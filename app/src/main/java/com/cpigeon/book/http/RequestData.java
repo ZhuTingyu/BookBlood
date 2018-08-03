@@ -4,6 +4,7 @@ import com.base.http.RequestUtil;
 import com.base.util.EncryptionTool;
 import com.base.util.Utils;
 import com.base.util.utility.LogUtil;
+import com.base.util.utility.PhoneUtils;
 import com.cpigeon.book.MyApp;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
@@ -15,17 +16,33 @@ import com.cpigeon.book.model.UserModel;
 public class RequestData<T> extends RequestUtil {
     public static <T> RequestUtil<T> build() {
         RequestUtil<T> request = RequestUtil.builder();
-        request.addHead("u", EncryptionTool.encryptAES(getRequestHead()));
+        request.addHead("auth", EncryptionTool.encryptAES(getRequestHead()));
         request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
         request.headUrl(MyApp.getAppContext().getString(R.string.api_head));
         request.setUserId(UserModel.getInstance().getUserId());
         request.setSignString(Utils.getString(R.string.keySign));
-        LogUtil.print("xiao-->" + getRequestHead());
-        LogUtil.print("xiaohl-->" + EncryptionTool.encryptAES(getRequestHead()));
+        LogUtil.print("请求头加密前-->" + getRequestHead());
+        LogUtil.print("请求头加密后-->" + EncryptionTool.encryptAES(getRequestHead()));
+        LogUtil.print("请求头解密后-->" + EncryptionTool.decryptAES(EncryptionTool.encryptAES(getRequestHead())));
+        return request;
+    }
+
+
+    public static <T> RequestUtil<T> build2() {
+        RequestUtil<T> request = RequestUtil.builder();
+        request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
+        request.headUrl(MyApp.getAppContext().getString(R.string.api_head));
+        request.setUserId(UserModel.getInstance().getUserId());
+        request.setSignString(Utils.getString(R.string.keySign));
+        LogUtil.print("请求头加密前-->" + getRequestHead());
+        LogUtil.print("请求头加密后-->" + EncryptionTool.encryptAES(getRequestHead()));
+        LogUtil.print("请求头解密后-->" + EncryptionTool.decryptAES(EncryptionTool.encryptAES(getRequestHead())));
         return request;
     }
 
     private static String getRequestHead() {
-        return UserModel.getInstance().getUserId() + "|" + UserModel.getInstance().getUserToken() + "|" + System.currentTimeMillis() / 1000;
+        return UserModel.getInstance().getUserId() + "|" + UserModel.getInstance().getUserToken() + "|" +
+                PhoneUtils.getCombinedDeviceID(Utils.getApp()) + "|" + System.currentTimeMillis() / 1000;
     }
+
 }

@@ -63,4 +63,13 @@ public class LoginViewModel extends BaseViewModel {
         });
     }
 
+
+    //hl 修改密码
+    public void useroneModifyPsd() {
+        submitRequestThrowError(LoginModel.getUseroneModifyPsd(), r -> {
+            if (r.isOk()) {
+
+            } else throw new HttpErrorException(r);
+        });
+    }
 }

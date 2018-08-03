@@ -47,4 +47,11 @@ dependencies {
     compile 'com.android.support:support-dynamic-animation:27.0.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //facebook
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+
+
+
 }

@@ -366,7 +366,7 @@ public final class PhoneUtils {
         String m_szLongID = m_szImei + m_szDevIDShort
                 + m_szAndroidID + m_szWLANMAC + m_szBTMAC;
         //compute md5
-        DeviceID = EncryptionTool.MD5(m_szLongID).toLowerCase();
+        DeviceID = EncryptionTool.MD5_32(m_szLongID).toLowerCase();
         return DeviceID;
     }
 

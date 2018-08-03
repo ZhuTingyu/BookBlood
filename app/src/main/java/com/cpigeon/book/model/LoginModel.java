@@ -56,4 +56,16 @@ public class LoginModel {
                 .request();
     }
 
+    //hl 修改密码
+    public static Observable<ApiResponse<Object>> getUseroneModifyPsd() {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.modify_user_pad)
+                .addBody("uid", UserModel.getInstance().getUserId())//登录用户ID
+                .addBody("jmm", EncryptionTool.MD5_32(UserModel.getInstance().getUserData().password))//旧密码，32位MD5加密
+                .addBody("xmm", "a654321")//新密码，不加密
+                .addBody("rxmm", "a654321")//确认新密码，不加密
+                .request();
+    }
 }

@@ -17,8 +17,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionTool {
 
-    private static String AESKey_en = "Nshuai2724@#$%^&";
-    private static String AESKey_de = "Nshuai2724@#$%^&";
+    private static String AESKey_en = "O&d-0ljfa#SGidfas9H";
+    private static String AESKey_de = "O&d-0ljfa#SGidfas9H";
 
 
     public static String SHA1(String decript) {
@@ -138,7 +138,7 @@ public class EncryptionTool {
      * @return
      */
     public static String encryptAES(String input) {
-        return encryptAES(input, AESKey_en);
+        return encryptAES(input, MD5_32(AESKey_en));
     }
 
     /**
@@ -148,9 +148,9 @@ public class EncryptionTool {
      * @return
      */
     public static String decryptAES(String input) {
-        if(StringUtil.isStringValid(input)){
-            return decryptAES(input, AESKey_de);
-        }else return "";
+        if (StringUtil.isStringValid(input)) {
+            return decryptAES(input, MD5_32(AESKey_de));
+        } else return "";
     }
 
     /**
@@ -169,7 +169,7 @@ public class EncryptionTool {
             crypted = cipher.doFinal(input.getBytes("utf-8"));
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            return "aes加密异常:" + e.getLocalizedMessage();
         }
         return new String(Base64.encodeBase64(crypted));
     }

@@ -58,7 +58,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
     LoginViewModel mLoginViewModel;
 
-    public static void start(Activity activity){
+    public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, PigeonHouseInfoFragment.class);
     }
@@ -83,15 +83,15 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mTvAuth = findViewById(R.id.tvAuth);
 
 
-        mLlLineInput =  findViewById(R.id.llLineInput);
-        mLvHouseName =  findViewById(R.id.lvHouseName);
-        mLvPhone =  findViewById(R.id.lvPhone);
-        mLvOrganize =  findViewById(R.id.lvOrganize);
-        mLvShedId =  findViewById(R.id.lvShedId);
-        mLvJoinMatchId =  findViewById(R.id.lvJoinMatchId);
-        mLvHouseLocation =  findViewById(R.id.lvHouseLocation);
-        mLvCity =  findViewById(R.id.lvCity);
-        mLvAddress =  findViewById(R.id.lvAddress);
+        mLlLineInput = findViewById(R.id.llLineInput);
+        mLvHouseName = findViewById(R.id.lvHouseName);
+        mLvPhone = findViewById(R.id.lvPhone);
+        mLvOrganize = findViewById(R.id.lvOrganize);
+        mLvShedId = findViewById(R.id.lvShedId);
+        mLvJoinMatchId = findViewById(R.id.lvJoinMatchId);
+        mLvHouseLocation = findViewById(R.id.lvHouseLocation);
+        mLvCity = findViewById(R.id.lvCity);
+        mLvAddress = findViewById(R.id.lvAddress);
 
         composite.add(RxUtils.delayed(50, aLong -> {
             mLlLineInput.getChildViews();
@@ -102,9 +102,9 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mImgHead.setOnClickListener(v -> {
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
                 String way = chooseWays[p];
-                if(Utils.getString(R.string.text_open_gallery).equals(way)){
+                if (Utils.getString(R.string.text_open_gallery).equals(way)) {
                     PictureSelectUtil.showChooseHeadImage(getBaseActivity());
-                }else if(Utils.getString(R.string.text_open_camera).equals(way)){
+                } else if (Utils.getString(R.string.text_open_camera).equals(way)) {
                     PictureSelectUtil.openCamera(getBaseActivity());
                 }
             });
@@ -118,12 +118,16 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mLoginViewModel.oneStartHintStr.observe(this, r -> {
             ToastUtils.showLong(getActivity(), r);
         });
+
+        mTvAuth.setOnClickListener(v -> {
+            mLoginViewModel.useroneModifyPsd();
+        });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) return;
-        if(requestCode == PictureMimeType.ofImage()){
+        if (requestCode == PictureMimeType.ofImage()) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
             mHeadImagePath = selectList.get(0).getCutPath();
             Bitmap bitmap = ImageUtils.getBitmap(mHeadImagePath);

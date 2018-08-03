@@ -1,5 +1,7 @@
 package com.base.http;
 
+import com.base.util.utility.LogUtil;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
@@ -9,7 +11,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- *网络请求头过滤器
+ * 网络请求头过滤器
  * Created by Zhu TingYu on 2017/12/15.
  */
 
@@ -29,7 +31,8 @@ public class BaseInterceptor implements Interceptor {
         if (headers != null && headers.size() > 0) {
             Set<String> keys = headers.keySet();
             for (String headerKey : keys) {
-                builder.addHeader(headerKey,   headers.get(headerKey)).build();
+                LogUtil.print("请求头    " + headerKey + "     " + headers.get(headerKey));
+                builder.addHeader(headerKey, headers.get(headerKey)).build();
             }
         }
         return chain.proceed(builder.build());

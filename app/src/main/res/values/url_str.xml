@@ -21,7 +21,11 @@
     <string name="user_one_start_app">TXGP_StartUp</string>
 
     <string name="get_pigeon_house_info">TXGP_Add_PigeonHome</string>
+    <!--修改用户密码-->
+    <string name="modify_user_pad">ZGW_Users_UpdatePWD</string>
 
+    <!--启动页  图片-->
+    <string name="launch_img">TXGP_Get_StartUpAd</string>
 
 
 

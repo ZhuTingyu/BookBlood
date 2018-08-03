@@ -29,6 +29,7 @@ import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -72,6 +73,7 @@ public class RequestUtil<T> {
 
     /**
      * 添加网络请求表单
+     *
      * @param key
      * @param value
      * @return
@@ -84,42 +86,46 @@ public class RequestUtil<T> {
 
     /**
      * 添加图片文件参数
+     *
      * @param key
      * @param filePath
      * @return
      */
 
-    public RequestUtil<T> addImageFileBody(String key, String filePath){
+    public RequestUtil<T> addImageFileBody(String key, String filePath) {
         imageFileParameter.put(key, filePath);
         return this;
     }
 
     /**
      * 添加视频文件参数
+     *
      * @param key
      * @param filePath
      * @return
      */
 
-    public RequestUtil<T> addVideoFileBody(String key, String filePath){
+    public RequestUtil<T> addVideoFileBody(String key, String filePath) {
         videoFileParameter.put(key, filePath);
         return this;
     }
 
     /**
      * 添加普通文件参数
+     *
      * @param key
      * @param filePath
      * @return
      */
 
-    public RequestUtil<T> addNormalFileBody(String key, String filePath){
+    public RequestUtil<T> addNormalFileBody(String key, String filePath) {
         normalFileParameter.put(key, filePath);
         return this;
     }
 
     /**
      * 添加请求头
+     *
      * @param key
      * @param value
      * @return
@@ -132,6 +138,7 @@ public class RequestUtil<T> {
 
     /**
      * 设置项目头链接 例（/CAdminAPI/V1/）
+     *
      * @param headUrl
      * @return
      */
@@ -143,6 +150,7 @@ public class RequestUtil<T> {
 
     /**
      * 设置接口 例（GetCircleMessageList）
+     *
      * @param url
      * @return
      */
@@ -154,6 +162,7 @@ public class RequestUtil<T> {
 
     /**
      * 设置接口
+     *
      * @param resId
      * @return
      */
@@ -165,6 +174,7 @@ public class RequestUtil<T> {
 
     /**
      * 设置返回数据中data的数据类型
+     *
      * @param toJsonType
      * @return
      */
@@ -185,6 +195,7 @@ public class RequestUtil<T> {
 
     /**
      * 设置服务器链接
+     *
      * @param baseUrl
      * @return
      */
@@ -209,7 +220,7 @@ public class RequestUtil<T> {
 
     }
 
-    public String getSignString(){
+    public String getSignString() {
         return signString;
     }
 
@@ -222,6 +233,11 @@ public class RequestUtil<T> {
         if (isCache) {
             builder.addNetworkInterceptor(new CacheInterceptor());
         }
+
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.addInterceptor(interceptor);
 
         okHttpClient = builder.build();
 
@@ -243,7 +259,7 @@ public class RequestUtil<T> {
                 .map(s -> {
                     try {
                         return GsonUtil.fromJson(s, toJsonType);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         return JSON.parseObject(s, toJsonType);
                     }
                 });
@@ -299,7 +315,7 @@ public class RequestUtil<T> {
     public String getSign() {
         Map<String, Object> map = new TreeMap<>();
         map.put("get_timestamp", System.currentTimeMillis() / 1000);
-       if(StringUtil.isStringValid(getUid())){
+        if (StringUtil.isStringValid(getUid())) {
             map.put("get_uid", getUid());
         }
         if (getBodyParameter() != null && getBodyParameter().size() > 0) {
@@ -315,7 +331,7 @@ public class RequestUtil<T> {
         }
         stringBuilder.append("key=" + signString);
         String result = stringBuilder.toString();
-        LogUtil.print(result);
+        LogUtil.print("签名：" + result);
         result = EncryptionTool.MD5_32(result);
         return result;
     }
