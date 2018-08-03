@@ -12,6 +12,9 @@ import com.base.util.SharedPreferencesUtil;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.module.launch.viewmodel.LaunchViewModel;
+import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.module.MainActivity;
+import com.cpigeon.book.module.home.PigeonHouseInfoFragment;
 import com.cpigeon.book.module.login.LoginActivity;
 
 import io.reactivex.disposables.Disposable;
@@ -59,13 +62,21 @@ public class LaunchActivity extends BaseActivity {
     }
 
     private void enterApp() {
-        if (mIsFirstOpen) {
+        if(mIsFirstOpen){
             SharedPreferencesUtil.setBoolean(this
                     , SharedPreferencesUtil.GUIDE_FILE, IS_FIRST_OPEN, false);
             IntentBuilder.Builder(this, GuideActivity.class)
                     .startActivity();
-        } else {
-            LoginActivity.start(this);
+        }else {
+            if(UserModel.getInstance().isLogin()){
+                if(UserModel.getInstance().isHaveHouseInfo()){
+                    MainActivity.start(getBaseActivity());
+                }else {
+                    PigeonHouseInfoFragment.start(getBaseActivity());
+                }
+            }else {
+                LoginActivity.start(this);
+            }
         }
         finish();
     }

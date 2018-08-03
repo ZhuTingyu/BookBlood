@@ -15,6 +15,7 @@ import com.base.util.utility.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.home.PigeonHouseInfoFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
@@ -49,14 +50,17 @@ public class LoginFragment extends BaseBookFragment {
         initViewModel(mViewModel);
 
         mViewModel.loginR.observe(this, s -> {
-            if (Integer.valueOf(s.data.basicinfo) == 0) {
+            if (!UserModel.getInstance().isHaveHouseInfo()) {
                 //未完善鸽舍信息
                 PigeonHouseInfoFragment.start(getActivity());
             } else {
                 //已完善鸽舍信息
                 MainActivity.start(getActivity());
             }
-            ToastUtils.showLong(getBaseActivity(), s.msg);
+        });
+
+        mViewModel.normalResult.observe(this, s -> {
+            ToastUtils.showLong(getBaseActivity(), s);
         });
 
         mViewModel.head.observe(this, s -> {

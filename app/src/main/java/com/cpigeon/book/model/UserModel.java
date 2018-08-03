@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.PUT;
 
 /**
  * Created by Zhu TingYu on 2018/3/21.
@@ -70,13 +71,30 @@ public class UserModel {
         return StringUtil.isStringValid(getInstance().getUserId());
     }
 
+    public boolean isHaveHouseInfo(){
+        return Integer.valueOf(getInstance().getUserData().basicinfo) == 1;
+    }
+
     public synchronized void setUserInfo(UserEntity userInfo, String password) {
         DbEntity entity = new DbEntity();
         userInfo.password = password;
+        entity.setUserId(userInfo.userid);
         entity.setData(GsonUtil.toJson(userInfo));
         entity.setType(AppDatabase.TYPE_USER_DATA);
         AppDatabase.getInstance(Utils.getApp()).DbEntityDao().insert(entity);
         this.userEntity = userInfo;
+    }
+
+    public synchronized void save(){
+        if(userEntity == null){
+            return;
+        }
+        DbEntity entity = new DbEntity();
+        entity.setId(1);
+        entity.setUserId(userEntity.userid);
+        entity.setData(GsonUtil.toJson(userEntity));
+        entity.setType(AppDatabase.TYPE_USER_DATA);
+        AppDatabase.getInstance(Utils.getApp()).DbEntityDao().updata(entity);
     }
 
 //    public static Observable<ApiResponse> loginOut() {
@@ -106,28 +124,5 @@ public class UserModel {
     public UserEntity getUserData() {
         return userEntity;
     }
-
-    public static Observable<ApiResponse<UserEntity>> login(String userName, String password) {
-        return RequestData.<ApiResponse<UserEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<UserEntity>>() {
-                }.getType())
-                .url(R.string.user_login)
-                .addBody("un", userName)
-                .addBody("pwd", EncryptionTool.MD5_32(password))
-                .addBody("t", "1")
-                .addBody("devid", PhoneUtils.getCombinedDeviceID(Utils.getApp()))
-                .addBody("dev", PhoneUtils.getModel())
-                .addBody("ver", String.valueOf(PhoneUtils.getVersionCode(Utils.getApp())))
-                .addBody("appid", PhoneUtils.getAppId())
-                .request().map(r -> {
-                    if (r.status) {
-                        UserModel.getInstance().setUserInfo(r.data, password);
-                    }
-                    return r;
-                });
-    }
-
-
-
 
 }

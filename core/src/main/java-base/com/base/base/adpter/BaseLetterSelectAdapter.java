@@ -1,6 +1,7 @@
 package com.base.base.adpter;
 
 
+import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.alibaba.idst.nls.internal.protocol.Content;
 import com.base.base.BaseViewHolder;
 import com.base.base.pinyin.LetterSortModel;
+import com.base.entity.LetterSortEntity;
 import com.base.http.R;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersDecoration;
@@ -21,7 +24,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2017/11/20.
  */
 
-public abstract class BaseLetterSelectAdapter<K extends LetterSortModel.LetterSortEntity, B extends BaseViewHolder> extends BaseQuickAdapter<K, B>
+public abstract class BaseLetterSelectAdapter<K extends LetterSortEntity, B extends BaseViewHolder> extends BaseQuickAdapter<K, B>
         implements StickyRecyclerHeadersAdapter<BaseViewHolder>{
 
     public BaseLetterSelectAdapter(@LayoutRes int id, List<K> data) {
@@ -57,10 +60,10 @@ public abstract class BaseLetterSelectAdapter<K extends LetterSortModel.LetterSo
         }
     }
 
-    public void initHead(){
+    public void initHead(Context content){
         final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(this);
         getRecyclerView().addItemDecoration(headersDecor);
-        getRecyclerView().addItemDecoration(new DividerDecoration(mContext));
+        getRecyclerView().addItemDecoration(new DividerDecoration(content));
         this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {

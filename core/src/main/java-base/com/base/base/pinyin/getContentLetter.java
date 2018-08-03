@@ -5,5 +5,5 @@ package com.base.base.pinyin;
  */
 
 public interface getContentLetter {
-
+     String getContent();
 }
