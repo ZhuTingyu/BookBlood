@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">core</string>
+    <string name="message_permission_hint">请去设置相关权限，没有权限应用不能正常使用</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_confirm">确定</string>
+    <string name="string_set">设置</string>
+    <string name="string_text_hint">提示</string>
+
+    <string name="message_pay_success">支付成功</string>
+    <string name="resultcode_alipay_ERROR_8000">正在处理中！</string>
+    <string name="resultcode_alipay_ERROR_4000">订单支付失败！</string>
+    <string name="resultcode_alipay_ERROR_6001">您取消了本笔订单支付！</string>
+    <string name="resultcode_alipay_ERROR_6002">网络连接出错！</string>
+
+    <string name="text_digits_number">1234567890</string>
+    <string name="text_commit">提交</string>
+    <string name="text_next">下一步</string>
+    <string name="text_input_phone_or_username">手机号/账号</string>
+    <string name="text_input_code">请输入验证码</string>
+    <string name="text_send_code">发送验证码</string>
+    <string name="btn_resend_count">%1$s s后重新获取</string>
+
+    <string name="text_input_password">请输入密码</string>
+    <string name="text_input_password_again">请再次输入密码</string>
+    <string name="message_net_error">网络不给力，请稍后重试！</string>
+
+
+
+
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.base.widget.recyclerview.XRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_empty="@layout/list_empty_layout"
+    app:layout_moreProgress="@layout/view_load_more"
+    app:mainLayoutId="@layout/refresh_recyclerview"
+    app:recyclerClipToPadding="false"
+    app:recyclerPaddingLeft="15dp"
+    android:background="@color/white"
+    app:recyclerPaddingRight="15dp"
+    app:scrollbarStyle="insideOverlay" />

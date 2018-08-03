@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="map" type="id">map</item>
+    <item name="btn_left" type="id" >btn_left</item>
+    <item name="btn_right" type="id">btn_right</item>
+
+    <item type="id" name="statusbarutil_fake_status_bar_view" />
+    <item type="id" name="statusbarutil_translucent_view" />
+</resources>
