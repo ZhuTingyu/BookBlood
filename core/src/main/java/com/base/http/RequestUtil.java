@@ -206,11 +206,6 @@ public class RequestUtil<T> {
 
     }
 
-    public RequestUtil<T> setUserId(String userId) {
-        this.uid = userId;
-        return this;
-    }
-
     public RequestUtil<T> setCacheFile() {
         File cacheFile = new File(BaseApplication.getAppContext().getCacheDir(), "httpCache");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
@@ -292,10 +287,6 @@ public class RequestUtil<T> {
         return bodyParameter;
     }
 
-    public String getUid() {
-        return uid;
-    }
-
     public Map<String, String> getImageFileParameter() {
         return imageFileParameter;
     }
@@ -315,9 +306,6 @@ public class RequestUtil<T> {
     public String getSign() {
         Map<String, Object> map = new TreeMap<>();
         map.put("get_timestamp", System.currentTimeMillis() / 1000);
-        if (StringUtil.isStringValid(getUid())) {
-            map.put("get_uid", getUid());
-        }
         if (getBodyParameter() != null && getBodyParameter().size() > 0) {
             for (String key : getBodyParameter().keySet()) {
                 if (!map.containsKey("post_" + key) && getBodyParameter().get(key) != null && !TextUtils.isEmpty(getBodyParameter().get(key).toString())) {

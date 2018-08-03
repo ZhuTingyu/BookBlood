@@ -50,12 +50,10 @@ public class RxRequest {
             Call<ResponseBody> call;
 
             if (!rxRequest.isCache) {
-                call = rxRequest.getRequestInterface().post(rxRequest.getUrl(), String.valueOf(rxRequest.getUid())
-                        , String.valueOf(System.currentTimeMillis() / 1000), rxRequest.getSign(), builder.build());
+                call = rxRequest.getRequestInterface().post(rxRequest.getUrl(), String.valueOf(System.currentTimeMillis() / 1000), rxRequest.getSign(), builder.build());
 
             } else {
-                call = rxRequest.getRequestInterface().postHaveCache(rxRequest.getUrl(), String.valueOf(rxRequest.getUid())
-                        , String.valueOf(System.currentTimeMillis() / 1000), rxRequest.getSign(), builder.build());
+                call = rxRequest.getRequestInterface().postHaveCache(rxRequest.getUrl(), String.valueOf(System.currentTimeMillis() / 1000), rxRequest.getSign(), builder.build());
             }
 
 

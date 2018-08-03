@@ -1,9 +1,7 @@
 package com.base.base.pinyin;
 
-import com.base.base.pinyin.CharacterParser;
 import com.base.entity.LetterSortEntity;
 import com.base.util.Lists;
-import com.base.util.utility.StringUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +14,7 @@ public class LetterSortModel<T extends LetterSortEntity> {
 
     List<String> mLetters = Lists.newArrayList();
     PinyinComparator pinyinComparator = new PinyinComparator();
-
+    LetterStringComparator mLetterStringComparator = new LetterStringComparator();
     public LetterSortModel(){
     }
 
@@ -50,6 +48,7 @@ public class LetterSortModel<T extends LetterSortEntity> {
     }
 
     public List<String> getLetters() {
+        Collections.sort(mLetters , mLetterStringComparator);
         return mLetters;
     }
 }
