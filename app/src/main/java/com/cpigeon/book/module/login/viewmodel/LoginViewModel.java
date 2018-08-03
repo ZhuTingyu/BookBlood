@@ -19,7 +19,7 @@ public class LoginViewModel extends BaseViewModel {
     String mPhone;
     String mPassword;
 
-    public MutableLiveData<ApiResponse<UserEntity>> loginR = new MutableLiveData<>();
+    public MutableLiveData<UserEntity> loginR = new MutableLiveData<>();
     public MutableLiveData<String> head = new MutableLiveData<>();
     public MutableLiveData<String> oneStartHintStr = new MutableLiveData<>();
 
@@ -27,7 +27,8 @@ public class LoginViewModel extends BaseViewModel {
         submitRequestThrowError(LoginModel.login(mPhone, mPassword), r -> {
             if (r.isOk()) {
                 UserModel.getInstance().setUserInfo(r.data, mPassword);
-                loginR.setValue(r);
+                loginR.setValue(r.data);
+                normalResult.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }

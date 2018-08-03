@@ -9,7 +9,9 @@ import com.base.util.IntentBuilder;
 import com.base.util.RxUtils;
 import com.base.util.SharedPreferencesUtil;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
+import com.cpigeon.book.module.home.PigeonHouseInfoFragment;
 import com.cpigeon.book.module.login.LoginActivity;
 
 import io.reactivex.disposables.Disposable;
@@ -49,7 +51,15 @@ public class LaunchActivity extends BaseActivity{
             IntentBuilder.Builder(this, GuideActivity.class)
                     .startActivity();
         }else {
-            LoginActivity.start(this);
+            if(UserModel.getInstance().isLogin()){
+                if(UserModel.getInstance().isHaveHouseInfo()){
+                    MainActivity.start(getBaseActivity());
+                }else {
+                    PigeonHouseInfoFragment.start(getBaseActivity());
+                }
+            }else {
+                LoginActivity.start(this);
+            }
         }
         finish();
     }

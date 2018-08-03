@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:gravity="center_vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:layout_height="48dp">
+
+    <EditText
+        android:id="@+id/edSearch"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        tools:text="1231312"
+        android:background="@drawable/shape_bg_search_edit"
+        android:drawableLeft="@drawable/svg_search"
+        />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/big_text_size"
+        android:text="@string/btn_cancel"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/white"
+
+        />
+
+</LinearLayout>

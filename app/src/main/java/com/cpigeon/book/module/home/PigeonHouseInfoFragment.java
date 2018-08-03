@@ -23,6 +23,7 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
+import com.cpigeon.book.module.select.SelectAssActivity;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 import com.luck.picture.lib.PictureSelector;
@@ -97,6 +98,12 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLlLineInput.getChildViews();
             mLlLineInput.setLineInputViewState(isLook);
         }));
+
+        mLvOrganize.setOnRightClickListener(lineInputView -> {
+            IntentBuilder.Builder(getActivity(), SelectAssActivity.class)
+                    .startActivity();
+        });
+
 
         String[] chooseWays = getResources().getStringArray(R.array.array_choose_photo);
         mImgHead.setOnClickListener(v -> {

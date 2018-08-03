@@ -65,6 +65,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".module.login.LoginActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".module.select.SelectAssActivity" />
 
     </application>
 

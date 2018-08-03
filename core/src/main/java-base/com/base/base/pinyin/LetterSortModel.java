@@ -1,54 +1,55 @@
 package com.base.base.pinyin;
 
 import com.base.base.pinyin.CharacterParser;
+import com.base.entity.LetterSortEntity;
+import com.base.util.Lists;
 import com.base.util.utility.StringUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/8/3.
  */
 
-public class LetterSortModel<T> {
+public class LetterSortModel<T extends LetterSortEntity> {
 
-    public List<LetterSortEntity> data;
+    List<String> mLetters = Lists.newArrayList();
+    PinyinComparator pinyinComparator = new PinyinComparator();
 
-    public void setData(List<LetterSortEntity> data) {
+    public LetterSortModel(){
+    }
+
+
+    public List<T> data;
+
+    public void setData(List<T> data) {
+        mLetters.clear();
         if (data != null) {
-            /*for (LetterSortEntity entity : data) {
-                String pinyin = CharacterParser.getInstance().getSelling(entity.getUsername());
+            for (LetterSortEntity entity : data) {
+                String pinyin = CharacterParser.getInstance().getSelling(entity.getContent());
                 String sortString = pinyin.substring(0, 1).toUpperCase();
 
                 if (sortString.matches("[A-Z]")) {
-                    entity.setSortLetters(sortString.toUpperCase());
+                    String letter = sortString.toUpperCase();
+                    entity.setLetter(letter);
+                    if(!mLetters.contains(letter)){
+                        mLetters.add(letter);
+                    }
                 } else {
-                    entity.setSortLetters("#");
+                    entity.setLetter("#");
                 }
-                mMembers.add(entity);
-            }*/
+            }
+            Collections.sort(data , pinyinComparator);
+            this.data = data;
         }
     }
 
-    public class LetterSortEntity {
+    public List<T> getData() {
+        return data;
+    }
 
-        public String letter;
-
-        public T data;
-
-        public String getLetter() {
-            return letter;
-        }
-
-        public void setLetter(String letter) {
-            this.letter = letter;
-        }
-
-        public T getData() {
-            return data;
-        }
-
-        public void setData(T data) {
-            this.data = data;
-        }
+    public List<String> getLetters() {
+        return mLetters;
     }
 }
