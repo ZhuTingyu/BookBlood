@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="74dp">
+    <LinearLayout
+        android:id="@+id/llTabViews"
+        android:background="@drawable/svg_main_bottom_bg"
+        android:layout_marginTop="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <com.cpigeon.book.widget.SimpleTitleView
+            android:id="@+id/simple1"
+            app:simpleTitleView_PressTextColor="@color/colorPrimary"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <com.cpigeon.book.widget.SimpleTitleView
+            android:id="@+id/simple2"
+            android:layout_width="0dp"
+            app:simpleTitleView_PressTextColor="@color/colorPrimary"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <com.cpigeon.book.widget.SimpleTitleView
+            android:id="@+id/simple3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            app:simpleTitleView_PressTextColor="@color/colorPrimary"
+            android:layout_height="match_parent"/>
+
+        <com.cpigeon.book.widget.SimpleTitleView
+            android:id="@+id/simple4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            app:simpleTitleView_PressTextColor="@color/colorPrimary"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgAdd"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/ic_main_bottom_add"
+        android:layout_width="68dp"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--baseURl-->
+    <string name="baseUrl">http://192.168.0.18:8188/</string>
+    <!--签名加密字符串-->
+    <string name="keySign">CioLy49TR23jk4h0Ap8Opy34ho78on</string>
+    <!--天下鸽谱-->
+    <string name="api_head">CAPI/V1/</string>
+    <!--单点登录-->
+    <string name="user_single_login">ZGW_Users_SingleLogin</string>
+    <!--用户注册-->
+    <string name="user_register">ZGW_Users_Register</string>
+    <!--找回密码-->
+    <string name="user_forget_psd">ZGW_Users_FindPWD</string>
+    <!--用户登录-->
+    <string name="user_login">ZGW_Users_Login</string>
+    <!--获取用户头像-->
+    <string name="user_head_img">ZGW_Users_GetUserFace</string>
+    <!--第一次登录获取鸽币-->
+    <string name="user_one_start_app">TXGP_StartUp</string>
+
+    <string name="get_pigeon_house_info">TXGP_Add_PigeonHome</string>
+
+
+
+
+</resources>

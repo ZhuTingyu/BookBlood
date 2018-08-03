@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主题颜色-->
+    <color name="colorPrimary">#0080ff</color>
+
+    <color name="colorPrimaryDark">@color/gray</color>
+    <color name="colorAccent">@color/gray_low</color>
+    <color name="main_home_pop_bg">#edffffff</color>
+
+    <color name="color_gary">#a3a2a2</color>
+
+
+
+
+</resources>
+

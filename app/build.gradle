@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        book {
+            keyAlias 'book'
+            keyPassword 'cpigeon@2018'
+            storeFile file('../keystore/book.jks')
+            storePassword 'cpigeon@2018'
+        }
+    }
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.cpigeon.book"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.book
+    }
+    buildTypes {
+        release {
+            //Zipalign优化
+//            zipAlignEnabled true
+//            //移除无用的resource文件
+//            shrinkResources true
+            minifyEnabled true
+            signingConfig signingConfigs.book
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            signingConfig signingConfigs.book
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':core')
+    compile 'com.android.support:support-dynamic-animation:27.0.2'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+}
