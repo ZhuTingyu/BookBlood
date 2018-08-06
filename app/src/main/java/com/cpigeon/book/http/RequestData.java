@@ -5,6 +5,7 @@ import com.base.util.EncryptionTool;
 import com.base.util.Utils;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.PhoneUtils;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.MyApp;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
@@ -19,7 +20,9 @@ public class RequestData<T> extends RequestUtil {
         request.addHead("auth", EncryptionTool.encryptAES(getRequestHead()));
         request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
         request.headUrl(MyApp.getAppContext().getString(R.string.api_head));
-        request.setUserId(UserModel.getInstance().getUserId());
+        if(StringUtil.isStringValid(UserModel.getInstance().getUserId())){
+            request.addBody("uid", UserModel.getInstance().getUserId());
+        }
         request.setSignString(Utils.getString(R.string.keySign));
         LogUtil.print("请求头加密前-->" + getRequestHead());
         LogUtil.print("请求头加密后-->" + EncryptionTool.encryptAES(getRequestHead()));
@@ -32,7 +35,6 @@ public class RequestData<T> extends RequestUtil {
         RequestUtil<T> request = RequestUtil.builder();
         request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
         request.headUrl(MyApp.getAppContext().getString(R.string.api_head));
-        request.setUserId(UserModel.getInstance().getUserId());
         request.setSignString(Utils.getString(R.string.keySign));
         LogUtil.print("请求头加密前-->" + getRequestHead());
         LogUtil.print("请求头加密后-->" + EncryptionTool.encryptAES(getRequestHead()));

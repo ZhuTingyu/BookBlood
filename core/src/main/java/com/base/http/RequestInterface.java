@@ -19,7 +19,6 @@ public interface RequestInterface {
     @POST
     Call<ResponseBody> post(
             @Url String url,
-            @Query("uid") String uid,
             @Query("timestamp") String time,
             @Query("sign") String sign,
             @Body RequestBody requestBody);
@@ -28,7 +27,6 @@ public interface RequestInterface {
     @POST
     Call<ResponseBody> postHaveCache (
             @Url String url,
-            @Query("uid") String uid,
             @Query("timestamp") String time,
             @Query("sign") String sign,
             @Body RequestBody requestBody);
