@@ -79,12 +79,17 @@ public class DialogUtils {
      */
 
     public static SweetAlertDialog createErrorDialog(Context context, String error) {
-        SweetAlertDialog dialogPrompt;
-        dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE);
-        dialogPrompt.setTitleText("失败");
-        dialogPrompt.setContentText(error);
-        dialogPrompt.show();
-        return dialogPrompt;
+        try {
+            SweetAlertDialog dialogPrompt;
+            dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE);
+            dialogPrompt.setTitleText("失败");
+            dialogPrompt.setContentText(error);
+            dialogPrompt.show();
+            return dialogPrompt;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
