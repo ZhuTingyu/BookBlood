@@ -71,6 +71,34 @@ public class DialogUtils {
     }
 
     /**
+     * 设置有取消按钮的弹框（自定义取消按钮弹框）
+     *
+     * @param context
+     * @param content
+     * @param leftListener
+     * @param rightListener
+     */
+
+    public static SweetAlertDialog createDialogWithLeft2(Context context, String content,
+                                            SweetAlertDialog.OnSweetClickListener leftListener,
+                                            SweetAlertDialog.OnSweetClickListener rightListener) {
+        SweetAlertDialog dialogPrompt;
+        dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
+        dialogPrompt.setCanceledOnTouchOutside(false);
+        dialogPrompt.setCancelable(true);
+        dialogPrompt.setTitleText("提示")
+                .setCancelText("取消")
+                .setCancelClickListener(leftListener)
+                .setConfirmClickListener(rightListener)
+                .setContentText(content)
+                .setConfirmText("确定").show();
+
+        return dialogPrompt;
+    }
+
+
+
+    /**
      * 显示错误弹框
      *
      * @param context

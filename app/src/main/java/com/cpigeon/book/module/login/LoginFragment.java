@@ -3,6 +3,7 @@ package com.cpigeon.book.module.login;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,8 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
-import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
+import com.cpigeon.book.service.SingleLoginService;
 import com.cpigeon.book.util.EditTextUtil;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -37,6 +38,8 @@ public class LoginFragment extends BaseBookFragment {
     private TextView tvLogin;
     LoginViewModel mViewModel;
 
+    private boolean userInfoTag = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,13 +53,17 @@ public class LoginFragment extends BaseBookFragment {
         initViewModel(mViewModel);
 
         mViewModel.loginR.observe(this, s -> {
-            if (!UserModel.getInstance().isHaveHouseInfo()) {
-                //未完善鸽舍信息
-                PigeonHouseInfoFragment.start(getActivity());
-            } else {
-                //已完善鸽舍信息
-                MainActivity.start(getActivity());
-            }
+            SingleLoginService.start(getActivity());
+
+            MainActivity.start(getActivity());
+
+//            if (!UserModel.getInstance().isHaveHouseInfo()) {
+//                //未完善鸽舍信息
+//                PigeonHouseInfoFragment.start(getActivity());
+//            } else {
+//                //已完善鸽舍信息
+//                MainActivity.start(getActivity());
+//            }
         });
 
         mViewModel.normalResult.observe(this, s -> {
@@ -93,7 +100,24 @@ public class LoginFragment extends BaseBookFragment {
         });
 
         imgLookPwd.setOnClickListener(v -> {
-            EditTextUtil.setPasHint(edPassword, imgLookPwd);//显示隐藏密码
+            if (userInfoTag) {
+                //保存用户信息
+                userInfoTag = false;
+                edPassword.setText("");
+                //选择状态 显示明文--设置为可见的密码
+                edPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                imgLookPwd.setImageResource(R.mipmap.show2x);//设置图片
+            } else {
+                EditTextUtil.setPasHint(edPassword, imgLookPwd);//显示隐藏密码
+            }
         });
+
+        if (UserModel.getInstance().getUserData() != null) {
+            // 保存的用户信息
+            userInfoTag = true;
+
+            edUserName.setText(UserModel.getInstance().getUserData().yonghuming);
+            edPassword.setText(UserModel.getInstance().getUserData().password);
+        }
     }
 }

@@ -28,6 +28,12 @@
     <string name="launch_img">TXGP_Get_StartUpAd</string>
     <string name="get_ass_list">TXGP_PigeonISCO_GetList</string>
 
+    <!--获取足环类型-->
+    <string name="foot_type_select">TXGP_FootRingType_Select</string>
+    <!--添加单个足环-->
+    <string name="foot_add_single">TXGP_FootRing_Add</string>
+    <!--删除单个足环-->
+    <string name="foot_del_single">TXGP_FootRing_Delete</string>
 
 
 </resources>

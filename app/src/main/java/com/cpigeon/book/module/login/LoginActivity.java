@@ -1,7 +1,6 @@
 package com.cpigeon.book.module.login;
 
 import android.app.Activity;
-import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

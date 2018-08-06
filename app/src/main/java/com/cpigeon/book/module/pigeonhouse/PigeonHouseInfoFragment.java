@@ -121,14 +121,14 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         });
 
 
-
         mLoginViewModel.oneStartGetGeBi();//第一次登录
         mLoginViewModel.oneStartHintStr.observe(this, r -> {
             ToastUtils.showLong(getActivity(), r);
         });
 
         mTvAuth.setOnClickListener(v -> {
-            mLoginViewModel.useroneModifyPsd();
+//            //修改密码
+//            mLoginViewModel.useroneModifyPsd();
         });
     }
 

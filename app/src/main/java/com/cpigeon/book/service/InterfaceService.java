@@ -5,5 +5,4 @@ package com.cpigeon.book.service;
  */
 
 public class InterfaceService {
-
 }

@@ -180,7 +180,7 @@ public class AppManager {
     }
 
 
-    private void killAllActivity() {
+    public void killAllActivity() {
         try {
             ListIterator<WeakReference<AppCompatActivity>> listIterator = mActivityStack.listIterator();
             while (listIterator.hasNext()) {

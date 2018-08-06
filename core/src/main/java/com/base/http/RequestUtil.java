@@ -10,7 +10,6 @@ import com.base.util.Lists;
 import com.base.util.http.GsonUtil;
 import com.base.util.http.NetworkUtils;
 import com.base.util.utility.LogUtil;
-import com.base.util.utility.StringUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -262,7 +261,7 @@ public class RequestUtil<T> {
         observable = observable.map(e -> {
             if (e instanceof ApiResponse) {
                 ApiResponse responseJson = (ApiResponse) e;
-                LogUtil.print(responseJson.toJsonString());
+//                LogUtil.print(responseJson.toJsonString());
             }
             return e;
         });
