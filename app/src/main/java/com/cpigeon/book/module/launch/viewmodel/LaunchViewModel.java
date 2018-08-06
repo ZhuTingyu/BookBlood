@@ -13,11 +13,11 @@ public class LaunchViewModel extends BaseViewModel {
 
     public MutableLiveData<String> launchImgStr = new MutableLiveData<>();
 
-    //获取用户头像
+    //启动页面图
     public void getLaunchImg() {
         submitRequestThrowError(LaunchModel.getLaunchData(), r -> {
             if (r.isOk()) {
-                launchImgStr.setValue(r.msg);
+                launchImgStr.setValue(r.data.getAdImageUrl());
             }
         });
     }

@@ -319,55 +319,61 @@ public final class PhoneUtils {
      * 结合多种方式计算设备唯一码
      */
     public static String getCombinedDeviceID(Context context) {
-        if (!TextUtils.isEmpty(DeviceID)) return DeviceID;
-        //IMEI
-        TelephonyManager TelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String m_szImei = null;
         try {
-            m_szImei = TelephonyMgr.getDeviceId();
-        } catch (Exception e) {
-            e.printStackTrace();
-            m_szImei = "";
-        }
+            if (!TextUtils.isEmpty(DeviceID)) return DeviceID;
+            //IMEI
+            TelephonyManager TelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String m_szImei = null;
+            try {
+                m_szImei = TelephonyMgr.getDeviceId();
+            } catch (Exception e) {
+                e.printStackTrace();
+                m_szImei = "";
+            }
 
-        //Pseudo-Unique ID
-        String m_szDevIDShort = "35" + //we make this look like a valid IMEI
-                Build.BOARD.length() % 10 +
-                Build.BRAND.length() % 10 +
-                Build.CPU_ABI.length() % 10 +
-                Build.DEVICE.length() % 10 +
-                Build.DISPLAY.length() % 10 +
-                Build.HOST.length() % 10 +
-                Build.ID.length() % 10 +
-                Build.MANUFACTURER.length() % 10 +
-                Build.MODEL.length() % 10 +
-                Build.PRODUCT.length() % 10 +
-                Build.TAGS.length() % 10 +
-                Build.TYPE.length() % 10 +
-                Build.USER.length() % 10; //13 digits
+            //Pseudo-Unique ID
+            String m_szDevIDShort = "35" + //we make this look like a valid IMEI
+                    Build.BOARD.length() % 10 +
+                    Build.BRAND.length() % 10 +
+                    Build.CPU_ABI.length() % 10 +
+                    Build.DEVICE.length() % 10 +
+                    Build.DISPLAY.length() % 10 +
+                    Build.HOST.length() % 10 +
+                    Build.ID.length() % 10 +
+                    Build.MANUFACTURER.length() % 10 +
+                    Build.MODEL.length() % 10 +
+                    Build.PRODUCT.length() % 10 +
+                    Build.TAGS.length() % 10 +
+                    Build.TYPE.length() % 10 +
+                    Build.USER.length() % 10; //13 digits
 
-        //Android ID
-        String m_szAndroidID = null;
-        try {
-            m_szAndroidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        } catch (Exception e) {
-            e.printStackTrace();
-            m_szAndroidID = "";
-        }
+            //Android ID
+            String m_szAndroidID = null;
+            try {
+                m_szAndroidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+            } catch (Exception e) {
+                e.printStackTrace();
+                m_szAndroidID = "";
+            }
 
-        //WIFI MAC Address string
+            //WIFI MAC Address string
 
 //        WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 //        String m_szWLANMAC = wm.getConnectionInfo().getMacAddress();
-        String m_szWLANMAC = getMacAddress();
-        //BT MAC Address string
-        String m_szBTMAC = android.provider.Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
+            String m_szWLANMAC = getMacAddress();
+            //BT MAC Address string
+            String m_szBTMAC = Settings.Secure.getString(context.getContentResolver(), "bluetooth_address");
 
-        String m_szLongID = m_szImei + m_szDevIDShort
-                + m_szAndroidID + m_szWLANMAC + m_szBTMAC;
-        //compute md5
-        DeviceID = EncryptionTool.MD5_32(m_szLongID).toLowerCase();
-        return DeviceID;
+            String m_szLongID = m_szImei + m_szDevIDShort
+                    + m_szAndroidID + m_szWLANMAC + m_szBTMAC;
+            //compute md5
+            DeviceID = EncryptionTool.MD5_32(m_szLongID).toLowerCase();
+            return DeviceID;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 
     /**

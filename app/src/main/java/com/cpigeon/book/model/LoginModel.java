@@ -50,7 +50,7 @@ public class LoginModel {
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.user_one_start_app)
-                .addBody("uid", UserModel.getInstance().getUserId())//登录用户ID
+//                .addBody("uid", UserModel.getInstance().getUserId())//登录用户ID
                 .addBody("ly", "安卓")//来源，值等于安卓或苹果
                 .addBody("sb", PhoneUtils.getModel())//设备信息
                 .request();

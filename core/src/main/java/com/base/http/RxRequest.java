@@ -1,6 +1,7 @@
 package com.base.http;
 
 import com.base.util.Utils;
+import com.base.util.utility.LogUtil;
 
 import java.io.File;
 import java.io.InterruptedIOException;
@@ -39,12 +40,12 @@ public class RxRequest {
 
             for (String key : videoBody.keySet()) {
                 File videoF = new File(videoBody.get(key));
-                builder.addPart(MultipartBody.Part.createFormData("video",videoF.getName(),
+                builder.addPart(MultipartBody.Part.createFormData("video", videoF.getName(),
                         RequestBody.create(MediaType.parse("video/*"), videoF)));
             }
 
             if (body.isEmpty()) {
-                builder.addFormDataPart("temp","temp");
+                builder.addFormDataPart("temp", "temp");
             }
 
             Call<ResponseBody> call;
@@ -59,8 +60,12 @@ public class RxRequest {
 
             try {
                 Response<ResponseBody> response = call.execute();
+
+                String responseStr = response.body().string().toString();
+                LogUtil.print("请求接口返回: " + responseStr);
+
                 if (response.code() == 200) {
-                    observableEmitter.onNext(response.body().string());
+                    observableEmitter.onNext(responseStr);
                 } else {
                     ApiResponse apiResponse = new ApiResponse();
                     apiResponse.errorCode = -1;
@@ -73,7 +78,6 @@ public class RxRequest {
 
         });
     }
-
 
 
     public static String getStringValue(String s) {

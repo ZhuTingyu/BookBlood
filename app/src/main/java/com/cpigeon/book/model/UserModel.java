@@ -1,23 +1,15 @@
 package com.cpigeon.book.model;
 
 
-import com.base.http.ApiResponse;
-import com.base.util.EncryptionTool;
 import com.base.util.Utils;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.base.util.http.GsonUtil;
-import com.base.util.utility.PhoneUtils;
 import com.base.util.utility.StringUtil;
-import com.cpigeon.book.R;
-import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.UserEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
-
-import io.reactivex.Observable;
-import retrofit2.http.PUT;
 
 /**
  * Created by Zhu TingYu on 2018/3/21.
@@ -56,11 +48,21 @@ public class UserModel {
     }
 
     public String getUserId() {
-        return userEntity != null ? userEntity. userid: "";
+        try {
+            return userEntity != null ? userEntity.userid : "";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public String getUserToken() {
-        return userEntity != null ? userEntity.token : "";
+        try {
+            return userEntity != null ? userEntity.token : "";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public String getUserName() {
@@ -71,7 +73,7 @@ public class UserModel {
         return StringUtil.isStringValid(getInstance().getUserId());
     }
 
-    public boolean isHaveHouseInfo(){
+    public boolean isHaveHouseInfo() {
         return Integer.valueOf(getInstance().getUserData().basicinfo) == 1;
     }
 
@@ -85,8 +87,8 @@ public class UserModel {
         this.userEntity = userInfo;
     }
 
-    public synchronized void save(){
-        if(userEntity == null){
+    public synchronized void save() {
+        if (userEntity == null) {
             return;
         }
         DbEntity entity = new DbEntity();

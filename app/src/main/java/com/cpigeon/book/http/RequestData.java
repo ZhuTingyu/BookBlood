@@ -30,18 +30,6 @@ public class RequestData<T> extends RequestUtil {
         return request;
     }
 
-
-    public static <T> RequestUtil<T> build2() {
-        RequestUtil<T> request = RequestUtil.builder();
-        request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
-        request.headUrl(MyApp.getAppContext().getString(R.string.api_head));
-        request.setSignString(Utils.getString(R.string.keySign));
-        LogUtil.print("请求头加密前-->" + getRequestHead());
-        LogUtil.print("请求头加密后-->" + EncryptionTool.encryptAES(getRequestHead()));
-        LogUtil.print("请求头解密后-->" + EncryptionTool.decryptAES(EncryptionTool.encryptAES(getRequestHead())));
-        return request;
-    }
-
     private static String getRequestHead() {
         return UserModel.getInstance().getUserId() + "|" + UserModel.getInstance().getUserToken() + "|" +
                 PhoneUtils.getCombinedDeviceID(Utils.getApp()) + "|" + System.currentTimeMillis() / 1000;
