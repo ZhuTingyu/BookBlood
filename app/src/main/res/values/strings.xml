@@ -21,6 +21,8 @@
     <string name="text_register_shed_number">注册棚号</string>
     <string name="text_join_match_number">参赛编号</string>
     <string name="text_pigeon_house_location">鸽舍坐标</string>
+    <string name="text_pigeon_house_la">鸽舍纬度</string>
+    <string name="text_pigeon_house_lo">鸽舍经度</string>
     <string name="text_location">所在省市</string>
     <string name="text_details_address">详细地址</string>
     <string name="text_go_auth">去认证</string>
