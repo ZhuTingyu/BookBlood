@@ -3,6 +3,7 @@ package com.base.base.adpter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.base.base.BaseViewHolder;
 import com.base.base.pinyin.LetterSortModel;
 import com.base.entity.LetterSortEntity;
 import com.base.http.R;
+import com.gjiazhe.wavesidebar.WaveSideBar;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersDecoration;
 
@@ -71,16 +73,16 @@ public abstract class BaseLetterSelectAdapter<K extends LetterSortEntity, B exte
             }
         });
     }
-    public void initHead(RecyclerView recyclerView){
-        final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(this);
-        recyclerView.addItemDecoration(headersDecor);
-        recyclerView.addItemDecoration(new DividerDecoration(mContext));
-        this.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onChanged() {
-                headersDecor.invalidateHeaders();
+
+    public <T extends LetterSortEntity> void  initWave(LetterSortModel<T> model, WaveSideBar waveSideBar) {
+        waveSideBar.setIndexItems(model.getLetters().toArray(new String[model.getLetters().size()]));
+        waveSideBar.setOnSelectIndexItemListener(index -> {
+            for (int i = 0; i < model.getData().size(); i++) {
+                if (index.equals(model.getData().get(i))) {
+                    ((LinearLayoutManager) getRecyclerView().getLayoutManager()).scrollToPositionWithOffset(i, 0);
+                    return;
+                }
             }
         });
     }
-
 }

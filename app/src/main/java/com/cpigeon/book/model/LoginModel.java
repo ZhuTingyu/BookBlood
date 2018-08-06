@@ -8,7 +8,7 @@ import com.cpigeon.book.MyApp;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.UserEntity;
-import com.cpigeon.book.model.user.UserHeadImgEntity;
+import com.cpigeon.book.model.entity.UserHeadImgEntity;
 import com.google.gson.reflect.TypeToken;
 
 import io.reactivex.Observable;

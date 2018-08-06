@@ -12,6 +12,7 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.AssEntity;
 import com.cpigeon.book.module.select.adpter.SelectAssAdapter;
+import com.cpigeon.book.module.select.viewmodel.SelectAssViewModel;
 import com.gjiazhe.wavesidebar.WaveSideBar;
 
 import java.util.List;
@@ -26,41 +27,36 @@ public class SelectAssActivity extends BaseActivity {
     SelectAssAdapter mAdapter;
     WaveSideBar mWaveSideBar;
     LetterSortModel<AssEntity> mModel = new LetterSortModel<>();
+    SelectAssViewModel mViewModel;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mViewModel = new SelectAssViewModel();
+        initViewModel(mViewModel);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_ass);
 
+        mViewModel.liveAss.observe(this, assEntities -> {
+            mModel.setData(assEntities);
+
+            mAdapter.initWave(mModel, mWaveSideBar);
+            mAdapter.initHead(getBaseActivity());
+            mAdapter.setNewData(mModel.getData());
+        });
+
         mRecyclerView = findViewById(R.id.list);
         mWaveSideBar = findViewById(R.id.side_bar);
 
 
-        List<AssEntity> assEntityLists = Lists.newArrayList();
-
-        assEntityLists.add(new AssEntity("朱"));
-        assEntityLists.add(new AssEntity("朱"));
-        assEntityLists.add(new AssEntity("江"));
-        assEntityLists.add(new AssEntity("王"));
-        assEntityLists.add(new AssEntity("许"));
-        assEntityLists.add(new AssEntity("胡"));
-        assEntityLists.add(new AssEntity("陈"));
-
-        mModel.setData(assEntityLists);
-
-        mWaveSideBar.setIndexItems(mModel.getLetters().toArray(new String[mModel.getLetters().size()]));
-        mWaveSideBar.setOnSelectIndexItemListener(index -> {
-            for (int i = 0; i < mModel.getData().size(); i++) {
-                if (index.equals(mModel.getData().get(i).getLetter())) {
-                    ((LinearLayoutManager) mRecyclerView.getRecyclerView().getLayoutManager()).scrollToPositionWithOffset(i, 0);
-                    return;
-                }
-            }
-        });
-
         mAdapter  = new SelectAssAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
-        mAdapter.initHead(getBaseActivity());
-        mAdapter.setNewData(mModel.getData());
+
+        mViewModel.getAssList();
+
+
     }
 }

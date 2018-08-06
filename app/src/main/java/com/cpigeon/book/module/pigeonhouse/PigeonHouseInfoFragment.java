@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home;
+package com.cpigeon.book.module.pigeonhouse;
 
 import android.app.Activity;
 import android.content.Context;
@@ -67,6 +67,9 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        //第一次登录  获取鸽币
+        mLoginViewModel = new LoginViewModel();
+        initViewModel(mLoginViewModel);
     }
 
     @Nullable
@@ -118,9 +121,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         });
 
 
-        //第一次登录  获取鸽币
-        mLoginViewModel = new LoginViewModel();
-        initViewModel(mLoginViewModel);
+
         mLoginViewModel.oneStartGetGeBi();//第一次登录
         mLoginViewModel.oneStartHintStr.observe(this, r -> {
             ToastUtils.showLong(getActivity(), r);

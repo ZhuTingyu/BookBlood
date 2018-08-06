@@ -14,7 +14,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.module.launch.viewmodel.LaunchViewModel;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
-import com.cpigeon.book.module.home.PigeonHouseInfoFragment;
+import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 import com.cpigeon.book.module.login.LoginActivity;
 
 import io.reactivex.disposables.Disposable;

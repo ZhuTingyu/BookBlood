@@ -26,6 +26,7 @@
 
     <!--启动页  图片-->
     <string name="launch_img">TXGP_Get_StartUpAd</string>
+    <string name="get_ass_list">TXGP_PigeonISCO_GetList</string>
 
 
 
