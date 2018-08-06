@@ -21,6 +21,8 @@
     <string name="text_register_shed_number">注册棚号</string>
     <string name="text_join_match_number">参赛编号</string>
     <string name="text_pigeon_house_location">鸽舍坐标</string>
+    <string name="text_pigeon_house_la">鸽舍纬度</string>
+    <string name="text_pigeon_house_lo">鸽舍经度</string>
     <string name="text_location">所在省市</string>
     <string name="text_details_address">详细地址</string>
     <string name="text_go_auth">去认证</string>
@@ -31,6 +33,10 @@
     <string name="text_input_right_password">请输入密码！</string>
     <string name="text_tiwce_password_not_same">两次输入密码不一致！</string>
     <string name="text_agree_agreement">请同意天下鸽谱使用协议</string>
+    <string name="text_search">搜索</string>
+    <string name="text_search_history">搜索历史</string>
+    <string name="text_clean">清空</string>
+    <string name="title_select_ass">选择协会</string>
     <string-array name="array_choose_photo">
         <item>@string/text_open_gallery</item>
         <item>@string/text_open_camera</item>

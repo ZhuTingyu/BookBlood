@@ -13,6 +13,7 @@ import com.base.util.IntentBuilder;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.module.MainActivity;
+import com.cpigeon.book.module.login.LoginActivity;
 
 /**
  * Created by Zhu TingYu on 2018/7/26.
@@ -42,7 +43,7 @@ public class GuideFragment extends BaseFragment {
 
         if(position == 3){
             mImageView.setOnClickListener(v -> {
-                MainActivity.start(getBaseActivity());
+                LoginActivity.start(getBaseActivity());
                 finish();
             });
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlRoot"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,30 +8,39 @@
 
 
     <LinearLayout
+        android:id="@+id/ll"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/include_top_bar"/>
+        <include layout = "@layout/layout_toolbar"/>
 
-
-        <com.cpigeon.book.widget.SearchTextView
+        <include
             android:layout_width="match_parent"
-            android:layout_height="48dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            layout="@layout/include_search_text_to_click"/>
 
-        <include layout="@layout/xrecyclerview_no_padding_layout"/>
+        <include layout="@layout/xrecyclerview_layout"/>
     </LinearLayout>
 
     <com.gjiazhe.wavesidebar.WaveSideBar
         android:id="@+id/side_bar"
+        android:layout_marginTop="118dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:paddingRight="8dp"
-        app:sidebar_position="right"
-        app:sidebar_max_offset="80dp"
         app:sidebar_lazy_respond="false"
+        app:sidebar_max_offset="80dp"
+        app:sidebar_position="right"
+        app:sidebar_text_alignment="center"
         app:sidebar_text_color="#8D6E63"
-        app:sidebar_text_size="14sp"
-        app:sidebar_text_alignment="center"/>
+        app:sidebar_text_size="14sp" />
 
 </RelativeLayout>

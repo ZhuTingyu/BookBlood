@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.base.application.BaseApplication;
 import com.base.base.BaseActivity;
 import com.base.http.R;
+import com.base.util.http.NetworkUtils;
 import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.luck.picture.lib.tools.StringUtils;

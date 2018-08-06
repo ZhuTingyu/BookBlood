@@ -21,18 +21,24 @@ public interface DbEntityDao {
 
     @Query("SELECT * FROM DbEntity WHERE userId LIKE :userId" +
             " AND type LIKE :type")
-    List<DbEntity> getDataByType(String userId, String type);
+    List<DbEntity> getDataByUserAndType(String userId, String type);
+
+    @Query("SELECT * FROM DbEntity WHERE type LIKE :type")
+    List<DbEntity> getDataByType(String type);
 
     @Insert
     void insert(DbEntity dbEntity);
 
     @Insert
-    void insertAll(List<DbEntity> dbEntities);
+    void insertAll(DbEntity... dbEntities);
 
     @Delete
     void delete(DbEntity dbEntity);
 
+    @Delete
+    void deleteAll(DbEntity... dbEntities);
+
     @Update
-    void updata(DbEntity dbEntity);
+    void update(DbEntity dbEntity);
 }
 

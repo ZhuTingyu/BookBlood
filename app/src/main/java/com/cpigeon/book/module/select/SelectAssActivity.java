@@ -3,6 +3,7 @@ package com.cpigeon.book.module.select;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.LinearLayout;
 
 import com.base.base.BaseActivity;
 import com.base.base.pinyin.LetterSortModel;
@@ -24,25 +25,24 @@ import java.util.List;
 public class SelectAssActivity extends BaseActivity {
 
     XRecyclerView mRecyclerView;
+    LinearLayout mLlSearchTextClick;
+
     SelectAssAdapter mAdapter;
     WaveSideBar mWaveSideBar;
     LetterSortModel<AssEntity> mModel = new LetterSortModel<>();
     SelectAssViewModel mViewModel;
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mViewModel = new SelectAssViewModel();
-        initViewModel(mViewModel);
-    }
+    SearchAssFragment searchAssFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_ass);
-
+        setTitle(R.string.title_select_ass);
+        mViewModel = new SelectAssViewModel();
+        initViewModel(mViewModel);
         mViewModel.liveAss.observe(this, assEntities -> {
+            setProgressVisible(false);
             mModel.setData(assEntities);
-
             mAdapter.initWave(mModel, mWaveSideBar);
             mAdapter.initHead(getBaseActivity());
             mAdapter.setNewData(mModel.getData());
@@ -50,13 +50,31 @@ public class SelectAssActivity extends BaseActivity {
 
         mRecyclerView = findViewById(R.id.list);
         mWaveSideBar = findViewById(R.id.side_bar);
+        mLlSearchTextClick = findViewById(R.id.llSearchTextClick);
 
 
         mAdapter  = new SelectAssAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 
+        setProgressVisible(true);
         mViewModel.getAssList();
 
+        searchAssFragment = new SearchAssFragment();
+        FragmentUtils.add(getSupportFragmentManager(), searchAssFragment ,R.id.rlRoot,false);
+        hideSearch();
 
+        mLlSearchTextClick.setOnClickListener(v -> {
+            FragmentUtils.show(searchAssFragment);
+        });
+
+    }
+
+    public void hideSearch(){
+        FragmentUtils.hide(searchAssFragment);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

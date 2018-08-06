@@ -1,0 +1,20 @@
+<LinearLayout
+    android:id="@+id/llSearchTextClick"
+    android:gravity="center"
+    android:padding="5dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:background="@drawable/shape_bg_corner_5_solid_white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:textSize="@dimen/medium_text_size"
+        android:text="@string/text_search"
+        android:drawableLeft="@drawable/svg_search"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

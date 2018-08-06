@@ -35,5 +35,9 @@
     <!--删除单个足环-->
     <string name="foot_del_single">TXGP_FootRing_Delete</string>
 
+    <string name="add_pigeon_house">TXGP_PigeonHome_Add</string>
+
+
+
 
 </resources>

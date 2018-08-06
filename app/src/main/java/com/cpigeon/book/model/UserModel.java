@@ -32,7 +32,8 @@ public class UserModel {
 
     public UserModel() {
 
-        List<DbEntity> list = AppDatabase.getInstance(Utils.getApp()).DbEntityDao().getAll();
+        List<DbEntity> list = AppDatabase.getInstance(Utils.getApp()).DbEntityDao()
+                .getDataByType(AppDatabase.TYPE_USER_DATA);
 
         if (list != null && list.size() > 0) {
             for (DbEntity configBean : list) {
@@ -80,6 +81,7 @@ public class UserModel {
     public synchronized void setUserInfo(UserEntity userInfo, String password) {
         DbEntity entity = new DbEntity();
         userInfo.password = password;
+        entity.setId(1);
         entity.setUserId(userInfo.userid);
         entity.setData(GsonUtil.toJson(userInfo));
         entity.setType(AppDatabase.TYPE_USER_DATA);
@@ -96,7 +98,7 @@ public class UserModel {
         entity.setUserId(userEntity.userid);
         entity.setData(GsonUtil.toJson(userEntity));
         entity.setType(AppDatabase.TYPE_USER_DATA);
-        AppDatabase.getInstance(Utils.getApp()).DbEntityDao().updata(entity);
+        AppDatabase.getInstance(Utils.getApp()).DbEntityDao().update(entity);
     }
 
 //    public static Observable<ApiResponse> loginOut() {
