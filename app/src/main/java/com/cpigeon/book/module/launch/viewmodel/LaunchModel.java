@@ -15,10 +15,11 @@ import io.reactivex.Observable;
 public class LaunchModel {
     //hl 启动页面图
     public static Observable<ApiResponse<Object>> getLaunchData() {
-        return RequestData.<ApiResponse<Object>>build2()
+        return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.launch_img)
+                .addHead("", "")
                 .addBody("uidsss", UserModel.getInstance().getUserId())
                 .request();
     }
