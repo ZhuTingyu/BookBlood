@@ -3,6 +3,7 @@ package com.cpigeon.book.module.select.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
+import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.AssModel;
 import com.cpigeon.book.model.entity.AssEntity;
 
@@ -15,13 +16,14 @@ import java.util.List;
 public class SelectAssViewModel extends BaseViewModel {
 
     public MutableLiveData<List<AssEntity>> liveAss = new MutableLiveData<>();
+    public MutableLiveData<List<AssEntity>> liveHistory = new MutableLiveData<>();
 
     public void getAssList(){
         submitRequestThrowError(AssModel.getAssList(), r -> {
             if(r.isOk()){
                 liveAss.setValue(r.data);
                 listEmptyMessage.setValue(r.msg);
-            }
+            }else throw new HttpErrorException(r);
         });
     }
 }

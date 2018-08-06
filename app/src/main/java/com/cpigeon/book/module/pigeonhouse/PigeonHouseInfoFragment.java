@@ -22,7 +22,9 @@ import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
+import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssActivity;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -39,6 +41,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class PigeonHouseInfoFragment extends BaseBookFragment {
+
+    public static int CODE_ORGANIZE = 0x123;
 
     private CircleImageView mImgHead;
     private TextView mTvName;
@@ -57,7 +61,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     private boolean isLook = false;
     private String mHeadImagePath;
 
-    LoginViewModel mLoginViewModel;
+    PigeonHouseViewModel mViewModel;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
@@ -68,8 +72,8 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         //第一次登录  获取鸽币
-        mLoginViewModel = new LoginViewModel();
-        initViewModel(mLoginViewModel);
+        mViewModel = new PigeonHouseViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -81,6 +85,10 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mViewModel.oneStartHintStr.observe(this, r -> {
+            ToastUtils.showLong(getActivity(), r);
+        });
 
         mImgHead = findViewById(R.id.imgHead);
         mTvName = findViewById(R.id.tvName);
@@ -97,6 +105,17 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mLvCity = findViewById(R.id.lvCity);
         mLvAddress = findViewById(R.id.lvAddress);
 
+        mTvAuth.setOnClickListener(v -> {
+            MainActivity.start(getBaseActivity());
+        });
+
+        bindUi(RxUtils.textChanges(mLvHouseName.getEditText()),mViewModel.setPigeonHomeName());
+        bindUi(RxUtils.textChanges(mLvPhone.getEditText()),mViewModel.setPigeonHomePhone());
+        bindUi(RxUtils.textChanges(mLvOrganize.getEditText()),mViewModel.setPigeonISOCID());
+        bindUi(RxUtils.textChanges(mLvShedId.getEditText()),mViewModel.setUsePigeonHomeNum());
+        bindUi(RxUtils.textChanges(mLvJoinMatchId.getEditText()),mViewModel.setPigeonMatchNum());
+        bindUi(RxUtils.textChanges(mLvAddress.getEditText()),mViewModel.setPigeonHomeName());
+
         composite.add(RxUtils.delayed(50, aLong -> {
             mLlLineInput.getChildViews();
             mLlLineInput.setLineInputViewState(isLook);
@@ -104,7 +123,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
         mLvOrganize.setOnRightClickListener(lineInputView -> {
             IntentBuilder.Builder(getActivity(), SelectAssActivity.class)
-                    .startActivity();
+                    .startActivity(CODE_ORGANIZE);
         });
 
 
@@ -120,16 +139,8 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             });
         });
 
+        mViewModel.oneStartGetGeBi();//第一次登录
 
-
-        mLoginViewModel.oneStartGetGeBi();//第一次登录
-        mLoginViewModel.oneStartHintStr.observe(this, r -> {
-            ToastUtils.showLong(getActivity(), r);
-        });
-
-        mTvAuth.setOnClickListener(v -> {
-            mLoginViewModel.useroneModifyPsd();
-        });
     }
 
     @Override
@@ -140,6 +151,12 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mHeadImagePath = selectList.get(0).getCutPath();
             Bitmap bitmap = ImageUtils.getBitmap(mHeadImagePath);
             mImgHead.setImageBitmap(bitmap);
+        }
+
+        if(requestCode == CODE_ORGANIZE){
+            String organize = data.getStringExtra(IntentBuilder.KEY_DATA);
+            mViewModel.mPigeonISOCID = organize;
+            mLvOrganize.setContent(organize);
         }
     }
 }

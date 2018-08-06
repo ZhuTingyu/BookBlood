@@ -6,6 +6,11 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.base.util.Lists;
+import com.base.util.http.GsonUtil;
+
+import java.util.List;
+
 
 /**
  * Created by Zhu TingYu on 2018/7/3.
@@ -15,6 +20,7 @@ import android.content.Context;
 public abstract class AppDatabase extends RoomDatabase {
 
     public static final String TYPE_USER_DATA = "TYPE_USER_DATA";
+    public static final String TYPE_SEARCH_ASS_HISTORY = "TYPE_SEARCH_ASS_HISTORY";
 
     private static AppDatabase INSTANCE;
     private static final Object sLok = new Object();
@@ -29,6 +35,14 @@ public abstract class AppDatabase extends RoomDatabase {
             }
             return INSTANCE;
         }
+    }
+
+    public static  <T> List<T> getDatas(List<DbEntity> data, Class<T> tClass){
+        List<T> entities = Lists.newArrayList();
+        for (DbEntity dbEntity : data) {
+            entities.add(dbEntity.getData(tClass));
+        }
+        return entities;
     }
 }
 

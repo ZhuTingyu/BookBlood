@@ -31,6 +31,10 @@
     <string name="text_input_right_password">请输入密码！</string>
     <string name="text_tiwce_password_not_same">两次输入密码不一致！</string>
     <string name="text_agree_agreement">请同意天下鸽谱使用协议</string>
+    <string name="text_search">搜索</string>
+    <string name="text_search_history">搜索历史</string>
+    <string name="text_clean">清空</string>
+    <string name="title_select_ass">选择协会</string>
     <string-array name="array_choose_photo">
         <item>@string/text_open_gallery</item>
         <item>@string/text_open_camera</item>

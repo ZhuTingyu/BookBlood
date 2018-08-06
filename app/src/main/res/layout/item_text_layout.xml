@@ -4,7 +4,7 @@
     android:id="@+id/text"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:gravity="center"
+    android:gravity="start|center_vertical"
     android:textSize="@dimen/medium_text_size"
     tools:text="1232412323412314" />
 

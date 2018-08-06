@@ -5,6 +5,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.base.util.http.GsonUtil;
+
 /**
  * Created by Zhu TingYu on 2018/7/2.
  */
@@ -65,6 +67,10 @@ public class DbEntity {
 
     public void setTimeSample(long timeSample) {
         this.timeSample = timeSample;
+    }
+
+    public  <T> T getData(Class<T> tClass){
+        return GsonUtil.fromJson(getData(), tClass);
     }
 }
 

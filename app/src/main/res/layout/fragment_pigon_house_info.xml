@@ -65,6 +65,8 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvHouseLocation"
                     app:lineInputView_DrawableRight="@drawable/svg_arrow_right"
+                    app:lineInputView_IsCanEdit="false"
+                    app:lineInputView_IsNotNull="true"
                     app:lineInputView_LeftString="@string/text_pigeon_house_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -72,6 +74,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvCity"
                     app:lineInputView_LeftString="@string/text_location"
+                    app:lineInputView_IsCanEdit="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

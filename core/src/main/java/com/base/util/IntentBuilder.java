@@ -298,6 +298,14 @@ public class IntentBuilder {
         return this;
     }
 
+    public IntentBuilder startActivity(int requestCode) {
+        if (mContext != null){
+            ((Activity)mContext).startActivityForResult(intent, requestCode);
+            ((Activity)mContext).overridePendingTransition(enter, exit);
+        }
+        return this;
+    }
+
 
     public void startActivity(Activity activity) {
         activity.startActivity(intent);

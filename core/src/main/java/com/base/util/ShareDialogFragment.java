@@ -62,33 +62,6 @@
 //        this.title = title;
 //    }
 //
-//    private View.OnClickListener clickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            switch (v.getId()) {
-//                case R.id.imgbtn_wx:
-//                    //微信分享
-//                    startShareApp(SHARE_MEDIA.WEIXIN);
-//                    break;
-//                case R.id.imgbtn_pyq:
-//                    //微信朋友圈
-//                    startShareApp(SHARE_MEDIA.WEIXIN_CIRCLE);
-//                    break;
-//                case R.id.imgbtn_qq:
-//                    //QQ
-//                    startShareApp(SHARE_MEDIA.QQ);
-//                    break;
-//
-//                case R.id.imgbtn_qqz:
-//                    //QQ空间
-//                    startShareApp(SHARE_MEDIA.QZONE);
-//                    break;
-//                case R.id.btn_cancel:
-//                    dismiss();
-//                    break;
-//            }
-//        }
-//    };
 //
 //    private void startShareApp(SHARE_MEDIA platform) {
 //        if(shareType == TYPE_DEFALTE){

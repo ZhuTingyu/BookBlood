@@ -1,5 +1,6 @@
 package com.base.util;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,12 +24,19 @@ public class Lists {
     }
 
     public static <E> ArrayList<E> newArrayList(E... elements) {
-
         int capacity = computeArrayListCapacity(elements.length);
         ArrayList<E> list = new ArrayList<E>(capacity);
         Collections.addAll(list, elements);
         return list;
     }
+
+    public static <T> T[] toArray(Class<?> cls, ArrayList<T> items) {
+        if (items == null || items.size() == 0) {
+            return (T[]) Array.newInstance(cls, 0);
+        }
+        return items.toArray((T[]) Array.newInstance(cls, items.size()));
+    }
+
     private static int computeArrayListCapacity(int arraySize) {
 
         return saturatedCast(5L + arraySize + (arraySize / 10));
@@ -62,6 +70,10 @@ public class Lists {
             }
         }
         return sb.toString();
+    }
+
+    public static boolean isEmpty(List list){
+        return list == null || list.isEmpty();
     }
 
 }

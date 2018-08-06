@@ -68,7 +68,7 @@ public class SearchTextView extends RelativeLayout {
         void cancel();
     }
 
-    public void setListener(OnSearchTextClickListener listener) {
+    public void setOnSearchTextClickListener(OnSearchTextClickListener listener) {
         this.listener = listener;
     }
 }
