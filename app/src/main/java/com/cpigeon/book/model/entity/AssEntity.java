@@ -9,15 +9,27 @@ import com.base.entity.LetterSortEntity;
 
 public class AssEntity extends LetterSortEntity {
 
-    public AssEntity(String name){
-        this.name = name;
-    }
-
-    String id;
-    String name;
+    String PigeonISOCID;
+    String ISOCName;
 
     @Override
     public String getContent() {
-        return name;
+        return ISOCName;
+    }
+
+    public String getPigeonISOCID() {
+        return PigeonISOCID;
+    }
+
+    public void setPigeonISOCID(String pigeonISOCID) {
+        PigeonISOCID = pigeonISOCID;
+    }
+
+    public String getISOCName() {
+        return ISOCName;
+    }
+
+    public void setISOCName(String ISOCName) {
+        this.ISOCName = ISOCName;
     }
 }

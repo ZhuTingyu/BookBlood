@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home.viewmodle;
+package com.cpigeon.book.module.pigeonhouse.viewmodle;
 
 import com.base.base.BaseViewModel;
 

@@ -17,7 +17,6 @@ public class NumberListModel {
         return RequestUtil.<ApiResponse<List<String>>>builder()
                 .setToJsonType(new TypeToken<ApiResponse<List<String>>>(){}.getType())
                 .addHead("u","KZvtq42TJnoAs/p7JDqLnY16yYcRtK7o2JtPg1WR9mZrFI/WO+qOP84FzmGjZzkgxjrdDPpWNqRQVH0bB6oJtw==")
-                .setUserId("024204")
                 .setBaseUrl("http://114.141.132.146:818")
                 .headUrl("/CPAPI/V1/")
                 .url("SGT_GetUserList")
