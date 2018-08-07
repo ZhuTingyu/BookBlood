@@ -13,6 +13,13 @@
         android:layout_height="wrap_content"
         android:text="足环" />
 
+    <Button
+        android:id="@+id/ac_btns2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="足环" />
+
+
 
     <include layout="@layout/xrecyclerview_no_padding_layout" />
 
