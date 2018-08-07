@@ -45,7 +45,7 @@ public class RxRequest {
             }
 
             if (body.isEmpty()) {
-                builder.addFormDataPart("temp", "temp");
+                builder.addFormDataPart("timestamp", "");
             }
 
             Call<ResponseBody> call;

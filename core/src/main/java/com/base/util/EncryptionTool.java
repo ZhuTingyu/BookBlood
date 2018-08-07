@@ -152,7 +152,7 @@ public class EncryptionTool {
      */
     public static String decryptAES(String input) {
         if (StringUtil.isStringValid(input)) {
-            return decryptAES(input, MD5_32(AESKey_de));
+            return decryptAES(input, MD5(AESKey_de));
         } else return "";
     }
 

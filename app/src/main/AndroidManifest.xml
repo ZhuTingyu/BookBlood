@@ -74,8 +74,9 @@
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService">
-
         </service>
+
+        <activity android:name=".module.foot.MyActivity"/>
 
     </application>
 

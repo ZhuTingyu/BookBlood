@@ -25,7 +25,6 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.MainActivity;
-import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssActivity;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
