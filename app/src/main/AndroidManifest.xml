@@ -48,6 +48,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="eaa472f5b6b36270351a48f1e4fa36d6"/>
+
         <activity android:name=".module.MainActivity"
             android:screenOrientation="portrait"/>
 

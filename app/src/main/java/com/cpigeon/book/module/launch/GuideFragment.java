@@ -10,10 +10,13 @@ import android.widget.ImageView;
 
 import com.base.BaseFragment;
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.login.LoginActivity;
+
+import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/7/26.
@@ -23,6 +26,10 @@ public class GuideFragment extends BaseFragment {
 
     private ImageView mImageView;
     private int position;
+    List<Integer> imgs =Lists.newArrayList(R.mipmap.ic_welcome_1
+            ,R.mipmap.ic_welcome_2
+            ,R.mipmap.ic_welcome_3
+            ,R.mipmap.ic_welcome_4);
 
     @Nullable
     @Override
@@ -38,7 +45,8 @@ public class GuideFragment extends BaseFragment {
         if(getArguments() != null){
             position = getArguments().getInt(IntentBuilder.KEY_DATA);
         }
-        Glide.with(getBaseActivity()).load(R.mipmap.ic_launcher)
+
+        Glide.with(getBaseActivity()).load(imgs.get(position))
                 .into(mImageView);
 
         if(position == 3){

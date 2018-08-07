@@ -17,6 +17,7 @@ import com.base.base.FragmentAdapter;
 import com.base.util.BarUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.RxUtils;
 import com.base.util.system.ScreenTool;
@@ -57,6 +58,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PermissionUtil.getAppDetailSettingIntent(this);
         BarUtils.setStatusBarAllAlpha(this);
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewPager);

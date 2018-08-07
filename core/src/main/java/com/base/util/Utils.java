@@ -20,6 +20,11 @@ public final class Utils {
     public static String getString(@StringRes int resId){
         return getApp().getResources().getString(resId);
     }
+
+    public static String getString(@StringRes int resId, Object... formatArgs){
+        return getApp().getResources().getString(resId,formatArgs);
+    }
+
     public static int getColor(@ColorRes int resId){
         return getApp().getResources().getColor(resId);
     }

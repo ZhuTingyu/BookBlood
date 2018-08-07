@@ -141,7 +141,7 @@ public class EncryptionTool {
      */
     public static String encryptAES(String input) {
         Log.d("xiaohlsss", "encryptAES: "+MD5_32(AESKey_en));
-        return encryptAES(input, MD5_32(AESKey_en));
+        return encryptAES(input, MD5(AESKey_en));
     }
 
     /**
