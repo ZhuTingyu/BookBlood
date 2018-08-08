@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-
 import com.base.http.R;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -128,11 +127,13 @@ public class DialogUtils {
      * @return
      */
 
-    public static SweetAlertDialog createSuccessDialog(Context context, String message) {
+    public static SweetAlertDialog createSuccessDialog(Context context, String message,boolean  cancelable,SweetAlertDialog.OnSweetClickListener mConfirmClick) {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);
         dialogPrompt.setTitleText("成功");
         dialogPrompt.setContentText(message);
+        dialogPrompt.setConfirmClickListener(mConfirmClick);
+        dialogPrompt.setCancelable(cancelable);
         dialogPrompt.show();
         return dialogPrompt;
     }

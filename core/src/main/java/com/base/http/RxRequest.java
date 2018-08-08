@@ -61,7 +61,7 @@ public class RxRequest {
             try {
                 Response<ResponseBody> response = call.execute();
 
-                String responseStr = response.body().string().toString();
+                String responseStr = response.body().string();
                 LogUtil.print("请求接口返回: " + responseStr);
 
                 if (response.code() == 200) {

@@ -10,13 +10,20 @@ import android.support.v7.app.AppCompatActivity;
 import com.base.BaseFragment;
 import com.base.entity.RestErrorInfo;
 import com.base.http.HttpErrorException;
+import com.base.http.R;
+import com.base.util.Utils;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
+;
 
 /**
  * 6 on 2016/3/15.
@@ -30,10 +37,10 @@ public class BaseViewModel extends ViewModel {
     public MutableLiveData<String> normalResult = new MutableLiveData<>();
 
 
-    public BaseViewModel(){
+    public BaseViewModel() {
     }
 
-    protected void newBaseModel(){
+    protected void newBaseModel() {
 
     }
 
@@ -144,10 +151,24 @@ public class BaseViewModel extends ViewModel {
     }
 
     public RestErrorInfo getError(Throwable throwable) {
+
+        //hl
+        if (throwable instanceof ConnectException) {
+            return new RestErrorInfo(Utils.getString(R.string.text_net_error));
+        }
+
+        if (throwable instanceof SocketTimeoutException) {
+            return new RestErrorInfo("网路有点不稳定\n请检查网速");
+        }
+
         if (throwable instanceof HttpErrorException) {
             return new RestErrorInfo(((HttpErrorException) throwable).getResponseJson());
         }
-        if (throwable != null) return new RestErrorInfo(throwable.getMessage());
+
+        if (throwable != null) {
+            return new RestErrorInfo(throwable.getMessage());
+        }
+
         return new RestErrorInfo("");
     }
 
@@ -176,16 +197,16 @@ public class BaseViewModel extends ViewModel {
         return "";
     }
 
-    protected void error(@StringRes int resId){
+    protected void error(@StringRes int resId) {
         error.setValue(getErrorString(resId));
     }
 
 
-    protected void error(String resId){
+    protected void error(String resId) {
         error.setValue(getErrorString(resId));
     }
 
-    protected void setListEmptyMessage(String message){
+    protected void setListEmptyMessage(String message) {
         listEmptyMessage.setValue(message);
     }
 

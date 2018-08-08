@@ -3,7 +3,6 @@ package com.cpigeon.book.module.login.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
-import com.base.http.ApiResponse;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.LoginModel;
 import com.cpigeon.book.model.UserModel;
@@ -26,7 +25,14 @@ public class LoginViewModel extends BaseViewModel {
     public void login() {
         submitRequestThrowError(LoginModel.login(mPhone, mPassword), r -> {
             if (r.isOk()) {
-                UserModel.getInstance().setUserInfo(r.data, mPassword);
+
+                if (UserModel.getInstance().getUserData() != null) {
+                    UserModel.getInstance().cleanUserInfo();
+                    UserModel.getInstance().setUserInfo(r.data, mPassword);
+                } else {
+                    UserModel.getInstance().setUserInfo(r.data, mPassword);
+                }
+
                 loginR.setValue(r.data);
                 normalResult.setValue(r.msg);
             } else throw new HttpErrorException(r);
@@ -70,6 +76,17 @@ public class LoginViewModel extends BaseViewModel {
         submitRequestThrowError(LoginModel.getUseroneModifyPsd(), r -> {
             if (r.isOk()) {
 
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    public MutableLiveData<String> outMsg = new MutableLiveData<>();
+
+    //hl 退出登录
+    public void outLogin() {
+        submitRequestThrowError(LoginModel.getOutLogin(), r -> {
+            if (r.isOk()) {
+                outMsg.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }

@@ -57,6 +57,9 @@ public class NumberListFragment extends BaseFragment{
         });
 
         recyclerView = findViewById(R.id.list);
+        recyclerView.setRefreshListener(() ->{
+
+        });
         adapter = new DemoAdapter();
         recyclerView.setAdapter(adapter);
         adapter.setOnLoadMoreListener(() -> {

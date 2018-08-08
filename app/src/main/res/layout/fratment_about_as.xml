@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="18dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_about"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/rl_appinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:minHeight="@dimen/activity_about_logo_layout_minheight"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/aciv_Logo"
+                        android:layout_width="@dimen/activity_about_logo_height"
+                        android:layout_height="@dimen/activity_about_logo_height"
+                        android:layout_gravity="center_horizontal|top"
+                        android:layout_marginTop="@dimen/activity_about_logo_margintop"
+                        app:srcCompat="@mipmap/about_logo" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/activity_about_item_p">
+
+                        <TextView
+                            android:id="@+id/tv_app_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="@string/app_name"
+                            android:textColor="@color/color_262626"
+                            android:textSize="@dimen/activity_about_appname_textsize" />
+
+                        <TextView
+                            android:id="@+id/tv_version_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="10dp"
+                            android:text="V1.0"
+                            android:textColor="@color/color_262626"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+
+                    <com.cpigeon.book.widget.DivideTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@id/tv_version_name"
+                        android:layout_marginTop="@dimen/activity_about_versionname_margintop"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:text="@string/cpigeon_intro"
+                        android:textColor="@color/color_262626"
+                        android:textSize="@dimen/activity_about_company_intro_textsize" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:id="@+id/tv_function_intro"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_h"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:padding="@dimen/activity_about_item_p"
+                        android:text="@string/function_introduction"
+                        android:textColor="@color/color_262626"
+                        android:textSize="@dimen/activity_about_clickitem_textsize" />
+
+                    <View
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/split_line_width"
+                        android:background="@color/colorLayoutSplitLineGray" />
+
+
+                    <TextView
+                        android:id="@+id/tv_user_agreement"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_h"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:padding="@dimen/activity_about_item_p"
+                        android:text="@string/user_agreement"
+                        android:textColor="@color/color_262626"
+                        android:textSize="@dimen/activity_about_clickitem_textsize" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_about_copyright_layout_paddingbottom">
+
+        <TextView
+            android:id="@+id/tv_copyright"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/version_information_c"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="@dimen/activity_about_copyright_textsize" />
+
+        <TextView
+            android:id="@+id/tvCompanyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_about_copyright_margintop"
+            android:gravity="center"
+            android:text="@string/version_information_gs"
+            android:textColor="@color/colorDarkGrey"
+            android:textSize="@dimen/activity_about_copyright_textsize" />
+    </LinearLayout>
+
+</LinearLayout>

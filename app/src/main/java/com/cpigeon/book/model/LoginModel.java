@@ -68,4 +68,16 @@ public class LoginModel {
                 .addBody("rxmm", "654321")//确认新密码，不加密
                 .request();
     }
+
+    //hl 退出登录
+    public static Observable<ApiResponse<Object>> getOutLogin() {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.user_out_login)
+                .addBody("u", UserModel.getInstance().getUserData().yonghuming)//用户名，或手机号码
+                .addBody("p", EncryptionTool.MD5_32(UserModel.getInstance().getUserData().password))//登录密码，使用32位MD5加密
+                .addBody("devid", PhoneUtils.getCombinedDeviceID(Utils.getApp()))//登录设备ID
+                .request();
+    }
 }

@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.base.util.RxUtils;
+import com.base.util.dialog.DialogUtils;
+import com.base.util.system.AppManager;
 import com.base.util.utility.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
@@ -20,8 +22,10 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.service.SingleLoginService;
+import com.cpigeon.book.service.SingleLoginViewModel;
 import com.cpigeon.book.util.EditTextUtil;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -38,6 +42,9 @@ public class LoginFragment extends BaseBookFragment {
     private TextView tvLogin;
     LoginViewModel mViewModel;
 
+    private SingleLoginViewModel mSingleLoginViewModel;
+    private SweetAlertDialog dialogPrompt;
+
     private boolean userInfoTag = false;
 
     @Nullable
@@ -51,6 +58,10 @@ public class LoginFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = new LoginViewModel();
         initViewModel(mViewModel);
+
+
+        mSingleLoginViewModel = new SingleLoginViewModel();
+        initViewModel(mSingleLoginViewModel);
 
         mViewModel.loginR.observe(this, s -> {
             SingleLoginService.start(getActivity());
@@ -96,7 +107,28 @@ public class LoginFragment extends BaseBookFragment {
         });
 
         tvLogin.setOnClickListener(v -> {
-            mViewModel.login();
+
+            if (UserModel.getInstance().getUserData() == null) {
+                mViewModel.login();
+                return;
+            }
+            mSingleLoginViewModel.getSingleLogin(o -> {
+                if (!o.isEmpty()) {
+                    if (dialogPrompt == null || !dialogPrompt.isShowing()) {
+                        dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o, dialog1 -> {
+                            dialog1.dismiss();
+                        }, dialog2 -> {
+                            dialog2.dismiss();
+
+                            SingleLoginService.stopService();
+                            mViewModel.login();
+                        });
+                    }
+                } else {
+                    mViewModel.login();
+                }
+            });
+
         });
 
         imgLookPwd.setOnClickListener(v -> {

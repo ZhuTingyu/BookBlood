@@ -41,4 +41,14 @@
         <item>@string/text_open_gallery</item>
         <item>@string/text_open_camera</item>
     </string-array>
+
+
+
+    <!--关于我们-->
+    <string name="cpigeon_intro">中鸽助手是为中鸽网公棚和协会用户提供信息发布、赛鸽管理和比赛监控的平台。目前提供：公棚赛鸽摄像、鸽运通（比赛监控）、训鸽通（个人训放监控）、鸽信通（短信群发）等服务和公棚、协会信息发布管理等功能，一部手机搞定所有工作，简单便捷高效，节省您的时间、提高工作效率。</string>
+    <string name="user_agreement">用户协议</string>
+    <string name="function_introduction">功能介绍</string>
+    <string name="version_information_gs">成都市中鸽科技有限公司</string>
+    <string name="version_information_c" translatable="false">Copyright © 2006 - 2018 All rights reserved.</string>
+
 </resources>

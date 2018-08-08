@@ -1,6 +1,7 @@
 package com.cpigeon.book.service;
 
 import com.base.http.ApiResponse;
+import com.base.util.EncryptionTool;
 import com.base.util.Utils;
 import com.base.util.utility.PhoneUtils;
 import com.cpigeon.book.R;
@@ -23,7 +24,7 @@ public class SingleLoginModel {
                 }.getType())
                 .url(R.string.user_single_login)
                 .addBody("u", UserModel.getInstance().getUserData().yonghuming)//用户名，或手机号码
-                .addBody("p",UserModel.getInstance().getUserData().password)//登录密码，使用32位MD5加密
+                .addBody("p", EncryptionTool.MD5_32(UserModel.getInstance().getUserData().password))//登录密码，使用32位MD5加密
                 .addBody("devid", PhoneUtils.getCombinedDeviceID(Utils.getApp()))//登录设备ID
                 .request();
     }

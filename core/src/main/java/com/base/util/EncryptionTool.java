@@ -127,7 +127,7 @@ public class EncryptionTool {
                 hexString.append(shaHex);
             }
             return hexString.toString().toUpperCase();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";

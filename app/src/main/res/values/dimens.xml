@@ -10,4 +10,21 @@
     <dimen name="normal_safe_distance">16dp</dimen>
 
 
+
+    <dimen name="item_h">60dp</dimen>
+    <dimen name="split_line_width">1px</dimen>
+    <dimen name="activity_about_copyright_textsize">14sp</dimen>
+    <dimen name="activity_about_copyright_margintop">5dp</dimen>
+    <dimen name="activity_about_copyright_layout_paddingbottom">10dp</dimen>
+    <dimen name="activity_about_clickitem_textsize">16sp</dimen>
+    <dimen name="activity_about_logo_layout_minheight">240dp</dimen>
+    <dimen name="activity_about_logo_height">65dp</dimen>
+    <dimen name="activity_about_logo_margintop">18dp</dimen>
+    <dimen name="activity_about_item_p">12dp</dimen>
+    <dimen name="activity_about_appname_matgintop">14dp</dimen>
+    <dimen name="activity_about_appname_textsize">20sp</dimen>
+    <dimen name="activity_about_versionname_margintop">8dp</dimen>
+    <dimen name="activity_about_versionname_textsize">20sp</dimen>
+    <dimen name="activity_about_company_intro_textsize">13sp</dimen>
+
 </resources>

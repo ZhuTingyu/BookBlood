@@ -12,6 +12,7 @@ import com.base.base.BaseViewModel;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.system.AppManager;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.login.LoginActivity;
 
 import java.util.Timer;
@@ -58,7 +59,7 @@ public class SingleLoginService extends Service {
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_CHECK_SINGLE_LOGIN.equals(action)) {
-//                checkLogin();
+                checkLogin();
             }
         }
         return START_STICKY_COMPATIBILITY;
@@ -79,13 +80,15 @@ public class SingleLoginService extends Service {
                             if (dialogPrompt == null || !dialogPrompt.isShowing()) {
                                 dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o, dialog1 -> {
                                     //结束所有页面
-                                    SingleLoginService.stopService();
+                                    UserModel.getInstance().cleanUserInfo();
 
+                                    SingleLoginService.stopService();
                                     AppManager.getAppManager().killAllActivity();
                                     dialog1.dismiss();
                                 }, dialog2 -> {
                                     SingleLoginService.stopService();
 
+                                    UserModel.getInstance().cleanUserInfo();
                                     //结束所有页面，跳转到登录页
                                     dialog2.dismiss();
                                     AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);

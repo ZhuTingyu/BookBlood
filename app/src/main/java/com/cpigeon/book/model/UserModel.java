@@ -114,7 +114,7 @@ public class UserModel {
 //
 //    }
 
-    private void cleanUserInfo() {
+    public void cleanUserInfo() {
         List<DbEntity> list = AppDatabase.getInstance(Utils.getApp()).DbEntityDao().getAll();
         if (list != null && !list.isEmpty()) {
             for (DbEntity dbEntity : list) {
