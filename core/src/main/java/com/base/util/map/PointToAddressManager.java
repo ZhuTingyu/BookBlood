@@ -1,13 +1,11 @@
 package com.base.util.map;
 
 import android.content.Context;
+import android.view.ContextThemeWrapper;
 
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeQuery;
-import com.amap.api.services.geocoder.RegeocodeResult;
-import com.amap.api.services.poisearch.PoiSearch;
 
 /**
  * Created by Zhu TingYu on 2018/8/7.
@@ -15,13 +13,11 @@ import com.amap.api.services.poisearch.PoiSearch;
 
 public class PointToAddressManager {
 
-    static GeocodeSearch geocoderSearch;
+    GeocodeSearch geocoderSearch;
     RegeocodeQuery query;
 
-    public static PointToAddressManager build(Context context){
-        PointToAddressManager poiSearchManager = new PointToAddressManager();
+    public PointToAddressManager(Context context){
         geocoderSearch = new GeocodeSearch(context);
-        return poiSearchManager;
     }
 
     public PointToAddressManager setSearchPoint(LatLonPoint latLonPoint){

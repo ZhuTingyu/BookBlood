@@ -23,6 +23,7 @@ import com.base.base.BaseActivity;
 import com.base.base.BaseViewModel;
 import com.base.http.R;
 import com.base.util.IntentBuilder;
+import com.base.util.Utils;
 import com.base.util.utility.ToastUtils;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -104,7 +105,14 @@ public abstract class BaseFragment extends Fragment {
                 getActivity().finish();
             });
         }
+
+        initObserve();
+
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    protected void initObserve(){
+
     }
 
     protected void setToolbarNotBack() {
@@ -183,6 +191,11 @@ public abstract class BaseFragment extends Fragment {
     protected void error(String message) {
         setProgressVisible(false);
         baseActivity.error(message);
+    }
+
+    protected void error(@StringRes int resId) {
+        setProgressVisible(false);
+        baseActivity.error(Utils.getString(resId));
     }
 
     public void error(int code, String error) {

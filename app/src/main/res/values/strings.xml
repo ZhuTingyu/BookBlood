@@ -40,9 +40,11 @@
     <string name="text_search_history">搜索历史</string>
     <string name="text_clean">清空</string>
     <string name="title_select_ass">选择协会</string>
-    <string name="text_comma_divide">%1$s, %2$s</string>
+    <string name="text_location_lo_la">E%1$s N%2$s</string>
     <string name="text_la">纬度 %1$s</string>
     <string name="text_lo">经度 %1$s</string>
+    <string name="text_error_not_select_location">选择地址异常，请检查网络</string>
+    <string name="title_map_location">地图定位</string>
     <string-array name="array_choose_photo">
         <item>@string/text_open_gallery</item>
         <item>@string/text_open_camera</item>

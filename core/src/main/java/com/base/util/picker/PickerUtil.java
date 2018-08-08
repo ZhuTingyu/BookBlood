@@ -101,7 +101,6 @@ public class PickerUtil {
 
     public static void onAddress3Picker(Activity activity, AddressPickTask.Callback callback) {
         AddressPickTask task = new AddressPickTask(activity);
-        task.setHideCounty(true);
         task.setCallback(callback);
         task.execute("四川", "阿坝");
     }

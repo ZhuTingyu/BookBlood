@@ -2,11 +2,16 @@ package com.base.util.map;
 
 
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 
+import com.alibaba.idst.nls.internal.protocol.Content;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.CoordinateConverter;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
+
+import java.util.List;
 
 /**
  * 高德地图操作管理工具
@@ -15,7 +20,8 @@ import com.amap.api.maps.model.LatLng;
 
 public class AmapManager {
 
-    public MutableLiveData<LatLng> mLatLngLiveData = new MutableLiveData<>();
+    public MutableLiveData<LatLng> mMoveEndLiveData = new MutableLiveData<>();
+    public MutableLiveData<LatLng> mInMoveLiveData = new MutableLiveData<>();
 
     AMap aMap;
     public AmapManager(AMap aMap){
@@ -52,13 +58,25 @@ public class AmapManager {
         aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
+                mInMoveLiveData.setValue(cameraPosition.target);
             }
 
             @Override
             public void onCameraChangeFinish(CameraPosition cameraPosition) {
-                mLatLngLiveData.setValue(cameraPosition.target);
+                mMoveEndLiveData.setValue(cameraPosition.target);
             }
         });
+    }
+
+    public static LatLng converter(Context context, LatLng sourceLatLng){
+
+        CoordinateConverter converter  = new CoordinateConverter(context);
+
+        converter.from(CoordinateConverter.CoordType.GPS);
+
+        converter.coord(sourceLatLng);
+
+        return converter.convert();
     }
 
 }

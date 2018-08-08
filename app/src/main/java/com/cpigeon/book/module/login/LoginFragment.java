@@ -60,7 +60,7 @@ public class LoginFragment extends BaseBookFragment {
 
             if (!UserModel.getInstance().isHaveHouseInfo()) {
                 //未完善鸽舍信息
-                PigeonHouseInfoFragment.start(getActivity());
+                PigeonHouseInfoFragment.start(getActivity(), false);
             } else {
                 //已完善鸽舍信息
                 MainActivity.start(getActivity());
