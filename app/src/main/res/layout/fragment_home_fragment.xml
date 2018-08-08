@@ -11,15 +11,19 @@
         android:id="@+id/ac_btns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="足环" />
+        android:text="足环管理" />
 
     <Button
         android:id="@+id/ac_btns2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="足环" />
+        android:text="退出登录" />
 
-
+    <Button
+        android:id="@+id/ac_btns3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户信息" />
 
     <include layout="@layout/xrecyclerview_no_padding_layout" />
 

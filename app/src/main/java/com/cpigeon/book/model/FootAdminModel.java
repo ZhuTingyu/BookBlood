@@ -23,14 +23,17 @@ public class FootAdminModel {
     }
 
     //hl 得到各种类型的足环个数
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String key) {
+    public static Observable<ApiResponse<Object>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String year, String typeid, String stateid, String key) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.foot_list_all)
-                .addBody("pageindex", String.valueOf(pi))
-                .addBody("pagesize", String.valueOf(ps))
-                .addBody("searchkey", key)
+                .addBody("pi", String.valueOf(pi))
+                .addBody("ps", String.valueOf(ps))
+                .addBody("year", year)
+                .addBody("typeid", typeid)
+                .addBody("stateid", stateid)
+                .addBody("key", key)
                 .request();
     }
 }

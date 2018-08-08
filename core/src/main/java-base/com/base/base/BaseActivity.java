@@ -44,7 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar toolbar;
     BaseActivity baseActivity;
     private WeakReference<AppCompatActivity> weakReference;
-    private SweetAlertDialog errorDialog;
+    public SweetAlertDialog errorDialog;
 
     protected LoadingView progressView;
     protected ViewGroup rootView;
@@ -75,23 +75,29 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         composite.clear();
-        if(viewModel != null){
+        if (viewModel != null) {
             viewModel.onDestroy();
         }
+
+        //hl
+        if (errorDialog != null && errorDialog.isShowing()) {
+            errorDialog.dismiss();
+        }
+
         super.onDestroy();
     }
 
-    protected void initViewModel(BaseViewModel viewModel){
+    protected void initViewModel(BaseViewModel viewModel) {
         this.viewModel = viewModel;
         this.viewModel.setBaseActivity(getBaseActivity());
         viewModel.getError().observe(this, restErrorInfo -> {
-            if(restErrorInfo != null){
+            if (restErrorInfo != null) {
                 error(restErrorInfo.code, restErrorInfo.message);
             }
         });
     }
 
-    protected <T extends BaseViewModel> T getViewModel(Class<T> viewModelClass){
+    protected <T extends BaseViewModel> T getViewModel(Class<T> viewModelClass) {
         return ViewModelProviders.of(getBaseActivity()).get(viewModelClass);
     }
 
@@ -110,14 +116,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         toolbar = findViewById(R.id.toolbar);
         setToolbar();
         initProgressLayout();
     }
 
     private void initProgressLayout() {
-        if(progressView == null){
+        if (progressView == null) {
             progressView = new LoadingView(this);
         }
         setProgressVisible(false);
@@ -126,11 +132,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 加载框
+     *
      * @param isVisible 是否显示
      */
 
     public void setProgressVisible(boolean isVisible) {
-        if(progressView != null){
+        if (progressView != null) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
             progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
             progressView.animate().setDuration(shortAnimTime).alpha(
@@ -144,7 +151,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        if(toolbar != null){
+        if (toolbar != null) {
             toolbar.setNavigationOnClickListener(v -> onBackPressed());
             title = findViewById(R.id.toolbar_title);
         }
@@ -153,16 +160,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void error(String message) {
 
-        if(!StringUtil.isStringValid(message)){
+        if (!StringUtil.isStringValid(message)) {
             return;
         }
 
         //保证界面只有一个错误提示
 
-        if(errorDialog == null || !errorDialog.isShowing()){
-            errorDialog = DialogUtils.createErrorDialog(baseActivity,message);
+        if (errorDialog == null || !errorDialog.isShowing()) {
+            errorDialog = DialogUtils.createErrorDialog(baseActivity, message);
         }
     }
+
 
     public void error(int code, String error) {
         setProgressVisible(false);
@@ -182,24 +190,25 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 设置顶部标题
+     *
      * @param titleString
      */
-    
 
-    public void setTitle(String titleString){
-        if(title != null){
+
+    public void setTitle(String titleString) {
+        if (title != null) {
             title.setText(titleString);
         }
     }
 
-    public void setTitle(@StringRes int resId){
-        if(title != null){
+    public void setTitle(@StringRes int resId) {
+        if (title != null) {
             title.setText(getString(resId));
         }
     }
 
-    protected void setToolbarRight(@StringRes int resId, MenuItem.OnMenuItemClickListener listener){
-        if(toolbar != null){
+    protected void setToolbarRight(@StringRes int resId, MenuItem.OnMenuItemClickListener listener) {
+        if (toolbar != null) {
             toolbar.getMenu().clear();
             toolbar.getMenu().add(getString(resId))
                     .setOnMenuItemClickListener(listener)
@@ -207,8 +216,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void setToolbarRight(String string, MenuItem.OnMenuItemClickListener listener){
-        if(toolbar != null){
+    protected void setToolbarRight(String string, MenuItem.OnMenuItemClickListener listener) {
+        if (toolbar != null) {
             toolbar.getMenu().clear();
             toolbar.getMenu().add(string)
                     .setOnMenuItemClickListener(listener)
@@ -239,7 +248,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public <T> void bindUi(Observable<T> observable, Consumer<? super T> onNext) {
         composite.add(observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribe(onNext, throwable -> {
-                                error(throwable.getMessage());
+                            error(throwable.getMessage());
                         }
                 ));
     }
@@ -252,7 +261,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 隐藏顶部通知栏
      */
 
-    protected void hideTop(){
+    protected void hideTop() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN
                         | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
@@ -272,7 +281,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     *  设置toolbar没有左边按钮
+     * 设置toolbar没有左边按钮
      */
 
     protected void setToolbarNotBack() {

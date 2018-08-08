@@ -22,13 +22,16 @@ public class FootAdminViewModel extends BaseViewModel {
     }
 
 
-    public int pageindex = 1;
-    public int pagesize = 20;
-    public String searchkey = "";
+    public int pi = 1;
+    public int ps = 20;
+    public String year = "";
+    public String typeid = "";
+    public String stateid = "";
+    public String key = "";
 
     //足环号码 列表
     public void getTXGP_FootRing_SelectKeyAllData() {
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_SelectKeyAll(pageindex, pagesize, searchkey), r -> {
+        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_SelectKeyAll(pi, ps, year, typeid, stateid, key), r -> {
             if (r.isOk()) {
 
             } else throw new HttpErrorException(r);

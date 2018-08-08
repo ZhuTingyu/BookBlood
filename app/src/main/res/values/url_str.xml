@@ -15,6 +15,8 @@
     <string name="user_forget_psd">ZGW_Users_FindPWD</string>
     <!--用户登录-->
     <string name="user_login">ZGW_Users_Login</string>
+    <!--退出登录-->
+    <string name="user_out_login">ZGW_Users_Logout</string>
     <!--获取用户头像-->
     <string name="user_head_img">ZGW_Users_GetUserFace</string>
     <!--第一次登录获取鸽币-->
@@ -45,7 +47,10 @@
     <!--添加足环号段-->
     <string name="foot_add_segment">TXGP_FootRing_AddSection</string>
     <!--足环号码 列表所有-->
-    <string name="foot_list_all">TXGP_FootRing_SelectKeyAll</string>
+    <string name="foot_list_all">TXGP_FootRing_SelectAll</string>
+    <!--获取操作日志-->
+    <string name="user_log_book">ZGW_Users_GetLog</string>
+
 
     <string name="add_pigeon_house">TXGP_PigeonHome_Add</string>
     <string name="get_pigeon_house">TXGP_PigeonHome_GetInfo</string>
