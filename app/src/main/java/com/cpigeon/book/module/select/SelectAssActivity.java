@@ -56,6 +56,10 @@ public class SelectAssActivity extends BaseActivity {
         mAdapter  = new SelectAssAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+
+        });
+
         setProgressVisible(true);
         mViewModel.getAssList();
 

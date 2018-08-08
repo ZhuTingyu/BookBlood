@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.LocationFormatUtils;
+import com.base.util.PermissionUtil;
 import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
@@ -25,6 +27,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssActivity;
+import com.cpigeon.book.module.select.SelectLocationByMapFragment;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 import com.luck.picture.lib.PictureSelector;
@@ -84,7 +87,13 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        PermissionUtil.getAppDetailSettingIntent(getBaseActivity());
 
+        mViewModel.oneStartHintStr.observe(this, r -> {
+            ToastUtils.showLong(getActivity(), r);
+        });
+
+        mViewModel.oneStartGetGeBi();//第一次登录
         mViewModel.oneStartHintStr.observe(this, r -> {
             ToastUtils.showLong(getActivity(), r);
         });
@@ -138,9 +147,22 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             });
         });
 
-        mViewModel.oneStartGetGeBi();//第一次登录
-        mViewModel.oneStartHintStr.observe(this, r -> {
-            ToastUtils.showLong(getActivity(), r);
+        mLvHouseLocation.setOnRightClickListener(lineInputView -> {
+            InputLocationFragment inputLocationFragment = new InputLocationFragment();
+            inputLocationFragment.setOnSureClickListener(new InputLocationFragment.OnInputLocationClickListener() {
+                @Override
+                public void sure(String lo, String la) {
+                    mLvHouseLocation.setContent(getString(R.string.text_comma_divide, lo, la));
+                    mViewModel.mLongitude = LocationFormatUtils.Aj2GPSLocationString(Double.valueOf(lo));
+                    mViewModel.mLatitude = LocationFormatUtils.Aj2GPSLocationString(Double.valueOf(la));
+                }
+
+                @Override
+                public void location() {
+                    SelectLocationByMapFragment.start(getBaseActivity());
+                }
+            });
+            inputLocationFragment.show(getBaseActivity().getSupportFragmentManager());
         });
 
         mTvAuth.setOnClickListener(v -> {

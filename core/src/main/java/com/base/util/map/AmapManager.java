@@ -1,8 +1,11 @@
 package com.base.util.map;
 
 
+import android.arch.lifecycle.MutableLiveData;
+
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 
 /**
@@ -11,6 +14,9 @@ import com.amap.api.maps.model.LatLng;
  */
 
 public class AmapManager {
+
+    public MutableLiveData<LatLng> mLatLngLiveData = new MutableLiveData<>();
+
     AMap aMap;
     public AmapManager(AMap aMap){
         this.aMap = aMap;
@@ -40,6 +46,19 @@ public class AmapManager {
 
     public float getMapZoomLevel(){
         return aMap.getCameraPosition().zoom;
+    }
+
+    public void setMoveCenterListener(){
+        aMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+            }
+
+            @Override
+            public void onCameraChangeFinish(CameraPosition cameraPosition) {
+                mLatLngLiveData.setValue(cameraPosition.target);
+            }
+        });
     }
 
 }

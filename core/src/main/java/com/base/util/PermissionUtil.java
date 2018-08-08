@@ -25,7 +25,7 @@ public class PermissionUtil {
     /**
      * 权限检查
      */
-    public static void getAppDetailSettingIntent(Context mContext) {
+    public static void  getAppDetailSettingIntent(Context mContext) {
 
         List<PermissionItem> permissonItems = new ArrayList<PermissionItem>();
 //        permissonItems.add(new PermissionItem(Manifest.permission.READ_PHONE_STATE, "电话簿", R.drawable.permission_ic_phone));

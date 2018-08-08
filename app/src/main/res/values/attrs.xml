@@ -29,4 +29,8 @@
         <attr name="lineInputView_IsCanEdit" format="boolean"/>
         <attr name="lineInputView_Hint" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="SearchTextView">
+        <attr name="searchTextView_is_in_top" format="boolean"/>
+    </declare-styleable>
 </resources>

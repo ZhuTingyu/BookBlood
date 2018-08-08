@@ -15,6 +15,8 @@ import com.base.application.BaseApplication;
 
 public class LocationLiveData extends LiveData<AMapLocation> {
 
+    private boolean isOnce;
+
     static LocationLiveData locationLiveData;
 
     AMapLocationClient mLocationClient;
@@ -27,11 +29,14 @@ public class LocationLiveData extends LiveData<AMapLocation> {
         }
     };
 
-    public static LocationLiveData get() {
+
+
+    public static LocationLiveData get(Boolean isOnce) {
         synchronized (LocationLiveData.class) {
             if (locationLiveData == null) {
                 locationLiveData = new LocationLiveData();
             }
+            locationLiveData.isOnce = isOnce;
             return locationLiveData;
         }
     }
@@ -60,7 +65,7 @@ public class LocationLiveData extends LiveData<AMapLocation> {
 //        mLocationOption.setOnceLocationLatest(true);
 //下面这句就是设置只定位一次的代码，默认是1秒钟定位一次，此方法在AMAPLocationActivity这个类里面
 
-        mLocationOption.setOnceLocation(true);
+        mLocationOption.setOnceLocation(isOnce);
 
 
         //设置是否返回地址信息（默认返回地址信息）

@@ -8,7 +8,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +27,7 @@
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -49,8 +49,146 @@
 
         </RelativeLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edLoDegree"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="32dp"
+                android:textSize="@dimen/medium_text_size"
+                android:hint="@string/text_degree"
+                android:digits="@string/text_digits_number"
+                android:inputType="number"
+                android:background="@drawable/shape_btn_stroke_gray"/>
+
+            <EditText
+                android:id="@+id/edLoMinute"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/medium_text_size"
+                android:hint="@string/text_minute"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="32dp"
+                android:digits="@string/text_digits_number"
+                android:inputType="number"
+                android:background="@drawable/shape_btn_stroke_gray"/>
+
+            <EditText
+                android:id="@+id/edLoSecond"
+                android:hint="@string/text_second"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/medium_text_size"
+                android:layout_height="32dp"
+                android:inputType="number"
+                android:digits="@string/text_digits_number_with_point"
+                android:background="@drawable/shape_btn_stroke_gray"/>
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/medium_text_size"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:text="@string/text_pigeon_house_la" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edLaDegree"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="32dp"
+                android:textSize="@dimen/medium_text_size"
+                android:hint="@string/text_degree"
+                android:digits="@string/text_digits_number"
+                android:inputType="number"
+                android:background="@drawable/shape_btn_stroke_gray"/>
+
+            <EditText
+                android:id="@+id/edLaMinute"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/medium_text_size"
+                android:hint="@string/text_minute"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_height="32dp"
+                android:digits="@string/text_digits_number"
+                android:inputType="number"
+                android:background="@drawable/shape_btn_stroke_gray"/>
+
+            <EditText
+                android:id="@+id/edLaSecond"
+                android:hint="@string/text_second"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/medium_text_size"
+                android:layout_height="32dp"
+                android:inputType="number"
+                android:digits="@string/text_digits_number_with_point"
+                android:background="@drawable/shape_btn_stroke_gray"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/include_line_view_layout"/>
+
+    <RelativeLayout
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvCancel"
+            android:text="@string/btn_cancel"
+            style="@style/bottom_style_cancel"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvSure"
+            android:text="@string/btn_confirm"
+            style="@style/bottom_style"
+            android:layout_alignParentRight="true"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
 
 
 

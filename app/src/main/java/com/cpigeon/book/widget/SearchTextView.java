@@ -1,6 +1,9 @@
 package com.cpigeon.book.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -11,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Utils;
 import com.cpigeon.book.R;
 
 /**
@@ -23,6 +27,8 @@ public class SearchTextView extends RelativeLayout {
     private TextView mTvCancel;
     private OnSearchTextClickListener listener;
 
+    private boolean mIsInTop;
+
 
     public SearchTextView(Context context) {
         super(context);
@@ -31,12 +37,20 @@ public class SearchTextView extends RelativeLayout {
 
     public SearchTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        getAttr(attrs);
         initView(context);
     }
 
     public SearchTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        getAttr(attrs);
         initView(context);
+    }
+
+    @SuppressLint("Recycle")
+    private void getAttr(AttributeSet attrs) {
+        TypedArray array = getContext().obtainStyledAttributes(attrs,R.styleable.SearchTextView);
+        mIsInTop = array.getBoolean(R.styleable.SearchTextView_searchTextView_is_in_top, true);
     }
 
     private void initView(Context context){
@@ -61,6 +75,17 @@ public class SearchTextView extends RelativeLayout {
                 listener.cancel();
             }
         });
+
+        if(mIsInTop){
+            setBackgroundColor(Utils.getColor(R.color.colorPrimary));
+            mTvCancel.setTextColor(Color.WHITE);
+            mEdSearch.setBackgroundResource(R.drawable.shape_bg_search_edit);
+        }else {
+            setBackgroundColor(Utils.getColor(R.color.white));
+            mTvCancel.setTextColor(Color.BLACK);
+            mEdSearch.setBackgroundResource(R.drawable.shape_bg_corner_5_solid_gray);
+        }
+
     }
 
     public interface OnSearchTextClickListener{

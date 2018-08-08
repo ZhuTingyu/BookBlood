@@ -119,6 +119,8 @@ public class LineInputView extends RelativeLayout {
             mImgRight.setImageDrawable(mDrawableRight);
         }
 
+        setCanEdit(mIsCanEdit);
+
     }
 
     public void setNotNullState(boolean isLookState){

@@ -13,6 +13,7 @@
     <string name="resultcode_alipay_ERROR_6002">网络连接出错！</string>
 
     <string name="text_digits_number">1234567890</string>
+    <string name="text_digits_number_with_point">1234567890.</string>
     <string name="text_commit">提交</string>
     <string name="text_next">下一步</string>
     <string name="text_input_phone_or_username">手机号/账号</string>

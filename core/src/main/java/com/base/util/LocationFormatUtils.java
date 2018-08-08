@@ -22,6 +22,18 @@ public class LocationFormatUtils {
     }
 
     /**
+     * 安捷格式转换为gps格式
+     */
+    public static String Aj2GPSLocationString(double ajLocationValue) {
+        int du = (int) ajLocationValue;
+        double temp = (ajLocationValue - du) * 100;//需要转换的部分（分）
+        int fen = (int) temp;
+        temp = (temp - fen) * 100;//秒
+        double result = du + (double) fen / 60 + temp / 3600;
+        return String.valueOf(result);
+    }
+
+    /**
      * gps格式转换为安捷格式
      */
     public static String GPS2AjLocation(double gpsLocationValue) {
@@ -175,6 +187,15 @@ public class LocationFormatUtils {
             }
         }
         return strDms;
+    }
+
+    public static String getDMS(String degree, String minute, String second){
+        StringBuilder sb = new StringBuilder();
+        sb.append(degree);
+        sb.append(".");
+        sb.append(minute);
+        sb.append(second.replace(".", ""));
+        return sb.toString();
     }
 
 
