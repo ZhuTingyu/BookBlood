@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:text="种鸽管理" />
 
+
     <Button
         android:id="@+id/ac_btns2"
         android:layout_width="wrap_content"
@@ -30,6 +31,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="用户信息" />
+
+    <Button
+        android:id="@+id/ac_btns4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取统计数据" />
 
     <include layout="@layout/xrecyclerview_no_padding_layout" />
 

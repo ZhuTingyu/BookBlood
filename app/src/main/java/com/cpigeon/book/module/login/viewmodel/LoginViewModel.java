@@ -4,7 +4,6 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
-import com.base.util.RxUtils;
 import com.cpigeon.book.model.LoginModel;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.UserEntity;
@@ -34,10 +33,10 @@ public class LoginViewModel extends BaseViewModel {
                     UserModel.getInstance().setUserInfo(r.data, mPassword);
                 }
 
-                RxUtils.delayed(1000, aLong -> {
-                    loginR.setValue(r.data);
-                    normalResult.setValue(r.msg);
-                });
+//                RxUtils.delayed(1000, aLong -> {
+                loginR.setValue(r.data);
+                normalResult.setValue(r.msg);
+//                });
 
             } else throw new HttpErrorException(r);
         });

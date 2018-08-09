@@ -17,7 +17,7 @@ import io.reactivex.Observable;
 public class LogbookModel {
 
 
-    //hl 得到足环的类型
+    //hl 获取操作日志
     public static Observable<ApiResponse<List<LogbookEntity>>> getZGW_Users_GetLog(int pi, int ps) {
         return RequestData.<ApiResponse<List<LogbookEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<LogbookEntity>>>() {

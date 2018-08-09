@@ -50,4 +50,36 @@ public class PigeonPublicModel {
                 .url(R.string.pigeon_feather_color_select)
                 .request();
     }
+
+
+    //hl 足环的来源
+    public static Observable<ApiResponse<Object>> getTXGP_FootRingSource_Select() {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.foot_source_single)
+                .request();
+    }
+
+
+    //hl 得到足环的类型
+    public static Observable<ApiResponse<Object>> getTXGP_FootRingType_Select() {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.foot_type_select)
+                .request();
+    }
+
+
+    //hl 种鸽来源
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonSource_Select() {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pigeon_select_source)
+                .request();
+    }
+
+
 }

@@ -16,20 +16,7 @@ import io.reactivex.functions.Consumer;
 
 public class FootAdminViewModel extends BaseViewModel {
 
-
-
-
     public MutableLiveData<String> oneStartHintStr = new MutableLiveData<>();
-
-    //获取  足环的类型  选择
-    public void getTXGP_FootRingType_SelectData() {
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRingType_Select(), r -> {
-            if (r.isOk()) {
-
-            } else throw new HttpErrorException(r);
-        });
-    }
-
 
     public String foot = "2018-11-112233";
     public String money = "100";
@@ -93,14 +80,7 @@ public class FootAdminViewModel extends BaseViewModel {
     }
 
 
-    //足环的来源
-    public void getTXGP_FootRingSource_SelectData() {
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRingSource_Select(), r -> {
-            if (r.isOk()) {
 
-            } else throw new HttpErrorException(r);
-        });
-    }
 
 
     public String footDetailsID = "16";
@@ -167,14 +147,6 @@ public class FootAdminViewModel extends BaseViewModel {
     }
 
 
-    //得到各种类型的足环个数
-    public void getgetTXGP_FootRing_SelectTypeData() {
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_SelectType(), r -> {
-            if (r.isOk()) {
-
-            } else throw new HttpErrorException(r);
-        });
-    }
 
 
     public int pi = 1;

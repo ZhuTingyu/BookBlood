@@ -70,7 +70,7 @@ public class FootAdminHomeFragment extends BaseBookFragment {
 
 
         mFootAdminModel = new FootAdminViewModel();
-        initViewModel(mFootAdminModel);
+        initViewModels(mFootAdminModel);
 
         bindUi(RxUtils.textChanges(et1), mFootAdminModel.setAddFootNum());
         bindUi(RxUtils.textChanges(et3), mFootAdminModel.setEditFootId());
@@ -93,10 +93,8 @@ public class FootAdminHomeFragment extends BaseBookFragment {
                 mFootAdminModel.getTXGP_FootRing_AddData();
                 break;
             case R.id.btn2:
-                //获取足环类型
-                Log.d(TAG, "onViewClicked: b");
-                ToastUtils.showLong(getActivity(), "获取足环类型1");
-                mFootAdminModel.getTXGP_FootRingType_SelectData();
+                //
+
                 break;
             case R.id.btn3:
                 //修改足环
@@ -109,9 +107,8 @@ public class FootAdminHomeFragment extends BaseBookFragment {
                 mFootAdminModel.getTXGP_FootRing_DeleteData();
                 break;
             case R.id.btn5:
-                //获取足环来源
-                Log.d(TAG, "onViewClicked: e");
-                mFootAdminModel.getTXGP_FootRingSource_SelectData();
+                //
+
                 break;
             case R.id.btn6:
                 //获取单个足环详细
@@ -119,8 +116,8 @@ public class FootAdminHomeFragment extends BaseBookFragment {
                 mFootAdminModel.getTXGP_FootRing_SelectData();
                 break;
             case R.id.btn7:
-                //得到各种类型的足环个数
-                mFootAdminModel.getgetTXGP_FootRing_SelectTypeData();
+                //
+
                 break;
 
             case R.id.btn8:

@@ -16,6 +16,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.foot.BreedPigeonFragment;
 import com.cpigeon.book.module.foot.FootAdminHomeFragment;
+import com.cpigeon.book.module.foot.StatisticalFragment;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.service.SingleLoginService;
@@ -30,6 +31,7 @@ public class HomeFragment3 extends BaseBookFragment {
     Button ac_btns1;
     Button ac_btns2;
     Button ac_btns3;
+    Button ac_btns4;
 
     private LoginViewModel mViewModel;
 
@@ -56,6 +58,7 @@ public class HomeFragment3 extends BaseBookFragment {
         ac_btns1 = findViewById(R.id.ac_btns1);
         ac_btns2 = findViewById(R.id.ac_btns2);
         ac_btns3 = findViewById(R.id.ac_btns3);
+        ac_btns4 = findViewById(R.id.ac_btns4);
 
         acBtn.setOnClickListener(v -> {
             FootAdminHomeFragment.start(getActivity());
@@ -85,7 +88,10 @@ public class HomeFragment3 extends BaseBookFragment {
             InfoDetailsFragment.start(getActivity());
         });
 
-
+        ac_btns4.setOnClickListener(v -> {
+            //获取统计数据
+            StatisticalFragment.start(getActivity());
+        });
 
     }
 }

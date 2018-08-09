@@ -16,15 +16,6 @@ public class FootAdminModel {
 
 
 
-    //hl 得到足环的类型
-    public static Observable<ApiResponse<Object>> getTXGP_FootRingType_Select() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.foot_type_select)
-                .request();
-    }
-
     //hl 添加足环（单个）
     public static Observable<ApiResponse<Object>> getTXGP_FootRing_Add(String foot, String money, String footType, String footState, String footSource, String remark) {
         return RequestData.<ApiResponse<Object>>build()
@@ -67,14 +58,6 @@ public class FootAdminModel {
     }
 
 
-    //hl 足环的来源
-    public static Observable<ApiResponse<Object>> getTXGP_FootRingSource_Select() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.foot_source_single)
-                .request();
-    }
 
 
     //hl 获取单个足环详细
@@ -106,14 +89,7 @@ public class FootAdminModel {
                 .request();
     }
 
-    //hl 得到各种类型的足环个数
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_SelectType() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.foot_num_type)
-                .request();
-    }
+
 
     //hl 得到各种类型的足环个数
     public static Observable<ApiResponse<Object>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String year, String typeid, String stateid, String key) {

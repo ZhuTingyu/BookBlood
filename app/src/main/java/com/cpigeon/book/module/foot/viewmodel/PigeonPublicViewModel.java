@@ -12,7 +12,7 @@ public class PigeonPublicViewModel extends BaseViewModel {
 
 
     //获取鸽子性别
-    public void getTXGP_FootRingSource_SelectData() {
+    public void getTXGP_PigeonSexType_SelectData() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_PigeonSexType_Select(), r -> {
             if (r.isOk()) {
 
@@ -49,4 +49,36 @@ public class PigeonPublicViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
+
+    //足环的来源
+    public void getTXGP_FootRingSource_SelectData() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_FootRingSource_Select(), r -> {
+            if (r.isOk()) {
+
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    //获取  足环的类型  选择
+    public void getTXGP_FootRingType_SelectData() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_FootRingType_Select(), r -> {
+            if (r.isOk()) {
+
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+
+    //获取  种鸽来源  选择
+    public void getTXGP_PigeonSource_SelectData() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_PigeonSource_Select(), r -> {
+            if (r.isOk()) {
+
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
 }
