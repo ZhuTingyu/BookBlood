@@ -12,9 +12,10 @@ import android.widget.EditText;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.foot.viewmodel.FootAdminViewModel;
+import com.cpigeon.book.module.foot.viewmodel.PigeonPublicViewModel;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * hl 种鸽
@@ -40,8 +41,8 @@ public class BreedPigeonFragment extends BaseBookFragment {
     @BindView(R.id.et8_1)
     EditText et8_1;
 
-//    private BreedPigeonViewModel mViewModel;
-    private FootAdminViewModel mFootAdminModel;
+    //    private BreedPigeonViewModel mViewModel;
+    private PigeonPublicViewModel mPigeonPublicViewModel;
     private String TAG = "bufffm";
 
 
@@ -57,5 +58,55 @@ public class BreedPigeonFragment extends BaseBookFragment {
         return view;
     }
 
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mPigeonPublicViewModel = new PigeonPublicViewModel();
+        initViewModel(mPigeonPublicViewModel);
+    }
+
+    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn1:
+                //获取鸽子性别
+                mPigeonPublicViewModel.getTXGP_FootRingSource_SelectData();
+                break;
+            case R.id.btn2:
+                //鸽子血统选择
+                mPigeonPublicViewModel.getTXGP_PigeonBloodType_SelectData();
+                break;
+            case R.id.btn3:
+                //选择  眼砂
+                mPigeonPublicViewModel.getTXGP_PigeonEyeType_SelectData();
+                break;
+            case R.id.btn4:
+                //选择  羽色
+                mPigeonPublicViewModel.getTXGP_PigeonPlumeType_SelectData();
+                break;
+            case R.id.btn5:
+                //
+
+                break;
+            case R.id.btn6:
+                //
+
+                break;
+            case R.id.btn7:
+                //
+
+                break;
+
+            case R.id.btn8:
+                //
+
+                break;
+
+            case R.id.btn9:
+
+                break;
+        }
+    }
 
 }

@@ -33,7 +33,6 @@ public class FootAdminViewModel extends BaseViewModel {
 
     public String foot = "2018-11-112233";
     public String money = "100";
-    public String ringNum = "2";//挂环次数
     public String footType = "4";//足环类型
     public String footState = "2";//足环状态
     public String footSource = "2";//足环来源
@@ -50,7 +49,7 @@ public class FootAdminViewModel extends BaseViewModel {
 
     //添加足环（单个）
     public void getTXGP_FootRing_AddData() {
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Add(foot, money, ringNum, footType, footState, footSource, remark), r -> {
+        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Add(foot, money, footType, footState, footSource, remark), r -> {
             if (r.isOk()) {
 
             } else throw new HttpErrorException(r);
@@ -68,7 +67,7 @@ public class FootAdminViewModel extends BaseViewModel {
 
     //修改足环（单个）
     public void getTXGP_FootRing_EditData() {
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Edit(footId, foot, money, ringNum, footType, footState, footSource, remark), r -> {
+        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Edit(footId, foot, money, footType, footState, footSource, remark), r -> {
             if (r.isOk()) {
 
             } else throw new HttpErrorException(r);

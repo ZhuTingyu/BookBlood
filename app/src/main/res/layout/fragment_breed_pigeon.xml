@@ -20,7 +20,7 @@
             android:id="@+id/btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="添加足环" />
+            android:text="性别" />
     </LinearLayout>
 
 
@@ -39,7 +39,7 @@
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取足环的类型" />
+            android:text="血统" />
     </LinearLayout>
 
 
@@ -59,7 +59,7 @@
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="修改足环" />
+            android:text="眼砂" />
     </LinearLayout>
 
 
@@ -79,7 +79,7 @@
             android:id="@+id/btn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="删除足环" />
+            android:text="羽色" />
     </LinearLayout>
 
 
@@ -99,7 +99,7 @@
             android:id="@+id/btn5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="足环来源" />
+            android:text="" />
     </LinearLayout>
 
 
@@ -119,7 +119,7 @@
             android:id="@+id/btn6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取单个足环详细" />
+            android:text="" />
 
     </LinearLayout>
 
@@ -140,7 +140,7 @@
             android:id="@+id/btn7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="得到各种类型的足环个数" />
+            android:text="" />
 
     </LinearLayout>
 
@@ -169,7 +169,7 @@
             android:id="@+id/btn8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="添加足环号段" />
+            android:text="" />
 
     </LinearLayout>
 
@@ -190,7 +190,7 @@
             android:id="@+id/btn9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取足环列表" />
+            android:text="" />
 
     </LinearLayout>
 

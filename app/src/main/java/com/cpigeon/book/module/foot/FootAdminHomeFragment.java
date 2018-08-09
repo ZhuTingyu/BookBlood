@@ -120,7 +120,7 @@ public class FootAdminHomeFragment extends BaseBookFragment {
                 break;
             case R.id.btn7:
                 //得到各种类型的足环个数
-                mFootAdminModel.getTXGP_FootRing_SelectData();
+                mFootAdminModel.getgetTXGP_FootRing_SelectTypeData();
                 break;
 
             case R.id.btn8:

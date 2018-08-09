@@ -51,6 +51,15 @@
     <!--获取操作日志-->
     <string name="user_log_book">ZGW_Users_GetLog</string>
 
+    <!--获取鸽子性别-->
+    <string name="pigeon_sex_select">TXGP_PigeonSexType_Select</string>
+    <!--血统选择-->
+    <string name="pigeon_lineage_select">TXGP_PigeonBloodType_Select</string>
+    <!--眼砂选择-->
+    <string name="pigeon_eye_sand_select">TXGP_PigeonEyeType_Select</string>
+    <!--羽色选择-->
+    <string name="pigeon_feather_color_select">TXGP_PigeonPlumeType_Select</string>
+
 
     <string name="add_pigeon_house">TXGP_PigeonHome_Add</string>
     <string name="get_pigeon_house">TXGP_PigeonHome_GetInfo</string>
