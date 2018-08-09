@@ -14,6 +14,12 @@
         android:text="足环管理" />
 
     <Button
+        android:id="@+id/ac_btns1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="种鸽管理" />
+
+    <Button
         android:id="@+id/ac_btns2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
