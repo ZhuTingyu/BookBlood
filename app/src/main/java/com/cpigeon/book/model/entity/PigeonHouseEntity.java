@@ -6,35 +6,46 @@ package com.cpigeon.book.model.entity;
 
 public class PigeonHouseEntity {
 
+
     /**
-     * UsePigeonHomeNum : 修改
+     * Longitude :
+     * UsePigeonHomeNum : 123456
      * touxiangurl : http://192.168.0.18:8188/Content/faces/default.png
-     * PigeonHomeName : name修改
-     * PigeonISOCID : 鸽会1
-     * PigeonMatchNum : 比赛编号修改
-     * xingbie : 男
-     * Remark : 备注修改
-     * NorthCoordinate : null
-     * Province : 所在省
-     * EastCoordinate : null
-     * xingming : 姓名
-     * PigeonHomeAdds : 地址
-     * PigeonHomeID : 1
+     * PigeonHomeName :
+     * PigeonISOCID : 中鸽
+     * xingming :
+     * PigeonMatchNum : 654321
+     * xingbie :
+     * PigeonHomePhone : 18302810737
+     * Province : 四川省
+     * Remark :
+     * Latitude :
+     * PigeonHomeAdds :
+     * PigeonHomeID : 3
      */
 
+    private double Longitude;
     private String UsePigeonHomeNum;
     private String touxiangurl;
     private String PigeonHomeName;
     private String PigeonISOCID;
+    private String xingming;
     private String PigeonMatchNum;
     private String xingbie;
-    private String Remark;
-    private Object NorthCoordinate;
+    private String PigeonHomePhone;
     private String Province;
-    private Object EastCoordinate;
-    private String xingming;
+    private String Remark;
+    private double Latitude;
     private String PigeonHomeAdds;
     private String PigeonHomeID;
+
+    public double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(double Longitude) {
+        this.Longitude = Longitude;
+    }
 
     public String getUsePigeonHomeNum() {
         return UsePigeonHomeNum;
@@ -68,6 +79,14 @@ public class PigeonHouseEntity {
         this.PigeonISOCID = PigeonISOCID;
     }
 
+    public String getXingming() {
+        return xingming;
+    }
+
+    public void setXingming(String xingming) {
+        this.xingming = xingming;
+    }
+
     public String getPigeonMatchNum() {
         return PigeonMatchNum;
     }
@@ -84,20 +103,12 @@ public class PigeonHouseEntity {
         this.xingbie = xingbie;
     }
 
-    public String getRemark() {
-        return Remark;
+    public String getPigeonHomePhone() {
+        return PigeonHomePhone;
     }
 
-    public void setRemark(String Remark) {
-        this.Remark = Remark;
-    }
-
-    public Object getNorthCoordinate() {
-        return NorthCoordinate;
-    }
-
-    public void setNorthCoordinate(Object NorthCoordinate) {
-        this.NorthCoordinate = NorthCoordinate;
+    public void setPigeonHomePhone(String PigeonHomePhone) {
+        this.PigeonHomePhone = PigeonHomePhone;
     }
 
     public String getProvince() {
@@ -108,20 +119,20 @@ public class PigeonHouseEntity {
         this.Province = Province;
     }
 
-    public Object getEastCoordinate() {
-        return EastCoordinate;
+    public String getRemark() {
+        return Remark;
     }
 
-    public void setEastCoordinate(Object EastCoordinate) {
-        this.EastCoordinate = EastCoordinate;
+    public void setRemark(String Remark) {
+        this.Remark = Remark;
     }
 
-    public String getXingming() {
-        return xingming;
+    public double getLatitude() {
+        return Latitude;
     }
 
-    public void setXingming(String xingming) {
-        this.xingming = xingming;
+    public void setLatitude(double Latitude) {
+        this.Latitude = Latitude;
     }
 
     public String getPigeonHomeAdds() {

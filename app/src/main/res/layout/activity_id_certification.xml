@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,138 +55,56 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <com.cpigeon.book.widget.LineInputListLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="7dp"
-            android:background="@drawable/background_box_angle1"
+            android:background="@drawable/shape_btn_stroke_gray"
             android:orientation="vertical"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
             <!--姓名-->
-            <LinearLayout
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lvName"
+                app:lineInputView_LeftString="@string/text_name"
+                app:lineInputView_IsCanEdit="false"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="姓名"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
+                android:layout_height="32dp"/>
             <!--身份证号-->
-            <LinearLayout
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lvNumber"
+                app:lineInputView_LeftString="@string/text_id_card_number"
+                app:lineInputView_IsCanEdit="false"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="身份证号"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_id"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
+                android:layout_height="32dp"/>
             <!--性别-->
-            <LinearLayout
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lvSex"
+                app:lineInputView_LeftString="@string/text_sex"
+                app:lineInputView_IsCanEdit="false"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="性别"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_sex"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="13sp" />
-
-            </LinearLayout>
+                android:layout_height="32dp"/>
 
             <!--名族-->
-            <LinearLayout
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lvFamily"
+                app:lineInputView_LeftString="@string/text_family"
+                app:lineInputView_IsCanEdit="false"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="名族"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_ethnic"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="13sp" />
-
-            </LinearLayout>
+                android:layout_height="32dp"/>
 
             <!--地址-->
-            <LinearLayout
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lvAddress"
+                app:lineInputView_LeftString="@string/text_details_address"
+                app:lineInputView_IsCanEdit="false"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="32dp"/>
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="地址"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_address"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </com.cpigeon.book.widget.LineInputListLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -217,58 +136,15 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="7dp"
-            android:background="@drawable/background_box_angle1"
+            android:background="@drawable/shape_btn_stroke_gray"
             android:orientation="vertical"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
             <!--签证机关-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="签证机关"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_organ"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="13sp" />
-
-            </LinearLayout>
 
             <!--有效期-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="有效期"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_validity_time"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="13sp" />
-
-            </LinearLayout>
 
         </LinearLayout>
 

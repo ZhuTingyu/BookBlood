@@ -29,6 +29,7 @@ import com.cpigeon.book.module.home.HomeFragment2;
 import com.cpigeon.book.module.home.HomeFragment3;
 import com.cpigeon.book.module.home.HomeFragment4;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
+import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 import com.cpigeon.book.widget.BottomAddTabView;
 import com.cpigeon.book.widget.SimpleTitleView;
 
@@ -113,6 +114,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initLeftMenu() {
+
+        menuLayoutLeft.setOnClickListener(v -> {
+            PigeonHouseInfoFragment.start(this, true);
+        });
 
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
