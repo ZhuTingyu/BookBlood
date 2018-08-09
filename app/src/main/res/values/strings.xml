@@ -58,5 +58,9 @@
     <string name="function_introduction">功能介绍</string>
     <string name="version_information_gs">成都市中鸽科技有限公司</string>
     <string name="version_information_c" translatable="false">Copyright © 2006 - 2018 All rights reserved.</string>
+    <string name="text_name">姓名</string>
+    <string name="text_id_card_number">身份证号</string>
+    <string name="text_sex">性别</string>
+    <string name="text_family">名族</string>
 
 </resources>

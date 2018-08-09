@@ -23,9 +23,13 @@ import com.base.base.BaseActivity;
 import com.base.base.BaseViewModel;
 import com.base.http.R;
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.utility.ToastUtils;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.Observable;
@@ -59,7 +63,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected Context context;
 
-    protected BaseViewModel viewModel;
+    protected List<BaseViewModel> viewModels = Lists.newArrayList();
 
     @Override
     public void onAttach(Context context) {
@@ -78,13 +82,26 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void initViewModel(BaseViewModel viewModel) {
-        this.viewModel = viewModel;
-        this.viewModel.setBaseActivity(getBaseActivity());
+        this.viewModels.add(viewModel) ;
+        viewModel.setBaseActivity(getBaseActivity());
         viewModel.getError().observe(this, restErrorInfo -> {
             if (restErrorInfo != null) {
                 error(restErrorInfo.code, restErrorInfo.message);
             }
         });
+    }
+
+    protected void initViewModels(BaseViewModel... viewModels) {
+        List<BaseViewModel> viewModelList = Lists.newArrayList(viewModels);
+        for (BaseViewModel viewModel : viewModelList) {
+            viewModel.setBaseActivity(getBaseActivity());
+            viewModel.getError().observe(this, restErrorInfo -> {
+                if (restErrorInfo != null) {
+                    error(restErrorInfo.code, restErrorInfo.message);
+                }
+            });
+        }
+        this.viewModels = viewModelList;
     }
 
 
@@ -213,10 +230,12 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         composite.clear();
-        if (viewModel != null) {
-            viewModel.onDestroy();
-            viewModel = null;
+        for (BaseViewModel viewModel : viewModels) {
+            if (viewModel != null) {
+                viewModel.onDestroy();
+            }
         }
+
     }
 
     protected <T extends View> T findViewById(@NonNull View view, @IdRes int resId) {

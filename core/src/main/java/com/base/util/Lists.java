@@ -37,7 +37,7 @@ public class Lists {
         return items.toArray((T[]) Array.newInstance(cls, items.size()));
     }
 
-    private static int computeArrayListCapacity(int arraySize) {
+    public static int computeArrayListCapacity(int arraySize) {
 
         return saturatedCast(5L + arraySize + (arraySize / 10));
     }

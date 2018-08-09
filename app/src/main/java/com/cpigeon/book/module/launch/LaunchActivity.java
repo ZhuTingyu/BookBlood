@@ -72,10 +72,10 @@ public class LaunchActivity extends BaseActivity {
                     .startActivity();
         }else {
             if(UserModel.getInstance().isLogin()){
-                if(!UserModel.getInstance().isHaveHouseInfo()){
+                if(UserModel.getInstance().isHaveHouseInfo()){
                     MainActivity.start(getBaseActivity());
                 }else {
-                    PigeonHouseInfoFragment.start(getBaseActivity(), true);
+                    PigeonHouseInfoFragment.start(getBaseActivity(), false);
                 }
             }else {
                 LoginActivity.start(this);

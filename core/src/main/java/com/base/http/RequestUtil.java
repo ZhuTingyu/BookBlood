@@ -64,7 +64,7 @@ public class RequestUtil<T> {
 
     boolean isCache = false;
 
-    public static <T> RequestUtil<T> builder() {
+    protected static <T> RequestUtil<T> builder() {
         RequestUtil<T> requestUtil = new RequestUtil<>();
         builder = new OkHttpClient.Builder();
         return requestUtil;

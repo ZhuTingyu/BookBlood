@@ -36,6 +36,35 @@ public class PigeonHouseModel {
                 .addBody("province", Province)
                 .addBody("county", county)
                 .addBody("city", city)
+                .addBody("isocname", PigeonISOCID)
+                .addBody("adds", PigeonHomeAdds)
+                .addBody("matchnum", PigeonMatchNum)
+                .request();
+    }
+
+    public static Observable<ApiResponse> modifyPigeonHouse(String PigeonHomeName
+            , String UsePigeonHomeNum
+            , String PigeonHomePhone
+            , String Latitude
+            , String Longitude
+            , String Province
+            , String county
+            , String city
+            , String PigeonISOCID
+            , String PigeonHomeAdds
+            , String PigeonMatchNum) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.modify_pigeon_house)
+                .addBody("name", PigeonHomeName)
+                .addBody("usenum", UsePigeonHomeNum)
+                .addBody("phone", PigeonHomePhone)
+                .addBody("la", Latitude)
+                .addBody("lo", Longitude)
+                .addBody("province", Province)
+                .addBody("county", county)
+                .addBody("city", city)
                 .addBody("isocid", PigeonISOCID)
                 .addBody("adds", PigeonHomeAdds)
                 .addBody("matchnum", PigeonMatchNum)

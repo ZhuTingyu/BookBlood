@@ -51,6 +51,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvPhone"
                     app:lineInputView_LeftString="@string/text_connection_phone"
+                    app:lineInputView_IsNotNull="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

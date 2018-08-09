@@ -136,7 +136,7 @@ public class UserModel {
 //    }
 
     public static Observable<ApiResponse<UserEntity>> setUserFace(String face) {
-        return RequestData.<ApiResponse<UserEntity>>builder()
+        return RequestData.<ApiResponse<UserEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<UserEntity>>() {
                 }.getType())
                 .url(R.string.api_set_user_face)

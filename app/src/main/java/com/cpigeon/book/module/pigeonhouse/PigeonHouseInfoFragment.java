@@ -230,7 +230,12 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
                 mViewModel.addPigeonHouse();
             });
         }else {
+            mTvOk.setVisibility(View.VISIBLE);
             mViewModel.getPigeonHouse();
+            mTvOk.setText(Utils.getString(R.string.text_sure_commit));
+            mTvOk.setOnClickListener(v -> {
+                mViewModel.modifyPigeonHouse();
+            });
 
         }
 
@@ -257,6 +262,10 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             MainActivity.start(getBaseActivity());
         });
 
+        mViewModel.modifyR.observe(this, s -> {
+
+        });
+
         mViewModel.mHouseEntityInfo.observe(this, r -> {
             if(r == null){
                 return;
@@ -264,6 +273,15 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLlLineInput.getChildViews();
             mLlLineInput.setLineInputViewState(mIsLook);
             Glide.with(getBaseActivity()).load(r.getTouxiangurl()).into(mImgHead);
+            mLvHouseName.setContent(r.getPigeonHomeName());
+            mLvOrganize.setContent(r.getPigeonISOCID());
+            mLvShedId.setContent(r.getUsePigeonHomeNum());
+            mLvJoinMatchId.setContent(r.getPigeonMatchNum());
+            mLvHouseLocation.setContent(getString(R.string.text_location_lo_la
+                    ,LocationFormatUtils.GPS2AjLocation(r.getLongitude())
+                    ,LocationFormatUtils.GPS2AjLocation(r.getLatitude())));
+            mLvCity.setContent(r.getProvince());
+            mLvCity.setContent(r.getPigeonHomeAdds());
         });
 
     }
