@@ -11,7 +11,11 @@ import android.view.ViewGroup;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.menu.SignFragment;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
+import com.cpigeon.book.module.menu.AnnouncementNoticeFragment;
+import com.cpigeon.book.module.menu.FeedbackListFragment;
+import com.cpigeon.book.module.menu.PigeonFriendMsgFragment;
 
 import butterknife.OnClick;
 
@@ -34,7 +38,8 @@ public class InfoDetailsFragment extends BaseBookFragment {
         return view;
     }
 
-    @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting})
+    @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting,
+            R.id.ll_feedback, R.id.ll_announcement_notice, R.id.ll_pigeon_friend_msg, R.id.ll_sign})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_loft_info:
@@ -56,6 +61,25 @@ public class InfoDetailsFragment extends BaseBookFragment {
 
             case R.id.ll_setting:
                 SettingFragment.start(getActivity());
+                break;
+            case R.id.ll_feedback:
+                //意见反馈
+                FeedbackListFragment.start(getActivity());
+                break;
+
+            case R.id.ll_announcement_notice:
+                //公告通知
+                AnnouncementNoticeFragment.start(getActivity());
+                break;
+
+            case R.id.ll_pigeon_friend_msg:
+                //鸽友交流
+                PigeonFriendMsgFragment.start(getActivity());
+                break;
+
+            case R.id.ll_sign:
+                //签到
+                SignFragment.start(getActivity());
                 break;
         }
     }

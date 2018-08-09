@@ -94,6 +94,7 @@ public class UserModel {
         entity.setData(GsonUtil.toJson(userInfo));
         entity.setType(AppDatabase.TYPE_USER_DATA);
         AppDatabase.getInstance(Utils.getApp()).DbEntityDao().insert(entity);
+        this.userEntity = userInfo;
     }
 
     public synchronized void save() {

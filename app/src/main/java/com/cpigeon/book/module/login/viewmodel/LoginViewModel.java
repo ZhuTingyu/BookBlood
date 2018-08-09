@@ -33,8 +33,11 @@ public class LoginViewModel extends BaseViewModel {
                     UserModel.getInstance().setUserInfo(r.data, mPassword);
                 }
 
+//                RxUtils.delayed(1000, aLong -> {
                 loginR.setValue(r.data);
                 normalResult.setValue(r.msg);
+//                });
+
             } else throw new HttpErrorException(r);
         });
     }

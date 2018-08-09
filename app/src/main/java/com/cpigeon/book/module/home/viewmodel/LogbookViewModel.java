@@ -15,7 +15,6 @@ import java.util.List;
 
 public class LogbookViewModel extends BaseViewModel {
 
-
     public int pi = 1;
     public int ps = 5;
 

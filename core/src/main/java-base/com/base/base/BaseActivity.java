@@ -79,12 +79,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             viewModel.onDestroy();
         }
 
+        super.onDestroy();
+
         //hl
         if (errorDialog != null && errorDialog.isShowing()) {
             errorDialog.dismiss();
         }
-
-        super.onDestroy();
     }
 
     protected void initViewModel(BaseViewModel viewModel) {

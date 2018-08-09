@@ -39,7 +39,7 @@
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取足环的类型" />
+            android:text="" />
     </LinearLayout>
 
 
@@ -93,13 +93,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="填写足环id" />
+            android:hint="" />
 
         <Button
             android:id="@+id/btn5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="足环来源" />
+            android:text="" />
     </LinearLayout>
 
 
@@ -140,7 +140,7 @@
             android:id="@+id/btn7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="得到各种类型的足环个数" />
+            android:text="" />
 
     </LinearLayout>
 
