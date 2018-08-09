@@ -84,18 +84,21 @@ public class PigeonHouseViewModel extends BaseViewModel {
     public Consumer<String> setPigeonHomeName() {
         return s -> {
             mPigeonHomeName = s;
+            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
         };
     }
 
     public Consumer<String> setUsePigeonHomeNum() {
         return s -> {
             mUsePigeonHomeNum = s;
+            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
         };
     }
 
     public Consumer<String> setPigeonHomePhone() {
         return s -> {
             mPigeonHomePhone = s;
+            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
         };
     }
 
@@ -120,18 +123,21 @@ public class PigeonHouseViewModel extends BaseViewModel {
     public Consumer<String> setPigeonISOCID() {
         return s -> {
             mPigeonISOCID = s;
+            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
         };
     }
 
     public Consumer<String> setPigeonHomeAdds() {
         return s -> {
             mPigeonHomeAdds = s;
+            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
         };
     }
 
     public Consumer<String> setPigeonMatchNum() {
         return s -> {
             mPigeonMatchNum = s;
+            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
         };
     }
 }

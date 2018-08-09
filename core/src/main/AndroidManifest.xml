@@ -31,6 +31,10 @@
         >
 
         <activity android:name="com.base.base.BaseWebViewActivity" />
+        <activity android:name="com.base.idcard.IdCardCameraActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
     </application>
 
 

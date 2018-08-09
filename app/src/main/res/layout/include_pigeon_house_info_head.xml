@@ -38,7 +38,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imgHead"
         app:layout_constraintStart_toStartOf="@+id/imgHead"
-        app:layout_constraintTop_toBottomOf="@+id/imgHead" />
+        app:layout_constraintTop_toBottomOf="@+id/imgHead"
+        tools:text="zhutigyu" />
 
     <TextView
         android:id="@+id/tvAuth"

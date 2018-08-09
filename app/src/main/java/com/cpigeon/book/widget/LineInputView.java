@@ -167,7 +167,7 @@ public class LineInputView extends RelativeLayout {
         return mEditText.getText().toString();
     }
 
-    public EditText getEditText() {
+    public ClickGetFocusEditText getEditText() {
         return mEditText;
     }
 

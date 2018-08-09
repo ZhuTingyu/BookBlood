@@ -51,9 +51,9 @@
     <color name="colorButton_orange_normal">#ffa750</color>
     <color name="colorButton_orange_focus">#dd7e21</color>
 
-    <color name="colorButton_YZM_disable">#ced7dc</color>
-    <color name="colorButton_YZM_normal">#4DAFEA</color>
-    <color name="colorButton_YZM_focus">#2C86E5</color>
+    <color name="colorButton_YZM_disable">#B3B3B3</color>
+    <color name="colorButton_YZM_normal">#0080FF</color>
+    <color name="colorButton_YZM_focus">#0073E6</color>
     <!--文本颜色-->
     <color name="textColor_blue">#2C86E5</color>
     <color name="textColor_gray_dark">#5e5e5e</color>

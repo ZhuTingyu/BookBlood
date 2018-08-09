@@ -23,10 +23,10 @@ public class IdCardIdentification {
     public static final int  TYPE_NOT_POSITIVE = 1;
 
     Youtu faceYoutu;
-    //修改成你申请的appid
-    public static final String APP_ID = "10109853";
-    public static final String SECRET_ID = "AKIDseEMJ71T5Wm5RaKda5dDpLmFlHjeRp2G";
-    public static final String SECRET_KEY = "rGiElM7xpiDcJdKwAxfIuOnkiiAXqHmJ";
+
+    public static final String APP_ID = "10144450";
+    public static final String SECRET_ID = "AKIDSrArW3m3fClzADnSNDSddlrskSzUoOab";
+    public static final String SECRET_KEY = "399y46zkKkz64rS3lMq9HE0ayCGA0jHd";
     public static final String USER_ID = "2851551317";
 
     public IdCardIdentification(){

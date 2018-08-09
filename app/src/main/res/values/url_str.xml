@@ -56,6 +56,7 @@
     <string name="modify_pigeon_house">TXGP_PigeonHome_Edit</string>
     <string name="get_pigeon_house">TXGP_PigeonHome_GetInfo</string>
     <string name="api_set_user_face">ZGW_Users_SetUserFace</string>
+    <string name="set_user_id_card">ZGW_Users_ID</string>
 
 
 </resources>

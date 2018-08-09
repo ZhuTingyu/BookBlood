@@ -1,5 +1,7 @@
 package com.base.idcard;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -8,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -17,20 +20,26 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+
+import com.base.base.BaseActivity;
 import com.base.http.R;
-import com.base.util.utility.StringUtil;
+import com.base.util.IntentBuilder;
+import com.base.util.Utils;
+import com.base.util.cache.CacheUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.http.GsonUtil;
-import com.base.util.IntentBuilder;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.google.gson.reflect.TypeToken;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -41,11 +50,14 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class IdCardCameraActivity extends AppCompatActivity {
 
-    public static final int CODE_ID_CARD_P = 0x123;
-    public static final int CODE_ID_CARD_N = 0x234;
+    public static final int CODE_ID_CARD_P = 123;
+    public static final int CODE_ID_CARD_N = 234;
 
     public static final int TYPE_P = 0; //身份证正面
     public static final int TYPE_N = 1; //身份证反面
+
+    public static final String IMAGE_P_PATH = "IMAGE_P_PATH";
+    public static final String IMAGE_N_PATH = "IMAGE_N_PATH";
 
     private SurfaceView surfaceview;
     private Camera camera;
@@ -72,9 +84,23 @@ public class IdCardCameraActivity extends AppCompatActivity {
 
     int type;
 
+    Context context;
+
+    public static void start(BaseActivity baseActivity, int type) {
+        IntentBuilder builder = IntentBuilder.Builder(baseActivity, IdCardCameraActivity.class)
+                .putExtra(IntentBuilder.KEY_TYPE, type);
+        if(type == TYPE_N){
+            builder.startActivity(CODE_ID_CARD_N);
+        }else {
+            builder.startActivity(CODE_ID_CARD_P);
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        context = this;
 
         type = getIntent().getIntExtra(IntentBuilder.KEY_TYPE,0);
 
@@ -91,7 +117,18 @@ public class IdCardCameraActivity extends AppCompatActivity {
         // 设置竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_id_card_camera_layout);
-        initView();
+
+        new RxPermissions(this).request(Manifest.permission.CAMERA).subscribe(aBoolean -> {
+            if(aBoolean){
+                try {
+                    initView();
+                } catch (Exception e) {
+                    DialogUtils.createHintDialog(this,"缺少相机权限请去 设置->应用信息—>权限管理");
+                }
+            }else{
+                DialogUtils.createHintDialog(this,"缺少相机权限请去 设置->应用信息—>权限管理");
+            }
+        });
     }
 
     public void initView() {
@@ -125,7 +162,11 @@ public class IdCardCameraActivity extends AppCompatActivity {
         holder.addCallback(new MySurfaceCallback());
 
         take.setOnClickListener(v -> {
-            takepicture();
+            try {
+                takepicture();
+            } catch (Exception e) {
+                DialogUtils.createHintDialog(context,"缺少相机权限请去 设置->应用信息—>权限管理");
+            }
         });
 
     }
@@ -139,7 +180,6 @@ public class IdCardCameraActivity extends AppCompatActivity {
          */
         camera.takePicture(null, null, new MyPictureCallback());
     }
-
     private final class MyPictureCallback implements Camera.PictureCallback {
 
         @Override
@@ -174,45 +214,55 @@ public class IdCardCameraActivity extends AppCompatActivity {
                 data = Bitmap2Bytes(bitmap1);
                 File file;
                 if(type == TYPE_P){
-                    file = new File(getCacheDir(), "IdCard_P" + ".jpg");
+                    file = new File(CacheUtils.getInstance().getIdCardPath(true));
                 }else {
-                    file = new File(getCacheDir(), "IdCard_N" + ".jpg");
+                    file = new File(CacheUtils.getInstance().getIdCardPath(false));
                 }
+
+
                 FileOutputStream fos = new FileOutputStream(file);
                 fos.write(data);
                 fos.close();
 
-
+                file.canRead();
                 showLoad();
                 if(type == TYPE_P){
                     idCardIdentification.IdCardOcr(file.getPath(),IdCardIdentification.TYPE_POSITIVE,jsonObject -> {
-                        camera.startPreview();
                         showLoad();
-                        IdCardPInfoEntity idCardPInfoEntity = GsonUtil.fromJson(jsonObject.toString(),new TypeToken<IdCardPInfoEntity>(){}.getType());
-                        if(StringUtil.isStringValid(idCardPInfoEntity.address) && idCardPInfoEntity.errorcode == 0){
-                            idCardPInfoEntity.frontimage = file.getPath();
-                            Intent intent = new Intent();
-                            intent.putExtra(IntentBuilder.KEY_DATA, idCardPInfoEntity);
-                            setResult(0, intent);
-                            ToastUtils.showLong(getApplicationContext(),"识别成功");
-                            finish();
+                        if (!jsonObject.isNull("errorcode")) {
+                            camera.startPreview();
+                            IdCardPInfoEntity idCardPInfoEntity = GsonUtil.fromJson(jsonObject.toString(),new TypeToken<IdCardPInfoEntity>(){}.getType());
+                            if(idCardPInfoEntity.errorcode == 0){
+                                idCardPInfoEntity.frontimage = file.getPath();
+                                Intent intent = new Intent();
+                                intent.putExtra(IntentBuilder.KEY_DATA, idCardPInfoEntity);
+                                setResult(RESULT_OK, intent);
+                                ToastUtils.showLong(getApplicationContext(),"识别成功");
+                                finish();
+                            }else {
+                                error();
+                            }
                         }else {
                             error();
                         }
                     });
                 }else {
                     idCardIdentification.IdCardOcr(file.getPath(),IdCardIdentification.TYPE_NOT_POSITIVE,jsonObject -> {
-                        camera.startPreview();
                         showLoad();
-                        IdCardNInfoEntity idCardNInfoEntity = GsonUtil.fromJson(jsonObject.toString(),new TypeToken<IdCardNInfoEntity>(){}.getType());
-                        if(StringUtil.isStringValid(idCardNInfoEntity.authority) && idCardNInfoEntity.errorcode == 0){
-                            idCardNInfoEntity.backimage = file.getPath();
-                            Intent intent = new Intent();
-                            intent.putExtra(IntentBuilder.KEY_DATA, idCardNInfoEntity);
-                            setResult(0, intent);
-                            ToastUtils.showLong(getApplicationContext(),"识别成功");
-                            finish();
-                        }else {
+                        if (!jsonObject.isNull("errorcode")) {
+                            camera.startPreview();
+                            IdCardNInfoEntity idCardNInfoEntity = GsonUtil.fromJson(jsonObject.toString(),new TypeToken<IdCardNInfoEntity>(){}.getType());
+                            if(idCardNInfoEntity.errorcode == 0){
+                                idCardNInfoEntity.backimage = file.getPath();
+                                Intent intent = new Intent();
+                                intent.putExtra(IntentBuilder.KEY_DATA, idCardNInfoEntity);
+                                setResult(RESULT_OK, intent);
+                                ToastUtils.showLong(getApplicationContext(),"识别成功");
+                                finish();
+                            }else {
+                                error();
+                            }
+                        } else {
                             error();
                         }
                     });
@@ -260,10 +310,10 @@ public class IdCardCameraActivity extends AppCompatActivity {
             try {
 
                 // 当surfaceview创建就去打开相机
-                camera = Camera.open();
-                Camera.Parameters params = camera.getParameters();
 
                 try {
+                    camera = Camera.open();
+                    Camera.Parameters params = camera.getParameters();
                     List<Camera.Size> sizeList = params.getSupportedPreviewSizes();
                     Camera.Size optionSize = getOptimalPreviewSize(sizeList, surfaceview.getWidth(), surfaceview.getHeight());
                     params.setPreviewSize(optionSize.width,optionSize.height);//把camera.size赋值到parameters
@@ -282,12 +332,10 @@ public class IdCardCameraActivity extends AppCompatActivity {
                 // 开启预览
                 camera.startPreview();
 
-            } catch (IOException e) {
-                DialogUtils.createDialogWithLeft(getBaseContext(), "您拒绝了相机权限，请在设置页面打开", sweetAlertDialog -> {
+            } catch (Exception e) {
+                DialogUtils.createDialogWithLeft(context, "缺少相机权限请去 设置->授权管理—>应用权限管理",sweetAlertDialog -> {
                     sweetAlertDialog.dismiss();
                     finish();
-                },sweetAlertDialog -> {
-
                 });
             }
 
@@ -373,7 +421,7 @@ public class IdCardCameraActivity extends AppCompatActivity {
         dialogPrompt.setCancelable(false);
         dialogPrompt.setTitleText("失败")
                 .setContentText("请在蓝色框里拍照").
-                setConfirmText("确定").show();
+                setConfirmText(getString(R.string.btn_confirm)).show();
     }
 
 }

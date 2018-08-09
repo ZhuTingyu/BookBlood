@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -1055,6 +1056,25 @@ public final class FileUtils {
         } else {
             return String.format("%.3fGB", (double) byteNum / 1073741824);
         }
+    }
+
+    public static File byte2File(byte[] data,String path){
+
+        File file = new File(path);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            fos.write(data);
+            fos.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return file;
+
     }
 
     private static boolean isSpace(final String s) {

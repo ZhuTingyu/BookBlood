@@ -11,10 +11,13 @@ import com.base.BaseFragment;
 import com.base.entity.RestErrorInfo;
 import com.base.http.HttpErrorException;
 import com.base.http.R;
+import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -35,6 +38,7 @@ public class BaseViewModel extends ViewModel {
     protected MutableLiveData<RestErrorInfo> error = new MutableLiveData<>();
     protected MutableLiveData<String> listEmptyMessage = new MutableLiveData<>();
     public MutableLiveData<String> normalResult = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isCanCommit = new MutableLiveData<>();
 
 
     public BaseViewModel() {
@@ -212,5 +216,16 @@ public class BaseViewModel extends ViewModel {
 
     public MutableLiveData<String> getListEmptyMessage() {
         return listEmptyMessage;
+    }
+
+    public void isCanCommit(String... strings){
+        List<String> list = Lists.newArrayList(strings);
+        for (String s : list) {
+            if(!StringUtil.isStringValid(s)){
+                isCanCommit.setValue(false);
+                return;
+            }
+        }
+        isCanCommit.setValue(true);
     }
 }

@@ -1,168 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvOk"
+        style="@style/bottom_style"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/text_commit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="45dp"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_above="@id/tvOk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_margin="15dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#459c6e"
-                android:scaleType="fitXY" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_margin="15dp"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="#948a8a"
-                android:scaleType="fitXY" />
+                <ImageView
+                    android:id="@+id/imgIdP"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#459c6e"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/imgIdN"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="#948a8a"
+                    android:scaleType="fitXY" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:background="#1b8d93"
+                    android:text=" " />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="身份证正面信息"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <com.cpigeon.book.widget.LineInputListLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/shape_btn_stroke_gray"
+                android:orientation="vertical"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <!--姓名-->
+                <com.cpigeon.book.widget.LineInputView
+                    android:id="@+id/lvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    app:lineInputView_IsCanEdit="false"
+                    app:lineInputView_LeftString="@string/text_name" />
+                <!--身份证号-->
+                <com.cpigeon.book.widget.LineInputView
+                    android:id="@+id/lvNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    app:lineInputView_IsCanEdit="false"
+                    app:lineInputView_LeftString="@string/text_id_card_number" />
+                <!--性别-->
+                <com.cpigeon.book.widget.LineInputView
+                    android:id="@+id/lvSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    app:lineInputView_IsCanEdit="false"
+                    app:lineInputView_LeftString="@string/text_sex" />
+
+                <!--名族-->
+                <com.cpigeon.book.widget.LineInputView
+                    android:id="@+id/lvFamily"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    app:lineInputView_IsCanEdit="false"
+                    app:lineInputView_LeftString="@string/text_family" />
+
+                <!--地址-->
+                <com.cpigeon.book.widget.LineInputView
+                    android:id="@+id/lvAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    app:lineInputView_IsCanEdit="false"
+                    app:lineInputView_LeftString="@string/text_details_address" />
+
+            </com.cpigeon.book.widget.LineInputListLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:background="#dfd741"
+                    android:text=" " />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="身份证反面信息"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/shape_btn_stroke_gray"
+                android:orientation="vertical"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <!--签证机关-->
+                <com.cpigeon.book.widget.LineInputView
+                    android:id="@+id/lvAuthority"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    app:lineInputView_IsCanEdit="false"
+                    app:lineInputView_LeftString="@string/text_authority" />
+
+                <!--有效期-->
+                <com.cpigeon.book.widget.LineInputView
+                    android:id="@+id/lvIndate"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    app:lineInputView_IsCanEdit="false"
+                    app:lineInputView_LeftString="@string/text_indate" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                android:background="#1b8d93"
-                android:text=" " />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="身份证正面信息"
-                android:textColor="#000"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <com.cpigeon.book.widget.LineInputListLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="7dp"
-            android:background="@drawable/shape_btn_stroke_gray"
-            android:orientation="vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <!--姓名-->
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvName"
-                app:lineInputView_LeftString="@string/text_name"
-                app:lineInputView_IsCanEdit="false"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"/>
-            <!--身份证号-->
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvNumber"
-                app:lineInputView_LeftString="@string/text_id_card_number"
-                app:lineInputView_IsCanEdit="false"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"/>
-            <!--性别-->
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvSex"
-                app:lineInputView_LeftString="@string/text_sex"
-                app:lineInputView_IsCanEdit="false"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"/>
-
-            <!--名族-->
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvFamily"
-                app:lineInputView_LeftString="@string/text_family"
-                app:lineInputView_IsCanEdit="false"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"/>
-
-            <!--地址-->
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvAddress"
-                app:lineInputView_LeftString="@string/text_details_address"
-                app:lineInputView_IsCanEdit="false"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"/>
-
-        </com.cpigeon.book.widget.LineInputListLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="7dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                android:background="#dfd741"
-                android:text=" " />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="身份证反面信息"
-                android:textColor="#000"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="7dp"
-            android:background="@drawable/shape_btn_stroke_gray"
-            android:orientation="vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <!--签证机关-->
+    </android.support.v4.widget.NestedScrollView>
 
 
-            <!--有效期-->
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/out_login"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="85dp"
-            android:background="@drawable/background_btn_radio"
-            android:gravity="center"
-            android:scaleType="fitXY"
-            android:text="重新认证身份"
-            android:textColor="#fff"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-</ScrollView>
+</RelativeLayout>

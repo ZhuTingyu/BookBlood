@@ -47,13 +47,13 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public final class CacheUtils {
 
-    private static final long DEFAULT_MAX_SIZE  = Long.MAX_VALUE;
-    private static final int  DEFAULT_MAX_COUNT = Integer.MAX_VALUE;
+    private static final long DEFAULT_MAX_SIZE = Long.MAX_VALUE;
+    private static final int DEFAULT_MAX_COUNT = Integer.MAX_VALUE;
 
-    public static final int SEC  = 1;
-    public static final int MIN  = 60;
+    public static final int SEC = 1;
+    public static final int MIN = 60;
     public static final int HOUR = 3600;
-    public static final int DAY  = 86400;
+    public static final int DAY = 86400;
 
     private static final SimpleArrayMap<String, CacheUtils> CACHE_MAP = new SimpleArrayMap<>();
     private CacheManager mCacheManager;
@@ -596,18 +596,26 @@ public final class CacheUtils {
         return mCacheManager.clear();
     }
 
+    public String getIdCardPath(boolean isP) {
+        if (isP) {
+            return getInstance().getCacheManager().getCacheDir() + "IdCard_P" + ".jpg";
+        } else {
+            return getInstance().getCacheManager().getCacheDir() + "IdCard_N" + ".jpg";
+        }
+    }
+
     public CacheManager getCacheManager() {
         return mCacheManager;
     }
 
     public class CacheManager {
-        private final AtomicLong    cacheSize;
+        private final AtomicLong cacheSize;
         private final AtomicInteger cacheCount;
-        private final long          sizeLimit;
-        private final int           countLimit;
+        private final long sizeLimit;
+        private final int countLimit;
         private final Map<File, Long> lastUsageDates
                 = Collections.synchronizedMap(new HashMap<File, Long>());
-        private final File   cacheDir;
+        private final File cacheDir;
         private final Thread mThread;
 
         private CacheManager(final File cacheDir, final long sizeLimit, final int countLimit) {

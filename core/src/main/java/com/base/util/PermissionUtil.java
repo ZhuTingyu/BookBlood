@@ -31,7 +31,7 @@ public class PermissionUtil {
 //        permissonItems.add(new PermissionItem(Manifest.permission.READ_PHONE_STATE, "电话簿", R.drawable.permission_ic_phone));
 //        permissonItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储", R.drawable.permission_ic_storage));
 //        permissonItems.add(new PermissionItem(Manifest.permission.ACCESS_NETWORK_STATE, "网络信息", R.drawable.permission_ic_phone));
-//        permissonItems.add(new PermissionItem(Manifest.permission.CAMERA, "相机", R.drawable.permission_ic_camera));
+        permissonItems.add(new PermissionItem(Manifest.permission.CAMERA, "相机", R.drawable.permission_ic_camera));
 //        permissonItems.add(new PermissionItem(Manifest.permission.READ_CONTACTS, "联系人", R.drawable.permission_ic_contacts));
         permissonItems.add(new PermissionItem(Manifest.permission.ACCESS_COARSE_LOCATION, "地理位置", R.drawable.permission_ic_location));
 //        permissonItems.add(new PermissionItem(Manifest.permission.RECORD_AUDIO, "录音", R.drawable.permission_ic_micro_phone));

@@ -62,5 +62,10 @@
     <string name="text_id_card_number">身份证号</string>
     <string name="text_sex">性别</string>
     <string name="text_family">名族</string>
+    <string name="text_authority">签发机关</string>
+    <string name="text_indate">有效期</string>
+    <string name="get_user_id_card">ZGW_Users_GetID</string>
+    <string name="text_yet_auth">已认证</string>
+    <string name="title_id_card">身份证</string>
 
 </resources>

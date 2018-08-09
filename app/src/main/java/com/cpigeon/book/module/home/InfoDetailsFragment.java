@@ -39,7 +39,7 @@ public class InfoDetailsFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.ll_loft_info:
                 //鸽舍信息
-                PigeonHouseInfoFragment.start(getActivity());
+                PigeonHouseInfoFragment.start(getActivity(), true);
                 break;
             case R.id.ll_account_security:
                 //账户安全

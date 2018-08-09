@@ -3,10 +3,10 @@ package com.cpigeon.book.module.pigeonhouse;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +14,7 @@ import android.widget.TextView;
 
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
-import com.amap.api.services.geocoder.AoiItem;
-import com.amap.api.services.geocoder.GeocodeResult;
-import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeAddress;
-import com.amap.api.services.geocoder.RegeocodeResult;
-import com.amap.api.services.geocoder.RegeocodeRoad;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.LocationFormatUtils;
@@ -27,12 +22,11 @@ import com.base.util.PermissionUtil;
 import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
-import com.base.util.http.GsonUtil;
 import com.base.util.map.AmapManager;
 import com.base.util.map.PointToAddressManager;
 import com.base.util.picker.AddressPickTask;
 import com.base.util.picker.PickerUtil;
-import com.base.util.utility.ImageUtils;
+import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.bumptech.glide.Glide;
@@ -40,9 +34,11 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
+import com.cpigeon.book.module.home.IdCertificationFragment;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssActivity;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
+import com.cpigeon.book.util.TextViewUtis;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 import com.luck.picture.lib.PictureSelector;
@@ -64,6 +60,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
     public static int CODE_ORGANIZE = 0x123;
     public static int CODE_LOCATION = 0x234;
+    public static int CODE_AUTH = 0x345;
 
     private CircleImageView mImgHead;
     private TextView mTvName;
@@ -214,14 +211,9 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
                 @Override
                 public void onAddressPicked(Province province, City city, County county) {
-                    mLvHouseLocation.setContent(province.getName() + city.getName());
+                    mLvCity.setContent(province.getName() + city.getName());
                 }
             });
-        });
-
-        mTvAuth.setOnClickListener(v -> {
-//            //修改密码
-//            mLoginViewModel.useroneModifyPsd();
         });
 
         if(!mIsLook){
@@ -230,7 +222,9 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
                 mViewModel.addPigeonHouse();
             });
         }else {
-            mTvOk.setVisibility(View.VISIBLE);
+            mLlLineInput.setOnInputViewGetFocusListener(() -> {
+                mTvOk.setVisibility(View.VISIBLE);
+            });
             mViewModel.getPigeonHouse();
             mTvOk.setText(Utils.getString(R.string.text_sure_commit));
             mTvOk.setOnClickListener(v -> {
@@ -243,6 +237,10 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     }
 
     protected void initObserve() {
+
+        mViewModel.isCanCommit.observe(this, aBoolean -> {
+            TextViewUtis.setEnabled(mTvOk, aBoolean);
+        });
 
         UserModel.getInstance().mUserLiveData.observe(this, userEntity -> {
             Glide.with(getBaseActivity()).load(userEntity.touxiangurl).into(mImgHead);
@@ -273,6 +271,8 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLlLineInput.getChildViews();
             mLlLineInput.setLineInputViewState(mIsLook);
             Glide.with(getBaseActivity()).load(r.getTouxiangurl()).into(mImgHead);
+            mTvName.setText(r.getXingming());
+            mLvPhone.setContent(r.getPigeonHomePhone());
             mLvHouseName.setContent(r.getPigeonHomeName());
             mLvOrganize.setContent(r.getPigeonISOCID());
             mLvShedId.setContent(r.getUsePigeonHomeNum());
@@ -280,8 +280,24 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLvHouseLocation.setContent(getString(R.string.text_location_lo_la
                     ,LocationFormatUtils.GPS2AjLocation(r.getLongitude())
                     ,LocationFormatUtils.GPS2AjLocation(r.getLatitude())));
+
+            mViewModel.mLongitude = String.valueOf(r.getLongitude());
+            mViewModel.mLatitude = String.valueOf(r.getLatitude());
+
             mLvCity.setContent(r.getProvince());
             mLvCity.setContent(r.getPigeonHomeAdds());
+
+            if(StringUtil.isStringValid(r.getXingming())){
+                mTvAuth.setText(getString(R.string.text_yet_auth));
+                mTvAuth.setOnClickListener(v -> {
+                    IdCertificationFragment.start(getBaseActivity(), false);
+                });
+            }else {
+                mTvAuth.setOnClickListener(v -> {
+                    IdCertificationFragment.start(getBaseActivity(), true);
+                });
+            }
+
         });
 
     }
@@ -293,15 +309,11 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
             mViewModel.mHeadUrl = selectList.get(0).getCutPath();
             mViewModel.setUserFace();
-        }
-
-        if(requestCode == CODE_ORGANIZE){
+        } else if(requestCode == CODE_ORGANIZE){
             String organize = data.getStringExtra(IntentBuilder.KEY_DATA);
             mViewModel.mPigeonISOCID = organize;
             mLvOrganize.setContent(organize);
-        }
-
-        if(requestCode == CODE_LOCATION){
+        } else if(requestCode == CODE_LOCATION){
 
             RegeocodeAddress address = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             LatLonPoint point = data.getParcelableExtra(IntentBuilder.KEY_DATA_2);
@@ -314,7 +326,10 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mViewModel.mLatitude = String.valueOf(point.getLatitude());
 
             bindAddress(address);
+        }else if(requestCode == CODE_AUTH){
+            mViewModel.getPigeonHouse();
         }
+
     }
 
     private void bindAddress(RegeocodeAddress mAddress){

@@ -19,6 +19,12 @@ public class LineInputListLayout extends LinearLayout {
 
     List<LineInputView> mLineInputViews = Lists.newArrayList();
 
+    private OnInputViewGetFocusListener mOnInputViewGetFocusListener;
+
+    public interface OnInputViewGetFocusListener{
+        void getFocus();
+    }
+
     public LineInputListLayout(Context context) {
         this(context, null);
     }
@@ -35,7 +41,14 @@ public class LineInputListLayout extends LinearLayout {
         for (int i = 0, len = getChildCount(); i < len; i++) {
             View view = getChildAt(i);
             if (view instanceof LineInputView) {
-                mLineInputViews.add((LineInputView) view);
+                LineInputView lineInputView = (LineInputView) view;
+                mLineInputViews.add(lineInputView);
+                lineInputView.getEditText().setOnClickAndHaveFocusListener(() -> {
+                    if(mOnInputViewGetFocusListener != null){
+                        mOnInputViewGetFocusListener.getFocus();
+                    }
+                });
+
             }
         }
     }
@@ -44,5 +57,9 @@ public class LineInputListLayout extends LinearLayout {
         for (LineInputView lineInputView : mLineInputViews) {
             lineInputView.setNotNullState(isLookStats);
         }
+    }
+
+    public void setOnInputViewGetFocusListener(OnInputViewGetFocusListener onInputViewGetFocusListener) {
+        mOnInputViewGetFocusListener = onInputViewGetFocusListener;
     }
 }
