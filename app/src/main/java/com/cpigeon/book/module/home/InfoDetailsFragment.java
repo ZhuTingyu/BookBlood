@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 
 import butterknife.OnClick;
 
@@ -38,7 +39,7 @@ public class InfoDetailsFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.ll_loft_info:
                 //鸽舍信息
-                InfoDetailsFragment.start(getActivity());
+                PigeonHouseInfoFragment.start(getActivity());
                 break;
             case R.id.ll_account_security:
                 //账户安全
