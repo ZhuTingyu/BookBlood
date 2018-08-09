@@ -85,7 +85,6 @@ public class SearchTextView extends RelativeLayout {
             mTvCancel.setTextColor(Color.BLACK);
             mEdSearch.setBackgroundResource(R.drawable.shape_bg_corner_5_solid_gray);
         }
-
     }
 
     public interface OnSearchTextClickListener{

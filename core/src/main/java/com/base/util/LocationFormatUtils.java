@@ -2,6 +2,10 @@ package com.base.util;
 
 import android.util.Log;
 
+import com.base.util.utility.StringUtil;
+
+import java.util.List;
+
 import static com.base.util.utility.FloatUtil.doubleFormat;
 
 /**
@@ -9,6 +13,10 @@ import static com.base.util.utility.FloatUtil.doubleFormat;
  */
 
 public class LocationFormatUtils {
+
+    public static final String TYPE_LO = "TYPE_LO";
+    public static final String TYPE_LA = "TYPE_LA";
+
 
     /**
      * 安捷格式转换为gps格式
@@ -191,12 +199,34 @@ public class LocationFormatUtils {
 
     public static String getDMS(String degree, String minute, String second){
         StringBuilder sb = new StringBuilder();
+
         sb.append(degree);
         sb.append(".");
+
+        if(minute.length() == 1){
+            sb.append("0");
+        }
         sb.append(minute);
-        sb.append(second.replace(".", ""));
+
+        String[] seconds = second.split("\\.");
+        String left = seconds[0];
+        String right = null;
+        if(seconds.length == 2){
+            right = seconds[1];
+        }
+
+        if(left.length() == 1){
+            sb.append("0");
+        }
+        sb.append(left);
+
+        if(StringUtil.isStringValid(right)){
+            if(right.length() == 1){
+                sb.append("0");
+            }
+            sb.append(right);
+        }
         return sb.toString();
     }
-
 
 }

@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.maps.model.LatLng;
 import com.base.base.BaseDialogFragment;
 import com.base.util.Lists;
 import com.base.util.LocationFormatUtils;
@@ -34,6 +35,8 @@ public class InputLocationFragment extends BaseDialogFragment {
     private TextView mTvSure;
 
     List<EditText> mEditTexts;
+
+    LatLng mLatLng;
 
     @Override
     protected int getLayoutRes() {
@@ -86,20 +89,40 @@ public class InputLocationFragment extends BaseDialogFragment {
             });
         }
 
+        if (mLatLng != null) {
+            String la = LocationFormatUtils.GPS2AjLocation(mLatLng.latitude);
+            String lo = LocationFormatUtils.GPS2AjLocation(mLatLng.longitude);
+
+            mEdLoDegree.setText(LocationFormatUtils.strToD(lo));
+            mEdLoMinute.setText(LocationFormatUtils.strToM(lo));
+            mEdLoSecond.setText(LocationFormatUtils.strToS(lo));
+
+            mEdLaDegree.setText(LocationFormatUtils.strToD(la));
+            mEdLaMinute.setText(LocationFormatUtils.strToM(la));
+            mEdLaSecond.setText(LocationFormatUtils.strToS(la));
+        }
+
+
         mImgLocation.setOnClickListener(v -> {
-            if(mOnSureClickListener != null){
+            if (mOnSureClickListener != null) {
                 mOnSureClickListener.location();
                 dismiss();
             }
         });
 
         mTvSure.setOnClickListener(v -> {
-            if(mOnSureClickListener != null){
+            if (mOnSureClickListener != null) {
 
-                String lo = LocationFormatUtils.getDMS(getString(mEdLoDegree),getString(mEdLoMinute),getString(mEdLoSecond));
-                String la = LocationFormatUtils.getDMS(getString(mEdLaDegree),getString(mEdLaMinute),getString(mEdLaSecond));
+                for (EditText editText : mEditTexts) {
+                    if (!StringUtil.isStringValid(editText.getText().toString())) {
+                        return;
+                    }
+                }
 
-                if(StringUtil.isStringValid(lo) && StringUtil.isStringValid(la)){
+                String lo = LocationFormatUtils.getDMS(getString(mEdLoDegree), getString(mEdLoMinute), getString(mEdLoSecond));
+                String la = LocationFormatUtils.getDMS(getString(mEdLaDegree), getString(mEdLaMinute), getString(mEdLaSecond));
+
+                if (StringUtil.isStringValid(lo) && StringUtil.isStringValid(la)) {
                     mOnSureClickListener.sure(lo, la);
                 }
             }
@@ -114,18 +137,18 @@ public class InputLocationFragment extends BaseDialogFragment {
     private void textMax(EditText editText, int maxNumber, EditText nextEd) {
         String text = editText.getText().toString();
 
-        if(!StringUtil.isStringValid(text)){
+        if (!StringUtil.isStringValid(text)) {
             return;
         }
 
         String maxNumberString = String.valueOf(maxNumber);
         int number = Integer.valueOf(text);
-        if(text.length() >= maxNumberString.length()){
-            if(number > maxNumber){
+        if (text.length() >= maxNumberString.length()) {
+            if (number > maxNumber) {
                 editText.setText(maxNumberString);
             }
             editText.clearFocus();
-            if(nextEd != null){
+            if (nextEd != null) {
                 nextEd.requestFocus();
             }
         }
@@ -134,23 +157,23 @@ public class InputLocationFragment extends BaseDialogFragment {
 
     private void textMax(EditText thisEd, float maxNumber, EditText nextEd) {
         String text = thisEd.getText().toString();
-        if(!StringUtil.isStringValid(text)){
+        if (!StringUtil.isStringValid(text)) {
             return;
         }
         String maxNumberString = String.valueOf(maxNumber);
 
         float number = Float.valueOf(text);
 
-        if(number > maxNumber){
+        if (number > maxNumber) {
             thisEd.setText(maxNumberString);
             thisEd.clearFocus();
-            if(nextEd != null){
+            if (nextEd != null) {
                 nextEd.requestFocus();
             }
-        }else {
-            if(text.length() >= 5){
+        } else {
+            if (text.length() >= 5) {
                 thisEd.clearFocus();
-                if(nextEd != null){
+                if (nextEd != null) {
                     nextEd.requestFocus();
                 }
             }
@@ -158,18 +181,23 @@ public class InputLocationFragment extends BaseDialogFragment {
 
     }
 
-    private String getString(EditText editText){
+    private String getString(EditText editText) {
         return editText.getText().toString();
     }
 
     private OnInputLocationClickListener mOnSureClickListener;
 
-    public interface OnInputLocationClickListener{
+    public interface OnInputLocationClickListener {
         void sure(String lo, String la);
+
         void location();
     }
 
     public void setOnSureClickListener(OnInputLocationClickListener onSureClickListener) {
         mOnSureClickListener = onSureClickListener;
+    }
+
+    public void setPoint(LatLng latLng) {
+        this.mLatLng = latLng;
     }
 }

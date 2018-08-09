@@ -6,6 +6,8 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.LoginModel;
 import com.cpigeon.book.model.PigeonHouseModel;
+import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonHouseEntity;
 
 import io.reactivex.functions.Consumer;
 
@@ -21,19 +23,40 @@ public class PigeonHouseViewModel extends BaseViewModel {
     public String mPigeonHomePhone;
     public String mLatitude;
     public String mLongitude;
+    public String mCounty;
+    public String mCity;
     public String mProvince;
     public String mPigeonISOCID;
     public String mPigeonHomeAdds;
     public String mPigeonMatchNum;
+    public String mHeadUrl;
 
     public MutableLiveData<String> addR = new MutableLiveData<>();
     public MutableLiveData<String> modifyR = new MutableLiveData<>();
     public MutableLiveData<String> oneStartHintStr = new MutableLiveData<>();
+    public MutableLiveData<PigeonHouseEntity> mHouseEntityInfo = new MutableLiveData<>();
+    public MutableLiveData<String> setHeadUrlR = new MutableLiveData<>();
 
+
+    public void getPigeonHouse(){
+        submitRequestThrowError(PigeonHouseModel.getPigeonHouse(),r -> {
+            if(r.isOk()){
+                mHouseEntityInfo.setValue(r.data);
+            }else throw new HttpErrorException(r);
+        });
+    }
+
+    public void setUserFace(){
+        submitRequestThrowError(UserModel.setUserFace(mHeadUrl), r -> {
+            if(r.isOk()){
+                UserModel.getInstance().setUserHeadUrl(r.data.touxiangurl);
+            }else throw new HttpErrorException(r);
+        });
+    }
 
     public void addPigeonHouse(){
         submitRequestThrowError(PigeonHouseModel.addPigeonHouse(mPigeonHomeName,mUsePigeonHomeNum,mPigeonHomePhone
-                ,mLatitude,mLongitude,mProvince,mPigeonISOCID,mPigeonHomeAdds,mPigeonMatchNum),r -> {
+                ,mLatitude,mLongitude,mProvince, mCounty, mCity,mPigeonISOCID,mPigeonHomeAdds,mPigeonMatchNum),r -> {
             if(r.isOk()){
                 addR.setValue(r.msg);
             }else throw new HttpErrorException(r);
