@@ -147,6 +147,7 @@
     <color name="color_white_transparent_f5">#f9ffffff</color>
     <color name="color_white_transparent_50">#80ffffff</color>
     <color name="color_white_transparent_10">#0dffffff</color>
+    <color name="color_transparent">#00ffffff</color>
 
     <color name="color_transparent_half">#3c000000</color>
     <color name="red_light">#ffff4444</color>

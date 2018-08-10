@@ -55,7 +55,7 @@ public class LineInputListLayout extends LinearLayout {
 
     public void setLineInputViewState(boolean isLookStats) {
         for (LineInputView lineInputView : mLineInputViews) {
-            lineInputView.setNotNullState(isLookStats);
+            lineInputView.setIsLookState(isLookStats);
         }
     }
 
