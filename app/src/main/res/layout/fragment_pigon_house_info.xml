@@ -44,6 +44,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvHouseName"
                     app:lineInputView_LeftString="@string/text_pigeon_house_name"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -52,20 +53,23 @@
                     android:id="@+id/lvPhone"
                     app:lineInputView_LeftString="@string/text_connection_phone"
                     app:lineInputView_IsNotNull="true"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
 
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvOrganize"
-                    app:lineInputView_DrawableRight="@drawable/svg_arrow_right"
+                    app:lineInputView_DrawableRight="@mipmap/ic_select_ass_right"
                     app:lineInputView_LeftString="@string/text_belongs_organize"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvShedId"
                     app:lineInputView_IsNotNull="true"
+                    app:lineInputView_IsLeft="true"
                     app:lineInputView_LeftString="@string/text_register_shed_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -73,22 +77,23 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvJoinMatchId"
                     app:lineInputView_LeftString="@string/text_join_match_number"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvHouseLocation"
-                    app:lineInputView_DrawableRight="@drawable/svg_arrow_right"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_IsNotNull="true"
                     app:lineInputView_LeftString="@string/text_pigeon_house_location"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvCity"
                     app:lineInputView_LeftString="@string/text_location"
-                    app:lineInputView_DrawableRight="@drawable/svg_arrow_right"
+                    app:lineInputView_IsLeft="true"
                     app:lineInputView_IsCanEdit="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -96,6 +101,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvAddress"
                     app:lineInputView_LeftString="@string/text_details_address"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </com.cpigeon.book.widget.LineInputListLayout>

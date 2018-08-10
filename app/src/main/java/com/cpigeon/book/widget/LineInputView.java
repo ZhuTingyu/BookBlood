@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 
 import com.alibaba.idst.nls.internal.utils.L;
 import com.base.util.Utils;
+import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 
 
@@ -46,6 +48,8 @@ public class LineInputView extends RelativeLayout {
     Drawable mDrawableRight;
     boolean mIsNotNull;
     boolean mIsCanEdit;
+    boolean mIsLeft;
+    int mInputType;
 
 
     TextView mTextView;
@@ -73,13 +77,6 @@ public class LineInputView extends RelativeLayout {
         initView();
     }
 
-    @Override
-    protected void measureChild(View child, int parentWidthMeasureSpec, int parentHeightMeasureSpec) {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(getWidth() / 3, ViewGroup.LayoutParams.MATCH_PARENT);
-        mTextView.setLayoutParams(params);
-        super.measureChild(child, parentWidthMeasureSpec, parentHeightMeasureSpec);
-    }
-
     @SuppressLint("Recycle")
     private void readAttr(AttributeSet attrs) {
         if (attrs == null) {
@@ -97,6 +94,8 @@ public class LineInputView extends RelativeLayout {
         mDrawableRight = array.getDrawable(R.styleable.LineInputView_lineInputView_DrawableRight);
         mIsNotNull = array.getBoolean(R.styleable.LineInputView_lineInputView_IsNotNull, false);
         mIsCanEdit = array.getBoolean(R.styleable.LineInputView_lineInputView_IsCanEdit, true);
+        mInputType = array.getInt(R.styleable.LineInputView_lineInputView_InputType, 0);
+        mIsLeft = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLeft, false);
     }
 
     private void initView() {
@@ -113,23 +112,38 @@ public class LineInputView extends RelativeLayout {
         mEditText.setText(mRightString);
         mEditText.setTextColor(mRightColor);
         mEditText.setTextSize(mRightTextSize);
+        if(mInputType != 0){
+            mEditText.setInputType(mInputType);
+        }
+        if(mIsLeft){
+            mEditText.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+        }else {
+            mEditText.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        }
 
         if (mDrawableRight != null) {
             mImgRight.setVisibility(VISIBLE);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            if(mIsLeft){
+                layoutParams.setMargins(ScreenTool.dip2px(8), 0, 0, 0);
+            }else {
+                layoutParams.setMargins(ScreenTool.dip2px(16), 0, 0, 0);
+            }
+            mImgRight.setLayoutParams(layoutParams);
             mImgRight.setImageDrawable(mDrawableRight);
         }
 
         setCanEdit(mIsCanEdit);
-
     }
 
-    public void setNotNullState(boolean isLookState){
+    public void setIsLookState(boolean isLookState){
         if (isLookState) {
             mEditText.setOnFocusChangeListener((v, hasFocus) -> {
                 setNotNullDrawable(hasFocus && mIsNotNull);
             });
         } else {
             mEditText.setOnFocusChangeListener(null);
+            mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
             setNotNullDrawable(mIsNotNull);
         }
     }
@@ -200,8 +214,10 @@ public class LineInputView extends RelativeLayout {
         if (isNotNull) {
             mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null
                     , Utils.getDrawable(R.drawable.svg_not_null), null);
+            mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
         } else {
             mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
         }
     }
 }
