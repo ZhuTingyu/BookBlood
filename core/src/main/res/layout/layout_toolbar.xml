@@ -13,21 +13,34 @@
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         style="@style/Toolbar"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary">
-
-        <com.base.widget.MarqueeTextView
-            android:id="@+id/toolbar_title"
-            style="@style/Marquee"
-            tools:text="中鸽网"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:layout_height="?android:attr/actionBarSize">
+        
+        <RelativeLayout
             android:layout_gravity="center"
-            android:gravity="center"
-            android:maxLines="1"
-            android:textColor="@color/colorWhite"
-            android:textSize="18dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            
+            <ImageView
+                android:id="@+id/imgTitle"
+                android:visibility="gone"
+                android:src="@drawable/ic_title"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp" />
+
+            <com.base.widget.MarqueeTextView
+                android:id="@+id/toolbar_title"
+                style="@style/Marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
+        
 
     </android.support.v7.widget.Toolbar>
 </android.support.design.widget.AppBarLayout>

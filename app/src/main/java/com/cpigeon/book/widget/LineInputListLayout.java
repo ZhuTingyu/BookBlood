@@ -48,7 +48,6 @@ public class LineInputListLayout extends LinearLayout {
                         mOnInputViewGetFocusListener.getFocus();
                     }
                 });
-
             }
         }
     }

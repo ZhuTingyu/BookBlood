@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.base.http.R;
 import com.base.util.BarUtils;
+import com.base.util.Utils;
 import com.base.util.system.AppManager;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
@@ -42,6 +44,8 @@ import io.reactivex.functions.Consumer;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected Toolbar toolbar;
+    private View stateBar;
+    private View imgTitle;
     BaseActivity baseActivity;
     private WeakReference<AppCompatActivity> weakReference;
     public SweetAlertDialog errorDialog;
@@ -66,7 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BarUtils.setNavBarImmersive(this);
-        BarUtils.setStatusBarAlpha(this, BarUtils.DEFAULT_ALPHA, true);
+        BarUtils.setStatusBarAllAlpha(this);
         weakReference = new WeakReference<AppCompatActivity>(this);
         AppManager.getAppManager().addActivity(weakReference);
         baseActivity = this;
@@ -116,8 +120,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
     }
 
+    public void setToolbarColor(@ColorRes int resId){
+        if(toolbar != null){
+            toolbar.setBackgroundColor(Utils.getColor(resId));
+        }
+        if(stateBar != null){
+            stateBar.setBackgroundColor(Utils.getColor(resId));
+            BarUtils.setStatusBarLightMode(baseActivity, true);
+        }
+    }
+
     private void initView() {
         toolbar = findViewById(R.id.toolbar);
+        stateBar = findViewById(R.id.stateBar);
+        imgTitle = findViewById(R.id.imgTitle);
         setToolbar();
         initProgressLayout();
     }
@@ -206,6 +222,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             title.setText(getString(resId));
         }
     }
+
+    public void setImageTitle(){
+        if(imgTitle != null){
+            imgTitle.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     protected void setToolbarRight(@StringRes int resId, MenuItem.OnMenuItemClickListener listener) {
         if (toolbar != null) {

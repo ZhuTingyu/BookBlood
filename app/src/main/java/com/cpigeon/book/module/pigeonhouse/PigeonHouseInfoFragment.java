@@ -125,6 +125,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
         mIsLook = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
 
+
         PermissionUtil.getAppDetailSettingIntent(getBaseActivity());
 
         mViewModel.oneStartGetGeBi();//第一次登录
@@ -144,10 +145,6 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mLvCity = findViewById(R.id.lvCity);
         mLvAddress = findViewById(R.id.lvAddress);
         mTvOk = findViewById(R.id.tvOk);
-
-        mTvAuth.setOnClickListener(v -> {
-            MainActivity.start(getBaseActivity());
-        });
 
         bindUi(RxUtils.textChanges(mLvHouseName.getEditText()),mViewModel.setPigeonHomeName());
         bindUi(RxUtils.textChanges(mLvPhone.getEditText()),mViewModel.setPigeonHomePhone());
@@ -219,7 +216,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         if(!mIsLook){
             mTvOk.setVisibility(View.VISIBLE);
             mTvOk.setOnClickListener(v -> {
-                mViewModel.addPigeonHouse();
+                mViewModel.setPigeonHouse();
             });
         }else {
             mLlLineInput.setOnInputViewGetFocusListener(() -> {
@@ -228,7 +225,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mViewModel.getPigeonHouse();
             mTvOk.setText(Utils.getString(R.string.text_sure_commit));
             mTvOk.setOnClickListener(v -> {
-                mViewModel.modifyPigeonHouse();
+                mViewModel.setPigeonHouse();
             });
 
         }
@@ -268,8 +265,6 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             if(r == null){
                 return;
             }
-            mLlLineInput.getChildViews();
-            mLlLineInput.setLineInputViewState(mIsLook);
             Glide.with(getBaseActivity()).load(r.getTouxiangurl()).into(mImgHead);
             mTvName.setText(r.getXingming());
             mLvPhone.setContent(r.getPigeonHomePhone());

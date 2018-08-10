@@ -47,6 +47,7 @@ public class GuideFragment extends BaseFragment {
         }
 
         Glide.with(getBaseActivity()).load(imgs.get(position))
+                .centerCrop()
                 .into(mImageView);
 
         if(position == 3){

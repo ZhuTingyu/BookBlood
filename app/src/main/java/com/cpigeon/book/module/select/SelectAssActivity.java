@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.select;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.widget.LinearLayout;
 import com.base.base.BaseActivity;
 import com.base.base.pinyin.LetterSortModel;
 import com.base.util.FragmentUtils;
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
@@ -57,6 +59,8 @@ public class SelectAssActivity extends BaseActivity {
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            Intent intent = new Intent();
+            intent.putExtra(IntentBuilder.KEY_DATA, mAdapter.getData().get(position).getISOCName());
 
         });
 

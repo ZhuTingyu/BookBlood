@@ -20,6 +20,7 @@ import com.base.util.Lists;
 import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.RxUtils;
+import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.CustomViewPager;
@@ -60,7 +61,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PermissionUtil.getAppDetailSettingIntent(this);
-        BarUtils.setStatusBarAllAlpha(this);
         setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewPager);
         bottomAddTabView = findViewById(R.id.bottomAddView);

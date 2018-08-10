@@ -4,13 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="74dp">
+    android:layout_height="wrap_content">
+
     <LinearLayout
         android:id="@+id/llTabViews"
         android:background="@drawable/svg_main_bottom_bg"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="50dp">
 
         <com.cpigeon.book.widget.SimpleTitleView
             android:id="@+id/simple1"
@@ -27,7 +28,7 @@
 
         <View
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:layout_height="match_parent"/>
 
         <com.cpigeon.book.widget.SimpleTitleView
@@ -48,10 +49,11 @@
 
     <ImageView
         android:id="@+id/imgAdd"
-        android:layout_centerInParent="true"
-        android:src="@mipmap/ic_main_bottom_add"
-        android:layout_width="68dp"
-        android:layout_height="match_parent" />
+        android:layout_width="109dp"
+        android:layout_height="66dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_main_bottom_add_2" />
 
 </RelativeLayout>
 

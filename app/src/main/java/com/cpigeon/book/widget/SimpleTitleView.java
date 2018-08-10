@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 
 /**
@@ -29,8 +30,11 @@ public class SimpleTitleView extends LinearLayout{
     int pressTextColor;
     int normalImage;
     int pressImage;
+    String text;
 
     Drawable image;
+
+    int imageSize;
 
 
     public SimpleTitleView(Context context) {
@@ -55,6 +59,8 @@ public class SimpleTitleView extends LinearLayout{
         normalTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_DefaultTextColor, Color.BLACK);
         pressTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_PressTextColor, Color.BLACK);
         image = array.getDrawable(R.styleable.SimpleTitleView_simpleTitleView_image);
+        imageSize = array.getDimensionPixelSize(R.styleable.SimpleTitleView_simpleTitleView_image_size, 24);
+        text = array.getString(R.styleable.SimpleTitleView_simpleTitleView_text);
 
     }
 
@@ -64,7 +70,12 @@ public class SimpleTitleView extends LinearLayout{
         titleText =  view.findViewById(R.id.titleText);
 
         titleText.setTextColor(normalTextColor);
+        titleText.setText(text);
+
         titleImg.setImageDrawable(image);
+        LayoutParams params = new LayoutParams(imageSize, imageSize);
+        titleImg.setLayoutParams(params);
+
     }
 
     public void setImages(@DrawableRes int normalImage, @DrawableRes int pressImage){

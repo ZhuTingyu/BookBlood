@@ -1,11 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <include layout="@layout/layout_toolbar" />
 
-    <include layout="@layout/xrecyclerview_no_padding_layout" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/topList"
+                android:layout_width="match_parent"
+                android:layout_height="154dp" />
+
+            <RelativeLayout
+                android:layout_marginLeft="43dp"
+                android:layout_marginRight="43dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="26dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvFootManager"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_image="@mipmap/ic_foot_manger"
+                    app:simpleTitleView_text="@string/text_foot_manger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvBreedPigeonManager"
+                    android:layout_centerHorizontal="true"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_image="@mipmap/ic_breed_pigeon_manger"
+                    app:simpleTitleView_text="@string/text_breed_pigeon_manger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvTrainRecord"
+                    android:layout_alignParentRight="true"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_image="@mipmap/ic_train_record"
+                    app:simpleTitleView_text="@string/text_train_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginLeft="43dp"
+                android:layout_marginRight="43dp"
+                android:layout_marginBottom="26dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvMatchPigeonManger"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_image="@mipmap/ic_match_pigeon_manger"
+                    app:simpleTitleView_text="@string/text_match_pigeon_manger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvFeedPigeonRecord"
+                    android:layout_centerHorizontal="true"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_image="@mipmap/ic_feed_pigeon_record"
+                    app:simpleTitleView_text="@string/text_feed_pigeon_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvAiPigeonHouse"
+                    android:layout_alignParentRight="true"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_image="@mipmap/ic_ai_pigeon_house"
+                    app:simpleTitleView_text="@string/text_ai_pigeon_house"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
 
 </LinearLayout>

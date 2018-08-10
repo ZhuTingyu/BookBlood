@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -16,12 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.base.base.BaseActivity;
 import com.base.base.BaseViewModel;
 import com.base.http.R;
+import com.base.util.BarUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
@@ -53,6 +56,8 @@ public abstract class BaseFragment extends Fragment {
     protected SweetAlertDialog mLoadingSweetAlertDialog;
 
     protected Toolbar toolbar;
+    protected View stateBar;
+    protected ImageView imgTitle;
 
     protected final CompositeDisposable composite = new CompositeDisposable();
 
@@ -113,14 +118,21 @@ public abstract class BaseFragment extends Fragment {
         }
         toolbar = view.findViewById(R.id.toolbar);
         titleView = view.findViewById(R.id.toolbar_title);
+        stateBar = view.findViewById(R.id.stateBar);
+        imgTitle = view.findViewById(R.id.imgTitle);
         if (toolbar == null) {
             toolbar = getActivity().findViewById(R.id.toolbar);
             titleView = getActivity().findViewById(R.id.toolbar_title);
+            imgTitle = getActivity().findViewById(R.id.imgTitle);
         }
         if (toolbar != null && isBack) {
             toolbar.setNavigationOnClickListener(v -> {
                 getActivity().finish();
             });
+        }
+
+        if(stateBar == null){
+            stateBar = getActivity().findViewById(R.id.stateBar);
         }
 
         initObserve();
@@ -170,6 +182,23 @@ public abstract class BaseFragment extends Fragment {
             toolbar.getMenu().add(string)
                     .setOnMenuItemClickListener(listener)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+    }
+
+
+    protected void setToolbarColor(@ColorRes int resId){
+        if(toolbar != null){
+            toolbar.setBackgroundColor(Utils.getColor(resId));
+        }
+        if(stateBar != null){
+            stateBar.setBackgroundColor(Utils.getColor(resId));
+            BarUtils.setStatusBarLightMode(getBaseActivity(), Utils.getColor(resId));
+        }
+    }
+
+    public void setImageTitle(){
+        if(imgTitle != null){
+            imgTitle.setVisibility(View.VISIBLE);
         }
     }
 

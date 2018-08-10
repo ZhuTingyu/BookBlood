@@ -67,5 +67,11 @@
     <string name="get_user_id_card">ZGW_Users_GetID</string>
     <string name="text_yet_auth">已认证</string>
     <string name="title_id_card">身份证</string>
+    <string name="text_foot_manger">足环管理</string>
+    <string name="text_breed_pigeon_manger">中鸽管理</string>
+    <string name="text_train_record">训鸽记录</string>
+    <string name="text_match_pigeon_manger">赛鸽管理</string>
+    <string name="text_feed_pigeon_record">养鸽记录</string>
+    <string name="text_ai_pigeon_house">智能鸽舍</string>
 
 </resources>

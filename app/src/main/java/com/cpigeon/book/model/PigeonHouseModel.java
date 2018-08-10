@@ -13,7 +13,7 @@ import io.reactivex.Observable;
  */
 
 public class PigeonHouseModel {
-    public static Observable<ApiResponse> addPigeonHouse(String PigeonHomeName
+    public static Observable<ApiResponse> setPigeonHouse(String PigeonHomeName
             , String UsePigeonHomeNum
             , String PigeonHomePhone
             , String Latitude
@@ -27,7 +27,7 @@ public class PigeonHouseModel {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
-                .url(R.string.add_pigeon_house)
+                .url(R.string.set_pigeon_house)
                 .addBody("name", PigeonHomeName)
                 .addBody("usenum", UsePigeonHomeNum)
                 .addBody("phone", PigeonHomePhone)
@@ -37,35 +37,6 @@ public class PigeonHouseModel {
                 .addBody("county", county)
                 .addBody("city", city)
                 .addBody("isocname", PigeonISOCID)
-                .addBody("adds", PigeonHomeAdds)
-                .addBody("matchnum", PigeonMatchNum)
-                .request();
-    }
-
-    public static Observable<ApiResponse> modifyPigeonHouse(String PigeonHomeName
-            , String UsePigeonHomeNum
-            , String PigeonHomePhone
-            , String Latitude
-            , String Longitude
-            , String Province
-            , String county
-            , String city
-            , String PigeonISOCID
-            , String PigeonHomeAdds
-            , String PigeonMatchNum) {
-        return RequestData.<ApiResponse>build()
-                .setToJsonType(new TypeToken<ApiResponse>() {
-                }.getType())
-                .url(R.string.modify_pigeon_house)
-                .addBody("name", PigeonHomeName)
-                .addBody("usenum", UsePigeonHomeNum)
-                .addBody("phone", PigeonHomePhone)
-                .addBody("la", Latitude)
-                .addBody("lo", Longitude)
-                .addBody("province", Province)
-                .addBody("county", county)
-                .addBody("city", city)
-                .addBody("isocid", PigeonISOCID)
                 .addBody("adds", PigeonHomeAdds)
                 .addBody("matchnum", PigeonMatchNum)
                 .request();

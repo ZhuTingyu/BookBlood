@@ -54,8 +54,8 @@ public class PigeonHouseViewModel extends BaseViewModel {
         });
     }
 
-    public void addPigeonHouse(){
-        submitRequestThrowError(PigeonHouseModel.addPigeonHouse(mPigeonHomeName,mUsePigeonHomeNum,mPigeonHomePhone
+    public void setPigeonHouse(){
+        submitRequestThrowError(PigeonHouseModel.setPigeonHouse(mPigeonHomeName,mUsePigeonHomeNum,mPigeonHomePhone
                 ,mLatitude,mLongitude,mProvince, mCounty, mCity,mPigeonISOCID,mPigeonHomeAdds,mPigeonMatchNum),r -> {
             if(r.isOk()){
                 addR.setValue(r.msg);
@@ -63,14 +63,6 @@ public class PigeonHouseViewModel extends BaseViewModel {
         });
     }
 
-    public void modifyPigeonHouse(){
-        submitRequestThrowError(PigeonHouseModel.modifyPigeonHouse(mPigeonHomeName,mUsePigeonHomeNum,mPigeonHomePhone
-                ,mLatitude,mLongitude,mProvince, mCounty, mCity,mPigeonISOCID,mPigeonHomeAdds,mPigeonMatchNum),r -> {
-            if(r.isOk()){
-                modifyR.setValue(r.msg);
-            }else throw new HttpErrorException(r);
-        });
-    }
 
     //第一次启动 获取鸽币
     public void oneStartGetGeBi() {

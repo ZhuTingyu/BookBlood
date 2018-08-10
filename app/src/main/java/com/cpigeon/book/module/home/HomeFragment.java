@@ -4,11 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.base.util.BarUtils;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.widget.recyclerview.XRecyclerView;
@@ -22,7 +24,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 
 public class HomeFragment extends BaseBookFragment {
 
-    XRecyclerView mRecyclerView;
+    RecyclerView mTopList;
     HomeAdapter mAdapter;
 
 
@@ -41,17 +43,8 @@ public class HomeFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setToolbarNotBack();
-        mRecyclerView = findViewById(R.id.list);
-
-        StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(manager);
-        mAdapter = new HomeAdapter();
-        mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
-        composite.add(RxUtils.delayed(50, aLong -> {
-            mAdapter.setEmptyText("测试空");
-            mAdapter.setNewData(Lists.newArrayList());
-        }));
+        setImageTitle();
+        setToolbarColor(R.color.white);
     }
 }

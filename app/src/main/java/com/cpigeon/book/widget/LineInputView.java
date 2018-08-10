@@ -40,8 +40,8 @@ public class LineInputView extends RelativeLayout {
     int mWeight;
     int mLeftColor;
     int mRightColor;
-    int mLeftTextSize;
-    int mRightTextSize;
+    float mLeftTextSize;
+    float mRightTextSize;
     String mLeftString;
     String mRightString;
     boolean mIsLookState;
@@ -87,7 +87,7 @@ public class LineInputView extends RelativeLayout {
         mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, Color.BLACK);
         mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, Color.BLACK);
         mLeftTextSize = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
-        mRightTextSize = array.getColor(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
+        mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);
         mRightString = array.getString(R.styleable.LineInputView_lineInputView_RightString);
         mIsLookState = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLookState, false);
