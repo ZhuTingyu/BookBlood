@@ -21,6 +21,8 @@ import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 
+import retrofit2.http.HEAD;
+
 
 /**
  * Created by Zhu TingYu on 2018/7/31.
@@ -224,6 +226,15 @@ public class LineInputView extends RelativeLayout {
         } else {
             mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             //mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
+        }
+    }
+
+    private void setEditTextBorder(boolean isVisible){
+        if(isVisible){
+            mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
+        }else {
+            mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
+
         }
     }
 }

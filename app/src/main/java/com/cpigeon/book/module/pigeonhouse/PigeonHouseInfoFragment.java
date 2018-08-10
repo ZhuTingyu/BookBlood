@@ -124,6 +124,10 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 //                });
 
         mIsLook = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
+        composite.add(RxUtils.delayed(50,aLong -> {
+            mLlLineInput.getChildViews();
+            mLlLineInput.setLineInputViewState(mIsLook);
+        }));
 
 
         PermissionUtil.getAppDetailSettingIntent(getBaseActivity());
@@ -146,12 +150,12 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mLvAddress = findViewById(R.id.lvAddress);
         mTvOk = findViewById(R.id.tvOk);
 
-        bindUi(RxUtils.textChanges(mLvHouseName.getEditText()),mViewModel.setPigeonHomeName());
-        bindUi(RxUtils.textChanges(mLvPhone.getEditText()),mViewModel.setPigeonHomePhone());
-        bindUi(RxUtils.textChanges(mLvOrganize.getEditText()),mViewModel.setPigeonISOCID());
-        bindUi(RxUtils.textChanges(mLvShedId.getEditText()),mViewModel.setUsePigeonHomeNum());
-        bindUi(RxUtils.textChanges(mLvJoinMatchId.getEditText()),mViewModel.setPigeonMatchNum());
-        bindUi(RxUtils.textChanges(mLvAddress.getEditText()),mViewModel.setPigeonHomeAdds());
+        bindUi(RxUtils.textChanges(mLvHouseName.getEditText()), mViewModel.setPigeonHomeName());
+        bindUi(RxUtils.textChanges(mLvPhone.getEditText()), mViewModel.setPigeonHomePhone());
+        bindUi(RxUtils.textChanges(mLvOrganize.getEditText()), mViewModel.setPigeonISOCID());
+        bindUi(RxUtils.textChanges(mLvShedId.getEditText()), mViewModel.setUsePigeonHomeNum());
+        bindUi(RxUtils.textChanges(mLvJoinMatchId.getEditText()), mViewModel.setPigeonMatchNum());
+        bindUi(RxUtils.textChanges(mLvAddress.getEditText()), mViewModel.setPigeonHomeAdds());
 
         mLvOrganize.setOnRightClickListener(lineInputView -> {
             IntentBuilder.Builder(getActivity(), SelectAssActivity.class)
@@ -213,12 +217,12 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             });
         });
 
-        if(!mIsLook){
+        if (!mIsLook) {
             mTvOk.setVisibility(View.VISIBLE);
             mTvOk.setOnClickListener(v -> {
                 mViewModel.setPigeonHouse();
             });
-        }else {
+        } else {
             mLlLineInput.setOnInputViewGetFocusListener(() -> {
                 mTvOk.setVisibility(View.VISIBLE);
             });
@@ -262,7 +266,10 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         });
 
         mViewModel.mHouseEntityInfo.observe(this, r -> {
-            if(r == null){
+            if (r == null) {
+                mTvAuth.setOnClickListener(v -> {
+                    IdCertificationFragment.start(getBaseActivity(), true);
+                });
                 return;
             }
             Glide.with(getBaseActivity()).load(r.getTouxiangurl()).into(mImgHead);
@@ -273,8 +280,8 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLvShedId.setContent(r.getUsePigeonHomeNum());
             mLvJoinMatchId.setContent(r.getPigeonMatchNum());
             mLvHouseLocation.setContent(getString(R.string.text_location_lo_la
-                    ,LocationFormatUtils.GPS2AjLocation(r.getLongitude())
-                    ,LocationFormatUtils.GPS2AjLocation(r.getLatitude())));
+                    , LocationFormatUtils.GPS2AjLocation(r.getLongitude())
+                    , LocationFormatUtils.GPS2AjLocation(r.getLatitude())));
 
             mViewModel.mLongitude = String.valueOf(r.getLongitude());
             mViewModel.mLatitude = String.valueOf(r.getLatitude());
@@ -282,16 +289,11 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLvCity.setContent(r.getProvince());
             mLvCity.setContent(r.getPigeonHomeAdds());
 
-            if(StringUtil.isStringValid(r.getXingming())){
-                mTvAuth.setText(getString(R.string.text_yet_auth));
-                mTvAuth.setOnClickListener(v -> {
-                    IdCertificationFragment.start(getBaseActivity(), false);
-                });
-            }else {
-                mTvAuth.setOnClickListener(v -> {
-                    IdCertificationFragment.start(getBaseActivity(), true);
-                });
-            }
+
+            mTvAuth.setText(getString(R.string.text_yet_auth));
+            mTvAuth.setOnClickListener(v -> {
+                IdCertificationFragment.start(getBaseActivity(), false);
+            });
 
         });
 
@@ -304,11 +306,11 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
             mViewModel.mHeadUrl = selectList.get(0).getCutPath();
             mViewModel.setUserFace();
-        } else if(requestCode == CODE_ORGANIZE){
+        } else if (requestCode == CODE_ORGANIZE) {
             String organize = data.getStringExtra(IntentBuilder.KEY_DATA);
             mViewModel.mPigeonISOCID = organize;
             mLvOrganize.setContent(organize);
-        } else if(requestCode == CODE_LOCATION){
+        } else if (requestCode == CODE_LOCATION) {
 
             RegeocodeAddress address = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             LatLonPoint point = data.getParcelableExtra(IntentBuilder.KEY_DATA_2);
@@ -321,13 +323,13 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mViewModel.mLatitude = String.valueOf(point.getLatitude());
 
             bindAddress(address);
-        }else if(requestCode == CODE_AUTH){
+        } else if (requestCode == CODE_AUTH) {
             mViewModel.getPigeonHouse();
         }
 
     }
 
-    private void bindAddress(RegeocodeAddress mAddress){
+    private void bindAddress(RegeocodeAddress mAddress) {
         String address = mAddress.getProvince() + mAddress.getCity() + mAddress.getDistrict();
         mLvCity.setContent(address);
         mViewModel.mProvince = mAddress.getProvince();
