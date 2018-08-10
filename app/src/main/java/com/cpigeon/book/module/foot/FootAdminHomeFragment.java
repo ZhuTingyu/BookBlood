@@ -90,7 +90,9 @@ public class FootAdminHomeFragment extends BaseBookFragment {
                 //添加足环
                 Log.d(TAG, "onViewClicked: a");
                 ToastUtils.showLong(getActivity(), "添加足环1");
-                mFootAdminModel.getTXGP_FootRing_AddData();
+
+
+                AddSingleFootFragment.start(getActivity());
                 break;
             case R.id.btn2:
                 //

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_home_pop_bg"
+    android:orientation="vertical">
+
+    <com.cpigeon.book.widget.LineInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineInputView_DrawableRight="@drawable/orange_oval"
+        app:lineInputView_IsCanEdit="true"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_LeftString="国家"
+        app:lineInputView_RightString="CHN">
+
+    </com.cpigeon.book.widget.LineInputView>
+
+</LinearLayout>

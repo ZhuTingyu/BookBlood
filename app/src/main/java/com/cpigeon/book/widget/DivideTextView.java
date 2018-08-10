@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
+ * 每行字体 间距均分
  * Created by Administrator on 2017/11/15.
  */
 
@@ -57,7 +58,7 @@ public class DivideTextView extends TextView {
                     lineEnd, getPaint());
             String line = text.substring(lineStart, lineEnd);
 
-            if(i < layout.getLineCount() - 1) {
+            if (i < layout.getLineCount() - 1) {
                 if (needScale(line)) {
                     drawScaledText(Canvas, lineStart, line, width);
                 } else {
