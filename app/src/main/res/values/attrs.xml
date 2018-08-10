@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FamilyTreeView">
-        <attr name="TreeView_LineWidth" format="dimension"/>
-        <attr name="TreeVie_LineColor" format="color"/>
-        <attr name="TreeView_ShowGeneration" format="integer"/>
-        <attr name="TreeView_MaxGeneration" format="integer"/>
-        <attr name="TreeView_isHaveCurrent" format="boolean"/>
-        <attr name="TreeView_isHorizontal" format="boolean"/>
+        <attr name="TreeView_LineWidth" format="dimension" />
+        <attr name="TreeVie_LineColor" format="color" />
+        <attr name="TreeView_ShowGeneration" format="integer" />
+        <attr name="TreeView_MaxGeneration" format="integer" />
+        <attr name="TreeView_isHaveCurrent" format="boolean" />
+        <attr name="TreeView_isHorizontal" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SimpleTitleView">
@@ -15,23 +15,29 @@
         <attr name="simpleTitleView_image" format="reference|color"/>
         <attr name="simpleTitleView_image_size" format="dimension"/>
         <attr name="simpleTitleView_text" format="string"/>
+
     </declare-styleable>
-    
+
     <declare-styleable name="LineInputView">
-        <attr name="lineInputView_Weight" format="integer"/>
-        <attr name="lineInputView_LeftTextColor" format="color"/>
-        <attr name="lineInputView_RightTextColor" format="color"/>
-        <attr name="lineInputView_LeftTextSize" format="dimension"/>
-        <attr name="lineInputView_RightTextSize" format="dimension"/>
-        <attr name="lineInputView_LeftString" format="string"/>
-        <attr name="lineInputView_RightString" format="string"/>
-        <attr name="lineInputView_IsLookState" format="boolean"/>
-        <attr name="lineInputView_DrawableRight" format="reference"/>
-        <attr name="lineInputView_IsNotNull" format="boolean"/>
-        <attr name="lineInputView_IsCanEdit" format="boolean"/>
-        <attr name="lineInputView_Hint" format="string"/>
-        <attr name="lineInputView_IsLeft" format="boolean"/>
-        <attr name="lineInputView_InputType"/>
+        <attr name="lineInputView_Weight" format="integer" />
+        <attr name="lineInputView_LeftTextColor" format="color" />
+        <attr name="lineInputView_RightTextColor" format="color" />
+        <attr name="lineInputView_LeftTextSize" format="dimension" />
+        <attr name="lineInputView_RightTextSize" format="dimension" />
+        <attr name="lineInputView_LeftString" format="string" />
+        <attr name="lineInputView_RightString" format="string" />
+        <attr name="lineInputView_IsLookState" format="boolean" />
+        <attr name="lineInputView_DrawableRight" format="reference" />
+        <attr name="lineInputView_IsNotNull" format="boolean" />
+        <attr name="lineInputView_IsCanEdit" format="boolean" />
+        <attr name="lineInputView_Hint" format="string" />
+        <attr name="lineInputView_IsLeft" format="boolean" />
+        <attr name="lineInputView_isShowLineDivisions">
+            <flag name="gone" value="0x00000008" />
+            <flag name="visible" value="0x00000000" />
+            <flag name="invisible" value="0x00000004" />
+        </attr>
+        <attr name="lineInputView_InputType" />
     </declare-styleable>
 
     <attr name="LineInputView_InputType">
@@ -70,6 +76,18 @@
     </attr>
 
     <declare-styleable name="SearchTextView">
-        <attr name="searchTextView_is_in_top" format="boolean"/>
+        <attr name="searchTextView_is_in_top" format="boolean" />
     </declare-styleable>
+
+
+    <declare-styleable name="InputBoxView">
+        <attr name="input_text_size" format="integer" />
+        <attr name="text_color" format="color" />
+        <attr name="text_hint_color" format="color" />
+        <attr name="text" format="string" />
+        <attr name="text_hint" format="string" />
+        <attr name="edit_max_input_line" format="integer" />
+
+    </declare-styleable>
+
 </resources>

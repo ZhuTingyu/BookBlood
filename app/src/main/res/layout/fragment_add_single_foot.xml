@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_home_pop_bg"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/spacing_left_reight"
+    android:paddingRight="@dimen/spacing_left_reight">
+
+    <com.cpigeon.book.widget.LineInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineInputView_IsCanEdit="true"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_LeftString="国家"
+        app:lineInputView_RightString="CHN" />
+
+    <com.cpigeon.book.widget.LineInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineInputView_IsCanEdit="true"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_LeftString="足环"
+        app:lineInputView_RightString="CHN" />
+
+    <com.cpigeon.book.widget.LineInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineInputView_IsCanEdit="true"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_LeftString="类别"
+        app:lineInputView_RightString="CHN" />
+
+    <com.cpigeon.book.widget.LineInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineInputView_IsCanEdit="true"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_LeftString="来源"
+        app:lineInputView_RightString="CHN" />
+
+    <com.cpigeon.book.widget.LineInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineInputView_IsCanEdit="true"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_LeftString="总金额"
+        app:lineInputView_RightString="CHN" />
+
+
+    <com.cpigeon.book.widget.LineInputView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:lineInputView_IsCanEdit="true"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_LeftString="备注"
+        app:lineInputView_isShowLineDivisions="gone" />
+
+
+    <com.cpigeon.book.widget.InputBoxView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:text_hint="500字内" />
+
+
+</LinearLayout>

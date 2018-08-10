@@ -21,7 +21,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
-import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 import com.cpigeon.book.service.SingleLoginService;
 import com.cpigeon.book.service.SingleLoginViewModel;
 import com.cpigeon.book.util.EditTextUtil;
@@ -67,15 +66,15 @@ public class LoginFragment extends BaseBookFragment {
         mViewModel.loginR.observe(this, s -> {
 //            SingleLoginService.start(getActivity());
 
-            //MainActivity.start(getActivity());
+            MainActivity.start(getActivity());
 
-            if (!UserModel.getInstance().isHaveHouseInfo()) {
-                //未完善鸽舍信息
-                PigeonHouseInfoFragment.start(getActivity(), false);
-            } else {
-                //已完善鸽舍信息
-                MainActivity.start(getActivity());
-            }
+//            if (!UserModel.getInstance().isHaveHouseInfo()) {
+//                //未完善鸽舍信息
+//                PigeonHouseInfoFragment.start(getActivity(), false);
+//            } else {
+//                //已完善鸽舍信息
+//                MainActivity.start(getActivity());
+//            }
         });
 
         mViewModel.normalResult.observe(this, s -> {
