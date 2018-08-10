@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.cpigeon.book.widget.LineInputListLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,43 +9,53 @@
     android:paddingRight="@dimen/spacing_left_reight">
 
     <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/lv_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:lineInputView_IsCanEdit="true"
         app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="国家"
         app:lineInputView_RightString="CHN" />
 
     <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/lv_foot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:lineInputView_IsCanEdit="true"
         app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="足环"
         app:lineInputView_RightString="CHN" />
 
     <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/lv_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:lineInputView_IsCanEdit="true"
         app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="类别"
         app:lineInputView_RightString="CHN" />
 
     <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/lv_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:lineInputView_IsCanEdit="true"
         app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="来源"
         app:lineInputView_RightString="CHN" />
 
     <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/lv_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:lineInputView_IsCanEdit="true"
         app:lineInputView_IsLookState="true"
-        app:lineInputView_LeftString="总金额"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="金额"
         app:lineInputView_RightString="CHN" />
 
 
@@ -64,4 +74,14 @@
         app:text_hint="500字内" />
 
 
-</LinearLayout>
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/tvOk"
+        style="@style/bottom_style"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/text_commit" />
+
+
+</com.cpigeon.book.widget.LineInputListLayout>

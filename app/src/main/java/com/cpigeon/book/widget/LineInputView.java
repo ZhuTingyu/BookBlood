@@ -220,10 +220,10 @@ public class LineInputView extends RelativeLayout {
         if (isNotNull) {
             mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null
                     , Utils.getDrawable(R.drawable.svg_not_null), null);
-            mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
+            //mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
         } else {
             mTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-            mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
+            //mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
         }
     }
 }
