@@ -3,26 +3,20 @@ package com.cpigeon.book.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.idst.nls.internal.utils.L;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
@@ -49,6 +43,7 @@ public class LineInputView extends RelativeLayout {
     boolean mIsNotNull;
     boolean mIsCanEdit;
     boolean mIsLeft;
+    int mShowLineDivision;//是否显示分割线
     int mInputType;
 
 
@@ -56,6 +51,8 @@ public class LineInputView extends RelativeLayout {
     ClickGetFocusEditText mEditText;
     ImageView mImgRight;
     LinearLayout mLlContent;
+
+    View line_division;//分割线
 
     public interface OnRightClickListener {
         void click(LineInputView lineInputView);
@@ -77,15 +74,15 @@ public class LineInputView extends RelativeLayout {
         initView();
     }
 
-    @SuppressLint("Recycle")
+    @SuppressLint({"Recycle", "ResourceAsColor"})
     private void readAttr(AttributeSet attrs) {
         if (attrs == null) {
             return;
         }
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.LineInputView);
         mWeight = array.getInteger(R.styleable.LineInputView_lineInputView_Weight, 4);
-        mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, Color.BLACK);
-        mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, Color.BLACK);
+        mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, R.color.color_4c4c4c);
+        mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, R.color.color_000000);
         mLeftTextSize = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
         mRightTextSize = array.getColor(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);
@@ -96,6 +93,11 @@ public class LineInputView extends RelativeLayout {
         mIsCanEdit = array.getBoolean(R.styleable.LineInputView_lineInputView_IsCanEdit, true);
         mInputType = array.getInt(R.styleable.LineInputView_lineInputView_InputType, 0);
         mIsLeft = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLeft, false);
+
+
+        mShowLineDivision = array.getInt(R.styleable.LineInputView_lineInputView_isShowLineDivisions, View.VISIBLE);
+
+
     }
 
     private void initView() {
@@ -104,39 +106,43 @@ public class LineInputView extends RelativeLayout {
         mEditText = view.findViewById(R.id.etRight);
         mImgRight = view.findViewById(R.id.imgRight);
         mLlContent = view.findViewById(R.id.llContent);
+        line_division = view.findViewById(R.id.line_division);
 
         mTextView.setText(mLeftString);
-        mTextView.setTextColor(mLeftColor);
+        mTextView.setTextColor(getResources().getColor(mLeftColor));
         mTextView.setTextSize(mLeftTextSize);
 
         mEditText.setText(mRightString);
-        mEditText.setTextColor(mRightColor);
+        mEditText.setTextColor(getResources().getColor(mRightColor));
         mEditText.setTextSize(mRightTextSize);
-        if(mInputType != 0){
+        if (mInputType != 0) {
             mEditText.setInputType(mInputType);
         }
-        if(mIsLeft){
+        if (mIsLeft) {
             mEditText.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-        }else {
+        } else {
             mEditText.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         }
 
         if (mDrawableRight != null) {
             mImgRight.setVisibility(VISIBLE);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            if(mIsLeft){
+            if (mIsLeft) {
                 layoutParams.setMargins(ScreenTool.dip2px(8), 0, 0, 0);
-            }else {
+            } else {
                 layoutParams.setMargins(ScreenTool.dip2px(16), 0, 0, 0);
             }
             mImgRight.setLayoutParams(layoutParams);
             mImgRight.setImageDrawable(mDrawableRight);
         }
 
+        line_division.setVisibility(mShowLineDivision);
+
+
         setCanEdit(mIsCanEdit);
     }
 
-    public void setIsLookState(boolean isLookState){
+    public void setIsLookState(boolean isLookState) {
         if (isLookState) {
             mEditText.setOnFocusChangeListener((v, hasFocus) -> {
                 setNotNullDrawable(hasFocus && mIsNotNull);
@@ -166,11 +172,11 @@ public class LineInputView extends RelativeLayout {
 
     public void setOnRightClickListener(OnRightClickListener onRightClickListener) {
         mOnRightClickListener = onRightClickListener;
-        if(mIsCanEdit){
+        if (mIsCanEdit) {
             mImgRight.setOnClickListener(v -> {
                 mOnRightClickListener.click(this);
             });
-        }else {
+        } else {
             mLlContent.setOnClickListener(v -> {
                 mOnRightClickListener.click(this);
             });

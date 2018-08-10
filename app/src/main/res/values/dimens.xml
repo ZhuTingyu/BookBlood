@@ -9,6 +9,9 @@
 
     <dimen name="normal_safe_distance">16dp</dimen>
 
+    
+    <dimen name="spacing_left_reight">20dp</dimen>
+    
 
 
     <dimen name="item_h">60dp</dimen>
