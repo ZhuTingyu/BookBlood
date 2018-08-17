@@ -15,11 +15,13 @@ import java.util.List;
 public class AnnouncementNoticeAdapter extends BaseQuickAdapter<AnnouncementNoticeEntity, BaseViewHolder> {
 
     public AnnouncementNoticeAdapter(List<AnnouncementNoticeEntity> data) {
-        super(R.layout.item_logbook, data);
+        super(R.layout.item_annoucenment_notice, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, AnnouncementNoticeEntity item) {
 
+        helper.setTextView(R.id.tv_title, item.getTitle());
+        helper.setTextView(R.id.tv_time, item.getDate());
     }
 }

@@ -111,4 +111,8 @@ public class InputBoxView extends LinearLayout {
         input_box_editText.setText(textStr);
     }
 
+
+    public EditText getEditText(){
+        return input_box_editText;
+    }
 }

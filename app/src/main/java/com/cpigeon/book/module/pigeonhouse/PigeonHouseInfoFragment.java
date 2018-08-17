@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ import com.base.util.map.AmapManager;
 import com.base.util.map.PointToAddressManager;
 import com.base.util.picker.AddressPickTask;
 import com.base.util.picker.PickerUtil;
-import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.bumptech.glide.Glide;
@@ -124,7 +122,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 //                });
 
         mIsLook = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
-        composite.add(RxUtils.delayed(50,aLong -> {
+        composite.add(RxUtils.delayed(50, aLong -> {
             mLlLineInput.getChildViews();
             mLlLineInput.setLineInputViewState(mIsLook);
         }));
@@ -326,7 +324,6 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         } else if (requestCode == CODE_AUTH) {
             mViewModel.getPigeonHouse();
         }
-
     }
 
     private void bindAddress(RegeocodeAddress mAddress) {

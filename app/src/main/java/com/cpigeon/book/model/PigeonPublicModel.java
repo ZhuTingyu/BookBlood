@@ -13,73 +13,83 @@ import io.reactivex.Observable;
 
 public class PigeonPublicModel {
 
-    //hl 获取鸽子性别
-    public static Observable<ApiResponse<Object>> getTXGP_PigeonSexType_Select() {
+//    //hl 获取鸽子性别
+//    public static Observable<ApiResponse<Object>> getTXGP_PigeonSexType_Select() {
+//        return RequestData.<ApiResponse<Object>>build()
+//                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+//                }.getType())
+//                .url(R.string.pigeon_sex_select)
+//                .request();
+//    }
+//
+//
+//    //hl 获取鸽子选择  血统
+//    public static Observable<ApiResponse<Object>> getTXGP_PigeonBloodType_Select() {
+//        return RequestData.<ApiResponse<Object>>build()
+//                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+//                }.getType())
+//                .url(R.string.pigeon_lineage_select)
+//                .request();
+//    }
+//
+//
+//    //hl 获取鸽子选择  眼砂
+//    public static Observable<ApiResponse<Object>> getTXGP_PigeonEyeType_Select() {
+//        return RequestData.<ApiResponse<Object>>build()
+//                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+//                }.getType())
+//                .url(R.string.pigeon_eye_sand_select)
+//                .request();
+//    }
+//
+//    //hl 获取鸽子选择  羽色
+//    public static Observable<ApiResponse<Object>> getTXGP_PigeonPlumeType_Select() {
+//        return RequestData.<ApiResponse<Object>>build()
+//                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+//                }.getType())
+//                .url(R.string.pigeon_feather_color_select)
+//                .request();
+//    }
+//
+//
+//    //hl 足环的来源
+//    public static Observable<ApiResponse<Object>> getTXGP_FootRingSource_Select() {
+//        return RequestData.<ApiResponse<Object>>build()
+//                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+//                }.getType())
+//                .url(R.string.foot_source_single)
+//                .request();
+//    }
+//
+//
+//    //hl 得到足环的类型
+//    public static Observable<ApiResponse<Object>> getTXGP_FootRingType_Select() {
+//        return RequestData.<ApiResponse<Object>>build()
+//                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+//                }.getType())
+//                .url(R.string.foot_type_select)
+//                .request();
+//    }
+//
+//
+//    //hl 种鸽来源
+//    public static Observable<ApiResponse<Object>> getTXGP_PigeonSource_Select() {
+//        return RequestData.<ApiResponse<Object>>build()
+//                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+//                }.getType())
+//                .url(R.string.pigeon_select_source)
+//                .request();
+//    }
+
+
+    //hl 足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别
+    public static Observable<ApiResponse<Object>> getTXGP_Type_Select(String selectType) {
+
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
-                .url(R.string.pigeon_sex_select)
+                .url(R.string.pigeon_select_all_type)
+                .addBody("whichid", String.valueOf(selectType))
                 .request();
     }
-
-
-    //hl 获取鸽子选择  血统
-    public static Observable<ApiResponse<Object>> getTXGP_PigeonBloodType_Select() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.pigeon_lineage_select)
-                .request();
-    }
-
-
-    //hl 获取鸽子选择  眼砂
-    public static Observable<ApiResponse<Object>> getTXGP_PigeonEyeType_Select() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.pigeon_eye_sand_select)
-                .request();
-    }
-
-    //hl 获取鸽子选择  羽色
-    public static Observable<ApiResponse<Object>> getTXGP_PigeonPlumeType_Select() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.pigeon_feather_color_select)
-                .request();
-    }
-
-
-    //hl 足环的来源
-    public static Observable<ApiResponse<Object>> getTXGP_FootRingSource_Select() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.foot_source_single)
-                .request();
-    }
-
-
-    //hl 得到足环的类型
-    public static Observable<ApiResponse<Object>> getTXGP_FootRingType_Select() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.foot_type_select)
-                .request();
-    }
-
-
-    //hl 种鸽来源
-    public static Observable<ApiResponse<Object>> getTXGP_PigeonSource_Select() {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-                }.getType())
-                .url(R.string.pigeon_select_source)
-                .request();
-    }
-
-
 }

@@ -38,6 +38,13 @@
         android:layout_height="wrap_content"
         android:text="获取统计数据" />
 
+
+    <Button
+        android:id="@+id/ac_btns5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="足环管理列表" />
+
     <include layout="@layout/xrecyclerview_no_padding_layout" />
 
 </LinearLayout>

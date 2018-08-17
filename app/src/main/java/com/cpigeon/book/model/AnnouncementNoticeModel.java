@@ -22,7 +22,7 @@ public class AnnouncementNoticeModel {
         return RequestData.<ApiResponse<List<AnnouncementNoticeEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<AnnouncementNoticeEntity>>>() {
                 }.getType())
-                .url(R.string.get_announcement_notice)
+                .url(R.string.get_announcement_notice_list)
                 .addBody("pi", String.valueOf(pi))
                 .addBody("ps", String.valueOf(ps))
                 .request();

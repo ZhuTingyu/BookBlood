@@ -6,6 +6,10 @@ import android.util.Log;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.FootAdminModel;
+import com.cpigeon.book.model.entity.DetailsSingleFootEntity;
+import com.cpigeon.book.model.entity.FootAdminListEntity;
+
+import java.util.List;
 
 import io.reactivex.functions.Consumer;
 
@@ -44,58 +48,69 @@ public class FootAdminViewModel extends BaseViewModel {
     }
 
 
-    public String footId = "16";
+    //=======================================================修改=====================================================================
 
-    public Consumer<String> setEditFootId() {
+    public String footEdit = "2018-11-112233";
+    public String moneyEdit = "100";
+    public String footSourceEdit = "2";//足环来源
+    public String remarkEdit = "测试备注";//备注
+
+    public String footTypeEdit = "4";//足环类型
+    public String footStateEdit = "2";//足环状态
+
+
+    public Consumer<String> editFootName_single() {
         return s -> {
-            footId = s;
+            footEdit = s;
+        };
+    }
+
+    public Consumer<String> editFootMoney_single() {
+        return s -> {
+            moneyEdit = s;
+        };
+    }
+
+
+    public Consumer<String> footSourceEdit_single() {
+        return s -> {
+            footSourceEdit = s;
+        };
+    }
+
+
+    public Consumer<String> remarkEdit_single() {
+        return s -> {
+            remarkEdit = s;
         };
     }
 
     //修改足环（单个）
-    public void getTXGP_FootRing_EditData() {
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Edit(footId, foot, money, footType, footState, footSource, remark), r -> {
+    public void getTXGP_FootRing_EditData(String footIdEdit) {
+        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Edit(footIdEdit, footEdit, moneyEdit.replace("元", ""), footTypeEdit, footStateEdit, footSourceEdit, remarkEdit), r -> {
             if (r.isOk()) {
 
             } else throw new HttpErrorException(r);
         });
     }
 
-
-    public String delFootId = "16";
-
-    public Consumer<String> setDelFootId() {
-        return s -> {
-            delFootId = s;
-        };
-    }
 
     //删除足环（单个）
-    public void getTXGP_FootRing_DeleteData() {
+    public void getTXGP_FootRing_DeleteData(String delFootId) {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Delete(delFootId), r -> {
             if (r.isOk()) {
-
+                error(r.msg);
             } else throw new HttpErrorException(r);
         });
     }
 
-
-
-
-
-    public String footDetailsID = "16";
-
-    public Consumer<String> setDetailsFootId() {
-        return s -> {
-            footDetailsID = s;
-        };
-    }
+    public MutableLiveData<DetailsSingleFootEntity> footDetailsData = new MutableLiveData<>();
 
     //获取单个足环详细
-    public void getTXGP_FootRing_SelectData() {
+    public void getTXGP_FootRing_SelectData(String footDetailsID) {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Select(footDetailsID), r -> {
             if (r.isOk()) {
-
+                footDetailsData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
@@ -147,8 +162,6 @@ public class FootAdminViewModel extends BaseViewModel {
     }
 
 
-
-
     public int pi = 1;
     public int ps = 20;
     public String year = "";
@@ -156,11 +169,13 @@ public class FootAdminViewModel extends BaseViewModel {
     public String stateid = "";
     public String key = "";
 
+    public MutableLiveData<List<FootAdminListEntity>> footAdminListData = new MutableLiveData<>();
+
     //足环号码 列表
     public void getTXGP_FootRing_SelectKeyAllData() {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_SelectKeyAll(pi, ps, year, typeid, stateid, key), r -> {
             if (r.isOk()) {
-
+                footAdminListData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

@@ -20,11 +20,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 添加 修改单个足环  fragment
+ * 添加 多个足环  fragment
  * Created by Administrator on 2018/8/10.
  */
 
-public class AddSingleFootFragment extends BaseBookFragment {
+public class FootAdminAddMultipleFragment extends BaseBookFragment {
 
 
     @BindView(R.id.lv_city)
@@ -44,13 +44,13 @@ public class AddSingleFootFragment extends BaseBookFragment {
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, AddSingleFootFragment.class);
+                .startParentActivity(activity, FootAdminAddMultipleFragment.class);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_single_foot, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_multiple_foot, container, false);
         return view;
     }
 
@@ -61,8 +61,6 @@ public class AddSingleFootFragment extends BaseBookFragment {
         mFootAdminModel = new FootAdminViewModel();
         initViewModels(mFootAdminModel);
 
-
-        mFootAdminModel.getTXGP_FootRing_AddData();
     }
 
     @OnClick({R.id.lv_city, R.id.lv_foot, R.id.lv_category, R.id.lv_source, R.id.lv_money, R.id.tvOk})
@@ -84,6 +82,8 @@ public class AddSingleFootFragment extends BaseBookFragment {
                 ToastUtils.showLong(getActivity(), "5");
                 break;
             case R.id.tvOk:
+
+                mFootAdminModel.getTXGP_FootRing_AddData();
                 ToastUtils.showLong(getActivity(), "6");
                 break;
         }

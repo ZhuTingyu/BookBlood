@@ -73,46 +73,50 @@ public class BreedPigeonFragment extends BaseBookFragment {
         initViewModels(mBreedPigeonViewModel);
 
         bindUi(RxUtils.textChanges(et9), mBreedPigeonViewModel.setDetailsFootId());
+
+        bindUi(RxUtils.textChanges(et8_1), mPigeonPublicViewModel.setSelectType());
     }
 
-    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9})
+    //    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9})
+    @OnClick({R.id.btn8, R.id.btn9})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn1:
-                //获取鸽子性别
-                mPigeonPublicViewModel.getTXGP_PigeonSexType_SelectData();
-                break;
-            case R.id.btn2:
-                //鸽子血统选择
-                mPigeonPublicViewModel.getTXGP_PigeonBloodType_SelectData();
-                break;
-            case R.id.btn3:
-                //选择  眼砂
-                mPigeonPublicViewModel.getTXGP_PigeonEyeType_SelectData();
-                break;
-            case R.id.btn4:
-                //选择  羽色
-                mPigeonPublicViewModel.getTXGP_PigeonPlumeType_SelectData();
-
-                break;
-            case R.id.btn5:
-                //获取足环来源
-                mPigeonPublicViewModel.getTXGP_FootRingSource_SelectData();
-
-                break;
-            case R.id.btn6:
-                //足环类型选择
-                mPigeonPublicViewModel.getTXGP_FootRingType_SelectData();
-
-                break;
-            case R.id.btn7:
-                //种鸽来源
-                mPigeonPublicViewModel.getTXGP_PigeonSource_SelectData();
-                break;
+//            case R.id.btn1:
+//                //获取鸽子性别
+//                mPigeonPublicViewModel.getTXGP_PigeonSexType_SelectData();
+//                break;
+//            case R.id.btn2:
+//                //鸽子血统选择
+//                mPigeonPublicViewModel.getTXGP_PigeonBloodType_SelectData();
+//                break;
+//            case R.id.btn3:
+//                //选择  眼砂
+//                mPigeonPublicViewModel.getTXGP_PigeonEyeType_SelectData();
+//                break;
+//            case R.id.btn4:
+//                //选择  羽色
+//                mPigeonPublicViewModel.getTXGP_PigeonPlumeType_SelectData();
+//
+//                break;
+//            case R.id.btn5:
+//                //获取足环来源
+//                mPigeonPublicViewModel.getTXGP_FootRingSource_SelectData();
+//
+//                break;
+//            case R.id.btn6:
+//                //足环类型选择
+//                mPigeonPublicViewModel.getTXGP_FootRingType_SelectData();
+//
+//                break;
+//            case R.id.btn7:
+//                //种鸽来源
+//                mPigeonPublicViewModel.getTXGP_PigeonSource_SelectData();
+//
+//                break;
 
             case R.id.btn8:
-                //
-
+                //获取足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别
+                mPigeonPublicViewModel.getTXGP_Type_SelectData();
                 break;
 
             case R.id.btn9:

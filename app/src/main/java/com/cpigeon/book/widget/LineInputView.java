@@ -21,8 +21,6 @@ import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 
-import retrofit2.http.HEAD;
-
 
 /**
  * Created by Zhu TingYu on 2018/7/31.
@@ -207,6 +205,10 @@ public class LineInputView extends RelativeLayout {
 
     public void setRightTextSize(int rightTextSize) {
         mEditText.setTextSize(rightTextSize);
+    }
+
+    public void setRightText(String rightText) {
+        mEditText.setText(rightText);
     }
 
     public void setEditState(boolean isCanEdit) {
