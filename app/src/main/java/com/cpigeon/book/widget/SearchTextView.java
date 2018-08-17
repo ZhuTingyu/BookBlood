@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
+import com.base.util.utility.KeyboardUtils;
 import com.cpigeon.book.R;
 
 /**
@@ -65,6 +66,7 @@ public class SearchTextView extends RelativeLayout {
                 v.clearFocus();
                 if(listener != null){
                     listener.search(mEdSearch.getText().toString());
+                    KeyboardUtils.hideSoftInput(this);
                 }
             }
             return false;

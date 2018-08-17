@@ -27,26 +27,82 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="91dp"
                 android:layout_margin="15dp"
                 android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgIdP"
+                
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#459c6e"
-                    android:scaleType="fitXY" />
+                    android:layout_marginRight="10dp"
+                    android:layout_height="match_parent">
+                    
+                    <LinearLayout
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/imgIdN"
+                        <ImageView
+                            android:layout_marginBottom="13dp"
+                            android:src="@mipmap/ic_id_card_add"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+
+                        <TextView
+                            android:textColor="@color/color_text_hint"
+                            android:text="@string/text_id_card_p"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    
+                    <ImageView
+                        android:id="@+id/imgIdP"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+                    
+                </RelativeLayout>
+
+
+
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="#948a8a"
-                    android:scaleType="fitXY" />
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_marginBottom="13dp"
+                            android:src="@mipmap/ic_id_card_add"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+
+                        <TextView
+                            android:textColor="@color/color_text_hint"
+                            android:text="@string/text_id_card_n"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/imgIdN"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -54,14 +110,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
                 android:layout_marginRight="15dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:background="#1b8d93"
-                    android:text=" " />
+                    android:layout_width="4dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_height="8dp"
+                    android:background="#1b8d93" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -69,7 +126,7 @@
                     android:layout_weight="1"
                     android:text="身份证正面信息"
                     android:textColor="#000"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/large_text_size" />
 
             </LinearLayout>
 
@@ -81,8 +138,8 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/shape_btn_stroke_gray"
                 android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp">
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <!--姓名-->
                 <com.cpigeon.book.widget.LineInputView
@@ -130,13 +187,14 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="7dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:background="#dfd741"
-                    android:text=" " />
+                    android:layout_width="4dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_height="8dp"
+                    android:background="#ffff8d1a" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -144,7 +202,7 @@
                     android:layout_weight="1"
                     android:text="身份证反面信息"
                     android:textColor="#000"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/large_text_size" />
 
             </LinearLayout>
 
@@ -156,8 +214,8 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/shape_btn_stroke_gray"
                 android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp">
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <!--签证机关-->
                 <com.cpigeon.book.widget.LineInputView

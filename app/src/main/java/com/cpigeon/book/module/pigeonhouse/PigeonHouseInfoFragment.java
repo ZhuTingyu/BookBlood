@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amap.api.maps.model.LatLng;
@@ -66,6 +67,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     private TextView mTvName;
     private TextView mTvAuth;
     private TextView mTvOk;
+    private ImageView mImgSex;
 
     private LineInputListLayout mLlLineInput;
     private LineInputView mLvHouseName;
@@ -107,21 +109,8 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        mPointToAddressManager = new PointToAddressManager(context)
-//                .setSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
-//                    @Override
-//                    public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
-//                        setProgressVisible(false);
-//                        if(regeocodeResult != null){
-//                            bindAddress(regeocodeResult.getRegeocodeAddress());
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
-//                        setProgressVisible(false);
-//                    }
-//                });
+
+        setTitle(R.string.title_pigeon_house_info);
 
         mIsLook = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         composite.add(RxUtils.delayed(50,aLong -> {
@@ -149,6 +138,11 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mLvCity = findViewById(R.id.lvCity);
         mLvAddress = findViewById(R.id.lvAddress);
         mTvOk = findViewById(R.id.tvOk);
+        mImgSex = findViewById(R.id.imgSex);
+
+        mTvAuth.setOnClickListener(v -> {
+            IdCertificationFragment.start(getBaseActivity(), true);
+        });
 
         bindUi(RxUtils.textChanges(mLvHouseName.getEditText()), mViewModel.setPigeonHomeName());
         bindUi(RxUtils.textChanges(mLvPhone.getEditText()), mViewModel.setPigeonHomePhone());
@@ -156,6 +150,9 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         bindUi(RxUtils.textChanges(mLvShedId.getEditText()), mViewModel.setUsePigeonHomeNum());
         bindUi(RxUtils.textChanges(mLvJoinMatchId.getEditText()), mViewModel.setPigeonMatchNum());
         bindUi(RxUtils.textChanges(mLvAddress.getEditText()), mViewModel.setPigeonHomeAdds());
+        bindUi(RxUtils.textChanges(mLvHouseLocation.getEditText()), s -> {
+            mViewModel.isCanCommit();
+        });
 
         mLvOrganize.setOnRightClickListener(lineInputView -> {
             IntentBuilder.Builder(getActivity(), SelectAssActivity.class)
@@ -226,6 +223,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLlLineInput.setOnInputViewGetFocusListener(() -> {
                 mTvOk.setVisibility(View.VISIBLE);
             });
+            setProgressVisible(true);
             mViewModel.getPigeonHouse();
             mTvOk.setText(Utils.getString(R.string.text_sure_commit));
             mTvOk.setOnClickListener(v -> {
@@ -266,10 +264,8 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         });
 
         mViewModel.mHouseEntityInfo.observe(this, r -> {
+            setProgressVisible(false);
             if (r == null) {
-                mTvAuth.setOnClickListener(v -> {
-                    IdCertificationFragment.start(getBaseActivity(), true);
-                });
                 return;
             }
             Glide.with(getBaseActivity()).load(r.getTouxiangurl()).into(mImgHead);
@@ -286,14 +282,24 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mViewModel.mLongitude = String.valueOf(r.getLongitude());
             mViewModel.mLatitude = String.valueOf(r.getLatitude());
 
-            mLvCity.setContent(r.getProvince());
-            mLvCity.setContent(r.getPigeonHomeAdds());
+            mLvCity.setContent(r.getProvince() + r.getCity() + r.getCounty());
+            mLvAddress.setContent(r.getPigeonHomeAdds());
 
 
-            mTvAuth.setText(getString(R.string.text_yet_auth));
-            mTvAuth.setOnClickListener(v -> {
-                IdCertificationFragment.start(getBaseActivity(), false);
-            });
+            if(StringUtil.isStringValid(r.getXingming())){
+                mTvAuth.setText(getString(R.string.text_yet_auth));
+                mTvAuth.setBackgroundResource(R.drawable.shape_btn_stroke_blue);
+                mTvAuth.setTextColor(Utils.getColor(R.color.colorPrimary));
+                mTvAuth.setOnClickListener(v -> {
+                    IdCertificationFragment.start(getBaseActivity(), false);
+                });
+
+                if(Utils.getString(R.string.text_male).equals(r.getXingbie())){
+                    mImgSex.setImageResource(R.mipmap.ic_male);
+                }else if(Utils.getString(R.string.text_female).equals(r.getXingbie())){
+                    mImgSex.setImageResource(R.mipmap.ic_female);
+                }
+            }
 
         });
 

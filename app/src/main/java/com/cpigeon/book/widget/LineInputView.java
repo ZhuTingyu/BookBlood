@@ -134,6 +134,8 @@ public class LineInputView extends RelativeLayout {
             }
             mImgRight.setLayoutParams(layoutParams);
             mImgRight.setImageDrawable(mDrawableRight);
+        }else {
+            mImgRight.setVisibility(GONE);
         }
 
         line_division.setVisibility(mShowLineDivision);

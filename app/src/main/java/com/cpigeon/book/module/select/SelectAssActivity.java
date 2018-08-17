@@ -61,7 +61,8 @@ public class SelectAssActivity extends BaseActivity {
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Intent intent = new Intent();
             intent.putExtra(IntentBuilder.KEY_DATA, mAdapter.getData().get(position).getISOCName());
-
+            setResult(RESULT_OK, intent);
+            finish();
         });
 
         setProgressVisible(true);

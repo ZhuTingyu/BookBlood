@@ -34,10 +34,28 @@ public class PigeonHouseEntity {
     private String xingbie;
     private String PigeonHomePhone;
     private String Province;
+    private String City;
+    private String County;
     private String Remark;
     private double Latitude;
     private String PigeonHomeAdds;
     private String PigeonHomeID;
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
+    }
+
+    public String getCounty() {
+        return County;
+    }
+
+    public void setCounty(String county) {
+        County = county;
+    }
 
     public double getLongitude() {
         return Longitude;

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.district.DistrictItem;
 import com.amap.api.services.geocoder.AoiItem;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
@@ -22,11 +23,14 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.LocationFormatUtils;
 import com.base.util.Utils;
+import com.base.util.map.DistrictSearchManager;
 import com.base.util.map.LocationLiveData;
+import com.base.util.map.NameToAddressManager;
 import com.base.util.map.PointToAddressManager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.widget.SearchTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +45,7 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
     private TextView mTvOk;
     private TextView mTvLocation;
     private PointToAddressManager mPointToAddressManager;
+    private DistrictSearchManager mDistrictSearchManager;
     RegeocodeAddress mAddress;
     RegeocodeResult mRegeocodeResult;
 
@@ -65,22 +70,7 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
                 .setSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
                     @Override
                     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
-                        if (regeocodeResult == null) {
-                            return;
-                        }
-                        mRegeocodeResult = regeocodeResult;
-                        mAddress = regeocodeResult.getRegeocodeAddress();
-
-                        List<AoiItem> aoiItems = mAddress.getAois();
-                        List<RegeocodeRoad> roudItems = mAddress.getRoads();
-
-                        if (!Lists.isEmpty(aoiItems)) {
-                            mTvLocation.setText(mAddress.getCity() + aoiItems.get(0).getAoiName());
-                        } else if (!Lists.isEmpty(roudItems)) {
-                            mTvLocation.setText(mAddress.getCity() + roudItems.get(0).getName());
-                        } else {
-                            mTvLocation.setText(mAddress.getFormatAddress());
-                        }
+                        setLocation(regeocodeResult);
                     }
 
                     @Override
@@ -88,6 +78,14 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
 
                     }
                 });
+
+        mDistrictSearchManager =  DistrictSearchManager.build(getBaseActivity()).setSearchListener(districtResult -> {
+            ArrayList<DistrictItem> data = districtResult.getDistrict();
+            if (!data.isEmpty()) {
+                LatLonPoint point = districtResult.getDistrict().get(0).getCenter();
+                amapManager.moveByLatLng(point.getLatitude(), point.getLongitude());
+            }
+        });
 
         amapManager.setMoveCenterListener();
         amapManager.mMoveEndLiveData.observe(this, latLng -> {
@@ -124,6 +122,18 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
 
         });
 
+        mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
+            @Override
+            public void search(String key) {
+                mDistrictSearchManager.keyword(key).search();
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+        });
+
         mTvOk.setOnClickListener(v -> {
             if (mRegeocodeResult == null) {
                 error(R.string.text_error_not_select_location);
@@ -135,5 +145,24 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
             getBaseActivity().setResult(Activity.RESULT_OK, intent);
             finish();
         });
+    }
+
+    private void  setLocation(RegeocodeResult regeocodeResult){
+        if (regeocodeResult == null) {
+            return;
+        }
+        mRegeocodeResult = regeocodeResult;
+        mAddress = regeocodeResult.getRegeocodeAddress();
+
+        List<AoiItem> aoiItems = mAddress.getAois();
+        List<RegeocodeRoad> roudItems = mAddress.getRoads();
+
+        if (!Lists.isEmpty(aoiItems)) {
+            mTvLocation.setText(mAddress.getCity() + aoiItems.get(0).getAoiName());
+        } else if (!Lists.isEmpty(roudItems)) {
+            mTvLocation.setText(mAddress.getCity() + roudItems.get(0).getName());
+        } else {
+            mTvLocation.setText(mAddress.getFormatAddress());
+        }
     }
 }

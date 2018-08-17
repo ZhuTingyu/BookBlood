@@ -13,7 +13,9 @@
         <attr name="simpleTitleView_DefaultTextColor" format="color"/>
         <attr name="simpleTitleView_PressTextColor" format="color"/>
         <attr name="simpleTitleView_image" format="reference|color"/>
+        <attr name="simpleTitleView_press_image" format="reference|color"/>
         <attr name="simpleTitleView_image_size" format="dimension"/>
+        <attr name="simpleTitleView_text_size" format="dimension"/>
         <attr name="simpleTitleView_text" format="string"/>
 
     </declare-styleable>

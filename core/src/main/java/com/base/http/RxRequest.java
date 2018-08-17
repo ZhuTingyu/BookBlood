@@ -5,6 +5,7 @@ import com.base.util.utility.LogUtil;
 
 import java.io.File;
 import java.io.InterruptedIOException;
+import java.net.SocketTimeoutException;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -72,7 +73,13 @@ public class RxRequest {
                     apiResponse.msg = Utils.getString(R.string.message_net_error);
                     observableEmitter.onNext(apiResponse.toJsonString());
                 }
-            } catch (InterruptedIOException e) {
+            } catch (Exception e) {
+                if(e instanceof SocketTimeoutException){
+                    ApiResponse apiResponse = new ApiResponse();
+                    apiResponse.errorCode = -1;
+                    apiResponse.msg = Utils.getString(R.string.message_net_error);
+                    observableEmitter.onNext(apiResponse.toJsonString());
+                }
                 e.printStackTrace();
             }
 

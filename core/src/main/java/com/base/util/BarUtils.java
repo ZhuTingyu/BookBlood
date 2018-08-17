@@ -96,40 +96,40 @@ public final class BarUtils {
         int flags = activity.getWindow().getAttributes().flags;
         return (flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == 0;
     }
-
-    /**
-     * Set the status bar's light mode.
-     *
-     * @param activity    The activity.
-     * @param isLightMode True to set status bar light mode, false otherwise.
-     */
-    public static void setStatusBarLightMode(@NonNull final Activity activity,
-                                             final boolean isLightMode) {
-        setStatusBarLightMode(activity.getWindow(), isLightMode);
-    }
-
-    /**
-     * Set the status bar's light mode.
-     *
-     * @param window      The window.
-     * @param isLightMode True to set status bar light mode, false otherwise.
-     */
-    public static void setStatusBarLightMode(@NonNull final Window window,
-                                             final boolean isLightMode) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decorView = window.getDecorView();
-            if (decorView != null) {
-                int vis = decorView.getSystemUiVisibility();
-                if (isLightMode) {
-                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-                } else {
-                    vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-                }
-                decorView.setSystemUiVisibility(vis);
-            }
-        }
-    }
+//
+//    /**
+//     * Set the status bar's light mode.
+//     *
+//     * @param activity    The activity.
+//     * @param isLightMode True to set status bar light mode, false otherwise.
+//     */
+//    public static void setStatusBarLightMode(@NonNull final Activity activity,
+//                                             final boolean isLightMode) {
+//        setStatusBarLightMode(activity.getWindow(), isLightMode);
+//    }
+//
+//    /**
+//     * Set the status bar's light mode.
+//     *
+//     * @param window      The window.
+//     * @param isLightMode True to set status bar light mode, false otherwise.
+//     */
+//    public static void setStatusBarLightMode(@NonNull final Window window,
+//                                             final boolean isLightMode) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            View decorView = window.getDecorView();
+//            if (decorView != null) {
+//                int vis = decorView.getSystemUiVisibility();
+//                if (isLightMode) {
+//                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//                    vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+//                } else {
+//                    vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+//                }
+//                decorView.setSystemUiVisibility(vis);
+//            }
+//        }
+//    }
 
     /**
      * Add the top margin size equals status bar's height for view.
@@ -645,22 +645,22 @@ public final class BarUtils {
         return (visibility & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
     }
 
-    public static void setStatusBarLightMode(Activity activity, int color) {
+    public static void setStatusBarLightMode(Activity activity, boolean isLight) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //判断是否为小米或魅族手机，如果是则将状态栏文字改为黑色
-            if (MIUISetStatusBarLightMode(activity, true) || FlymeSetStatusBarLightMode(activity, true)) {
+            if (MIUISetStatusBarLightMode(activity, isLight) || FlymeSetStatusBarLightMode(activity, isLight)) {
                 //设置状态栏为指定颜色
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0
-                    activity.getWindow().setStatusBarColor(color);
-                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4
-                    //调用修改状态栏颜色的方法
-                    setStatusBarColor(activity, color);
-                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0
+//                    activity.getWindow().setStatusBarColor(color);
+//                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4
+//                    //调用修改状态栏颜色的方法
+//                    setStatusBarColor(activity, color);
+//                }
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 //如果是6.0以上将状态栏文字改为黑色，并设置状态栏颜色
                 activity.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                activity.getWindow().setStatusBarColor(color);
+                //activity.getWindow().setStatusBarColor(color);
 
                 //fitsSystemWindow 为 false, 不预留系统栏位置.
                 ViewGroup mContentView = (ViewGroup) activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT);
