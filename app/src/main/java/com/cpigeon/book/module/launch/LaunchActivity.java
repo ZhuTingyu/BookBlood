@@ -95,8 +95,6 @@ public class LaunchActivity extends BaseActivity {
 
     private void enterApp() {
 
-//        PigeonHouseInfoFragment.start(this, false);
-
         if (mIsFirstOpen) {
             SharedPreferencesUtil.setBoolean(this
                     , SharedPreferencesUtil.GUIDE_FILE, IS_FIRST_OPEN, false);
@@ -113,7 +111,6 @@ public class LaunchActivity extends BaseActivity {
                 LoginActivity.start(this);
             }
         }
-        finish();
     }
 
 }

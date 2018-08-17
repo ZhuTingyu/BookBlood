@@ -32,7 +32,7 @@
     <string name="detail_feedback">ZGW_Users_Feedback_Detail</string>
 
     <!--公告通知-->
-    <string name="get_announcement_notice">TXGP_GetGongGao</string>
+    <string name="get_announcement_notice_list">TXGP_GongGao_GetList</string>
     <!--鸽友消息-->
     <string name="pigeon_friend_msg">TXGP_GetMsgList</string>
 
@@ -48,8 +48,7 @@
     <string name="launch_img">TXGP_Get_StartUpAd</string>
     <string name="get_ass_list">TXGP_PigeonISCO_GetList</string>
 
-    <!--获取足环类型-->
-    <string name="foot_type_select">TXGP_FootRingType_Select</string>
+
     <!--添加单个足环-->
     <string name="foot_add_single">TXGP_FootRing_Add</string>
     <!--修改单个足环-->
@@ -58,8 +57,6 @@
     <string name="foot_details_single">TXGP_FootRing_Select</string>
     <!--删除单个足环-->
     <string name="foot_del_single">TXGP_FootRing_Delete</string>
-    <!--足环来源-->
-    <string name="foot_source_single">TXGP_FootRingSource_Select</string>
     <!--获取各个类型的足环数-->
     <string name="foot_num_type">TXGP_FootRing_SelectType</string>
     <!--添加足环号段-->
@@ -68,14 +65,20 @@
     <string name="foot_list_all">TXGP_FootRing_SelectAll</string>
 
 
-    <!--获取鸽子性别-->
-    <string name="pigeon_sex_select">TXGP_PigeonSexType_Select</string>
-    <!--血统选择-->
-    <string name="pigeon_lineage_select">TXGP_PigeonBloodType_Select</string>
-    <!--眼砂选择-->
-    <string name="pigeon_eye_sand_select">TXGP_PigeonEyeType_Select</string>
-    <!--羽色选择-->
-    <string name="pigeon_feather_color_select">TXGP_PigeonPlumeType_Select</string>
+    <!--&lt;!&ndash;获取鸽子性别&ndash;&gt;-->
+    <!--<string name="pigeon_sex_select">TXGP_PigeonSexType_Select</string>-->
+    <!--&lt;!&ndash;血统选择&ndash;&gt;-->
+    <!--<string name="pigeon_lineage_select">TXGP_PigeonBloodType_Select</string>-->
+    <!--&lt;!&ndash;眼砂选择&ndash;&gt;-->
+    <!--<string name="pigeon_eye_sand_select">TXGP_PigeonEyeType_Select</string>-->
+    <!--&lt;!&ndash;羽色选择&ndash;&gt;-->
+    <!--<string name="pigeon_feather_color_select">TXGP_PigeonPlumeType_Select</string>-->
+    <!--&lt;!&ndash;种鸽来源&ndash;&gt;-->
+    <!--<string name="pigeon_select_source">TXGP_PigeonSource_Select</string>-->
+    <!--&lt;!&ndash;足环来源&ndash;&gt;-->
+    <!--<string name="foot_source_single">TXGP_FootRingSource_Select</string>-->
+    <!--&lt;!&ndash;获取足环类型&ndash;&gt;-->
+    <!--<string name="foot_type_select">TXGP_FootRingType_Select</string>-->
 
     <!--获取种鸽详细-->
     <string name="pigeon_breed_details">TXGP_Pigeon_GetInfo</string>
@@ -83,8 +86,8 @@
     <string name="pigeon_breed_add">TXGP_Pigeon_Add</string>
 
 
-    <!--种鸽来源-->
-    <string name="pigeon_select_source">TXGP_PigeonSource_Select</string>
+    <!--足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别-->
+    <string name="pigeon_select_all_type">TXGP_Type_Select</string>
 
     <string name="set_pigeon_house">TXGP_PigeonHome_AddEdit</string>
     <string name="get_pigeon_house">TXGP_PigeonHome_GetInfo</string>

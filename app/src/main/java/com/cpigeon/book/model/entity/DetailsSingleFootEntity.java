@@ -5,4 +5,6 @@ package com.cpigeon.book.model.entity;
  */
 
 public class DetailsSingleFootEntity {
+
+
 }

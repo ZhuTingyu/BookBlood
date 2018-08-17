@@ -73,9 +73,9 @@ public class FootAdminHomeFragment extends BaseBookFragment {
         initViewModels(mFootAdminModel);
 
         bindUi(RxUtils.textChanges(et1), mFootAdminModel.setAddFootNum());
-        bindUi(RxUtils.textChanges(et3), mFootAdminModel.setEditFootId());
-        bindUi(RxUtils.textChanges(et4), mFootAdminModel.setDelFootId());
-        bindUi(RxUtils.textChanges(et6), mFootAdminModel.setDetailsFootId());
+//        bindUi(RxUtils.textChanges(et3), mFootAdminModel.setEditFootId());
+//        bindUi(RxUtils.textChanges(et4), mFootAdminModel.setDelFootId());
+//        bindUi(RxUtils.textChanges(et6), mFootAdminModel.setDetailsFootId());
 
 
         bindUi(RxUtils.textChanges(et8), mFootAdminModel.setSegmentStartFoot());
@@ -91,8 +91,7 @@ public class FootAdminHomeFragment extends BaseBookFragment {
                 Log.d(TAG, "onViewClicked: a");
                 ToastUtils.showLong(getActivity(), "添加足环1");
 
-
-                AddSingleFootFragment.start(getActivity());
+                FootAdminAddSingleFragment.start(getActivity());
                 break;
             case R.id.btn2:
                 //
@@ -101,12 +100,12 @@ public class FootAdminHomeFragment extends BaseBookFragment {
             case R.id.btn3:
                 //修改足环
                 Log.d(TAG, "onViewClicked: c");
-                mFootAdminModel.getTXGP_FootRing_EditData();
+                mFootAdminModel.getTXGP_FootRing_EditData(String.valueOf(16));
                 break;
             case R.id.btn4:
                 //删除足环
                 Log.d(TAG, "onViewClicked: d");
-                mFootAdminModel.getTXGP_FootRing_DeleteData();
+
                 break;
             case R.id.btn5:
                 //
@@ -115,7 +114,7 @@ public class FootAdminHomeFragment extends BaseBookFragment {
             case R.id.btn6:
                 //获取单个足环详细
                 Log.d(TAG, "onViewClicked: f");
-                mFootAdminModel.getTXGP_FootRing_SelectData();
+                mFootAdminModel.getTXGP_FootRing_SelectData(String.valueOf(16));
                 break;
             case R.id.btn7:
                 //

@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.cpigeon.book.R;
 
 /**
- * 输入框
+ * hl 输入框
  * Created by Administrator on 2018/8/10.
  */
 
@@ -111,4 +111,8 @@ public class InputBoxView extends LinearLayout {
         input_box_editText.setText(textStr);
     }
 
+
+    public EditText getEditText(){
+        return input_box_editText;
+    }
 }
