@@ -13,10 +13,13 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:textSize="@dimen/medium_text_size"
+        android:maxLines="1"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         tools:text="1231312"
+        android:imeOptions="actionSearch"
         android:background="@drawable/shape_bg_search_edit"
         android:drawableLeft="@drawable/svg_search"
         />

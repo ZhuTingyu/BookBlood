@@ -75,7 +75,13 @@
             android:name=".module.login.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".module.select.SelectAssActivity" />
+        <activity
+            android:name=".module.select.SelectAssFragment"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".base.SearchFragmentParentActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".module.select.SearchAssActivity" />
 
 
         <!--单点登录-->

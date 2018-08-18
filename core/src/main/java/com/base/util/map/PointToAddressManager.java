@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.ContextThemeWrapper;
 
 import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.GeocodeQuery;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 
@@ -13,8 +14,9 @@ import com.amap.api.services.geocoder.RegeocodeQuery;
 
 public class PointToAddressManager {
 
-    GeocodeSearch geocoderSearch;
     RegeocodeQuery query;
+    GeocodeSearch geocoderSearch;
+    GeocodeQuery mGeocodeQuery;
 
     public PointToAddressManager(Context context){
         geocoderSearch = new GeocodeSearch(context);
@@ -26,6 +28,8 @@ public class PointToAddressManager {
         query = new RegeocodeQuery(latLonPoint, 50,GeocodeSearch.AMAP);
         return this;
     }
+
+
 
     public PointToAddressManager setSearchListener(GeocodeSearch.OnGeocodeSearchListener listener){
         geocoderSearch.setOnGeocodeSearchListener(listener);

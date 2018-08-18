@@ -66,12 +66,36 @@
     <string name="text_indate">有效期</string>
     <string name="get_user_id_card">ZGW_Users_GetID</string>
     <string name="text_yet_auth">已认证</string>
-    <string name="title_id_card">身份证</string>
+    <string name="title_id_card">身份证认证</string>
     <string name="text_foot_manger">足环管理</string>
     <string name="text_breed_pigeon_manger">中鸽管理</string>
     <string name="text_train_record">训鸽记录</string>
     <string name="text_match_pigeon_manger">赛鸽管理</string>
     <string name="text_feed_pigeon_record">养鸽记录</string>
     <string name="text_ai_pigeon_house">智能鸽舍</string>
+    <string name="text_skip">跳过</string>
+    <string name="text_launch_sikp">跳过 %d</string>
+    <string name="text_blood_book_made">血统书制作</string>
+    <string name="text_match_pigeon_analyse">赛鸽分析</string>
+    <string name="text_blood_find">血统寻根</string>
+    <string name="text_breed_info">繁育信息</string>
+    <string name="text_pigeon_match_info">信鸽赛绩</string>
+    <string name="text_pigeon_photo">信鸽相册</string>
+    <string name="text_home">首页</string>
+    <string name="text_good_pigeon">铭鸽库</string>
+    <string name="text_trading_hall">交易厅</string>
+    <string name="text_share_hall">共享厅</string>
+    <string name="title_pigeon_house_info">鸽舍信息</string>
+    <string name="text_male">男</string>
+    <string name="text_female">女</string>
+    <string name="text_id_card_p">身份证正面</string>
+    <string name="text_id_card_n">身份证背面</string>
+    <string name="text_food_number_input">足环录入</string>
+    <string name="text_match_pigeon_train">赛鸽路训</string>
+    <string name="text_breed_pigeon_input">种鸽录入</string>
+    <string name="text_pigeon_take_photo">爱鸽拍照</string>
+    <string name="text_match_pigeon_input">赛鸽录入</string>
+    <string name="text_match_pigeon_tool">赛鸽工具</string>
+    <string name="text_search_ass">点击搜索协会</string>
 
 </resources>

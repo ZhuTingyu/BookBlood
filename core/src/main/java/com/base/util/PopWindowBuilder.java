@@ -59,8 +59,9 @@ public class PopWindowBuilder {
         return this;
     }
 
-    public void showAsDropDown(View view, int xoff, int yoff, int gravity) {
+    public PopupWindow showAsDropDown(View view, int xoff, int yoff, int gravity) {
         mPopupWindow.showAsDropDown(view, xoff, yoff, gravity);
+        return this.mPopupWindow;
     }
 
     public void showAsDropDown(View view){
@@ -71,8 +72,9 @@ public class PopWindowBuilder {
         mPopupWindow.showAsDropDown(view, xoff, yoff);
     }
 
-    public void showAtLocation(View parent, int xoff, int yoff, int gravity){
+    public PopupWindow showAtLocation(View parent, int xoff, int yoff, int gravity){
         mPopupWindow.showAtLocation(parent, xoff, yoff, gravity);
+        return this.mPopupWindow;
     }
 
 }

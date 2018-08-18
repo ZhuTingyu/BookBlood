@@ -9,12 +9,14 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 
@@ -28,13 +30,13 @@ public class SimpleTitleView extends LinearLayout{
 
     int normalTextColor;
     int pressTextColor;
-    int normalImage;
-    int pressImage;
     String text;
 
+    Drawable pressImage;
     Drawable image;
 
     int imageSize;
+    float textSize;
 
 
     public SimpleTitleView(Context context) {
@@ -56,10 +58,14 @@ public class SimpleTitleView extends LinearLayout{
             return;
         }
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.SimpleTitleView);
-        normalTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_DefaultTextColor, Color.BLACK);
+        normalTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_DefaultTextColor
+                , Utils.getColor(R.color.color_text_hint));
         pressTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_PressTextColor, Color.BLACK);
         image = array.getDrawable(R.styleable.SimpleTitleView_simpleTitleView_image);
-        imageSize = array.getDimensionPixelSize(R.styleable.SimpleTitleView_simpleTitleView_image_size, 24);
+        pressImage = array.getDrawable(R.styleable.SimpleTitleView_simpleTitleView_press_image);
+        imageSize = array.getDimensionPixelSize(R.styleable.SimpleTitleView_simpleTitleView_image_size, ScreenTool.dip2px(24));
+        textSize = array.getDimensionPixelSize(R.styleable.SimpleTitleView_simpleTitleView_text_size
+                , ScreenTool.dip2px(13));
         text = array.getString(R.styleable.SimpleTitleView_simpleTitleView_text);
 
     }
@@ -71,6 +77,7 @@ public class SimpleTitleView extends LinearLayout{
 
         titleText.setTextColor(normalTextColor);
         titleText.setText(text);
+        titleText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
 
         titleImg.setImageDrawable(image);
         LayoutParams params = new LayoutParams(imageSize, imageSize);
@@ -78,17 +85,17 @@ public class SimpleTitleView extends LinearLayout{
 
     }
 
-    public void setImages(@DrawableRes int normalImage, @DrawableRes int pressImage){
+    /*public void setImages(@DrawableRes int normalImage, @DrawableRes int pressImage){
         this.normalImage = normalImage;
         this.pressImage = pressImage;
-    }
+    }*/
 
     public void setPress(boolean isPress){
         if(isPress){
-            titleImg.setImageResource(pressImage);
+            titleImg.setImageDrawable(pressImage);
             titleText.setTextColor(pressTextColor);
         }else {
-            titleImg.setImageResource(normalImage);
+            titleImg.setImageDrawable(image);
             titleText.setTextColor(normalTextColor);
         }
     }

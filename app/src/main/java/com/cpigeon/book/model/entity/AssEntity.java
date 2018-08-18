@@ -1,6 +1,5 @@
 package com.cpigeon.book.model.entity;
 
-import com.base.base.pinyin.LetterSortModel;
 import com.base.entity.LetterSortEntity;
 
 /**

@@ -10,6 +10,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.base.base.BaseActivity;
@@ -50,6 +52,8 @@ public class MainActivity extends BaseActivity {
     private RelativeLayout menuLayoutLeft;
 
     LoginViewModel mViewModel;
+
+    private PopupWindow mPopupWindow;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder(activity, MainActivity.class)
@@ -92,10 +96,10 @@ public class MainActivity extends BaseActivity {
         bottomAddTabView.switchTab(0);
 
         bottomAddTabView.setAddClickListener(() -> {
-            PopWindowBuilder.builder(this)
+            mPopupWindow = PopWindowBuilder.builder(this)
                     .setSize(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
                     .setView(initPopView())
-                    .setBackgroundColor(R.color.white)
+                    .setBackgroundColor(R.color.main_home_pop_bg)
                     .setAnimationStyle(R.style.bottom_out_in_anim)
                     .showAtLocation(rootView, 0, 0, Gravity.CENTER);
 
@@ -152,6 +156,12 @@ public class MainActivity extends BaseActivity {
             SimpleTitleView simpleTitleView = view.findViewById(ids.get(i));
             views.add(simpleTitleView);
         }
+
+        ImageView close = view.findViewById(R.id.imgClose);
+        close.setOnClickListener(v -> {
+            mPopupWindow.dismiss();
+        });
+
         spring = new SpringForce(0)
                 .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
                 .setStiffness(SpringForce.STIFFNESS_MEDIUM);

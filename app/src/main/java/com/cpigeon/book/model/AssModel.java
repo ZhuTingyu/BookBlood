@@ -15,11 +15,12 @@ import io.reactivex.Observable;
  */
 
 public class AssModel {
-    public static Observable<ApiResponse<List<AssEntity>>> getAssList() {
+    public static Observable<ApiResponse<List<AssEntity>>> getAssList(String key) {
         return RequestData.<ApiResponse<List<AssEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<AssEntity>>>() {
                 }.getType())
                 .url(R.string.get_ass_list)
+                .addBody("key", key)
                 .request();
     }
 }

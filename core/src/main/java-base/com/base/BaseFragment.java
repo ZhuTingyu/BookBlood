@@ -215,7 +215,6 @@ public abstract class BaseFragment extends Fragment {
         }
         if (stateBar != null) {
             stateBar.setBackgroundColor(Utils.getColor(resId));
-            BarUtils.setStatusBarLightMode(getBaseActivity(), Utils.getColor(resId));
         }
     }
 

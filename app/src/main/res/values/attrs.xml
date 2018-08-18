@@ -13,7 +13,9 @@
         <attr name="simpleTitleView_DefaultTextColor" format="color"/>
         <attr name="simpleTitleView_PressTextColor" format="color"/>
         <attr name="simpleTitleView_image" format="reference|color"/>
+        <attr name="simpleTitleView_press_image" format="reference|color"/>
         <attr name="simpleTitleView_image_size" format="dimension"/>
+        <attr name="simpleTitleView_text_size" format="dimension"/>
         <attr name="simpleTitleView_text" format="string"/>
 
     </declare-styleable>
@@ -32,6 +34,11 @@
         <attr name="lineInputView_IsCanEdit" format="boolean" />
         <attr name="lineInputView_Hint" format="string" />
         <attr name="lineInputView_IsLeft" format="boolean" />
+        <attr name="lineInputView_isShowRightImage">
+            <flag name="gone" value="0x00000008" />
+            <flag name="visible" value="0x00000000" />
+            <flag name="invisible" value="0x00000004" />
+        </attr>
         <attr name="lineInputView_isShowLineDivisions">
             <flag name="gone" value="0x00000008" />
             <flag name="visible" value="0x00000000" />

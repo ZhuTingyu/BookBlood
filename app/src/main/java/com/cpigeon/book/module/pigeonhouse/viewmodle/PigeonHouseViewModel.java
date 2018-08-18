@@ -76,60 +76,48 @@ public class PigeonHouseViewModel extends BaseViewModel {
     public Consumer<String> setPigeonHomeName() {
         return s -> {
             mPigeonHomeName = s;
-            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
+            isCanCommit();
         };
     }
 
     public Consumer<String> setUsePigeonHomeNum() {
         return s -> {
             mUsePigeonHomeNum = s;
-            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
+            isCanCommit();
         };
     }
 
     public Consumer<String> setPigeonHomePhone() {
         return s -> {
             mPigeonHomePhone = s;
-            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
+            isCanCommit();
         };
     }
 
-    public Consumer<String> setLatitude() {
-        return s -> {
-            mLatitude = s;
-        };
-    }
-
-    public Consumer<String> setLongitude() {
-        return s -> {
-            mLongitude = s;
-        };
-    }
-
-    public Consumer<String> setProvince() {
-        return s -> {
-            mProvince = s;
-        };
-    }
 
     public Consumer<String> setPigeonISOCID() {
         return s -> {
             mPigeonISOCID = s;
-            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
+            isCanCommit();
         };
     }
 
     public Consumer<String> setPigeonHomeAdds() {
         return s -> {
             mPigeonHomeAdds = s;
-            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
+            isCanCommit();
         };
     }
 
     public Consumer<String> setPigeonMatchNum() {
         return s -> {
             mPigeonMatchNum = s;
-            isCanCommit(mPigeonHomePhone, mLatitude, mPigeonMatchNum);
+            isCanCommit();
         };
+    }
+
+    public void isCanCommit(){
+        isCanCommit(mPigeonHomePhone, mLatitude, mUsePigeonHomeNum);
+
     }
 }

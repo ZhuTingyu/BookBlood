@@ -10,13 +10,13 @@ import com.cpigeon.book.R;
  * Created by Zhu TingYu on 2018/8/9.
  */
 
-public class TextViewUtis {
+public class TextViewUtil {
     public static void setEnabled(TextView textView, boolean isEnabled){
         textView.setEnabled(isEnabled);
         if(isEnabled){
-            textView.setTextColor(Color.WHITE);
+            textView.setTextColor(Utils.getColor(R.color.color_text_can_click));
         }else {
-            textView.setTextColor(Utils.getColor(R.color.color_text_not_can_click));
+            textView.setTextColor(Color.WHITE);
         }
     }
 }

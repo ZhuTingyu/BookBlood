@@ -43,8 +43,10 @@ public class LineInputView extends RelativeLayout {
     boolean mIsNotNull;
     boolean mIsCanEdit;
     boolean mIsLeft;
+
     int mShowLineDivision;//是否显示分割线
     int mInputType;
+    int mRightImageVisible;
 
 
     TextView mTextView;
@@ -96,6 +98,7 @@ public class LineInputView extends RelativeLayout {
 
 
         mShowLineDivision = array.getInt(R.styleable.LineInputView_lineInputView_isShowLineDivisions, View.VISIBLE);
+        mRightImageVisible = array.getInt(R.styleable.LineInputView_lineInputView_isShowRightImage, View.VISIBLE);
 
 
     }
@@ -137,7 +140,7 @@ public class LineInputView extends RelativeLayout {
         }
 
         line_division.setVisibility(mShowLineDivision);
-
+        mImgRight.setVisibility(mRightImageVisible);
 
         setCanEdit(mIsCanEdit);
     }
@@ -177,7 +180,7 @@ public class LineInputView extends RelativeLayout {
                 mOnRightClickListener.click(this);
             });
         } else {
-            mLlContent.setOnClickListener(v -> {
+            this.setOnClickListener(v -> {
                 mOnRightClickListener.click(this);
             });
         }

@@ -31,12 +31,14 @@ public class ClickGetFocusEditText extends AppCompatEditText {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        if(mOnClickAndHaveFocusListener != null){
+            mOnClickAndHaveFocusListener.clickAndFocus();
+        }
+
         if(isCanEdit){
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 setFocusableInTouchMode(true);
-                if(mOnClickAndHaveFocusListener != null){
-                    mOnClickAndHaveFocusListener.clickAndFocus();
-                }
             }
             return super.onTouchEvent(event);
         }else {

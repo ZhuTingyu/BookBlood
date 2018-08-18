@@ -111,7 +111,7 @@ public class UserModel {
     }
 
     public synchronized void setUserHeadUrl(String headUrl){
-        if(StringUtil.isStringValid(headUrl)){
+        if(!StringUtil.isStringValid(headUrl)){
             return;
         }
         userEntity.touxiangurl = headUrl;
