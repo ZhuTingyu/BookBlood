@@ -78,13 +78,13 @@ public class DialogUtils {
      * @param rightListener
      */
 
-    public static SweetAlertDialog createDialogWithLeft2(Context context, String content,
+    public static SweetAlertDialog createDialogWithLeft2(Context context, String content,boolean  isCancelable,
                                             SweetAlertDialog.OnSweetClickListener leftListener,
                                             SweetAlertDialog.OnSweetClickListener rightListener) {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
         dialogPrompt.setCanceledOnTouchOutside(false);
-        dialogPrompt.setCancelable(true);
+        dialogPrompt.setCancelable(isCancelable);
         dialogPrompt.setTitleText("提示")
                 .setCancelText("取消")
                 .setCancelClickListener(leftListener)

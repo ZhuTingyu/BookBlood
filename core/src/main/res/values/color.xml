@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--app主题颜色-->
+    <color name="colorAppPrimary">#0080FF</color>
+
+
     <color name="colorPrimary">@color/gray_m</color>
     <color name="colorPrimaryDark">@color/gray_m</color>
     <color name="colorAccent">@color/gray_m</color>

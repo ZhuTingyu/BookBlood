@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_home_pop_bg"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/spacing_left_reight"
+    android:paddingRight="@dimen/spacing_left_reight">
+
+
+    <!--反馈内容-->
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="反馈内容" />
+
+
+    <!--联系方式-->
+    <EditText
+        android:id="@+id/et_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="联系方式" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/btn_addFile"
+        android:layout_marginTop="15dp"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:background="@color/black">
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/btn_submit"
+        style="@style/bottom_style"
+        android:layout_marginTop="50dp"
+        android:text="@string/text_commit" />
+
+
+</LinearLayout>

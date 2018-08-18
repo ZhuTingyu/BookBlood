@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Animation.Popup" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
@@ -50,6 +51,8 @@
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/btn_base_rect_selector</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">match_parent</item>
     </style>
 
     <style name="bottom_style_cancel">

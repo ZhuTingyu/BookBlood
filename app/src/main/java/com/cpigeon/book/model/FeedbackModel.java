@@ -4,7 +4,6 @@ import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.FeedbackListEntity;
-import com.cpigeon.book.model.entity.LogbookEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -43,13 +42,13 @@ public class FeedbackModel {
 
 
     //hl 意见反馈添加提交
-    public static Observable<ApiResponse<List<FeedbackListEntity>>> getZGW_Users_Feedback_Add(int pi, int ps) {
+    public static Observable<ApiResponse<List<FeedbackListEntity>>> getZGW_Users_Feedback_Add(String content, String contact) {
         return RequestData.<ApiResponse<List<FeedbackListEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<FeedbackListEntity>>>() {
                 }.getType())
                 .url(R.string.submit_feedback)
-                .addBody("pi", String.valueOf(pi))
-                .addBody("ps", String.valueOf(ps))
+                .addBody("content", content)
+                .addBody("contact", contact)
                 .request();
     }
 

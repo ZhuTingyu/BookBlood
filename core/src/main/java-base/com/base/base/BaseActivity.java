@@ -120,11 +120,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
     }
 
-    public void setToolbarColor(@ColorRes int resId){
-        if(toolbar != null){
+    public void setToolbarColor(@ColorRes int resId) {
+        if (toolbar != null) {
             toolbar.setBackgroundColor(Utils.getColor(resId));
         }
-        if(stateBar != null){
+        if (stateBar != null) {
             stateBar.setBackgroundColor(Utils.getColor(resId));
             BarUtils.setStatusBarLightMode(baseActivity, true);
         }
@@ -223,8 +223,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void setImageTitle(){
-        if(imgTitle != null){
+    public void setImageTitle() {
+        if (imgTitle != null) {
             imgTitle.setVisibility(View.VISIBLE);
         }
     }

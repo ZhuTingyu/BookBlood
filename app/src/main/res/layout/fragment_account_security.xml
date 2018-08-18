@@ -4,15 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/spacing_left_reight"
-    android:paddingRight="@dimen/spacing_left_reight"
-    android:orientation="vertical">
+    android:paddingRight="@dimen/spacing_left_reight">
 
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/modify_log_psd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLeft="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="修改登录密码" />
@@ -21,8 +22,10 @@
         android:id="@+id/modify_play_psd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLeft="true"
         app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="修改支付密码" />
+        app:lineInputView_LeftString="修改支付密码"
+        app:lineInputView_isShowLineDivisions="gone" />
 
 </LinearLayout>

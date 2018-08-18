@@ -26,7 +26,6 @@ import butterknife.OnClick;
 
 public class FootAdminAddSingleFragment extends BaseBookFragment {
 
-
     @BindView(R.id.lv_city)
     LineInputView lvCity;
     @BindView(R.id.lv_foot)

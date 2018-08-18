@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,6 +34,14 @@ public class FeedbackListFragment extends BaseBookFragment {
                 .startParentActivity(activity, FeedbackListFragment.class);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mViewModel = new FeedbackViewModel();
+        initViewModel(mViewModel);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,20 +54,6 @@ public class FeedbackListFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = findViewById(R.id.list);
-
-        mViewModel = new FeedbackViewModel();
-        initViewModel(mViewModel);
-
-        mViewModel.feedbackListData.observe(this, logbookEntities -> {
-
-            if (logbookEntities.isEmpty()) {
-                mAdapter.setLoadMore(true);
-            } else {
-                mAdapter.setLoadMore(false);
-                mAdapter.addData(logbookEntities);
-            }
-        });
-
 
         mAdapter = new FeedbackAdapter(null);
 
@@ -75,5 +70,31 @@ public class FeedbackListFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
 
         mViewModel.getZGW_Users_Feedback_ListData();
+
+
+        setTitle("意见反馈");
+
+        setToolbarRight("反馈", item -> {
+            FeedbackAddFragment.start(getActivity());
+            return true;
+        });
+    }
+
+    @Override
+    protected void initObserve() {
+        mViewModel.feedbackListData.observe(this, logbookEntities -> {
+            mRecyclerView.setRefreshing(false);
+            if (logbookEntities.isEmpty()) {
+                mAdapter.setLoadMore(true);
+                mAdapter.setEmptyView();
+            } else {
+                mAdapter.setLoadMore(false);
+                mAdapter.addData(logbookEntities);
+            }
+        });
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
     }
 }

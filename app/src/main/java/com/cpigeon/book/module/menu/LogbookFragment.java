@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home;
+package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
 import android.os.Bundle;

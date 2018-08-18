@@ -167,7 +167,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
                 if (Utils.getString(R.string.text_open_gallery).equals(way)) {
                     PictureSelectUtil.showChooseHeadImage(getBaseActivity());
                 } else if (Utils.getString(R.string.text_open_camera).equals(way)) {
-                    PictureSelectUtil.openCamera(getBaseActivity());
+                    PictureSelectUtil.openCamera(getBaseActivity(), true);
                 }
             });
         });

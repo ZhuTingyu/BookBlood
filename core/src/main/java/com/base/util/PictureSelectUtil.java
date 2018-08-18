@@ -1,21 +1,16 @@
 package com.base.util;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
 import com.base.base.ShowImageActivity;
-import com.luck.picture.lib.PictureExternalPreviewActivity;
 import com.luck.picture.lib.PictureSelectionModel;
 import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.compress.Luban;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.tools.PictureFileUtils;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -98,13 +93,13 @@ public class PictureSelectUtil {
     }
 
 
-    public static void openCamera(Activity activity) {
+    public static void openCamera(Activity activity,boolean isCrop) {
         // 进入相机 以下是例子：不需要的api可以不写
         PictureSelector.create(activity)
                 .openCamera(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()
                 .maxSelectNum(1)// 最大图片选择数量
                 .minSelectNum(1)// 最小选择数量
-                .enableCrop(true)// 是否裁剪 true or false
+                .enableCrop(isCrop)// 是否裁剪 true or false
                 .withAspectRatio(1, 1)// int 裁剪比例 如 16:9 3:2 3:4 1:1 可自定义
                 .imageSpanCount(4)// 每行显示个数
                 .previewImage(true)// 是否可预览图片

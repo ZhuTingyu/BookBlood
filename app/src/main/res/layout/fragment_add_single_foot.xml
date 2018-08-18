@@ -16,7 +16,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="国家"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_foot"
@@ -26,7 +26,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="足环"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_category"
@@ -36,7 +36,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="类别"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_source"
@@ -46,17 +46,17 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="来源"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lineInputView_IsCanEdit="true"
+        app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="金额"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
 
     <com.cpigeon.book.widget.LineInputView
@@ -75,12 +75,12 @@
 
 
     <TextView
-        android:layout_marginTop="50dp"
         android:id="@+id/tvOk"
         style="@style/bottom_style"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="50dp"
         android:text="@string/text_commit" />
 
 

@@ -78,7 +78,7 @@ public class SingleLoginService extends Service {
                         Log.d("xiaohls", "onHandleIntent: 2 --->" + o);
                         if (!o.isEmpty()) {
                             if (dialogPrompt == null || !dialogPrompt.isShowing()) {
-                                dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o, dialog1 -> {
+                                dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o, true,dialog1 -> {
                                     //结束所有页面
                                     UserModel.getInstance().cleanUserInfo();
 

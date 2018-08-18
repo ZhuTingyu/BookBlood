@@ -20,7 +20,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.base.base.BaseActivity;
 import com.base.base.BaseViewModel;
 import com.base.http.R;
@@ -28,10 +27,11 @@ import com.base.util.BarUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
+import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -87,7 +87,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void initViewModel(BaseViewModel viewModel) {
-        this.viewModels.add(viewModel) ;
+        this.viewModels.add(viewModel);
         viewModel.setBaseActivity(getBaseActivity());
         viewModel.getError().observe(this, restErrorInfo -> {
             if (restErrorInfo != null) {
@@ -103,6 +103,29 @@ public abstract class BaseFragment extends Fragment {
             viewModel.getError().observe(this, restErrorInfo -> {
                 if (restErrorInfo != null) {
                     error(restErrorInfo.code, restErrorInfo.message);
+                }
+            });
+
+
+            viewModel.getHintClosePage().observe(this, restHintInfo -> {
+                if (restHintInfo != null) {
+                    setProgressVisible(false);
+
+                    if (!StringUtil.isStringValid(restHintInfo.message)) {
+                        return;
+                    }
+
+                    //保证界面只有一个错误提示
+                    if (baseActivity.errorDialog == null || !baseActivity.errorDialog.isShowing()) {
+                        baseActivity.errorDialog = DialogUtils.createSuccessDialog(baseActivity, restHintInfo.message, restHintInfo.cancelable, sweetAlertDialog -> {
+                            sweetAlertDialog.dismiss();
+
+                            if (restHintInfo.isClosePage) {
+                                getActivity().finish();
+                            }
+                        });
+                    }
+
                 }
             });
         }
@@ -131,7 +154,7 @@ public abstract class BaseFragment extends Fragment {
             });
         }
 
-        if(stateBar == null){
+        if (stateBar == null) {
             stateBar = getActivity().findViewById(R.id.stateBar);
         }
 
@@ -140,7 +163,7 @@ public abstract class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    protected void initObserve(){
+    protected void initObserve() {
 
     }
 
@@ -186,18 +209,18 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-    protected void setToolbarColor(@ColorRes int resId){
-        if(toolbar != null){
+    protected void setToolbarColor(@ColorRes int resId) {
+        if (toolbar != null) {
             toolbar.setBackgroundColor(Utils.getColor(resId));
         }
-        if(stateBar != null){
+        if (stateBar != null) {
             stateBar.setBackgroundColor(Utils.getColor(resId));
             BarUtils.setStatusBarLightMode(getBaseActivity(), Utils.getColor(resId));
         }
     }
 
-    public void setImageTitle(){
-        if(imgTitle != null){
+    public void setImageTitle() {
+        if (imgTitle != null) {
             imgTitle.setVisibility(View.VISIBLE);
         }
     }

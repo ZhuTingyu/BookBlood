@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home;
+package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,22 +13,22 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 
 /**
- * hl 推送设置
+ * hl  账户安全
  * Created by Administrator on 2018/8/8.
  */
 
-public class PushSetFragment extends BaseBookFragment {
+public class AccountSecurityFragment extends BaseBookFragment {
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, PushSetFragment.class);
+                .startParentActivity(activity, AccountSecurityFragment.class);
     }
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_push_set, container, false);
+        View view = inflater.inflate(R.layout.fragment_account_security, container, false);
         return view;
     }
+
 }

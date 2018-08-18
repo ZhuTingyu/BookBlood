@@ -115,7 +115,7 @@ public class LoginFragment extends BaseBookFragment {
             mSingleLoginViewModel.getSingleLogin(o -> {
                 if (!o.isEmpty()) {
                     if (dialogPrompt == null || !dialogPrompt.isShowing()) {
-                        dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o, dialog1 -> {
+                        dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o,true, dialog1 -> {
                             dialog1.dismiss();
                         }, dialog2 -> {
                             dialog2.dismiss();

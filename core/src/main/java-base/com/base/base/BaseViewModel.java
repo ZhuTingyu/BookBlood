@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.base.BaseFragment;
 import com.base.entity.RestErrorInfo;
+import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
 import com.base.http.R;
 import com.base.util.Lists;
@@ -36,10 +37,12 @@ public class BaseViewModel extends ViewModel {
     private Object baseActivity;
     protected final CompositeDisposable subscription = new CompositeDisposable();
     protected MutableLiveData<RestErrorInfo> error = new MutableLiveData<>();
-    protected MutableLiveData<String> listEmptyMessage = new MutableLiveData<>();
+    public MutableLiveData<String> listEmptyMessage = new MutableLiveData<>();
     public MutableLiveData<String> normalResult = new MutableLiveData<>();
     public MutableLiveData<Boolean> isCanCommit = new MutableLiveData<>();
 
+    //                showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).build());
+    public MutableLiveData<RestHintInfo> showHintClosePage = new MutableLiveData<>();//弹出成功提示框
 
     public BaseViewModel() {
     }
@@ -68,6 +71,11 @@ public class BaseViewModel extends ViewModel {
 
     public LiveData<RestErrorInfo> getError() {
         return error;
+    }
+
+
+    public LiveData<RestHintInfo> getHintClosePage() {
+        return showHintClosePage;
     }
 
     public <T> void submitRequest(Observable<T> observable, final Consumer<? super T> onNext, final Consumer<Throwable> onError, final Action onComplete) {
@@ -210,6 +218,12 @@ public class BaseViewModel extends ViewModel {
         error.setValue(getErrorString(resId));
     }
 
+
+    protected void hintDialog(String resId) {
+        showHintClosePage.setValue(new RestHintInfo.Builder().message(resId).build());
+    }
+
+
     protected void setListEmptyMessage(String message) {
         listEmptyMessage.setValue(message);
     }
@@ -218,10 +232,10 @@ public class BaseViewModel extends ViewModel {
         return listEmptyMessage;
     }
 
-    public void isCanCommit(String... strings){
+    public void isCanCommit(String... strings) {
         List<String> list = Lists.newArrayList(strings);
         for (String s : list) {
-            if(!StringUtil.isStringValid(s)){
+            if (!StringUtil.isStringValid(s)) {
                 isCanCommit.setValue(false);
                 return;
             }

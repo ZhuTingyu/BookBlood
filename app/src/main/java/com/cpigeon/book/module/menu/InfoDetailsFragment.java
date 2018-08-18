@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home;
+package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,11 +11,7 @@ import android.view.ViewGroup;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.menu.SignFragment;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
-import com.cpigeon.book.module.menu.AnnouncementNoticeFragment;
-import com.cpigeon.book.module.menu.FeedbackListFragment;
-import com.cpigeon.book.module.menu.PigeonFriendMsgFragment;
 
 import butterknife.OnClick;
 
@@ -36,6 +32,13 @@ public class InfoDetailsFragment extends BaseBookFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info_details, container, false);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        setTitle("我的");
     }
 
     @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting,

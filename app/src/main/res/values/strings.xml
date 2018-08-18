@@ -46,8 +46,8 @@
     <string name="text_error_not_select_location">选择地址异常，请检查网络</string>
     <string name="title_map_location">地图定位</string>
     <string-array name="array_choose_photo">
-        <item>@string/text_open_gallery</item>
         <item>@string/text_open_camera</item>
+        <item>@string/text_open_gallery</item>
     </string-array>
 
 

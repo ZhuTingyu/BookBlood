@@ -34,18 +34,19 @@ public class FootAdminModel {
     }
 
     //hl 修改足环（单个）
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Edit(String footId, String foot, String money, String footType, String footState, String footSource, String remark) {
+    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Edit(String footId, String codeid, String foot, String money, String footType, String footState, String footSource, String remark) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.foot_edit_single)
                 .addBody("footid", footId)//足环id
+                .addBody("codeid", codeid)//足环id
                 .addBody("numstr", foot)//足环号码
                 .addBody("money", money)//足环金额
                 .addBody("typeid", footType)// 足环类型
                 .addBody("state", footState)// 足环状态
                 .addBody("source", footSource)// 足环来源
-                .addBody("reamrk", remark)// 备注
+                .addBody("remark", remark)// 备注
                 .request();
     }
 

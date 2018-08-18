@@ -56,6 +56,7 @@ public class FootAdminViewModel extends BaseViewModel {
     public String remarkEdit = "测试备注";//备注
 
     public String footTypeEdit = "4";//足环类型
+    public String codeidEdit = "1";//足环类型
     public String footStateEdit = "2";//足环状态
 
 
@@ -87,7 +88,7 @@ public class FootAdminViewModel extends BaseViewModel {
 
     //修改足环（单个）
     public void getTXGP_FootRing_EditData(String footIdEdit) {
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Edit(footIdEdit, footEdit, moneyEdit.replace("元", ""), footTypeEdit, footStateEdit, footSourceEdit, remarkEdit), r -> {
+        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Edit(footIdEdit, codeidEdit, footEdit, moneyEdit.replace("元", ""), footTypeEdit, footStateEdit, footSourceEdit, remarkEdit), r -> {
             if (r.isOk()) {
 
             } else throw new HttpErrorException(r);
@@ -99,7 +100,9 @@ public class FootAdminViewModel extends BaseViewModel {
     public void getTXGP_FootRing_DeleteData(String delFootId) {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Delete(delFootId), r -> {
             if (r.isOk()) {
-                error(r.msg);
+                hintDialog(r.msg);
+
+
             } else throw new HttpErrorException(r);
         });
     }

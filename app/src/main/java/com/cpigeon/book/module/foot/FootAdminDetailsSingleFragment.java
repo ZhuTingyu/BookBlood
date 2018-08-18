@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.RxUtils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -71,7 +72,15 @@ public class FootAdminDetailsSingleFragment extends BaseBookFragment {
         setTitle("足环号详情");
 
         setToolbarRight("删除", item -> {
-            mFootAdminModel.getTXGP_FootRing_DeleteData(String.valueOf(mFootAdminListEntity.getFootRingID()));
+
+            getBaseActivity().errorDialog = DialogUtils.createDialogWithLeft2(getActivity(), "确定删除该条足环数据！", false, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+            }, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+
+                mFootAdminModel.getTXGP_FootRing_DeleteData(String.valueOf(mFootAdminListEntity.getFootRingID()));
+            });
+
             return true;
         });
 

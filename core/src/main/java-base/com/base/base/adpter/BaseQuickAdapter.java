@@ -5,18 +5,14 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.AppCompatImageView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.base.application.BaseApplication;
 import com.base.base.BaseActivity;
 import com.base.http.R;
-import com.base.util.http.NetworkUtils;
 import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.luck.picture.lib.tools.StringUtils;
-
 
 import java.util.List;
 
@@ -45,6 +41,9 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
     }
 
     public void setEmptyView() {
+        if(!getData().isEmpty()){
+            return;
+        }
         if (getEmptyViewImage() == 0) {
             setSelfEmptyView(getEmptyViewText());
         } else {

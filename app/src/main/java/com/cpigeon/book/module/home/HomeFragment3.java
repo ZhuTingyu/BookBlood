@@ -9,18 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.base.util.dialog.DialogUtils;
-import com.base.util.system.AppManager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.foot.BreedPigeonFragment;
 import com.cpigeon.book.module.foot.FootAdminHomeFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.foot.StatisticalFragment;
-import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
-import com.cpigeon.book.service.SingleLoginService;
+import com.cpigeon.book.module.menu.InfoDetailsFragment;
 
 /**
  * Created by Zhu TingYu on 2018/7/10.
@@ -40,6 +36,8 @@ public class HomeFragment3 extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mViewModel = new LoginViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -51,9 +49,6 @@ public class HomeFragment3 extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mViewModel = new LoginViewModel();
-        initViewModel(mViewModel);
 
 
         acBtn = findViewById(R.id.ac_btns);
@@ -67,23 +62,14 @@ public class HomeFragment3 extends BaseBookFragment {
             FootAdminHomeFragment.start(getActivity());
         });
 
-        //hl  退出登录
-        mViewModel.outMsg.observe(this, s -> {
-            SingleLoginService.stopService();
-            UserModel.getInstance().cleanUserInfo();
-            getBaseActivity().errorDialog = DialogUtils.createSuccessDialog(getActivity(), s, false, dialog -> {
-                dialog.dismiss();
-                //结束所有页面，跳转到登录页
-                AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);
-            });
-        });
+
 
         ac_btns1.setOnClickListener(v -> {
             BreedPigeonFragment.start(getActivity());
         });
 
         ac_btns2.setOnClickListener(v -> {
-            mViewModel.outLogin();
+
         });
 
         ac_btns3.setOnClickListener(v -> {

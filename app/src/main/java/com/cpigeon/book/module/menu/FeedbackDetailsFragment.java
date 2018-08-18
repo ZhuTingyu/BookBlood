@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home;
+package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,20 +13,21 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 
 /**
- * hl 关于我们
- * Created by Administrator on 2018/8/8.
+ * 提交意见反馈
+ * Created by Administrator on 2018/8/9.
  */
 
-public class AboutAsFragment extends BaseBookFragment {
+public class FeedbackDetailsFragment extends BaseBookFragment {
+
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, AboutAsFragment.class);
+                .startParentActivity(activity, FeedbackDetailsFragment.class);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fratment_about_as, container, false);
+        View view = inflater.inflate(R.layout.fragment_feedback_submit, container, false);
         return view;
     }
 

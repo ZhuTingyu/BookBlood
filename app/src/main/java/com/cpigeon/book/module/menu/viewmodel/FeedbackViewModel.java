@@ -9,6 +9,8 @@ import com.cpigeon.book.model.entity.FeedbackListEntity;
 
 import java.util.List;
 
+import io.reactivex.functions.Consumer;
+
 /**
  * 意见反馈
  * Created by Administrator on 2018/8/9.
@@ -26,11 +28,11 @@ public class FeedbackViewModel extends BaseViewModel {
     public void getZGW_Users_Feedback_ListData() {
         submitRequestThrowError(FeedbackModel.getZGW_Users_Feedback_List(pi, ps), r -> {
             if (r.isOk()) {
+                listEmptyMessage.setValue(r.msg);
                 feedbackListData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
-
 
 
     //获取  意见反馈详情
@@ -43,9 +45,27 @@ public class FeedbackViewModel extends BaseViewModel {
     }
 
 
+    public String contentSub;//反馈内容
+    public String contactSub;//联系方式
+    public String strFileSub;//文件路径
+
+
+    public Consumer<String> setContentSub() {
+        return s -> {
+            contentSub = s;
+        };
+    }
+
+
+    public Consumer<String> setContactSub() {
+        return s -> {
+            contactSub = s;
+        };
+    }
+
     //获取  意见反馈 提交
     public void getZGW_Users_Feedback_AddData() {
-        submitRequestThrowError(FeedbackModel.getZGW_Users_Feedback_Add(pi, ps), r -> {
+        submitRequestThrowError(FeedbackModel.getZGW_Users_Feedback_Add(contentSub, contactSub), r -> {
             if (r.isOk()) {
 //                FeedbackListData.setValue(r.data);
             } else throw new HttpErrorException(r);
