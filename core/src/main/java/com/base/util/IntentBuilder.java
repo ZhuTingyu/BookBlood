@@ -11,6 +11,7 @@ import android.support.annotation.AnimRes;
 
 import com.base.BaseFragment;
 import com.base.FragmentParentActivity;
+import com.base.base.BaseActivity;
 import com.base.http.R;
 
 import java.io.Serializable;
@@ -345,6 +346,10 @@ public class IntentBuilder {
             fragment.getBaseActivity().overridePendingTransition(enter, exit);
         }else throw new NullPointerException("fragment's activity is null");
 
+    }
 
+    public void finishForResult(Activity activity){
+        activity.setResult(Activity.RESULT_OK, intent);
+        activity.finish();
     }
 }

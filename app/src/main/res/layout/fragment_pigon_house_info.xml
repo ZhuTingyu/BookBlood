@@ -45,6 +45,7 @@
                     android:id="@+id/lvHouseName"
                     app:lineInputView_LeftString="@string/text_pigeon_house_name"
                     app:lineInputView_IsLeft="true"
+                    app:lineInputView_isShowRightImage="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -52,6 +53,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvPhone"
                     app:lineInputView_LeftString="@string/text_connection_phone"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsNotNull="true"
                     app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
@@ -71,12 +73,14 @@
                     app:lineInputView_IsNotNull="true"
                     app:lineInputView_IsLeft="true"
                     app:lineInputView_LeftString="@string/text_register_shed_number"
+                    app:lineInputView_isShowRightImage="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvJoinMatchId"
                     app:lineInputView_LeftString="@string/text_join_match_number"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -86,6 +90,7 @@
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_IsNotNull="true"
                     app:lineInputView_LeftString="@string/text_pigeon_house_location"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -93,6 +98,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvCity"
                     app:lineInputView_LeftString="@string/text_location"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsLeft="true"
                     app:lineInputView_IsCanEdit="false"
                     android:layout_width="match_parent"
@@ -101,6 +107,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvAddress"
                     app:lineInputView_LeftString="@string/text_details_address"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

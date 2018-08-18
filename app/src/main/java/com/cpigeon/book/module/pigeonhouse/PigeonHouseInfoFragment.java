@@ -26,18 +26,20 @@ import com.base.util.map.AmapManager;
 import com.base.util.map.PointToAddressManager;
 import com.base.util.picker.AddressPickTask;
 import com.base.util.picker.PickerUtil;
+import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.home.IdCertificationFragment;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
-import com.cpigeon.book.module.select.SelectAssActivity;
+import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
-import com.cpigeon.book.util.TextViewUtis;
+import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 import com.luck.picture.lib.PictureSelector;
@@ -153,8 +155,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         });
 
         mLvOrganize.setOnRightClickListener(lineInputView -> {
-            IntentBuilder.Builder(getActivity(), SelectAssActivity.class)
-                    .startActivity(CODE_ORGANIZE);
+            SearchFragmentParentActivity.start(getBaseActivity(), SelectAssFragment.class, CODE_ORGANIZE);
         });
 
         String[] chooseWays = getResources().getStringArray(R.array.array_choose_photo);
@@ -236,7 +237,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtis.setEnabled(mTvOk, aBoolean);
+            TextViewUtil.setEnabled(mTvOk, aBoolean);
         });
 
         UserModel.getInstance().mUserLiveData.observe(this, userEntity -> {

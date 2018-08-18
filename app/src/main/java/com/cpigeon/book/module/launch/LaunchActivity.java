@@ -111,6 +111,7 @@ public class LaunchActivity extends BaseActivity {
                 LoginActivity.start(this);
             }
         }
+        finish();
     }
 
 }

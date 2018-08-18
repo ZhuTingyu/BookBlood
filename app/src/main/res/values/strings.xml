@@ -90,5 +90,12 @@
     <string name="text_female">女</string>
     <string name="text_id_card_p">身份证正面</string>
     <string name="text_id_card_n">身份证背面</string>
+    <string name="text_food_number_input">足环录入</string>
+    <string name="text_match_pigeon_train">赛鸽路训</string>
+    <string name="text_breed_pigeon_input">种鸽录入</string>
+    <string name="text_pigeon_take_photo">爱鸽拍照</string>
+    <string name="text_match_pigeon_input">赛鸽录入</string>
+    <string name="text_match_pigeon_tool">赛鸽工具</string>
+    <string name="text_search_ass">点击搜索协会</string>
 
 </resources>

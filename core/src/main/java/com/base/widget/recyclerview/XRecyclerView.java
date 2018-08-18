@@ -146,7 +146,7 @@ public class XRecyclerView extends FrameLayout {
         if(adapter instanceof BaseQuickAdapter){
             BaseQuickAdapter quickAdapter = (BaseQuickAdapter) adapter;
             quickAdapter.setEnableLoadMore(false);
-            quickAdapter.setEmptyView(progressView);
+            //quickAdapter.setEmptyView(progressView);
             quickAdapter.setLoadMoreView(new CustomLoadMoreView());
             quickAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                 @Override

@@ -63,7 +63,7 @@ public class SimpleTitleView extends LinearLayout{
         pressTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_PressTextColor, Color.BLACK);
         image = array.getDrawable(R.styleable.SimpleTitleView_simpleTitleView_image);
         pressImage = array.getDrawable(R.styleable.SimpleTitleView_simpleTitleView_press_image);
-        imageSize = array.getDimensionPixelSize(R.styleable.SimpleTitleView_simpleTitleView_image_size, 24);
+        imageSize = array.getDimensionPixelSize(R.styleable.SimpleTitleView_simpleTitleView_image_size, ScreenTool.dip2px(24));
         textSize = array.getDimensionPixelSize(R.styleable.SimpleTitleView_simpleTitleView_text_size
                 , ScreenTool.dip2px(13));
         text = array.getString(R.styleable.SimpleTitleView_simpleTitleView_text);

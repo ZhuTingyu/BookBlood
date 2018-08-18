@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -87,6 +88,10 @@ public class SearchTextView extends RelativeLayout {
             mTvCancel.setTextColor(Color.BLACK);
             mEdSearch.setBackgroundResource(R.drawable.shape_bg_corner_5_solid_gray);
         }
+    }
+
+    public void setHint(@StringRes int resId){
+        mEdSearch.setHint(resId);
     }
 
     public interface OnSearchTextClickListener{

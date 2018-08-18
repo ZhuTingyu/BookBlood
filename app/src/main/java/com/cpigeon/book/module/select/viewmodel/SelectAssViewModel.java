@@ -15,15 +15,25 @@ import java.util.List;
 
 public class SelectAssViewModel extends BaseViewModel {
 
+    private String key;
+
     public MutableLiveData<List<AssEntity>> liveAss = new MutableLiveData<>();
     public MutableLiveData<List<AssEntity>> liveHistory = new MutableLiveData<>();
 
     public void getAssList(){
-        submitRequestThrowError(AssModel.getAssList(), r -> {
+        submitRequestThrowError(AssModel.getAssList(key), r -> {
             if(r.isOk()){
                 liveAss.setValue(r.data);
                 listEmptyMessage.setValue(r.msg);
             }else throw new HttpErrorException(r);
         });
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
     }
 }

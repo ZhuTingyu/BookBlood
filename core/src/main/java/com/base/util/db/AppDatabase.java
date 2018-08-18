@@ -1,6 +1,7 @@
 
 package com.base.util.db;
 
+import android.app.Activity;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
@@ -37,12 +38,28 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     }
 
-    public static  <T> List<T> getDatas(List<DbEntity> data, Class<T> tClass){
+    public static  <T> List<T> getDates(List<DbEntity> data, Class<T> tClass){
         List<T> entities = Lists.newArrayList();
         for (DbEntity dbEntity : data) {
             entities.add(dbEntity.getData(tClass));
         }
         return entities;
     }
+
+    public <T> void saveData(T data, String type, String userId){
+        DbEntity dbEntity = new DbEntity();
+        dbEntity.setUserId(userId);
+        dbEntity.setType(type);
+        dbEntity.setData(GsonUtil.toJson(data));
+        dbEntity.setTimeSample(System.currentTimeMillis());
+        DbEntityDao().insert(dbEntity);
+    }
+
+    public  void delectAll(List<DbEntity> data){
+        for (DbEntity t : data) {
+            DbEntityDao().deleteAll(t);
+        }
+    }
+
 }
 

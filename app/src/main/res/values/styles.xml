@@ -10,7 +10,7 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/color_background</item>
         <item name="toolbarStyle">@style/Toolbar</item>
-        <item name="buttonStyle">@style/Button</item>
+        <!--<item name="buttonStyle">@style/Button</item>-->
         <item name="editTextStyle">@style/EditText</item>
         <item name="navigationIcon">@drawable/ic_back</item>
         <item name="actionMenuTextColor">@color/white</item>
