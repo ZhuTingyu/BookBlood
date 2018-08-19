@@ -30,6 +30,7 @@ import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * hl 设置
@@ -37,7 +38,6 @@ import butterknife.OnClick;
  */
 
 public class SettingFragment extends BaseBookFragment {
-
 
     @BindView(R.id.ll_current_version)
     LineInputView ll_current_version;
@@ -97,7 +97,7 @@ public class SettingFragment extends BaseBookFragment {
             SingleLoginService.stopService();
             UserModel.getInstance().cleanUserInfo();
             setProgressVisible(false);
-            getBaseActivity().errorDialog = DialogUtils.createSuccessDialog(getActivity(), s, false, dialog -> {
+            getBaseActivity().errorDialog = DialogUtils.createSuccessDialog(getActivity(), s, SweetAlertDialog.SUCCESS_TYPE, false, dialog -> {
                 dialog.dismiss();
                 //结束所有页面，跳转到登录页
                 AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);

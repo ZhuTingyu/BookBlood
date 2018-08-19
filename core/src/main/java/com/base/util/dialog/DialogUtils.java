@@ -78,9 +78,9 @@ public class DialogUtils {
      * @param rightListener
      */
 
-    public static SweetAlertDialog createDialogWithLeft2(Context context, String content,boolean  isCancelable,
-                                            SweetAlertDialog.OnSweetClickListener leftListener,
-                                            SweetAlertDialog.OnSweetClickListener rightListener) {
+    public static SweetAlertDialog createDialogWithLeft2(Context context, String content, boolean isCancelable,
+                                                         SweetAlertDialog.OnSweetClickListener leftListener,
+                                                         SweetAlertDialog.OnSweetClickListener rightListener) {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
         dialogPrompt.setCanceledOnTouchOutside(false);
@@ -94,7 +94,6 @@ public class DialogUtils {
 
         return dialogPrompt;
     }
-
 
 
     /**
@@ -127,10 +126,17 @@ public class DialogUtils {
      * @return
      */
 
-    public static SweetAlertDialog createSuccessDialog(Context context, String message,boolean  cancelable,SweetAlertDialog.OnSweetClickListener mConfirmClick) {
+    public static SweetAlertDialog createSuccessDialog(Context context, String message, int alerType, boolean cancelable, SweetAlertDialog.OnSweetClickListener mConfirmClick) {
         SweetAlertDialog dialogPrompt;
-        dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);
-        dialogPrompt.setTitleText("成功");
+        dialogPrompt = new SweetAlertDialog(context, alerType);
+
+
+        if (alerType == SweetAlertDialog.SUCCESS_TYPE) {
+            dialogPrompt.setTitleText("成功");
+        } else if (alerType == SweetAlertDialog.ERROR_TYPE) {
+            dialogPrompt.setTitleText("失败");
+        }
+
         dialogPrompt.setContentText(message);
         dialogPrompt.setConfirmClickListener(mConfirmClick);
         dialogPrompt.setCancelable(cancelable);

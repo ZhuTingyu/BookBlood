@@ -23,7 +23,6 @@ import android.widget.TextView;
 import com.base.base.BaseActivity;
 import com.base.base.BaseViewModel;
 import com.base.http.R;
-import com.base.util.BarUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
@@ -94,6 +93,28 @@ public abstract class BaseFragment extends Fragment {
                 error(restErrorInfo.code, restErrorInfo.message);
             }
         });
+
+        viewModel.getHintClosePage().observe(this, restHintInfo -> {
+            if (restHintInfo != null) {
+                setProgressVisible(false);
+
+                if (!StringUtil.isStringValid(restHintInfo.message)) {
+                    return;
+                }
+
+                //保证界面只有一个错误提示
+                if (baseActivity.errorDialog == null || !baseActivity.errorDialog.isShowing()) {
+                    baseActivity.errorDialog = DialogUtils.createSuccessDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE,restHintInfo.cancelable, sweetAlertDialog -> {
+                        sweetAlertDialog.dismiss();
+
+                        if (restHintInfo.isClosePage) {
+                            getActivity().finish();
+                        }
+                    });
+                }
+
+            }
+        });
     }
 
     protected void initViewModels(BaseViewModel... viewModels) {
@@ -117,7 +138,7 @@ public abstract class BaseFragment extends Fragment {
 
                     //保证界面只有一个错误提示
                     if (baseActivity.errorDialog == null || !baseActivity.errorDialog.isShowing()) {
-                        baseActivity.errorDialog = DialogUtils.createSuccessDialog(baseActivity, restHintInfo.message, restHintInfo.cancelable, sweetAlertDialog -> {
+                        baseActivity.errorDialog = DialogUtils.createSuccessDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE,restHintInfo.cancelable, sweetAlertDialog -> {
                             sweetAlertDialog.dismiss();
 
                             if (restHintInfo.isClosePage) {

@@ -19,12 +19,13 @@ public class FootAdminModel {
 
 
     //hl 添加足环（单个）
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Add(String foot, String money, String footType, String footState, String footSource, String remark) {
+    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Add(String foot, String codeid, String money, String footType, String footState, String footSource, String remark) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.foot_add_single)
                 .addBody("numstr", foot)//足环号码
+                .addBody("codeid", codeid)//国家id
                 .addBody("money", money)//足环金额
                 .addBody("typeid", footType)// 足环类型
                 .addBody("stateid", footState)// 足环状态
@@ -91,7 +92,7 @@ public class FootAdminModel {
     }
 
 
-    //hl 得到各种类型的足环个数
+    //hl 足环管理   列表数据
     public static Observable<ApiResponse<List<FootAdminListEntity>>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String year, String typeid, String stateid, String key) {
         return RequestData.<ApiResponse<List<FootAdminListEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<FootAdminListEntity>>>() {

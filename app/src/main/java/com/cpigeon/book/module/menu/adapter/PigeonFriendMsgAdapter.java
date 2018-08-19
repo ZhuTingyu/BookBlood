@@ -14,11 +14,14 @@ import java.util.List;
 public class PigeonFriendMsgAdapter extends BaseQuickAdapter<PigeonFriendMsgListEntity, BaseViewHolder> {
 
     public PigeonFriendMsgAdapter(List<PigeonFriendMsgListEntity> data) {
-        super(R.layout.item_logbook, data);
+        super(R.layout.item_pigeon_friend_msg, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, PigeonFriendMsgListEntity item) {
+
+        helper.setText(R.id.tv_title, item.getContent());
+        helper.setText(R.id.tv_time, item.getDate());
 
     }
 }

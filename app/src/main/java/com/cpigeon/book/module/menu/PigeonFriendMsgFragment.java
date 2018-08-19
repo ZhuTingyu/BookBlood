@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.PigeonFriendMsgListEntity;
 import com.cpigeon.book.module.menu.adapter.PigeonFriendMsgAdapter;
 import com.cpigeon.book.module.menu.viewmodel.PigeonFriendMsgViewModel;
 
@@ -40,12 +42,19 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = findViewById(R.id.list);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         mViewModel = new PigeonFriendMsgViewModel();
         initViewModel(mViewModel);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setTitle("鸽友消息");
+
+        mRecyclerView = findViewById(R.id.list);
 
         mViewModel.pigeonFriendMsgListData.observe(this, logbookEntities -> {
 
@@ -72,6 +81,16 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
 
         mViewModel.getTXGP_GetMsgListData();
-    }
 
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
+
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            PigeonFriendMsgListEntity mPigeonFriendMsgListEntity = (PigeonFriendMsgListEntity) adapter.getData().get(position);
+            mViewModel.getTXGP_Msg_DetailData(mPigeonFriendMsgListEntity.getId());
+        });
+
+    }
 }

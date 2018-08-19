@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.foot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,7 +27,6 @@ import butterknife.OnClick;
 
 public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
 
-
     @BindView(R.id.lv_city)
     LineInputView lvCity;
     @BindView(R.id.lv_foot)
@@ -41,10 +41,17 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
     TextView tvOk;
     private FootAdminViewModel mFootAdminModel;
 
-
     public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, FootAdminDetailsMultipleFragment.class);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mFootAdminModel = new FootAdminViewModel();
+        initViewModels(mFootAdminModel);
     }
 
     @Nullable
@@ -57,9 +64,6 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mFootAdminModel = new FootAdminViewModel();
-        initViewModels(mFootAdminModel);
 
     }
 

@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.foot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.RxUtils;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -40,10 +42,16 @@ public class FootAdminAddSingleFragment extends BaseBookFragment {
     TextView tvOk;
     private FootAdminViewModel mFootAdminModel;
 
-
     public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, FootAdminAddSingleFragment.class);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mFootAdminModel = new FootAdminViewModel();
+        initViewModels(mFootAdminModel);
     }
 
     @Nullable
@@ -57,8 +65,7 @@ public class FootAdminAddSingleFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mFootAdminModel = new FootAdminViewModel();
-        initViewModels(mFootAdminModel);
+        bindUi(RxUtils.textChanges(lvFoot.getEditText()), mFootAdminModel.setAddFootNum());//足环号
 
     }
 
@@ -81,7 +88,6 @@ public class FootAdminAddSingleFragment extends BaseBookFragment {
                 ToastUtils.showLong(getActivity(), "5");
                 break;
             case R.id.tvOk:
-
                 mFootAdminModel.getTXGP_FootRing_AddData();
                 ToastUtils.showLong(getActivity(), "6");
                 break;

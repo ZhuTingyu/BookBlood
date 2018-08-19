@@ -40,6 +40,7 @@ public class LineInputView extends RelativeLayout {
     String mRightString;
     boolean mIsLookState;
     Drawable mDrawableRight;
+    Drawable mDrawableLeft;
     boolean mIsNotNull;
     boolean mIsCanEdit;
     boolean mIsLeft;
@@ -52,6 +53,7 @@ public class LineInputView extends RelativeLayout {
     TextView mTextView;
     ClickGetFocusEditText mEditText;
     ImageView mImgRight;
+    ImageView imgLeft;
     LinearLayout mLlContent;
 
     View line_division;//分割线
@@ -91,6 +93,7 @@ public class LineInputView extends RelativeLayout {
         mRightString = array.getString(R.styleable.LineInputView_lineInputView_RightString);
         mIsLookState = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLookState, false);
         mDrawableRight = array.getDrawable(R.styleable.LineInputView_lineInputView_DrawableRight);
+        mDrawableLeft = array.getDrawable(R.styleable.LineInputView_lineInputView_DrawableLeft);
         mIsNotNull = array.getBoolean(R.styleable.LineInputView_lineInputView_IsNotNull, false);
         mIsCanEdit = array.getBoolean(R.styleable.LineInputView_lineInputView_IsCanEdit, true);
         mInputType = array.getInt(R.styleable.LineInputView_lineInputView_InputType, 0);
@@ -111,6 +114,8 @@ public class LineInputView extends RelativeLayout {
         mLlContent = view.findViewById(R.id.llContent);
         line_division = view.findViewById(R.id.line_division);
 
+        imgLeft = view.findViewById(R.id.img_left);
+
         mTextView.setText(mLeftString);
         mTextView.setTextColor(getResources().getColor(mLeftColor));
         mTextView.setTextSize(mLeftTextSize);
@@ -125,6 +130,14 @@ public class LineInputView extends RelativeLayout {
             mEditText.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
         } else {
             mEditText.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        }
+
+
+        if (mDrawableLeft != null) {
+            imgLeft.setVisibility(VISIBLE);
+            imgLeft.setImageDrawable(mDrawableLeft);
+        } else {
+            imgLeft.setVisibility(GONE);
         }
 
         if (mDrawableRight != null) {
@@ -234,10 +247,10 @@ public class LineInputView extends RelativeLayout {
         }
     }
 
-    private void setEditTextBorder(boolean isVisible){
-        if(isVisible){
+    private void setEditTextBorder(boolean isVisible) {
+        if (isVisible) {
             mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
-        }else {
+        } else {
             mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
 
         }
