@@ -1,410 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/colorWhite"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:fadingEdge="none"
+    android:orientation="vertical"
+    android:overScrollMode="never"
     android:paddingLeft="@dimen/spacing_left_reight"
     android:paddingRight="@dimen/spacing_left_reight"
-    android:orientation="vertical">
+    android:scrollbars="none">
 
-    <!--鸽舍信息-->
-    <com.cpigeon.book.widget.LineInputView
-        android:id="@+id/ll_loft_info"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lineInputView_IsCanEdit="true"
-        app:lineInputView_IsLookState="true"
-        app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="鸽舍信息"
-        app:lineInputView_RightString="" />
-
-
-    <!--账户安全-->
-    <LinearLayout
-        android:id="@+id/ll_account_security"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@color/black" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="账户安全"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@mipmap/ic_info_r" />
-    </LinearLayout>
-
-    <!--操作日志-->
-    <LinearLayout
-        android:id="@+id/ll_logbook"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@color/black" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="操作日志"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@mipmap/ic_info_r" />
-    </LinearLayout>
-
-    <!--关于我们-->
-    <LinearLayout
-        android:id="@+id/ll_about_us"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@color/black" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="关于我们"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@mipmap/ic_info_r" />
-    </LinearLayout>
-
-    <!--设置-->
-    <LinearLayout
-        android:id="@+id/ll_setting"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@color/black" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="设置"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@mipmap/ic_info_r" />
-    </LinearLayout>
-
-    <!--意见反馈-->
-    <LinearLayout
-        android:id="@+id/ll_feedback"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@color/black" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="意见反馈"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@mipmap/ic_info_r" />
-    </LinearLayout>
-
-    <!--公告通知-->
-    <LinearLayout
-        android:id="@+id/ll_announcement_notice"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@color/black" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="公告通知"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@mipmap/ic_info_r" />
-    </LinearLayout>
-
-    <!--鸽友交流-->
-    <LinearLayout
-        android:id="@+id/ll_pigeon_friend_msg"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@color/black" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="鸽友交流"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@mipmap/ic_info_r" />
-    </LinearLayout>
-
-    <!--签到-->
-    <LinearLayout
-        android:id="@+id/ll_sign"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorWhite"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@color/black" />
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="签到"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
-            app:srcCompat="@mipmap/ic_info_r" />
+        android:orientation="vertical">
+
+
+        <!--鸽舍信息-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_loft_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="鸽舍信息"
+            app:lineInputView_RightString="" />
+
+
+        <!--账户安全-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_account_security"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="账户安全"
+            app:lineInputView_RightString="" />
+
+
+        <!--分享天下鸽谱-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_share_txgp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="分享天下鸽谱"
+            app:lineInputView_RightString="" />
+
+
+        <!--账户余额-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_account_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="账户余额"
+            app:lineInputView_RightString="" />
+
+        <!--续费-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_renewal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="续费"
+            app:lineInputView_RightString="" />
+
+
+        <!--我的鸽币-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_my_gebi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="我的鸽币"
+            app:lineInputView_RightString="" />
+
+
+        <!--我的订单-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_my_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="我的订单"
+            app:lineInputView_RightString="" />
+
+
+        <!--关于我们-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="关于我们"
+            app:lineInputView_RightString="" />
+
+
+        <!--设置-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_my_balance"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="设置"
+            app:lineInputView_RightString="" />
+
+
+        <!--意见反馈-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="意见反馈"
+            app:lineInputView_RightString="" />
+
+
+        <!--使用帮助-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_use_help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_my_balance"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="使用帮助"
+            app:lineInputView_RightString="" />
+
+
+        <!--操作日志-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_logbook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_my_balance"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="操作日志"
+            app:lineInputView_RightString="" />
+
+
+        <!--公告通知-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_announcement_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_my_balance"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="公告通知"
+            app:lineInputView_RightString="" />
+
+        <!--鸽友消息-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_pigeon_friend_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="鸽友消息"
+            app:lineInputView_RightString="" />
+
+
     </LinearLayout>
 
 
-</LinearLayout>
+</ScrollView>

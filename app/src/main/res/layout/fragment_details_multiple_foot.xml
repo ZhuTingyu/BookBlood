@@ -16,7 +16,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="国家"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_foot"
@@ -26,7 +26,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="足环"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_category"
@@ -36,7 +36,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="类别"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_source"
@@ -46,7 +46,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="来源"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_money"
@@ -56,7 +56,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="金额"
-        app:lineInputView_RightString="CHN" />
+        app:lineInputView_RightString="" />
 
 
     <com.cpigeon.book.widget.LineInputView

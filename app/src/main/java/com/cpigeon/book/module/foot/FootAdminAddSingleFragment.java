@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.RxUtils;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -21,11 +22,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 详情 多个足环  fragment
+ * 添加 单个足环  fragment
  * Created by Administrator on 2018/8/10.
  */
 
-public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
+public class FootAdminAddSingleFragment extends BaseBookFragment {
 
     @BindView(R.id.lv_city)
     LineInputView lvCity;
@@ -43,13 +44,12 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, FootAdminDetailsMultipleFragment.class);
+                .startParentActivity(activity, FootAdminAddSingleFragment.class);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         mFootAdminModel = new FootAdminViewModel();
         initViewModels(mFootAdminModel);
     }
@@ -57,7 +57,7 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_details_multiple_foot, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_single_foot, container, false);
         return view;
     }
 
@@ -65,12 +65,8 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-<<<<<<< HEAD
-        mFootAdminModel = new FootAdminViewModel(getBaseActivity());
-        initViewModels(mFootAdminModel);
+        bindUi(RxUtils.textChanges(lvFoot.getEditText()), mFootAdminModel.setAddFootNum());//足环号
 
-=======
->>>>>>> b397383ad4d18b6387b8308575dbdac7f834fbe7
     }
 
     @OnClick({R.id.lv_city, R.id.lv_foot, R.id.lv_category, R.id.lv_source, R.id.lv_money, R.id.tvOk})
@@ -92,8 +88,7 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
                 ToastUtils.showLong(getActivity(), "5");
                 break;
             case R.id.tvOk:
-
-               // mFootAdminModel.getTXGP_FootRing_AddData();
+                mFootAdminModel.getTXGP_FootRing_AddData();
                 ToastUtils.showLong(getActivity(), "6");
                 break;
         }

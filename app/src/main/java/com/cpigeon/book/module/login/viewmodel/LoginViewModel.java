@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.login.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
@@ -23,6 +24,9 @@ public class LoginViewModel extends BaseViewModel {
     public MutableLiveData<String> oneStartHintStr = new MutableLiveData<>();
 
     public void login() {
+        Log.d("xiaohlls", "login: "+mPhone);
+        Log.d("xiaohlls", "login: "+mPassword);
+
         submitRequestThrowError(LoginModel.login(mPhone, mPassword), r -> {
             if (r.isOk()) {
 

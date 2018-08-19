@@ -114,7 +114,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 DialogUtils.createHintDialog(getBaseActivity()
                         , Utils.getString(R.string.text_is_sure_delect_foot_number)
                         , sweetAlertDialog -> {
-                            mViewModel.delectFoot();
+                            mViewModel.delecteFoot();
                         });
                 return false;
             });

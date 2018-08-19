@@ -26,7 +26,18 @@ public class PigeonFriendMsgViewModel extends BaseViewModel {
     public void getTXGP_GetMsgListData() {
         submitRequestThrowError(PigeonFriendMsgModel.getTXGP_GetMsgList(pi, ps), r -> {
             if (r.isOk()) {
-                pigeonFriendMsgListData.setValue(null);
+                pigeonFriendMsgListData.setValue(r.data);
+                listEmptyMessage.setValue(r.msg);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    //获取  鸽友消息详情
+    public void getTXGP_Msg_DetailData(String id) {
+        submitRequestThrowError(PigeonFriendMsgModel.getTXGP_Msg_Detail(id), r -> {
+            if (r.isOk()) {
+                hintDialog(r.toJsonString());
             } else throw new HttpErrorException(r);
         });
     }

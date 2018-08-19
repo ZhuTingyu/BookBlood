@@ -27,4 +27,16 @@ public class PigeonFriendMsgModel {
                 .addBody("ps", String.valueOf(ps))
                 .request();
     }
+
+
+    //hl 鸽友消息详情
+    public static Observable<ApiResponse<List<PigeonFriendMsgListEntity>>> getTXGP_Msg_Detail(String  id ) {
+        return RequestData.<ApiResponse<List<PigeonFriendMsgListEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonFriendMsgListEntity>>>() {
+                }.getType())
+                .url(R.string.pigeon_friend_msg_detail)
+                .addBody("id",id)
+                .request();
+    }
+
 }

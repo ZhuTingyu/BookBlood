@@ -3,10 +3,31 @@
 
     <!--baseURl-->
     <string name="baseUrl">http://192.168.0.18:8188/</string>
+    <string name="baseUrl2">http://192.168.0.18:8188/</string>
+    <string name="baseUrl3">http://192.168.0.18:8188/</string>
+
     <!--签名加密字符串-->
     <string name="keySign">CioLy49TR23jk4h0Ap8Opy34ho78on</string>
     <!--天下鸽谱-->
     <string name="api_head">CAPI/V1/</string>
+
+
+    <!--天下鸽谱APP分享-->
+    <string name="txgp_app_share">APP/Share?t=1</string>
+    <!--天下鸽谱使用协议-->
+    <string name="txgp_use_protocol">APP/Protocol?t=1</string>
+    <!--天下鸽谱支付协议-->
+    <string name="txgp_play_protocol">APP/Protocol?t=2</string>
+    <!--天下鸽谱功能介绍-->
+    <string name="txgp_function_introduce">APP/Intro?t=1</string>
+    <!--天下鸽谱使用帮助-->
+    <string name="txgp_use_help">APP/Help?t=1</string>
+    <!--中鸽网分享-->
+    <string name="app_share_zgw">http://www.cpigeon.com:818/APP/Download</string>
+    <!--中鸽助手app分享-->
+    <string name="app_share_zgzs">http://www.cpigeon.com:818/APP/DownloadCpigeonHelper</string>
+
+
     <!--单点登录-->
     <string name="user_single_login">ZGW_Users_SingleLogin</string>
     <!--用户注册-->
@@ -33,8 +54,14 @@
 
     <!--公告通知-->
     <string name="get_announcement_notice_list">TXGP_GongGao_GetList</string>
+    <!--公告通知统计-->
+    <string name="get_announcement_notice_count">TXGP_GongGao_Count</string>
+    <!--公告通知详情-->
+    <string name="get_announcement_notice_detail">TXGP_GongGao_Detail</string>
     <!--鸽友消息-->
-    <string name="pigeon_friend_msg">TXGP_GetMsgList</string>
+    <string name="pigeon_friend_msg">TXGP_Msg_GetList</string>
+    <!--鸽友消息详情-->
+    <string name="pigeon_friend_msg_detail">TXGP_Msg_Detail</string>
 
     <!--签到规则-->
     <string name="sign_rule">ZGW_Users_SignGuiZe</string>

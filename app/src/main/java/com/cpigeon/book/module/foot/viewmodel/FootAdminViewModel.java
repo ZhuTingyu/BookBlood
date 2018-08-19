@@ -38,6 +38,7 @@ public class FootAdminViewModel extends BaseViewModel {
         foodId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
     }
 
+
     //添加足环（单个）
     public void addFoot() {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Add(countryId, footNumber, money, footType, footSource, remark), r -> {
@@ -67,7 +68,7 @@ public class FootAdminViewModel extends BaseViewModel {
     }
 
     //删除足环（单个）
-    public void delectFoot() {
+    public void delecteFoot() {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Delete(foodId), r -> {
             if (r.isOk()) {
                 mdelectR.setValue(r.msg);
@@ -111,13 +112,7 @@ public class FootAdminViewModel extends BaseViewModel {
 
     /*
 
-
-
-
     public MutableLiveData<DetailsSingleFootEntity> footDetailsData = new MutableLiveData<>();
-
-
-
 
     //添加足环号段
     public void getTXGP_FootRing_AddSectionData() {
@@ -129,6 +124,5 @@ public class FootAdminViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }*/
-
 
 }

@@ -4,16 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include layout="@layout/layout_toolbar" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:fadingEdge="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,169 +28,169 @@
                 android:layout_height="154dp" />
 
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="26dp"
                 android:layout_marginLeft="43dp"
                 android:layout_marginRight="43dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="26dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="16dp">
 
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvFootManager"
-                    app:simpleTitleView_image_size="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_foot_manger"
-                    app:simpleTitleView_text="@string/text_foot_manger"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_foot_manger" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvBreedPigeonManager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_breed_pigeon_manger"
-                    app:simpleTitleView_text="@string/text_breed_pigeon_manger"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_breed_pigeon_manger" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvTrainRecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_train_record"
-                    app:simpleTitleView_text="@string/text_train_record"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_train_record" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="43dp"
-                android:layout_marginBottom="26dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="43dp"
+                android:layout_marginRight="43dp">
 
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvMatchPigeonManger"
-                    app:simpleTitleView_image_size="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_match_pigeon_manger"
-                    app:simpleTitleView_text="@string/text_match_pigeon_manger"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_match_pigeon_manger" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvFeedPigeonRecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_feed_pigeon_record"
-                    app:simpleTitleView_text="@string/text_feed_pigeon_record"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_feed_pigeon_record" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvAiPigeonHouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_ai_pigeon_house"
-                    app:simpleTitleView_text="@string/text_ai_pigeon_house"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_ai_pigeon_house" />
 
             </RelativeLayout>
 
             <ImageView
                 android:id="@+id/imgAd"
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_welcome_1"
+                android:layout_height="93dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_welcome_1" />
 
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="26dp"
                 android:layout_marginLeft="43dp"
                 android:layout_marginRight="43dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="26dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="24dp">
 
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvBloodBookMade"
-                    app:simpleTitleView_image_size="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_blood_book_made"
-                    app:simpleTitleView_text="@string/text_blood_book_made"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_blood_book_made" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvMatchPigeonAnalyse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_match_pigeon_analyse"
-                    app:simpleTitleView_text="@string/text_match_pigeon_analyse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_match_pigeon_analyse" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvBloodFind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
-                    app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_image="@mipmap/ic_blood_find"
-                    app:simpleTitleView_text="@string/text_blood_find"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_blood_find" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginLeft="43dp"
-                android:layout_marginRight="43dp"
-                android:layout_marginBottom="26dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="43dp"
+                android:layout_marginRight="43dp">
 
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvBreedInfo"
-                    app:simpleTitleView_image_size="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_breed_info"
-                    app:simpleTitleView_text="@string/text_breed_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_breed_info" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvPigeonMatchInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_pigeon_match_info"
-                    app:simpleTitleView_text="@string/text_pigeon_match_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_pigeon_match_info" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvPigeonPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_pigeon_photo"
-                    app:simpleTitleView_text="@string/text_pigeon_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_pigeon_photo" />
 
             </RelativeLayout>
 

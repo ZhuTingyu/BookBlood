@@ -31,4 +31,21 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
         });
     }
 
+    //获取  公告通知统计
+    public void getTXGP_GongGao_CountData() {
+        submitRequestThrowError(AnnouncementNoticeModel.getTXGP_GongGao_Count(), r -> {
+            if (r.isOk()) {
+                hintDialog("未读公告条数:" + r.data.getCount());
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取  公告通知详细
+    public void getTXGP_GongGao_DetailData(String detailId) {
+        submitRequestThrowError(AnnouncementNoticeModel.getTXGP_GongGao_Detail(detailId), r -> {
+            if (r.isOk()) {
+                hintDialog("详细获取成功：" + r.toJsonString());
+            } else throw new HttpErrorException(r);
+        });
+    }
 }

@@ -181,7 +181,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         //保证界面只有一个错误提示
-
         if (errorDialog == null || !errorDialog.isShowing()) {
             errorDialog = DialogUtils.createErrorDialog(baseActivity, message);
         }

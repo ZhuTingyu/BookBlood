@@ -10,7 +10,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-
 import com.base.http.R;
 import com.base.util.IntentBuilder;
 import com.base.util.utility.StringUtil;
@@ -43,13 +42,13 @@ public class BaseWebViewActivity extends BaseActivity {
 
         String temp = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
 
-        if(StringUtil.isStringValid(temp)){
+        if (StringUtil.isStringValid(temp)) {
             url = temp;
         }
 
         title = getIntent().getStringExtra(IntentBuilder.KEY_TITLE);
 
-        if(StringUtil.isStringValid(title)){
+        if (StringUtil.isStringValid(title)) {
             setTitle(title);
         }
 
@@ -101,11 +100,15 @@ public class BaseWebViewActivity extends BaseActivity {
                 if (progressBar != null) {
                     progressBar.setVisibility(View.GONE);
                 }
+
+                if (title != null) {
+                    BaseWebViewActivity.this.setTitle(title);
+                } else {
+                    BaseWebViewActivity.this.setTitle(view.getTitle());
+                }
             }
 
-
             @Override
-
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
                 view.loadUrl(url);
@@ -121,7 +124,7 @@ public class BaseWebViewActivity extends BaseActivity {
 
     }
 
-    protected void loadWebByHtml(String url){
+    protected void loadWebByHtml(String url) {
         webView.loadDataWithBaseURL(null, url, "text/html", "utf-8", null);
     }
 
@@ -148,7 +151,7 @@ public class BaseWebViewActivity extends BaseActivity {
         super.onDestroy();
     }
 
-    protected void loadJsFinish(){
+    protected void loadJsFinish() {
 
     }
 

@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,6 +34,14 @@ public class LogbookFragment extends BaseBookFragment {
                 .startParentActivity(activity, LogbookFragment.class);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mViewModel = new LogbookViewModel();
+        initViewModel(mViewModel);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,11 +52,10 @@ public class LogbookFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setTitle("操作日志");
+
         mRecyclerView = findViewById(R.id.list);
-
-        mViewModel = new LogbookViewModel();
-        initViewModel(mViewModel);
-
         mViewModel.logbookData.observe(this, logbookEntities -> {
 
             if (logbookEntities.isEmpty()) {

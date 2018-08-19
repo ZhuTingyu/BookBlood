@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,6 +28,13 @@ public class SignFragment extends BaseBookFragment {
                 .startParentActivity(activity, SignFragment.class);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mSignViewModel = new SignViewModel();
+        initViewModel(mSignViewModel);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,9 +46,8 @@ public class SignFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mSignViewModel = new SignViewModel();
-        initViewModel(mSignViewModel);
 
+        setTitle("签到");
 
         mSignViewModel.pigeonFriendMsgListData.observe(this, signRuleListEntities -> {
             //签到规则

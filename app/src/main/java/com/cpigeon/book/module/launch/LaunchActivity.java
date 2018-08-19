@@ -9,19 +9,12 @@ import android.widget.ImageView;
 
 import com.base.base.BaseActivity;
 import com.base.util.BarUtils;
-import com.base.util.IntentBuilder;
-import com.base.util.RxUtils;
 import com.base.util.SharedPreferencesUtil;
 import com.base.util.Utils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.launch.viewmodel.LaunchViewModel;
 import com.cpigeon.book.module.login.LoginActivity;
-import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
-
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Zhu TingYu on 2018/7/26.
@@ -95,23 +88,26 @@ public class LaunchActivity extends BaseActivity {
 
     private void enterApp() {
 
-        if (mIsFirstOpen) {
-            SharedPreferencesUtil.setBoolean(this
-                    , SharedPreferencesUtil.GUIDE_FILE, IS_FIRST_OPEN, false);
-            IntentBuilder.Builder(this, GuideActivity.class)
-                    .startActivity();
-        } else {
-            if (UserModel.getInstance().isLogin()) {
-                if (UserModel.getInstance().isHaveHouseInfo()) {
-                    MainActivity.start(getBaseActivity());
-                } else {
-                    PigeonHouseInfoFragment.start(getBaseActivity(), false);
-                }
-            } else {
-                LoginActivity.start(this);
-            }
-        }
-        finish();
+        LoginActivity.start(this);
+
+
+//        if (mIsFirstOpen) {
+//            SharedPreferencesUtil.setBoolean(this
+//                    , SharedPreferencesUtil.GUIDE_FILE, IS_FIRST_OPEN, false);
+//            IntentBuilder.Builder(this, GuideActivity.class)
+//                    .startActivity();
+//        } else {
+//            if (UserModel.getInstance().isLogin()) {
+//                if (UserModel.getInstance().isHaveHouseInfo()) {
+//                    MainActivity.start(getBaseActivity());
+//                } else {
+//                    PigeonHouseInfoFragment.start(getBaseActivity(), false);
+//                }
+//            } else {
+//                LoginActivity.start(this);
+//            }
+//        }
+//        finish();
     }
 
 }

@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.HEAD;
 
 /**
  * Created by Administrator on 2018/8/7.
@@ -18,13 +19,16 @@ public class FootAdminModel {
 
 
     //hl 添加足环（单个）
+
     public static Observable<ApiResponse<Object>> getTXGP_FootRing_Add(String countryId,String foot, String money, String footType, String footSource, String remark) {
+
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.foot_add_single)
                 .addBody("codeid", countryId)
                 .addBody("numstr", foot)//足环号码
+                .addBody("codeid", countryId)//国家id
                 .addBody("money", money)//足环金额
                 .addBody("typeid", footType)// 足环类型
                 .addBody("source", footSource)// 足环来源
@@ -89,18 +93,4 @@ public class FootAdminModel {
     }
 
 
-    //hl 得到各种类型的足环个数
-    public static Observable<ApiResponse<List<FootEntity>>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String year, String typeid, String stateid, String key) {
-        return RequestData.<ApiResponse<List<FootEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<FootEntity>>>() {
-                }.getType())
-                .url(R.string.foot_list_all)
-                .addBody("pi", String.valueOf(pi))
-                .addBody("ps", String.valueOf(ps))
-                .addBody("year", year)
-                .addBody("typeid", typeid)
-                .addBody("stateid", stateid)
-                .addBody("key", key)
-                .request();
-    }
 }

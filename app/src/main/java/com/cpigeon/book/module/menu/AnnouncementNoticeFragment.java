@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.AnnouncementNoticeEntity;
 import com.cpigeon.book.module.menu.adapter.AnnouncementNoticeAdapter;
 import com.cpigeon.book.module.menu.viewmodel.AnnouncementNoticeViewModel;
 
@@ -32,6 +34,14 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
                 .startParentActivity(activity, AnnouncementNoticeFragment.class);
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mViewModel = new AnnouncementNoticeViewModel();
+        initViewModels(mViewModel);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,8 +54,11 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = findViewById(R.id.list);
 
-        mViewModel = new AnnouncementNoticeViewModel();
-        initViewModel(mViewModel);
+        setTitle("公告通知");
+        setToolbarRight("统计", item -> {
+            mViewModel.getTXGP_GongGao_CountData();
+            return true;
+        });
 
         mViewModel.announcementNoticeData.observe(this, logbookEntities -> {
 
@@ -64,6 +77,13 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
             mViewModel.pi = 1;
             mViewModel.getTXGP_GetGongGaoData();
         });
+
+
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            AnnouncementNoticeEntity mAnnouncementNoticeEntity = (AnnouncementNoticeEntity) adapter.getData().get(position);
+            mViewModel.getTXGP_GongGao_DetailData(mAnnouncementNoticeEntity.getId());
+        });
+
 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnLoadMoreListener(() -> {

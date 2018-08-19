@@ -30,6 +30,7 @@
         <attr name="lineInputView_RightString" format="string" />
         <attr name="lineInputView_IsLookState" format="boolean" />
         <attr name="lineInputView_DrawableRight" format="reference" />
+        <attr name="lineInputView_DrawableLeft" format="reference" />
         <attr name="lineInputView_IsNotNull" format="boolean" />
         <attr name="lineInputView_IsCanEdit" format="boolean" />
         <attr name="lineInputView_Hint" format="string" />
