@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.base.BaseFragment;
+import com.base.util.dialog.DialogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

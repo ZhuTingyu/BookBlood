@@ -15,6 +15,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.menu.adapter.FeedbackAdapter;
 import com.cpigeon.book.module.menu.viewmodel.FeedbackViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
  * 意见反馈列表
@@ -83,14 +84,7 @@ public class FeedbackListFragment extends BaseBookFragment {
     @Override
     protected void initObserve() {
         mViewModel.feedbackListData.observe(this, logbookEntities -> {
-            mRecyclerView.setRefreshing(false);
-            if (logbookEntities.isEmpty()) {
-                mAdapter.setLoadMore(true);
-                mAdapter.setEmptyView();
-            } else {
-                mAdapter.setLoadMore(false);
-                mAdapter.addData(logbookEntities);
-            }
+            RecyclerViewUtils.setRefreshingCallBack(mRecyclerView, mAdapter, logbookEntities);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

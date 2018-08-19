@@ -44,6 +44,7 @@
             <flag name="visible" value="0x00000000" />
             <flag name="invisible" value="0x00000004" />
         </attr>
+        <attr name="lineInputView_isShowEditBoard" format="boolean"/>
         <attr name="lineInputView_InputType" />
     </declare-styleable>
 
@@ -94,6 +95,7 @@
         <attr name="text" format="string" />
         <attr name="text_hint" format="string" />
         <attr name="edit_max_input_line" format="integer" />
+        <attr name="inputBoxView_tittle" format="string" />
 
     </declare-styleable>
 

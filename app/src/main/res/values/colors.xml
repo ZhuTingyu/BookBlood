@@ -10,6 +10,7 @@
     <color name="color_gary">#a3a2a2</color>
     <color name="color_text_color_gray">#808080</color>
     <color name="color_text_cancel">#4D4D4D</color>
+    <color name="color_text_title">#4D4D4D</color>
     <color name="color_text_can_click">#FFFFFF</color>
     <color name="color_text_hint">#B3B3B3</color>
     <color name="color_btn_bg_not_can_click">#85C2FF</color>

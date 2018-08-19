@@ -58,7 +58,7 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mFootAdminModel = new FootAdminViewModel();
+        mFootAdminModel = new FootAdminViewModel(getBaseActivity());
         initViewModels(mFootAdminModel);
 
     }
@@ -83,7 +83,7 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
                 break;
             case R.id.tvOk:
 
-                mFootAdminModel.getTXGP_FootRing_AddData();
+                //mFootAdminModel.getTXGP_FootRing_AddData();
                 ToastUtils.showLong(getActivity(), "6");
                 break;
         }

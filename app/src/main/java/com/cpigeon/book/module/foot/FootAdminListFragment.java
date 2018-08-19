@@ -1,20 +1,28 @@
 package com.cpigeon.book.module.foot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
+import com.base.util.Utils;
+import com.base.widget.BottomSheetAdapter;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.entity.FootAdminListEntity;
+import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.module.foot.adapter.FootAdminListAdapter;
+import com.cpigeon.book.module.foot.viewmodel.FootAdminListViewModel;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
  * Created by Administrator on 2018/8/17.
@@ -25,63 +33,86 @@ public class FootAdminListFragment extends BaseBookFragment {
 
     private XRecyclerView mRecyclerView;
 
-    private FootAdminViewModel mFootAdminModel;
+    private FootAdminListViewModel mViewModel;
     private FootAdminListAdapter mAdapter;
+    private TextView mTvOk;
+    SearchFragmentParentActivity mActivity;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mViewModel = new FootAdminListViewModel();
+        initViewModels(mViewModel);
+        mActivity = (SearchFragmentParentActivity) getBaseActivity();
+    }
 
     public static void start(Activity activity) {
-        IntentBuilder.Builder()
-                .startParentActivity(activity, FootAdminListFragment.class);
+        SearchFragmentParentActivity.start(activity, FootAdminListFragment.class);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.xrecyclerview_no_padding_layout, container, false);
+        View view = inflater.inflate(R.layout.xreclyview_with_bottom_btn, container, false);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = findViewById(R.id.list);
 
-        mFootAdminModel = new FootAdminViewModel();
-        initViewModels(mFootAdminModel);
+        mActivity.setSearchHint(R.string.text_input_foot_number_search);
+        mActivity.setSearchClickListener(v -> {
 
-        mFootAdminModel.footAdminListData.observe(this, logbookEntities -> {
-
-            if (logbookEntities.isEmpty()) {
-                mAdapter.setLoadMore(true);
-            } else {
-                mAdapter.setLoadMore(false);
-                mAdapter.addData(logbookEntities);
-            }
         });
 
+        mRecyclerView = findViewById(R.id.list);
+        mTvOk = findViewById(R.id.tvOk);
 
         mAdapter = new FootAdminListAdapter(null);
 
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.getData().clear();
-            mFootAdminModel.pi = 1;
-            mFootAdminModel.getTXGP_FootRing_SelectKeyAllData();
+            mViewModel.pi = 1;
+            mViewModel.getFoodList();
         });
 
         mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.addItemDecorationLine();
+
         mAdapter.setOnLoadMoreListener(() -> {
-            mFootAdminModel.pi++;
-            mFootAdminModel.getTXGP_FootRing_SelectKeyAllData();
+            mViewModel.pi++;
+            mViewModel.getFoodList();
         }, mRecyclerView.getRecyclerView());
 
-        mFootAdminModel.getTXGP_FootRing_SelectKeyAllData();
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-//            FootAdminDetailsSingleFragment.start(getActivity());
-            FootAdminListEntity mFootAdminListEntity = (FootAdminListEntity) adapter.getData().get(position);
+            FootAdminSingleFragment.start(getBaseActivity(), String.valueOf(mAdapter.getItem(position).getFootRingID()));
+        });
+        String[] chooseWays = getResources().getStringArray(R.array.array_choose_input_foot_number);
+        mTvOk.setText(R.string.text_add_foot_number);
+        mTvOk.setOnClickListener(v -> {
+            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays),p -> {
+                if(chooseWays[p].equals(Utils.getString(R.string.text_one_foot_input))){
+                    FootAdminSingleFragment.start(getBaseActivity());
+                }else {
+
+                }
+            });
+        });
 
 
-            IntentBuilder.Builder().putExtra(IntentBuilder.KEY_DATA,  mFootAdminListEntity)
-                    .startParentActivity(getActivity(), FootAdminDetailsSingleFragment.class);
+        setProgressVisible(true);
+        mViewModel.getFoodList();
+    }
+
+    @Override
+    protected void initObserve() {
+        mViewModel.footAdminListData.observe(this, logbookEntities -> {
+            setProgressVisible(false);
+            RecyclerViewUtils.setRefreshingCallBack(mRecyclerView, mAdapter, logbookEntities);
         });
     }
 }

@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -205,6 +206,22 @@ public abstract class BaseFragment extends Fragment {
             toolbar.getMenu().add(string)
                     .setOnMenuItemClickListener(listener)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+    }
+
+    protected void setToolbarRightImage(@DrawableRes int icon, MenuItem.OnMenuItemClickListener listener) {
+        if (toolbar != null) {
+            toolbar.getMenu().clear();
+            toolbar.getMenu().add("").setIcon(icon)
+                    .setOnMenuItemClickListener(listener)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+    }
+
+    protected void setToolbarLeft(@DrawableRes int resId, View.OnClickListener onClickListener){
+        if (toolbar != null) {
+            toolbar.setNavigationIcon(resId);
+            toolbar.setNavigationOnClickListener(onClickListener);
         }
     }
 

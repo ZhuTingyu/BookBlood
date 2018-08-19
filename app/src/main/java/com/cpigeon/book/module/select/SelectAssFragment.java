@@ -28,9 +28,9 @@ import com.gjiazhe.wavesidebar.WaveSideBar;
 
 public class SelectAssFragment extends BaseFragment {
 
-    XRecyclerView mRecyclerView;
-
     SelectAssAdapter mAdapter;
+
+    XRecyclerView mRecyclerView;
     WaveSideBar mWaveSideBar;
     LetterSortModel<AssEntity> mModel = new LetterSortModel<>();
     SelectAssViewModel mViewModel;
@@ -45,7 +45,7 @@ public class SelectAssFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_select_ass, container, false);
+        return inflater.inflate(R.layout.fragment_select_with_wave_bar, container, false);
     }
 
     @Override

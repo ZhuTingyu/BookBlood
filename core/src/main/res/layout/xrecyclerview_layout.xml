@@ -9,6 +9,6 @@
     app:mainLayoutId="@layout/refresh_recyclerview"
     app:recyclerClipToPadding="false"
     app:recyclerPaddingLeft="16dp"
-    android:background="@color/white"
     app:recyclerPaddingRight="16dp"
+    android:background="@color/white"
     app:scrollbarStyle="insideOverlay" />

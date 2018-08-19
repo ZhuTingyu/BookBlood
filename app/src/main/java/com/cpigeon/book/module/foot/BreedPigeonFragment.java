@@ -74,7 +74,7 @@ public class BreedPigeonFragment extends BaseBookFragment {
 
         bindUi(RxUtils.textChanges(et9), mBreedPigeonViewModel.setDetailsFootId());
 
-        bindUi(RxUtils.textChanges(et8_1), mPigeonPublicViewModel.setSelectType());
+       // bindUi(RxUtils.textChanges(et8_1), mPigeonPublicViewModel.setSelectType());
     }
 
     //    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9})
@@ -116,7 +116,7 @@ public class BreedPigeonFragment extends BaseBookFragment {
 
             case R.id.btn8:
                 //获取足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别
-                mPigeonPublicViewModel.getTXGP_Type_SelectData();
+                //mPigeonPublicViewModel.getTXGP_Type_SelectData();
                 break;
 
             case R.id.btn9:

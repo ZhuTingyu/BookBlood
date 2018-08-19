@@ -43,7 +43,7 @@
             <com.cpigeon.book.widget.SimpleTitleView
                 android:id="@+id/simpleText1"
                 app:simpleTitleView_image_size="40dp"
-                app:simpleTitleView_text="@string/text_food_number_input"
+                app:simpleTitleView_text="@string/text_foot_number_input"
                 app:simpleTitleView_image="@mipmap/ic_foot_manger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

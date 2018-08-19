@@ -42,7 +42,8 @@ public class LineInputView extends RelativeLayout {
     Drawable mDrawableRight;
     boolean mIsNotNull;
     boolean mIsCanEdit;
-    boolean mIsLeft;
+    boolean mIsEditLeft;
+    boolean mIsHaveEditBoard;
 
     int mShowLineDivision;//是否显示分割线
     int mInputType;
@@ -94,7 +95,8 @@ public class LineInputView extends RelativeLayout {
         mIsNotNull = array.getBoolean(R.styleable.LineInputView_lineInputView_IsNotNull, false);
         mIsCanEdit = array.getBoolean(R.styleable.LineInputView_lineInputView_IsCanEdit, true);
         mInputType = array.getInt(R.styleable.LineInputView_lineInputView_InputType, 0);
-        mIsLeft = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLeft, false);
+        mIsEditLeft = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLeft, false);
+        mIsHaveEditBoard = array.getBoolean(R.styleable.LineInputView_lineInputView_isShowEditBoard, false);
 
 
         mShowLineDivision = array.getInt(R.styleable.LineInputView_lineInputView_isShowLineDivisions, View.VISIBLE);
@@ -121,7 +123,7 @@ public class LineInputView extends RelativeLayout {
         if (mInputType != 0) {
             mEditText.setInputType(mInputType);
         }
-        if (mIsLeft) {
+        if (mIsEditLeft) {
             mEditText.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
         } else {
             mEditText.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
@@ -130,7 +132,7 @@ public class LineInputView extends RelativeLayout {
         if (mDrawableRight != null) {
             mImgRight.setVisibility(VISIBLE);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            if (mIsLeft) {
+            if (mIsEditLeft) {
                 layoutParams.setMargins(ScreenTool.dip2px(8), 0, 0, 0);
             } else {
                 layoutParams.setMargins(ScreenTool.dip2px(16), 0, 0, 0);
@@ -152,7 +154,9 @@ public class LineInputView extends RelativeLayout {
             });
         } else {
             mEditText.setOnFocusChangeListener(null);
-            mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
+            if(mIsHaveEditBoard){
+                mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
+            }
             setNotNullDrawable(mIsNotNull);
         }
     }
@@ -239,7 +243,6 @@ public class LineInputView extends RelativeLayout {
             mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
         }else {
             mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
-
         }
     }
 }

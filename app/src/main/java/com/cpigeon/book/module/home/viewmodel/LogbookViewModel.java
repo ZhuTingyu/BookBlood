@@ -5,7 +5,6 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.LogbookModel;
-import com.cpigeon.book.model.entity.FootAdminListEntity;
 import com.cpigeon.book.model.entity.LogbookEntity;
 
 import java.util.List;

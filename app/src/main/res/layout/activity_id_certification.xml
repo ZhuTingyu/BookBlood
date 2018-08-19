@@ -146,6 +146,7 @@
                     android:id="@+id/lvName"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_name" />
                 <!--身份证号-->
@@ -153,6 +154,7 @@
                     android:id="@+id/lvNumber"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_id_card_number" />
                 <!--性别-->
@@ -160,6 +162,7 @@
                     android:id="@+id/lvSex"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_sex" />
 
@@ -168,6 +171,7 @@
                     android:id="@+id/lvFamily"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_family" />
 
@@ -177,7 +181,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     app:lineInputView_IsCanEdit="false"
-                    app:lineInputView_LeftString="@string/text_details_address" />
+                    app:lineInputView_LeftString="@string/text_details_address"
+                    app:lineInputView_isShowRightImage="gone" />
 
             </com.cpigeon.book.widget.LineInputListLayout>
 
@@ -222,6 +227,7 @@
                     android:id="@+id/lvAuthority"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_authority" />
 
@@ -230,6 +236,7 @@
                     android:id="@+id/lvIndate"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
+                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_indate" />
 

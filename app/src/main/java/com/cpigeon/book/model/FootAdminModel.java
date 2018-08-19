@@ -3,8 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.DetailsSingleFootEntity;
-import com.cpigeon.book.model.entity.FootAdminListEntity;
+import com.cpigeon.book.model.entity.FootEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -19,22 +18,22 @@ public class FootAdminModel {
 
 
     //hl 添加足环（单个）
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Add(String foot, String money, String footType, String footState, String footSource, String remark) {
+    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Add(String countryId,String foot, String money, String footType, String footSource, String remark) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.foot_add_single)
+                .addBody("codeid", countryId)
                 .addBody("numstr", foot)//足环号码
                 .addBody("money", money)//足环金额
                 .addBody("typeid", footType)// 足环类型
-                .addBody("stateid", footState)// 足环状态
                 .addBody("source", footSource)// 足环来源
                 .addBody("reamrk", remark)// 备注
                 .request();
     }
 
     //hl 修改足环（单个）
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Edit(String footId, String codeid, String foot, String money, String footType, String footState, String footSource, String remark) {
+    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Edit(String footId, String codeid, String foot, String money, String footType,  String footSource, String remark) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
@@ -44,7 +43,6 @@ public class FootAdminModel {
                 .addBody("numstr", foot)//足环号码
                 .addBody("money", money)//足环金额
                 .addBody("typeid", footType)// 足环类型
-                .addBody("state", footState)// 足环状态
                 .addBody("source", footSource)// 足环来源
                 .addBody("remark", remark)// 备注
                 .request();
@@ -62,9 +60,9 @@ public class FootAdminModel {
 
 
     //hl 获取单个足环详细
-    public static Observable<ApiResponse<DetailsSingleFootEntity>> getTXGP_FootRing_Select(String footId) {
-        return RequestData.<ApiResponse<DetailsSingleFootEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<DetailsSingleFootEntity>>() {
+    public static Observable<ApiResponse<FootEntity>> getTXGP_FootRing_Select(String footId) {
+        return RequestData.<ApiResponse<FootEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<FootEntity>>() {
                 }.getType())
                 .url(R.string.foot_details_single)
                 .addBody("footid", footId)
@@ -92,9 +90,9 @@ public class FootAdminModel {
 
 
     //hl 得到各种类型的足环个数
-    public static Observable<ApiResponse<List<FootAdminListEntity>>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String year, String typeid, String stateid, String key) {
-        return RequestData.<ApiResponse<List<FootAdminListEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<FootAdminListEntity>>>() {
+    public static Observable<ApiResponse<List<FootEntity>>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String year, String typeid, String stateid, String key) {
+        return RequestData.<ApiResponse<List<FootEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<FootEntity>>>() {
                 }.getType())
                 .url(R.string.foot_list_all)
                 .addBody("pi", String.valueOf(pi))

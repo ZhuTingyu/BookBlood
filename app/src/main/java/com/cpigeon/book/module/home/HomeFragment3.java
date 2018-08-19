@@ -12,7 +12,6 @@ import android.widget.Button;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.foot.BreedPigeonFragment;
-import com.cpigeon.book.module.foot.FootAdminHomeFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.foot.StatisticalFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
@@ -59,7 +58,7 @@ public class HomeFragment3 extends BaseBookFragment {
         ac_btns5 = findViewById(R.id.ac_btns5);
 
         acBtn.setOnClickListener(v -> {
-            FootAdminHomeFragment.start(getActivity());
+            //FootAdminHomeFragment.start(getActivity());
         });
 
 

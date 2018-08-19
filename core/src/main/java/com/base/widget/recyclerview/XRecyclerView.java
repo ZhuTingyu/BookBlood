@@ -208,7 +208,7 @@ public class XRecyclerView extends FrameLayout {
      */
 
     public void addItemDecorationLine(){
-        addItemDecorationLine(R.color.im_line_color, ScreenTool.dip2px(0.5f));
+        addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f));
     }
 
     protected void addItemDecorationLine( @ColorRes int color, int size){

@@ -127,7 +127,7 @@ public class DialogUtils {
      * @return
      */
 
-    public static SweetAlertDialog createSuccessDialog(Context context, String message,boolean  cancelable,SweetAlertDialog.OnSweetClickListener mConfirmClick) {
+    public static SweetAlertDialog createSuccessDialog(Context context, String message, boolean cancelable,SweetAlertDialog.OnSweetClickListener mConfirmClick) {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);
         dialogPrompt.setTitleText("成功");
@@ -136,6 +136,18 @@ public class DialogUtils {
         dialogPrompt.setCancelable(cancelable);
         dialogPrompt.show();
         return dialogPrompt;
+    }
+
+    /**
+     * 显示成功弹框
+     *
+     * @param context
+     * @param message
+     * @return
+     */
+
+    public static SweetAlertDialog createSuccessDialog(Context context, String message,SweetAlertDialog.OnSweetClickListener mConfirmClick) {
+       return createSuccessDialog(context, message, false, mConfirmClick);
     }
 
     public static void createDialog(Context context, String title, String content

@@ -49,8 +49,12 @@
         <item>@string/text_open_camera</item>
         <item>@string/text_open_gallery</item>
     </string-array>
-
-
+    <string name="text_one_foot_input">单个足环录入</string>
+    <string name="text_foots_input">号码段录入</string>
+    <string-array name="array_choose_input_foot_number">
+        <item>@string/text_one_foot_input</item>
+        <item>@string/text_foots_input</item>
+    </string-array>
 
     <!--关于我们-->
     <string name="cpigeon_intro">中鸽助手是为中鸽网公棚和协会用户提供信息发布、赛鸽管理和比赛监控的平台。目前提供：公棚赛鸽摄像、鸽运通（比赛监控）、训鸽通（个人训放监控）、鸽信通（短信群发）等服务和公棚、协会信息发布管理等功能，一部手机搞定所有工作，简单便捷高效，节省您的时间、提高工作效率。</string>
@@ -90,12 +94,20 @@
     <string name="text_female">女</string>
     <string name="text_id_card_p">身份证正面</string>
     <string name="text_id_card_n">身份证背面</string>
-    <string name="text_food_number_input">足环录入</string>
+    <string name="text_foot_number_input">足环录入</string>
     <string name="text_match_pigeon_train">赛鸽路训</string>
     <string name="text_breed_pigeon_input">种鸽录入</string>
     <string name="text_pigeon_take_photo">爱鸽拍照</string>
     <string name="text_match_pigeon_input">赛鸽录入</string>
     <string name="text_match_pigeon_tool">赛鸽工具</string>
     <string name="text_search_ass">点击搜索协会</string>
+    <string name="text_add_foot_number">添加足环号码</string>
+    <string name="text_input_foot_number_search">请输入足环号码进行搜索</string>
+    <string name="text_remark">备注</string>
+    <string name="text_yuan">%1$s元</string>
+    <string name="text_foot_details">足环详情</string>
+    <string name="text_delect">删除</string>
+    <string name="text_is_sure_delect_foot_number">是否确定删除该足环 ?</string>
+
 
 </resources>

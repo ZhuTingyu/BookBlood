@@ -29,8 +29,10 @@ public class InputBoxView extends LinearLayout {
     private int maxInputLine;
     private String text;
     private String textHint;
+    private String title;
     private EditText input_box_editText;
     private TextView tv_hint;
+    private TextView mTvTitle;
 
     public InputBoxView(Context context) {
         this(context, null);
@@ -60,6 +62,7 @@ public class InputBoxView extends LinearLayout {
 
         text = array.getString(R.styleable.InputBoxView_text);
         textHint = array.getString(R.styleable.InputBoxView_text_hint);
+        title = array.getString(R.styleable.InputBoxView_inputBoxView_tittle);
     }
 
     private void initView() {
@@ -67,6 +70,7 @@ public class InputBoxView extends LinearLayout {
 
         input_box_editText = view.findViewById(R.id.input_box_editText);
         tv_hint = view.findViewById(R.id.tv_hint);
+        mTvTitle = view.findViewById(R.id.tvTitle);
 
         input_box_editText.setHintTextColor(getResources().getColor(hintColor));
         input_box_editText.setTextColor(getResources().getColor(textColor));
@@ -96,9 +100,8 @@ public class InputBoxView extends LinearLayout {
             }
         });
 
-
         tv_hint.setHint(textHint);
-
+        mTvTitle.setText(title);
 
     }
 
