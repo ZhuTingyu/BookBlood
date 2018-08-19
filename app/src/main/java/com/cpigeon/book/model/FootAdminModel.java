@@ -91,6 +91,21 @@ public class FootAdminModel {
                 .addBody("remark", remark)//备注
                 .request();
     }
+    //hl 得到各种类型的足环个数
+    public static Observable<ApiResponse<List<FootEntity>>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String year, String typeid, String stateid, String key) {
+        return RequestData.<ApiResponse<List<FootEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<FootEntity>>>() {
+                }.getType())
+                .url(R.string.foot_list_all)
+                .addBody("pi", String.valueOf(pi))
+                .addBody("ps", String.valueOf(ps))
+                .addBody("year", year)
+                .addBody("typeid", typeid)
+                .addBody("stateid", stateid)
+                .addBody("key", key)
+                .request();
+    }
+
 
 
 }
