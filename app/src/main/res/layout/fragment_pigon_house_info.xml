@@ -58,6 +58,7 @@
                     app:lineInputView_IsNotNull="true"
                     app:lineInputView_IsLeft="true"
                     app:lineInputView_isShowEditBoard="true"
+                    app:lineInputView_InputType="phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -76,6 +77,7 @@
                     app:lineInputView_IsNotNull="true"
                     app:lineInputView_IsLeft="true"
                     app:lineInputView_LeftString="@string/text_register_shed_number"
+                    app:lineInputView_InputType="number"
                     app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_isShowEditBoard="true"
                     android:layout_width="match_parent"
@@ -87,6 +89,7 @@
                     app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_isShowEditBoard="true"
                     app:lineInputView_IsLeft="true"
+                    app:lineInputView_InputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

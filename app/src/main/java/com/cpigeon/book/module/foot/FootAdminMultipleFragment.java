@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/8/10.
  */
 
-public class FootAdminAddMultipleFragment extends BaseBookFragment {
+public class FootAdminMultipleFragment extends BaseBookFragment {
 
 
     @BindView(R.id.lv_city)
@@ -44,7 +44,7 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, FootAdminAddMultipleFragment.class);
+                .startParentActivity(activity, FootAdminMultipleFragment.class);
     }
 
     @Nullable

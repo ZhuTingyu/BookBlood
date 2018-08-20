@@ -46,22 +46,9 @@ public class SearchAssActivity extends BaseSearchActivity {
 
         mViewModel.liveAss.observe(this, assEntities -> {
             mSearchAssAdapter.setNewData(assEntities);
-            SearchHistoryEntity historyEntity = new SearchHistoryEntity();
-            historyEntity.searchTitle = mViewModel.getKey();
-            AppDatabase.getInstance(getBaseActivity()).saveData(historyEntity
-                    ,AppDatabase.TYPE_SEARCH_ASS_HISTORY, UserModel.getInstance().getUserId());
+            saveHistroy(mViewModel.getKey(), AppDatabase.TYPE_SEARCH_ASS_HISTORY);
             mRlHistory.setVisibility(View.GONE);
         });
-
-        List<DbEntity> history = AppDatabase.getInstance(getBaseActivity())
-                .DbEntityDao().getDataByUserAndType(UserModel.getInstance().getUserId(), AppDatabase.TYPE_SEARCH_ASS_HISTORY);
-
-        if(!Lists.isEmpty(history)){
-            mRlHistory.setVisibility(View.VISIBLE);
-            mSearchHistoryAdapter.setNewData(AppDatabase.getDates(history, SearchHistoryEntity.class));
-        }else {
-            mRlHistory.setVisibility(View.GONE);
-        }
 
         mSearchAssAdapter.setOnItemClickListener((adapter, view, position) -> {
             IntentBuilder.Builder()
@@ -74,12 +61,6 @@ public class SearchAssActivity extends BaseSearchActivity {
             mViewModel.getAssList();
         });
 
-        mSearchHistoryAdapter.setOnDeleteClickListener(p -> {
-            AppDatabase.getInstance(getBaseActivity()).DbEntityDao().delete(history.get(p));
-            if(mSearchHistoryAdapter.getData().isEmpty()){
-                mRlHistory.setVisibility(View.GONE);
-            }
-        });
 
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
@@ -94,12 +75,12 @@ public class SearchAssActivity extends BaseSearchActivity {
             }
         });
 
-        mTvCleanHistory.setOnClickListener(v -> {
-            AppDatabase.getInstance(getBaseActivity()).delectAll(history);
-            mSearchHistoryAdapter.getData().clear();
-            mRlHistory.setVisibility(View.GONE);
-        });
+    }
 
+    @Override
+    protected List<DbEntity> getHistory() {
+        return AppDatabase.getInstance(getBaseActivity())
+                .DbEntityDao().getDataByUserAndType(UserModel.getInstance().getUserId(), AppDatabase.TYPE_SEARCH_ASS_HISTORY);
     }
 
 }

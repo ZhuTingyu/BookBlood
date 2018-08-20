@@ -10,19 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.widget.BottomSheetAdapter;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
-import com.cpigeon.book.model.entity.FootEntity;
+import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.module.foot.adapter.FootAdminListAdapter;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminListViewModel;
-import com.cpigeon.book.module.foot.viewmodel.FootAdminViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Administrator on 2018/8/17.
@@ -54,7 +56,7 @@ public class FootAdminListFragment extends BaseBookFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.xreclyview_with_bottom_btn, container, false);
+        View view = inflater.inflate(R.layout.fragment_foot_list, container, false);
         return view;
     }
 
@@ -64,13 +66,13 @@ public class FootAdminListFragment extends BaseBookFragment {
 
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-
+            BaseSearchActivity.start(getActivity(), SearchFootActivity.class);
         });
 
         mRecyclerView = findViewById(R.id.list);
         mTvOk = findViewById(R.id.tvOk);
 
-        mAdapter = new FootAdminListAdapter(null);
+        mAdapter = new FootAdminListAdapter(getBaseActivity());
 
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.getData().clear();
@@ -87,10 +89,6 @@ public class FootAdminListFragment extends BaseBookFragment {
             mViewModel.getFoodList();
         }, mRecyclerView.getRecyclerView());
 
-
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            FootAdminSingleFragment.start(getBaseActivity(), String.valueOf(mAdapter.getItem(position).getFootRingID()));
-        });
         String[] chooseWays = getResources().getStringArray(R.array.array_choose_input_foot_number);
         mTvOk.setText(R.string.text_add_foot_number);
         mTvOk.setOnClickListener(v -> {
@@ -103,7 +101,6 @@ public class FootAdminListFragment extends BaseBookFragment {
             });
         });
 
-
         setProgressVisible(true);
         mViewModel.getFoodList();
     }
@@ -112,7 +109,14 @@ public class FootAdminListFragment extends BaseBookFragment {
     protected void initObserve() {
         mViewModel.footAdminListData.observe(this, logbookEntities -> {
             setProgressVisible(false);
-            RecyclerViewUtils.setRefreshingCallBack(mRecyclerView, mAdapter, logbookEntities);
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, logbookEntities);
         });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(FootUpdateEvent event){
+        mAdapter.getData().clear();
+        mViewModel.pi = 1;
+        mViewModel.getFoodList();
     }
 }

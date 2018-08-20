@@ -352,4 +352,9 @@ public class IntentBuilder {
         activity.setResult(Activity.RESULT_OK, intent);
         activity.finish();
     }
+    public void finishForResult(Activity activity, int resultCode){
+        activity.setResult(resultCode, intent);
+        activity.finish();
+    }
+
 }

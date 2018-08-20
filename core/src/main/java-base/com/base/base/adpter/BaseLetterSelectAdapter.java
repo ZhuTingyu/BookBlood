@@ -78,7 +78,7 @@ public abstract class BaseLetterSelectAdapter<K extends LetterSortEntity, B exte
         waveSideBar.setIndexItems(model.getLetters().toArray(new String[model.getLetters().size()]));
         waveSideBar.setOnSelectIndexItemListener(index -> {
             for (int i = 0; i < model.getData().size(); i++) {
-                if (index.equals(model.getData().get(i))) {
+                if (index.equals(model.getData().get(i).getLetter())) {
                     ((LinearLayoutManager) getRecyclerView().getLayoutManager()).scrollToPositionWithOffset(i, 0);
                     return;
                 }
