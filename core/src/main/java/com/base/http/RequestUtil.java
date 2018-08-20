@@ -96,6 +96,17 @@ public class RequestUtil<T> {
         return this;
     }
 
+
+    public RequestUtil<T> addImageFileBodys(Map<String, String> body) {
+        Iterator<Map.Entry<String, String>> entries = body.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry<String, String> entry = entries.next();
+            imageFileParameter.put(entry.getKey(), entry.getValue());
+        }
+        return this;
+    }
+
+
     /**
      * 添加视频文件参数
      *

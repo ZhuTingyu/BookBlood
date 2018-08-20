@@ -3,12 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/color_bg_window"
     android:fadingEdge="none"
     android:orientation="vertical"
     android:overScrollMode="never"
-    android:paddingLeft="@dimen/spacing_left_reight"
-    android:paddingRight="@dimen/spacing_left_reight"
     android:scrollbars="none">
 
     <LinearLayout
@@ -16,13 +14,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <!--鸽舍信息-->
         <com.cpigeon.book.widget.LineInputView
             android:id="@+id/ll_loft_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_geshe"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -35,6 +35,9 @@
             android:id="@+id/ll_account_security"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
             app:lineInputView_DrawableLeft="@mipmap/info_anquan"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
@@ -48,12 +51,17 @@
             android:id="@+id/ll_share_txgp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_fenxiang"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="分享天下鸽谱"
-            app:lineInputView_RightString="" />
+            app:lineInputView_RightString=""
+            app:lineInputView_isShowLineDivisions="gone" />
 
 
         <!--账户余额-->
@@ -61,7 +69,10 @@
             android:id="@+id/ll_account_balance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_yue"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -73,7 +84,10 @@
             android:id="@+id/ll_renewal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_xufei"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -86,7 +100,10 @@
             android:id="@+id/ll_my_gebi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_gebi"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -99,12 +116,17 @@
             android:id="@+id/ll_my_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_dingdan"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="我的订单"
-            app:lineInputView_RightString="" />
+            app:lineInputView_RightString=""
+            app:lineInputView_isShowLineDivisions="gone" />
 
 
         <!--关于我们-->
@@ -112,7 +134,10 @@
             android:id="@+id/ll_about_us"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_guanyu"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -125,7 +150,10 @@
             android:id="@+id/ll_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_my_balance"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_shezhi"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -138,20 +166,25 @@
             android:id="@+id/ll_feedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_yue"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="意见反馈"
             app:lineInputView_RightString="" />
 
-
         <!--使用帮助-->
         <com.cpigeon.book.widget.LineInputView
             android:id="@+id/ll_use_help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_my_balance"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_shezhi"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -164,7 +197,10 @@
             android:id="@+id/ll_logbook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_my_balance"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_rizhi"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -177,7 +213,10 @@
             android:id="@+id/ll_announcement_notice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lineInputView_DrawableLeft="@mipmap/info_my_balance"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_DrawableLeft="@mipmap/info_guanyu"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
@@ -189,12 +228,16 @@
             android:id="@+id/ll_pigeon_friend_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
             app:lineInputView_DrawableLeft="@mipmap/info_anquan"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="鸽友消息"
-            app:lineInputView_RightString="" />
+            app:lineInputView_RightString=""
+            app:lineInputView_isShowLineDivisions="gone" />
 
 
     </LinearLayout>

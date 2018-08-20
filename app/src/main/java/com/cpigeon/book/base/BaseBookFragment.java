@@ -32,7 +32,7 @@ public class BaseBookFragment extends BaseFragment {
 
             //保证界面只有一个错误提示
             if (getBaseActivity().errorDialog == null || !getBaseActivity().errorDialog.isShowing()) {
-                getBaseActivity().errorDialog = DialogUtils.createSuccessDialog(getActivity(), error, SweetAlertDialog.ERROR_TYPE, false, dialog -> {
+                getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), error, SweetAlertDialog.ERROR_TYPE, false, dialog -> {
                     dialog.dismiss();
                     //结束所有页面，跳转到登录页
                     AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);

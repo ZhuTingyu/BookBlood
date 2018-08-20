@@ -43,7 +43,7 @@ public class PictureSelectUtil {
     }
 
     public static void showChooseHeadImage(Activity activity) {
-        showChooseImage(activity, PictureMimeType.ofImage(), 1, true,PictureConfig.SINGLE);
+        showChooseImage(activity, PictureMimeType.ofImage(), 1, true, PictureConfig.SINGLE);
     }
 
     public static void showChooseImage(Activity activity, int type, int count, boolean isCrop, int selectionMode) {
@@ -60,10 +60,11 @@ public class PictureSelectUtil {
                 //.isZoomAnim(true)// 图片列表点击 缩放效果 默认true
                 //.sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
                 //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径,可不填
+                .compressMaxKB(200)
                 .enableCrop(isCrop)// 是否裁剪 true or false
                 .compress(true)// 是否压缩 true or false
                 //.glideOverride()// int glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
-                .withAspectRatio(1,1)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
+                .withAspectRatio(1, 1)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
                 .hideBottomControls(false)// 是否显示uCrop工具栏，默认不显示 true or false
                 .isGif(true)// 是否显示gif图片 true or false
                 //.compressSavePath(getPath())//压缩图片保存地址
@@ -74,7 +75,7 @@ public class PictureSelectUtil {
                 .openClickSound(false)// 是否开启点击声音 true or false
                 //.selectionMedia()// 是否传入已选图片 List<LocalMedia> list
                 .previewEggs(true)// 预览图片时 是否增强左右滑动图片体验(图片滑动一半即可看到上一张是否选中) true or false
-                .cropCompressQuality(90)// 裁剪压缩质量 默认90 int
+                .cropCompressQuality(75)// 裁剪压缩质量 默认90 int
                 //.minimumCompressSize(100)// 小于100kb的图片不压缩
                 //.synOrAsy(true)//同步true或异步false 压缩 默认同步
                 //.cropWH()// 裁剪宽高比，设置如果大于图片本身宽高则无效 int
@@ -93,7 +94,7 @@ public class PictureSelectUtil {
     }
 
 
-    public static void openCamera(Activity activity,boolean isCrop) {
+    public static void openCamera(Activity activity, boolean isCrop) {
         // 进入相机 以下是例子：不需要的api可以不写
         PictureSelector.create(activity)
                 .openCamera(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()
@@ -112,12 +113,11 @@ public class PictureSelectUtil {
     }
 
 
-
-    public void cleanCache(Activity activity){
+    public void cleanCache(Activity activity) {
         PictureFileUtils.deleteCacheDirFile(activity);
     }
 
-    public void showVedios(Activity activity, String path){
+    public void showVedios(Activity activity, String path) {
         PictureSelector.create(activity).externalPictureVideo(path);
     }
 

@@ -13,23 +13,23 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 
 /**
- * Created by Administrator on 2018/8/19.
+ * hl  续费
+ * Created by Administrator on 2018/8/20.
  */
-
-public class OrderListFragment extends BaseBookFragment {
+public class RenewalFragment extends BaseBookFragment {
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, OrderListFragment.class);
+                .startParentActivity(activity, RenewalFragment.class);
     }
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_renewal, container, false);
         return view;
     }
+
 
 
 }

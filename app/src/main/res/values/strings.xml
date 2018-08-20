@@ -45,10 +45,23 @@
     <string name="text_lo">经度 %1$s</string>
     <string name="text_error_not_select_location">选择地址异常，请检查网络</string>
     <string name="title_map_location">地图定位</string>
+
+
+    <string name="text_renewal_login_psd">修改登录密码</string>
+    <string name="text_renewal_play_psd">修改支付密码</string>
+
+
     <string-array name="array_choose_photo">
         <item>@string/text_open_camera</item>
         <item>@string/text_open_gallery</item>
     </string-array>
+
+    <!--账户安全-->
+    <string-array name="array_account_security">
+        <item>@string/text_renewal_login_psd</item>
+        <item>@string/text_renewal_play_psd</item>
+    </string-array>
+
     <string name="text_one_foot_input">单个足环录入</string>
     <string name="text_foots_input">号码段录入</string>
     <string-array name="array_choose_input_foot_number">
@@ -57,6 +70,15 @@
     </string-array>
 
     <!--关于我们-->
+    <string name="string_about_as_tv">天下鸽谱是一款方便快捷录入并管理信鸽信息，基于中鸽网12年来高达100G的赛鸽数据进行云计算分析处理，特别推出的产品！ \n特色功能划分： \n种：足环管理，种鸽管理，血统书制作，血缘寻根。 \n养：爱鸽日记，配对牵线，病情分析，药物推荐。 \n训：记录、分析每一次训鸽成绩，优胜劣汰。 \n赛：赛鸽管理，赛鸽成绩汇总，通过云系统进行大数据全面分析赛鸽成绩，铭鸽评选。 </string>
+    <string name="string_about_as_tv1">天下鸽谱是一款方便快捷录入并管理信鸽信息，基于中鸽网12年来高达100G的赛鸽数据进行云计算分析处理，特别推出的产品！</string>
+    <string name="string_about_as_tv2"> 特色功能划分：</string>
+    <string name="string_about_as_tv3"> 种：足环管理，种鸽管理，血统书制作，血缘寻根。 </string>
+    <string name="string_about_as_tv4">养：爱鸽日记，配对牵线，病情分析，药物推荐。  </string>
+    <string name="string_about_as_tv5">训：记录、分析每一次训鸽成绩，优胜劣汰。 </string>
+    <string name="string_about_as_tv6"> 赛：赛鸽管理，赛鸽成绩汇总，通过云系统进行大数据全面分析赛鸽成绩，铭鸽评选。</string>
+
+
     <string name="cpigeon_intro">中鸽助手是为中鸽网公棚和协会用户提供信息发布、赛鸽管理和比赛监控的平台。目前提供：公棚赛鸽摄像、鸽运通（比赛监控）、训鸽通（个人训放监控）、鸽信通（短信群发）等服务和公棚、协会信息发布管理等功能，一部手机搞定所有工作，简单便捷高效，节省您的时间、提高工作效率。</string>
     <string name="user_agreement">用户协议</string>
     <string name="function_introduction">功能介绍</string>

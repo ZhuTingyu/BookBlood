@@ -7,6 +7,7 @@ import com.cpigeon.book.model.BreedPigeonModel;
 import io.reactivex.functions.Consumer;
 
 /**
+ * 种鸽管理
  * Created by Administrator on 2018/8/6.
  */
 
@@ -29,7 +30,6 @@ public class BreedPigeonViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
-
 
 
     //添加种鸽

@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 
 import com.base.base.BaseWebViewActivity;
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
+import com.base.util.Utils;
+import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
@@ -42,7 +45,6 @@ public class InfoDetailsFragment extends BaseBookFragment {
 
         setTitle("我的");
 
-
         setToolbarRight("签到", item -> {
             //签到
             SignFragment.start(getActivity());
@@ -52,7 +54,7 @@ public class InfoDetailsFragment extends BaseBookFragment {
 
     @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting,
             R.id.ll_feedback, R.id.ll_announcement_notice, R.id.ll_pigeon_friend_msg, R.id.ll_use_help, R.id.ll_my_order,
-            R.id.ll_my_gebi, R.id.ll_renewal, R.id.ll_account_balance})
+            R.id.ll_my_gebi, R.id.ll_renewal, R.id.ll_account_balance, R.id.ll_share_txgp})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_loft_info:
@@ -61,7 +63,18 @@ public class InfoDetailsFragment extends BaseBookFragment {
                 break;
             case R.id.ll_account_security:
                 //账户安全
-                AccountSecurityFragment.start(getActivity());
+                String[] chooseWays = getResources().getStringArray(R.array.array_account_security);
+                BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
+                    String way = chooseWays[p];
+                    if (Utils.getString(R.string.text_renewal_login_psd).equals(way)) {
+                        //修改登录密码
+                        ReviseLoginPsdFragment.start(getActivity());
+                    } else if (Utils.getString(R.string.text_renewal_play_psd).equals(way)) {
+                        //修改支付密码
+                        RevisePlayPsdFragment.start(getActivity());
+                    }
+                });
+
                 break;
             case R.id.ll_logbook:
                 //操作日志
@@ -71,7 +84,6 @@ public class InfoDetailsFragment extends BaseBookFragment {
                 //关于我们
                 AboutAsFragment.start(getActivity());
                 break;
-
             case R.id.ll_setting:
                 SettingFragment.start(getActivity());
                 break;
@@ -79,24 +91,20 @@ public class InfoDetailsFragment extends BaseBookFragment {
                 //意见反馈
                 FeedbackListFragment.start(getActivity());
                 break;
-
             case R.id.ll_announcement_notice:
                 //公告通知
                 AnnouncementNoticeFragment.start(getActivity());
                 break;
-
             case R.id.ll_pigeon_friend_msg:
                 //鸽友消息
                 PigeonFriendMsgFragment.start(getActivity());
                 break;
-
             case R.id.ll_use_help:
                 //使用帮助
                 Intent intent2 = new Intent(getActivity(), BaseWebViewActivity.class);
                 intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_use_help)));
                 startActivity(intent2);
                 break;
-
             case R.id.ll_my_order:
                 //我的订单
                 OrderListFragment.start(getActivity());
@@ -107,7 +115,7 @@ public class InfoDetailsFragment extends BaseBookFragment {
                 break;
             case R.id.ll_renewal:
                 //续费
-
+                RenewalFragment.start(getActivity());
                 break;
             case R.id.ll_account_balance:
                 //账户余额
@@ -115,7 +123,9 @@ public class InfoDetailsFragment extends BaseBookFragment {
                 break;
             case R.id.ll_share_txgp:
                 //分享天下鸽谱
-
+                Intent intent1 = new Intent(getActivity(), BaseWebViewActivity.class);
+                intent1.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_app_share)));
+                startActivity(intent1);
                 break;
         }
     }

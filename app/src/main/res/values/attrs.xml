@@ -10,13 +10,13 @@
     </declare-styleable>
 
     <declare-styleable name="SimpleTitleView">
-        <attr name="simpleTitleView_DefaultTextColor" format="color"/>
-        <attr name="simpleTitleView_PressTextColor" format="color"/>
-        <attr name="simpleTitleView_image" format="reference|color"/>
-        <attr name="simpleTitleView_press_image" format="reference|color"/>
-        <attr name="simpleTitleView_image_size" format="dimension"/>
-        <attr name="simpleTitleView_text_size" format="dimension"/>
-        <attr name="simpleTitleView_text" format="string"/>
+        <attr name="simpleTitleView_DefaultTextColor" format="color" />
+        <attr name="simpleTitleView_PressTextColor" format="color" />
+        <attr name="simpleTitleView_image" format="reference|color" />
+        <attr name="simpleTitleView_press_image" format="reference|color" />
+        <attr name="simpleTitleView_image_size" format="dimension" />
+        <attr name="simpleTitleView_text_size" format="dimension" />
+        <attr name="simpleTitleView_text" format="string" />
 
     </declare-styleable>
 
@@ -80,6 +80,12 @@
             <flag name="date" value="0x00000014" />
             <flag name="time" value="0x00000024" />
         </attr>
+        <attr name="lineInputView_content_paddingLeft" format="integer" />
+        <attr name="lineInputView_content_paddingRight" format="integer" />
+
+        <attr name="lineInputView_line_paddingLift" format="integer" />
+        <attr name="lineInputView_line_paddingRight" format="integer" />
+
     </declare-styleable>
 
     <declare-styleable name="SearchTextView">

@@ -13,6 +13,7 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.FeedbackListEntity;
 import com.cpigeon.book.module.menu.adapter.FeedbackAdapter;
 import com.cpigeon.book.module.menu.viewmodel.FeedbackViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -72,12 +73,19 @@ public class FeedbackListFragment extends BaseBookFragment {
 
         mViewModel.getZGW_Users_Feedback_ListData();
 
-
         setTitle("意见反馈");
 
         setToolbarRight("反馈", item -> {
             FeedbackAddFragment.start(getActivity());
             return true;
+        });
+
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            FeedbackListEntity mFeedbackListEntity = (FeedbackListEntity) adapter.getData().get(position);
+
+            IntentBuilder.Builder()
+                    .putExtra(IntentBuilder.KEY_DATA, mFeedbackListEntity.getId())
+                    .startParentActivity(getActivity(), FeedbackDetailsFragment.class);
         });
     }
 

@@ -15,6 +15,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.home.adapter.LogbookAdapter;
 import com.cpigeon.book.module.home.viewmodel.LogbookViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
  * hl 操作日志
@@ -56,16 +57,6 @@ public class LogbookFragment extends BaseBookFragment {
         setTitle("操作日志");
 
         mRecyclerView = findViewById(R.id.list);
-        mViewModel.logbookData.observe(this, logbookEntities -> {
-
-            if (logbookEntities.isEmpty()) {
-                mAdapter.setLoadMore(true);
-            } else {
-                mAdapter.setLoadMore(false);
-                mAdapter.addData(logbookEntities);
-            }
-        });
-
 
         mAdapter = new LogbookAdapter(null);
 
@@ -82,5 +73,20 @@ public class LogbookFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
 
         mViewModel.getZGW_Users_GetLogData();
+
     }
+
+
+    @Override
+    protected void initObserve() {
+
+        mViewModel.logbookData.observe(this, datas -> {
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+        });
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+    }
+
 }

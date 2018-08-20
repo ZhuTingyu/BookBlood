@@ -105,7 +105,7 @@ public abstract class BaseFragment extends Fragment {
 
                 //保证界面只有一个错误提示
                 if (baseActivity.errorDialog == null || !baseActivity.errorDialog.isShowing()) {
-                    baseActivity.errorDialog = DialogUtils.createSuccessDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE,restHintInfo.cancelable, sweetAlertDialog -> {
+                    baseActivity.errorDialog = DialogUtils.createHintDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE,restHintInfo.cancelable, sweetAlertDialog -> {
                         sweetAlertDialog.dismiss();
 
                         if (restHintInfo.isClosePage) {
@@ -139,7 +139,7 @@ public abstract class BaseFragment extends Fragment {
 
                     //保证界面只有一个错误提示
                     if (baseActivity.errorDialog == null || !baseActivity.errorDialog.isShowing()) {
-                        baseActivity.errorDialog = DialogUtils.createSuccessDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE,restHintInfo.cancelable, sweetAlertDialog -> {
+                        baseActivity.errorDialog = DialogUtils.createHintDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE,restHintInfo.cancelable, sweetAlertDialog -> {
                             sweetAlertDialog.dismiss();
 
                             if (restHintInfo.isClosePage) {

@@ -5,9 +5,13 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.FeedbackModel;
+import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.FeedbackDetails;
 import com.cpigeon.book.model.entity.FeedbackListEntity;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.functions.Consumer;
 
@@ -20,7 +24,7 @@ public class FeedbackViewModel extends BaseViewModel {
 
 
     public int pi = 1;
-    public int ps = 5;
+    public int ps = 15;
 
     public MutableLiveData<List<FeedbackListEntity>> feedbackListData = new MutableLiveData<>();
 
@@ -35,20 +39,22 @@ public class FeedbackViewModel extends BaseViewModel {
     }
 
 
+    public MutableLiveData<FeedbackDetails> feedbackDetailsData = new MutableLiveData<>();
+
+
     //获取  意见反馈详情
-    public void getZGW_Users_Feedback_DetailData() {
-        submitRequestThrowError(FeedbackModel.getZGW_Users_Feedback_Detail(pi, ps), r -> {
+    public void getZGW_Users_Feedback_DetailData(String id) {
+        submitRequestThrowError(FeedbackModel.getZGW_Users_Feedback_Detail(id), r -> {
             if (r.isOk()) {
-//                FeedbackListData.setValue(r.data);
+                feedbackDetailsData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
 
 
     public String contentSub;//反馈内容
-    public String contactSub;//联系方式
-    public String strFileSub;//文件路径
-
+    public String contactSub = UserModel.getInstance().getUserData().handphone;//联系方式
+    public Map<String, String> imgFile = new HashMap<>();//文件路径
 
     public Consumer<String> setContentSub() {
         return s -> {
@@ -56,18 +62,11 @@ public class FeedbackViewModel extends BaseViewModel {
         };
     }
 
-
-    public Consumer<String> setContactSub() {
-        return s -> {
-            contactSub = s;
-        };
-    }
-
     //获取  意见反馈 提交
     public void getZGW_Users_Feedback_AddData() {
-        submitRequestThrowError(FeedbackModel.getZGW_Users_Feedback_Add(contentSub, contactSub), r -> {
+        submitRequestThrowError(FeedbackModel.getZGW_Users_Feedback_Add(contentSub, contactSub, imgFile), r -> {
             if (r.isOk()) {
-//                FeedbackListData.setValue(r.data);
+                hintDialog(r.toJsonString());
             } else throw new HttpErrorException(r);
         });
     }

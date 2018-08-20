@@ -58,6 +58,13 @@ public class LineInputView extends RelativeLayout {
     LinearLayout mLlContent;
 
     View line_division;//分割线
+    LinearLayout layout_view;//内容总布局
+
+    int content_paddingLeft;
+    int content_paddingRight;
+
+    int line_paddingLeft;
+    int line_paddingRight;
 
     public interface OnRightClickListener {
         void click(LineInputView lineInputView);
@@ -101,10 +108,11 @@ public class LineInputView extends RelativeLayout {
         mIsEditLeft = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLeft, false);
         mIsHaveEditBoard = array.getBoolean(R.styleable.LineInputView_lineInputView_isShowEditBoard, false);
 
-
         mShowLineDivision = array.getInt(R.styleable.LineInputView_lineInputView_isShowLineDivisions, View.VISIBLE);
         mRightImageVisible = array.getInt(R.styleable.LineInputView_lineInputView_isShowRightImage, View.VISIBLE);
 
+
+        content_paddingLeft = array.getInt(R.styleable.LineInputView_lineInputView_InputType, 0);
 
     }
 
@@ -115,6 +123,8 @@ public class LineInputView extends RelativeLayout {
         mImgRight = view.findViewById(R.id.imgRight);
         mLlContent = view.findViewById(R.id.llContent);
         line_division = view.findViewById(R.id.line_division);
+
+        layout_view = view.findViewById(R.id.layout_view);
 
         imgLeft = view.findViewById(R.id.img_left);
 
@@ -167,7 +177,7 @@ public class LineInputView extends RelativeLayout {
             });
         } else {
             mEditText.setOnFocusChangeListener(null);
-            if(mIsHaveEditBoard){
+            if (mIsHaveEditBoard) {
                 mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
             }
             setNotNullDrawable(mIsNotNull);

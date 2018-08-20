@@ -14,11 +14,13 @@ import java.util.List;
 public class FeedbackAdapter extends BaseQuickAdapter<FeedbackListEntity, BaseViewHolder> {
 
     public FeedbackAdapter(List<FeedbackListEntity> data) {
-        super(R.layout.item_logbook, data);
+        super(R.layout.item_feedback, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, FeedbackListEntity item) {
 
+        helper.setText(R.id.tv_title, item.getContent());
+        helper.setText(R.id.tv_time, item.getDatetime());
     }
 }
