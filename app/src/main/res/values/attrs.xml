@@ -10,13 +10,13 @@
     </declare-styleable>
 
     <declare-styleable name="SimpleTitleView">
-        <attr name="simpleTitleView_DefaultTextColor" format="color"/>
-        <attr name="simpleTitleView_PressTextColor" format="color"/>
-        <attr name="simpleTitleView_image" format="reference|color"/>
-        <attr name="simpleTitleView_press_image" format="reference|color"/>
-        <attr name="simpleTitleView_image_size" format="dimension"/>
-        <attr name="simpleTitleView_text_size" format="dimension"/>
-        <attr name="simpleTitleView_text" format="string"/>
+        <attr name="simpleTitleView_DefaultTextColor" format="color" />
+        <attr name="simpleTitleView_PressTextColor" format="color" />
+        <attr name="simpleTitleView_image" format="reference|color" />
+        <attr name="simpleTitleView_press_image" format="reference|color" />
+        <attr name="simpleTitleView_image_size" format="dimension" />
+        <attr name="simpleTitleView_text_size" format="dimension" />
+        <attr name="simpleTitleView_text" format="string" />
 
     </declare-styleable>
 
@@ -45,8 +45,15 @@
             <flag name="visible" value="0x00000000" />
             <flag name="invisible" value="0x00000004" />
         </attr>
-        <attr name="lineInputView_isShowEditBoard" format="boolean"/>
+        <attr name="lineInputView_isShowEditBoard" format="boolean" />
         <attr name="lineInputView_InputType" />
+
+
+        <attr name="lineInputView_content_paddingLeft" format="integer" />
+        <attr name="lineInputView_content_paddingRight" format="integer" />
+
+        <attr name="lineInputView_line_paddingLift" format="integer" />
+        <attr name="lineInputView_line_paddingRight" format="integer" />
     </declare-styleable>
 
     <attr name="LineInputView_InputType">

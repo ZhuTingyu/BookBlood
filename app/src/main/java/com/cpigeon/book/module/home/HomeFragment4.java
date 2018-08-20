@@ -24,7 +24,7 @@ public class HomeFragment4 extends BaseBookFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_share_hall, container, false);
     }
 
     @Override

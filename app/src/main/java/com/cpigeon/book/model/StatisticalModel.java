@@ -21,4 +21,16 @@ public class StatisticalModel {
                 .url(R.string.foot_num_type)
                 .request();
     }
+
+
+    //hl 获取种鸽 （赛鸽） 雌雄数量
+    public static Observable<ApiResponse<Object>> getPigeonSexCount(String pigeonType) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pigeon_sex_count)
+                .addBody("type", pigeonType)//种鸽（赛鸽） 或全部
+                .request();
+    }
+
 }

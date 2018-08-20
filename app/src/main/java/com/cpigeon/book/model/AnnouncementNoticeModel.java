@@ -3,7 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.AnnouncementNoticeCountEntity;
+import com.cpigeon.book.model.entity.MsgCountEntity;
 import com.cpigeon.book.model.entity.AnnouncementNoticeEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,9 +31,9 @@ public class AnnouncementNoticeModel {
 
 
     //hl 公告通知统计
-    public static Observable<ApiResponse<AnnouncementNoticeCountEntity>> getTXGP_GongGao_Count() {
-        return RequestData.<ApiResponse<AnnouncementNoticeCountEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<AnnouncementNoticeCountEntity>>() {
+    public static Observable<ApiResponse<MsgCountEntity>> getTXGP_GongGao_Count() {
+        return RequestData.<ApiResponse<MsgCountEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<MsgCountEntity>>() {
                 }.getType())
                 .url(R.string.get_announcement_notice_count)
                 .request();
@@ -41,9 +41,9 @@ public class AnnouncementNoticeModel {
 
 
     //hl 公告通知详情
-    public static Observable<ApiResponse<AnnouncementNoticeCountEntity>> getTXGP_GongGao_Detail(String id) {
-        return RequestData.<ApiResponse<AnnouncementNoticeCountEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<AnnouncementNoticeCountEntity>>() {
+    public static Observable<ApiResponse<MsgCountEntity>> getTXGP_GongGao_Detail(String id) {
+        return RequestData.<ApiResponse<MsgCountEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<MsgCountEntity>>() {
                 }.getType())
                 .url(R.string.get_announcement_notice_detail)
                 .addBody("id", id)

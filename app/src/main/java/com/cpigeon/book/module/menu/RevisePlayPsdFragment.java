@@ -1,6 +1,6 @@
-package com.cpigeon.book.module.home;
+package com.cpigeon.book.module.menu;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,27 +8,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 
 /**
- * Created by Zhu TingYu on 2018/7/10.
+ * hl  修改支付密码
+ * Created by Administrator on 2018/8/8.
  */
 
-public class HomeFragment2 extends BaseBookFragment {
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+public class RevisePlayPsdFragment extends BaseBookFragment {
+
+    public static void start(Activity activity) {
+        IntentBuilder.Builder()
+                .startParentActivity(activity, RevisePlayPsdFragment.class);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_ming_pigeon_library, container, false);
+        View view = inflater.inflate(R.layout.fragment_revise_play_psd, container, false);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setTitle("修改支付密码");
+
     }
 }

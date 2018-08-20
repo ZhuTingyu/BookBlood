@@ -16,6 +16,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.PigeonFriendMsgListEntity;
 import com.cpigeon.book.module.menu.adapter.PigeonFriendMsgAdapter;
 import com.cpigeon.book.module.menu.viewmodel.PigeonFriendMsgViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
  * 鸽友消息
@@ -54,17 +55,12 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle("鸽友消息");
 
-        mRecyclerView = findViewById(R.id.list);
-
-        mViewModel.pigeonFriendMsgListData.observe(this, logbookEntities -> {
-
-            if (logbookEntities.isEmpty()) {
-                mAdapter.setLoadMore(true);
-            } else {
-                mAdapter.setLoadMore(false);
-                mAdapter.addData(logbookEntities);
-            }
+        setToolbarRight("统计", item -> {
+            mViewModel.getTXGP_Msg_CountData();
+            return true;
         });
+
+        mRecyclerView = findViewById(R.id.list);
 
         mAdapter = new PigeonFriendMsgAdapter(null);
 
@@ -92,5 +88,18 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
             mViewModel.getTXGP_Msg_DetailData(mPigeonFriendMsgListEntity.getId());
         });
 
+    }
+
+
+    @Override
+    protected void initObserve() {
+
+        mViewModel.pigeonFriendMsgListData.observe(this, datas -> {
+            RecyclerViewUtils.setRefreshingCallBack(mRecyclerView, mAdapter, datas);
+        });
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
     }
 }

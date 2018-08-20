@@ -16,6 +16,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.AnnouncementNoticeEntity;
 import com.cpigeon.book.module.menu.adapter.AnnouncementNoticeAdapter;
 import com.cpigeon.book.module.menu.viewmodel.AnnouncementNoticeViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
  * 公告通知
@@ -60,15 +61,6 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
             return true;
         });
 
-        mViewModel.announcementNoticeData.observe(this, logbookEntities -> {
-
-            if (logbookEntities.isEmpty()) {
-                mAdapter.setLoadMore(true);
-            } else {
-                mAdapter.setLoadMore(false);
-                mAdapter.addData(logbookEntities);
-            }
-        });
 
         mAdapter = new AnnouncementNoticeAdapter(null);
 
@@ -92,6 +84,20 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
 
         mViewModel.getTXGP_GetGongGaoData();
+    }
+
+
+
+    @Override
+    protected void initObserve() {
+
+        mViewModel.announcementNoticeData.observe(this, datas -> {
+            RecyclerViewUtils.setRefreshingCallBack(mRecyclerView, mAdapter, datas);
+        });
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
     }
 
 }

@@ -118,6 +118,7 @@ public class DialogUtils {
         return null;
     }
 
+
     /**
      * 显示成功或错误弹框
      *
@@ -125,9 +126,7 @@ public class DialogUtils {
      * @param message
      * @return
      */
-
-
-    public static SweetAlertDialog createSuccessDialog(Context context, String message, int alerType, boolean cancelable, SweetAlertDialog.OnSweetClickListener mConfirmClick) {
+    public static SweetAlertDialog createHintDialog(Context context, String message, int alerType, boolean cancelable, SweetAlertDialog.OnSweetClickListener mConfirmClick) {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context, alerType);
 

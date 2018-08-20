@@ -1,11 +1,11 @@
 package com.cpigeon.book.model.entity;
 
 /**
- * 公告通知统计数据
+ * 公告通知  鸽友消息  统计数据
  * Created by Administrator on 2018/8/19.
  */
 
-public class AnnouncementNoticeCountEntity {
+public class MsgCountEntity {
 
 
     /**

@@ -17,7 +17,7 @@ public class PigeonFriendMsgListEntity {
      */
 
     private String id;
-    private String isread;
+    private String isread;//是否已读   1：已读  0 ：未读
     private String content;
     private String title;
     private String source;

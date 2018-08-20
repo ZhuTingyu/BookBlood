@@ -39,7 +39,7 @@
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text="查询种鸽（或者赛鸽）的雄鸽雌鸽数量" />
     </LinearLayout>
 
 

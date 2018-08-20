@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.base.util.Utils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.menu.viewmodel.FeedbackViewModel;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -65,12 +67,10 @@ public class FeedbackAddFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         setTitle("反馈");
+        etContact.setText(UserModel.getInstance().getUserData().handphone);
 
         bindUi(RxUtils.textChanges(etContent), mViewModel.setContentSub());//反馈内容
-        bindUi(RxUtils.textChanges(etContact), mViewModel.setContactSub());//联系方式
     }
 
 
@@ -83,7 +83,7 @@ public class FeedbackAddFragment extends BaseBookFragment {
                 BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
                     String way = chooseWays[p];
                     if (Utils.getString(R.string.text_open_gallery).equals(way)) {
-                        PictureSelectUtil.showChooseHeadImage(getBaseActivity());
+                        PictureSelectUtil.showChooseImage(getBaseActivity(), PictureMimeType.ofImage(), 6 - mViewModel.imgFile.size());
                     } else if (Utils.getString(R.string.text_open_camera).equals(way)) {
                         PictureSelectUtil.openCamera(getBaseActivity(), false);
                     }
@@ -102,7 +102,11 @@ public class FeedbackAddFragment extends BaseBookFragment {
         if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == PictureMimeType.ofImage()) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-            mViewModel.strFileSub = selectList.get(0).getCutPath();
+
+            for (int i = 0; i < selectList.size(); i++) {
+                Log.d("xiaohlssl", "onActivityResult: " + selectList.get(i).getCompressPath());
+                mViewModel.imgFile.put("pic" + (mViewModel.imgFile.size() + 1), selectList.get(i).getCompressPath());
+            }
         }
     }
 }

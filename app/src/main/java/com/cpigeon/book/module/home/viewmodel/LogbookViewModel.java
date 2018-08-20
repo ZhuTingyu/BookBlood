@@ -16,15 +16,16 @@ import java.util.List;
 public class LogbookViewModel extends BaseViewModel {
 
     public int pi = 1;
-    public int ps = 5;
+    public int ps = 15;
 
     public MutableLiveData<List<LogbookEntity>> logbookData = new MutableLiveData<>();
 
 
-    //获取  足环的类型  选择
+    //获取  操作日志列表
     public void getZGW_Users_GetLogData() {
         submitRequestThrowError(LogbookModel.getZGW_Users_GetLog(pi, ps), r -> {
             if (r.isOk()) {
+                listEmptyMessage.setValue(r.msg);
                 logbookData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });

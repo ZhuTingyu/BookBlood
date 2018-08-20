@@ -13,22 +13,29 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 
 /**
- * hl  账户安全
+ * hl  修改登录密码
  * Created by Administrator on 2018/8/8.
  */
 
-public class AccountSecurityFragment extends BaseBookFragment {
+public class ReviseLoginPsdFragment extends BaseBookFragment {
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, AccountSecurityFragment.class);
+                .startParentActivity(activity, ReviseLoginPsdFragment.class);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_account_security, container, false);
+        View view = inflater.inflate(R.layout.fragment_revise_login_psd, container, false);
         return view;
     }
 
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setTitle("修改登录密码");
+
+    }
 }

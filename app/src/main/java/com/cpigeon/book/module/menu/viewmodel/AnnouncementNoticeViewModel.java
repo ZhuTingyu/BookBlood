@@ -18,7 +18,7 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
 
 
     public int pi = 1;
-    public int ps = 5;
+    public int ps = 15;
 
     public MutableLiveData<List<AnnouncementNoticeEntity>> announcementNoticeData = new MutableLiveData<>();
 
@@ -26,6 +26,7 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
     public void getTXGP_GetGongGaoData() {
         submitRequestThrowError(AnnouncementNoticeModel.getTXGP_GetGongGao(pi, ps), r -> {
             if (r.isOk()) {
+                listEmptyMessage.setValue(r.msg);
                 announcementNoticeData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
