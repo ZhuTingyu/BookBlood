@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    android:id="@+id/rlRoot"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlRoot"
     android:layout_width="wrap_content"
-    android:background="@color/white"
     android:layout_height="wrap_content">
 
     <EditText
         android:id="@+id/edText"
         android:layout_width="90dp"
         android:layout_height="24dp"
+        android:background="@drawable/shape_bg_corner_5_solid_gray"
         android:gravity="center"
         android:hint="@string/text_custom"
-        android:textColorHint="@color/color_text_hint"
-        android:background="@drawable/shape_bg_corner_5_solid_gray"
+        android:maxLength="4"
+        android:inputType="time"
         android:textColor="@color/black"
-        android:textSize="@dimen/medium_text_size" />
+        android:textColorHint="@color/color_text_hint"
+        android:textSize="@dimen/small_text_size_2" />
 
 
 </RelativeLayout>

@@ -101,5 +101,10 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
     public void setEmptyText(String emptyText) {
         this.emptyText = emptyText;
     }
+
+    public void cleanList(){
+        getData().clear();
+        notifyDataSetChanged();
+    }
 }
 

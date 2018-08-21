@@ -19,7 +19,7 @@ import io.reactivex.functions.Consumer;
  * Created by Administrator on 2018/8/7.
  */
 
-public class FootAdminViewModel extends BaseViewModel {
+public class FootAdminSingleViewModel extends BaseViewModel {
 
     public MutableLiveData<String> oneStartHintStr = new MutableLiveData<>();
 
@@ -34,7 +34,7 @@ public class FootAdminViewModel extends BaseViewModel {
     public MutableLiveData<FootEntity> mFootLiveData = new MutableLiveData<>();
     public MutableLiveData<String> mdelectR = new MutableLiveData<>();
 
-    public FootAdminViewModel(Activity activity) {
+    public FootAdminSingleViewModel(Activity activity) {
         foodId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
     }
 
@@ -68,7 +68,7 @@ public class FootAdminViewModel extends BaseViewModel {
     }
 
     //删除足环（单个）
-    public void delecteFoot() {
+    public void deleteFoot() {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Delete(foodId), r -> {
             if (r.isOk()) {
                 mdelectR.setValue(r.msg);

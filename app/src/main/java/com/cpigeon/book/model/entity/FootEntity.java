@@ -41,11 +41,8 @@ public class FootEntity implements Parcelable {
     private String Remark;
     private int UseFootRingNum;
     private int Section;
-    /**
-     * EndFootRingNum : null
-     */
 
-    private Object EndFootRingNum;
+    private String EndFootRingNum;
 
     public int getFootRingID() {
         return FootRingID;
@@ -214,11 +211,11 @@ public class FootEntity implements Parcelable {
         }
     };
 
-    public Object getEndFootRingNum() {
+    public String getEndFootRingNum() {
         return EndFootRingNum;
     }
 
-    public void setEndFootRingNum(Object EndFootRingNum) {
+    public void setEndFootRingNum(String EndFootRingNum) {
         this.EndFootRingNum = EndFootRingNum;
     }
 }

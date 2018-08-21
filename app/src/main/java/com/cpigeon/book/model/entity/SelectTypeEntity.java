@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.base.util.Lists;
+import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
@@ -68,6 +69,25 @@ public class SelectTypeEntity implements MultiItemEntity, Parcelable {
             names.add(entity.getTypeName());
         }
         return names;
+    }
+
+    public static String getTypeIds(List<SelectTypeEntity> data){
+        //全部
+        if(data.size() == 1 && !StringUtil.isStringValid(data.get(0).getTypeName())){
+            return StringUtil.emptyString();
+        }else {
+            List<String> ids = Lists.newArrayList();
+            for (SelectTypeEntity entity : data) {
+                ids.add(entity.getTypeID());
+            }
+            return Lists.appendStringByList(ids);
+        }
+    }
+
+    public static SelectTypeEntity getCustomEntity(String whichType){
+        SelectTypeEntity entity = new SelectTypeEntity();
+        entity.setWhichType(whichType);
+        return entity;
     }
 
     @Override

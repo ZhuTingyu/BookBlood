@@ -6,6 +6,6 @@
         android:id="@+id/stateBar"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="18dp"/>
+        android:layout_height="@dimen/top_bar_height"/>
 
 </merge>

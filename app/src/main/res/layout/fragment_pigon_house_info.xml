@@ -107,7 +107,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvCity"
                     app:lineInputView_LeftString="@string/text_location"
-                    app:lineInputView_isShowRightImage="gone"
+                    app:lineInputView_isShowRightImage="visible"
                     app:lineInputView_isShowEditBoard="true"
                     app:lineInputView_IsLeft="true"
                     app:lineInputView_IsCanEdit="false"

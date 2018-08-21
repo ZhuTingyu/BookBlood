@@ -24,7 +24,7 @@ import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.foot.viewmodel.FootAdminViewModel;
+import com.cpigeon.book.module.foot.viewmodel.FootAdminSingleViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
@@ -63,7 +63,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     InputBoxView boxViewRemark;
     @BindView(R.id.lv_status)
     LineInputView lvStatus;
-    private FootAdminViewModel mViewModel;
+    private FootAdminSingleViewModel mViewModel;
     private SelectTypeViewModel mPublicViewModel;
 
     boolean mIsLook;
@@ -84,7 +84,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mViewModel = new FootAdminViewModel(getBaseActivity());
+        mViewModel = new FootAdminSingleViewModel(getBaseActivity());
         mPublicViewModel = new SelectTypeViewModel();
         initViewModels(mViewModel, mPublicViewModel);
     }
@@ -92,7 +92,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_single_foot, container, false);
+        View view = inflater.inflate(R.layout.fragment_admin_single_foot, container, false);
         return view;
     }
 
@@ -109,7 +109,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         bindUi(RxUtils.textChanges(lvSource.getEditText()), mViewModel.setFootSource());//来源
         bindUi(RxUtils.textChanges(boxViewRemark.getEditText()), mViewModel.setRemark());//备注
 
-        mPublicViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_NUMBER);
+        mPublicViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_RING);
         mPublicViewModel.getSelectType();
 
         lvCity.setOnClickListener(v -> {
@@ -118,11 +118,11 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
         if (mIsLook) {
             setToolbarRight(R.string.text_delete, item -> {
-                DialogUtils.createHintDialog(getBaseActivity()
+                DialogUtils.createDialogWithLeft(getBaseActivity()
                         , Utils.getString(R.string.text_is_sure_delete_foot_number)
                         , sweetAlertDialog -> {
                             setProgressVisible(true);
-                            mViewModel.delecteFoot();
+                            mViewModel.deleteFoot();
                         });
                 return false;
             });

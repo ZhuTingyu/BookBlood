@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +9,7 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_above="@+id/tvOk"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,7 +17,8 @@
             android:id="@+id/llRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/main_home_pop_bg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:paddingLeft="@dimen/spacing_left_reight"
             android:paddingRight="@dimen/spacing_left_reight">
@@ -24,13 +27,9 @@
                 android:id="@+id/lv_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                app:lineInputView_isShowRightImage="gone"
-                app:lineInputView_RightString="@string/text_china_code"
-                app:lineInputView_IsCanEdit="true"
+                app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
+                app:lineInputView_RightString="CHN"
                 app:lineInputView_LeftString="国家" />
 
             <com.cpigeon.book.widget.LineInputView
@@ -40,16 +39,7 @@
                 app:lineInputView_InputType="number"
                 app:lineInputView_IsCanEdit="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="起始足环" />
-
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lv_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:lineInputView_InputType="number"
-                app:lineInputView_IsCanEdit="true"
-                app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="数量" />
+                app:lineInputView_LeftString="足环" />
 
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lv_category"
@@ -58,6 +48,16 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="类别" />
+
+
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lv_status"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_isShowRightImage="gone"
+                app:lineInputView_LeftString="状态" />
 
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lv_source"
@@ -71,22 +71,24 @@
                 android:id="@+id/lv_money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:lineInputView_isShowRightImage="gone"
+                app:lineInputView_InputType="numberDecimal"
                 app:lineInputView_IsCanEdit="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_InputType="numberDecimal"
                 app:lineInputView_LeftString="金额" />
 
-
             <com.cpigeon.book.widget.InputBoxView
-                android:id="@+id/edRemark"
+                android:id="@+id/boxViewRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:inputBoxView_tittle="@string/text_remark"
                 app:text_hint="500字内" />
 
         </com.cpigeon.book.widget.LineInputListLayout>
+
     </android.support.v4.widget.NestedScrollView>
+
+
+
     <TextView
         android:id="@+id/tvOk"
         style="@style/bottom_style"

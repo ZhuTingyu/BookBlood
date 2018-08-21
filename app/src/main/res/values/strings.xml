@@ -136,6 +136,12 @@
     <string name="text_custom">自定义</string>
     <string name="text_reset">重置</string>
     <string name="text_sure">确定</string>
+    <string name="text_category">类别</string>
+    <string name="text_is_hand_ring">是否挂环</string>
+    <string name="text_year">年份</string>
+    <string name="text_china_code">CHN</string>
+    <string name="text_input_foot_numbers">足环号段录入</string>
+    <string name="text_foots">%1$s→%2$s</string>
 
 
 </resources>

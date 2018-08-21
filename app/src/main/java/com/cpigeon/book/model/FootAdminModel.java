@@ -75,19 +75,25 @@ public class FootAdminModel {
 
 
     //hl 添加足环号段
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_AddSection(String startFoot, String endFoot, String typeId, String stateId, String source
-            , String money, String usenum, String remark) {
-        return RequestData.<ApiResponse<Object>>build()
+    public static Observable<ApiResponse<String>> addMultiFoot(
+            String startFoot
+            , String count
+            , String typeId
+            , String source
+            , String cityCode
+            , String money
+            , String remark
+    ) {
+        return RequestData.<ApiResponse<String>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.foot_add_segment)
                 .addBody("fromNum", startFoot)//开始足环号
-                .addBody("endNum", endFoot)//终止足环号
+                .addBody("count", count)//终止足环号
                 .addBody("typeid", typeId)//类型
-                .addBody("state", stateId)//状态
                 .addBody("source", source)//来源
+                .addBody("codeid", cityCode)//来源
                 .addBody("money", money)//足环金额
-                .addBody("usenum", usenum)//挂环次数
                 .addBody("remark", remark)//备注
                 .request();
     }

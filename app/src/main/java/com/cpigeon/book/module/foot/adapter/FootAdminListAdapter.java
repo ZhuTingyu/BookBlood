@@ -4,8 +4,11 @@ import com.base.base.BaseActivity;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.FootEntity;
+import com.cpigeon.book.module.foot.FootAdminDetailsMultipleFragment;
+import com.cpigeon.book.module.foot.FootAdminMultipleFragment;
 import com.cpigeon.book.module.foot.FootAdminSingleFragment;
 
 import java.util.List;
@@ -29,8 +32,13 @@ public class FootAdminListAdapter extends BaseQuickAdapter<FootEntity, BaseViewH
         helper.setTextView(R.id.tvFootNumber, item.getFootRingNum());
         helper.setTextView(R.id.tvStatus, item.getStateName());
         helper.itemView.setOnClickListener(v -> {
-            FootAdminSingleFragment.start(getBaseActivity()
-                    , String.valueOf(getItem(helper.getAdapterPosition()).getFootRingID()));
+            if(StringUtil.isStringValid(item.getEndFootRingNum())){
+                FootAdminDetailsMultipleFragment.start(getBaseActivity()
+                        , String.valueOf(getItem(helper.getAdapterPosition()).getFootRingID()));
+            }else {
+                FootAdminSingleFragment.start(getBaseActivity()
+                        , String.valueOf(getItem(helper.getAdapterPosition()).getFootRingID()));
+            }
         });
     }
 }

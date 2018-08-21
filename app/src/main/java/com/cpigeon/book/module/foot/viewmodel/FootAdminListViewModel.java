@@ -28,6 +28,7 @@ public class FootAdminListViewModel extends BaseViewModel{
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_SelectKeyAll(pi, ps, year, typeid, stateid, key), r -> {
             if (r.isOk()) {
                 footAdminListData.setValue(r.data);
+                listEmptyMessage.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }

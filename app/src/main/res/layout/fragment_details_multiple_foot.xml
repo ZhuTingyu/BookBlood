@@ -16,7 +16,7 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="国家"
-        app:lineInputView_RightString="" />
+        app:lineInputView_RightString="@string/text_china_code" />
 
     <com.cpigeon.book.widget.LineInputView
         android:id="@+id/lv_foot"

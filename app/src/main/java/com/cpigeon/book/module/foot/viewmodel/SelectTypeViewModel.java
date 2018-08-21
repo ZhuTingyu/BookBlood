@@ -5,7 +5,9 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
+import com.base.util.Lists;
 import com.base.util.utility.LogUtil;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.model.PigeonPublicModel;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 
@@ -19,27 +21,30 @@ import io.reactivex.functions.Consumer;
  */
 public class SelectTypeViewModel extends BaseViewModel {
 
-    public static final String TYPE_EYE = "TYPE_EYE";
-    public static final String TYPE_FOOT_NUMBER = "TYPE_FOOT_NUMBER";
-    public static final String TYPE_PIGEON = "TYPE_PIGEON";
-    public static final String TYPE_COLOR_Feather ="TYPE_PIGEON";
+    public static final String TIME = "10000";
+    public static final String TYPE_EYE = "1";
+    public static final String TYPE_FOOT_RING = "2";
+    public static final String TYPE_PIGEON = "3";
+    public static final String TYPE_COLOR_FEATHER = "4";
+    public static final String STATE_FOOT_RING = "10";
 
 
-    public int selectType;
+    public String selectType;
+    public String selectTypes;
+    public List<String> whichIds;
 
     public MutableLiveData<List<SelectTypeEntity>> mSelectTypeLiveData = new MutableLiveData<>();
 
     public void setSelectType(String type) {
-        if(TYPE_FOOT_NUMBER.equals(type)){
-            selectType = 2;
-        }
+            selectType = type;
     }
 
     public void setSelectType(String... type) {
-        if(TYPE_FOOT_NUMBER.equals(type)){
-            selectType = 2;
-        }
+        whichIds = Lists.newArrayList(type);
+        selectTypes = Lists.appendStringByList(whichIds);
     }
+
+
 
     //获取  足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别
     public void getSelectType() {
@@ -51,7 +56,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     }
 
     public void getSelectTypes() {
-        submitRequestThrowError(PigeonPublicModel.getSelectMushType(selectType), r -> {
+        submitRequestThrowError(PigeonPublicModel.getSelectMushType(selectTypes), r -> {
             if (r.isOk()) {
                 mSelectTypeLiveData.setValue(r.data);
             } else throw new HttpErrorException(r);

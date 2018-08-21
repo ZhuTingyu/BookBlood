@@ -13,7 +13,7 @@ import com.base.util.IntentBuilder;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.foot.viewmodel.FootAdminViewModel;
+import com.cpigeon.book.module.foot.viewmodel.FootAdminSingleViewModel;
 import com.cpigeon.book.widget.LineInputView;
 
 import butterknife.BindView;
@@ -39,7 +39,7 @@ public class FootAdminMultipleFragment extends BaseBookFragment {
     LineInputView lvMoney;
     @BindView(R.id.tvOk)
     TextView tvOk;
-    private FootAdminViewModel mFootAdminModel;
+    private FootAdminSingleViewModel mFootAdminModel;
 
 
     public static void start(Activity activity) {
@@ -58,7 +58,7 @@ public class FootAdminMultipleFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mFootAdminModel = new FootAdminViewModel(getBaseActivity());
+        mFootAdminModel = new FootAdminSingleViewModel(getBaseActivity());
         initViewModels(mFootAdminModel);
 
     }

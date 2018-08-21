@@ -80,6 +80,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".base.SearchFragmentParentActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity android:name=".module.select.SearchAssActivity"
             android:screenOrientation="portrait"/>

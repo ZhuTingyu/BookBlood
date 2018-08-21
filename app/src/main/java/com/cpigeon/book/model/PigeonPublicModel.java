@@ -16,20 +16,20 @@ import io.reactivex.Observable;
 
 public class PigeonPublicModel {
     //hl 足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别
-    public static Observable<ApiResponse<List<SelectTypeEntity>>> getTXGP_Type_Select(int selectType) {
+    public static Observable<ApiResponse<List<SelectTypeEntity>>> getTXGP_Type_Select(String selectType) {
         return RequestData.<ApiResponse<List<SelectTypeEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<SelectTypeEntity>>>() {
                 }.getType())
                 .url(R.string.pigeon_select_all_type)
-                .addBody("whichid", String.valueOf(selectType))
+                .addBody("whichid", selectType)
                 .request();
     }
-    public static Observable<ApiResponse<List<SelectTypeEntity>>> getSelectMushType(int selectType) {
+    public static Observable<ApiResponse<List<SelectTypeEntity>>> getSelectMushType(String selectTypes) {
         return RequestData.<ApiResponse<List<SelectTypeEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<SelectTypeEntity>>>() {
                 }.getType())
                 .url(R.string.pigeon_select_filtrate_type)
-                .addBody("whichid", String.valueOf(selectType))
+                .addBody("whichidstr", selectTypes)
                 .request();
     }
 
