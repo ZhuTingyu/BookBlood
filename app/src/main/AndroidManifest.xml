@@ -81,7 +81,10 @@
         <activity
             android:name=".base.SearchFragmentParentActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".module.select.SearchAssActivity" />
+        <activity android:name=".module.select.SearchAssActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".module.foot.SearchFootActivity"
+            android:screenOrientation="portrait"/>
 
 
         <!--单点登录-->

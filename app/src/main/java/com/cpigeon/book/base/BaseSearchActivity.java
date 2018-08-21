@@ -6,14 +6,22 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.base.BaseActivity;
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.Lists;
+import com.base.util.db.AppDatabase;
+import com.base.util.db.DbEntity;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.SearchHistoryEntity;
 import com.cpigeon.book.widget.SearchTextView;
+
+import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/8/6.
@@ -31,6 +39,8 @@ public abstract class BaseSearchActivity extends BaseActivity {
 
     protected SearchHistoryAdapter mSearchHistoryAdapter;
 
+    protected List<DbEntity> history;
+
     public  static <A extends  BaseSearchActivity> void start(Activity activity, Class<A> aClass){
         Intent intent = new Intent();
         intent.setClass(activity, aClass);
@@ -42,6 +52,8 @@ public abstract class BaseSearchActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_base_search);
+
+        history = getHistory();
 
         mRecyclerView = findViewById(R.id.list);
         mSearchTextView = findViewById(R.id.key);
@@ -55,7 +67,30 @@ public abstract class BaseSearchActivity extends BaseActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
         mRecyclerView.setAdapter(getResultAdapter());
+
+        if(!Lists.isEmpty(history)){
+            mRlHistory.setVisibility(View.VISIBLE);
+            mSearchHistoryAdapter.setNewData(AppDatabase.getDates(history, SearchHistoryEntity.class));
+        }else {
+            mRlHistory.setVisibility(View.GONE);
+        }
+
+        mTvCleanHistory.setOnClickListener(v -> {
+            AppDatabase.getInstance(getBaseActivity()).delectAll(history);
+            mSearchHistoryAdapter.getData().clear();
+            mRlHistory.setVisibility(View.GONE);
+        });
+
+        mSearchHistoryAdapter.setOnDeleteClickListener(p -> {
+            AppDatabase.getInstance(getBaseActivity()).DbEntityDao().delete(history.get(p));
+            if(mSearchHistoryAdapter.getData().isEmpty()){
+                mRlHistory.setVisibility(View.GONE);
+            }
+        });
+
     }
+
+    protected abstract List<DbEntity> getHistory();
 
     protected abstract BaseQuickAdapter getResultAdapter();
 
@@ -64,6 +99,14 @@ public abstract class BaseSearchActivity extends BaseActivity {
         super.finish();
         overridePendingTransition(R.anim.anim_no, R.anim.bottom_in);
     }
+
+    protected void saveHistroy(String key, String type){
+        SearchHistoryEntity historyEntity = new SearchHistoryEntity();
+        historyEntity.searchTitle = key;
+        AppDatabase.getInstance(getBaseActivity()).saveData(historyEntity
+                ,type, UserModel.getInstance().getUserId());
+    }
+
 
 
 }

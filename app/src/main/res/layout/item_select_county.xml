@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:id="@+id/tvCountyName"
+        tools:text = "text"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tvCountyCode"
+        tools:text = "text"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imgRight"
+        android:src="@mipmap/ic_arrow_right"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
+
+
+
+</RelativeLayout>

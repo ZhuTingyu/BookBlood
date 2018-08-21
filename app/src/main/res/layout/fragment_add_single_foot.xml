@@ -58,6 +58,7 @@
         android:id="@+id/lv_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:lineInputView_InputType="numberDecimal"
         app:lineInputView_IsCanEdit="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="金额" />

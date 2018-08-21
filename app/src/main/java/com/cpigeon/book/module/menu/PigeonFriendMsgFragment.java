@@ -95,7 +95,7 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.pigeonFriendMsgListData.observe(this, datas -> {
-            RecyclerViewUtils.setRefreshingCallBack(mRecyclerView, mAdapter, datas);
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

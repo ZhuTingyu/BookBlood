@@ -92,7 +92,7 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.announcementNoticeData.observe(this, datas -> {
-            RecyclerViewUtils.setRefreshingCallBack(mRecyclerView, mAdapter, datas);
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

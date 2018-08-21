@@ -8,7 +8,7 @@
     app:layout_moreProgress="@layout/view_load_more"
     app:mainLayoutId="@layout/refresh_recyclerview"
     app:recyclerClipToPadding="false"
-    app:recyclerPaddingLeft="16dp"
-    app:recyclerPaddingRight="16dp"
+    app:recyclerPaddingLeft="20dp"
+    app:recyclerPaddingRight="20dp"
     android:background="@color/white"
     app:scrollbarStyle="insideOverlay" />

@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class RecyclerViewUtils {
-    public static void setRefreshingCallBack(XRecyclerView xRecyclerView, BaseQuickAdapter adapter, List data){
+    public static void setLoadMoreCallBack(XRecyclerView xRecyclerView, BaseQuickAdapter adapter, List data){
         xRecyclerView.setRefreshing(false);
         if (data.isEmpty()) {
             adapter.setLoadMore(true);

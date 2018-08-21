@@ -2,6 +2,7 @@ package com.cpigeon.book.module.foot;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,14 +16,16 @@ import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
-import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.event.FootUpdateEevnt;
+import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.event.FootUpdateEvent;
+import com.cpigeon.book.model.entity.CountyAreaEntity;
+import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminViewModel;
-import com.cpigeon.book.module.foot.viewmodel.PigeonPublicViewModel;
+import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
@@ -31,9 +34,7 @@ import com.cpigeon.book.widget.LineInputView;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 添加 单个足环  fragment
@@ -41,6 +42,8 @@ import butterknife.Unbinder;
  */
 
 public class FootAdminSingleFragment extends BaseBookFragment {
+
+    public static final int CODE_SELECT_COUNTY = 0x123;
 
     @BindView(R.id.lv_city)
     LineInputView lvCity;
@@ -61,7 +64,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     @BindView(R.id.lv_status)
     LineInputView lvStatus;
     private FootAdminViewModel mViewModel;
-    private PigeonPublicViewModel mPublicViewModel;
+    private SelectTypeViewModel mPublicViewModel;
 
     boolean mIsLook;
 
@@ -82,7 +85,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mViewModel = new FootAdminViewModel(getBaseActivity());
-        mPublicViewModel = new PigeonPublicViewModel();
+        mPublicViewModel = new SelectTypeViewModel();
         initViewModels(mViewModel, mPublicViewModel);
     }
 
@@ -106,14 +109,19 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         bindUi(RxUtils.textChanges(lvSource.getEditText()), mViewModel.setFootSource());//来源
         bindUi(RxUtils.textChanges(boxViewRemark.getEditText()), mViewModel.setRemark());//备注
 
-        mPublicViewModel.setSelectType(PigeonPublicViewModel.TYPE_FOOT_NUMBER);
+        mPublicViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_NUMBER);
         mPublicViewModel.getSelectType();
 
+        lvCity.setOnClickListener(v -> {
+            SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, CODE_SELECT_COUNTY);
+        });
+
         if (mIsLook) {
-            setToolbarRight(R.string.text_delect, item -> {
+            setToolbarRight(R.string.text_delete, item -> {
                 DialogUtils.createHintDialog(getBaseActivity()
-                        , Utils.getString(R.string.text_is_sure_delect_foot_number)
+                        , Utils.getString(R.string.text_is_sure_delete_foot_number)
                         , sweetAlertDialog -> {
+                            setProgressVisible(true);
                             mViewModel.delecteFoot();
                         });
                 return false;
@@ -124,6 +132,12 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             llRoot.setOnInputViewGetFocusListener(() -> {
                 tvOk.setVisibility(View.VISIBLE);
             });
+            boxViewRemark.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
+                if(hasFocus){
+                    tvOk.setVisibility(View.VISIBLE);
+                }
+            });
+            setProgressVisible(true);
             mViewModel.getFootById();
             tvOk.setOnClickListener(v -> {
                 mViewModel.modifyFootNumber();
@@ -132,6 +146,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             setTitle(R.string.text_foot_number_input);
             lvStatus.setVisibility(View.GONE);
             tvOk.setOnClickListener(v -> {
+                setProgressVisible(true);
                 mViewModel.addFoot();
             });
         }
@@ -140,6 +155,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     @Override
     protected void initObserve() {
         mViewModel.mFootLiveData.observe(this, footEntity -> {
+            setProgressVisible(false);
             if (footEntity != null) {
                 lvFoot.setRightText(footEntity.getFootRingNum());//足环号
                 lvCategory.setRightText(footEntity.getTypeName());//类别
@@ -151,9 +167,10 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         mViewModel.normalResult.observe(this, s -> {
+            setProgressVisible(false);
             DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
-                EventBus.getDefault().post(new FootUpdateEevnt());
+                EventBus.getDefault().post(new FootUpdateEvent());
                 finish();
             });
         });
@@ -167,9 +184,10 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         mViewModel.mdelectR.observe(this, s -> {
+            setProgressVisible(false);
             DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
-                EventBus.getDefault().post(new FootUpdateEevnt());
+                EventBus.getDefault().post(new FootUpdateEvent());
                 finish();
             });
         });
@@ -189,5 +207,25 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CODE_SELECT_COUNTY) {
+                try {
+                    CountyEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                    mViewModel.countryId = entity.getSort();
+                    lvCity.setRightText(entity.getCode());
+                } catch (Exception e) {
+                    CountyAreaEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                    mViewModel.countryId = entity.getFootCodeID();
+                    lvCity.setRightText(entity.getCode());
+                }
+            }
+        }
+
     }
 }

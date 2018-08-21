@@ -30,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_arrow" />
+        app:srcCompat="@mipmap/ic_arrow_right" />
 
     <TextView
         android:id="@+id/tvStatus"

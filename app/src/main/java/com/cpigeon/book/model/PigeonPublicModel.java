@@ -24,4 +24,13 @@ public class PigeonPublicModel {
                 .addBody("whichid", String.valueOf(selectType))
                 .request();
     }
+    public static Observable<ApiResponse<List<SelectTypeEntity>>> getSelectMushType(int selectType) {
+        return RequestData.<ApiResponse<List<SelectTypeEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<SelectTypeEntity>>>() {
+                }.getType())
+                .url(R.string.pigeon_select_filtrate_type)
+                .addBody("whichid", String.valueOf(selectType))
+                .request();
+    }
+
 }

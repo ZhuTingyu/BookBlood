@@ -68,15 +68,15 @@
                 android:textSize="@dimen/medium_text_size"
                 tools:text="123333333333333333" />
 
+
             <ImageView
                 android:id="@+id/imgRight"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
-                android:src="@mipmap/ic_arrow"
+                android:src="@mipmap/ic_arrow_right"
                 android:visibility="visible" />
         </LinearLayout>
-
     </LinearLayout>
 
 

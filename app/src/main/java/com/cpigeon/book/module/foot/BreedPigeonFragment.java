@@ -14,7 +14,7 @@ import com.base.util.RxUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.foot.viewmodel.BreedPigeonViewModel;
-import com.cpigeon.book.module.foot.viewmodel.PigeonPublicViewModel;
+import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,7 +46,7 @@ public class BreedPigeonFragment extends BaseBookFragment {
     EditText et9;
 
     private BreedPigeonViewModel mBreedPigeonViewModel;
-    private PigeonPublicViewModel mPigeonPublicViewModel;
+    private SelectTypeViewModel mPigeonPublicViewModel;
     private String TAG = "bufffm";
 
 
@@ -66,7 +66,7 @@ public class BreedPigeonFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPigeonPublicViewModel = new PigeonPublicViewModel();
+        mPigeonPublicViewModel = new SelectTypeViewModel();
         initViewModels(mPigeonPublicViewModel);
 
         mBreedPigeonViewModel = new BreedPigeonViewModel();

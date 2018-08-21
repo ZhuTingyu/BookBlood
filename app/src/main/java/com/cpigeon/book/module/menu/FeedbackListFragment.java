@@ -92,7 +92,7 @@ public class FeedbackListFragment extends BaseBookFragment {
     @Override
     protected void initObserve() {
         mViewModel.feedbackListData.observe(this, logbookEntities -> {
-            RecyclerViewUtils.setRefreshingCallBack(mRecyclerView, mAdapter, logbookEntities);
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, logbookEntities);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

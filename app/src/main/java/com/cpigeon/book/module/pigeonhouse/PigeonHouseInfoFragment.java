@@ -154,6 +154,8 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mViewModel.isCanCommit();
         });
 
+        mLvPhone.setRightText(UserModel.getInstance().getUserData().handphone);
+
         mLvOrganize.setOnRightClickListener(lineInputView -> {
             SearchFragmentParentActivity.start(getBaseActivity(), SelectAssFragment.class, CODE_ORGANIZE);
         });

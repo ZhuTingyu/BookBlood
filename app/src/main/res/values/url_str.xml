@@ -122,10 +122,14 @@
     <!--足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别-->
     <string name="pigeon_select_all_type">TXGP_Type_Select</string>
 
+    <string name="pigeon_select_filtrate_type">TXGP_Type_SelectMushType</string>
+
     <string name="set_pigeon_house">TXGP_PigeonHome_AddEdit</string>
     <string name="get_pigeon_house">TXGP_PigeonHome_GetInfo</string>
     <string name="api_set_user_face">ZGW_Users_SetUserFace</string>
     <string name="set_user_id_card">ZGW_Users_ID</string>
+    <string name="get_county_list">TXGP_FootRingCode_GetCountyList</string>
+    <string name="get_county_area_list">TXGP_FootRingCode_GetCodeList</string>
 
 
 </resources>

@@ -27,6 +27,7 @@ import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.CustomViewPager;
 import com.cpigeon.book.R;
+import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.module.home.HomeFragment;
 import com.cpigeon.book.module.home.HomeFragment2;
 import com.cpigeon.book.module.home.HomeFragment3;
@@ -85,11 +86,11 @@ public class MainActivity extends BaseActivity {
                 , getString(R.string.title_home_fragment3)
                 , getString(R.string.title_home_fragment4));
 
-        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager()
-                , Lists.newArrayList(homeFragment, homeFragment2, homeFragment3, homeFragment4), titles);
+        ContentFragmentAdapter adapter = new ContentFragmentAdapter(getSupportFragmentManager()
+                , Lists.newArrayList(homeFragment, homeFragment2, homeFragment3, homeFragment4));
 
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(4);
+        viewPager.setOffscreenPageLimit(5);
         viewPager.setScanScroll(false);
 
         bottomAddTabView.bindViewPager(viewPager);

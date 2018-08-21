@@ -68,7 +68,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected Context context;
 
-    protected List<BaseViewModel> viewModels = Lists.newArrayList();
+    private List<BaseViewModel> viewModels = Lists.newArrayList();
 
     @Override
     public void onAttach(Context context) {
