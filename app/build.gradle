@@ -66,4 +66,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
+    //日历
+    compile 'com.haibin:calendarview:3.4.1'
 }
