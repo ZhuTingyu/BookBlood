@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import android.widget.ImageView;
 
 import com.base.util.BarUtils;
 import com.base.util.Lists;
-import com.base.util.RxUtils;
-import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
@@ -44,7 +41,6 @@ public class HomeFragment extends BaseBookFragment {
     private SimpleTitleView mSTvBreedInfo;
     private SimpleTitleView mSTvPigeonMatchInfo;
     private SimpleTitleView mSTvPigeonPhoto;
-
 
 
     @Override
