@@ -14,7 +14,7 @@
 
         <com.base.widget.CustomViewPager
             android:id="@+id/viewPager"
-            android:layout_marginBottom="52dp"
+            android:layout_marginBottom="49dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

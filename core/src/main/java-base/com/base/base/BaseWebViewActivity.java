@@ -1,5 +1,6 @@
 package com.base.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -36,6 +37,12 @@ public class BaseWebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view_layout);
         initView();
+    }
+
+    public static void start(Activity activity, String url){
+        IntentBuilder.Builder(activity, BaseWebViewActivity.class)
+                .putExtra(IntentBuilder.KEY_DATA, url)
+                .startActivity();
     }
 
     public void initView() {

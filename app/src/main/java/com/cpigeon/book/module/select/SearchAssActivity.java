@@ -9,6 +9,7 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
+import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.AssEntity;
@@ -41,12 +42,14 @@ public class SearchAssActivity extends BaseSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setSearchHint(R.string.text_input_ass_and_search);
+
         mViewModel = new SelectAssViewModel();
         initViewModel(mViewModel);
 
         mViewModel.liveAss.observe(this, assEntities -> {
             mSearchAssAdapter.setNewData(assEntities);
-            saveHistroy(mViewModel.getKey(), AppDatabase.TYPE_SEARCH_ASS_HISTORY);
+            saveHistory(mViewModel.getKey(), AppDatabase.TYPE_SEARCH_ASS_HISTORY);
             mRlHistory.setVisibility(View.GONE);
         });
 

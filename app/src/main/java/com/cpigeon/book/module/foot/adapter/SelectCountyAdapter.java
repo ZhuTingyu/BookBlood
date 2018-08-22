@@ -4,13 +4,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.base.base.BaseActivity;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseLetterSelectAdapter;
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
+import com.cpigeon.book.module.foot.FootAdminSingleFragment;
+import com.cpigeon.book.module.foot.SelectCountyAreaFragment;
 
 /**
  * Created by Zhu TingYu on 2018/8/20.
@@ -38,5 +42,18 @@ public class SelectCountyAdapter extends BaseLetterSelectAdapter<CountyEntity, B
 
         helper.setText(R.id.tvCountyName, item.getCountry());
 
+        helper.itemView.setOnClickListener(v -> {
+            CountyEntity entity = getItem(helper.getAdapterPosition());
+
+            if(StringUtil.isStringValid(entity.getCode())){
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, entity)
+                        .finishForResult(getBaseActivity());
+            }else {
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, entity.getSort())
+                        .startParentActivity(getBaseActivity(), SelectCountyAreaFragment.class, FootAdminSingleFragment.CODE_SELECT_COUNTY);
+            }
+        });
     }
 }

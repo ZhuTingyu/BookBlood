@@ -14,7 +14,7 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.home.adapter.LogbookAdapter;
-import com.cpigeon.book.module.home.viewmodel.LogbookViewModel;
+import com.cpigeon.book.module.menu.viewmodel.LogbookViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
@@ -46,7 +46,7 @@ public class LogbookFragment extends BaseBookFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.xrecyclerview_no_padding_layout, container, false);
+        View view = inflater.inflate(R.layout.xrecyclerview_layout, container, false);
         return view;
     }
 
@@ -54,9 +54,10 @@ public class LogbookFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle("操作日志");
+        setTitle(R.string.text_operate_log);
 
         mRecyclerView = findViewById(R.id.list);
+        mRecyclerView.addItemDecorationLine();
 
         mAdapter = new LogbookAdapter(null);
 
@@ -71,7 +72,7 @@ public class LogbookFragment extends BaseBookFragment {
             mViewModel.pi++;
             mViewModel.getZGW_Users_GetLogData();
         }, mRecyclerView.getRecyclerView());
-
+        setProgressVisible(true);
         mViewModel.getZGW_Users_GetLogData();
 
     }
@@ -81,6 +82,7 @@ public class LogbookFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.logbookData.observe(this, datas -> {
+            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 

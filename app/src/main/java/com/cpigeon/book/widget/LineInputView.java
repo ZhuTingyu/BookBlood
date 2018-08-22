@@ -10,6 +10,7 @@ import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
+
+import retrofit2.http.PUT;
 
 
 /**
@@ -267,5 +270,31 @@ public class LineInputView extends RelativeLayout {
         } else {
             mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
         }
+    }
+
+    public void setRightImageVisible(boolean isVisible) {
+        mImgRight.setVisibility(isVisible ? VISIBLE : INVISIBLE);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            if(mOnClickAndHaveFocusListener != null){
+                mOnClickAndHaveFocusListener.clickAndFocus();
+            }
+        }
+
+        return super.onTouchEvent(event);
+    }
+
+    private OnClickAndHaveFocusListener mOnClickAndHaveFocusListener;
+    public interface OnClickAndHaveFocusListener{
+        void clickAndFocus();
+    }
+
+    public void setOnClickAndHaveFocusListener(OnClickAndHaveFocusListener onClickAndHaveFocusListener) {
+        mOnClickAndHaveFocusListener = onClickAndHaveFocusListener;
+        mEditText.setOnClickAndHaveFocusListener(onClickAndHaveFocusListener);
     }
 }

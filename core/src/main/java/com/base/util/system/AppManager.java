@@ -134,7 +134,6 @@ public class AppManager {
                     activity.finish();
                 }
             }
-
         } catch (Exception e) {
             LogUtil.print(e.getMessage());
         }

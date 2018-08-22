@@ -142,6 +142,11 @@
     <string name="text_china_code">CHN</string>
     <string name="text_input_foot_numbers">足环号段录入</string>
     <string name="text_foots">%1$s→%2$s</string>
+    <string name="text_foots_details">足环号段详情</string>
+    <string name="text_is_delete_foot_numbers">是否删除该足环号段，删除过后号段里的所有足环将全部删除？</string>
+    <string name="text_input_ass_and_search">请输入协会名字搜索</string>
+    <string name="text_operate_log">操作日志</string>
+    <string name="text_feed_back">意见反馈</string>
 
 
 </resources>

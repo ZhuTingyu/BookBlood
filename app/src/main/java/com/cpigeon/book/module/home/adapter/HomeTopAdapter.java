@@ -19,15 +19,24 @@ import java.util.List;
 
 public class HomeTopAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
+    int width;
+    int height;
+    int paddingLeft;
+    int paddingBttom;
+
     public HomeTopAdapter() {
         super(R.layout.item_home_top, Lists.newArrayList());
+        width = ScreenTool.getScreenWidth() - ScreenTool.dip2px(40);
+        height = ScreenTool.dip2px(156) ;
+        paddingLeft = ScreenTool.dip2px(6);
+        paddingBttom = ScreenTool.dip2px(10);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         View view = helper.itemView;
-        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ScreenTool.dip2px(320)
-                ,ScreenTool.dip2px(156));
+        view.setPadding(paddingLeft,0, paddingLeft, paddingBttom);
+        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(width, height);
         if(helper.getAdapterPosition() == 0){
             layoutParams.setMargins(ScreenTool.dip2px(20), 0,ScreenTool.dip2px(6)
                     ,ScreenTool.dip2px(8));

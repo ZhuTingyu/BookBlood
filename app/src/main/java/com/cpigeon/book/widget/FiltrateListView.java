@@ -75,14 +75,18 @@ public class FiltrateListView extends RelativeLayout {
         });
 
         mTvReset.setOnClickListener(v -> {
-            if (mFiltrateItemViews != null) {
-                for (int i = 0; i < mFiltrateItemViews.size(); i++) {
-                    FiltrateItemAdapter adapter = mFiltrateItemViews.get(i).mAdapter;
-                    adapter.resetSelect(true);
-                }
-            }
+            resetData();
         });
 
+    }
+
+    public void resetData(){
+        if (mFiltrateItemViews != null) {
+            for (int i = 0; i < mFiltrateItemViews.size(); i++) {
+                FiltrateItemAdapter adapter = mFiltrateItemViews.get(i).mAdapter;
+                adapter.resetSelect(true);
+            }
+        }
     }
 
     public void setData(boolean isHaveYear, List<SelectTypeEntity> data, List<String> titles, List<String> whichIds) {

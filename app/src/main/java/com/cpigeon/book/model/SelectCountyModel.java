@@ -17,11 +17,12 @@ import io.reactivex.Observable;
 
 public class SelectCountyModel {
 
-    public static Observable<ApiResponse<List<CountyEntity>>> getCountyList() {
+    public static Observable<ApiResponse<List<CountyEntity>>> getCountyList(String key) {
         return RequestData.<ApiResponse<List<CountyEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<CountyEntity>>>() {
                 }.getType())
                 .url(R.string.get_county_list)
+                .addBody("key", key)
                 .request();
     }
 

@@ -5,6 +5,7 @@
     <string name="baseUrl">http://192.168.0.18:8188/</string>
     <string name="baseUrl2">http://192.168.0.18:8188/</string>
     <string name="baseUrl3">http://192.168.0.18:8188/</string>
+    <string name="baseUr_x">http://192.168.0.8:15538/</string>
 
     <!--签名加密字符串-->
     <string name="keySign">CioLy49TR23jk4h0Ap8Opy34ho78on</string>
@@ -90,6 +91,8 @@
     <string name="foot_add_segment">TXGP_FootRing_AddSection</string>
     <!--足环号码 列表所有-->
     <string name="foot_list_all">TXGP_FootRing_SelectAll</string>
+    <string name="delete_foots">TXGP_FootRing_DeleteSection</string>
+
 
 
     <!--获取各个类型的足环数-->
@@ -130,6 +133,8 @@
     <string name="set_user_id_card">ZGW_Users_ID</string>
     <string name="get_county_list">TXGP_FootRingCode_GetCountyList</string>
     <string name="get_county_area_list">TXGP_FootRingCode_GetCodeList</string>
+    <string name="modify_foots">TXGP_FootRing_EditSection</string>
+    <string name="get_home_ad">TXGP_Get_IndexAd</string>
 
 
 </resources>

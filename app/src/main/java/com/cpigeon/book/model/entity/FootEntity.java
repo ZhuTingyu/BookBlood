@@ -43,9 +43,18 @@ public class FootEntity implements Parcelable {
     private int Section;
 
     private String EndFootRingNum;
+    private String EndFootRingID;
 
     public int getFootRingID() {
         return FootRingID;
+    }
+
+    public String getEndFootRingID() {
+        return EndFootRingID;
+    }
+
+    public void setEndFootRingID(String endFootRingID) {
+        EndFootRingID = endFootRingID;
     }
 
     public void setFootRingID(int FootRingID) {
@@ -156,6 +165,17 @@ public class FootEntity implements Parcelable {
         this.Section = Section;
     }
 
+    public FootEntity() {
+    }
+
+    public String getEndFootRingNum() {
+        return EndFootRingNum;
+    }
+
+    public void setEndFootRingNum(String EndFootRingNum) {
+        this.EndFootRingNum = EndFootRingNum;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -177,9 +197,8 @@ public class FootEntity implements Parcelable {
         dest.writeString(this.Remark);
         dest.writeInt(this.UseFootRingNum);
         dest.writeInt(this.Section);
-    }
-
-    public FootEntity() {
+        dest.writeString(this.EndFootRingNum);
+        dest.writeString(this.EndFootRingID);
     }
 
     protected FootEntity(Parcel in) {
@@ -197,6 +216,8 @@ public class FootEntity implements Parcelable {
         this.Remark = in.readString();
         this.UseFootRingNum = in.readInt();
         this.Section = in.readInt();
+        this.EndFootRingNum = in.readString();
+        this.EndFootRingID = in.readString();
     }
 
     public static final Creator<FootEntity> CREATOR = new Creator<FootEntity>() {
@@ -210,12 +231,4 @@ public class FootEntity implements Parcelable {
             return new FootEntity[size];
         }
     };
-
-    public String getEndFootRingNum() {
-        return EndFootRingNum;
-    }
-
-    public void setEndFootRingNum(String EndFootRingNum) {
-        this.EndFootRingNum = EndFootRingNum;
-    }
 }

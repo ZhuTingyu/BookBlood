@@ -18,7 +18,7 @@ import io.reactivex.functions.Consumer;
  * Created by Zhu TingYu on 2018/8/21.
  */
 
-public class FootAdminMultiViewModel extends BaseViewModel {
+public class FootAddMultiViewModel extends BaseViewModel {
 
     private String footId;
     private String startFoot;
@@ -29,13 +29,18 @@ public class FootAdminMultiViewModel extends BaseViewModel {
     private String money;
     private String remark;
 
+    public String sFootId;
+    public String eFootId;
+    public String sFootNumber;
+    public String eFootNumber;
+
     public List<SelectTypeEntity> mSelectTypes;
 
     public MutableLiveData<String> addR = new MutableLiveData<>();
     public MutableLiveData<String> deleteR = new MutableLiveData<>();
     public MutableLiveData<FootEntity> mFootEntityLiveData = new MutableLiveData<>();
 
-    public FootAdminMultiViewModel(Activity activity) {
+    public FootAddMultiViewModel(Activity activity) {
         footId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
     }
 
@@ -43,6 +48,10 @@ public class FootAdminMultiViewModel extends BaseViewModel {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Select(footId),r -> {
             if(r.isOk()){
                 mFootEntityLiveData.setValue(r.data);
+                sFootId = String.valueOf(r.data.getFootRingID());
+                eFootId = r.data.getEndFootRingID();
+                sFootNumber = r.data.getFootRingNum();
+                eFootNumber = r.data.getEndFootRingNum();
             }else throw new HttpErrorException(r);
         });
     }
@@ -52,6 +61,14 @@ public class FootAdminMultiViewModel extends BaseViewModel {
                 , typeId, source, cityCode, money, remark),r -> {
             if(r.isOk()){
                 addR.setValue(r.msg);
+            }else throw new HttpErrorException(r);
+        });
+    }
+
+    public void deleteMultiFoot() {
+        submitRequestThrowError(FootAdminModel.deleteFoots(sFootId, eFootId, sFootNumber, eFootNumber),r -> {
+            if(r.isOk()){
+                deleteR.setValue(r.msg);
             }else throw new HttpErrorException(r);
         });
     }

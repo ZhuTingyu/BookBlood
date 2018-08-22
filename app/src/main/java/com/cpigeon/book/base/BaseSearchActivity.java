@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -100,13 +101,20 @@ public abstract class BaseSearchActivity extends BaseActivity {
         overridePendingTransition(R.anim.anim_no, R.anim.bottom_in);
     }
 
-    protected void saveHistroy(String key, String type){
+    protected void saveHistory(String key, String type){
         SearchHistoryEntity historyEntity = new SearchHistoryEntity();
         historyEntity.searchTitle = key;
         AppDatabase.getInstance(getBaseActivity()).saveData(historyEntity
                 ,type, UserModel.getInstance().getUserId());
     }
 
+    public void setSearchHint(@StringRes int resId){
+        mSearchTextView.setHint(resId);
+    }
+
+    public void goneHistroy(){
+        mRlHistory.setVisibility(View.GONE);
+    }
 
 
 }

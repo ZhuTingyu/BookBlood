@@ -16,6 +16,7 @@ import com.base.util.IntentBuilder;
 import com.base.util.utility.StringUtil;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
+import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
@@ -55,6 +56,9 @@ public class SelectCountyFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         mActivity.setSearchHint(R.string.text_input_county_name_and_search);
+        mActivity.setSearchClickListener(v -> {
+            BaseSearchActivity.start(getBaseActivity(), SearchCountyActivity.class);
+        });
 
         mRecyclerView = findViewById(R.id.list);
         mWaveSideBar = findViewById(R.id.side_bar);
@@ -64,22 +68,6 @@ public class SelectCountyFragment extends BaseFragment {
 
         setProgressVisible(true);
         mViewModel.getCountyList();
-
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-
-            CountyEntity entity = mAdapter.getItem(position);
-
-            if(StringUtil.isStringValid(entity.getCode())){
-                IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, mAdapter.getItem(position))
-                        .finishForResult(getBaseActivity());
-            }else {
-                IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, mAdapter.getItem(position).getSort())
-                        .startParentActivity(getBaseActivity(), SelectCountyAreaFragment.class, FootAdminSingleFragment.CODE_SELECT_COUNTY);
-            }
-
-        });
 
     }
 
@@ -98,10 +86,17 @@ public class SelectCountyFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK){
-            CountyAreaEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, entity)
-                    .finishForResult(getBaseActivity());
+            try {
+                CountyAreaEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, entity)
+                        .finishForResult(getBaseActivity());
+            } catch (Exception e) {
+                CountyEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, entity)
+                        .finishForResult(getBaseActivity());
+            }
         }
     }
 }

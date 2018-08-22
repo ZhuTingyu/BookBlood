@@ -7,7 +7,9 @@ import com.base.BaseFragment;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.system.AppManager;
 import com.base.util.utility.StringUtil;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.login.LoginActivity;
+import com.cpigeon.book.service.SingleLoginService;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -33,9 +35,11 @@ public class BaseBookFragment extends BaseFragment {
             //保证界面只有一个错误提示
             if (getBaseActivity().errorDialog == null || !getBaseActivity().errorDialog.isShowing()) {
                 getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), error, SweetAlertDialog.ERROR_TYPE, false, dialog -> {
+                    SingleLoginService.stopService();
+                    UserModel.getInstance().cleanUserInfo();
                     dialog.dismiss();
-                    //结束所有页面，跳转到登录页
-                    AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);
+                    AppManager.getAppManager().killAllActivity();
+                    LoginActivity.start(getBaseActivity());
                 });
             }
 

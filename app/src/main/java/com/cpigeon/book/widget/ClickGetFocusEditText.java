@@ -15,7 +15,7 @@ public class ClickGetFocusEditText extends AppCompatEditText {
 
     boolean isCanEdit = true;
 
-    private OnClickAndHaveFocusListener mOnClickAndHaveFocusListener;
+    private LineInputView.OnClickAndHaveFocusListener mOnClickAndHaveFocusListener;
 
     public ClickGetFocusEditText(Context context) {
         this(context, null);
@@ -56,11 +56,7 @@ public class ClickGetFocusEditText extends AppCompatEditText {
         return isCanEdit;
     }
 
-    public interface OnClickAndHaveFocusListener{
-        void clickAndFocus();
-    }
-
-    public void setOnClickAndHaveFocusListener(OnClickAndHaveFocusListener onClickAndHaveFocusListener) {
+    public void setOnClickAndHaveFocusListener(LineInputView.OnClickAndHaveFocusListener onClickAndHaveFocusListener) {
         mOnClickAndHaveFocusListener = onClickAndHaveFocusListener;
     }
 }

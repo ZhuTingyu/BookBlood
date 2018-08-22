@@ -51,6 +51,19 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
                    getEmptyViewText() : emptyText  ,getEmptyViewImage());
         }
     }
+    public void setEmptyView(String emptyMsg) {
+        this.emptyText = emptyMsg;
+        if(!getData().isEmpty()){
+            return;
+        }
+        if (getEmptyViewImage() == 0) {
+            setSelfEmptyView(emptyMsg);
+        } else {
+            setSelfEmptyView(StringUtil.isStringValid(getEmptyViewText()) ?
+                    getEmptyViewText() : emptyText  ,getEmptyViewImage());
+        }
+    }
+
 
     public void setLoadMore(boolean isEnd) {
         if (isEnd) {

@@ -112,7 +112,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         mPublicViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_RING);
         mPublicViewModel.getSelectType();
 
-        lvCity.setOnClickListener(v -> {
+        lvCity.setOnRightClickListener(v -> {
             SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, CODE_SELECT_COUNTY);
         });
 
@@ -157,6 +157,8 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         mViewModel.mFootLiveData.observe(this, footEntity -> {
             setProgressVisible(false);
             if (footEntity != null) {
+                lvCity.setRightText(footEntity.getFootCodeName());
+                mViewModel.countryId = String.valueOf(footEntity.getFootCodeID());
                 lvFoot.setRightText(footEntity.getFootRingNum());//足环号
                 lvCategory.setRightText(footEntity.getTypeName());//类别
                 lvSource.setRightText(footEntity.getSourceName());//来源

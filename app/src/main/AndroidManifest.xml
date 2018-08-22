@@ -54,6 +54,7 @@
 
         <activity
             android:name=".module.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
         <activity
@@ -86,6 +87,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".module.foot.SearchFootActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".module.foot.SearchCountyActivity" />
 
 
         <!--单点登录-->

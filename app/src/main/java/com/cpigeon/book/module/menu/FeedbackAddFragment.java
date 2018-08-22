@@ -67,10 +67,10 @@ public class FeedbackAddFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle("反馈");
+        setTitle(R.string.text_feed_back);
         etContact.setText(UserModel.getInstance().getUserData().handphone);
 
-        bindUi(RxUtils.textChanges(etContent), mViewModel.setContentSub());//反馈内容
+        bindUi(RxUtils.textChanges(etContent), mViewModel.setContentSub());//反馈内容 q
     }
 
 
@@ -104,7 +104,6 @@ public class FeedbackAddFragment extends BaseBookFragment {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 
             for (int i = 0; i < selectList.size(); i++) {
-                Log.d("xiaohlssl", "onActivityResult: " + selectList.get(i).getCompressPath());
                 mViewModel.imgFile.put("pic" + (mViewModel.imgFile.size() + 1), selectList.get(i).getCompressPath());
             }
         }

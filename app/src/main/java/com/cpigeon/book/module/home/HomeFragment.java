@@ -4,23 +4,33 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.base.base.BaseWebViewActivity;
 import com.base.util.BarUtils;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
+import com.base.util.system.ScreenTool;
 import com.base.widget.recyclerview.XRecyclerView;
+import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.adapter.HomeTopAdapter;
+import com.cpigeon.book.module.home.viewmodel.HomeViewModel;
 import com.cpigeon.book.widget.SimpleTitleView;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Zhu TingYu on 2018/7/10.
@@ -30,6 +40,7 @@ public class HomeFragment extends BaseBookFragment {
 
     RecyclerView mTopList;
     HomeTopAdapter mAdapter;
+    HomeViewModel mViewModel;
 
     private SimpleTitleView mSTvFootManager;
     private SimpleTitleView mSTvBreedPigeonManager;
@@ -50,6 +61,8 @@ public class HomeFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mViewModel = new HomeViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -61,12 +74,15 @@ public class HomeFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        DrawerLayout drawerLayout = ((MainActivity)getBaseActivity()).getMenu();
+
         setImageTitle();
         setToolbarColor(R.color.white);
         BarUtils.setStatusBarLightMode(getBaseActivity(), true);
 
         setToolbarLeft(R.drawable.svg_home_my, v -> {
-
+            drawerLayout.openDrawer(Gravity.LEFT);
         });
 
         setToolbarRightImage(R.drawable.svg_home_message, item -> {
@@ -87,7 +103,15 @@ public class HomeFragment extends BaseBookFragment {
         mSTvBloodFind = findViewById(R.id.sTvBloodFind);
         mSTvBreedInfo = findViewById(R.id.sTvBreedInfo);
         mSTvPigeonMatchInfo = findViewById(R.id.sTvPigeonMatchInfo);
+
         mSTvPigeonPhoto = findViewById(R.id.sTvPigeonPhoto);
+
+        int w = ScreenTool.getScreenWidth() - ScreenTool.dip2px(40);
+        int h = (w / 10) * 3;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(w, h);
+        params.setMargins(ScreenTool.dip2px(20),0, ScreenTool.dip2px(20),0 );
+        mImgAd.setLayoutParams(params);
+
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -100,5 +124,22 @@ public class HomeFragment extends BaseBookFragment {
             FootAdminListFragment.start(getBaseActivity());
         });
 
+        mViewModel.getHomeAd();
+
+    }
+
+    @Override
+    protected void initObserve() {
+        mViewModel.mLdHomeAd.observe(this, homeAdEntity -> {
+            Glide.with(getBaseActivity()).load(homeAdEntity.getAdImageUrl())
+                    .centerCrop()
+                    .bitmapTransform(new RoundedCornersTransformation(context, 5, 0))
+                    .into(mImgAd);
+
+            mImgAd.setOnClickListener(v -> {
+                BaseWebViewActivity.start(getBaseActivity(), homeAdEntity.getAdUrl());
+            });
+
+        });
     }
 }

@@ -27,7 +27,6 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                app:lineInputView_isShowRightImage="gone"
                 app:lineInputView_RightString="@string/text_china_code"
                 app:lineInputView_IsCanEdit="true"
                 app:lineInputView_IsNotNull="true"
@@ -37,7 +36,6 @@
                 android:id="@+id/lv_foot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:lineInputView_InputType="number"
                 app:lineInputView_IsCanEdit="true"
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="起始足环" />

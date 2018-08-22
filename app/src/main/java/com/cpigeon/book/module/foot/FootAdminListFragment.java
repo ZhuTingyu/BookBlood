@@ -100,7 +100,8 @@ public class FootAdminListFragment extends BaseBookFragment {
 
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.getData().clear();
-            mViewModel.pi = 1;
+            mFiltrate.resetData();
+            mViewModel.resetData();
             mViewModel.getFoodList();
         });
 

@@ -25,7 +25,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/topList"
                 android:layout_width="match_parent"
-                android:layout_height="154dp" />
+                android:layout_height="wrap_content" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -111,9 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="93dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_welcome_1" />
+                android:layout_marginRight="20dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

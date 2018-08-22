@@ -138,6 +138,8 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/shape_btn_stroke_gray"
                 android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp">
 
@@ -145,7 +147,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvName"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="wrap_content"
                     app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_name" />
@@ -153,7 +155,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="wrap_content"
                     app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_id_card_number" />
@@ -161,7 +163,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvSex"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="wrap_content"
                     app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_sex" />
@@ -170,7 +172,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvFamily"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="wrap_content"
                     app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_family" />
@@ -179,7 +181,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="wrap_content"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_details_address"
                     app:lineInputView_isShowRightImage="gone" />
@@ -219,6 +221,8 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/shape_btn_stroke_gray"
                 android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp">
 
@@ -226,7 +230,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvAuthority"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="wrap_content"
                     app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_authority" />
@@ -235,7 +239,7 @@
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvIndate"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="wrap_content"
                     app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
                     app:lineInputView_LeftString="@string/text_indate" />

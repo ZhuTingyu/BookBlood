@@ -43,7 +43,7 @@ public class LineInputListLayout extends LinearLayout {
             if (view instanceof LineInputView) {
                 LineInputView lineInputView = (LineInputView) view;
                 mLineInputViews.add(lineInputView);
-                lineInputView.getEditText().setOnClickAndHaveFocusListener(() -> {
+                lineInputView.setOnClickAndHaveFocusListener(() -> {
                     if(mOnInputViewGetFocusListener != null){
                         mOnInputViewGetFocusListener.getFocus();
                     }

@@ -159,7 +159,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         if (getArguments() != null) {
-            isBack = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
+             isBack = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
         }
         toolbar = view.findViewById(R.id.toolbar);
         titleView = view.findViewById(R.id.toolbar_title);

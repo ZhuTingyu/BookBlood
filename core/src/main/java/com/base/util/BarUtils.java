@@ -657,18 +657,19 @@ public final class BarUtils {
 //                    setStatusBarColor(activity, color);
 //                }
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                //如果是6.0以上将状态栏文字改为黑色，并设置状态栏颜色
+                /*//如果是6.0以上将状态栏文字改为黑色，并设置状态栏颜色
                 activity.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 //activity.getWindow().setStatusBarColor(color);
-
+*/
                 //fitsSystemWindow 为 false, 不预留系统栏位置.
-                ViewGroup mContentView = (ViewGroup) activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT);
+               /* ViewGroup mContentView = (ViewGroup) activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT);
                 View mChildView = mContentView.getChildAt(0);
                 if (mChildView != null) {
-                    ViewCompat.setFitsSystemWindows(mChildView, true);
+                    ViewCompat.setFitsSystemWindows(mChildView, false);
                     ViewCompat.requestApplyInsets(mChildView);
-                }
+                }*/
+                activity.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
         }
     }

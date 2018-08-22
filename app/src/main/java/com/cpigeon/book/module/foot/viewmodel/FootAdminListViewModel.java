@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/19.
  */
 
-public class FootAdminListViewModel extends BaseViewModel{
+public class FootAdminListViewModel extends BaseViewModel {
     public int pi = 1;
     public int ps = 20;
     public String year = "";
@@ -27,9 +27,18 @@ public class FootAdminListViewModel extends BaseViewModel{
     public void getFoodList() {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_SelectKeyAll(pi, ps, year, typeid, stateid, key), r -> {
             if (r.isOk()) {
-                footAdminListData.setValue(r.data);
                 listEmptyMessage.setValue(r.msg);
+                footAdminListData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
+    }
+
+    public void resetData() {
+        pi = 1;
+        ps = 20;
+        year = "";
+        typeid = "";
+        stateid = "";
+        key = "";
     }
 }

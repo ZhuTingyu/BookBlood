@@ -2,10 +2,12 @@ package com.cpigeon.book.module.foot;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
+import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.foot.adapter.FootAdminListAdapter;
@@ -33,19 +35,30 @@ public class SearchFootActivity extends BaseSearchActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setSearchHint(R.string.text_input_foot_number_search);
+
         mViewModel = new FootAdminListViewModel();
         initViewModel(mViewModel);
 
         mViewModel.footAdminListData.observe(this, footEntities -> {
+            setProgressVisible(false);
+            goneHistroy();
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, footEntities);
+        });
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
         });
 
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
             public void search(String key) {
+                setProgressVisible(true);
+                mAdapter.cleanList();
                 mViewModel.key = key;
                 mViewModel.getFoodList();
-                saveHistroy(key, AppDatabase.TYPE_SEARCH_FOOT_HISTORY);
+                saveHistory(key, AppDatabase.TYPE_SEARCH_FOOT_HISTORY);
             }
 
             @Override
@@ -55,6 +68,7 @@ public class SearchFootActivity extends BaseSearchActivity {
         });
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
+            setProgressVisible(true);
             mViewModel.key = mSearchHistoryAdapter.getItem(position).searchTitle;
             mViewModel.getFoodList();
         });

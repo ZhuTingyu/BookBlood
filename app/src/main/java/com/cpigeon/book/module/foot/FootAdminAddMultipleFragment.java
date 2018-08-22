@@ -2,7 +2,6 @@ package com.cpigeon.book.module.foot;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,19 +13,13 @@ import android.widget.TextView;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
-import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
-import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.FootUpdateEvent;
-import com.cpigeon.book.model.entity.CountyAreaEntity;
-import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.foot.viewmodel.FootAdminMultiViewModel;
-import com.cpigeon.book.module.foot.viewmodel.FootAdminSingleViewModel;
+import com.cpigeon.book.module.foot.viewmodel.FootAddMultiViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
@@ -34,9 +27,6 @@ import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 详情 多个足环  fragment
@@ -47,7 +37,7 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
 
     public static final int CODE_SELECT_COUNTY = 0x123;
 
-    FootAdminMultiViewModel mViewModel;
+    FootAddMultiViewModel mViewModel;
     SelectTypeViewModel mPublicViewModel;
     private LineInputListLayout mLlRoot;
     private LineInputView mLvCity;
@@ -68,7 +58,7 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mViewModel = new FootAdminMultiViewModel(getBaseActivity());
+        mViewModel = new FootAddMultiViewModel(getBaseActivity());
         mPublicViewModel = new SelectTypeViewModel();
         initViewModels(mViewModel, mPublicViewModel);
     }
@@ -97,6 +87,8 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
         composite.add(RxUtils.delayed(50,aLong -> {
             mLlRoot.setLineInputViewState(false);
         }));
+
+        mLvCity.setRightImageVisible(false);
 
         bindUi(RxUtils.textChanges(mLvFoot.getEditText()), mViewModel.setStartFoot());
         bindUi(RxUtils.textChanges(mLvCount.getEditText()), mViewModel.setCount());

@@ -18,6 +18,7 @@ import java.util.List;
 
 public class SelectCountyViewModel extends BaseViewModel {
     public String id;
+    public String key;
 
     public MutableLiveData<List<CountyEntity>> mLiveData = new MutableLiveData<>();
     public MutableLiveData<List<CountyAreaEntity>> mAreaLiveData = new MutableLiveData<>();
@@ -27,7 +28,7 @@ public class SelectCountyViewModel extends BaseViewModel {
     }
 
     public void getCountyList(){
-        submitRequestThrowError(SelectCountyModel.getCountyList(), r -> {
+        submitRequestThrowError(SelectCountyModel.getCountyList(key), r -> {
             if(r.isOk()){
                 mLiveData.setValue(r.data);
             }else throw new HttpErrorException(r);

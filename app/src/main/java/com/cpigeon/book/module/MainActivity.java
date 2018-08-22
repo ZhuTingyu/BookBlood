@@ -75,11 +75,17 @@ public class MainActivity extends BaseActivity {
         llMain = findViewById(R.id.llMain);
         menuLayoutLeft = findViewById(R.id.menuLayoutLeft);
 
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, false);
 
         HomeFragment homeFragment = new HomeFragment();
         HomeFragment2 homeFragment2 = new HomeFragment2();
         HomeFragment3 homeFragment3 = new HomeFragment3();
         HomeFragment4 homeFragment4 = new HomeFragment4();
+        homeFragment.setArguments(bundle);
+        homeFragment2.setArguments(bundle);
+        homeFragment3.setArguments(bundle);
+        homeFragment4.setArguments(bundle);
 
         titles = Lists.newArrayList(getString(R.string.title_home_fragment)
                 , getString(R.string.title_home_fragment2)
@@ -181,5 +187,9 @@ public class MainActivity extends BaseActivity {
             anim.cancel();
             anim.start();
         });
+    }
+
+    public DrawerLayout getMenu(){
+        return drawerLayout;
     }
 }

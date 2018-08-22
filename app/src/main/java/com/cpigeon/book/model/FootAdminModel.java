@@ -20,7 +20,7 @@ public class FootAdminModel {
 
     //hl 添加足环（单个）
 
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Add(String countryId,String foot, String money, String footType, String footSource, String remark) {
+    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Add(String countryId, String foot, String money, String footType, String footSource, String remark) {
 
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
@@ -37,7 +37,7 @@ public class FootAdminModel {
     }
 
     //hl 修改足环（单个）
-    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Edit(String footId, String codeid, String foot, String money, String footType,  String footSource, String remark) {
+    public static Observable<ApiResponse<Object>> getTXGP_FootRing_Edit(String footId, String codeid, String foot, String money, String footType, String footSource, String remark) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
@@ -97,6 +97,7 @@ public class FootAdminModel {
                 .addBody("remark", remark)//备注
                 .request();
     }
+
     //hl 得到各种类型的足环个数
     public static Observable<ApiResponse<List<FootEntity>>> getTXGP_FootRing_SelectKeyAll(int pi, int ps, String year, String typeid, String stateid, String key) {
         return RequestData.<ApiResponse<List<FootEntity>>>build()
@@ -105,13 +106,52 @@ public class FootAdminModel {
                 .url(R.string.foot_list_all)
                 .addBody("pi", String.valueOf(pi))
                 .addBody("ps", String.valueOf(ps))
-                .addBody("year", year)
-                .addBody("typeid", typeid)
-                .addBody("stateid", stateid)
+                .addBody("yearstr", year)
+                .addBody("typeidstr", typeid)
+                .addBody("stateidstr", stateid)
                 .addBody("key", key)
                 .request();
     }
 
+    public static Observable<ApiResponse<String>> deleteFoots(String sFootId, String eFootId
+            , String sFootNumber, String eFootNumber) {
+        return RequestData.<ApiResponse<String>>build()
+                .setToJsonType(new TypeToken<ApiResponse<String>>() {
+                }.getType())
+                .url(R.string.delete_foots)
+                .addBody("fromnumid", sFootId)
+                .addBody("endnumid", eFootId)
+                .addBody("fromnum", sFootNumber)
+                .addBody("endnum", eFootNumber)
+                .request();
+    }
+
+    public static Observable<ApiResponse<String>> modifyMultiFoot(
+            String sFoodId
+            , String eFoodId
+            , String sFoodNumber
+            , String eFoodNumber
+            , String typeId
+            , String source
+            , String codeId
+            , String money
+            , String remark
+    ) {
+        return RequestData.<ApiResponse<String>>build()
+                .setToJsonType(new TypeToken<ApiResponse<String>>() {
+                }.getType())
+                .url(R.string.modify_foots)
+                .addBody("fromnumid", sFoodId)
+                .addBody("endnumid", eFoodId)
+                .addBody("fromnum", sFoodNumber)
+                .addBody("endnum", eFoodNumber)
+                .addBody("typeid", typeId)
+                .addBody("source", source)
+                .addBody("codeid", codeId)
+                .addBody("money", money)
+                .addBody("remark", remark)
+                .request();
+    }
 
 
 }
