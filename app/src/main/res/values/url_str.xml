@@ -67,6 +67,10 @@
 
     <!--签到规则-->
     <string name="sign_rule">ZGW_Users_SignGuiZe</string>
+    <!--点击签到-->
+    <string name="sign_click">ZGW_Users_SignIn</string>
+    <!--签到信息-->
+    <string name="sign_info">ZGW_Users_SignInfo</string>
 
 
     <string name="get_pigeon_house_info">TXGP_Add_PigeonHome</string>
