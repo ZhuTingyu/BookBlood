@@ -57,7 +57,6 @@ public class HomeFragment extends BaseBookFragment {
     private SimpleTitleView mSTvPigeonPhoto;
 
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
