@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
+import android.widget.LinearLayout;
 
 import com.base.base.BaseWebViewActivity;
 import com.base.util.IntentBuilder;
@@ -26,18 +26,18 @@ public class UserInfoActivity extends BaseBookActivity {
 
     private LineInputView mLlLoftInfo;
     private LineInputView mLlAccountSecurity;
-    private LineInputView mLlShareTxgp;
+    private LinearLayout mLlShareTxgp;
     private LineInputView mLlAccountBalance;
     private LineInputView mLlRenewal;
     private LineInputView mLlMyGebi;
     private LineInputView mLlMyOrder;
     private LineInputView mLlAboutUs;
     private LineInputView mLlSetting;
-    private LineInputView mLlFeedback;
-    private LineInputView mLlUseHelp;
+//    private LineInputView mLlFeedback;
+//    private LineInputView mLlUseHelp;
     private LineInputView mLlLogbook;
-    private LineInputView mLlAnnouncementNotice;
-    private LineInputView mLlPigeonFriendMsg;
+//    private LineInputView mLlAnnouncementNotice;
+//    private LineInputView mLlPigeonFriendMsg;
     public static void start(Activity activity) {
         Intent intent = new Intent();
         intent.setClass(activity, UserInfoActivity.class);
@@ -60,11 +60,11 @@ public class UserInfoActivity extends BaseBookActivity {
         mLlMyOrder = findViewById(R.id.ll_my_order);
         mLlAboutUs = findViewById(R.id.ll_about_us);
         mLlSetting = findViewById(R.id.ll_setting);
-        mLlFeedback = findViewById(R.id.ll_feedback);
-        mLlUseHelp = findViewById(R.id.ll_use_help);
+//        mLlFeedback = findViewById(R.id.ll_feedback);
+//        mLlUseHelp = findViewById(R.id.ll_use_help);
         mLlLogbook = findViewById(R.id.ll_logbook);
-        mLlAnnouncementNotice = findViewById(R.id.ll_announcement_notice);
-        mLlPigeonFriendMsg = findViewById(R.id.ll_pigeon_friend_msg);
+//        mLlAnnouncementNotice = findViewById(R.id.ll_announcement_notice);
+//        mLlPigeonFriendMsg = findViewById(R.id.ll_pigeon_friend_msg);
 
         mLlLoftInfo.setOnClickListener(v -> {
             PigeonHouseInfoFragment.start(this, true);
@@ -110,29 +110,29 @@ public class UserInfoActivity extends BaseBookActivity {
         mLlSetting.setOnClickListener(v -> {
             SettingFragment.start(getBaseActivity());
         });
-        mLlFeedback.setOnClickListener(v -> {
-            //意见反馈
-            FeedbackListFragment.start(getBaseActivity());
-        });
-        mLlUseHelp.setOnClickListener(v -> {
-            //使用帮助
-            Intent intent2 = new Intent(getBaseActivity(), BaseWebViewActivity.class);
-            intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_use_help)));
-            startActivity(intent2);
-        });
+//        mLlFeedback.setOnClickListener(v -> {
+//            //意见反馈
+//            FeedbackListFragment.start(getBaseActivity());
+//        });
+//        mLlUseHelp.setOnClickListener(v -> {
+//            //使用帮助
+//            Intent intent2 = new Intent(getBaseActivity(), BaseWebViewActivity.class);
+//            intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_use_help)));
+//            startActivity(intent2);
+//        });
         mLlLogbook.setOnClickListener(v -> {
             //操作日志
             LogbookFragment.start(this);
         });
-        mLlAnnouncementNotice.setOnClickListener(v -> {
-            //公告通知
-            AnnouncementNoticeFragment.start(getBaseActivity());
-        });
-
-        mLlPigeonFriendMsg.setOnClickListener(v -> {
-            //鸽友消息
-            PigeonFriendMsgFragment.start(getBaseActivity());
-        });
+//        mLlAnnouncementNotice.setOnClickListener(v -> {
+//            //公告通知
+//            AnnouncementNoticeFragment.start(getBaseActivity());
+//        });
+//
+//        mLlPigeonFriendMsg.setOnClickListener(v -> {
+//            //鸽友消息
+//            PigeonFriendMsgFragment.start(getBaseActivity());
+//        });
 
         mLlAccountBalance.setOnClickListener(v -> {
             //账户余额
