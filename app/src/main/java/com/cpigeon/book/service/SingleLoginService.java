@@ -87,10 +87,10 @@ public class SingleLoginService extends Service {
                                     dialog1.dismiss();
                                 }, dialog2 -> {
                                     SingleLoginService.stopService();
-
                                     UserModel.getInstance().cleanUserInfo();
                                     //结束所有页面，跳转到登录页
                                     dialog2.dismiss();
+                                    LoginActivity.start(AppManager.getAppManager().getTopActivity());
                                     AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);
                                 });
                             }

@@ -22,7 +22,7 @@ public class FootAddMultiViewModel extends BaseViewModel {
 
     private String footId;
     private String startFoot;
-    private String count = "0";
+    public String count = "0";
     public String typeId;
     private String source;
     public String cityCode = "2";

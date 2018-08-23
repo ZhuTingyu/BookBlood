@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.menu.viewmodel.FeedbackViewModel;
+import com.cpigeon.book.module.menu.viewmodel.FeedbackDetailViewModel;
 
 import butterknife.BindView;
 
@@ -24,13 +25,12 @@ import butterknife.BindView;
 
 public class FeedbackDetailsFragment extends BaseBookFragment {
 
-    private FeedbackViewModel mViewModel;
+    private FeedbackDetailViewModel mViewModel;
+    private XRecyclerView recyclerView;
 
-    @BindView(R.id.tv_content)
-    TextView tv_content;
-
-    public static void start(Activity activity) {
+    public static void start(Activity activity, String id) {
         IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, id)
                 .startParentActivity(activity, FeedbackDetailsFragment.class);
     }
 
@@ -38,7 +38,7 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mViewModel = new FeedbackViewModel();
+        mViewModel = new FeedbackDetailViewModel(getBaseActivity());
         initViewModel(mViewModel);
     }
 
@@ -46,8 +46,7 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feedback_submit, container, false);
-        return view;
+        return inflater.inflate(R.layout.xrecyclerview_no_padding_layout, container, false);;
     }
 
 
@@ -55,10 +54,10 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setTitle("意见反馈详情");
+        recyclerView = findViewById(R.id.list);
 
-        String id = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_DATA);
 
-        mViewModel.getZGW_Users_Feedback_DetailData(id);
+        mViewModel.getFeedbackDetail();
 
     }
 
@@ -66,8 +65,7 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
     protected void initObserve() {
         super.initObserve();
 
-        mViewModel.feedbackDetailsData.observe(getActivity(), feedbackDetails -> {
-            tv_content.setText(feedbackDetails.toJsonString());
+        mViewModel.mFeedbackDetaisLiveData.observe(getActivity(), feedbackDetails -> {
         });
     }
 }

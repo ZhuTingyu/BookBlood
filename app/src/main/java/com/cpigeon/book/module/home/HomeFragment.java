@@ -7,8 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +16,7 @@ import android.widget.LinearLayout;
 import com.base.base.BaseWebViewActivity;
 import com.base.util.BarUtils;
 import com.base.util.Lists;
-import com.base.util.RxUtils;
 import com.base.util.system.ScreenTool;
-import com.base.widget.recyclerview.XRecyclerView;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -28,6 +24,8 @@ import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.viewmodel.HomeViewModel;
+import com.cpigeon.book.module.menu.AnnouncementNoticeFragment;
+import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.widget.SimpleTitleView;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -81,10 +79,11 @@ public class HomeFragment extends BaseBookFragment {
         BarUtils.setStatusBarLightMode(getBaseActivity(), true);
 
         setToolbarLeft(R.drawable.svg_home_my, v -> {
-            drawerLayout.openDrawer(Gravity.LEFT);
+            UserInfoActivity.start(getBaseActivity());
         });
 
         setToolbarRightImage(R.drawable.svg_home_message, item -> {
+            AnnouncementNoticeFragment.start(getBaseActivity());
             return false;
         });
 

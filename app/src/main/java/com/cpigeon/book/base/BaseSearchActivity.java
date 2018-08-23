@@ -28,7 +28,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/6.
  */
 
-public abstract class BaseSearchActivity extends BaseActivity {
+public abstract class BaseSearchActivity extends BaseBookActivity {
 
     public static final int CODE_SEARCH = 0x987;
 

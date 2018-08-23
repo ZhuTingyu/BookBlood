@@ -13,10 +13,14 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.event.FeedbackUpdateEvent;
 import com.cpigeon.book.model.entity.FeedbackListEntity;
 import com.cpigeon.book.module.menu.adapter.FeedbackAdapter;
-import com.cpigeon.book.module.menu.viewmodel.FeedbackViewModel;
+import com.cpigeon.book.module.menu.viewmodel.FeedbackListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * 意见反馈列表
@@ -28,7 +32,7 @@ public class FeedbackListFragment extends BaseBookFragment {
 
     private XRecyclerView mRecyclerView;
 
-    private FeedbackViewModel mViewModel;
+    private FeedbackListViewModel mViewModel;
     private FeedbackAdapter mAdapter;
 
     public static void start(Activity activity) {
@@ -40,7 +44,7 @@ public class FeedbackListFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mViewModel = new FeedbackViewModel();
+        mViewModel = new FeedbackListViewModel();
         initViewModel(mViewModel);
     }
 
@@ -62,16 +66,16 @@ public class FeedbackListFragment extends BaseBookFragment {
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.getData().clear();
             mViewModel.pi = 1;
-            mViewModel.getZGW_Users_Feedback_ListData();
+            mViewModel.getFeedbackList();
         });
 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnLoadMoreListener(() -> {
             mViewModel.pi++;
-            mViewModel.getZGW_Users_Feedback_ListData();
+            mViewModel.getFeedbackList();
         }, mRecyclerView.getRecyclerView());
-
-        mViewModel.getZGW_Users_Feedback_ListData();
+        setProgressVisible(true);
+        mViewModel.getFeedbackList();
 
         setTitle("意见反馈");
 
@@ -92,11 +96,19 @@ public class FeedbackListFragment extends BaseBookFragment {
     @Override
     protected void initObserve() {
         mViewModel.feedbackListData.observe(this, logbookEntities -> {
+            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, logbookEntities);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
         });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(FeedbackUpdateEvent event){
+        mAdapter.getData().clear();
+        mViewModel.pi = 1;
+        mViewModel.getFeedbackList();
     }
 }

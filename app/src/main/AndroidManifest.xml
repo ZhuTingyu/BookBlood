@@ -77,9 +77,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.select.SelectAssFragment"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".base.SearchFragmentParentActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
@@ -87,7 +84,15 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".module.foot.SearchFootActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".module.foot.SearchCountyActivity" />
+        <activity android:name=".module.foot.SearchCountyActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+        <activity android:name=".base.BaseBookActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+        <activity android:name=".module.menu.UserInfoActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" />
 
 
         <!--单点登录-->

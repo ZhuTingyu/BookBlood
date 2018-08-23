@@ -98,7 +98,7 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
         mTvOk = findViewById(R.id.tvOk);
 
         mLvCity.setRightImageVisible(false);
-
+        mLvMoney.setTitle(R.string.text_all_money);
         mTvOk.setVisibility(View.GONE);
 
         composite.add(RxUtils.delayed(50, aLong -> {

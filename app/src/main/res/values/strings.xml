@@ -94,7 +94,7 @@
     <string name="text_yet_auth">已认证</string>
     <string name="title_id_card">身份证认证</string>
     <string name="text_foot_manger">足环管理</string>
-    <string name="text_breed_pigeon_manger">中鸽管理</string>
+    <string name="text_breed_pigeon_manger">种鸽管理</string>
     <string name="text_train_record">训鸽记录</string>
     <string name="text_match_pigeon_manger">赛鸽管理</string>
     <string name="text_feed_pigeon_record">养鸽记录</string>
@@ -147,6 +147,11 @@
     <string name="text_input_ass_and_search">请输入协会名字搜索</string>
     <string name="text_operate_log">操作日志</string>
     <string name="text_feed_back">意见反馈</string>
+    <string name="text_feed_back_content">反馈内容</string>
+    <string name="text_all_money">总金额</string>
+    <string name="text_not_handle">未处理</string>
+    <string name="text_handled">已处理</string>
+    <string name="text_not_reply">已经回复</string>
 
 
 </resources>

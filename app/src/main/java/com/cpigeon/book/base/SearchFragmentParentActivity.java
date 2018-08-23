@@ -24,7 +24,7 @@ import com.cpigeon.book.widget.FiltrateListView;
  * Created by Zhu TingYu on 2017/11/15.
  */
 
-public class SearchFragmentParentActivity extends BaseActivity {
+public class SearchFragmentParentActivity extends BaseBookActivity {
 
     public static String KEY_FRAGMENT = "KEY_FRAGMENT";
 

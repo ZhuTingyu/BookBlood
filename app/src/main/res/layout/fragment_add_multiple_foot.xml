@@ -73,7 +73,7 @@
                 app:lineInputView_IsCanEdit="true"
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_InputType="numberDecimal"
-                app:lineInputView_LeftString="金额" />
+                app:lineInputView_LeftString="总金额" />
 
 
             <com.cpigeon.book.widget.InputBoxView

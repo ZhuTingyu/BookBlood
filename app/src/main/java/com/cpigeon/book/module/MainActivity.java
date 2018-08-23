@@ -28,6 +28,7 @@ import com.base.util.utility.ToastUtils;
 import com.base.widget.CustomViewPager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
+import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.module.home.HomeFragment;
 import com.cpigeon.book.module.home.HomeFragment2;
 import com.cpigeon.book.module.home.HomeFragment3;
@@ -39,7 +40,7 @@ import com.cpigeon.book.widget.SimpleTitleView;
 
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseBookActivity {
 
     private CustomViewPager viewPager;
     BottomAddTabView bottomAddTabView;
