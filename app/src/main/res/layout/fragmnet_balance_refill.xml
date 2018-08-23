@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/balance_refill_bg1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp">
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="充值方式"
+            android:textColor="@color/color_text_cancel"
+            android:textSize="@dimen/small_text_size_2" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信客户端充值"
+            android:textColor="@color/color_000000"
+            android:textSize="@dimen/medium_text_size" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:background="@drawable/balance_refill_bg2"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        android:paddingTop="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="充值余额"
+            android:textColor="@color/color_text_cancel"
+            android:textSize="@dimen/small_text_size_2" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="34dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/general_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥"
+                android:textSize="28sp" />
+
+            <TextView
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/general_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="432"
+                android:textSize="28sp" />
+
+        </LinearLayout>
+
+
+        <include layout="@layout/include_line_view_layout" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="微信收取1%手续费，实际支付金额1000.55元"
+            android:textColor="@color/general_text_hint_color" />
+
+    </LinearLayout>
+
+</LinearLayout>

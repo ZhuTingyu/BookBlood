@@ -22,8 +22,6 @@ import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 
-import retrofit2.http.PUT;
-
 
 /**
  * Created by Zhu TingYu on 2018/7/31.
@@ -61,13 +59,14 @@ public class LineInputView extends RelativeLayout {
     LinearLayout mLlContent;
 
     View line_division;//分割线
+    LinearLayout ll_line;//分割线
     LinearLayout layout_view;//内容总布局
 
     int content_paddingLeft;
     int content_paddingRight;
 
-    int line_paddingLeft;
-    int line_paddingRight;
+    int line_paddingLeft = 0;
+    int line_paddingRight = 0;
 
     public interface OnRightClickListener {
         void click(LineInputView lineInputView);
@@ -91,6 +90,7 @@ public class LineInputView extends RelativeLayout {
 
     @SuppressLint({"Recycle", "ResourceAsColor"})
     private void readAttr(AttributeSet attrs) {
+
         if (attrs == null) {
             return;
         }
@@ -115,7 +115,11 @@ public class LineInputView extends RelativeLayout {
         mRightImageVisible = array.getInt(R.styleable.LineInputView_lineInputView_isShowRightImage, View.VISIBLE);
 
 
-        content_paddingLeft = array.getInt(R.styleable.LineInputView_lineInputView_InputType, 0);
+        content_paddingLeft = (int) array.getDimension(R.styleable.LineInputView_lineInputView_content_paddingLeft, 0);
+        content_paddingRight = (int) array.getDimension(R.styleable.LineInputView_lineInputView_content_paddingRight, 0);
+
+        line_paddingLeft = (int) array.getDimension(R.styleable.LineInputView_lineInputView_line_paddingLift, 0);
+        line_paddingRight = (int) array.getDimension(R.styleable.LineInputView_lineInputView_line_paddingRight, 0);
 
     }
 
@@ -126,6 +130,7 @@ public class LineInputView extends RelativeLayout {
         mImgRight = view.findViewById(R.id.imgRight);
         mLlContent = view.findViewById(R.id.llContent);
         line_division = view.findViewById(R.id.line_division);
+        ll_line = view.findViewById(R.id.ll_line);
 
         layout_view = view.findViewById(R.id.layout_view);
 
@@ -168,6 +173,11 @@ public class LineInputView extends RelativeLayout {
         }
 
         line_division.setVisibility(mShowLineDivision);
+        ll_line.setPadding(line_paddingLeft, 0, line_paddingRight, 0);
+
+//        ScreenTool.dip2px(
+        layout_view.setPadding(content_paddingLeft, 0, content_paddingRight, 0);
+
         mImgRight.setVisibility(mRightImageVisible);
 
         setCanEdit(mIsCanEdit);
@@ -280,7 +290,7 @@ public class LineInputView extends RelativeLayout {
     public boolean onTouchEvent(MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            if(mOnClickAndHaveFocusListener != null){
+            if (mOnClickAndHaveFocusListener != null) {
                 mOnClickAndHaveFocusListener.clickAndFocus();
             }
         }
@@ -289,7 +299,8 @@ public class LineInputView extends RelativeLayout {
     }
 
     private OnClickAndHaveFocusListener mOnClickAndHaveFocusListener;
-    public interface OnClickAndHaveFocusListener{
+
+    public interface OnClickAndHaveFocusListener {
         void clickAndFocus();
     }
 

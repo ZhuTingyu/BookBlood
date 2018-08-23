@@ -11,7 +11,8 @@
 
     
     <dimen name="spacing_left_reight">20dp</dimen>
-    
+    <dimen name="spacing_info_details_line">53dp</dimen>
+
 
 
     <dimen name="item_h">60dp</dimen>

@@ -44,7 +44,6 @@ public class InfoDetailsFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setTitle("我的");
-
         setToolbarRight("签到", item -> {
             //签到
             SignFragment.start(getActivity());
@@ -52,8 +51,7 @@ public class InfoDetailsFragment extends BaseBookFragment {
         });
     }
 
-    @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting,
-            R.id.ll_feedback, R.id.ll_announcement_notice, R.id.ll_pigeon_friend_msg, R.id.ll_use_help, R.id.ll_my_order,
+    @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting, R.id.ll_my_order,
             R.id.ll_my_gebi, R.id.ll_renewal, R.id.ll_account_balance, R.id.ll_share_txgp})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -86,24 +84,6 @@ public class InfoDetailsFragment extends BaseBookFragment {
                 break;
             case R.id.ll_setting:
                 SettingFragment.start(getActivity());
-                break;
-            case R.id.ll_feedback:
-                //意见反馈
-                FeedbackListFragment.start(getActivity());
-                break;
-            case R.id.ll_announcement_notice:
-                //公告通知
-                AnnouncementNoticeFragment.start(getActivity());
-                break;
-            case R.id.ll_pigeon_friend_msg:
-                //鸽友消息
-                PigeonFriendMsgFragment.start(getActivity());
-                break;
-            case R.id.ll_use_help:
-                //使用帮助
-                Intent intent2 = new Intent(getActivity(), BaseWebViewActivity.class);
-                intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_use_help)));
-                startActivity(intent2);
                 break;
             case R.id.ll_my_order:
                 //我的订单

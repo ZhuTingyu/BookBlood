@@ -18,7 +18,7 @@
             android:id="@+id/aciv_Logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@color/black" />
+            android:src="@mipmap/ic_logo_about_as" />
 
         <TextView
             android:id="@+id/tv_version_name"
@@ -69,7 +69,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_weight="1"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
-                    app:simpleTitleView_image="@mipmap/ic_train_record"
+                    app:simpleTitleView_image="@mipmap/ic_function_intro"
                     app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_text="@string/function_introduction" />
 
@@ -86,7 +86,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_weight="1"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
-                    app:simpleTitleView_image="@mipmap/ic_train_record"
+                    app:simpleTitleView_image="@mipmap/ic_user_agreement"
                     app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_text="@string/user_agreement" />
 

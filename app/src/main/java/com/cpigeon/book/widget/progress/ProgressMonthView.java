@@ -228,30 +228,34 @@ public class ProgressMonthView extends MonthView {
                     break;
                 default:
                     if (hasScheme) {
+//                           calendar.isCurrentDay() ? mCurDayTextPaints :
                         canvas.drawText(String.valueOf(calendar.getDay()),
                                 cx,
                                 baselineY,
-                                calendar.isCurrentDay() ? mCurDayTextPaints :
+
                                         calendar.isCurrentMonth() ? mSchemeTextPaints : mOtherMonthTextPaint);
 
                     } else {
+//                          calendar.isCurrentDay() ? mCurDayTextPaints :
                         canvas.drawText(String.valueOf(calendar.getDay()), cx, baselineY,
-                                calendar.isCurrentDay() ? mCurDayTextPaints :
+
                                         calendar.isCurrentMonth() ? mCurMonthTextPaints : mOtherMonthTextPaint);
                     }
             }
 
         } catch (Exception e) {
             if (hasScheme) {
+//                     calendar.isCurrentDay() ? mCurDayTextPaints :
                 canvas.drawText(String.valueOf(calendar.getDay()),
                         cx,
                         baselineY,
-                        calendar.isCurrentDay() ? mCurDayTextPaints :
+
                                 calendar.isCurrentMonth() ? mSchemeTextPaints : mOtherMonthTextPaint);
 
             } else {
+//                  calendar.isCurrentDay() ? mCurDayTextPaints :
                 canvas.drawText(String.valueOf(calendar.getDay()), cx, baselineY,
-                        calendar.isCurrentDay() ? mCurDayTextPaints :
+
                                 calendar.isCurrentMonth() ? mCurMonthTextPaints : mOtherMonthTextPaint);
             }
         }

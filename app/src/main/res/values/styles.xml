@@ -157,4 +157,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@drawable/selector_btn_rect</item>
     </style>
+
+    <style name="bottom_style2" parent="bottom_style">
+        <item name="android:textColor">@color/color_4c4c4c</item>
+        <item name="android:background">@drawable/shape_radius_4_stroke</item>
+    </style>
+
 </resources>

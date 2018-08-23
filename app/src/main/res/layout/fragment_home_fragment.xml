@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/layout_toolbar" />
@@ -43,6 +44,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="足环管理列表" />
+
+
+
+    <!--公告通知-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_announcement_notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight"
+        app:lineInputView_DrawableLeft="@mipmap/info_guanyu"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="公告通知"
+        app:lineInputView_RightString="" />
+
+    <!--鸽友消息-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_pigeon_friend_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight"
+        app:lineInputView_DrawableLeft="@mipmap/info_anquan"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="鸽友消息"
+        app:lineInputView_RightString=""
+        app:lineInputView_isShowLineDivisions="gone" />
+
 
     <include layout="@layout/xrecyclerview_no_padding_layout" />
 

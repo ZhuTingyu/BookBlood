@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_bg_corner_3_solid_white"
+        android:paddingBottom="16dp"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight"
+        android:paddingTop="16dp"
+        android:textColor="@color/color_000000"
+        android:textSize="@dimen/medium_text_size" />
+
+</LinearLayout>

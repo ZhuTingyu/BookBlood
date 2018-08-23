@@ -15,11 +15,11 @@ import java.util.List;
 public class SignRuleAdapter extends BaseQuickAdapter<SignRuleListEntity, BaseViewHolder> {
 
     public SignRuleAdapter(List<SignRuleListEntity> data) {
-        super(R.layout.item_logbook, data);
+        super(R.layout.item_sign_rule, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, SignRuleListEntity item) {
-
+        helper.setText(R.id.tv_content, (helper.getPosition() + 1) + ":" + item.getGbgz());
     }
 }

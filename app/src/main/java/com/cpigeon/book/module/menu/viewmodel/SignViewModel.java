@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.SignModel;
+import com.cpigeon.book.model.entity.SignClickEntity;
 import com.cpigeon.book.model.entity.SignInfoEntity;
 import com.cpigeon.book.model.entity.SignRuleListEntity;
 
@@ -22,10 +23,14 @@ public class SignViewModel extends BaseViewModel {
     //签到信息
     public MutableLiveData<SignInfoEntity> mSignInfoEntity = new MutableLiveData<>();
 
+    //签到结果
+    public MutableLiveData<SignClickEntity> mSignClickData = new MutableLiveData<>();
+
     //获取  签到规则
     public void getZGW_Users_SignGuiZeData() {
         submitRequestThrowError(SignModel.getZGW_Users_SignGuiZe(), r -> {
             if (r.isOk()) {
+                pigeonFriendMsgListData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
@@ -44,7 +49,11 @@ public class SignViewModel extends BaseViewModel {
     public void getZGW_Users_SignIn() {
         submitRequestThrowError(SignModel.getZGW_Users_SignIn(), r -> {
             if (r.isOk()) {
-            } else throw new HttpErrorException(r);
+                mSignClickData.setValue(r.data);
+            } else {
+                mSignClickData.setValue(null);
+                throw new HttpErrorException(r);
+            }
         });
     }
 

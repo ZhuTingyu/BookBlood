@@ -10,19 +10,19 @@ public class SignInfoEntity {
 
 
     /**
-     * giftdata : []
-     * giftSettings : [{"gid":"2","items":"累计签到3日礼包","gb":"10","dw":"鸽币"},{"gid":"3","items":"累计签到7日礼包","gb":"20","dw":"鸽币"},{"gid":"4","items":"累计签到15日礼包","gb":"30","dw":"鸽币"},{"gid":"5","items":"累计签到28日礼包","gb":"50","dw":"鸽币"}]
+     * giftdata : [{"items":"累计签到3日礼包","date":"2018-08-22"}]
+     * giftSettings : [{"gid":"3","items":"累计签到7日礼包","gb":"20","date":"2018-08-28","dw":"鸽币"}]
      * signSetting : 5
-     * signDays : 21,1,11,22
-     * signsTotalDays : 4
-     * signed : true
+     * signDays : 21,1,22
+     * signsTotalDays : 3
+     * signed : false
      */
 
     private String signSetting;
     private String signDays;
     private String signsTotalDays;
     private boolean signed;
-    private List<?> giftdata;
+    private List<GiftdataBean> giftdata;
     private List<GiftSettingsBean> giftSettings;
 
     public String getSignSetting() {
@@ -57,11 +57,11 @@ public class SignInfoEntity {
         this.signed = signed;
     }
 
-    public List<?> getGiftdata() {
+    public List<GiftdataBean> getGiftdata() {
         return giftdata;
     }
 
-    public void setGiftdata(List<?> giftdata) {
+    public void setGiftdata(List<GiftdataBean> giftdata) {
         this.giftdata = giftdata;
     }
 
@@ -73,17 +73,45 @@ public class SignInfoEntity {
         this.giftSettings = giftSettings;
     }
 
+    public static class GiftdataBean {
+        /**
+         * items : 累计签到3日礼包
+         * date : 2018-08-22
+         */
+
+        private String items;
+        private String date;
+
+        public String getItems() {
+            return items;
+        }
+
+        public void setItems(String items) {
+            this.items = items;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+    }
+
     public static class GiftSettingsBean {
         /**
-         * gid : 2
-         * items : 累计签到3日礼包
-         * gb : 10
+         * gid : 3
+         * items : 累计签到7日礼包
+         * gb : 20
+         * date : 2018-08-28
          * dw : 鸽币
          */
 
         private String gid;
         private String items;
         private String gb;
+        private String date;
         private String dw;
 
         public String getGid() {
@@ -108,6 +136,14 @@ public class SignInfoEntity {
 
         public void setGb(String gb) {
             this.gb = gb;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
         }
 
         public String getDw() {
