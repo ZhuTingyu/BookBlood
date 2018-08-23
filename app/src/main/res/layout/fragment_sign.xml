@@ -3,57 +3,120 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_home_pop_bg"
     android:orientation="vertical">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="签到" />
-
-
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="点击签到" />
+    <LinearLayout
+        android:id="@+id/btn_sign"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="获取签到信息" />
+        <FrameLayout
+            android:id="@+id/fl_sign"
+            android:layout_width="64dp"
+            android:layout_height="64dp">
 
-    <Button
-        android:id="@+id/btn3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="获取签到规则" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_sign_circle" />
+
+            <ImageView
+                android:id="@+id/img_sign"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_sign_click" />
+
+            <TextView
+                android:id="@+id/tv_gebi_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#FFAF6A00"
+                android:textSize="28sp"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
 
-    <com.haibin.calendarview.CalendarLayout
+        <TextView
+            android:id="@+id/tv_sign_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="点击签到"
+            android:textColor="@color/color_text_cancel"
+            android:textSize="@dimen/small_text_size_2" />
+
+    </LinearLayout>
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:calendar_content_view_id="@+id/recyclerView"
-        app:calendar_show_mode="only_week_view"
-        app:default_status="shrink">
+        android:fadingEdge="none"
+        android:overScrollMode="never">
 
-        <com.haibin.calendarview.CalendarView
-            android:id="@+id/calendarView"
+        <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:isScrollContainer="false"
-            app:calendar_height="60dp"
-            app:lunar_text_size="0dp"
-            app:month_view="com.cpigeon.book.widget.progress.ProgressMonthView"
-            app:month_view_show_mode="mode_only_current"
-            app:week_bar_height="0dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.haibin.calendarview.CalendarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:calendar_content_view_id="@+id/recyclerView"
+                app:calendar_show_mode="only_week_view"
+                app:default_status="shrink">
+
+                <com.haibin.calendarview.CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:isScrollContainer="false"
+                    app:calendar_height="60dp"
+                    app:lunar_text_size="0dp"
+                    app:month_view="com.cpigeon.book.widget.progress.ProgressMonthView"
+                    app:month_view_show_mode="mode_only_current"
+                    app:week_bar_height="0dp" />
 
 
-    </com.haibin.calendarview.CalendarLayout>
+            </com.haibin.calendarview.CalendarLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="17dp"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                android:text="签到规则"
+                android:textColor="@color/general_text_color"
+                android:textSize="@dimen/medium_text_size" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_guize"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="53dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

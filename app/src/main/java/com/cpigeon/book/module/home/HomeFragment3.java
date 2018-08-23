@@ -16,6 +16,11 @@ import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.foot.StatisticalFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.module.menu.UserInfoActivity;
+import com.cpigeon.book.module.menu.AnnouncementNoticeFragment;
+import com.cpigeon.book.module.menu.InfoDetailsFragment;
+import com.cpigeon.book.module.menu.PigeonFriendMsgFragment;
+
+import butterknife.OnClick;
 
 /**
  * Created by Zhu TingYu on 2018/7/10.
@@ -62,7 +67,6 @@ public class HomeFragment3 extends BaseBookFragment {
         });
 
 
-
         ac_btns1.setOnClickListener(v -> {
             BreedPigeonFragment.start(getActivity());
         });
@@ -85,5 +89,20 @@ public class HomeFragment3 extends BaseBookFragment {
             //足环管理列表
             FootAdminListFragment.start(getActivity());
         });
+    }
+
+    @OnClick({R.id.ll_announcement_notice, R.id.ll_pigeon_friend_msg})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_announcement_notice:
+                //公告通知
+                AnnouncementNoticeFragment.start(getActivity());
+                break;
+            case R.id.ll_pigeon_friend_msg:
+                //鸽友消息
+                PigeonFriendMsgFragment.start(getActivity());
+                break;
+
+        }
     }
 }

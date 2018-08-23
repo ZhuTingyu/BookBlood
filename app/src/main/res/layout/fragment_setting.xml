@@ -54,8 +54,32 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="推送设置"
-        app:lineInputView_RightString=""
-        app:lineInputView_isShowLineDivisions="gone" />
+        app:lineInputView_RightString="" />
+
+
+    <!--意见反馈-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="意见反馈"
+        app:lineInputView_RightString="" />
+
+    <!--使用帮助-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_use_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="使用帮助"
+        app:lineInputView_RightString="" />
 
 
     <TextView

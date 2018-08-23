@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.base.base.BaseWebViewActivity;
 import com.base.util.IntentBuilder;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.glide.GlideCacheUtil;
@@ -105,7 +106,7 @@ public class SettingFragment extends BaseBookFragment {
         });
     }
 
-    @OnClick({R.id.ll_clear_cache, R.id.ll_applied_scores, R.id.ll_current_version, R.id.ll_push_set, R.id.out_login})
+    @OnClick({R.id.ll_clear_cache, R.id.ll_applied_scores, R.id.ll_current_version, R.id.ll_push_set, R.id.out_login,R.id.ll_feedback,R.id.ll_use_help})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_clear_cache:
@@ -139,6 +140,18 @@ public class SettingFragment extends BaseBookFragment {
                 //推送设置
                 PushSetFragment.start(getActivity());
                 break;
+
+            case R.id.ll_feedback:
+                //意见反馈
+                FeedbackListFragment.start(getActivity());
+                break;
+            case R.id.ll_use_help:
+                //使用帮助
+                Intent intent2 = new Intent(getActivity(), BaseWebViewActivity.class);
+                intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_use_help)));
+                startActivity(intent2);
+                break;
+
             case R.id.out_login:
                 //退出登录
                 getBaseActivity().errorDialog = DialogUtils.createDialogWithLeft2(getActivity(), "确定退出登录", false, sweetAlertDialog -> {

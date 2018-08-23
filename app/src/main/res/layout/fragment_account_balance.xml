@@ -1,13 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_white">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="48dp"
+                android:src="@mipmap/balance_gold" />
+
+            <TextView
+                android:id="@+id/tv_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="23dp"
+                android:text="1000.00"
+                android:textColor="#F3C23C"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/balance_refill"
+                style="@style/bottom_style"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="102dp"
+                android:text="充值" />
+
+
+            <TextView
+                android:id="@+id/balance_withdraw"
+                style="@style/bottom_style2"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="20dp"
+                android:text="提现" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
     <TextView
+        android:id="@+id/tv_bottom_help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="账户余额" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:text="不知如何操作？快快点击此处!"
+        android:textColor="#85C2FF" />
 
-
-</LinearLayout>
+</RelativeLayout>
