@@ -31,12 +31,23 @@ public class AccountBalanceFragment extends BaseBookFragment {
                 .startParentActivity(activity, AccountBalanceFragment.class);
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account_balance, container, false);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setTitle("余额");
+
+        setToolbarRight("明细", item -> {
+            AccountBalanceDetails.start(getActivity());
+            return true;
+        });
+
     }
 
     @OnClick({R.id.balance_refill, R.id.balance_withdraw, R.id.tv_bottom_help})

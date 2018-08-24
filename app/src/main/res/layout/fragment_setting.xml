@@ -5,87 +5,94 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/spacing_left_reight"
     android:paddingLeft="@dimen/spacing_left_reight"
     android:paddingRight="@dimen/spacing_left_reight">
 
-
-    <!--清除缓存-->
-    <com.cpigeon.book.widget.LineInputView
-        android:id="@+id/ll_clear_cache"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:lineInputView_IsCanEdit="false"
-        app:lineInputView_IsLookState="true"
-        app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="清除缓存"
-        app:lineInputView_RightString="" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
 
-    <!--应用评分-->
-    <com.cpigeon.book.widget.LineInputView
-        android:id="@+id/ll_applied_scores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:lineInputView_IsCanEdit="false"
-        app:lineInputView_IsLookState="true"
-        app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="应用评分"
-        app:lineInputView_RightString="" />
+        <!--清除缓存-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="清除缓存"
+            app:lineInputView_RightString="" />
 
 
-    <!--当前版本-->
-    <com.cpigeon.book.widget.LineInputView
-        android:id="@+id/ll_current_version"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:lineInputView_IsCanEdit="false"
-        app:lineInputView_IsLookState="true"
-        app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="当前版本"
-        app:lineInputView_RightString="" />
+        <!--应用评分-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_applied_scores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="应用评分"
+            app:lineInputView_RightString="" />
 
 
-    <!--推送设置-->
-    <com.cpigeon.book.widget.LineInputView
-        android:id="@+id/ll_push_set"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:lineInputView_IsCanEdit="false"
-        app:lineInputView_IsLookState="true"
-        app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="推送设置"
-        app:lineInputView_RightString="" />
+        <!--当前版本-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_current_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="当前版本"
+            app:lineInputView_RightString="" />
 
 
-    <!--意见反馈-->
-    <com.cpigeon.book.widget.LineInputView
-        android:id="@+id/ll_feedback"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        app:lineInputView_IsCanEdit="false"
-        app:lineInputView_IsLookState="true"
-        app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="意见反馈"
-        app:lineInputView_RightString="" />
+        <!--推送设置-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_push_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="推送设置"
+            app:lineInputView_RightString="" />
 
-    <!--使用帮助-->
-    <com.cpigeon.book.widget.LineInputView
-        android:id="@+id/ll_use_help"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        app:lineInputView_IsCanEdit="false"
-        app:lineInputView_IsLookState="true"
-        app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="使用帮助"
-        app:lineInputView_RightString="" />
 
+        <!--意见反馈-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="意见反馈"
+            app:lineInputView_RightString="" />
+
+        <!--使用帮助-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_use_help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="使用帮助"
+            app:lineInputView_RightString="" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/out_login"
-        style="@style/bottom_style"
-        android:layout_marginTop="50dp"
+        style="@style/bottom_style3"
         android:text="退出登录" />
 
 

@@ -93,8 +93,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginTop="27dp"
                 android:paddingLeft="@dimen/spacing_left_reight"
                 android:paddingRight="@dimen/spacing_left_reight"
                 android:text="签到规则"

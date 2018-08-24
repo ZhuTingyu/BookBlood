@@ -14,15 +14,11 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-import com.base.base.BaseActivity;
-import com.base.base.FragmentAdapter;
-import com.base.util.BarUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.RxUtils;
-import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.CustomViewPager;
@@ -67,7 +63,6 @@ public class MainActivity extends BaseBookActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PermissionUtil.getAppDetailSettingIntent(this);
-        setContentView(R.layout.activity_main);
         viewPager = findViewById(R.id.viewPager);
         bottomAddTabView = findViewById(R.id.bottomAddView);
 
@@ -123,6 +118,11 @@ public class MainActivity extends BaseBookActivity {
         mViewModel.oneStartHintStr.observe(this, r -> {
             ToastUtils.showLong(this, r);
         });
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_main;
     }
 
     private void initLeftMenu() {
@@ -193,4 +193,5 @@ public class MainActivity extends BaseBookActivity {
     public DrawerLayout getMenu(){
         return drawerLayout;
     }
+
 }

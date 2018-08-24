@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.base.base.BaseActivity;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
@@ -49,10 +48,15 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
         activity.overridePendingTransition(R.anim.bottom_out, R.anim.anim_no);
     }
 
+
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_base_search;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_base_search);
 
         history = getHistory();
 

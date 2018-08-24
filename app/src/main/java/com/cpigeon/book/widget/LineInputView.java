@@ -39,6 +39,7 @@ public class LineInputView extends RelativeLayout {
     float mRightTextSize;
     String mLeftString;
     String mRightString;
+    String mEtHintStr;
     boolean mIsLookState;
     Drawable mDrawableRight;
     Drawable mDrawableLeft;
@@ -102,6 +103,7 @@ public class LineInputView extends RelativeLayout {
         mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);
         mRightString = array.getString(R.styleable.LineInputView_lineInputView_RightString);
+        mEtHintStr = array.getString(R.styleable.LineInputView_lineInputView_Hint);
         mIsLookState = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLookState, false);
         mDrawableRight = array.getDrawable(R.styleable.LineInputView_lineInputView_DrawableRight);
         mDrawableLeft = array.getDrawable(R.styleable.LineInputView_lineInputView_DrawableLeft);
@@ -127,6 +129,7 @@ public class LineInputView extends RelativeLayout {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_line_input, this, true);
         mTextView = view.findViewById(R.id.tvLeft);
         mEditText = view.findViewById(R.id.etRight);
+
         mImgRight = view.findViewById(R.id.imgRight);
         mLlContent = view.findViewById(R.id.llContent);
         line_division = view.findViewById(R.id.line_division);
@@ -141,6 +144,7 @@ public class LineInputView extends RelativeLayout {
         mTextView.setTextSize(mLeftTextSize);
 
         mEditText.setText(mRightString);
+        mEditText.setHint(mEtHintStr);
         mEditText.setTextColor(getResources().getColor(mRightColor));
         mEditText.setTextSize(mRightTextSize);
         if (mInputType != 0) {

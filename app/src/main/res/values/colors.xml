@@ -28,6 +28,9 @@
     <color name="color_feedback_handled">#D90000</color>
 
 
+    <!--按钮-->
+    <color name="state_enabled_false">#85C2FF</color>
+
     <!--一般提示颜色-->
     <color name="general_text_hint_color">#b3b3b3</color>
     <!--一般字体颜色-->

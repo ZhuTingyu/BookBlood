@@ -2,7 +2,6 @@ package com.cpigeon.book.module.foot;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.db.AppDatabase;
@@ -74,6 +73,7 @@ public class SearchFootActivity extends BaseSearchActivity {
         });
 
     }
+
 
     @Override
     protected List<DbEntity> getHistory() {

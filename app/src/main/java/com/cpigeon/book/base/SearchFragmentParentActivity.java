@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.base.BaseFragment;
 import com.base.FragmentParentActivity;
-import com.base.base.BaseActivity;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.widget.FiltrateListView;
@@ -69,16 +68,23 @@ public class SearchFragmentParentActivity extends BaseBookActivity {
         initView();
     }
 
-    public void initView() {
-        Class clz = (Class) getIntent().getSerializableExtra(KEY_FRAGMENT);
+    @Override
+    protected int getContentView() {
+
         boolean isHaveMenu = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
 
-        String cls = clz.getName();
-        if(isHaveMenu){
-            setContentView(R.layout.activity_with_search_and_menu_toolbar_layout);
-        }else {
-            setContentView(R.layout.activity_with_search_toolbar_layout);
+        if (isHaveMenu) {
+            return R.layout.activity_with_search_and_menu_toolbar_layout;
+        } else {
+            return R.layout.activity_with_search_toolbar_layout;
         }
+    }
+
+    public void initView() {
+
+
+        Class clz = (Class) getIntent().getSerializableExtra(KEY_FRAGMENT);
+        String cls = clz.getName();
         Fragment fragment = Fragment.instantiate(getBaseActivity(), cls);
         if (fragment instanceof BaseFragment)
             baseFragment = (BaseFragment) fragment;
@@ -105,7 +111,7 @@ public class SearchFragmentParentActivity extends BaseBookActivity {
         }
     }
 
-    public DrawerLayout getDrawerLayout(){
+    public DrawerLayout getDrawerLayout() {
         return mDrawerLayout;
     }
 

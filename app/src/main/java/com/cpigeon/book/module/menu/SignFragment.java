@@ -359,7 +359,13 @@ public class SignFragment extends BaseBookFragment {
                                         // 不是周末周天
                                         if (Integer.valueOf(ySgin[ySgin.length - 2]) + 1 == Integer.valueOf(ySgin[ySgin.length - 1])) {
                                             //签到 跟前一天连在一起
-                                            schemes.add(getSchemeCalendar(x, 1));
+
+                                            if (Arrays.asList(yGift).contains(ySgin[ySgin.length - 2]) || Arrays.asList(wGift).contains(ySgin[ySgin.length - 2])){
+                                                schemes.add(getSchemeCalendar(x, 0));
+                                            }else {
+                                                schemes.add(getSchemeCalendar(x, 1));
+                                            }
+
                                         } else {
                                             schemes.add(getSchemeCalendar(x, 0));
                                         }

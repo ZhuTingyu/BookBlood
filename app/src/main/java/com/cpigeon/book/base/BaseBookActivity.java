@@ -19,14 +19,19 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Created by Zhu TingYu on 2018/8/23.
  */
 
-public class BaseBookActivity extends BaseActivity {
+public abstract class BaseBookActivity extends BaseActivity {
+
     Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getContentView());
+
         unbinder = ButterKnife.bind(this);
     }
+
+    protected abstract int getContentView();
 
     @Override
     public void error(int code, String error) {
@@ -60,4 +65,5 @@ public class BaseBookActivity extends BaseActivity {
             unbinder.unbind();
         }
     }
+
 }

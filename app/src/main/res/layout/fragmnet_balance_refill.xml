@@ -66,18 +66,23 @@
             android:orientation="horizontal">
 
             <TextView
-                android:textColor="@color/general_text_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥"
+                android:textColor="@color/general_text_color"
                 android:textSize="28sp" />
 
-            <TextView
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/general_text_color"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/et_input_money"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="432"
+                android:layout_marginLeft="32dp"
+                android:background="@null"
+                android:hint="@string/user_money_hint_num"
+                android:inputType="number"
+                android:text=""
+                android:textColor="@color/general_text_color"
+                android:textColorHint="@color/color_text_hint"
                 android:textSize="28sp" />
 
         </LinearLayout>
@@ -87,12 +92,66 @@
 
 
         <TextView
+            android:id="@+id/tv_hint_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="微信收取1%手续费，实际支付金额1000.55元"
+            android:text="微信收取1%手续费，实际支付金额0元"
             android:textColor="@color/general_text_hint_color" />
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:layout_marginTop="13dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/ll_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkBoxb"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/checkbox_button1"
+                android:button="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="9dp"
+                android:text="@string/user_agree_agreement1"
+                android:textSize="@dimen/small_text_size" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_paly_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_agree_agreement2"
+            android:textSize="@dimen/small_text_size" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_next_step"
+        style="@style/bottom_style"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:layout_marginTop="78dp"
+        android:text="@string/btn_next_step" />
 
 </LinearLayout>

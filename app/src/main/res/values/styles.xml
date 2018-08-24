@@ -163,4 +163,8 @@
         <item name="android:background">@drawable/shape_radius_4_stroke</item>
     </style>
 
+    <style name="bottom_style3" parent="bottom_style">
+        <item name="android:background">@drawable/selector_btn_rect3</item>
+    </style>
+
 </resources>

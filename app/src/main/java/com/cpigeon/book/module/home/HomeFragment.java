@@ -72,7 +72,7 @@ public class HomeFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DrawerLayout drawerLayout = ((MainActivity)getBaseActivity()).getMenu();
+        DrawerLayout drawerLayout = ((MainActivity) getBaseActivity()).getMenu();
 
         setImageTitle();
         setToolbarColor(R.color.white);
@@ -107,7 +107,7 @@ public class HomeFragment extends BaseBookFragment {
         int w = ScreenTool.getScreenWidth() - ScreenTool.dip2px(40);
         int h = (w / 10) * 3;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(w, h);
-        params.setMargins(ScreenTool.dip2px(20),0, ScreenTool.dip2px(20),0 );
+        params.setMargins(ScreenTool.dip2px(20), 0, ScreenTool.dip2px(20), 0);
         mImgAd.setLayoutParams(params);
 
 
@@ -116,7 +116,7 @@ public class HomeFragment extends BaseBookFragment {
         mTopList.setLayoutManager(manager);
         mAdapter = new HomeTopAdapter();
         mTopList.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newArrayList("",""));
+        mAdapter.setNewData(Lists.newArrayList("", ""));
 
         mSTvFootManager.setOnClickListener(v -> {
             FootAdminListFragment.start(getBaseActivity());

@@ -74,12 +74,14 @@ public class AboutAsFragment extends BaseBookFragment {
                 //功能介绍
                 Intent intent1 = new Intent(getActivity(), BaseWebViewActivity.class);
                 intent1.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_function_introduce)));
+                intent1.putExtra(IntentBuilder.KEY_TITLE, getString(R.string.web_title_function_intro));
                 startActivity(intent1);
                 break;
             case R.id.tv_user_agreement:
                 //用户协议
                 Intent intent2 = new Intent(getActivity(), BaseWebViewActivity.class);
                 intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_use_protocol)));
+                intent2.putExtra(IntentBuilder.KEY_TITLE, getString(R.string.web_title_user_agreement));
                 startActivity(intent2);
                 break;
         }

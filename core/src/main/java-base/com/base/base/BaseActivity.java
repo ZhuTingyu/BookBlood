@@ -55,7 +55,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected BaseViewModel viewModel;
 
-
     private TextView title;
 
     private RxPermissions mRxPermission;
@@ -66,6 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +75,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         AppManager.getAppManager().addActivity(weakReference);
         baseActivity = this;
     }
+
+
+
+
 
     @Override
     protected void onDestroy() {

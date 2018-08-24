@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.base.base.BaseWebViewActivity;
 import com.base.util.IntentBuilder;
@@ -46,6 +47,9 @@ public class SettingFragment extends BaseBookFragment {
     @BindView(R.id.ll_clear_cache)
     LineInputView ll_clear_cache;
     private LoginViewModel mLoginViewModel;
+
+    @BindView(R.id.out_login)
+    TextView out_login;//退出登录状态
 
     private File mFile;//缓存文件
     private long cacheSize;//缓存内存大小
@@ -87,7 +91,6 @@ public class SettingFragment extends BaseBookFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -106,7 +109,7 @@ public class SettingFragment extends BaseBookFragment {
         });
     }
 
-    @OnClick({R.id.ll_clear_cache, R.id.ll_applied_scores, R.id.ll_current_version, R.id.ll_push_set, R.id.out_login,R.id.ll_feedback,R.id.ll_use_help})
+    @OnClick({R.id.ll_clear_cache, R.id.ll_applied_scores, R.id.ll_current_version, R.id.ll_push_set, R.id.out_login, R.id.ll_feedback, R.id.ll_use_help})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_clear_cache:
@@ -149,6 +152,7 @@ public class SettingFragment extends BaseBookFragment {
                 //使用帮助
                 Intent intent2 = new Intent(getActivity(), BaseWebViewActivity.class);
                 intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_use_help)));
+                intent2.putExtra(IntentBuilder.KEY_TITLE, getString(R.string.web_title_use_help));
                 startActivity(intent2);
                 break;
 
