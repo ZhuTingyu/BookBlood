@@ -33,12 +33,10 @@ public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     List<String> mImgData = Lists.newArrayList();
 
     int rootW;
-    int imgW;
 
     public SelectImageAdapter(BaseActivity activity) {
         mBaseActivity = activity;
         rootW = ScreenTool.getScreenWidth() / MAX_NUMBER;
-        imgW = rootW - ScreenTool.dip2px(10);
     }
 
     @Override
@@ -90,22 +88,17 @@ public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     protected class ImageViewHolder extends BaseViewHolder {
         RelativeLayout rlRoot;
-        RelativeLayout rlImage;
         public ImageView icon;
         public ImageView del;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
             rlRoot = itemView.findViewById(R.id.rlRoot);
-            rlImage = itemView.findViewById(R.id.rlImg);
             icon = itemView.findViewById(R.id.img);
+            icon.setVisibility(View.VISIBLE);
             del = itemView.findViewById(R.id.imgDel);
 
-            RelativeLayout.LayoutParams imgParams = new RelativeLayout.LayoutParams(imgW, imgW);
-            icon.setLayoutParams(imgParams);
-            rlImage.setLayoutParams(imgParams);
-
-            RecyclerView.LayoutParams rootParams = new RecyclerView.LayoutParams(rootW, imgW);
+            RecyclerView.LayoutParams rootParams = new RecyclerView.LayoutParams(rootW, ViewGroup.LayoutParams.WRAP_CONTENT);
             rlRoot.setLayoutParams(rootParams);
         }
 
@@ -136,12 +129,10 @@ public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             rlRoot = itemView.findViewById(R.id.rlRoot);
             addBtn = itemView.findViewById(R.id.imgAdd);
 
-            RelativeLayout.LayoutParams imgParams = new RelativeLayout.LayoutParams(imgW, imgW);
             addBtn.setScaleType(ImageView.ScaleType.CENTER);
             addBtn.setImageResource(R.mipmap.ic_add);
-            addBtn.setLayoutParams(imgParams);
 
-            RecyclerView.LayoutParams rootParams = new RecyclerView.LayoutParams(rootW, imgW);
+            RecyclerView.LayoutParams rootParams = new RecyclerView.LayoutParams(rootW, ViewGroup.LayoutParams.WRAP_CONTENT);
             rlRoot.setLayoutParams(rootParams);
             bindData();
 

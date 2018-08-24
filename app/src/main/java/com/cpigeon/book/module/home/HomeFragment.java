@@ -72,7 +72,6 @@ public class HomeFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DrawerLayout drawerLayout = ((MainActivity)getBaseActivity()).getMenu();
 
         setImageTitle();
         setToolbarColor(R.color.white);

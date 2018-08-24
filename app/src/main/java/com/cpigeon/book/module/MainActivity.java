@@ -49,9 +49,6 @@ public class MainActivity extends BaseBookActivity {
 
     SpringForce spring;
 
-    private DrawerLayout drawerLayout;
-    private RelativeLayout llMain;
-    private RelativeLayout menuLayoutLeft;
 
     LoginViewModel mViewModel;
 
@@ -71,10 +68,6 @@ public class MainActivity extends BaseBookActivity {
         viewPager = findViewById(R.id.viewPager);
         bottomAddTabView = findViewById(R.id.bottomAddView);
 
-
-        drawerLayout = findViewById(R.id.drawerLayout);
-        llMain = findViewById(R.id.llMain);
-        menuLayoutLeft = findViewById(R.id.menuLayoutLeft);
 
         Bundle bundle = new Bundle();
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, false);
@@ -113,45 +106,12 @@ public class MainActivity extends BaseBookActivity {
 
         });
 
-        initLeftMenu();
-
-
         //第一次登录  获取鸽币
         mViewModel = new LoginViewModel();
         initViewModel(mViewModel);
         mViewModel.oneStartGetGeBi();//第一次登录
         mViewModel.oneStartHintStr.observe(this, r -> {
             ToastUtils.showLong(this, r);
-        });
-    }
-
-    private void initLeftMenu() {
-
-        menuLayoutLeft.setOnClickListener(v -> {
-            PigeonHouseInfoFragment.start(this, true);
-        });
-
-        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-                llMain.layout(menuLayoutLeft.getRight(), 0, menuLayoutLeft.getRight() + ScreenTool.getScreenWidth()
-                        , ScreenTool.getScreenHeight());
-            }
-
-            @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerClosed(@NonNull View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
         });
     }
 
@@ -190,7 +150,4 @@ public class MainActivity extends BaseBookActivity {
         });
     }
 
-    public DrawerLayout getMenu(){
-        return drawerLayout;
-    }
 }

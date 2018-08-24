@@ -16,6 +16,7 @@ import com.base.util.Utils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 
 import butterknife.OnClick;

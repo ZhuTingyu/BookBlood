@@ -26,6 +26,7 @@
     <color name="color_262626">#262626</color>
     <color name="color_feedback_not_handle">#13B156</color>
     <color name="color_feedback_handled">#D90000</color>
+    <color name="color_count_add">#D90000</color>
 
 
     <!--一般提示颜色-->

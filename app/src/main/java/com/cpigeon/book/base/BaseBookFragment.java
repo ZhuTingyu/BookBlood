@@ -1,15 +1,20 @@
 package com.cpigeon.book.base;
 
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.base.BaseFragment;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.system.AppManager;
+import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
+import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.service.SingleLoginService;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -60,6 +65,15 @@ public class BaseBookFragment extends BaseFragment {
         if (unbinder != null) {
             unbinder.unbind();
         }
+    }
+
+    protected void addItemDecorationLine(RecyclerView recyclerView){
+        addItemDecorationLine(recyclerView, R.color.color_line, ScreenTool.dip2px(0.5f));
+    }
+
+    protected void addItemDecorationLine(RecyclerView recyclerView, @ColorRes int color, int size){
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(recyclerView.getContext())
+                .colorResId(color).size(size).build());
     }
 
 }

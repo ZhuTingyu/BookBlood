@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:id="@+id/rlImg"
-        android:layout_width="match_parent"
+        android:layout_width="48dp"
         android:layout_height="48dp">
         <ImageView
             android:id="@+id/img"
@@ -23,6 +23,7 @@
             android:id="@+id/imgDel"
             android:src="@mipmap/ic_delete"
             tools:src="@mipmap/ic_home"
+            android:visibility="gone"
             android:paddingLeft="12dp"
             android:paddingBottom="12dp"
             android:layout_width="20dp"

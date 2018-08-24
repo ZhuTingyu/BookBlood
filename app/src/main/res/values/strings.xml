@@ -152,6 +152,13 @@
     <string name="text_not_handle">未处理</string>
     <string name="text_handled">已处理</string>
     <string name="text_not_reply">已经回复</string>
-
-
+    <string name="text_status_not_set_foot_ring">未挂环</string>
+    <string name="text_status_set_foot_ring">已挂环</string>
+    <string name="text_input_foot_numbers_count_limit">录入的足环数量不超过10000个</string>
+    <string name="text_currency_exchange">鸽币兑换</string>
+    <string name="text_currency_details">鸽币明细</string>
+    <string name="text_my_currency">我的鸽币</string>
+    <string name="text_way_of_get_currency">鸽币获取方法</string>
+    <string name="text_finished">已完成</string>
+    <string name="text_go_finish">去完成</string>
 </resources>

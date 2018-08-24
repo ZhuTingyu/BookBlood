@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
+import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -91,7 +93,15 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
         mLvCity.setRightImageVisible(false);
 
         bindUi(RxUtils.textChanges(mLvFoot.getEditText()), mViewModel.setStartFoot());
-        bindUi(RxUtils.textChanges(mLvCount.getEditText()), mViewModel.setCount());
+        bindUi(RxUtils.textChanges(mLvCount.getEditText()), s -> {
+            if(!StringUtil.isStringValid(s)) return;
+            int count = Integer.valueOf(s);
+            if(count > 10000){
+                s = "10000";
+                DialogUtils.createHintDialog(getBaseActivity(), Utils.getString(R.string.text_input_foot_numbers_count_limit));
+            }
+            mViewModel.setCount(s);
+        });
         bindUi(RxUtils.textChanges(mLvSource.getEditText()), mViewModel.setSource());
         bindUi(RxUtils.textChanges(mLvMoney.getEditText()), mViewModel.setMoney());
         bindUi(RxUtils.textChanges(mEdRemark.getEditText()), mViewModel.setRemark());
