@@ -123,7 +123,6 @@ public class FiltrateItemAdapter extends BaseMultiItemQuickAdapter<SelectTypeEnt
                     public void afterTextChanged(Editable s) {
                         String content = mEditText.getText().toString();
                         if (StringUtil.isStringValid(content)) {
-                            resetSelect(false);
                             custom.setTypeName(mEditText.getText().toString());
                             custom.setSelect(true);
                         }else {

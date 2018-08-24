@@ -46,4 +46,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="TextView" />
 
+    <ImageView
+        android:id="@+id/imgStatus"
+        android:layout_width="36dp"
+        android:layout_height="12dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvFootNumber"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_set_foot_ring" />
+
 </android.support.constraint.ConstraintLayout>

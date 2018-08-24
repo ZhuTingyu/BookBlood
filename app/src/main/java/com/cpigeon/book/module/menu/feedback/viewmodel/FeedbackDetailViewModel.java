@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu.viewmodel;
+package com.cpigeon.book.module.menu.feedback.viewmodel;
 
 import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
@@ -8,6 +8,8 @@ import com.base.http.HttpErrorException;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.model.FeedbackModel;
 import com.cpigeon.book.model.entity.FeedbackDetailEntity;
+
+import java.util.List;
 
 /**
  * 意见反馈
@@ -19,7 +21,7 @@ public class FeedbackDetailViewModel extends BaseViewModel {
 
     String id;
 
-    public MutableLiveData<FeedbackDetailEntity> mFeedbackDetaisLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<FeedbackDetailEntity>> mFeedbackDetaisLiveData = new MutableLiveData<>();
 
     public FeedbackDetailViewModel(Activity activity){
         id = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);

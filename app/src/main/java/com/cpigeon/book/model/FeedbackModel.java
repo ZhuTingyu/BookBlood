@@ -32,9 +32,9 @@ public class FeedbackModel {
 
 
     //hl 意见反馈详情
-    public static Observable<ApiResponse<FeedbackDetailEntity>> getZGW_Users_Feedback_Detail(String id) {
-        return RequestData.<ApiResponse<FeedbackDetailEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<FeedbackDetailEntity>>() {
+    public static Observable<ApiResponse<List<FeedbackDetailEntity>>> getZGW_Users_Feedback_Detail(String id) {
+        return RequestData.<ApiResponse<List<FeedbackDetailEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<FeedbackDetailEntity>>>() {
                 }.getType())
                 .url(R.string.detail_feedback)
                 .addBody("id", id)

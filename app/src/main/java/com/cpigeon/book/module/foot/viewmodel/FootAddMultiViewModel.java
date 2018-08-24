@@ -44,32 +44,32 @@ public class FootAddMultiViewModel extends BaseViewModel {
         footId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
     }
 
-    public void getFootInfo(){
-        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Select(footId),r -> {
-            if(r.isOk()){
+    public void getFootInfo() {
+        submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Select(footId), r -> {
+            if (r.isOk()) {
                 mFootEntityLiveData.setValue(r.data);
                 sFootId = String.valueOf(r.data.getFootRingID());
                 eFootId = r.data.getEndFootRingID();
                 sFootNumber = r.data.getFootRingNum();
                 eFootNumber = r.data.getEndFootRingNum();
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 
     public void addMultiFoot() {
         submitRequestThrowError(FootAdminModel.addMultiFoot(startFoot, count
-                , typeId, source, cityCode, money, remark),r -> {
-            if(r.isOk()){
+                , typeId, source, cityCode, money, remark), r -> {
+            if (r.isOk()) {
                 addR.setValue(r.msg);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 
     public void deleteMultiFoot() {
-        submitRequestThrowError(FootAdminModel.deleteFoots(sFootId, eFootId, sFootNumber, eFootNumber),r -> {
-            if(r.isOk()){
+        submitRequestThrowError(FootAdminModel.deleteFoots(sFootId, eFootId, sFootNumber, eFootNumber), r -> {
+            if (r.isOk()) {
                 deleteR.setValue(r.msg);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 
@@ -80,11 +80,9 @@ public class FootAddMultiViewModel extends BaseViewModel {
         };
     }
 
-    public Consumer<String> setCount() {
-        return s -> {
-            count = s;
-            isCanCommit();
-        };
+    public void setCount(String count) {
+        this.count = count;
+        isCanCommit();
     }
 
     public Consumer<String> setSource() {
@@ -109,7 +107,7 @@ public class FootAddMultiViewModel extends BaseViewModel {
         };
     }
 
-    public void isCanCommit(){
+    public void isCanCommit() {
         isCanCommit(startFoot, count, startFoot, money);
     }
 }

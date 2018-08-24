@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu.viewmodel;
+package com.cpigeon.book.module.menu.feedback.viewmodel;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;

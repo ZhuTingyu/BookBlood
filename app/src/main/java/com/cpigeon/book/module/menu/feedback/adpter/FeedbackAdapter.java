@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu.adapter;
+package com.cpigeon.book.module.menu.feedback.adpter;
 
 import android.widget.TextView;
 

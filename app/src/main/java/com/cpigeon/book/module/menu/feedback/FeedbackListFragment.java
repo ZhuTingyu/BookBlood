@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu;
+package com.cpigeon.book.module.menu.feedback;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,8 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.FeedbackUpdateEvent;
 import com.cpigeon.book.model.entity.FeedbackListEntity;
-import com.cpigeon.book.module.menu.adapter.FeedbackAdapter;
-import com.cpigeon.book.module.menu.viewmodel.FeedbackListViewModel;
+import com.cpigeon.book.module.menu.feedback.adpter.FeedbackAdapter;
+import com.cpigeon.book.module.menu.feedback.viewmodel.FeedbackListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 import org.greenrobot.eventbus.Subscribe;

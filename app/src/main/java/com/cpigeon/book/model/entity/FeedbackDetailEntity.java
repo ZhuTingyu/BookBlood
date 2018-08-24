@@ -28,7 +28,7 @@ public class FeedbackDetailEntity implements MultiItemEntity {
     private String datetime;
     private String id;
     private String replycontent;
-    private List<ImglistBean> imglist;
+    private List<ImageEntity> imglist;
 
     private int itemType;
 
@@ -72,32 +72,16 @@ public class FeedbackDetailEntity implements MultiItemEntity {
         this.replycontent = replycontent;
     }
 
-    public List<ImglistBean> getImglist() {
+    public List<ImageEntity> getImglist() {
         return imglist;
     }
 
-    public void setImglist(List<ImglistBean> imglist) {
+    public void setImglist(List<ImageEntity> imglist) {
         this.imglist = imglist;
     }
 
     @Override
     public int getItemType() {
       return  StringUtil.isStringValid(replycontent) ? TYPE_REPLY : TYPE_FEEDBACK;
-    }
-
-    public static class ImglistBean {
-        /**
-         * imgurl : 图片地址
-         */
-
-        private String imgurl;
-
-        public String getImgurl() {
-            return imgurl;
-        }
-
-        public void setImgurl(String imgurl) {
-            this.imgurl = imgurl;
-        }
     }
 }

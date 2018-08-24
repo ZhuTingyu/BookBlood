@@ -35,6 +35,8 @@
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name="com.base.base.ShowImageActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 

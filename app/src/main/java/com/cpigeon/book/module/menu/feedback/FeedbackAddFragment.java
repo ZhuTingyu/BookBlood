@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu;
+package com.cpigeon.book.module.menu.feedback;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,7 +24,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.FeedbackUpdateEvent;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.module.menu.viewmodel.FeedBackAddViewModel;
+import com.cpigeon.book.module.menu.feedback.viewmodel.FeedBackAddViewModel;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;

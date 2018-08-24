@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu;
+package com.cpigeon.book.module.menu.feedback;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,15 +8,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.menu.viewmodel.FeedbackDetailViewModel;
-
-import butterknife.BindView;
+import com.cpigeon.book.module.menu.feedback.adpter.FeedbackDetailsAdapter;
+import com.cpigeon.book.module.menu.feedback.viewmodel.FeedbackDetailViewModel;
 
 /**
  * 提交意见反馈
@@ -27,6 +26,7 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
 
     private FeedbackDetailViewModel mViewModel;
     private XRecyclerView recyclerView;
+    FeedbackDetailsAdapter mAdapter;
 
     public static void start(Activity activity, String id) {
         IntentBuilder.Builder()
@@ -37,7 +37,6 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         mViewModel = new FeedbackDetailViewModel(getBaseActivity());
         initViewModel(mViewModel);
     }
@@ -55,8 +54,10 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle("意见反馈详情");
         recyclerView = findViewById(R.id.list);
-
-
+        recyclerView.setBackgroundColor(Utils.getColor(R.color.white));
+        mAdapter = new FeedbackDetailsAdapter();
+        mAdapter.bindToRecyclerView(recyclerView.getRecyclerView());
+        setProgressVisible(true);
         mViewModel.getFeedbackDetail();
 
     }
@@ -65,7 +66,9 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
     protected void initObserve() {
         super.initObserve();
 
-        mViewModel.mFeedbackDetaisLiveData.observe(getActivity(), feedbackDetails -> {
+        mViewModel.mFeedbackDetaisLiveData.observe(getBaseActivity(), feedbackDetails -> {
+            setProgressVisible(false);
+            mAdapter.setNewData(feedbackDetails);
         });
     }
 }
