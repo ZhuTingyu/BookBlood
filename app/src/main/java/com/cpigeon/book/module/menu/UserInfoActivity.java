@@ -64,10 +64,20 @@ public class UserInfoActivity extends BaseBookActivity {
                     String way = chooseWays[p];
                     if (Utils.getString(R.string.text_renewal_login_psd).equals(way)) {
                         //修改登录密码
-                        ReviseLoginPsdFragment.start(this);
+
+                        IntentBuilder.Builder()
+                                .putExtra(IntentBuilder.KEY_DATA,1)
+                                .startParentActivity(this, ReviseLoginPsdFragment.class);
+
+//                        ReviseLoginPsdFragment.start(this);
                     } else if (Utils.getString(R.string.text_renewal_play_psd).equals(way)) {
                         //修改支付密码
-                        RevisePlayPsdFragment.start(this);
+
+                        IntentBuilder.Builder()
+                                .putExtra(IntentBuilder.KEY_DATA,2)
+                                .startParentActivity(this, ReviseLoginPsdFragment.class);
+
+//                        RevisePlayPsdFragment.start(this);
                     }
                 });
 
