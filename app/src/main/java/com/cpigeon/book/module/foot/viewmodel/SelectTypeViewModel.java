@@ -32,6 +32,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mSelectTypeLiveData = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Sex = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_FeatherColor = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_EyeSand = new MutableLiveData<>();
 
     public void setSelectType(String type) {
         selectType = type;
@@ -76,10 +77,11 @@ public class SelectTypeViewModel extends BaseViewModel {
     public void getSelectType_eyeSand() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_EYE), r -> {
             if (r.isOk()) {
-                mSelectType_FeatherColor.setValue(r.data);
+                mSelectType_EyeSand.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
+
 
     public void getSelectTypes() {
         submitRequestThrowError(PigeonPublicModel.getSelectMushType(selectTypes), r -> {

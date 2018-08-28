@@ -37,6 +37,7 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -167,6 +168,10 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor = selectTypeEntities;
         });
 
+        mSelectTypeViewModel.mSelectType_EyeSand.observe(this, selectTypeEntities -> {
+            mBreedPigeonEntryViewModel.mSelectTypes_EyeSand = selectTypeEntities;
+        });
+
     }
 
     @Override
@@ -250,8 +255,22 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
                 break;
             case R.id.ll_eye_sand:
+                if (!Lists.isEmpty(mBreedPigeonEntryViewModel.mSelectTypes_EyeSand)) {
+                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_EyeSand), 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            mBreedPigeonEntryViewModel.eyeSandId = mBreedPigeonEntryViewModel.mSelectTypes_EyeSand.get(index).getTypeID();
+                            llEyeSand.setContent(mBreedPigeonEntryViewModel.mSelectTypes_EyeSand.get(index).getTypeName());
+                            mBreedPigeonEntryViewModel.isCanCommit();
+                        }
+                    });
+                }
                 break;
             case R.id.ll_their_shells_date:
+
+                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+
+                });
                 break;
             case R.id.ll_lineage:
                 break;

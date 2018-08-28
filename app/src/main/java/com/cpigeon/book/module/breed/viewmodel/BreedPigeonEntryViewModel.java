@@ -24,6 +24,10 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
     public String featherColorId ;
 
 
+    public List<SelectTypeEntity> mSelectTypes_EyeSand;
+    public String eyeSandId ;
+
+
     public HashMap<String,String> setImageMap() {
         HashMap<String, String> map = new HashMap<>();
         for (int i = 0,len = images.size(); i < len; i++) {
