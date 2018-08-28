@@ -4,33 +4,29 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
-import android.support.annotation.NonNull;
-import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.RxUtils;
-import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.CustomViewPager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
+import com.cpigeon.book.module.breed.BreedPigeonEntryFragment;
 import com.cpigeon.book.module.home.HomeFragment;
 import com.cpigeon.book.module.home.HomeFragment2;
 import com.cpigeon.book.module.home.HomeFragment3;
 import com.cpigeon.book.module.home.HomeFragment4;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
-import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 import com.cpigeon.book.widget.BottomAddTabView;
 import com.cpigeon.book.widget.SimpleTitleView;
 
@@ -108,6 +104,7 @@ public class MainActivity extends BaseBookActivity {
         mViewModel.oneStartHintStr.observe(this, r -> {
             ToastUtils.showLong(this, r);
         });
+
     }
 
 
@@ -128,8 +125,15 @@ public class MainActivity extends BaseBookActivity {
         }
 
         ImageView close = view.findViewById(R.id.imgClose);
+        SimpleTitleView simpleText2 = view.findViewById(R.id.simpleText2);
         close.setOnClickListener(v -> {
             mPopupWindow.dismiss();
+        });
+
+        simpleText2.setOnClickListener(v -> {
+            //种鸽录入
+            mPopupWindow.dismiss();
+            BreedPigeonEntryFragment.start(getBaseActivity());
         });
 
         spring = new SpringForce(0)

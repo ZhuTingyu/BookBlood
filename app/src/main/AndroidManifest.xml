@@ -101,7 +101,12 @@
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>
+        <!--极光推送-->
+        <service android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace" >
 
+        </service>
 
     </application>
 

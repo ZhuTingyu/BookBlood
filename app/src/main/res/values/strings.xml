@@ -93,6 +93,7 @@
 
     <!--按钮文字-->
     <string name="btn_next_step">下一步</string>
+    <string name="btn_save">保存</string>
     <string name="btn_sure_modify">确定修改</string>
 
 

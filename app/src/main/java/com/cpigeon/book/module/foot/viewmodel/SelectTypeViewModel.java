@@ -1,19 +1,14 @@
 package com.cpigeon.book.module.foot.viewmodel;
 
-import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.Lists;
-import com.base.util.utility.LogUtil;
-import com.base.util.utility.StringUtil;
 import com.cpigeon.book.model.PigeonPublicModel;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 
 import java.util.List;
-
-import io.reactivex.functions.Consumer;
 
 /**
  * 不同模块 公用的接口 如： 羽色 ，眼砂  雌雄，血统
@@ -26,6 +21,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public static final String TYPE_FOOT_RING = "2";
     public static final String TYPE_PIGEON = "3";
     public static final String TYPE_COLOR_FEATHER = "4";
+    public static final String TYPE_SEX = "6";
     public static final String STATE_FOOT_RING = "10";
 
 
@@ -34,9 +30,11 @@ public class SelectTypeViewModel extends BaseViewModel {
     public List<String> whichIds;
 
     public MutableLiveData<List<SelectTypeEntity>> mSelectTypeLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Sex = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_FeatherColor = new MutableLiveData<>();
 
     public void setSelectType(String type) {
-            selectType = type;
+        selectType = type;
     }
 
     public void setSelectType(String... type) {
@@ -45,12 +43,40 @@ public class SelectTypeViewModel extends BaseViewModel {
     }
 
 
-
     //获取  足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别
     public void getSelectType() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(selectType), r -> {
             if (r.isOk()) {
                 mSelectTypeLiveData.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    //获取  性别
+    public void getSelectType_Sex() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_SEX), r -> {
+            if (r.isOk()) {
+                mSelectType_Sex.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    //获取  羽色
+    public void getSelectType_FeatherColor() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_COLOR_FEATHER), r -> {
+            if (r.isOk()) {
+                mSelectType_FeatherColor.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取  眼砂
+    public void getSelectType_eyeSand() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_EYE), r -> {
+            if (r.isOk()) {
+                mSelectType_FeatherColor.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

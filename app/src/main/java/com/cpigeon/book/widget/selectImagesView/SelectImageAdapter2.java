@@ -21,7 +21,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/22.
  */
 
-public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class SelectImageAdapter2 extends RecyclerView.Adapter<BaseViewHolder> {
 
     public static final int MAX_NUMBER = 6;
     protected final static int TYPE_ADD = 1;
@@ -31,7 +31,7 @@ public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     int rootW;
 
-    public SelectImageAdapter(BaseActivity activity) {
+    public SelectImageAdapter2(BaseActivity activity) {
         mBaseActivity = activity;
         rootW = ScreenTool.getScreenWidth() / MAX_NUMBER;
     }
@@ -58,29 +58,40 @@ public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     private int getImagePosition(int position) {
-        int imagePosition = position;
-        if (mImgData.size() < MAX_NUMBER) {
-            imagePosition -= 1;
-        }
+        int imagePosition = position - 1;
+
+//        if (mImgData.size() < MAX_NUMBER) {
+//            imagePosition -= 1;
+//        }
+//        imagePosition -= 1;
+
         return imagePosition;
     }
 
     @Override
     public int getItemCount() {
-        if (mImgData.size() < MAX_NUMBER) {
-            return mImgData.size() + 1;
-        } else {
-            return mImgData.size();
-        }
+        return mImgData.size() + 1;
+//        if (mImgData.size() < MAX_NUMBER) {
+//            return mImgData.size() + 1;
+//        } else {
+//            return mImgData.size();
+//        }
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (mImgData.size() < MAX_NUMBER && position == 0) {
+
+        if (position == 0) {
             return TYPE_ADD;
         } else {
             return super.getItemViewType(position);
         }
+
+//        if (mImgData.size() < MAX_NUMBER && position == 0) {
+//            return TYPE_ADD;
+//        } else {
+//            return super.getItemViewType(position);
+//        }
     }
 
     protected class ImageViewHolder extends BaseViewHolder {
@@ -102,7 +113,6 @@ public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         void bindData(int position) {
 
             File img = new File(mImgData.get(position));
-
             GlideUtil.setGlideImageViewHaveRound(mBaseActivity, img, icon);
 
             del.setVisibility(View.VISIBLE);

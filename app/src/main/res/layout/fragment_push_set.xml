@@ -19,7 +19,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="推送消息" />
+            android:text="推送消息"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
 
 
         <!--   app:kswBackDrawable="@color/gray"
@@ -27,12 +29,9 @@
         <com.kyleduo.switchbutton.SwitchButton
             android:id="@+id/sb_push_info"
             style="@style/Setting_Item_CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowColor="@color/color_gary"
-            app:kswBackColor="@color/colorPrimary"
-            app:kswThumbColor="@color/color_white"
-            app:kswTintColor="@color/color_gary" />
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            app:kswThumbColor="@color/color_white" />
 
     </LinearLayout>
 
@@ -48,18 +47,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="声音提示" />
+            android:text="声音提示"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
 
 
         <com.kyleduo.switchbutton.SwitchButton
             android:id="@+id/sb_voice_hint"
             style="@style/Setting_Item_CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowColor="@color/color_gary"
-            app:kswBackColor="@color/colorPrimary"
-            app:kswThumbColor="@color/color_white"
-            app:kswTintColor="@color/color_gary" />
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            app:kswThumbColor="@color/color_white" />
     </LinearLayout>
 
     <include layout="@layout/include_line_view_layout" />
@@ -75,12 +73,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="震动提示" />
+            android:text="震动提示"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
 
 
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/sb_vibration_hint"
+            style="@style/Setting_Item_CheckBox"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            app:kswThumbColor="@color/color_white" />
     </LinearLayout>
 
     <include layout="@layout/include_line_view_layout" />
@@ -96,15 +99,83 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="免打扰" />
+            android:text="免打扰"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
 
 
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/sb_dont_disturb"
+            style="@style/Setting_Item_CheckBox"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            app:kswThumbColor="@color/color_white" />
     </LinearLayout>
 
-    <include layout="@layout/include_line_view_layout" />
+
+    <LinearLayout
+        android:id="@+id/ll_dont_disturb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/include_line_view_layout" />
+
+        <LinearLayout
+            android:id="@+id/ll_time_start"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="起始时间"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+
+            <TextView
+                android:id="@+id/tv_time_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@color/general_text_color"
+                android:textSize="@dimen/medium_text_size" />
+        </LinearLayout>
+
+        <include layout="@layout/include_line_view_layout" />
+
+        <LinearLayout
+            android:id="@+id/ll_time_end"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="结束时间"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+
+            <TextView
+                android:id="@+id/tv_time_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textColor="@color/general_text_color"
+                android:textSize="@dimen/medium_text_size" />
+        </LinearLayout>
+
+        <include layout="@layout/include_line_view_layout" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

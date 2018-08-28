@@ -82,7 +82,7 @@ public class PickerUtil {
      * @param listener
      */
 
-    private void showItemPicker(Activity activity, List<String> data, int defaultPosition, OptionPicker.OnOptionPickListener listener){
+    public static void showItemPicker(Activity activity, List<String> data, int defaultPosition, OptionPicker.OnOptionPickListener listener){
         OptionPicker picker = new OptionPicker(activity, data);
         picker.setCanceledOnTouchOutside(false);
         picker.setDividerRatio(WheelView.DividerConfig.FILL);
@@ -98,7 +98,6 @@ public class PickerUtil {
      * @param activity
      * @param callback
      */
-
     public static void onAddress3Picker(Activity activity, AddressPickTask.Callback callback) {
         AddressPickTask task = new AddressPickTask(activity);
         task.setCallback(callback);
