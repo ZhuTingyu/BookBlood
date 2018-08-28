@@ -35,6 +35,7 @@ public class FootAdminSingleViewModel extends BaseViewModel {
     public String footSource;//足环来源
     public String remark;//备注
     public List<SelectTypeEntity> mSelectTypes;
+    public List<SelectTypeEntity> mSelectTypes_Source;
     public MutableLiveData<FootEntity> mFootLiveData = new MutableLiveData<>();
     public MutableLiveData<String> mdelectR = new MutableLiveData<>();
 

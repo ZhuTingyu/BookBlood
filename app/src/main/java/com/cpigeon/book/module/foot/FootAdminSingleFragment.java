@@ -17,6 +17,7 @@ import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.picker.PickerUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -39,6 +40,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * 添加 单个足环  fragment
@@ -115,6 +117,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
         mPublicViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_RING);
         mPublicViewModel.getSelectType();
+        mPublicViewModel.getSelectType_Source();
 
         lvCity.setOnRightClickListener(v -> {
             SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, CODE_SELECT_COUNTY);
@@ -137,8 +140,19 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
             });
             dialog.setOnChooseClickListener(v -> {
-
+                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Source)
+                        , 0, new OptionPicker.OnOptionPickListener() {
+                            @Override
+                            public void onOptionPicked(int index, String item) {
+                                lvSource.setRightText(item);
+                            }
+                        });
             });
+            dialog.show(getBaseActivity().getSupportFragmentManager());
+        });
+
+        lvMoney.setOnRightClickListener(lineInputView -> {
+
         });
 
         if (mIsLook) {
@@ -205,6 +219,10 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
         mPublicViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
             mViewModel.mSelectTypes = selectTypeEntities;
+        });
+
+        mPublicViewModel.mSelectType_Foot_Source.observe(this, selectTypeEntities -> {
+            mViewModel.mSelectTypes_Source = selectTypeEntities;
         });
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {

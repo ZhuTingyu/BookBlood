@@ -36,6 +36,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<SelectTypeEntity> mSelectTypeList = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Sex = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_FeatherColor = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Foot_Source = new MutableLiveData<>();
 
     public void setSelectType(String type) {
         selectType = type;
@@ -84,6 +85,17 @@ public class SelectTypeViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
+
+    //获取足环来源
+    public void getSelectType_Source() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_SOURCE), r -> {
+            if (r.isOk()) {
+                mSelectType_Foot_Source.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
 
     public void getSelectTypes() {
         submitRequestThrowError(PigeonPublicModel.getSelectMushType(selectTypes), r -> {
