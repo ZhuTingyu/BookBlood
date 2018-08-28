@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.base.BaseFragment;
 import com.base.base.pinyin.LetterSortModel;
 import com.base.util.IntentBuilder;
-import com.base.util.utility.StringUtil;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
@@ -29,6 +28,9 @@ import com.gjiazhe.wavesidebar.WaveSideBar;
  */
 
 public class SelectCountyFragment extends BaseFragment {
+
+    public static final int CODE_SELECT_COUNTY = 0x123;
+
 
     XRecyclerView mRecyclerView;
     WaveSideBar mWaveSideBar;

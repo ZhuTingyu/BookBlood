@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg_window"
+    android:orientation="vertical">
+
+
+    <com.cpigeon.book.widget.LineInputListLayout
+        android:id="@+id/llz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--国家-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_countries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="CHN"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="国家" />
+
+
+        <!--足环号码-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_foot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="输入足环号"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="足环号码" />
+
+
+        <!--副环-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_foot_vice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="请输入副环"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="false"
+            app:lineInputView_LeftString="副环" />
+
+        <!--来源-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_foot_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="请选择"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="来源" />
+
+
+        <!--父足环-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_foot_father"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="如果存在请选择"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="false"
+            app:lineInputView_LeftString="父足环" />
+
+
+        <!--母足环-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_foot_mother"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="如果存在请选择"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="false"
+            app:lineInputView_LeftString="母足环" />
+
+
+        <!--鸽名-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_pigeon_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="请输入鸽子姓名"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="false"
+            app:lineInputView_LeftString="鸽名" />
+
+
+        <!--性别-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="雄"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="性别" />
+
+
+        <!--羽色-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_feather_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="雨点"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="羽色" />
+
+
+        <!--眼砂-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_eye_sand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="黄眼"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="眼砂" />
+
+
+        <!--出壳日期-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_their_shells_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="请选择"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="出壳日期" />
+
+
+        <!--血统-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_lineage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="请输入血统"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="血统" />
+
+
+        <!--状态-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="在棚"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="状态"
+            app:lineInputView_isShowLineDivisions="gone" />
+
+
+        <!--是否上架该信鸽信息-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="是否上架该信鸽信息"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+
+            <com.kyleduo.switchbutton.SwitchButton
+                android:id="@+id/sb_dont_disturb"
+                style="@style/Setting_Item_CheckBox"
+                android:layout_width="40dp"
+                android:layout_height="20dp"
+                app:kswThumbColor="@color/color_white" />
+        </LinearLayout>
+
+        <include layout="@layout/include_line_view_layout" />
+
+        <!--数据交易价格-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_deal_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="请填写"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="数据交易价格"
+            app:lineInputView_isShowLineDivisions="gone" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_white"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上传图片"
+                    android:textColor="@color/color_4c4c4c"
+                    android:textSize="@dimen/small_text_size_2" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_next_step"
+                style="@style/bottom_style"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="34dp"
+                android:text="@string/btn_save" />
+
+
+        </LinearLayout>
+
+
+    </com.cpigeon.book.widget.LineInputListLayout>
+
+
+</ScrollView>

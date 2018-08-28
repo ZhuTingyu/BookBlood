@@ -98,7 +98,6 @@ public class PickerUtil {
      * @param activity
      * @param callback
      */
-
     public static void onAddress3Picker(Activity activity, AddressPickTask.Callback callback) {
         AddressPickTask task = new AddressPickTask(activity);
         task.setCallback(callback);
