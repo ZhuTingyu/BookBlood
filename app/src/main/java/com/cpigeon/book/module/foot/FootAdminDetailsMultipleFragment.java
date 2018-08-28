@@ -109,6 +109,26 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
         bindUi(RxUtils.textChanges(mLvMoney.getEditText()), mViewModel.setMoney());
         bindUi(RxUtils.textChanges(mBoxViewRemark.getEditText()), mViewModel.setRemark());
 
+        mLvFoot.setOnRightClickListener(lineInputView -> {
+            FootsInfoDialog dialog = new FootsInfoDialog();
+            dialog.setSFoots(mViewModel.sFootNumber);
+            dialog.setEFoots(mViewModel.eFootNumber);
+            dialog.setOnFootStringFinishListener(new FootsInfoDialog.OnFootStringFinishListener() {
+                @Override
+                public void sFoot(String foot) {
+                    mViewModel.sFootNumber = foot;
+                }
+
+                @Override
+                public void eFoot(String foot) {
+                    mViewModel.eFootNumber = foot;
+                    mLvFoot.setRightText(Utils.getString(R.string.text_foots
+                            ,mViewModel.sFootNumber,mViewModel.eFootNumber));//足环号
+                }
+            });
+            dialog.show(getBaseActivity().getSupportFragmentManager());
+        });
+
         mLvCategory.setOnClickListener(v -> {
             if (!Lists.isEmpty(mViewModel.mSelectTypes)) {
                 BottomSheetAdapter.createBottomSheet(getBaseActivity()

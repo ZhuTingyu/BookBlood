@@ -66,8 +66,8 @@
         app:layout_constraintGuide_begin="44dp" />
 
     <com.cpigeon.book.widget.gridpasswordview.GridPasswordView
-        android:id="@+id/gpFoot"
-        android:layout_width="match_parent"
+        android:id="@+id/gpSFoot"
+        android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -78,7 +78,7 @@
         app:gpvTextColor="@color/black"
         app:gpvTextSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/tvYear" />
 
     <TextView
@@ -112,16 +112,6 @@
         app:layout_constraintTop_toTopOf="@+id/tvYear"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/tvSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginTop="144dp"
-        android:drawableRight="@mipmap/ic_arrow_right"
-        android:gravity="center"
-        android:text="@string/text_custom_foot_ring_number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edFoot"
@@ -136,7 +126,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="起"
+        android:textColor="@color/black"
+        android:textSize="@dimen/big_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/gpSFoot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gpSFoot" />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="止"
+        android:textColor="@color/black"
+        android:textSize="@dimen/big_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/gpEFoot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gpEFoot" />
+
+    <com.cpigeon.book.widget.gridpasswordview.GridPasswordView
+        android:id="@+id/gpEFoot"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:gpvLineColor="@color/gray"
+        app:gpvLineWidth="1dp"
+        app:gpvPasswordLength="7"
+        app:gpvTextColor="@color/black"
+        app:gpvTextSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/gpSFoot" />
 
 
 </android.support.constraint.ConstraintLayout>

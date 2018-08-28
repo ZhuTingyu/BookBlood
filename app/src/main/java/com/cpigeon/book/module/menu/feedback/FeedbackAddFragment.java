@@ -25,6 +25,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.FeedbackUpdateEvent;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.menu.feedback.viewmodel.FeedBackAddViewModel;
+import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -119,6 +120,11 @@ public class FeedbackAddFragment extends BaseBookFragment {
 
     @Override
     protected void initObserve() {
+
+        mViewModel.isCanCommit.observe(this, aBoolean -> {
+            TextViewUtil.setEnabled(mTvOk, aBoolean);
+        });
+
         mViewModel.normalResult.observe(this, s -> {
             setProgressVisible(false);
             DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {

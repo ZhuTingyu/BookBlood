@@ -12,11 +12,7 @@ import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.module.foot.FootAdminDetailsMultipleFragment;
-import com.cpigeon.book.module.foot.FootAdminMultipleFragment;
 import com.cpigeon.book.module.foot.FootAdminSingleFragment;
-import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
-
-import java.util.List;
 
 /**
  * Created by Administrator on 2018/8/17.
@@ -36,7 +32,7 @@ public class FootAdminListAdapter extends BaseQuickAdapter<FootEntity, BaseViewH
         ImageView status = helper.getView(R.id.imgStatus);
         helper.setTextView(R.id.tvStatus, item.getTypeName());
 
-        if(StringUtil.isStringValid(item.getEndFootRingNum())){
+        if (StringUtil.isStringValid(item.getEndFootRingNum())) {
             helper.setTextView(R.id.tvFootNumber, Utils.getString(R.string.text_foots, item.getFootRingNum()
                     , item.getEndFootRingNum()));
             helper.itemView.setOnClickListener(v -> {
@@ -44,16 +40,16 @@ public class FootAdminListAdapter extends BaseQuickAdapter<FootEntity, BaseViewH
                         , String.valueOf(getItem(helper.getAdapterPosition()).getFootRingID()));
             });
             status.setVisibility(View.GONE);
-        }else {
+        } else {
             helper.setTextView(R.id.tvFootNumber, item.getFootRingNum());
             helper.itemView.setOnClickListener(v -> {
                 FootAdminSingleFragment.start(getBaseActivity()
                         , String.valueOf(getItem(helper.getAdapterPosition()).getFootRingID()));
             });
             status.setVisibility(View.VISIBLE);
-            if(item.getStateName().equals(Utils.getString(R.string.text_status_not_set_foot_ring))){
+            if (item.getStateName().equals(Utils.getString(R.string.text_status_not_set_foot_ring))) {
                 status.setImageResource(R.mipmap.ic_set_not_foot_ring);
-            }else {
+            } else {
                 status.setImageResource(R.mipmap.ic_set_foot_ring);
             }
         }

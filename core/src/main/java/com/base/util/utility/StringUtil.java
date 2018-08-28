@@ -2,6 +2,11 @@ package com.base.util.utility;
 
 import android.text.TextUtils;
 
+import com.base.http.R;
+import com.base.util.Lists;
+import com.base.util.Utils;
+
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

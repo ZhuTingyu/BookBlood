@@ -19,6 +19,9 @@ import com.base.util.system.ScreenTool;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.BaseSearchActivity;
+import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonListFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.viewmodel.HomeViewModel;
@@ -116,6 +119,9 @@ public class HomeFragment extends BaseBookFragment {
 
         mSTvFootManager.setOnClickListener(v -> {
             FootAdminListFragment.start(getBaseActivity());
+        });
+        mSTvBreedPigeonManager.setOnClickListener(v -> {
+             BreedPigeonListFragment.start(getBaseActivity());
         });
 
         mViewModel.getHomeAd();

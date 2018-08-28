@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
@@ -19,6 +20,7 @@ import com.base.util.dialog.DialogUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
@@ -32,6 +34,8 @@ import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -117,11 +121,24 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         lvFoot.setOnClickListener(v -> {
-            InputFootDialog dialog = new InputFootDialog();
+            List<String> foots = mViewModel.getFoots();
+            InputSingleFootDialog dialog = new InputSingleFootDialog();
+            dialog.setFoots(foots);
             dialog.setOnFootStringFinishListener(foot -> {
                 lvFoot.setRightText(foot);
             });
             dialog.show(getBaseActivity().getSupportFragmentManager());
+        });
+
+        lvSource.setOnRightClickListener(lineInputView -> {
+            BaseInputDialog dialog = new BaseInputDialog();
+            dialog.setTitle(R.string.text_foot_input_price);
+            dialog.setOnFinishListener(content -> {
+
+            });
+            dialog.setOnChooseClickListener(v -> {
+
+            });
         });
 
         if (mIsLook) {
@@ -148,6 +165,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             setProgressVisible(true);
             mViewModel.getFootById();
             tvOk.setOnClickListener(v -> {
+                setProgressVisible(true);
                 mViewModel.modifyFootNumber();
             });
         } else {

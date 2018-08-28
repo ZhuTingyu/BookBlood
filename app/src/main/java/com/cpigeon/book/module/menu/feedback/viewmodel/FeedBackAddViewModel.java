@@ -40,12 +40,18 @@ public class FeedBackAddViewModel extends BaseViewModel {
     public Consumer<String> setPhone(){
         return s -> {
           phone = s;
+            isCanCommit();
         };
     }
     public Consumer<String> setContent(){
         return s -> {
             content = s;
+            isCanCommit();
         };
+    }
+
+    public void isCanCommit(){
+        isCanCommit(phone, content);
     }
 
 }

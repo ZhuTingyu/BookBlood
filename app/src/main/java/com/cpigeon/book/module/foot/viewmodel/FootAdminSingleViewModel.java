@@ -6,6 +6,10 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
+import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
+import com.cpigeon.book.R;
 import com.cpigeon.book.model.FootAdminModel;
 import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -124,5 +128,14 @@ public class FootAdminSingleViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }*/
+
+    public List<String> getFoots() {
+        List<String> foot = Lists.newArrayList();
+        if (StringUtil.isStringValid(footNumber)) {
+            String[] foots = footNumber.split(Utils.getString(R.string.text_foots_divide));
+            foot = Lists.newArrayList(foots);
+        }
+        return foot;
+    }
 
 }

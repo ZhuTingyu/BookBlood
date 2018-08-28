@@ -8,6 +8,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.v7.content.res.AppCompatResources;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.base.http.R;
 import com.base.util.DrawableUtils;
+import com.base.util.system.ScreenTool;
 import com.bumptech.glide.Glide;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -193,6 +195,14 @@ public class BaseViewHolder extends com.chad.library.adapter.base.BaseViewHolder
                 .centerCrop()
                 .bitmapTransform(new RoundedCornersTransformation(context, 5, 0))
                 .into((ImageView) getView(resId));
+    }
+
+    public void setBottomMargin(View view, int height ,int margin){
+        RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
+                , ScreenTool.dip2px(height));
+        params.setMargins(0, 0, 0, ScreenTool.dip2px(margin));
+        view.setLayoutParams(params);
+
     }
 
 }

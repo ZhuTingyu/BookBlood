@@ -55,14 +55,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:lineInputView_IsCanEdit="false"
-                app:lineInputView_isShowRightImage="gone"
+                app:lineInputView_isShowRightImage="invisible"
                 app:lineInputView_LeftString="状态" />
 
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lv_source"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:lineInputView_IsCanEdit="true"
+                app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="来源" />
 
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:lineInputView_InputType="numberDecimal"
-                app:lineInputView_IsCanEdit="true"
+                app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="金额" />
 
