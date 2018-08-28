@@ -116,6 +116,14 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, CODE_SELECT_COUNTY);
         });
 
+        lvFoot.setOnClickListener(v -> {
+            InputFootDialog dialog = new InputFootDialog();
+            dialog.setOnFootStringFinishListener(foot -> {
+                lvFoot.setRightText(foot);
+            });
+            dialog.show(getBaseActivity().getSupportFragmentManager());
+        });
+
         if (mIsLook) {
             setToolbarRight(R.string.text_delete, item -> {
                 DialogUtils.createDialogWithLeft(getBaseActivity()

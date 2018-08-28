@@ -98,6 +98,9 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".module.home.TestActivity" />
+        <activity android:name=".module.order.OrderListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>

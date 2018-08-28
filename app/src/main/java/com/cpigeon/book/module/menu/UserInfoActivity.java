@@ -14,6 +14,7 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
+import com.cpigeon.book.module.order.OrderListActivity;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 
 import butterknife.OnClick;
@@ -95,7 +96,7 @@ public class UserInfoActivity extends BaseBookActivity {
                 break;
             case R.id.ll_my_order:
                 //我的订单
-                OrderListFragment.start(this);
+                OrderListActivity.start(this);
                 break;
             case R.id.ll_my_gebi:
                 //我的鸽币
