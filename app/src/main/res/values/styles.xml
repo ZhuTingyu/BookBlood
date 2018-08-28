@@ -189,6 +189,13 @@
     <style name="AnimBottomDialog" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/bottom_out</item>
         <item name="android:windowExitAnimation">@anim/bottom_in</item>
+
+    </style>
+
+    <style name="Setting_Item_CheckBox">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+
     </style>
 
 </resources>

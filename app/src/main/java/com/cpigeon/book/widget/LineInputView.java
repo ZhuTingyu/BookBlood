@@ -29,7 +29,7 @@ import com.cpigeon.book.R;
 
 public class LineInputView extends RelativeLayout {
 
-    private static final int LEFT_TEXT_SIZE = 14;
+    private static final int LEFT_TEXT_SIZE = 13;
     private static final int RIGHT_TEXT_SIZE = 14;
 
     int mWeight;

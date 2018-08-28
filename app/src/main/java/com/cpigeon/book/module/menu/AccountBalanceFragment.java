@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 
@@ -59,6 +60,8 @@ public class AccountBalanceFragment extends BaseBookFragment {
                 break;
             case R.id.balance_withdraw:
                 //提现
+
+                ToastUtils.showLong(getBaseActivity(),"该功能暂未实现，敬请期待");
 
                 break;
             case R.id.tv_bottom_help:

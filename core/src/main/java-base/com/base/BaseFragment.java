@@ -105,7 +105,7 @@ public abstract class BaseFragment extends Fragment {
 
                 //保证界面只有一个错误提示
                 if (baseActivity.errorDialog == null || !baseActivity.errorDialog.isShowing()) {
-                    baseActivity.errorDialog = DialogUtils.createHintDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE,restHintInfo.cancelable, sweetAlertDialog -> {
+                    baseActivity.errorDialog = DialogUtils.createHintDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE, restHintInfo.cancelable, sweetAlertDialog -> {
                         sweetAlertDialog.dismiss();
 
                         if (restHintInfo.isClosePage) {
@@ -139,7 +139,7 @@ public abstract class BaseFragment extends Fragment {
 
                     //保证界面只有一个错误提示
                     if (baseActivity.errorDialog == null || !baseActivity.errorDialog.isShowing()) {
-                        baseActivity.errorDialog = DialogUtils.createHintDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE,restHintInfo.cancelable, sweetAlertDialog -> {
+                        baseActivity.errorDialog = DialogUtils.createHintDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE, restHintInfo.cancelable, sweetAlertDialog -> {
                             sweetAlertDialog.dismiss();
 
                             if (restHintInfo.isClosePage) {
@@ -159,7 +159,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         if (getArguments() != null) {
-             isBack = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
+            isBack = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
         }
         toolbar = view.findViewById(R.id.toolbar);
         titleView = view.findViewById(R.id.toolbar_title);
@@ -221,6 +221,12 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    protected void setToolbarRight(String res) {
+        if (toolbar != null) {
+            toolbar.getMenu().getItem(0).setTitle(res);
+        }
+    }
+
     protected void setToolbarRight(String string, MenuItem.OnMenuItemClickListener listener) {
         if (toolbar != null) {
             toolbar.getMenu().clear();
@@ -239,7 +245,7 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void setToolbarLeft(@DrawableRes int resId, View.OnClickListener onClickListener){
+    protected void setToolbarLeft(@DrawableRes int resId, View.OnClickListener onClickListener) {
         if (toolbar != null) {
             toolbar.setNavigationIcon(resId);
             toolbar.setNavigationOnClickListener(onClickListener);

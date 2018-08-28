@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
@@ -20,9 +21,19 @@
             android:layout_weight="1"
             android:text="推送消息" />
 
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
+
+        <!--   app:kswBackDrawable="@color/gray"
+            app:kswThumbDrawable="@color/colorPrimary"-->
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/sb_push_info"
+            style="@style/Setting_Item_CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="@color/color_gary"
+            app:kswBackColor="@color/colorPrimary"
+            app:kswThumbColor="@color/color_white"
+            app:kswTintColor="@color/color_gary" />
+
     </LinearLayout>
 
     <include layout="@layout/include_line_view_layout" />
@@ -40,9 +51,15 @@
             android:text="声音提示" />
 
 
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/sb_voice_hint"
+            style="@style/Setting_Item_CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="@color/color_gary"
+            app:kswBackColor="@color/colorPrimary"
+            app:kswThumbColor="@color/color_white"
+            app:kswTintColor="@color/color_gary" />
     </LinearLayout>
 
     <include layout="@layout/include_line_view_layout" />

@@ -20,7 +20,8 @@ public class VerifyCountdownUtil {
             @Override
             public void run() {
                 mContext.runOnUiThread(() -> {
-                    ingBtnValidation.setBackgroundColor(mContext.getResources().getColor(R.color.color_gary));
+//                    ingBtnValidation.setBackgroundColor(mContext.getResources().getColor(R.color.color_gary));
+                    ingBtnValidation.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_gray);
                     ingBtnValidation.setClickable(false);
                 });
 
@@ -40,7 +41,8 @@ public class VerifyCountdownUtil {
                 mContext.runOnUiThread(() -> {
                     //结束
                     ingBtnValidation.setText("获取验证码");
-                    ingBtnValidation.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
+//                    ingBtnValidation.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
+                    ingBtnValidation.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_blue);
                     ingBtnValidation.setClickable(true);
                 });
             }

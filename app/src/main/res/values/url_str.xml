@@ -35,8 +35,13 @@
     <string name="user_register">ZGW_Users_Register</string>
     <!--找回密码-->
     <string name="user_forget_psd">ZGW_Users_FindPWD</string>
-    <!--修改密码 知道密码-->
+    <!--修改密码 不需要验证码-->
     <string name="user_modify_psd_know">ZGW_Users_UpdatePWD</string>
+    <!--修改密码 需要验证码-->
+    <string name="user_modify_psd_need">ZGW_Users_UpdatePWD</string>
+
+    <!--修改支付密码  需要验证码-->
+    <string name="user_modify_psd_play">ZGW_Users_SetUserPayPwd</string>
     <!--用户登录-->
     <string name="user_login">ZGW_Users_Login</string>
     <!--退出登录-->
@@ -98,7 +103,6 @@
     <!--足环号码 列表所有-->
     <string name="foot_list_all">TXGP_FootRing_SelectAll</string>
     <string name="delete_foots">TXGP_FootRing_DeleteSection</string>
-
 
 
     <!--获取各个类型的足环数-->
