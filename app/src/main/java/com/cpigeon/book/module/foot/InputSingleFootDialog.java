@@ -29,7 +29,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
  * Created by Zhu TingYu on 2018/8/27.
  */
 
-public class InputFootDialog extends BaseDialogFragment {
+public class InputSingleFootDialog extends BaseDialogFragment {
 
     private ImageButton mImgClose;
     private TextView mTvFinish;
@@ -39,8 +39,10 @@ public class InputFootDialog extends BaseDialogFragment {
     private TextView mTvSwitch;
     private EditText mEdFoot;
     private boolean isStandard = true;
+    private boolean isHaveStandard = true;
     List<String> years = Lists.newArrayList();
     List<String> area = Lists.newArrayList();
+    List<String> foots;
 
 
     @Override
@@ -63,6 +65,34 @@ public class InputFootDialog extends BaseDialogFragment {
 
         mTvYear.setText(years.get(0));
         mTvArea.setText(area.get(0));
+
+        if (foots.size() == 3) {
+            isStandard = true;
+            if(!Lists.isEmpty(foots)){
+                mTvYear.setText(foots.get(0));
+                mTvArea.setText(foots.get(1));
+                mGpFoot.setPassword(foots.get(2));
+            }
+        }else if(foots.size() == 1 && StringUtil.isStringValid(foots.get(0))){
+            isStandard = false;
+            if(!Lists.isEmpty(foots)){
+                mEdFoot.setText(foots.get(0));
+            }
+        }
+
+        if (isStandard) {
+            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
+            mTvYear.setVisibility(View.VISIBLE);
+            mTvArea.setVisibility(View.VISIBLE);
+            mGpFoot.setVisibility(View.VISIBLE);
+            mEdFoot.setVisibility(View.GONE);
+        } else {
+            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
+            mTvYear.setVisibility(View.GONE);
+            mTvArea.setVisibility(View.GONE);
+            mGpFoot.setVisibility(View.GONE);
+            mEdFoot.setVisibility(View.VISIBLE);
+        }
 
         mTvYear.setOnClickListener(v -> {
             PickerUtil.showItemPicker(getActivity(), years, 0, new OptionPicker.OnOptionPickListener() {
@@ -89,39 +119,43 @@ public class InputFootDialog extends BaseDialogFragment {
         mTvFinish.setOnClickListener(v -> {
             if (mOnFootStringFinishListener != null) {
                 if (isStandard) {
-                    if(StringUtil.isStringValid(mGpFoot.getPassWord())){
+                    if (StringUtil.isStringValid(mGpFoot.getPassWord())) {
                         mOnFootStringFinishListener.foots(Utils.getString(R.string.text_standard_foot
                                 , mTvYear.getText().toString()
                                 , mTvArea.getText().toString()
                                 , mGpFoot.getPassWord()));
-                    }else {
+                        hide();
+                    } else {
                         ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
                     }
                 } else {
 
-                    if(StringUtil.isStringValid(mEdFoot.getText().toString())){
+                    if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
                         mOnFootStringFinishListener.foots(mEdFoot.getText().toString());
-                    }else {
+                        hide();
+                    } else {
                         ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
                     }
 
                 }
             }
-            hide();
+
         });
 
         mImgClose.setOnClickListener(v -> {
             hide();
         });
 
+        if(!isHaveStandard){
+            mTvSwitch.setVisibility(View.GONE);
+        }
+
     }
 
     private void switchStatus() {
         if (isStandard) {
-            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
             isStandard = false;
         } else {
-            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
             isStandard = true;
         }
         switchInputView();
@@ -130,11 +164,13 @@ public class InputFootDialog extends BaseDialogFragment {
 
     private void switchInputView() {
         if (isStandard) {
+            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
             mTvYear.setVisibility(View.GONE);
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
             mEdFoot.setVisibility(View.VISIBLE);
         } else {
+            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
             mTvYear.setVisibility(View.VISIBLE);
             mTvArea.setVisibility(View.VISIBLE);
             mGpFoot.setVisibility(View.VISIBLE);
@@ -144,7 +180,7 @@ public class InputFootDialog extends BaseDialogFragment {
 
     private void getYears() {
         int len = Integer.valueOf(TimeUtil.format(System.currentTimeMillis(), TimeUtil.FORMAT_YYYY));
-        for (int i = 2010; i <= len; i++) {
+        for (int i = len - 10; i <= len; i++) {
             years.add(String.valueOf(i));
         }
         Collections.reverse(years);
@@ -177,5 +213,13 @@ public class InputFootDialog extends BaseDialogFragment {
 
     public void setOnFootStringFinishListener(OnFootStringFinishListener onFootStringFinishListener) {
         mOnFootStringFinishListener = onFootStringFinishListener;
+    }
+
+    public void setFoots(List<String> foots) {
+        this.foots = foots;
+    }
+
+    public void setHaveStandard(boolean haveStandard) {
+        isHaveStandard = haveStandard;
     }
 }

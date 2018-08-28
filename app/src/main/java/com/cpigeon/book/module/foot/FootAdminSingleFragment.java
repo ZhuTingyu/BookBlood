@@ -11,14 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.picker.PickerUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
@@ -33,8 +36,11 @@ import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * 添加 单个足环  fragment
@@ -111,17 +117,42 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
         mPublicViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_RING);
         mPublicViewModel.getSelectType();
+        mPublicViewModel.getSelectType_Source();
 
         lvCity.setOnRightClickListener(v -> {
             SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, CODE_SELECT_COUNTY);
         });
 
         lvFoot.setOnClickListener(v -> {
-            InputFootDialog dialog = new InputFootDialog();
+            List<String> foots = mViewModel.getFoots();
+            InputSingleFootDialog dialog = new InputSingleFootDialog();
+            dialog.setFoots(foots);
             dialog.setOnFootStringFinishListener(foot -> {
                 lvFoot.setRightText(foot);
             });
             dialog.show(getBaseActivity().getSupportFragmentManager());
+        });
+
+        lvSource.setOnRightClickListener(lineInputView -> {
+            BaseInputDialog dialog = new BaseInputDialog();
+            dialog.setTitle(R.string.text_foot_input_price);
+            dialog.setOnFinishListener(content -> {
+
+            });
+            dialog.setOnChooseClickListener(v -> {
+                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Source)
+                        , 0, new OptionPicker.OnOptionPickListener() {
+                            @Override
+                            public void onOptionPicked(int index, String item) {
+                                lvSource.setRightText(item);
+                            }
+                        });
+            });
+            dialog.show(getBaseActivity().getSupportFragmentManager());
+        });
+
+        lvMoney.setOnRightClickListener(lineInputView -> {
+
         });
 
         if (mIsLook) {
@@ -148,6 +179,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             setProgressVisible(true);
             mViewModel.getFootById();
             tvOk.setOnClickListener(v -> {
+                setProgressVisible(true);
                 mViewModel.modifyFootNumber();
             });
         } else {
@@ -187,6 +219,10 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
         mPublicViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
             mViewModel.mSelectTypes = selectTypeEntities;
+        });
+
+        mPublicViewModel.mSelectType_Foot_Source.observe(this, selectTypeEntities -> {
+            mViewModel.mSelectTypes_Source = selectTypeEntities;
         });
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {

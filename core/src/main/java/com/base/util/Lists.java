@@ -20,7 +20,7 @@ public class Lists {
 
 
     public static  ArrayList<String> newTestArrayList() {
-        return Lists.newArrayList("","","","","","");
+        return Lists.newArrayList("","","","","","","","","","","","","","","");
     }
 
     public static <E> ArrayList<E> newArrayList(E... elements) {

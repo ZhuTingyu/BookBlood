@@ -12,7 +12,7 @@
 
         <RelativeLayout
             android:id="@+id/rlLeft"
-            android:layout_width="100dp"
+            android:layout_width="85dp"
             android:layout_height="44dp">
 
             <ImageView
@@ -20,9 +20,9 @@
                 android:layout_width="23dp"
                 android:layout_height="23dp"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="8dp"
                 android:src="@mipmap/info_anquan"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/tvLeft"
@@ -32,7 +32,7 @@
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
                 android:textSize="@dimen/small_text_size_2"
-                tools:text="2123321" />
+                tools:text="我的订单" />
 
         </RelativeLayout>
 
@@ -62,7 +62,10 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:ellipsize="middle"
-                android:padding="8dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:singleLine="true"
                 android:textColorHint="@color/gray_m"
                 android:textSize="@dimen/medium_text_size"

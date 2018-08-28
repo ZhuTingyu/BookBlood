@@ -10,6 +10,7 @@ import com.cpigeon.book.model.entity.SelectTypeEntity;
 
 import java.util.List;
 
+
 /**
  * 不同模块 公用的接口 如： 羽色 ，眼砂  雌雄，血统
  * Created by Administrator on 2018/8/9.
@@ -21,7 +22,9 @@ public class SelectTypeViewModel extends BaseViewModel {
     public static final String TYPE_FOOT_RING = "2";
     public static final String TYPE_PIGEON = "3";
     public static final String TYPE_COLOR_FEATHER = "4";
+    public static final String TYPE_PIGEON_BLOOD = "5";
     public static final String TYPE_SEX = "6";
+    public static final String TYPE_PIGEON_SOURCE = "9";
     public static final String STATE_FOOT_RING = "10";
 
 
@@ -30,9 +33,12 @@ public class SelectTypeViewModel extends BaseViewModel {
     public List<String> whichIds;
 
     public MutableLiveData<List<SelectTypeEntity>> mSelectTypeLiveData = new MutableLiveData<>();
+    public MutableLiveData<SelectTypeEntity> mSelectTypeList = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Sex = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_FeatherColor = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_EyeSand = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Foot_Source = new MutableLiveData<>();
+
 
     public void setSelectType(String type) {
         selectType = type;
@@ -78,6 +84,16 @@ public class SelectTypeViewModel extends BaseViewModel {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_EYE), r -> {
             if (r.isOk()) {
                 mSelectType_EyeSand.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    //获取足环来源
+    public void getSelectType_Source() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_SOURCE), r -> {
+            if (r.isOk()) {
+                mSelectType_Foot_Source.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

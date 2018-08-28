@@ -30,6 +30,8 @@ import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
+
 /**
  * 详情 多个足环  fragment
  * Created by Administrator on 2018/8/10.
@@ -105,6 +107,17 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
         bindUi(RxUtils.textChanges(mLvSource.getEditText()), mViewModel.setSource());
         bindUi(RxUtils.textChanges(mLvMoney.getEditText()), mViewModel.setMoney());
         bindUi(RxUtils.textChanges(mEdRemark.getEditText()), mViewModel.setRemark());
+
+        mLvFoot.setOnRightClickListener(lineInputView -> {
+            List<String> foots = mViewModel.getFoots();
+            InputSingleFootDialog dialog = new InputSingleFootDialog();
+            dialog.setHaveStandard(false);
+            dialog.setFoots(foots);
+            dialog.setOnFootStringFinishListener(foot -> {
+                mLvFoot.setRightText(foot);
+            });
+            dialog.show(getBaseActivity().getSupportFragmentManager());
+        });
 
         mLvCategory.setOnClickListener(v -> {
             if (!Lists.isEmpty(mViewModel.mSelectTypes)) {
