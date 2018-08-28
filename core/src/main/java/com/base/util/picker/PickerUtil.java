@@ -82,7 +82,7 @@ public class PickerUtil {
      * @param listener
      */
 
-    private void showItemPicker(Activity activity, List<String> data, int defaultPosition, OptionPicker.OnOptionPickListener listener){
+    public static void showItemPicker(Activity activity, List<String> data, int defaultPosition, OptionPicker.OnOptionPickListener listener){
         OptionPicker picker = new OptionPicker(activity, data);
         picker.setCanceledOnTouchOutside(false);
         picker.setDividerRatio(WheelView.DividerConfig.FILL);

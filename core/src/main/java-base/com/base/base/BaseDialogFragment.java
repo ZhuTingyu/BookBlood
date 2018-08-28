@@ -54,4 +54,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public void show(FragmentManager manager){
         show(manager, "dialog");
     }
+
+    public void hide(){
+        getDialog().hide();
+    }
+
 }

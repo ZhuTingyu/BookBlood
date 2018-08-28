@@ -27,6 +27,8 @@
     <color name="color_feedback_not_handle">#13B156</color>
     <color name="color_feedback_handled">#D90000</color>
     <color name="color_count_add">#D90000</color>
+    <color name="color_order_price">#D90000</color>
+    <color name="color_text_red">#D90000</color>
 
 
     <!--按钮-->

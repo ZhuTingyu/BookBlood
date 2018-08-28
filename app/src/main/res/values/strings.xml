@@ -151,6 +151,8 @@
     <string name="text_area_select">区号选择</string>
     <string name="text_all">全部</string>
     <string name="text_custom">自定义</string>
+    <string name="text_custom_foot_ring_number">自定义环号</string>
+    <string name="text_standard_foot_ring_number">标准环号</string>
     <string name="text_reset">重置</string>
     <string name="text_sure">确定</string>
     <string name="text_category">类别</string>
@@ -159,6 +161,7 @@
     <string name="text_china_code">CHN</string>
     <string name="text_input_foot_numbers">足环号段录入</string>
     <string name="text_foots">%1$s→%2$s</string>
+    <string name="text_standard_foot">%1$s-%2$s-%3$s</string>
     <string name="text_foots_details">足环号段详情</string>
     <string name="text_is_delete_foot_numbers">是否删除该足环号段，删除过后号段里的所有足环将全部删除？</string>
     <string name="text_input_ass_and_search">请输入协会名字搜索</string>
@@ -178,4 +181,17 @@
     <string name="text_way_of_get_currency">鸽币获取方法</string>
     <string name="text_finished">已完成</string>
     <string name="text_go_finish">去完成</string>
+    <string name="text_unpaid">待支付</string>
+    <string name="text_out_of_date">已过期</string>
+    <string name="text_finish">完成</string>
+    <string name="text_foot">足环</string>
+    <string name="text_pleas_input_foot_number">请输入换号</string>
+
+    <string-array name="array_order_status">
+        <item>@string/text_all</item>
+        <item>@string/text_unpaid</item>
+        <item>@string/text_finished</item>
+        <item>@string/text_out_of_date</item>
+    </string-array>
+
 </resources>
