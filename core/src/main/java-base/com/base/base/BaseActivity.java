@@ -72,6 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        baseActivity = this;
         if(getIntent() != null){
             isBarImmersive = getBaseActivity().getIntent().getBooleanExtra(IS_BAR_IMMERSIVE, true);
         }
@@ -81,7 +82,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         weakReference = new WeakReference<AppCompatActivity>(this);
         AppManager.getAppManager().addActivity(weakReference);
-        baseActivity = this;
     }
 
 
