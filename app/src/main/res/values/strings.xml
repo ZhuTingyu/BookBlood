@@ -192,6 +192,7 @@
     <string name="text_add_breed_pigeon">添加种鸽</string>
     <string name="text_go_choose">去选择</string>
     <string name="text_foot_input_price">足环金额录入</string>
+    <string name="text_foot_source">录入足环来源</string>
 
     <string-array name="array_order_status">
         <item>@string/text_all</item>

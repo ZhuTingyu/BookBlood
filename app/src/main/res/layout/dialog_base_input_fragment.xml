@@ -48,13 +48,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/text_finish"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/view3"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="349dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edContent"

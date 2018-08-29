@@ -18,6 +18,9 @@ import com.base.util.system.ScreenTool;
  */
 
 public abstract class BaseDialogFragment extends DialogFragment {
+
+    public BaseDialogFragment(){}
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

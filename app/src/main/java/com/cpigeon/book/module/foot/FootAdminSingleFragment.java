@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.base.base.BaseDialogFragment;
@@ -71,6 +73,10 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     LineInputView lvStatus;
     private FootAdminSingleViewModel mViewModel;
     private SelectTypeViewModel mPublicViewModel;
+    private int selectSourcePosition = 0;
+    private BaseInputDialog mDialogSource;
+    private BaseInputDialog mDialogMoney;
+
 
     boolean mIsLook;
 
@@ -117,7 +123,6 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
         mPublicViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_RING);
         mPublicViewModel.getSelectType();
-        mPublicViewModel.getSelectType_Source();
 
         lvCity.setOnRightClickListener(v -> {
             SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, CODE_SELECT_COUNTY);
@@ -134,25 +139,21 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         lvSource.setOnRightClickListener(lineInputView -> {
-            BaseInputDialog dialog = new BaseInputDialog();
-            dialog.setTitle(R.string.text_foot_input_price);
-            dialog.setOnFinishListener(content -> {
-
-            });
-            dialog.setOnChooseClickListener(v -> {
-                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Source)
-                        , 0, new OptionPicker.OnOptionPickListener() {
-                            @Override
-                            public void onOptionPicked(int index, String item) {
-                                lvSource.setRightText(item);
-                            }
-                        });
-            });
-            dialog.show(getBaseActivity().getSupportFragmentManager());
+            mDialogSource = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+                    , R.string.text_foot_source, 0,content -> {
+                        lvSource.setRightText(content);
+                    }, () -> {
+                        setProgressVisible(true);
+                        mPublicViewModel.getSelectType_Source();
+                    });
         });
 
         lvMoney.setOnRightClickListener(lineInputView -> {
-
+           mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+                    , R.string.text_foot_input_price, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        lvSource.setRightText(content);
+                        mDialogMoney.hide();
+                    }, null);
         });
 
         if (mIsLook) {
@@ -172,7 +173,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 tvOk.setVisibility(View.VISIBLE);
             });
             boxViewRemark.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
-                if(hasFocus){
+                if (hasFocus) {
                     tvOk.setVisibility(View.VISIBLE);
                 }
             });
@@ -222,7 +223,16 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         mPublicViewModel.mSelectType_Foot_Source.observe(this, selectTypeEntities -> {
-            mViewModel.mSelectTypes_Source = selectTypeEntities;
+            setProgressVisible(false);
+            PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(selectTypeEntities)
+                    , selectSourcePosition, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            selectSourcePosition = index;
+                            lvSource.setRightText(item);
+                            mDialogSource.hide();
+                        }
+                    });
         });
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
