@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
@@ -172,7 +171,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 tvOk.setVisibility(View.VISIBLE);
             });
             boxViewRemark.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
-                if(hasFocus){
+                if (hasFocus) {
                     tvOk.setVisibility(View.VISIBLE);
                 }
             });
