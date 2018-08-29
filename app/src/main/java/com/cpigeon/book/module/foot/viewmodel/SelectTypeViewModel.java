@@ -24,6 +24,8 @@ public class SelectTypeViewModel extends BaseViewModel {
     public static final String TYPE_COLOR_FEATHER = "4";
     public static final String TYPE_PIGEON_BLOOD = "5";
     public static final String TYPE_SEX = "6";
+    public static final String TYPE_PIGEON_IMG = "7";//信鸽图片类型
+    public static final String TYPE_FOOT_SOURCE = "8";
     public static final String TYPE_PIGEON_SOURCE = "9";
     public static final String STATE_FOOT_RING = "10";
     public static final String STATE_STATE = "11";//信鸽状态
@@ -38,9 +40,11 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Sex = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_FeatherColor = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_EyeSand = new MutableLiveData<>();
-    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Foot_Source = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Foot_Source = new MutableLiveData<>();//足环来源
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Pigeon_Source = new MutableLiveData<>();//信鸽来源
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Lineage = new MutableLiveData<>();//血统
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_State = new MutableLiveData<>();//信鸽状态
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_ImgType = new MutableLiveData<>();//图片类型
 
 
     public void setSelectType(String type) {
@@ -101,7 +105,6 @@ public class SelectTypeViewModel extends BaseViewModel {
         });
     }
 
-
     //获取  状态
     public void getSelectType_State() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_STATE), r -> {
@@ -111,12 +114,30 @@ public class SelectTypeViewModel extends BaseViewModel {
         });
     }
 
+    //获取  信鸽图片类型
+    public void getSelectType_ImgType() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_IMG), r -> {
+            if (r.isOk()) {
+                mSelectType_ImgType.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
 
     //获取足环来源
     public void getSelectType_Source() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_SOURCE), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_FOOT_SOURCE), r -> {
             if (r.isOk()) {
                 mSelectType_Foot_Source.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    //获取 信鸽来源
+    public void getSelectType_PigeonSource() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_SOURCE), r -> {
+            if (r.isOk()) {
+                mSelectType_Pigeon_Source.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

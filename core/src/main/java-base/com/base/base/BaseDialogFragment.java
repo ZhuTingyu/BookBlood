@@ -59,7 +59,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     }
 
     public void hide(){
-        this.dismiss();
+       this.dismiss();
     }
 
 }

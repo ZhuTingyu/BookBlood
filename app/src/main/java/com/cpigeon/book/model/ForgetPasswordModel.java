@@ -12,7 +12,7 @@ import io.reactivex.Observable;
  */
 
 public class ForgetPasswordModel {
-    //找回密码
+    //找回密码  舍弃
     public static Observable<ApiResponse> retrievePassword(String u, String p, String y) {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {

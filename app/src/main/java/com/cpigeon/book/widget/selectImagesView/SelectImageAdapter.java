@@ -13,6 +13,9 @@ import com.base.util.Lists;
 import com.base.util.glide.GlideUtil;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
+import com.cpigeon.book.service.EventBusService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.List;
@@ -107,6 +110,9 @@ public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             del.setVisibility(View.VISIBLE);
             del.setOnClickListener(v -> {
+
+                EventBus.getDefault().post(EventBusService.BREED_PIGEON_IMG_TYPE);//通知数据
+
                 mImgData.remove(position);
                 notifyDataSetChanged();
                 if (mOnSelectImageClickListener != null) {

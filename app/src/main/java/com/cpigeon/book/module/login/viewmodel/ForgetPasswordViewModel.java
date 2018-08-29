@@ -1,13 +1,11 @@
 package com.cpigeon.book.module.login.viewmodel;
 
-import android.arch.lifecycle.MutableLiveData;
-
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.regex.RegexUtils;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.ForgetPasswordModel;
+import com.cpigeon.book.model.RevisePsdModel;
 
 import io.reactivex.functions.Consumer;
 
@@ -45,7 +43,7 @@ public class ForgetPasswordViewModel extends BaseViewModel {
             return;
         }
 
-        submitRequestThrowError(ForgetPasswordModel.retrievePassword(phone, password, authCode), r -> {
+        submitRequestThrowError(RevisePsdModel.retrievePassword(phone, password, authCode), r -> {
             if (r.isOk()) {
                 normalResult.setValue(r.msg);
             } else throw new HttpErrorException(r);
