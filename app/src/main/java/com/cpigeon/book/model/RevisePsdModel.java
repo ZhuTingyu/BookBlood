@@ -42,16 +42,29 @@ public class RevisePsdModel {
     }
 
 
-    //  修改支付密码 已知密码  不需要验证码
-    public static Observable<ApiResponse<Object>> getRevisePlayPsd(String phoneStr, String imgVerCode, String phoneVerCode, String newPsdStr) {
+    //找回密码
+    public static Observable<ApiResponse> retrievePassword(String u, String p, String y) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.user_forget_psd)
+                .addBody("sjhm", u)//手机号码
+                .addBody("p", p) //登录密码，使用32位MD5加密
+                .addBody("y", y)//手机验证码
+                .request();
+    }
+
+
+
+    //  修改支付密码 需要验证码
+    public static Observable<ApiResponse<Object>> getRevisePlayPsd(String phoneStr,  String phoneVerCode, String newPsdStr) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.user_modify_psd_play)
-                .addBody("jmm", EncryptionTool.MD5_32(phoneStr))
-                .addBody("xmm", imgVerCode)
-                .addBody("rxmm", phoneVerCode)
-                .addBody("rsxmm", newPsdStr)
+                .addBody("sjhm", phoneStr)//手机号码
+                .addBody("y", phoneVerCode)//手机验证码
+                .addBody("p", EncryptionTool.encryptAES(newPsdStr))//支付密码，AES加密
                 .request();
     }
 

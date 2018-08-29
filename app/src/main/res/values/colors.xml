@@ -31,6 +31,9 @@
     <color name="color_text_red">#D90000</color>
 
 
+    <!--背景-->
+    <color name="color_bg_orange">#FFB288</color>
+
     <!--按钮-->
     <color name="state_enabled_false">#85C2FF</color>
 

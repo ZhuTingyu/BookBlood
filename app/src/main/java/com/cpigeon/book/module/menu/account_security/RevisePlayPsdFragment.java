@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu;
+package com.cpigeon.book.module.menu.account_security;
 
 import android.app.Activity;
 import android.os.Bundle;

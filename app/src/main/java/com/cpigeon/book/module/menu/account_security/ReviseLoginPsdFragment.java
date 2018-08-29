@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu;
+package com.cpigeon.book.module.menu.account_security;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,12 +17,17 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.RxUtils;
+import com.base.util.dialog.DialogUtils;
+import com.base.util.system.AppManager;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.menu.viewmodel.RevisePsdViewModel;
+import com.cpigeon.book.service.SingleLoginService;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.util.VerifyCountdownUtil;
 import com.cpigeon.book.widget.CodeUtils;
@@ -33,6 +38,7 @@ import java.io.ByteArrayOutputStream;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
@@ -76,7 +82,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
     private Thread thread;
 
     private boolean isNeedVerCode = false;//是否需要验证码
-    private int type = -1;
+    private int type = -1;//1  修改登录密码   2  修改支付密码
 
     private RevisePsdViewModel mRevisePsdViewModel;
 
@@ -99,7 +105,6 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
         View view = inflater.inflate(R.layout.fragment_revise_login_psd, container, false);
         return view;
     }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -168,17 +173,35 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
             TextViewUtil.setEnabled(tvNextStep, aBoolean);
         });
 
+
+        mRevisePsdViewModel.reviseLoginPsd.observe(this, s -> {
+            getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), s, SweetAlertDialog.ERROR_TYPE, false, dialog -> {
+                SingleLoginService.stopService();
+                UserModel.getInstance().cleanUserInfo();
+                dialog.dismiss();
+                AppManager.getAppManager().killAllActivity();
+                LoginActivity.start(getBaseActivity());
+            });
+        });
+
     }
 
     @OnClick({R.id.tv_next_step, R.id.tv_ver_code, R.id.img_verCode, R.id.ll_share_txgp})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_next_step:
+                //点击提交
                 if (type == 1) {
                     //修改登录密码
-
                     if (isNeedVerCode) {
                         //需要验证码
+
+
+                        if (!et_imgVerCode.getText().toString().toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase())) {
+                            ToastUtils.showLong(getBaseActivity(), "输入图片验证码不符，请重新输入");
+                            return;
+                        }
+
                         mRevisePsdViewModel.getZGW_Users_GetLoginData2();
                     } else {
                         //不需要验证码
@@ -187,6 +210,12 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
 
                 } else if (type == 2) {
                     //修改支付密码
+
+                    if (!et_imgVerCode.getText().toString().toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase())) {
+                        ToastUtils.showLong(getBaseActivity(), "输入图片验证码不符，请重新输入");
+                        return;
+                    }
+
                     mRevisePsdViewModel.getZGW_Users_GetPlayData();
                 }
 

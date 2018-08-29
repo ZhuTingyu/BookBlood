@@ -207,52 +207,57 @@
             app:lineInputView_LeftString="状态"
             app:lineInputView_isShowLineDivisions="gone" />
 
-
-        <!--是否上架该信鸽信息-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/color_white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/spacing_left_reight"
-            android:paddingRight="@dimen/spacing_left_reight">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="是否上架该信鸽信息"
-                android:textColor="@color/color_4c4c4c"
-                android:textSize="@dimen/small_text_size_2" />
-
-
-            <com.kyleduo.switchbutton.SwitchButton
-                android:id="@+id/sb_dont_disturb"
-                style="@style/Setting_Item_CheckBox"
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                app:kswThumbColor="@color/color_white" />
-        </LinearLayout>
-
-        <include layout="@layout/include_line_view_layout" />
-
-        <!--数据交易价格-->
-        <com.cpigeon.book.widget.LineInputView
-            android:id="@+id/ll_deal_price"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_white"
-            android:paddingLeft="@dimen/spacing_left_reight"
-            android:paddingRight="@dimen/spacing_left_reight"
-            app:lineInputView_Hint="请填写"
-            app:lineInputView_IsCanEdit="false"
-            app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
-            app:lineInputView_LeftString="数据交易价格"
-            app:lineInputView_isShowLineDivisions="gone" />
+            android:orientation="vertical"
+            android:visibility="gone">
+            <!--是否上架该信鸽信息-->
+            <LinearLayout
+                android:id="@+id/ll_isShelves"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="是否上架该信鸽信息"
+                    android:textColor="@color/color_4c4c4c"
+                    android:textSize="@dimen/small_text_size_2" />
+
+
+                <com.kyleduo.switchbutton.SwitchButton
+                    android:id="@+id/sb_dont_disturb"
+                    style="@style/Setting_Item_CheckBox"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    app:kswThumbColor="@color/color_white" />
+            </LinearLayout>
+
+            <include layout="@layout/include_line_view_layout" />
+
+            <!--数据交易价格-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_deal_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint="请填写"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="数据交易价格"
+                app:lineInputView_isShowLineDivisions="gone" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -283,6 +288,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp" />
+
 
             </LinearLayout>
 

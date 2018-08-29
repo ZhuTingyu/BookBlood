@@ -95,6 +95,7 @@
     <string name="btn_next_step">下一步</string>
     <string name="btn_save">保存</string>
     <string name="btn_sure_modify">确定修改</string>
+    <string name="btn_sure_upload">确定上传</string>
 
 
     <string name="cpigeon_intro">中鸽助手是为中鸽网公棚和协会用户提供信息发布、赛鸽管理和比赛监控的平台。目前提供：公棚赛鸽摄像、鸽运通（比赛监控）、训鸽通（个人训放监控）、鸽信通（短信群发）等服务和公棚、协会信息发布管理等功能，一部手机搞定所有工作，简单便捷高效，节省您的时间、提高工作效率。</string>
@@ -192,6 +193,8 @@
     <string name="text_add_breed_pigeon">添加种鸽</string>
     <string name="text_go_choose">去选择</string>
     <string name="text_foot_input_price">足环金额录入</string>
+    <string name="text_pigeon_name">请输入鸽子名称</string>
+    <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_foot_source">录入足环来源</string>
 
     <string-array name="array_order_status">

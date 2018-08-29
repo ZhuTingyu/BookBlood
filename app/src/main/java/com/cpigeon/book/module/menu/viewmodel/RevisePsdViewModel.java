@@ -1,7 +1,11 @@
 package com.cpigeon.book.module.menu.viewmodel;
 
+import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
+
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
+import com.base.util.EncryptionTool;
 import com.cpigeon.book.model.RevisePsdModel;
 
 import io.reactivex.functions.Consumer;
@@ -12,12 +16,13 @@ import io.reactivex.functions.Consumer;
 
 public class RevisePsdViewModel extends BaseViewModel {
 
+    public MutableLiveData<String> reviseLoginPsd = new MutableLiveData<>();
 
     //  修改登录密码 已知密码  不需要验证码
     public void getZGW_Users_GetLoginData1() {
         submitRequestThrowError(RevisePsdModel.getZGW_Users_UpdatePWD(modifyOriginalPsd, modifyNewPsd, modifyNewPsd2), r -> {
             if (r.isOk()) {
-                listEmptyMessage.setValue(r.msg);
+                reviseLoginPsd.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }
@@ -25,29 +30,32 @@ public class RevisePsdViewModel extends BaseViewModel {
 
     //  修改登录密码 需要验证码
     public void getZGW_Users_GetLoginData2() {
-        submitRequestThrowError(RevisePsdModel.getReviseLoginPsd(phoneStr, imgVerCode, phoneVerCode, newPsdStr), r -> {
+        submitRequestThrowError(RevisePsdModel.retrievePassword(phoneStr, newPsdStr, phoneVerCode), r -> {
             if (r.isOk()) {
-                listEmptyMessage.setValue(r.msg);
+                reviseLoginPsd.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }
 
+    private String TAG = "xxxsssl";
 
     //  修改支付密码 需要验证码
     public void getZGW_Users_GetPlayData() {
-        submitRequestThrowError(RevisePsdModel.getRevisePlayPsd(phoneStr, imgVerCode, phoneVerCode, newPsdStr), r -> {
+        Log.d(TAG, "getZGW_Users_GetPlayData: 111-->" + newPsdStr);
+        Log.d(TAG, "getZGW_Users_GetPlayData: 111-->" + EncryptionTool.encryptAES(newPsdStr));
+        Log.d(TAG, "getZGW_Users_GetPlayData: 111-->" + EncryptionTool.decryptAES(EncryptionTool.encryptAES(newPsdStr)));
+        submitRequestThrowError(RevisePsdModel.getRevisePlayPsd(phoneStr, phoneVerCode, newPsdStr), r -> {
             if (r.isOk()) {
-                listEmptyMessage.setValue(r.msg);
+                hintDialog(r.msg);
             } else throw new HttpErrorException(r);
         });
     }
-
 
     //================================================需要验证码=====================================================================
 
     String phoneStr;//绑定的手机号
     String imgVerCode;//图片验证码
-    String phoneVerCode;//手机验证码
+    String phoneVerCode = "1234";//手机验证码
     String newPsdStr;//设置新密码
 
     public Consumer<String> setPhoneStr() {
