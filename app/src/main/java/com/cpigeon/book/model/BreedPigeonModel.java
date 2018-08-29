@@ -24,25 +24,33 @@ public class BreedPigeonModel {
     }
 
 
-//    //hl 添加种鸽
-//    public static Observable<ApiResponse<Object>> getTXGP_Pigeon_Add(String name, String typeid, String stateid, String source,
-//                                                                     String sex, String eye, String bitdate, String plume, String blood,
-//                                                                     String outtime) {
-//        return RequestData.<ApiResponse<Object>>build()
-//                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
-//                }.getType())
-//                .url(R.string.pigeon_breed_add)
-//                .addBody("name", name)
-//                .addBody("typeid", typeid)
-//                .addBody("stateid", stateid)
-//                .addBody("sourceid", source)//来源
-//                .addBody("sex", sex)//性别  id
-//                .addBody("eye", eye)//眼砂  id
-//                .addBody("sex", sex)//性别
-//                .addBody("bitdate", bitdate)//是否要挂卖数据
-//                .addBody("plume", plume)//羽色
-//                .addBody("blood", blood)//血统
-//                .addBody("outtime", outtime)//出壳时间
-//                .request();
-//    }
+    //hl 添加种鸽
+    public static Observable<ApiResponse<Object>> getTXGP_Pigeon_Add(String name,
+                                                                     String typeid,
+                                                                     String stateid,
+                                                                     String source,
+                                                                     String sex,
+                                                                     String eye,
+                                                                     String bitdate,
+                                                                     String plume,
+                                                                     String blood,
+                                                                     String outtime) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pigeon_breed_add)
+                .addBody("typeid", typeid)// 信鸽类型
+                .addBody("stateid", stateid)//信鸽状态
+                .addBody("sourceid", source)//信鸽 来源
+                .addBody("bitdate", bitdate)//是否要挂卖数据
+                
+                .addBody("sex", sex)//性别  id
+                .addBody("eye", eye)//眼砂  id
+                .addBody("name", name)
+                .addBody("sex", sex)//性别
+                .addBody("plume", plume)//羽色
+                .addBody("blood", blood)//血统
+                .addBody("outtime", outtime)//出壳时间
+                .request();
+    }
 }

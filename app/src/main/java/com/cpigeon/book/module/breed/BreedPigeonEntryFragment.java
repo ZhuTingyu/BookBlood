@@ -27,6 +27,7 @@ import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breed.viewmodel.BreedPigeonEntryViewModel;
+import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.widget.LineInputListLayout;
@@ -37,6 +38,8 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -138,7 +141,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                     String way = chooseWays[p];
                     if (Utils.getString(R.string.text_open_gallery).equals(way)) {
 //                        PictureSelectUtil.showChooseImage(getBaseActivity(), PictureMimeType.ofImage(), SelectImageAdapter.MAX_NUMBER - mBreedPigeonEntryViewModel.images.size());
-                        PictureSelectUtil.showChooseImage(getBaseActivity(), PictureMimeType.ofImage(), 10000);
+                        PictureSelectUtil.showChooseImage(getBaseActivity(), PictureMimeType.ofImage(), 1);
                     } else if (Utils.getString(R.string.text_open_camera).equals(way)) {
                         PictureSelectUtil.openCamera(getBaseActivity(), false);
                     }
@@ -155,6 +158,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_Sex();
         mSelectTypeViewModel.getSelectType_FeatherColor();
         mSelectTypeViewModel.getSelectType_eyeSand();
+        mSelectTypeViewModel.getSelectType_lineage();
+        mSelectTypeViewModel.getSelectType_State();
     }
 
     @Override
@@ -166,6 +171,20 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         mSelectTypeViewModel.mSelectType_FeatherColor.observe(this, selectTypeEntities -> {
             mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor = selectTypeEntities;
         });
+
+        mSelectTypeViewModel.mSelectType_EyeSand.observe(this, selectTypeEntities -> {
+            mBreedPigeonEntryViewModel.mSelectTypes_EyeSand = selectTypeEntities;
+        });
+
+
+        mSelectTypeViewModel.mSelectType_Lineage.observe(this, selectTypeEntities -> {
+            mBreedPigeonEntryViewModel.mSelectTypes_Lineage = selectTypeEntities;
+        });
+
+        mSelectTypeViewModel.mSelectType_State.observe(this, selectTypeEntities -> {
+            mBreedPigeonEntryViewModel.mSelectTypes_State = selectTypeEntities;
+        });
+
 
     }
 
@@ -186,11 +205,11 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             case SelectCountyFragment.CODE_SELECT_COUNTY:
                 try {
                     CountyEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-//                    mViewModel.countryId = entity.getSort();
+                    mBreedPigeonEntryViewModel.countryId = entity.getSort();
                     llCountries.setRightText(entity.getCode());
                 } catch (Exception e) {
                     CountyAreaEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-//                    mViewModel.countryId = entity.getFootCodeID();
+                    mBreedPigeonEntryViewModel.countryId = entity.getFootCodeID();
                     llCountries.setRightText(entity.getCode());
                 }
 
@@ -205,6 +224,15 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, SelectCountyFragment.CODE_SELECT_COUNTY);
                 break;
             case R.id.ll_foot:
+//                List<String> foots = mViewModel.getFoots();
+                List<String> foots = new ArrayList<>();
+                InputSingleFootDialog dialog = new InputSingleFootDialog();
+                dialog.setFoots(foots);
+                dialog.setOnFootStringFinishListener(foot -> {
+                    llFoot.setRightText(foot);
+                });
+                dialog.show(getBaseActivity().getSupportFragmentManager());
+
                 break;
             case R.id.ll_foot_vice:
                 break;
@@ -250,12 +278,50 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
                 break;
             case R.id.ll_eye_sand:
+                if (!Lists.isEmpty(mBreedPigeonEntryViewModel.mSelectTypes_EyeSand)) {
+                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_EyeSand), 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            mBreedPigeonEntryViewModel.eyeSandId = mBreedPigeonEntryViewModel.mSelectTypes_EyeSand.get(index).getTypeID();
+                            llEyeSand.setContent(mBreedPigeonEntryViewModel.mSelectTypes_EyeSand.get(index).getTypeName());
+                            mBreedPigeonEntryViewModel.isCanCommit();
+                        }
+                    });
+                }
                 break;
             case R.id.ll_their_shells_date:
+
+                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                    llTheirShellsDate.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
+                });
                 break;
             case R.id.ll_lineage:
+
+                if (!Lists.isEmpty(mBreedPigeonEntryViewModel.mSelectTypes_Lineage)) {
+                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_Lineage), 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            mBreedPigeonEntryViewModel.lineageId = mBreedPigeonEntryViewModel.mSelectTypes_Lineage.get(index).getTypeID();
+                            llLineage.setContent(mBreedPigeonEntryViewModel.mSelectTypes_Lineage.get(index).getTypeName());
+                            mBreedPigeonEntryViewModel.isCanCommit();
+                        }
+                    });
+                }
+
                 break;
             case R.id.ll_state:
+
+                if (!Lists.isEmpty(mBreedPigeonEntryViewModel.mSelectTypes_State)) {
+                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            mBreedPigeonEntryViewModel.stateId = mBreedPigeonEntryViewModel.mSelectTypes_State.get(index).getTypeID();
+                            llState.setContent(mBreedPigeonEntryViewModel.mSelectTypes_State.get(index).getTypeName());
+                            mBreedPigeonEntryViewModel.isCanCommit();
+                        }
+                    });
+                }
+
                 break;
             case R.id.sb_dont_disturb:
                 break;

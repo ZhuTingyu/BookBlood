@@ -129,7 +129,7 @@
     <!--获取种鸽详细-->
     <string name="pigeon_breed_details">TXGP_Pigeon_GetInfo</string>
     <!--添加种鸽-->
-    <string name="pigeon_breed_add">TXGP_Pigeon_Add</string>
+    <string name="pigeon_breed_add">TXGP_Pigeon_AddBreed</string>
 
 
     <!--足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别-->

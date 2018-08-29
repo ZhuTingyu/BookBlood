@@ -23,9 +23,10 @@ public class SelectTypeViewModel extends BaseViewModel {
     public static final String TYPE_PIGEON = "3";
     public static final String TYPE_COLOR_FEATHER = "4";
     public static final String TYPE_PIGEON_BLOOD = "5";
-    public static final String TYPE_PIGEON_SOURCE = "9";
     public static final String TYPE_SEX = "6";
+    public static final String TYPE_PIGEON_SOURCE = "9";
     public static final String STATE_FOOT_RING = "10";
+    public static final String STATE_STATE = "11";//信鸽状态
 
 
     public String selectType;
@@ -36,7 +37,11 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<SelectTypeEntity> mSelectTypeList = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Sex = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_FeatherColor = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_EyeSand = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Foot_Source = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Lineage = new MutableLiveData<>();//血统
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_State = new MutableLiveData<>();//信鸽状态
+
 
     public void setSelectType(String type) {
         selectType = type;
@@ -81,10 +86,31 @@ public class SelectTypeViewModel extends BaseViewModel {
     public void getSelectType_eyeSand() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_EYE), r -> {
             if (r.isOk()) {
-                mSelectType_FeatherColor.setValue(r.data);
+                mSelectType_EyeSand.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
+
+
+    //获取  血统
+    public void getSelectType_lineage() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_BLOOD), r -> {
+            if (r.isOk()) {
+                mSelectType_Lineage.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    //获取  状态
+    public void getSelectType_State() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_STATE), r -> {
+            if (r.isOk()) {
+                mSelectType_State.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
 
     //获取足环来源
     public void getSelectType_Source() {
@@ -95,8 +121,6 @@ public class SelectTypeViewModel extends BaseViewModel {
         });
     }
 
-
-
     public void getSelectTypes() {
         submitRequestThrowError(PigeonPublicModel.getSelectMushType(selectTypes), r -> {
             if (r.isOk()) {
@@ -104,6 +128,5 @@ public class SelectTypeViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
-
 
 }

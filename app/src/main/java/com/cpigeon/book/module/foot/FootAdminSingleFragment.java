@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
