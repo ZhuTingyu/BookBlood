@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breedpigeon.adpter;
+package com.cpigeon.book.module.breed.adpter;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;

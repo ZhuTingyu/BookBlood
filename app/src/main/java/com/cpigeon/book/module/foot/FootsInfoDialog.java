@@ -67,6 +67,10 @@ public class FootsInfoDialog extends BaseDialogFragment {
             mGpSFoot.setPassword(sFoot);
             mGpEFoot.setPassword(eFoot);
         }
+        mImgClose.setOnClickListener(v -> {
+            hide();
+        });
+
 
         mTvFinish.setOnClickListener(v -> {
             if(mOnFootStringFinishListener != null){
