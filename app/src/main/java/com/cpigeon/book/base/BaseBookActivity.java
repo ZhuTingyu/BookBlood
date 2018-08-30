@@ -1,5 +1,6 @@
 package com.cpigeon.book.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -10,6 +11,7 @@ import com.base.util.utility.StringUtil;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.service.SingleLoginService;
+import com.umeng.socialize.UMShareAPI;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -65,5 +67,6 @@ public abstract class BaseBookActivity extends BaseActivity {
             unbinder.unbind();
         }
     }
+
 
 }

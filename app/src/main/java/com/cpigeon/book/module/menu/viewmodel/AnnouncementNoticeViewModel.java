@@ -6,6 +6,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.AnnouncementNoticeModel;
 import com.cpigeon.book.model.entity.AnnouncementNoticeEntity;
+import com.cpigeon.book.model.entity.MsgCountEntity;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
     public int ps = 15;
 
     public MutableLiveData<List<AnnouncementNoticeEntity>> announcementNoticeData = new MutableLiveData<>();
+    public MutableLiveData<MsgCountEntity> mMsgCountData = new MutableLiveData<>();
 
     //获取  公告通知列表
     public void getTXGP_GetGongGaoData() {
@@ -45,7 +47,7 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
     public void getTXGP_GongGao_DetailData(String detailId) {
         submitRequestThrowError(AnnouncementNoticeModel.getTXGP_GongGao_Detail(detailId), r -> {
             if (r.isOk()) {
-                hintDialog("详细获取成功：" + r.toJsonString());
+                mMsgCountData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

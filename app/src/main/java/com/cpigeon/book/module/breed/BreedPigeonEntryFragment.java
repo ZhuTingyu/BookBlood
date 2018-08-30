@@ -33,6 +33,7 @@ import com.cpigeon.book.module.breed.viewmodel.BreedPigeonEntryViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.photo.ImgUploadFragment;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 import com.cpigeon.book.widget.selectImagesView.SelectImageAdapter2;
@@ -212,7 +213,6 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             IntentBuilder.Builder().putExtra(IntentBuilder.KEY_TYPE, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath()).build())
                     .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
 
-
 //            mBreedPigeonEntryViewModel.images.addAll(imgs);
         }
 
@@ -236,6 +236,9 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 List<ImgTypeEntity> imgs = Lists.newArrayList();
                 imgs.add(0, mImgTypeEntity);
                 mAdapter.addImage(imgs);
+
+                mBreedPigeonEntryViewModel.phototypeid = mImgTypeEntity.getImgTypeId();
+                mBreedPigeonEntryViewModel.images.addAll(Lists.newArrayList(mImgTypeEntity.getImgPath()));
 
                 break;
         }
@@ -293,11 +296,29 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.ll_foot_father:
                 //父足环
-                mBreedPigeonEntryViewModel.footFather = "";
+
+
+                List<String> foots3 = new ArrayList<>();
+                InputSingleFootDialog dialog3 = new InputSingleFootDialog();
+                dialog3.setFoots(foots3);
+                dialog3.setOnFootStringFinishListener(foot -> {
+                    llFootFather.setRightText(foot);
+                    mBreedPigeonEntryViewModel.footFather = foot;
+                });
+                dialog3.show(getBaseActivity().getSupportFragmentManager());
+
                 break;
             case R.id.ll_foot_mother:
                 //母足环
-                mBreedPigeonEntryViewModel.footMother = "";
+                List<String> foots4 = new ArrayList<>();
+                InputSingleFootDialog dialog4 = new InputSingleFootDialog();
+                dialog4.setFoots(foots4);
+                dialog4.setOnFootStringFinishListener(foot -> {
+                    llFootMother.setRightText(foot);
+                    mBreedPigeonEntryViewModel.footMother = foot;
+                });
+                dialog4.show(getBaseActivity().getSupportFragmentManager());
+
                 break;
             case R.id.ll_pigeon_name:
                 //鸽名
@@ -366,6 +387,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 //血统
                 mDialogLineage = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                         , R.string.text_pigeon_lineage, 0, content -> {
+                            mDialogLineage.hide();
                             mBreedPigeonEntryViewModel.lineageId = content;
                             llLineage.setRightText(content);
                         }, () -> {

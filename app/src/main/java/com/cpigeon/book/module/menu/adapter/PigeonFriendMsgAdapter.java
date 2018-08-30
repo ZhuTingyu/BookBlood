@@ -1,5 +1,8 @@
 package com.cpigeon.book.module.menu.adapter;
 
+import android.view.View;
+import android.widget.TextView;
+
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.cpigeon.book.R;
@@ -20,8 +23,27 @@ public class PigeonFriendMsgAdapter extends BaseQuickAdapter<PigeonFriendMsgList
     @Override
     protected void convert(BaseViewHolder helper, PigeonFriendMsgListEntity item) {
 
-        helper.setText(R.id.tv_title, item.getContent());
-        helper.setText(R.id.tv_time, item.getDate());
+        TextView tv_circle = helper.getView(R.id.tv_circle);
+        tv_circle.setVisibility(View.GONE);
+
+        helper.setTextView(R.id.tv_title, item.getTitle());
+        helper.setTextView(R.id.tv_time, item.getDate());
+        helper.setTextView(R.id.tv_send_address, item.getSource());
+
+
+        TextView tv_title = helper.getView(R.id.tv_title);
+
+        if (item.getIsread().equals("1")) {
+            //消息已读
+            tv_circle.setVisibility(View.GONE);
+            tv_title.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+        } else {
+            //消息未读
+            tv_circle.setVisibility(View.VISIBLE);
+            tv_title.setTextColor(mContext.getResources().getColor(R.color.color_010101));
+        }
+
+        helper.setText(R.id.tv_content, item.getContent());
 
     }
 }

@@ -23,8 +23,8 @@ import com.cpigeon.book.module.breed.BreedPigeonListFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.viewmodel.HomeViewModel;
-import com.cpigeon.book.module.menu.AnnouncementNoticeFragment;
 import com.cpigeon.book.module.menu.UserInfoActivity;
+import com.cpigeon.book.module.menu.message.MsgActivity;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.widget.SimpleTitleView;
 
@@ -81,7 +81,8 @@ public class HomeFragment extends BaseBookFragment {
         });
 
         setToolbarRightImage(R.drawable.svg_home_message, item -> {
-            AnnouncementNoticeFragment.start(getBaseActivity());
+            //公告通知 ，鸽友消息
+            MsgActivity.start(getBaseActivity());
             return false;
         });
 
@@ -120,7 +121,7 @@ public class HomeFragment extends BaseBookFragment {
             FootAdminListFragment.start(getBaseActivity());
         });
         mSTvBreedPigeonManager.setOnClickListener(v -> {
-             BreedPigeonListFragment.start(getBaseActivity());
+            BreedPigeonListFragment.start(getBaseActivity());
         });
 
         mSTvPigeonPhoto.setOnClickListener(v -> {

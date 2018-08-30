@@ -45,6 +45,8 @@
     <!--一般字体颜色-->
     <color name="general_text_color">#000000</color>
     <color name="color_4c4c4c">#4c4c4c</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_010101">#010101</color>
     <color name="color_000000">#000000</color>
 
 

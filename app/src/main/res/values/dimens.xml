@@ -31,4 +31,9 @@
     <dimen name="activity_about_versionname_textsize">20sp</dimen>
     <dimen name="activity_about_company_intro_textsize">13sp</dimen>
 
+
+    <!--分享dialog-->
+    <dimen name="dialog_plr">10dp</dimen>
+    <dimen name="dialog_ptb">25dp</dimen>
+
 </resources>

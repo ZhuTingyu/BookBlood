@@ -28,8 +28,8 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "你的appkey", //JPush上注册的包名对应的appkey.
+                JPUSH_PKGNAME : "com.cpigeon.book",
+                JPUSH_APPKEY : "de92f1aaa26e29684c23ea57", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
@@ -70,11 +70,9 @@ dependencies {
     compile 'com.android.support:support-dynamic-animation:27.0.2'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-
     //facebook
     compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
-
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
     //视图注解
     compile 'com.jakewharton:butterknife:8.5.1'
@@ -84,9 +82,24 @@ dependencies {
     compile 'com.haibin:calendarview:3.4.1'
     //开关按钮
     compile 'com.kyleduo.switchbutton:library:1.4.5'
+
+    compile 'cn.jiguang.sdk:jpush:3.1.5'
+    // 此处以JPush 3.1.5 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.2.3'
+    //
+    compile 'me.shaohui:bottomdialog:1.1.9'
+    compile 'com.android.support:multidex:1.0.3'
+    implementation files('libs/open_sdk_r5788_lite.jar')
+    implementation files('libs/SocialSDK_QQ_Full.jar')
+    implementation files('libs/SocialSDK_WeiXin_Full.jar')
+    implementation files('libs/umeng_social_api.jar')
+    implementation files('libs/umeng_social_net.jar')
+    implementation files('libs/umeng_social_tool.jar')
+
     //极光推送
     compile 'cn.jiguang.sdk:jpush:3.1.5'  // 此处以JPush 3.1.5 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.2.3'  // 此处以JCore 1.2.3 版本为例。
 
     compile 'com.github.Hitomis:CrazyShadow:v1.0.1'
+
 }
