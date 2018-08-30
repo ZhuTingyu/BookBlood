@@ -46,11 +46,13 @@ public class BaseInputDialog extends BaseDialogFragment {
         mEdContent = dialog.findViewById(R.id.edContent);
         mTvChoose = dialog.findViewById(R.id.tvChoose);
 
-        if(getArguments() != null){
+        if (getArguments() != null) {
             String title = getArguments().getString(IntentBuilder.KEY_TITLE);
             mEditInputType = getArguments().getInt(IntentBuilder.KEY_TYPE);
             mTvTitle.setText(title);
-            mEdContent.setInputType(mEditInputType);
+            if (mEditInputType != 0) {
+                mEdContent.setInputType(mEditInputType);
+            }
         }
 
         mImgClose.setOnClickListener(v -> {
@@ -58,12 +60,12 @@ public class BaseInputDialog extends BaseDialogFragment {
         });
 
         mTvFinish.setOnClickListener(v -> {
-            if(mOnFinishListener != null){
+            if (mOnFinishListener != null) {
                 mOnFinishListener.finish(mEdContent.getText().toString());
             }
         });
 
-        if(mOnChooseListener != null){
+        if (mOnChooseListener != null) {
             mTvChoose.setVisibility(View.VISIBLE);
             mTvChoose.setOnClickListener(v -> {
                 mOnChooseListener.choose();
@@ -71,6 +73,7 @@ public class BaseInputDialog extends BaseDialogFragment {
         }
 
     }
+
     @Override
     protected void initLayout(Window window, WindowManager.LayoutParams lp) {
         window.setWindowAnimations(R.style.AnimBottomDialog);
@@ -80,19 +83,19 @@ public class BaseInputDialog extends BaseDialogFragment {
         window.setAttributes(lp);
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         mTvTitle.setText(title);
     }
 
-    public void setTitle(@StringRes int title){
+    public void setTitle(@StringRes int title) {
         mTvTitle.setText(Utils.getString(title));
     }
 
-    public interface  OnFinishListener{
+    public interface OnFinishListener {
         void finish(String content);
     }
 
-    public interface  OnChooseClickListener{
+    public interface OnChooseClickListener {
         void choose();
     }
 
@@ -107,16 +110,16 @@ public class BaseInputDialog extends BaseDialogFragment {
         mOnChooseListener = onChooseClickListener;
     }
 
-    public void setContent(String content){
+    public void setContent(String content) {
         mEdContent.setText(content);
     }
 
     public static BaseInputDialog show(FragmentManager fragmentManager
-            ,@StringRes int resId, int editInputType ,OnFinishListener onFinishListener ,@Nullable OnChooseClickListener onChooseClickListener){
+            , @StringRes int resId, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
         BaseInputDialog dialog = new BaseInputDialog();
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(resId));
-        if(editInputType != 0){
+        if (editInputType != 0) {
             bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
         }
         dialog.setArguments(bundle);

@@ -204,4 +204,13 @@
         <item>@string/text_out_of_date</item>
     </string-array>
 
+
+    <string-array name="array_msg">
+        <item>@string/test_announcement_notice</item>
+        <item>@string/test_pigeon_friend_msg</item>
+    </string-array>
+
+    <string name="test_announcement_notice">公告通知</string>
+    <string name="test_pigeon_friend_msg">鸽友消息</string>
+
 </resources>

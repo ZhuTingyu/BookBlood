@@ -322,14 +322,10 @@ public static java.lang.String TABLENAME;
     public <fields>;
 }
 
-#友盟
--dontwarn com.umeng.**
 -dontwarn com.youtu.**
 
-
--keep class cn.pedant.SweetAlert.Rotate3dAnimation {
-  public <init>(...);
-}
+#友盟
+-keep class com.umeng.** {*;}
 
 #Glide
 

@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu;
+package com.cpigeon.book.module.menu.message;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,34 +13,26 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.entity.AnnouncementNoticeEntity;
-import com.cpigeon.book.module.menu.adapter.AnnouncementNoticeAdapter;
-import com.cpigeon.book.module.menu.viewmodel.AnnouncementNoticeViewModel;
+import com.cpigeon.book.model.entity.PigeonFriendMsgListEntity;
+import com.cpigeon.book.module.menu.adapter.PigeonFriendMsgAdapter;
+import com.cpigeon.book.module.menu.viewmodel.PigeonFriendMsgViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
- * 公告通知
+ * 鸽友消息
  * Created by Administrator on 2018/8/9.
  */
 
-public class AnnouncementNoticeFragment extends BaseBookFragment {
+public class PigeonFriendMsgFragment extends BaseBookFragment {
 
     private XRecyclerView mRecyclerView;
 
-    private AnnouncementNoticeViewModel mViewModel;
-    private AnnouncementNoticeAdapter mAdapter;
+    private PigeonFriendMsgViewModel mViewModel;
+    private PigeonFriendMsgAdapter mAdapter;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, AnnouncementNoticeFragment.class);
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mViewModel = new AnnouncementNoticeViewModel();
-        initViewModels(mViewModel);
+                .startParentActivity(activity, PigeonFriendMsgFragment.class);
     }
 
     @Nullable
@@ -51,47 +43,58 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mViewModel = new PigeonFriendMsgViewModel();
+        initViewModel(mViewModel);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = findViewById(R.id.list);
+        setTitle("鸽友消息");
 
-        setTitle("公告通知");
         setToolbarRight("统计", item -> {
-            mViewModel.getTXGP_GongGao_CountData();
+            mViewModel.getTXGP_Msg_CountData();
             return true;
         });
 
+        mRecyclerView = findViewById(R.id.list);
 
-        mAdapter = new AnnouncementNoticeAdapter(null);
+        mAdapter = new PigeonFriendMsgAdapter(null);
 
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.getData().clear();
             mViewModel.pi = 1;
-            mViewModel.getTXGP_GetGongGaoData();
+            mViewModel.getTXGP_GetMsgListData();
         });
-
-
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            AnnouncementNoticeEntity mAnnouncementNoticeEntity = (AnnouncementNoticeEntity) adapter.getData().get(position);
-            mViewModel.getTXGP_GongGao_DetailData(mAnnouncementNoticeEntity.getId());
-        });
-
 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnLoadMoreListener(() -> {
             mViewModel.pi++;
-            mViewModel.getTXGP_GetGongGaoData();
+            mViewModel.getTXGP_GetMsgListData();
         }, mRecyclerView.getRecyclerView());
 
-        mViewModel.getTXGP_GetGongGaoData();
-    }
+        mViewModel.getTXGP_GetMsgListData();
 
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
+
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            PigeonFriendMsgListEntity mPigeonFriendMsgListEntity = (PigeonFriendMsgListEntity) adapter.getData().get(position);
+            mViewModel.getTXGP_Msg_DetailData(mPigeonFriendMsgListEntity.getId());
+        });
+
+    }
 
 
     @Override
     protected void initObserve() {
 
-        mViewModel.announcementNoticeData.observe(this, datas -> {
+        mViewModel.pigeonFriendMsgListData.observe(this, datas -> {
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 
@@ -99,5 +102,4 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
             mAdapter.setEmptyText(s);
         });
     }
-
 }

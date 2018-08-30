@@ -40,15 +40,16 @@ public class BreedPigeonModel {
                                                                      String outtime,
                                                                      String blood,
                                                                      String stateid,
+                                                                     String phototypeid,
                                                                      Map<String, String> body) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_add)
-                .addBody("typeid  ", String.valueOf(8))//
-                .addBody("coodid  ", coodid)// 国家Id
-                .addBody("footnum ", footnum)//足环（可选可填，传足环号）
-                .addBody("footnumto ", footnumto)// 副环（可选可填 ，传足环号）
+                .addBody("typeid", String.valueOf(8))//
+                .addBody("coodid", coodid)// 国家Id
+                .addBody("footnum", footnum)//足环（可选可填，传足环号）
+                .addBody("footnumto", footnumto)// 副环（可选可填 ，传足环号）
                 .addBody("sourceid", sourceid)// 信鸽来源ID
                 .addBody("menfootnum", menfootnum)// 父足环号码
                 .addBody("wofootnum", wofootnum)// 母足环号码
@@ -59,6 +60,7 @@ public class BreedPigeonModel {
                 .addBody("outtime", outtime)//   出壳时间
                 .addBody("blood", blood)//  血统 （可选可填，传血统名称）
                 .addBody("stateid", stateid)// 信鸽状态ID
+                .addBody("phototypeid", phototypeid)// 信鸽状态ID
                 .addImageFileBodys(body)
                 .request();
     }

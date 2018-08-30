@@ -150,7 +150,7 @@ public class ImgUploadFragment extends BaseBookFragment {
                         .imgType(mBreedPigeonEntryViewModel.imgTypeStr)
                         .imgPath(mImgTypeEntity.getImgPath())
                         .build());
-                getBaseActivity().setResult(ImgUploadFragment.CODE_SELECT_COUNTY, intent);
+                getBaseActivity().setResult(Activity.RESULT_OK, intent);
                 getBaseActivity().finish();
 
                 break;

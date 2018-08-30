@@ -18,6 +18,9 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+
+    <uses-sdk android:minSdkVersion="8"></uses-sdk>
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -27,6 +30,48 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+
+
+        <!--分享-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5b866e98a40fa36fb8000038" />
+
+        <!--qq完整版：-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105989530" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!--微信分享-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
 
         <provider
             android:name="com.base.util.MyFileProvider"
@@ -98,21 +143,30 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".module.home.TestActivity" />
-        <activity android:name=".module.order.OrderListActivity"
+        <activity
+            android:name=".module.order.OrderListActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.breedpigeon.SearchBreedPigeonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.breedpigeon.SearchBreedPigeonActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".module.menu.message.MsgActivity" />
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>
         <!--极光推送-->
-        <service android:name="cn.jpush.android.service.PushService"
+        <service
+            android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
-            tools:node="replace" >
+            tools:node="replace">
 
         </service>
+
+
+        <!--友盟-->
+
 
     </application>
 

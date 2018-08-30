@@ -31,6 +31,7 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
                 theirShellsDate,
                 lineageId,
                 stateId,
+                phototypeid,
                 setImageMap()), r -> {
 
             if (r.isOk()) {
@@ -41,7 +42,9 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
     }
 
 
+    //图片
     public List<String> images = Lists.newArrayList();
+    public String phototypeid;
 
 
     //国家
@@ -98,7 +101,7 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
     public HashMap<String, String> setImageMap() {
         HashMap<String, String> map = new HashMap<>();
         for (int i = 0, len = images.size(); i < len; i++) {
-            map.put("pic" + i, images.get(i));
+            map.put("photo", images.get(i));
         }
         return map;
     }

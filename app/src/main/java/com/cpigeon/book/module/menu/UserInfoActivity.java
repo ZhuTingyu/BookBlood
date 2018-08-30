@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.base.base.BaseWebViewActivity;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
@@ -15,8 +14,12 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.module.menu.account_security.ReviseLoginPsdFragment;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
+import com.cpigeon.book.module.menu.viewmodel.ShareViewModel;
 import com.cpigeon.book.module.order.OrderListActivity;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
+import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
+import com.cpigeon.book.widget.mydialog.ViewControlShare;
+import com.umeng.socialize.UMShareAPI;
 
 import butterknife.OnClick;
 
@@ -29,6 +32,10 @@ import butterknife.OnClick;
 public class UserInfoActivity extends BaseBookActivity {
 
 
+    private ShareDialogFragment dialogFragment;
+
+    private ShareViewModel mShareViewModel;
+
     public static void start(Activity activity) {
         Intent intent = new Intent();
         intent.setClass(activity, UserInfoActivity.class);
@@ -36,18 +43,44 @@ public class UserInfoActivity extends BaseBookActivity {
         activity.overridePendingTransition(com.base.http.R.anim.anim_left_in, com.base.http.R.anim.anim_right_out);
     }
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mShareViewModel = new ShareViewModel();
+        initViewModel(mShareViewModel);
+
+        mShareViewModel.mInviteCodeData.observe(this, inviteCodeEntity -> {
+
+            try {
+                if (dialogFragment != null && dialogFragment.getDialog() != null && dialogFragment.getDialog().isShowing()) {
+                    dialogFragment.getDialog().dismiss();
+                    dialogFragment.dismiss();
+                }
+
+                if (dialogFragment != null) {
+                    dialogFragment.setShareTitle("注册邀请");
+                    dialogFragment.setShareContentString("分享天下鸽谱，注册邀请得鸽币!!!");
+                    dialogFragment.setShareContent(inviteCodeEntity.getUrl());
+                    dialogFragment.setShareListener(ViewControlShare.getShareResultsDown(getBaseActivity(), dialogFragment, ""));
+                    dialogFragment.setShareType(1);
+                    dialogFragment.show(getBaseActivity().getFragmentManager(), "share");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        });
+
         setTitle("我的");
-
-
         setToolbarRight("签到", item -> {
             //签到
             SignFragment.start(getBaseActivity());
             return true;
         });
+
+        dialogFragment = new ShareDialogFragment();
     }
 
 
@@ -68,7 +101,7 @@ public class UserInfoActivity extends BaseBookActivity {
                         //修改登录密码
 
                         IntentBuilder.Builder()
-                                .putExtra(IntentBuilder.KEY_DATA,1)
+                                .putExtra(IntentBuilder.KEY_DATA, 1)
                                 .startParentActivity(this, ReviseLoginPsdFragment.class);
 
 //                        ReviseLoginPsdFragment.start(this);
@@ -76,7 +109,7 @@ public class UserInfoActivity extends BaseBookActivity {
                         //修改支付密码
 
                         IntentBuilder.Builder()
-                                .putExtra(IntentBuilder.KEY_DATA,2)
+                                .putExtra(IntentBuilder.KEY_DATA, 2)
                                 .startParentActivity(this, ReviseLoginPsdFragment.class);
 
 //                        RevisePlayPsdFragment.start(this);
@@ -113,10 +146,17 @@ public class UserInfoActivity extends BaseBookActivity {
                 break;
             case R.id.ll_share_txgp:
                 //分享天下鸽谱
-                Intent intent1 = new Intent(this, BaseWebViewActivity.class);
-                intent1.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_app_share)));
-                intent1.putExtra(IntentBuilder.KEY_TITLE, getString(R.string.web_title_share_txgp));
-                startActivity(intent1);
+                mShareViewModel.getZGW_Users_SignGuiZeData();
+
+
+//                } catch (Exception e) {
+//                    Log.d("sharemyxiaohl", "onViewClicked: 弹出异常"+e.getLocalizedMessage());
+//                }
+
+//                Intent intent1 = new Intent(this, BaseWebViewActivity.class);
+//                intent1.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_app_share)));
+//                intent1.putExtra(IntentBuilder.KEY_TITLE, getString(R.string.web_title_share_txgp));
+//                startActivity(intent1);
                 break;
         }
     }
@@ -133,4 +173,11 @@ public class UserInfoActivity extends BaseBookActivity {
         super.finish();
         overridePendingTransition(com.base.http.R.anim.anim_right_in, com.base.http.R.anim.anim_left_out);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
 }

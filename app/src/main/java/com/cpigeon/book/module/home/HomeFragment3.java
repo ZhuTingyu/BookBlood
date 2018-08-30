@@ -16,8 +16,8 @@ import com.cpigeon.book.module.foot.BreedPigeonFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.foot.StatisticalFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
-import com.cpigeon.book.module.menu.AnnouncementNoticeFragment;
-import com.cpigeon.book.module.menu.PigeonFriendMsgFragment;
+import com.cpigeon.book.module.menu.message.AnnouncementNoticeFragment;
+import com.cpigeon.book.module.menu.message.PigeonFriendMsgFragment;
 import com.cpigeon.book.module.menu.UserInfoActivity;
 
 import butterknife.OnClick;
