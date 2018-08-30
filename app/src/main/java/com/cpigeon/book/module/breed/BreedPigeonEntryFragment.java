@@ -159,6 +159,9 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         });
 
 
+        llCountries.setRightText("CHN");
+
+
         mSelectTypeViewModel.getSelectType_Sex();
         mSelectTypeViewModel.getSelectType_FeatherColor();
         mSelectTypeViewModel.getSelectType_eyeSand();
@@ -202,18 +205,9 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         if (requestCode == PictureMimeType.ofImage()) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 
-
-//            List<ImgTypeEntity> imgs = Lists.newArrayList();
-//
-//            for (int i = 0; i < selectList.size(); i++) {
-//                imgs.add(0, new ImgTypeEntity.Builder().imgPath(selectList.get(i).getCompressPath()).imgType("全身照").imgTypeId("1").build());
-//            }
-//            mAdapter.addImage(imgs);
-
             IntentBuilder.Builder().putExtra(IntentBuilder.KEY_TYPE, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath()).build())
                     .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
 
-//            mBreedPigeonEntryViewModel.images.addAll(imgs);
         }
 
         switch (requestCode) {
@@ -344,23 +338,32 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.ll_feather_color:
                 //羽色
-                if (!Lists.isEmpty(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor)) {
-                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor), 0, new OptionPicker.OnOptionPickListener() {
-                        @Override
-                        public void onOptionPicked(int index, String item) {
-                            mBreedPigeonEntryViewModel.featherColorId = mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor.get(index).getTypeID();
-                            llFeatherColor.setContent(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor.get(index).getTypeName());
+                mDialogLineage = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+                        , R.string.text_feather_color, 0, content -> {
+                            mDialogLineage.hide();
+                            mBreedPigeonEntryViewModel.featherColor = content;
+                            llFeatherColor.setContent(content);
                             mBreedPigeonEntryViewModel.isCanCommit();
-                        }
-                    });
+                        }, () -> {
+                            mDialogLineage.hide();
 
+                            if (!Lists.isEmpty(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor)) {
+                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor), 0, new OptionPicker.OnOptionPickListener() {
+                                    @Override
+                                    public void onOptionPicked(int index, String item) {
+                                        mBreedPigeonEntryViewModel.featherColor = mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor.get(index).getTypeName();
+                                        llFeatherColor.setContent(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor.get(index).getTypeName());
+                                        mBreedPigeonEntryViewModel.isCanCommit();
+                                    }
+                                });
+                            }
+                        });
 //                    BottomSheetAdapter.createBottomSheet(getBaseActivity()
 //                            , SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor), p -> {
 //                                mBreedPigeonEntryViewModel.featherColorId = mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor.get(p).getTypeID();
 //                                llSex.setContent(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor.get(p).getTypeName());
 //                                mBreedPigeonEntryViewModel.isCanCommit();
 //                            });
-                }
 
                 break;
             case R.id.ll_eye_sand:

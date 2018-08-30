@@ -26,7 +26,7 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
                 footMother,
                 pigeonName,
                 sexId,
-                featherColorId,
+                featherColor,
                 eyeSandId,
                 theirShellsDate,
                 lineageId,
@@ -35,8 +35,7 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
                 setImageMap()), r -> {
 
             if (r.isOk()) {
-
-
+                hintDialog(r.msg);
             } else throw new HttpErrorException(r);
         });
     }
@@ -48,7 +47,7 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
 
 
     //国家
-    public String countryId;//国家id
+    public String countryId = "1";//国家id
 
     //足环号
     public String foot;
@@ -75,7 +74,7 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
 
     //羽色
     public List<SelectTypeEntity> mSelectTypes_FeatherColor;
-    public String featherColorId;
+    public String featherColor;
 
     //眼砂
     public List<SelectTypeEntity> mSelectTypes_EyeSand;

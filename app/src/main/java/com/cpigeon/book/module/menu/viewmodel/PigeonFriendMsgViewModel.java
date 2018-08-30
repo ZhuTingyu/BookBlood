@@ -20,7 +20,10 @@ public class PigeonFriendMsgViewModel extends BaseViewModel {
     public int pi = 1;
     public int ps = 5;
 
+    public int changePosition;
+
     public MutableLiveData<List<PigeonFriendMsgListEntity>> pigeonFriendMsgListData = new MutableLiveData<>();
+    public MutableLiveData<PigeonFriendMsgListEntity> mPigeonFriendMsgDetail = new MutableLiveData<>();
 
     //获取  鸽友消息  列表
     public void getTXGP_GetMsgListData() {
@@ -37,7 +40,7 @@ public class PigeonFriendMsgViewModel extends BaseViewModel {
     public void getTXGP_Msg_DetailData(String id) {
         submitRequestThrowError(PigeonFriendMsgModel.getTXGP_Msg_Detail(id), r -> {
             if (r.isOk()) {
-                hintDialog(r.toJsonString());
+                mPigeonFriendMsgDetail.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

@@ -84,6 +84,8 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
 
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            mViewModel.changePosition = position;
+
             PigeonFriendMsgListEntity mPigeonFriendMsgListEntity = (PigeonFriendMsgListEntity) adapter.getData().get(position);
             mViewModel.getTXGP_Msg_DetailData(mPigeonFriendMsgListEntity.getId());
         });
@@ -100,6 +102,12 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
 
         mViewModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
+        });
+
+
+        mViewModel.mPigeonFriendMsgDetail.observe(this, pigeonFriendMsgListEntity -> {
+            mAdapter.getData().get(mViewModel.changePosition).setIsread("1");
+            mAdapter.notifyItemChanged(mViewModel.changePosition);
         });
     }
 }

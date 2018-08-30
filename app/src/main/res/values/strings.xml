@@ -196,6 +196,7 @@
     <string name="text_foot_input_price">足环金额录入</string>
     <string name="text_pigeon_name">请输入鸽子名称</string>
     <string name="text_pigeon_lineage">血统添加</string>
+    <string name="text_feather_color">羽色添加</string>
     <string name="text_foot_source">录入足环来源</string>
     <string name="text_all_photo">全部照片</string>
     <string name="text_time">时间</string>

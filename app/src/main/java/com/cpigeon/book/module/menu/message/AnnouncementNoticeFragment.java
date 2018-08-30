@@ -64,6 +64,8 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
         mAdapter = new AnnouncementNoticeAdapter(null);
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            mViewModel.changePosition = position;
+
             AnnouncementNoticeEntity mAnnouncementNoticeEntity = (AnnouncementNoticeEntity) adapter.getData().get(position);
             mViewModel.getTXGP_GongGao_DetailData(mAnnouncementNoticeEntity.getId());
         });
@@ -96,8 +98,8 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
         });
 
         mViewModel.mMsgCountData.observe(this, msgCountEntity -> {
-            mAdapter.getData().clear();
-            mViewModel.getTXGP_GetGongGaoData();
+            mAdapter.getData().get(mViewModel.changePosition).setIsread("1");
+            mAdapter.notifyItemChanged(mViewModel.changePosition);
         });
     }
 

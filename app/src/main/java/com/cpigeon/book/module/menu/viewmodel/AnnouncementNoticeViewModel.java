@@ -21,6 +21,8 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
     public int pi = 1;
     public int ps = 15;
 
+    public int changePosition;
+
     public MutableLiveData<List<AnnouncementNoticeEntity>> announcementNoticeData = new MutableLiveData<>();
     public MutableLiveData<MsgCountEntity> mMsgCountData = new MutableLiveData<>();
 
