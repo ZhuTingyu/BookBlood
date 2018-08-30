@@ -33,6 +33,7 @@ import com.cpigeon.book.module.breed.viewmodel.BreedPigeonEntryViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.photo.ImgUploadFragment;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 import com.cpigeon.book.widget.selectImagesView.SelectImageAdapter2;

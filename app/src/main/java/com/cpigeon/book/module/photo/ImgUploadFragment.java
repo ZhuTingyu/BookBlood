@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed;
+package com.cpigeon.book.module.photo;
 
 import android.app.Activity;
 import android.content.Context;
