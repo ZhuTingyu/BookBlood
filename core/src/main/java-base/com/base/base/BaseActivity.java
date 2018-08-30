@@ -43,6 +43,8 @@ import io.reactivex.functions.Consumer;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    public static final String IS_BAR_IMMERSIVE = "IS_BAR_IMMERSIVE";
+
     protected Toolbar toolbar;
     private View stateBar;
     private View imgTitle;
@@ -58,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private TextView title;
 
     private RxPermissions mRxPermission;
+    private boolean isBarImmersive = true;
     protected final CompositeDisposable composite = new CompositeDisposable();
 
 
@@ -69,11 +72,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BarUtils.setNavBarImmersive(this);
-        BarUtils.setStatusBarAllAlpha(this);
+        baseActivity = this;
+        if(getIntent() != null){
+            isBarImmersive = getBaseActivity().getIntent().getBooleanExtra(IS_BAR_IMMERSIVE, true);
+        }
+        if(isBarImmersive){
+            BarUtils.setNavBarImmersive(this);
+            BarUtils.setStatusBarAllAlpha(this);
+        }
         weakReference = new WeakReference<AppCompatActivity>(this);
         AppManager.getAppManager().addActivity(weakReference);
-        baseActivity = this;
     }
 
 

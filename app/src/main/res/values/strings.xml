@@ -121,6 +121,7 @@
     <string name="text_skip">跳过</string>
     <string name="text_launch_sikp">跳过 %d</string>
     <string name="text_blood_book_made">血统书制作</string>
+    <string name="text_blood_book">血统</string>
     <string name="text_match_pigeon_analyse">赛鸽分析</string>
     <string name="text_blood_find">血统寻根</string>
     <string name="text_breed_info">繁育信息</string>
@@ -196,6 +197,8 @@
     <string name="text_pigeon_name">请输入鸽子名称</string>
     <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_foot_source">录入足环来源</string>
+    <string name="text_all_photo">全部照片</string>
+    <string name="text_time">时间</string>
 
     <string-array name="array_order_status">
         <item>@string/text_all</item>

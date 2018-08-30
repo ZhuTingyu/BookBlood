@@ -36,6 +36,8 @@
 
     <!--按钮-->
     <color name="state_enabled_false">#85C2FF</color>
+    <color name="color_book_male">#85C2FF</color>
+    <color name="color_book_female">#F5C3E4</color>
 
     <!--一般提示颜色-->
     <color name="general_text_hint_color">#b3b3b3</color>

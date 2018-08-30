@@ -19,12 +19,13 @@ import com.base.util.system.ScreenTool;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.breedpigeon.BreedPigeonListFragment;
+import com.cpigeon.book.module.breed.BreedPigeonListFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.viewmodel.HomeViewModel;
 import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.module.menu.message.MsgActivity;
+import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.widget.SimpleTitleView;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -121,6 +122,10 @@ public class HomeFragment extends BaseBookFragment {
         });
         mSTvBreedPigeonManager.setOnClickListener(v -> {
             BreedPigeonListFragment.start(getBaseActivity());
+        });
+
+        mSTvPigeonPhoto.setOnClickListener(v -> {
+            PigeonPhotoHomeActivity.start(getBaseActivity());
         });
 
         mViewModel.getHomeAd();

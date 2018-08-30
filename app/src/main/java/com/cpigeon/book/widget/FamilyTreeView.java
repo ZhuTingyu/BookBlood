@@ -32,7 +32,7 @@ public class FamilyTreeView extends LinearLayout {
     private int countOfGeneration = COUNT_OF_GENERATIONS; //一共显示几代
     private int maxOfGeneration = MAX_OF_GENERATIONS; //最高一代
 
-    private int mLineWidthDp;
+    private float mLineWidthDp;
     private boolean isHorizontal = true;// 是否横向显示
     private boolean isHaveCurrentGeneration = false; //是否包含当前代
     private int mLineColor;
@@ -40,7 +40,7 @@ public class FamilyTreeView extends LinearLayout {
     private static final int SCROLL_WIDTH = 3;//移动超过3dp，响应滑动，否则属于点击
     private static final float MAX_SCALE = 3f;
     private static final float LEAST_SCALE = 1f;
-    private static final int LINE_WIDTH_DP = 2;//连线宽度2dp
+    private static final float LINE_WIDTH_DP = 1f;//连线宽度2dp
     private int mWidth;
     private int mHeight;
 
@@ -98,7 +98,7 @@ public class FamilyTreeView extends LinearLayout {
     private void initAttrs(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.FamilyTreeView);
         try {
-            mLineWidthDp = (int) array.getDimension(R.styleable.FamilyTreeView_TreeView_LineWidth, LINE_WIDTH_DP);
+            mLineWidthDp = (int) array.getFloat(R.styleable.FamilyTreeView_TreeView_LineWidth, LINE_WIDTH_DP);
             mLineColor = array.getColor(R.styleable.FamilyTreeView_TreeVie_LineColor, getResources().getColor(R.color.black));
             isHorizontal = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isHorizontal, true);
             isHaveCurrentGeneration = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isHaveCurrent, false); //是否包含当前代
@@ -120,9 +120,9 @@ public class FamilyTreeView extends LinearLayout {
             startGeneration = 1;
         }
 
-        for (int i = startGeneration; i < maxOfGeneration; i++) {
+        for (int generationsPoint = startGeneration; generationsPoint < maxOfGeneration; generationsPoint++) {
             int thisGenerationsCount;
-            thisGenerationsCount = (int) Math.pow(2, i);
+            thisGenerationsCount = (int) Math.pow(2, generationsPoint);
             LinearLayout linearLayout = new LinearLayout(getContext());
             linearLayout.setOrientation(isHorizontal ? VERTICAL : HORIZONTAL);
             LinearLayout.LayoutParams params;
@@ -133,8 +133,8 @@ public class FamilyTreeView extends LinearLayout {
             }
             params.gravity = Gravity.CENTER;
             linearLayout.setLayoutParams(params);
-            for (int i1 = 0; i1 < thisGenerationsCount; i1++) {
-                linearLayout.addView(getMemberView(getContext(), thisGenerationsCount));
+            for (int generationsOrder = 0; generationsOrder < thisGenerationsCount; generationsOrder++) {
+                linearLayout.addView(getMemberView(getContext(), generationsPoint ,generationsOrder,thisGenerationsCount));
             }
             addView(linearLayout);
             generationLinearLayouts.add(linearLayout);
@@ -142,8 +142,8 @@ public class FamilyTreeView extends LinearLayout {
     }
 
 
-    private FamilyMemberView getMemberView(Context context, int generationCount) {
-        FamilyMemberView view = new FamilyMemberView(context);
+    private FamilyMemberView getMemberView(Context context,int generationsPoint,int generationsOrder,int generationCount) {
+        FamilyMemberView view = new FamilyMemberView(context, generationsPoint, generationsOrder);
         LinearLayout.LayoutParams params;
         if (isHorizontal) {
             params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
@@ -154,7 +154,7 @@ public class FamilyTreeView extends LinearLayout {
         }
         view.setLayoutParams(params);
         view.setOnClickListener(v -> {
-            ToastUtils.showShort(getContext(), generationCount + "");
+            ToastUtils.showShort(getContext(), generationsPoint + "," +generationsOrder);
         });
         return view;
     }

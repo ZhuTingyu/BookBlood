@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breedpigeon;
+package com.cpigeon.book.module.breed;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,9 +20,7 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
-import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
-import com.cpigeon.book.module.foot.FootAdminListFragment;
+import com.cpigeon.book.module.breed.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.widget.FiltrateListView;
 
@@ -91,6 +89,9 @@ public class BreedPigeonListFragment extends BaseFragment {
         mRecyclerView.addItemDecorationLine();
 
         mTvOk.setText(R.string.text_add_breed_pigeon);
+        mTvOk.setOnClickListener(v -> {
+            InputBreedInBook.start(getBaseActivity());
+        });
 
         mAdapter.setNewData(Lists.newTestArrayList());
 
