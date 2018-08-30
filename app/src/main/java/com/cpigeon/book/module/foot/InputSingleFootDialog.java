@@ -81,13 +81,13 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         }
 
         if (isStandard) {
-            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
+            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
             mTvYear.setVisibility(View.VISIBLE);
             mTvArea.setVisibility(View.VISIBLE);
             mGpFoot.setVisibility(View.VISIBLE);
             mEdFoot.setVisibility(View.GONE);
         } else {
-            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
+            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
             mTvYear.setVisibility(View.GONE);
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
@@ -155,27 +155,20 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     private void switchStatus() {
         if (isStandard) {
             isStandard = false;
-        } else {
-            isStandard = true;
-        }
-        switchInputView();
-
-    }
-
-    private void switchInputView() {
-        if (isStandard) {
             mTvSwitch.setText(R.string.text_custom_foot_ring_number);
             mTvYear.setVisibility(View.GONE);
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
             mEdFoot.setVisibility(View.VISIBLE);
         } else {
+            isStandard = true;
             mTvSwitch.setText(R.string.text_standard_foot_ring_number);
             mTvYear.setVisibility(View.VISIBLE);
             mTvArea.setVisibility(View.VISIBLE);
             mGpFoot.setVisibility(View.VISIBLE);
             mEdFoot.setVisibility(View.GONE);
         }
+
     }
 
     private void getYears() {

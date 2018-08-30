@@ -32,7 +32,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         // 设置宽度为屏宽, 靠近屏幕底部。
         final Window window = dialog.getWindow();
         assert window != null;
-        window.setBackgroundDrawableResource(R.drawable.shape_bg_corner_5);
+        window.setBackgroundDrawableResource(R.drawable.shape_bg_corner_3);
         //window.setWindowAnimations(R.style.AnimBottomDialog);
         final WindowManager.LayoutParams lp = window.getAttributes();
         initLayout(window, lp);
