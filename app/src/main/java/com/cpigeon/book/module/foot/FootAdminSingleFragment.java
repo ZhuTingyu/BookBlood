@@ -139,7 +139,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
         lvSource.setOnRightClickListener(lineInputView -> {
             mDialogSource = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.text_foot_source, 0,content -> {
+                    , R.string.text_foot_source, 0, content -> {
                         lvSource.setRightText(content);
                     }, () -> {
                         setProgressVisible(true);
@@ -148,9 +148,9 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         lvMoney.setOnRightClickListener(lineInputView -> {
-           mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+            mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                     , R.string.text_foot_input_price, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
-                        lvSource.setRightText(content);
+                        lvMoney.setRightText(content);
                         mDialogMoney.hide();
                     }, null);
         });

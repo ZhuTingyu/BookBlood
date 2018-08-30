@@ -199,6 +199,9 @@
     <string name="text_foot_source">录入足环来源</string>
     <string name="text_all_photo">全部照片</string>
     <string name="text_time">时间</string>
+    <string name="text_set_photo_face">设为封面</string>
+    <string name="text_move">移动</string>
+    <string name="text_set_face">设为封面</string>
 
     <string-array name="array_order_status">
         <item>@string/text_all</item>

@@ -60,6 +60,7 @@ public class BaseInputDialog extends BaseDialogFragment {
         mTvFinish.setOnClickListener(v -> {
             if(mOnFinishListener != null){
                 mOnFinishListener.finish(mEdContent.getText().toString());
+                hide();
             }
         });
 

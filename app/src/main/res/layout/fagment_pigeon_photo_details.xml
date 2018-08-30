@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <com.cpigeon.book.widget.mzbanner.MZBannerView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:canLoop="true"
+            app:indicatorAlign="center"
+            app:middle_page_cover="false"
+            app:open_mz_mode="true" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center_vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp">
+
+            <com.cpigeon.book.widget.SimpleTitleView
+                android:id="@+id/sTvMove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:simpleTitleView_image="@mipmap/ic_photo_details_move"
+                app:simpleTitleView_text="@string/text_move" />
+
+            <com.cpigeon.book.widget.SimpleTitleView
+                android:id="@+id/sTvSetFace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                app:simpleTitleView_image="@mipmap/ic_photo_details_set_face"
+                app:simpleTitleView_text="@string/text_set_face" />
+
+            <com.cpigeon.book.widget.SimpleTitleView
+                android:id="@+id/sTvDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                app:simpleTitleView_image="@mipmap/ic_photo_details_delete"
+                app:simpleTitleView_text="@string/text_delete" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

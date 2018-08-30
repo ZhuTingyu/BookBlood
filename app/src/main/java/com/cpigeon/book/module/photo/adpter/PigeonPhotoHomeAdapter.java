@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.photo.adpter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -21,40 +22,44 @@ import java.util.List;
 public class PigeonPhotoHomeAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
     int imgSize;
-    int rootCW;
+    RelativeLayout rlRoot;
     int marginB;
-
 
     public PigeonPhotoHomeAdapter() {
         super(R.layout.item_pigeon_photo_home, Lists.newArrayList());
-        imgSize = (ScreenTool.getScreenWidth() - 60) / 4;
-        rootCW = imgSize + ScreenTool.dip2px(20);
-        marginB = ScreenTool.dip2px(10);
+        imgSize = (ScreenTool.getScreenWidth() - ScreenTool.dip2px(60)) / 3;
+        marginB = ScreenTool.dip2px(114);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-        RelativeLayout root = helper.getView(R.id.rlRoot);
         ImageView imageView = helper.getView(R.id.img);
+        helper.setGlideImageView(mContext, R.id.img, UserModel.getInstance().getUserData().touxiangurl);
+        rlRoot = helper.getView(R.id.rlRoot);
+        RecyclerView.LayoutParams rootP = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, imgSize);
 
-        int rootW;
-        int rootH;
-
-        helper.setGlideImageView(mContext, R.id.img,UserModel.getInstance().getUserData().touxiangurl);
-
-        if(helper.getAdapterPosition() % 3 == 1){
-            rootW = rootCW;
-            rootH = imgSize;
-        }else {
-            rootW = imgSize;
-            rootH = imgSize;
+        int dataSize = getData().size();
+        int p = helper.getAdapterPosition();
+        boolean isB = false;
+        if (dataSize % 3 == 0) {
+            if (p == dataSize - 3 || p == dataSize - 2 || p == dataSize - 1) {
+                isB = true;
+            }
+        } else if (dataSize % 3 == 1) {
+            if (p == dataSize - 1) {
+                isB = true;
+            }
+        } else if (dataSize % 3 == 2) {
+            if (p == dataSize - 2 || p == dataSize - 1) {
+                isB = true;
+            }
         }
 
-        RecyclerView.LayoutParams rootP = new RecyclerView.LayoutParams(rootW, rootH);
-        rootP.setMargins(0, 0, 0, marginB);
-        RelativeLayout.LayoutParams imgP = new RelativeLayout.LayoutParams(imgSize, imgSize);
-        root.setLayoutParams(rootP);
-        imageView.setLayoutParams(imgP);
+        if(isB){
+            rootP.setMargins(0, 0, 0, marginB);
+        }
+
+        rlRoot.setLayoutParams(rootP);
 
     }
 }

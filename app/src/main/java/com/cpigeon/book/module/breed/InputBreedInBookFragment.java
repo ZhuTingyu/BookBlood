@@ -19,11 +19,11 @@ import com.cpigeon.book.widget.FamilyTreeView;
  * Created by Zhu TingYu on 2018/8/29.
  */
 
-public class InputBreedInBook extends BaseBookFragment {
+public class InputBreedInBookFragment extends BaseBookFragment {
     FamilyTreeView mFamilyTreeView;
 
     public static void start(Activity activity){
-        IntentBuilder.Builder().startParentActivity(activity, InputBreedInBook.class);
+        IntentBuilder.Builder().startParentActivity(activity, InputBreedInBookFragment.class);
     }
 
     @Override

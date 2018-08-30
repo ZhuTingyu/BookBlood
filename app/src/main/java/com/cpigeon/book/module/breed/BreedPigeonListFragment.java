@@ -90,7 +90,7 @@ public class BreedPigeonListFragment extends BaseFragment {
 
         mTvOk.setText(R.string.text_add_breed_pigeon);
         mTvOk.setOnClickListener(v -> {
-            InputBreedInBook.start(getBaseActivity());
+            InputBreedInBookFragment.start(getBaseActivity());
         });
 
         mAdapter.setNewData(Lists.newTestArrayList());
