@@ -35,6 +35,7 @@ public class LineInputView extends RelativeLayout {
     int mWeight;
     int mLeftColor;
     int mRightColor;
+    int mContentColor;
     float mLeftTextSize;
     float mRightTextSize;
     String mLeftString;
@@ -62,6 +63,7 @@ public class LineInputView extends RelativeLayout {
     View line_division;//分割线
     LinearLayout ll_line;//分割线
     LinearLayout layout_view;//内容总布局
+    RelativeLayout rlZ;//总布局
 
     int content_paddingLeft;
     int content_paddingRight;
@@ -99,6 +101,7 @@ public class LineInputView extends RelativeLayout {
         mWeight = array.getInteger(R.styleable.LineInputView_lineInputView_Weight, 4);
         mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, R.color.color_4c4c4c);
         mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, R.color.color_000000);
+        mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, R.color.color_white);
         mLeftTextSize = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
         mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);
@@ -136,6 +139,7 @@ public class LineInputView extends RelativeLayout {
         ll_line = view.findViewById(R.id.ll_line);
 
         layout_view = view.findViewById(R.id.layout_view);
+        rlZ = view.findViewById(R.id.rlZ);
 
         imgLeft = view.findViewById(R.id.img_left);
 
@@ -181,6 +185,7 @@ public class LineInputView extends RelativeLayout {
 
 //        ScreenTool.dip2px(
         layout_view.setPadding(content_paddingLeft, 0, content_paddingRight, 0);
+        rlZ.setBackgroundColor(mContentColor);
 
         mImgRight.setVisibility(mRightImageVisible);
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_view_height"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_close" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="足环号码"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/medium_text_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下一步"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/medium_text_size" />
+
+    </LinearLayout>
+
+
+    <!--足环号码-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_foot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_bg_window"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight"
+        app:lineInputView_ContentColor="@color/color_bg_window"
+        app:lineInputView_Hint="在棚"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="足环号码" />
+
+
+    <!--组织类型-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_org"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_bg_window"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight"
+        app:lineInputView_ContentColor="@color/color_bg_window"
+        app:lineInputView_Hint="在棚"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="组织类型" />
+
+    <!--单位名称-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_unit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight"
+        app:lineInputView_ContentColor="@color/color_bg_window"
+        app:lineInputView_Hint="公棚"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="单位名称"
+        app:lineInputView_isShowLineDivisions="gone" />
+
+
+</LinearLayout>

@@ -69,6 +69,7 @@
 
 
     <com.cpigeon.book.widget.InputBoxView
+        app:input_high="@dimen/view_input_height"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         app:text_hint="500字内" />

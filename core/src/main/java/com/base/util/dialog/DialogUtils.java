@@ -181,6 +181,24 @@ public class DialogUtils {
     }
 
 
+    public static SweetAlertDialog createDialogReturn(Context context, String content
+            , @Nullable SweetAlertDialog.OnSweetClickListener leftListener, @Nullable SweetAlertDialog.OnSweetClickListener rightListener) {
+
+        SweetAlertDialog dialogPrompt;
+        dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
+        dialogPrompt.setTitleText(context.getString(R.string.string_text_hint));
+        dialogPrompt.setCancelText(context.getString(com.base.http.R.string.btn_confirm));
+        dialogPrompt.setCancelClickListener(leftListener);
+        dialogPrompt.setConfirmClickListener(rightListener);
+        dialogPrompt.setContentText(content);
+        dialogPrompt.setConfirmText(context.getString(com.base.http.R.string.btn_cancel));
+        dialogPrompt.show();
+
+
+        return dialogPrompt;
+    }
+
+
     public static void createNotCancelableDialog(Context context, @StringRes int message, @Nullable SweetAlertDialog.OnSweetClickListener leftListener, @Nullable SweetAlertDialog.OnSweetClickListener rightListener) {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);

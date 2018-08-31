@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:gravity="center_vertical"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_view_height"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="赛绩"
+            android:textColor="@color/general_text_color"
+            android:textSize="@dimen/large_text_size" />
+
+
+        <ImageView
+            android:id="@+id/img_play_import"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="32dp"
+            android:src="@mipmap/ic_play_import" />
+
+        <ImageView
+            android:id="@+id/img_play_add"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_play_add" />
+
+    </LinearLayout>
+
+    <include layout="@layout/include_line_view_layout" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/color_white"
+        android:gravity="center"
+        android:text="显示赛绩" />
+
+</LinearLayout>

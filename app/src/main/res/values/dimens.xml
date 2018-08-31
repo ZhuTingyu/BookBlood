@@ -32,6 +32,14 @@
     <dimen name="activity_about_company_intro_textsize">13sp</dimen>
 
 
+    <dimen name="view_input_height">117dp</dimen>
+
+    <dimen name="item_view_height">44dp</dimen>
+    <dimen name="item_view_height2">22dp</dimen>
+
+    <!--信鸽详情-->
+    <dimen name="item_line_mlr">9dp</dimen>
+
     <!--分享dialog-->
     <dimen name="dialog_plr">10dp</dimen>
     <dimen name="dialog_ptb">25dp</dimen>

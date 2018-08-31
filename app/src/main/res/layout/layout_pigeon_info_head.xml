@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:paddingBottom="24dp"
+    android:paddingLeft="@dimen/spacing_left_reight"
+    android:paddingRight="@dimen/spacing_left_reight"
+    android:paddingTop="12dp">
+
+    <LinearLayout
+        android:id="@+id/ll_info1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <!--足环号  性别-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/item_view_height"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_foot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHN-2018-22-2323321"
+                android:textColor="@color/general_text_color"
+                android:textSize="@dimen/medium_text_size" />
+
+            <ImageView
+                android:id="@+id/img_sex"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="18dp"
+                android:src="@mipmap/ic_male" />
+        </LinearLayout>
+
+        <!--副环-->
+        <LinearLayout
+            android:id="@+id/ll_foot_vice"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/item_view_height2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="副环"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="@dimen/item_line_mlr"
+                android:layout_marginRight="@dimen/item_line_mlr"
+                android:background="@color/color_btn_border" />
+
+            <TextView
+                android:id="@+id/tv_foot_vice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018-232-323"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+        <!--血统-->
+        <LinearLayout
+            android:id="@+id/ll_lineage"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/item_view_height2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="血统"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="@dimen/item_line_mlr"
+                android:layout_marginRight="@dimen/item_line_mlr"
+                android:background="@color/color_btn_border" />
+
+            <TextView
+                android:id="@+id/tv_lineage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="愤怒的小鸟"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+        <!--状态-->
+        <LinearLayout
+            android:id="@+id/ll_state"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/item_view_height2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="状态"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="@dimen/item_line_mlr"
+                android:layout_marginRight="@dimen/item_line_mlr"
+                android:background="@color/color_btn_border" />
+
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="现役在棚"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+        <!--眼砂-->
+        <LinearLayout
+            android:id="@+id/ll_eye_sand"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/item_view_height2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="眼砂"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="@dimen/item_line_mlr"
+                android:layout_marginRight="@dimen/item_line_mlr"
+                android:background="@color/color_btn_border" />
+
+            <TextView
+                android:id="@+id/tv_eye_sand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="牛眼"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+        <!--羽色-->
+        <LinearLayout
+            android:id="@+id/ll_feather_color"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/item_view_height2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="羽色"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="@dimen/item_line_mlr"
+                android:layout_marginRight="@dimen/item_line_mlr"
+                android:background="@color/color_btn_border" />
+
+            <TextView
+                android:id="@+id/tv_feather_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="灰白条"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--出壳日期-->
+    <LinearLayout
+        android:id="@+id/ll_their_shells_date"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/item_view_height2"
+        android:layout_below="@+id/ll_info1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="出壳日期"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="12dp"
+            android:layout_marginLeft="@dimen/item_line_mlr"
+            android:layout_marginRight="@dimen/item_line_mlr"
+            android:background="@color/color_btn_border" />
+
+        <TextView
+            android:id="@+id/tv_their_shells_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-03-28"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
+
+    </LinearLayout>
+
+    <!--来源 评分-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_view_height2"
+        android:layout_below="@+id/ll_their_shells_date"
+        android:orientation="horizontal">
+
+        <!--来源-->
+        <LinearLayout
+            android:id="@+id/ll_foot_source"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/item_view_height2"
+            android:layout_below="@+id/ll_info1"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="来源"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="@dimen/item_line_mlr"
+                android:layout_marginRight="@dimen/item_line_mlr"
+                android:background="@color/color_btn_border" />
+
+            <TextView
+                android:id="@+id/tv_foot_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="繁育"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+
+        <!--评分-->
+        <LinearLayout
+            android:id="@+id/ll_score"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/item_view_height2"
+            android:layout_below="@+id/ll_info1"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal"
+            android:paddingRight="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评分"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_marginLeft="@dimen/item_line_mlr"
+                android:layout_marginRight="@dimen/item_line_mlr"
+                android:background="@color/color_btn_border" />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="暂无"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!---->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_pigeon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="34dp"
+        android:src="@mipmap/ic_launcher" />
+
+</RelativeLayout>
+

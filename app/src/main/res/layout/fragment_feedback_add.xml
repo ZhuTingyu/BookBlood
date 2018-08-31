@@ -30,6 +30,7 @@
             android:id="@+id/ibContent"
             android:layout_marginLeft="@dimen/normal_safe_distance"
             android:layout_marginRight="@dimen/normal_safe_distance"
+            app:input_high="@dimen/view_input_height"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:inputBoxView_tittle="@string/text_feed_back_content"/>

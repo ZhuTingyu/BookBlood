@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_home_pop_bg">
+
+
+    <ScrollView
+        android:fadingEdge="none"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.cpigeon.book.widget.LineInputListLayout
+            android:id="@+id/llz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!--足环号码-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_foot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint=""
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="false"
+                app:lineInputView_LeftString="足环号码"
+                app:lineInputView_isShowRightImage="invisible" />
+
+
+            <!--赛事组织-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_play_org"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint="请输入或选择"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="赛事组织" />
+
+
+            <!--项目名称-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_project_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint="不得超过50个字"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="项目名称" />
+
+
+            <!--比赛规模-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_paly_scale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint="请输入数字"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="比赛规模" />
+
+
+            <!--比赛名次-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_paly_rank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint="请输入数字"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="比赛名次" />
+
+
+            <!--司放地点-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_fly_place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint="请输入司放地点"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="司放地点" />
+
+
+            <!--司放空距-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_fly_ullage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint="请输入空距（米）"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="司放空距" />
+
+
+            <!--比赛日期-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/ll_play_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight"
+                app:lineInputView_Hint="请选择日期"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="比赛日期" />
+
+        </com.cpigeon.book.widget.LineInputListLayout>
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/tv_next_step"
+        style="@style/bottom_style"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:text="@string/btn_save" />
+
+</RelativeLayout>
