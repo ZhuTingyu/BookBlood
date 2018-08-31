@@ -1,5 +1,7 @@
 package com.cpigeon.book.module.breed.viewmodel;
 
+import android.arch.lifecycle.MutableLiveData;
+
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.Lists;
@@ -9,6 +11,8 @@ import com.cpigeon.book.model.entity.SelectTypeEntity;
 import java.util.HashMap;
 import java.util.List;
 
+import io.reactivex.functions.Consumer;
+
 /**
  * 种鸽录入
  * Created by Administrator on 2018/8/28.
@@ -16,6 +20,8 @@ import java.util.List;
 
 public class BreedPigeonEntryViewModel extends BaseViewModel {
 
+
+    public MutableLiveData<String> mBreedPigeonData = new MutableLiveData<>();
 
     public void addBreedPigeonEntry() {
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Add(countryId,
@@ -29,12 +35,15 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
                 featherColor,
                 eyeSandId,
                 theirShellsDate,
-                lineageId,
+                lineage,
                 stateId,
                 phototypeid,
                 setImageMap()), r -> {
 
             if (r.isOk()) {
+
+                mBreedPigeonData.setValue(r.msg);
+
                 hintDialog(r.msg);
             } else throw new HttpErrorException(r);
         });
@@ -50,51 +59,63 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
     public String countryId = "1";//国家id
 
     //足环号
-    public String foot;
+    public String foot = "";
+
+    public Consumer<String> setFootNumber() {
+        return s -> {
+            this.foot = s;
+            isCanCommit();
+        };
+    }
 
     //副环
-    public String footVice;
+    public String footVice = "";
 
     //来源
     public List<SelectTypeEntity> mSelectTypes_Source;
-    public String sourceId;
+    public String sourceId = "";
 
     //父足环
-    public String footFather;
+    public String footFather = "";
 
     //母足环
-    public String footMother;
+    public String footMother = "";
 
     //鸽名
-    public String pigeonName;
+    public String pigeonName = "";
 
     //性别
     public List<SelectTypeEntity> mSelectTypes_Sex;
-    public String sexId;
+    public String sexId = "";
 
     //羽色
     public List<SelectTypeEntity> mSelectTypes_FeatherColor;
-    public String featherColor;
+    public String featherColor = "";
 
     //眼砂
     public List<SelectTypeEntity> mSelectTypes_EyeSand;
-    public String eyeSandId;
+    public String eyeSandId = "";
 
     //出壳日期
-    public String theirShellsDate;
+    public String theirShellsDate = "";
 
     //血统
     public List<SelectTypeEntity> mSelectTypes_Lineage;
-    public String lineageId;
+    public String lineage = "";
 
     //状态
     public List<SelectTypeEntity> mSelectTypes_State;
-    public String stateId;
+    public String stateId = "";
 
     //图片类型
     public List<SelectTypeEntity> mSelectTypes_ImgType;
     public String imgTypeStr = "";
     public String imgTypeId = "";
+
+
+    public void isCanCommit() {
+        isCanCommit(foot, sourceId, sexId, featherColor, eyeSandId, theirShellsDate, lineage, stateId);
+    }
 
 
     public HashMap<String, String> setImageMap() {

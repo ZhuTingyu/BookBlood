@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cpigeon.book.R;
@@ -27,12 +28,15 @@ public class InputBoxView extends LinearLayout {
     private int hintColor;
     private int textColor;
     private int maxInputLine;
+    private int inputHigh;
     private String text;
     private String textHint;
     private String title;
     private EditText input_box_editText;
     private TextView tv_hint;
     private TextView mTvTitle;
+    private RelativeLayout rlz_input;
+    private LinearLayout layout_z;
 
     public InputBoxView(Context context) {
         this(context, null);
@@ -59,6 +63,7 @@ public class InputBoxView extends LinearLayout {
         textColor = array.getColor(R.styleable.InputBoxView_text_color, R.color.general_text_color);
 
         maxInputLine = array.getInteger(R.styleable.InputBoxView_edit_max_input_line, 100);
+        inputHigh = (int) array.getDimension(R.styleable.InputBoxView_input_high, 117);
 
         text = array.getString(R.styleable.InputBoxView_text);
         textHint = array.getString(R.styleable.InputBoxView_text_hint);
@@ -71,6 +76,11 @@ public class InputBoxView extends LinearLayout {
         input_box_editText = view.findViewById(R.id.input_box_editText);
         tv_hint = view.findViewById(R.id.tv_hint);
         mTvTitle = view.findViewById(R.id.tvTitle);
+        rlz_input = view.findViewById(R.id.rlz_input);
+
+        layout_z = view.findViewById(R.id.layout_z);
+
+        rlz_input.getLayoutParams().height = inputHigh;
 
         input_box_editText.setHintTextColor(getResources().getColor(hintColor));
         input_box_editText.setTextColor(getResources().getColor(textColor));
@@ -115,7 +125,7 @@ public class InputBoxView extends LinearLayout {
     }
 
 
-    public EditText getEditText(){
+    public EditText getEditText() {
         return input_box_editText;
     }
 }

@@ -19,6 +19,7 @@ import com.base.util.Lists;
 import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
@@ -34,6 +35,8 @@ import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
+import com.cpigeon.book.module.play.AddPlayFragment;
+import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 import com.cpigeon.book.widget.selectImagesView.SelectImageAdapter2;
@@ -161,6 +164,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
         llCountries.setRightText("CHN");
 
+        bindUi(RxUtils.textChanges(llFoot.getEditText()), mBreedPigeonEntryViewModel.setFootNumber());//足环号
+
 
         mSelectTypeViewModel.getSelectType_Sex();
         mSelectTypeViewModel.getSelectType_FeatherColor();
@@ -172,6 +177,11 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
     @Override
     protected void initObserve() {
+
+        mBreedPigeonEntryViewModel.isCanCommit.observe(this, aBoolean -> {
+            TextViewUtil.setEnabled(tvNextStep, aBoolean);
+        });
+
         mSelectTypeViewModel.mSelectType_Sex.observe(this, selectTypeEntities -> {
             mBreedPigeonEntryViewModel.mSelectTypes_Sex = selectTypeEntities;
         });
@@ -196,6 +206,26 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         mSelectTypeViewModel.mSelectType_Pigeon_Source.observe(this, selectTypeEntities -> {
             setProgressVisible(false);
             mBreedPigeonEntryViewModel.mSelectTypes_Source = selectTypeEntities;
+        });
+
+        //种鸽录入
+        mBreedPigeonEntryViewModel.mBreedPigeonData.observe(this, o -> {
+            //保证界面只有一个提示
+
+            if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
+                getBaseActivity().errorDialog.dismiss();
+            }
+
+            getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), "种鸽录入成功，是否为该信鸽录入赛绩！", sweetAlertDialog -> {
+                //确定
+                sweetAlertDialog.dismiss();
+                AddPlayFragment.start(getBaseActivity());
+            }, sweetAlertDialog -> {
+                //取消
+                sweetAlertDialog.dismiss();
+
+            });
+
         });
     }
 
@@ -239,7 +269,6 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
     }
 
     private BaseInputDialog mDialogLineage;
-    private int selectSourcePosition = 0;
     private BaseInputDialog mDialogMoney;
 
     @OnClick({R.id.ll_countries, R.id.ll_foot, R.id.ll_foot_vice, R.id.ll_foot_source, R.id.ll_foot_father, R.id.ll_foot_mother, R.id.ll_pigeon_name, R.id.ll_sex, R.id.ll_feather_color, R.id.ll_eye_sand, R.id.ll_their_shells_date, R.id.ll_lineage, R.id.ll_state, R.id.sb_dont_disturb, R.id.ll_deal_price, R.id.tv_next_step, R.id.llz})
@@ -391,7 +420,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 mDialogLineage = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                         , R.string.text_pigeon_lineage, 0, content -> {
                             mDialogLineage.hide();
-                            mBreedPigeonEntryViewModel.lineageId = content;
+                            mBreedPigeonEntryViewModel.lineage = content;
                             llLineage.setRightText(content);
                         }, () -> {
                             mDialogLineage.hide();
@@ -400,7 +429,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_Lineage), 0, new OptionPicker.OnOptionPickListener() {
                                     @Override
                                     public void onOptionPicked(int index, String item) {
-                                        mBreedPigeonEntryViewModel.lineageId = mBreedPigeonEntryViewModel.mSelectTypes_Lineage.get(index).getTypeID();
+                                        mBreedPigeonEntryViewModel.lineage = mBreedPigeonEntryViewModel.mSelectTypes_Lineage.get(index).getTypeName();
                                         llLineage.setContent(mBreedPigeonEntryViewModel.mSelectTypes_Lineage.get(index).getTypeName());
                                         mBreedPigeonEntryViewModel.isCanCommit();
                                     }

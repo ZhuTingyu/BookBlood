@@ -77,6 +77,7 @@
 
 
             <com.cpigeon.book.widget.InputBoxView
+                app:input_high="@dimen/view_input_height"
                 android:id="@+id/edRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

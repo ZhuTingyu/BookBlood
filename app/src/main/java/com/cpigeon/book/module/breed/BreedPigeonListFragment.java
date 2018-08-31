@@ -98,6 +98,10 @@ public class BreedPigeonListFragment extends BaseFragment {
 
         mAdapter.setNewData(Lists.newTestArrayList());
 
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            BreedPigeonDetailsFragment.start(getBaseActivity());
+        });
+
         mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_RING
                 , SelectTypeViewModel.STATE_FOOT_RING, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
         mSelectTypeViewModel.getSelectTypes();

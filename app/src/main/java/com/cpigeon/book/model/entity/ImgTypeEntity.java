@@ -11,6 +11,7 @@ public class ImgTypeEntity implements Serializable{
     private String imgPath;
     private String imgType;
     private String imgTypeId;
+    private String imgRemark;
 
 
     public String getImgPath() {
@@ -37,17 +38,27 @@ public class ImgTypeEntity implements Serializable{
         this.imgTypeId = imgTypeId;
     }
 
+    public String getImgRemark() {
+        return imgRemark;
+    }
+
+    public void setImgRemark(String imgRemark) {
+        this.imgRemark = imgRemark;
+    }
+
     private ImgTypeEntity(Builder builder) {
         imgPath = builder.imgPath;
         imgType = builder.imgType;
         imgTypeId = builder.imgTypeId;
+        imgRemark = builder.imgRemark;
     }
 
 
-    public static final class Builder implements Serializable{
+    public static final class Builder {
         private String imgPath;
         private String imgType;
         private String imgTypeId;
+        private String imgRemark;
 
         public Builder() {
         }
@@ -64,6 +75,11 @@ public class ImgTypeEntity implements Serializable{
 
         public Builder imgTypeId(String val) {
             imgTypeId = val;
+            return this;
+        }
+
+        public Builder imgRemark(String val) {
+            imgRemark = val;
             return this;
         }
 

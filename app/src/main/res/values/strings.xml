@@ -195,11 +195,21 @@
     <string name="text_go_choose">去选择</string>
     <string name="text_foot_input_price">足环金额录入</string>
     <string name="text_pigeon_name">请输入鸽子名称</string>
+
     <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_feather_color">羽色添加</string>
     <string name="text_feather_count">羽数</string>
     <string name="text_foot_source">录入足环来源</string>
     <string name="text_all_photo">全部照片</string>
+
+
+    <string name="tv_play_org">请输入组织名称</string>
+    <string name="tv_project_name">请输入项目名称</string>
+    <string name="tv_paly_scale">请输入比赛规模</string>
+    <string name="tv_paly_rank">请输入比赛名次</string>
+    <string name="tv_fly_ullage">请输入司放空距（米）</string>
+    <string name="tv_fly_place">请输入司放地点</string>
+
     <string name="text_time">时间</string>
     <string name="text_set_photo_face">设为封面</string>
     <string name="text_move">移动</string>
