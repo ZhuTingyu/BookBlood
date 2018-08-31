@@ -197,6 +197,7 @@
     <string name="text_pigeon_name">请输入鸽子名称</string>
     <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_feather_color">羽色添加</string>
+    <string name="text_feather_count">羽数</string>
     <string name="text_foot_source">录入足环来源</string>
     <string name="text_all_photo">全部照片</string>
     <string name="text_time">时间</string>
@@ -220,5 +221,15 @@
     <string name="test_announcement_notice">公告通知</string>
     <string name="test_pigeon_friend_msg">鸽友消息</string>
     <string name="text_sure_modify">确认修改</string>
+    <string name="text_must_open">立即开通</string>
+    <string name="text_open_at_once">立即开通</string>
+    <string name="text_renew_at_once">立即续费</string>
+    <string name="text_open_service">开通服务</string>
+    <string name="text_opened_service">已开通服务</string>
+    <string name="text_all_service">所有服务</string>
+    <string name="text_open_report">开通记录</string>
+    <string name="text_trained">已训</string>
+    <string name="text_status">状态</string>
+    <string name="text_new">新建</string>
 
 </resources>

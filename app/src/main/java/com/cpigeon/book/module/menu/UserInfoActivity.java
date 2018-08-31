@@ -14,6 +14,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.module.menu.account_security.ReviseLoginPsdFragment;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
+import com.cpigeon.book.module.menu.service.RenewalFragment;
 import com.cpigeon.book.module.menu.viewmodel.ShareViewModel;
 import com.cpigeon.book.module.order.OrderListActivity;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;

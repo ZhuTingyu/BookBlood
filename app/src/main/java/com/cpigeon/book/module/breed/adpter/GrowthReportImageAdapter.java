@@ -21,7 +21,6 @@ import java.util.List;
 public class GrowthReportImageAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
     RecyclerView mRecyclerView;
-    int rootW;
 
     public GrowthReportImageAdapter(RecyclerView recyclerView) {
         super(R.layout.item_pigeon_photo_home, Lists.newArrayList());
@@ -31,16 +30,11 @@ public class GrowthReportImageAdapter extends BaseQuickAdapter<String, BaseViewH
     @Override
     protected void convert(BaseViewHolder helper, String item) {
 
-        if(rootW == 0){
-            rootW = (mRecyclerView.getMeasuredWidth() - ScreenTool.dip2px(20)) / 4;
-        }
+        int rootW = (mRecyclerView.getMeasuredWidth() - ScreenTool.dip2px(20)) / 4;
         RelativeLayout rootR = helper.getView(R.id.rlRoot);
         RecyclerView.LayoutParams rootP = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, rootW);
         rootR.setLayoutParams(rootP);
-
         helper.setGlideImageView(mContext, R.id.img, UserModel.getInstance().getUserData().touxiangurl);
-
-
     }
 
     @Override

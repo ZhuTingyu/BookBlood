@@ -26,6 +26,7 @@ import com.cpigeon.book.module.home.viewmodel.HomeViewModel;
 import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.module.menu.message.MsgActivity;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
+import com.cpigeon.book.module.trainpigeon.TrainPigeonListFragment;
 import com.cpigeon.book.widget.SimpleTitleView;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -127,6 +128,10 @@ public class HomeFragment extends BaseBookFragment {
         mSTvPigeonPhoto.setOnClickListener(v -> {
             PigeonPhotoHomeActivity.start(getBaseActivity());
         });
+        mSTvTrainRecord.setOnClickListener(v -> {
+            TrainPigeonListFragment.start(getBaseActivity());
+        });
+
 
         mViewModel.getHomeAd();
 

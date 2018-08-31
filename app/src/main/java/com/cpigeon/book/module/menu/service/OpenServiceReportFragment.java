@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed;
+package com.cpigeon.book.module.menu.service;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,53 +11,44 @@ import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
-import com.base.util.RxUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.breed.adpter.GrowthReportAdapter;
-import com.cpigeon.book.module.breed.viewmodel.GrowthReportViewModel;
+import com.cpigeon.book.module.menu.service.adpter.OpenServiceAdapter;
 
 /**
- * Created by Zhu TingYu on 2018/8/29.
+ * Created by Zhu TingYu on 2018/8/31.
  */
 
-public class GrowthReportFragment extends BaseBookFragment {
+public class OpenServiceReportFragment extends BaseBookFragment{
 
-    GrowthReportViewModel mViewModel;
     XRecyclerView mRecyclerView;
-    GrowthReportAdapter mAdapter;
+    OpenServiceAdapter mAdapter;
 
-    public static void start(Activity activity, String footNumber){
+    public static void start(Activity activity){
         IntentBuilder.Builder()
-                .putExtra(IntentBuilder.KEY_DATA, footNumber)
-                .startParentActivity(activity, GrowthReportFragment.class);
+                .startParentActivity(activity, OpenServiceReportFragment.class);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mViewModel = new GrowthReportViewModel(getBaseActivity());
-        initViewModel(mViewModel);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.xrecyclerview_no_padding_layout, container, false);
+        return inflater.inflate(R.layout.xrecyclerview_layout, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(mViewModel.footNumber);
+        setTitle(R.string.text_open_report);
         mRecyclerView = findViewById(R.id.list);
-        composite.add(RxUtils.delayed(50,aLong -> {
-            mRecyclerView.setListPadding(0, 32,0, 32);
-        }));
-        mAdapter = new GrowthReportAdapter();
+        mRecyclerView.addItemDecorationLine();
+        mAdapter = new OpenServiceAdapter();
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setNewData(Lists.newTestArrayList());
-
     }
 }
