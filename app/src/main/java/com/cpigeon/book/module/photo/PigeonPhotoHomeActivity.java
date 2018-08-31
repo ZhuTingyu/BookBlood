@@ -129,8 +129,6 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
         setProgressVisible(true);
         mTypeViewModel.getSelectType_ImgType();
 
-
-
     }
 
 

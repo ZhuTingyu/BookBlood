@@ -228,4 +228,8 @@ public class XRecyclerView extends FrameLayout {
     public RecyclerView getRecyclerView() {
         return recyclerView;
     }
+
+    public void setListPadding(float left, float top, float right, float bottom){
+        recyclerView.setPadding(ScreenTool.dip2px(left), ScreenTool.dip2px(top),ScreenTool.dip2px(right),ScreenTool.dip2px(bottom));
+    }
 }

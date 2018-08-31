@@ -19,6 +19,7 @@ import com.cpigeon.book.module.menu.feedback.adpter.FeedbackAdapter;
 import com.cpigeon.book.module.menu.feedback.viewmodel.FeedbackListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -59,6 +60,7 @@ public class FeedbackListFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);
         mRecyclerView = findViewById(R.id.list);
 
         mAdapter = new FeedbackAdapter(null);
@@ -103,6 +105,12 @@ public class FeedbackListFragment extends BaseBookFragment {
         mViewModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

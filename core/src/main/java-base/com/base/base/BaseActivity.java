@@ -325,4 +325,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public ViewGroup getRootView() {
+        return rootView;
+    }
 }

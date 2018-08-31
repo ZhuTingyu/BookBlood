@@ -6,15 +6,18 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.PopWindowBuilder;
 import com.base.util.Utils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.picker.PickerUtil;
@@ -25,6 +28,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.viewmodel.PigeonPhotoDetailsViewModel;
+import com.cpigeon.book.widget.ClickGetFocusEditText;
 import com.cpigeon.book.widget.SimpleTitleView;
 import com.cpigeon.book.widget.mzbanner.MZBannerView;
 import com.cpigeon.book.widget.mzbanner.holder.MZViewHolder;
@@ -47,8 +51,9 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
     PigeonPhotoDetailsViewModel mViewModel;
     SelectTypeViewModel mTypeViewModel;
     int typePosition = 0;
+    private PopupWindow mPopupWindow;
 
-    public static void start(Activity activity,String footNumber ,int position) {
+    public static void start(Activity activity, String footNumber, int position) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, position)
                 .putExtra(IntentBuilder.KEY_TITLE, footNumber)
@@ -72,6 +77,16 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setToolbarRightImage(R.drawable.svg_pigeon_photo_details, item -> {
+            mPopupWindow = PopWindowBuilder.builder(getBaseActivity())
+                    .setSize(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                    .setView(initPopView())
+                    .setBackgroundColor(R.color.white)
+                    .setAnimationStyle(R.style.bottom_out_in_anim)
+                    .showAtLocation(getBaseActivity().getRootView(), 0, 0, Gravity.CENTER);
+            return false;
+        });
 
         String footNumber = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TITLE);
         int position = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA, 0);
@@ -101,6 +116,26 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         setProgressVisible(true);
         mTypeViewModel.getSelectType_ImgType();
 
+    }
+
+    private View initPopView() {
+        View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.pop_pigeon_photo_remark, null);
+        ImageView mImgClose;
+        ClickGetFocusEditText mFEdRemark;
+        TextView mTvOk;
+        mImgClose = view.findViewById(R.id.imgClose);
+        mFEdRemark = view.findViewById(R.id.fEdRemark);
+        mTvOk = view.findViewById(R.id.tvOk);
+
+        mFEdRemark.setOnClickAndHaveFocusListener(() -> {
+            mTvOk.setVisibility(View.VISIBLE);
+        });
+
+        mImgClose.setOnClickListener(v -> {
+            mPopupWindow.dismiss();
+        });
+
+        return view;
     }
 
     @Override
