@@ -2,9 +2,12 @@ package com.cpigeon.book.module.trainpigeon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +15,37 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.base.base.BaseMapFragment;
+import com.base.http.ApiResponse;
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
+import com.base.util.LocationFormatUtils;
+import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.http.GsonUtil;
+import com.base.util.map.AmapManager;
+import com.base.util.map.MapMarkerManager;
 import com.base.util.system.AppManager;
 import com.base.util.utility.StringUtil;
+import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
-import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.login.LoginActivity;
+import com.cpigeon.book.module.pigeonhouse.InputLocationFragment;
+import com.cpigeon.book.module.select.SelectLocationByMapFragment;
+import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
 import com.cpigeon.book.service.SingleLoginService;
+import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.LineInputView;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -39,7 +61,14 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
     private MapView mMap;
     private ImageView mImgAdd;
     private RecyclerView mList;
+    private NewTrainPigeonListAdapter mAdapter;
     private TextView mTvOk;
+    private TextView mTvDis;
+    private CardView mCardView;
+    private MapMarkerManager mMapMarkerManager;
+
+    private LatLng mPigeonHousePosition;
+
 
 
     public static void start(Activity activity) {
@@ -62,6 +91,118 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_new_train_pigeon);
 
+        amapManager.setZoomControlsVisible(false);
+        mMapMarkerManager = new MapMarkerManager(aMap, getBaseActivity());
+
+        mLvName = findViewById(R.id.lvName);
+        mLvFlyLocation = findViewById(R.id.lvFlyLocation);
+        mLvFlyPoint = findViewById(R.id.lvFlyPoint);
+        mLvPigeonHousePoint = findViewById(R.id.lvPigeonHousePoint);
+        mMap = findViewById(R.id.map);
+        mImgAdd = findViewById(R.id.imgAdd);
+        mList = findViewById(R.id.list);
+        mTvOk = findViewById(R.id.tvOk);
+        mTvDis = findViewById(R.id.tvDis);
+        mCardView = findViewById(R.id.card);
+
+
+        mPigeonHousePosition = new LatLng(Double.valueOf(UserModel.getInstance().getUserData().la)
+                ,Double.valueOf(UserModel.getInstance().getUserData().lo));
+
+
+        amapManager.moveByLatLng(mPigeonHousePosition);
+
+        mMapMarkerManager.addCustomCenterMarker(mPigeonHousePosition,"",R.mipmap.ic_blue_point);
+        mMapMarkerManager.addMap();
+
+        amapManager.setMapZoomLevel(11f);
+
+        mLvPigeonHousePoint.setContent(getString(R.string.text_location_lo_la
+                , LocationFormatUtils.strToDMS(String.valueOf(mPigeonHousePosition.longitude))
+                , LocationFormatUtils.strToDMS(String.valueOf(mPigeonHousePosition.latitude))));
+
+        mLvFlyLocation.setOnClickListener(v -> {
+            InputLocationFragment inputLocationFragment = new InputLocationFragment();
+            inputLocationFragment.setOnSureClickListener(new InputLocationFragment.OnInputLocationClickListener() {
+                @Override
+                public void sure(String lo, String la) {
+                    mLvFlyPoint.setContent(getString(R.string.text_location_lo_la, LocationFormatUtils.strToDMS(lo)
+                            , LocationFormatUtils.strToDMS(la)));
+
+                    LatLng latLng = new LatLng(LocationFormatUtils.Aj2GPSLocation(Double.valueOf(lo))
+                            , LocationFormatUtils.Aj2GPSLocation(Double.valueOf(la)));
+                    LatLng c = AmapManager.converter(getContext(), latLng);
+
+                    /*mViewModel.mLongitude = String.valueOf(c.longitude);
+                    mViewModel.mLatitude = String.valueOf(c.latitude);*/
+
+//                    mPointToAddressManager.setSearchPoint(new LatLonPoint(Double.valueOf(mViewModel.mLatitude)
+//                            , Double.valueOf(mViewModel.mLongitude))).search();
+
+                }
+
+                @Override
+                public void location() {
+                    SelectLocationByMapFragment.start(getBaseActivity(), SelectLocationByMapFragment.CODE_LOCATION);
+                }
+            });
+            inputLocationFragment.show(getBaseActivity().getSupportFragmentManager());
+        });
+
+        mImgAdd.setOnClickListener(v -> {
+            NewTrainAddPigeonFragment.start(getBaseActivity());
+        });
+
+        mList.setLayoutManager(new LinearLayoutManager(getContext()));
+        addItemDecorationLine(mList);
+        mAdapter = new NewTrainPigeonListAdapter();
+        mAdapter.setOnDeleteListener(position -> {
+            mAdapter.remove(position);
+        });
+        mList.setAdapter(mAdapter);
+        mAdapter.setNewData(Lists.newTestArrayList());
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) return;
+        if (requestCode == SelectLocationByMapFragment.CODE_LOCATION) {
+
+            RegeocodeAddress address = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            LatLonPoint point = data.getParcelableExtra(IntentBuilder.KEY_DATA_2);
+
+            mLvFlyPoint.setContent(getString(R.string.text_location_lo_la
+                    , LocationFormatUtils.loLaToDMS(point.getLongitude())
+                    , LocationFormatUtils.loLaToDMS(point.getLatitude())));
+
+            /*mViewModel.mLongitude = String.valueOf(point.getLongitude());
+            mViewModel.mLatitude = String.valueOf(point.getLatitude());
+
+            bindAddress(address);*/
+
+            mLvFlyLocation.setContent(data.getStringExtra(SelectLocationByMapFragment.KEY_ADDRESS_NAME));
+
+            mMapMarkerManager.clean();
+
+            mMapMarkerManager.addCustomCenterMarker(mPigeonHousePosition,"",R.mipmap.ic_blue_point);
+            mMapMarkerManager.addCustomCenterMarker(new LatLng(point.getLatitude(),point.getLongitude())
+                    ,"",R.mipmap.ic_red_point);
+            mMapMarkerManager.addMap();
+
+            int d = (int) AMapUtils.calculateLineDistance(mPigeonHousePosition,new LatLng(point.getLatitude(),point.getLongitude())) / 1000;
+            mCardView.setVisibility(View.VISIBLE);
+            mTvDis.setText(Utils.getString(R.string.text_KM, String.valueOf(d)));
+
+        }
+    }
+
+    private void bindAddress(RegeocodeAddress mAddress) {
+        String address = mAddress.getProvince() + mAddress.getCity() + mAddress.getDistrict();
+
+        /*mViewModel.mProvince = mAddress.getProvince();
+        mViewModel.mCity = mAddress.getCity();
+        mViewModel.mCounty = mAddress.getDistrict();*/
     }
 
     @Override

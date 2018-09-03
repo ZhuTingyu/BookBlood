@@ -28,6 +28,8 @@ public class UserEntity implements Parcelable {
     public String touxiangurl;
     public String userid;
     public String password;
+    public String lo;
+    public String la;
 
     public UserEntity() {
     }
@@ -47,6 +49,8 @@ public class UserEntity implements Parcelable {
         dest.writeString(this.touxiangurl);
         dest.writeString(this.userid);
         dest.writeString(this.password);
+        dest.writeString(this.lo);
+        dest.writeString(this.la);
     }
 
     protected UserEntity(Parcel in) {
@@ -58,6 +62,8 @@ public class UserEntity implements Parcelable {
         this.touxiangurl = in.readString();
         this.userid = in.readString();
         this.password = in.readString();
+        this.lo = in.readString();
+        this.la = in.readString();
     }
 
     public static final Creator<UserEntity> CREATOR = new Creator<UserEntity>() {

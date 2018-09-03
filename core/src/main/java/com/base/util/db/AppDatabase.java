@@ -25,6 +25,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String TYPE_SEARCH_FOOT_HISTORY = "TYPE_SEARCH_FOOT_HISTORY";
     public static final String TYPE_SEARCH_COUNTY_HISTORY = "TYPE_SEARCH_COUNTY_HISTORY";
     public static final String TYPE_SEARCH_BREED_PIGEON = "TYPE_SEARCH_BREED_PIGEON";
+    public static final String TYPE_SEARCH_TRAIN_PIGEON = "TYPE_SEARCH_TRAIN_PIGEON";
 
     private static AppDatabase INSTANCE;
     private static final Object sLok = new Object();

@@ -28,6 +28,7 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -361,7 +362,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected void addItemDecorationLine(RecyclerView recyclerView) {
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(recyclerView.getContext())
-                .colorResId(R.color.color_line).size(1).build());
+                .colorResId(R.color.color_line).size(ScreenTool.dip2px(1)).build());
     }
 
     protected <T> void bindUi(Observable<T> observable, Consumer<? super T> onNext) {

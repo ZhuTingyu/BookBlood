@@ -123,6 +123,12 @@ public class UserModel {
          save();
     }
 
+    public void setPigeonHouseInfo(String lo, String la) {
+        getInstance().getUserData().la = la;
+        getInstance().getUserData().lo = lo;
+        save();
+    }
+
 //    public static Observable<ApiResponse> loginOut() {
 //        return AdminRequest.<ApiResponse>builder()
 //                .setToJsonType(new TypeToken<ApiResponse>() {}.getType())

@@ -39,6 +39,10 @@ import java.util.List;
 
 public class SelectLocationByMapFragment extends BaseMapFragment {
 
+    public static final String KEY_ADDRESS_NAME = "INTENT_ADDRESS_NAME";
+
+    public static int CODE_LOCATION = 0x234;
+
     private SearchTextView mSearchTextView;
     private TextView mTvLa;
     private TextView mTvLo;
@@ -48,6 +52,9 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
     private DistrictSearchManager mDistrictSearchManager;
     RegeocodeAddress mAddress;
     RegeocodeResult mRegeocodeResult;
+
+    String addString = null;
+
 
 
     public static void start(Activity activity, int requestCode) {
@@ -142,6 +149,7 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
             Intent intent = new Intent();
             intent.putExtra(IntentBuilder.KEY_DATA, mRegeocodeResult.getRegeocodeAddress());
             intent.putExtra(IntentBuilder.KEY_DATA_2, mRegeocodeResult.getRegeocodeQuery().getPoint());
+            intent.putExtra(KEY_ADDRESS_NAME, addString);
             getBaseActivity().setResult(Activity.RESULT_OK, intent);
             finish();
         });
@@ -158,11 +166,12 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
         List<RegeocodeRoad> roudItems = mAddress.getRoads();
 
         if (!Lists.isEmpty(aoiItems)) {
-            mTvLocation.setText(mAddress.getCity() + aoiItems.get(0).getAoiName());
+            addString = (mAddress.getCity() + aoiItems.get(0).getAoiName());
         } else if (!Lists.isEmpty(roudItems)) {
-            mTvLocation.setText(mAddress.getCity() + roudItems.get(0).getName());
+            addString = (mAddress.getCity() + roudItems.get(0).getName());
         } else {
-            mTvLocation.setText(mAddress.getFormatAddress());
+            addString = (mAddress.getFormatAddress());
         }
+        mTvLocation.setText(addString);
     }
 }

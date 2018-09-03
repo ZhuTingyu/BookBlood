@@ -247,5 +247,9 @@
     <string name="text_fly_point">放飞坐标</string>
     <string name="text_save">保存</string>
     <string name="text_new_train_pigeon">新建训鸽</string>
+    <string name="text_KM">%1$sKM</string>
+    <string name="text_choose_yet">已选</string>
+    <string name="text_all_choose">全选</string>
+    <string name="text_add_at_once">立即添加</string>
 
 </resources>

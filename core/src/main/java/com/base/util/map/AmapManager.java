@@ -8,6 +8,7 @@ import com.alibaba.idst.nls.internal.protocol.Content;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.CoordinateConverter;
+import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 
@@ -22,10 +23,12 @@ public class AmapManager {
 
     public MutableLiveData<LatLng> mMoveEndLiveData = new MutableLiveData<>();
     public MutableLiveData<LatLng> mInMoveLiveData = new MutableLiveData<>();
-
+    private UiSettings mUiSettings;//定义一个UiSettings对象
     AMap aMap;
     public AmapManager(AMap aMap){
         this.aMap = aMap;
+        mUiSettings = aMap.getUiSettings();//实例化UiSettings类对象
+
     }
 
     public void moveByLatLng(double la, double lo){
@@ -77,6 +80,10 @@ public class AmapManager {
         converter.coord(sourceLatLng);
 
         return converter.convert();
+    }
+
+    public void setZoomControlsVisible(boolean isShow){
+        mUiSettings.setZoomControlsEnabled(isShow);
     }
 
 }
