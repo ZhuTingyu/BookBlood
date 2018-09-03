@@ -18,7 +18,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.AddPlayFragment;
-import com.cpigeon.book.widget.mydialog.ImportPlayDialog;
+import com.cpigeon.book.widget.mydialog.AddPlayDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +98,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         setTitle("详情");
 
         setToolbarRight("成长记录", item -> {
-
+            GrowthReportFragment.start(getBaseActivity(), "");
             return true;
         });
     }
@@ -190,9 +190,11 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
             case R.id.img_play_import:
                 //赛绩导入
 
-                ImportPlayDialog mImportPlayDialog = new ImportPlayDialog(getBaseActivity());
-                mImportPlayDialog.show();
+//                ImportPlayDialog mImportPlayDialog = new ImportPlayDialog(getBaseActivity());
+//                mImportPlayDialog.show();
 
+                AddPlayDialog addPlayDialog = new AddPlayDialog();
+                addPlayDialog.show(getBaseActivity().getFragmentManager(), "");
                 break;
             case R.id.img_play_add:
                 //手动添加赛绩

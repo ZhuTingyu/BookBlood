@@ -85,9 +85,15 @@ public class AddPlayFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setTitle("赛绩录入");
+
         composite.add(RxUtils.delayed(50, aLong -> {
             llz.setLineInputViewState(false);
         }));
+
+        setToolbarRight("自定义", item -> {
+            return true;
+        });
     }
 
 
@@ -98,8 +104,6 @@ public class AddPlayFragment extends BaseBookFragment {
         mPlayViewModel.isCanCommit.observe(this, aBoolean -> {
             TextViewUtil.setEnabled(tv_next_step, aBoolean);
         });
-
-
     }
 
     private BaseInputDialog mInputDialog;

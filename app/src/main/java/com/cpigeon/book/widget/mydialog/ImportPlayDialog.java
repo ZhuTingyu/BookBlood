@@ -12,7 +12,7 @@ import com.cpigeon.book.R;
 
 public class ImportPlayDialog extends CustomAlertDialog3 {
     public ImportPlayDialog(@NonNull Context context) {
-        super(context);
+        super(context, R.style.BottomDialog);
     }
 
     public ImportPlayDialog(@NonNull Context context, int themeResId) {
