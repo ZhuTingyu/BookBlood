@@ -3,6 +3,7 @@ package com.cpigeon.book.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
@@ -101,7 +102,7 @@ public class LineInputView extends RelativeLayout {
         mWeight = array.getInteger(R.styleable.LineInputView_lineInputView_Weight, 4);
         mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, R.color.color_4c4c4c);
         mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, R.color.color_000000);
-        mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, R.color.color_white);
+        mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, Color.parseColor("#FFFFFF"));
         mLeftTextSize = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
         mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);

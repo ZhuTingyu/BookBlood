@@ -42,7 +42,8 @@ public class CustomAlertDialog3 extends Dialog {
         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
         int displayWidth = dm.widthPixels;
         android.view.WindowManager.LayoutParams p = getWindow().getAttributes();  //获取对话框当前的参数值
-        p.width = displayWidth;    //宽度设置为屏幕的0.55
+//        p.width = displayWidth;    //宽度设置为屏幕的0.55
+//        p.width = WindowManager.LayoutParams.MATCH_PARENT;    //宽度设置为屏幕的0.55
 
         p.gravity = Gravity.BOTTOM; // 紧贴底部
         p.height = WindowManager.LayoutParams.WRAP_CONTENT;
@@ -50,6 +51,7 @@ public class CustomAlertDialog3 extends Dialog {
 
         this.getWindow().setBackgroundDrawableResource(R.drawable.dialog_corner_bg);
 //        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 
         init();
     }
