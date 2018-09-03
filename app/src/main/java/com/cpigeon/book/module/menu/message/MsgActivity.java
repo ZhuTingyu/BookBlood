@@ -2,7 +2,6 @@ package com.cpigeon.book.module.menu.message;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -14,10 +13,11 @@ import com.base.widget.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.base.widget.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
-import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseTabActivity;
+import com.cpigeon.book.widget.CustomTabView;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/8/30.
@@ -25,16 +25,23 @@ import com.cpigeon.book.base.BaseTabActivity;
 
 public class MsgActivity extends BaseTabActivity {
 
+    private static CommonNavigatorAdapter mCommonNavigatorAdapter;
+
     public static void start(Activity activity) {
         IntentBuilder.Builder(activity, MsgActivity.class).startActivity();
     }
 
+    private static List<String> mData = Lists.newArrayList();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mData = Lists.newArrayList("0", "0");
+
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdjustMode(true);
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+        mCommonNavigatorAdapter = new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
                 return mTitles == null ? 0 : mTitles.size();
@@ -42,18 +49,20 @@ public class MsgActivity extends BaseTabActivity {
 
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
-                simplePagerTitleView.setText(mTitles.get(index));
-                simplePagerTitleView.setTextSize(18);
-                simplePagerTitleView.setNormalColor(Color.WHITE);
-                simplePagerTitleView.setSelectedColor(Color.WHITE);
-                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+
+
+                CustomTabView mCustomTabView = new CustomTabView(context);
+
+                mCustomTabView.setContext(mTitles.get(index));
+                mCustomTabView.setSum(mData.get(index));
+
+                mCustomTabView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mViewPager.setCurrentItem(index);
                     }
                 });
-                return simplePagerTitleView;
+                return mCustomTabView;
             }
 
             @Override
@@ -65,7 +74,9 @@ public class MsgActivity extends BaseTabActivity {
             public float getTitleWeight(Context context, int index) {
                 return 1.0f;
             }
-        });
+        };
+
+        commonNavigator.setAdapter(mCommonNavigatorAdapter);
         mIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(mIndicator, mViewPager);
 
@@ -85,5 +96,16 @@ public class MsgActivity extends BaseTabActivity {
     protected void initTitles() {
         String[] titles = getResources().getStringArray(R.array.array_msg);
         mTitles = Lists.newArrayList(titles);
+    }
+
+
+    public static List<String> getTobData() {
+        return mData;
+    }
+
+    public static void initTobData(List<String> mData) {
+//        mData = Lists.newArrayList("12", "14");
+
+        mCommonNavigatorAdapter.notifyDataSetChanged();
     }
 }

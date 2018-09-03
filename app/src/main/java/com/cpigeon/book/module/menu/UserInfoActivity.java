@@ -13,6 +13,7 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.module.menu.account_security.ReviseLoginPsdFragment;
+import com.cpigeon.book.module.menu.balance.AccountBalanceFragment;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
 import com.cpigeon.book.module.menu.service.RenewalFragment;
 import com.cpigeon.book.module.menu.viewmodel.ShareViewModel;

@@ -33,7 +33,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/8/31.
  */
 
-public class AddPlayFragment extends BaseBookFragment {
+public class PlayAddFragment extends BaseBookFragment {
 
     @BindView(R.id.ll_foot)
     LineInputView llFoot;
@@ -62,7 +62,7 @@ public class AddPlayFragment extends BaseBookFragment {
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, AddPlayFragment.class);
+                .startParentActivity(activity, PlayAddFragment.class);
     }
 
     @Override

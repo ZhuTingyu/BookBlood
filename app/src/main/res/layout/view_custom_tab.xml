@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:textSize="@dimen/large_text_size"
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="公告通知"
+        android:textColor="@color/color_white" />
+
+    <TextView
+        android:id="@+id/tv_sum"
+        android:textSize="@dimen/medium_text_size"
+        android:paddingBottom="8dp"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/tv_content"
+        android:text="10"
+        android:textColor="@color/color_white" />
+
+</RelativeLayout>

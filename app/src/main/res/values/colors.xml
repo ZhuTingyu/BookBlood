@@ -35,6 +35,7 @@
     <!--背景-->
     <color name="color_bg_orange">#FFB288</color>
     <color name="color_bg_yellow">#F9B855</color>
+    <color name="color_bg_dcedff">#DCEDFF</color>
 
 
     <!--按钮-->

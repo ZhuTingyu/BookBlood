@@ -39,7 +39,7 @@
     <string name="text_search">搜索</string>
     <string name="text_search_history">搜索历史</string>
     <string name="text_clean">清空</string>
-    <string name="title_select_ass">选择协会</string>
+
     <string name="text_location_lo_la">E%1$s N%2$s</string>
     <string name="text_la">纬度 %1$s</string>
     <string name="text_lo">经度 %1$s</string>
@@ -49,6 +49,14 @@
 
     <string name="text_renewal_login_psd">修改登录密码</string>
     <string name="text_renewal_play_psd">修改支付密码</string>
+
+
+    <string name="title_select_ass">选择协会</string>
+    <string name="title_select_loft">选择公棚</string>
+    <string-array name="array_org">
+        <item>@string/title_select_ass</item>
+        <item>@string/title_select_loft</item>
+    </string-array>
 
 
     <string-array name="array_choose_photo">
@@ -94,6 +102,7 @@
     <!--按钮文字-->
     <string name="btn_next_step">下一步</string>
     <string name="btn_save">保存</string>
+    <string name="btn_sure_inport">确定导入</string>
     <string name="btn_sure_modify">确定修改</string>
     <string name="btn_sure_upload">确定上传</string>
 
