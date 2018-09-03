@@ -278,8 +278,8 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLvShedId.setContent(r.getUsePigeonHomeNum());
             mLvJoinMatchId.setContent(r.getPigeonMatchNum());
             mLvHouseLocation.setContent(getString(R.string.text_location_lo_la
-                    , LocationFormatUtils.GPS2AjLocation(r.getLongitude())
-                    , LocationFormatUtils.GPS2AjLocation(r.getLatitude())));
+                    , LocationFormatUtils.loLaToDMS(r.getLongitude())
+                    , LocationFormatUtils.loLaToDMS(r.getLatitude())));
 
             mViewModel.mLongitude = String.valueOf(r.getLongitude());
             mViewModel.mLatitude = String.valueOf(r.getLatitude());

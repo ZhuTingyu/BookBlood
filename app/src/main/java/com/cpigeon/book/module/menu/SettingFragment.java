@@ -105,6 +105,7 @@ public class SettingFragment extends BaseBookFragment {
             getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), s, SweetAlertDialog.SUCCESS_TYPE, false, dialog -> {
                 dialog.dismiss();
                 //结束所有页面，跳转到登录页
+                LoginActivity.start(getBaseActivity());
                 AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);
             });
         });

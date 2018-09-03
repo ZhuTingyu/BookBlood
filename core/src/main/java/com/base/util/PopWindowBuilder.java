@@ -27,7 +27,7 @@ public class PopWindowBuilder {
         PopWindowBuilder builder = new PopWindowBuilder();
         builder.mContext = context;
         builder.mPopupWindow = new PopupWindow(context);
-        builder.mPopupWindow.setOutsideTouchable(true);
+        builder.mPopupWindow.setOutsideTouchable(false);
         builder.mPopupWindow.setFocusable(true);
         builder.mPopupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));
         return builder;
