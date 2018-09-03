@@ -250,5 +250,11 @@
     <string name="text_trained">已训</string>
     <string name="text_status">状态</string>
     <string name="text_new">新建</string>
+    <string name="text_project_name">项目名称</string>
+    <string name="text_pleas_input">请输入</string>
+    <string name="text_fly_location">放飞地点</string>
+    <string name="text_fly_point">放飞坐标</string>
+    <string name="text_save">保存</string>
+    <string name="text_new_train_pigeon">新建训鸽</string>
 
 </resources>

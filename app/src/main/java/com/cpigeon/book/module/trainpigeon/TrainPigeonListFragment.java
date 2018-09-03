@@ -56,7 +56,7 @@ public class TrainPigeonListFragment extends BaseBookFragment{
 
         mtvOk.setText(Utils.getString(R.string.text_new));
         mtvOk.setOnClickListener(v -> {
-
+            NewTrainPigeonFragment.start(getBaseActivity());
         });
     }
 }
