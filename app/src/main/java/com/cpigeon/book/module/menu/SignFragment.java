@@ -220,7 +220,7 @@ public class SignFragment extends BaseBookFragment {
         for (SignInfoEntity.GiftdataBean item : ylq) {
             String[] s = item.getDate().split("-");
             try {
-                yGiftArr.add(s[2]);
+                yGiftArr.add(String.valueOf(Integer.valueOf(s[2])));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -235,7 +235,7 @@ public class SignFragment extends BaseBookFragment {
         for (SignInfoEntity.GiftSettingsBean item : wlq) {
             String[] s = item.getDate().split("-");
             try {
-                wGiftArr.add(s[2]);
+                wGiftArr.add(String.valueOf(Integer.valueOf(s[2])));
             } catch (Exception e) {
                 e.printStackTrace();
             }

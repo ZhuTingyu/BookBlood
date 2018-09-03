@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_view_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="49dp"
+            android:text="中鸽直播"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/medium_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_foot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="2018-23-23"
+            android:textColor="@color/general_text_color"
+            android:textSize="@dimen/medium_text_size" />
+
+
+        <TextView
+            android:id="@+id/tv_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1名"
+            android:textColor="@color/general_text_color"
+            android:textSize="@dimen/medium_text_size" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/checkbox"
+            android:layout_width="24dp"
+
+            android:layout_height="24dp"
+            android:layout_marginLeft="52dp"
+            android:background="@mipmap/ic_select_click" />
+
+    </LinearLayout>
+
+    <include layout="@layout/include_line_view_layout" />
+
+</LinearLayout>

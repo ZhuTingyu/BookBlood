@@ -13,7 +13,8 @@ import com.base.util.Lists;
 
 import java.util.List;
 
-/** checkbox 选择列表基类
+/**
+ * checkbox 选择列表基类
  * Created by Zhu TingYu on 2017/11/20.
  */
 
@@ -45,21 +46,22 @@ public abstract class BaseMultiSelectAdapter<K extends MultiSelectEntity, B exte
         entity.isChoose = isChoose;
     }
 
-    private void setAllChoose(List<K> productEntities, boolean isChoose){
-        for(MultiSelectEntity productEntity : productEntities){
+    private void setAllChoose(List<K> productEntities, boolean isChoose) {
+        for (MultiSelectEntity productEntity : productEntities) {
             setChoose(productEntity, isChoose);
         }
     }
 
     /**
      * 获取选择的下标
+     *
      * @return
      */
 
-    public List<Integer> getSelectedPotion(){
+    public List<Integer> getSelectedPotion() {
         selectedPositions = Lists.newArrayList();
-        for(int i = 0; i < mData.size(); i++){
-            if(mData.get(i).isChoose){
+        for (int i = 0; i < mData.size(); i++) {
+            if (mData.get(i).isChoose) {
                 selectedPositions.add(i);
             }
         }
@@ -68,13 +70,14 @@ public abstract class BaseMultiSelectAdapter<K extends MultiSelectEntity, B exte
 
     /**
      * 获取选择的数据
+     *
      * @return
      */
 
-    public List<K> getSelectedEntity(){
+    public List<K> getSelectedEntity() {
         List<K> list = Lists.newArrayList();
-        for(int i = 0; i < mData.size(); i++){
-            if(mData.get(i).isChoose){
+        for (int i = 0; i < mData.size(); i++) {
+            if (mData.get(i).isChoose) {
                 list.add(mData.get(i));
             }
         }
@@ -86,7 +89,7 @@ public abstract class BaseMultiSelectAdapter<K extends MultiSelectEntity, B exte
      */
 
     public void deleteChoose() {
-        for (int i = 0; i < mData.size();) {
+        for (int i = 0; i < mData.size(); ) {
             if (mData.get(i).isChoose) {
                 remove(i);
                 continue;
@@ -97,38 +100,46 @@ public abstract class BaseMultiSelectAdapter<K extends MultiSelectEntity, B exte
 
     /**
      * 是否全选
+     *
      * @param isChooseAll
      */
 
     public void isChooseAll(boolean isChooseAll) {
-        setAllChoose(mData ,isChooseAll);
+        setAllChoose(mData, isChooseAll);
         notifyDataSetChanged();
     }
 
     /**
      * 多选
-     * @param item
+     *
      * @param position
      */
-
-    public void setMultiSelectItem(K item, int position){
-        setChoose(item, !item.isChoose);
+    public void setMultiSelectItem(int position) {
+        setChoose(getData().get(position), !getData().get(position).isChoose);
         notifyItemChanged(position);
     }
 
     /**
      * 单选
+     *
      * @param item
      * @param position
      */
 
-    public void setSingleItem(K item, int position){
+    public void setSingleItem(K item, int position) {
         for (int i = 0; i < mData.size(); i++) {
-            if(mData.get(i).isChoose){
+            if (mData.get(i).isChoose) {
                 mData.get(i).isChoose = false;
             }
         }
         setChoose(item, true);
         notifyDataSetChanged();
+    }
+
+    public void setChooseVisible(boolean visible) {
+        for (int i = 0; i < mData.size(); i++) {
+            mData.get(i).isVisible = visible;
+        }
+        this.notifyDataSetChanged();
     }
 }

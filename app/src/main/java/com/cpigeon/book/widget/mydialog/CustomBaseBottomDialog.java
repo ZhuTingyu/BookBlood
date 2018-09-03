@@ -2,6 +2,8 @@ package com.cpigeon.book.widget.mydialog;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
@@ -34,21 +36,23 @@ public abstract class CustomBaseBottomDialog extends DialogFragment {
 //        lp.height = getActivity().getWindowManager().getDefaultDisplay().getHeight() * 2 / 5;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
-        dialog.getWindow().setBackgroundDrawableResource(setBackgroundDrawableResource());
+//        dialog.getWindow().setBackgroundDrawableResource(R.drawable.shape_bg_corner_4_solid_top_white);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialog.getWindow().setBackgroundDrawableResource(setBackgroundDrawableResource());
 
-        initView(this);
+        initView(dialog);
 
         return dialog;
     }
 
 
     protected int setBackgroundDrawableResource() {
-        return R.drawable.shape_bg_corner_3_solid_top_white;
+        return R.drawable.dialog_corner_bg;
     }
 
 
     public abstract int setContentView();
 
 
-    public abstract void initView(CustomBaseBottomDialog mCustomBaseBottomDialog);
+    public abstract void initView(Dialog dialog);
 }

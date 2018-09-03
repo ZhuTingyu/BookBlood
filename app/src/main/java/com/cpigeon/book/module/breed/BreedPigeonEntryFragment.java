@@ -35,7 +35,7 @@ import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
-import com.cpigeon.book.module.play.AddPlayFragment;
+import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -219,7 +219,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), "种鸽录入成功，是否为该信鸽录入赛绩！", sweetAlertDialog -> {
                 //确定
                 sweetAlertDialog.dismiss();
-                AddPlayFragment.start(getBaseActivity());
+                PlayAddFragment.start(getBaseActivity());
             }, sweetAlertDialog -> {
                 //取消
                 sweetAlertDialog.dismiss();

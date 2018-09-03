@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu;
+package com.cpigeon.book.module.menu.balance;
 
 import android.app.Activity;
 import android.content.Context;

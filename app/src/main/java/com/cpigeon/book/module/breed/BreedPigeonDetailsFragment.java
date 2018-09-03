@@ -15,9 +15,10 @@ import android.widget.TextView;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.breed.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
-import com.cpigeon.book.module.play.AddPlayFragment;
+import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.widget.mydialog.AddPlayDialog;
 
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 种鸽详情
@@ -72,7 +72,13 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     TextView tvScore;
     @BindView(R.id.ll_score)
     LinearLayout llScore;
-    Unbinder unbinder;
+
+    private BreedPigeonDetailsViewModel mBreedPigeonDetailsViewModel;
+    private AddPlayDialog mAddPlayDialog;
+
+    public static int CODE_ORGANIZE = 0x123;
+    public static int CODE_LOFT = 0x234;
+
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
@@ -82,6 +88,9 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel();
+        initViewModels(mBreedPigeonDetailsViewModel);
     }
 
     @Nullable
@@ -101,6 +110,13 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
             GrowthReportFragment.start(getBaseActivity(), "");
             return true;
         });
+
+        initInputPlayDialog();
+    }
+
+    private void initInputPlayDialog() {
+        mAddPlayDialog = new AddPlayDialog();
+
     }
 
 
@@ -193,12 +209,12 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 //                ImportPlayDialog mImportPlayDialog = new ImportPlayDialog(getBaseActivity());
 //                mImportPlayDialog.show();
 
-                AddPlayDialog addPlayDialog = new AddPlayDialog();
-                addPlayDialog.show(getBaseActivity().getFragmentManager(), "");
+
+                mAddPlayDialog.show(getBaseActivity().getFragmentManager(), "");
                 break;
             case R.id.img_play_add:
                 //手动添加赛绩
-                AddPlayFragment.start(getBaseActivity());
+                PlayAddFragment.start(getBaseActivity());
                 break;
         }
     }

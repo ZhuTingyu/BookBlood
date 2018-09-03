@@ -5,17 +5,19 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
+    <!--android:background="@drawable/shape_bg_corner_4_solid_top_white"-->
+    <!--android:background="@color/color_white"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_view_height"
-        android:background="@color/color_white"
+        android:background="@drawable/shape_bg_corner_4_solid_top_white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/spacing_left_reight"
         android:paddingRight="@dimen/spacing_left_reight">
 
         <ImageView
+            android:id="@+id/btn_cancel"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@mipmap/ic_close" />
@@ -30,7 +32,7 @@
             android:textSize="@dimen/medium_text_size" />
 
         <TextView
-            android:id="@+id/tv_"
+            android:id="@+id/btn_sure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="下一步"
@@ -53,7 +55,8 @@
         app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="足环号码" />
+        app:lineInputView_LeftString="足环号码"
+        app:lineInputView_isShowRightImage="gone" />
 
 
     <!--组织类型-->
@@ -85,7 +88,8 @@
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="单位名称"
-        app:lineInputView_isShowLineDivisions="gone" />
+        app:lineInputView_isShowLineDivisions="gone"
+        app:lineInputView_isShowRightImage="gone" />
 
 
 </LinearLayout>
