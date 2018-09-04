@@ -13,12 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.breed.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
+import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
 import com.cpigeon.book.widget.mydialog.AddPlayDialog;
 
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 种鸽详情
@@ -73,15 +78,21 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     @BindView(R.id.ll_score)
     LinearLayout llScore;
 
+    @BindView(R.id.img_pigeon)
+    CircleImageView img_pigeon;
+
     private BreedPigeonDetailsViewModel mBreedPigeonDetailsViewModel;
+
+    private PlayListViewModel mPlayListViewModel;
+
     private AddPlayDialog mAddPlayDialog;
 
     public static int CODE_ORGANIZE = 0x123;
     public static int CODE_LOFT = 0x234;
 
-
-    public static void start(Activity activity) {
+    public static void start(Activity activity, BreedPigeonEntity mBreedPigeonEntity) {
         IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_TYPE, mBreedPigeonEntity)
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
@@ -90,7 +101,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         super.onAttach(context);
 
         mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel();
-        initViewModels(mBreedPigeonDetailsViewModel);
+        mPlayListViewModel = new PlayListViewModel();
+        initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel);
     }
 
     @Nullable
@@ -110,8 +122,17 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
             GrowthReportFragment.start(getBaseActivity(), "");
             return true;
         });
-
         initInputPlayDialog();
+
+
+        BreedPigeonEntity mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_TYPE);
+
+
+        if (mBreedPigeonEntity != null) {
+            mBreedPigeonDetailsViewModel.footid = String.valueOf(mBreedPigeonEntity.getPigeonID());
+            mBreedPigeonDetailsViewModel.getPigeonDetails();
+        }
+
     }
 
     private void initInputPlayDialog() {
@@ -119,6 +140,42 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
     }
 
+    @Override
+    protected void initObserve() {
+        super.initObserve();
+
+        mBreedPigeonDetailsViewModel.mBreedPigeonData.observe(this, datas -> {
+
+            mPlayListViewModel.pigeonid = datas.getPigeonID();
+            mPlayListViewModel.footid = datas.getFootRingID();
+
+            tvFoot.setText(datas.getFootRingNum());//足环号
+
+            if (datas.getPigeonSexName().equals("雌")) {
+                imgSex.setImageResource(R.mipmap.ic_female);
+            } else if (datas.getPigeonSexName().equals("雄")) {
+                imgSex.setImageResource(R.mipmap.ic_male);
+            } else {
+                imgSex.setImageResource(R.mipmap.ic_sex_no);
+            }
+
+            tvFootVice.setText(datas.getFootRingIDToNum());//副足环
+            tvLineage.setText(datas.getPigeonBloodName());//血统
+            tvState.setText(datas.getStateName());//状态
+            tvEyeSand.setText(datas.getPigeonEyeName());//眼砂d
+
+            tvFeatherColor.setText(datas.getPigeonPlumeName());//羽色
+            tvTheirShellsDate.setText(datas.getOutShellTime());//出壳日期
+            tvFootSource.setText(datas.getSourceName());//来源
+
+            tvScore.setText(datas.getPigeonScore());//评分
+
+            Glide.with(this)
+                    .load(datas.getCoverPhotoUrl())
+                    .placeholder(R.drawable.ic_img_default)
+                    .into(img_pigeon);//鸽子照片
+        });
+    }
 
     @OnClick({R.id.img_pigeon, R.id.tv_foot, R.id.img_sex, R.id.ll_foot_vice, R.id.ll_lineage, R.id.ll_state, R.id.ll_eye_sand, R.id.ll_feather_color, R.id.ll_their_shells_date, R.id.ll_foot_source, R.id.ll_score
             , R.id.tv_make_book, R.id.tv_lineage_analysis, R.id.tv_lineage_roots, R.id.tv_breed_info
@@ -187,7 +244,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
             case R.id.tv_make_book:
                 //血统书制作
-
+                mPlayListViewModel.getZGW_Users_GetLogData();
                 break;
 
             case R.id.tv_lineage_analysis:
@@ -209,12 +266,21 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 //                ImportPlayDialog mImportPlayDialog = new ImportPlayDialog(getBaseActivity());
 //                mImportPlayDialog.show();
 
-
                 mAddPlayDialog.show(getBaseActivity().getFragmentManager(), "");
                 break;
             case R.id.img_play_add:
                 //手动添加赛绩
-                PlayAddFragment.start(getBaseActivity());
+                try {
+                    BreedPigeonEntity mBreedPigeonEntity = mBreedPigeonDetailsViewModel.mBreedPigeonData.getValue();
+                    PlayAddFragment.start(getBaseActivity(),
+                            new PigeonEntryEntity.Builder()
+                                    .FootRingID(mBreedPigeonEntity.getFootRingID())
+                                    .FootRingNum(mBreedPigeonEntity.getFootRingNum())
+                                    .PigeonID(mBreedPigeonEntity.getPigeonID())
+                                    .build());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }

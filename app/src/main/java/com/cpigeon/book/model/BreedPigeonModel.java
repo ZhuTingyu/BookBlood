@@ -3,8 +3,11 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
+import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -16,9 +19,9 @@ import io.reactivex.Observable;
 public class BreedPigeonModel {
 
     //hl 获取种鸽详细
-    public static Observable<ApiResponse<Object>> getTXGP_Pigeon_GetInfo(String footId) {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+    public static Observable<ApiResponse<BreedPigeonEntity>> getTXGP_Pigeon_GetInfo(String footId) {
+        return RequestData.<ApiResponse<BreedPigeonEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<BreedPigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_details)
                 .addBody("pigeonid", footId)
@@ -27,23 +30,23 @@ public class BreedPigeonModel {
 
 
     //hl 添加种鸽
-    public static Observable<ApiResponse<Object>> getTXGP_Pigeon_Add(String coodid,
-                                                                     String footnum,
-                                                                     String footnumto,
-                                                                     String sourceid,
-                                                                     String menfootnum,
-                                                                     String wofootnum,
-                                                                     String name,
-                                                                     String sex,
-                                                                     String plume,
-                                                                     String eye,
-                                                                     String outtime,
-                                                                     String blood,
-                                                                     String stateid,
-                                                                     String phototypeid,
-                                                                     Map<String, String> body) {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+    public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Add(String coodid,
+                                                                                String footnum,
+                                                                                String footnumto,
+                                                                                String sourceid,
+                                                                                String menfootnum,
+                                                                                String wofootnum,
+                                                                                String name,
+                                                                                String sex,
+                                                                                String plume,
+                                                                                String eye,
+                                                                                String outtime,
+                                                                                String blood,
+                                                                                String stateid,
+                                                                                String phototypeid,
+                                                                                Map<String, String> body) {
+        return RequestData.<ApiResponse<PigeonEntryEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_add)
                 .addBody("typeid", String.valueOf(8))//
@@ -62,6 +65,41 @@ public class BreedPigeonModel {
                 .addBody("stateid", stateid)// 信鸽状态ID
                 .addBody("phototypeid", phototypeid)// 信鸽状态ID
                 .addImageFileBodys(body)
+                .request();
+    }
+
+
+    //hl 种鸽列表，搜索
+    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum) {
+        return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
+                }.getType())
+                .url(R.string.pigeon_breed_search)
+                .addBody("pi", pi)
+                .addBody("ps", ps)
+                .addBody("footnum", footnum)
+                .request();
+    }
+
+
+    //hl 种鸽列表，筛选
+    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_Pigeon_SelectAll(String pi, String ps,
+                                                                                            String typeid,
+                                                                                            String bloodid,
+                                                                                            String sexid,
+                                                                                            String year,
+                                                                                            String stateid) {
+        return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
+                }.getType())
+                .url(R.string.pigeon_breed_sift)
+                .addBody("pi", pi)
+                .addBody("ps", ps)
+                .addBody("typeid", typeid)
+                .addBody("bloodid", bloodid)
+                .addBody("sexid", sexid)
+                .addBody("year", year)
+                .addBody("stateid", stateid)
                 .request();
     }
 }

@@ -36,7 +36,6 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
                 .startParentActivity(activity, AnnouncementNoticeFragment.class);
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -84,6 +83,8 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
 
         mViewModel.getTXGP_GetGongGaoData();
+
+        mViewModel.getTXGP_GongGao_CountData();
     }
 
 
@@ -104,7 +105,6 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
 
             mViewModel.getTXGP_GongGao_CountData();
         });
-
 
         mViewModel.mMsgCountData.observe(this, msgCountEntity -> {
             MsgActivity.initTobData(Lists.newArrayList(msgCountEntity.getCount(), MsgActivity.getTobData().get(1)));

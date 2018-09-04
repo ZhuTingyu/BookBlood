@@ -1,7 +1,9 @@
 package com.cpigeon.book.module.foot.adapter;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.base.base.BaseActivity;
 import com.base.base.BaseViewHolder;
@@ -13,6 +15,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.module.foot.FootAdminDetailsMultipleFragment;
 import com.cpigeon.book.module.foot.FootAdminSingleFragment;
+import com.cpigeon.book.util.KeywordUtil;
 
 /**
  * Created by Administrator on 2018/8/17.
@@ -33,8 +36,14 @@ public class FootAdminListAdapter extends BaseQuickAdapter<FootEntity, BaseViewH
         helper.setTextView(R.id.tvStatus, item.getTypeName());
 
         if (StringUtil.isStringValid(item.getEndFootRingNum())) {
-            helper.setTextView(R.id.tvFootNumber, Utils.getString(R.string.text_foots, item.getFootRingNum()
-                    , item.getEndFootRingNum()));
+
+            TextView textView = helper.getView(R.id.tvFootNumber);
+
+            textView.setText(KeywordUtil.matcherSearchTitle(Color.RED, Utils.getString(R.string.text_foots, item.getFootRingNum(), item.getEndFootRingNum()), "····"));
+
+//            helper.setTextView(R.id.tvFootNumber, Utils.getString(R.string.text_foots, item.getFootRingNum()
+//                    , item.getEndFootRingNum()));
+
             helper.itemView.setOnClickListener(v -> {
                 FootAdminDetailsMultipleFragment.start(getBaseActivity()
                         , String.valueOf(getItem(helper.getAdapterPosition()).getFootRingID()));

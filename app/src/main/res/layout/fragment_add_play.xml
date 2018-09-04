@@ -7,11 +7,11 @@
 
 
     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:fadingEdge="none"
         android:orientation="vertical"
-        android:overScrollMode="never"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:overScrollMode="never">
 
         <com.cpigeon.book.widget.LineInputListLayout
             android:id="@+id/llz"
@@ -141,7 +141,37 @@
                 app:lineInputView_LeftString="比赛日期" />
 
         </com.cpigeon.book.widget.LineInputListLayout>
+
+
     </ScrollView>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:id="@+id/rlz_input"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:padding="5dp"
+        android:background="@drawable/rounded_corners_box1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_input_height">
+
+        <EditText
+            android:id="@+id/input_box_editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="top|left"
+            android:hint="请输入"
+            android:textColor="@color/general_text_color"
+            android:textColorHint="@color/general_text_hint_color"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
 
 
     <TextView

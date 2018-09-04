@@ -80,7 +80,7 @@ public class FiltrateListView extends RelativeLayout {
 
     }
 
-    public void resetData(){
+    public void resetData() {
         if (mFiltrateItemViews != null) {
             for (int i = 0; i < mFiltrateItemViews.size(); i++) {
                 FiltrateItemAdapter adapter = mFiltrateItemViews.get(i).mAdapter;
@@ -129,7 +129,6 @@ public class FiltrateListView extends RelativeLayout {
             mFiltrateItemViews.add(itemView);
             mLlRoot.addView(itemView);
         }
-
 
 
     }

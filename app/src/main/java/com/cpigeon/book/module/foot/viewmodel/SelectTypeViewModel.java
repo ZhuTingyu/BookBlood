@@ -18,17 +18,19 @@ import java.util.List;
 public class SelectTypeViewModel extends BaseViewModel {
 
     public static final String TIME = "10000";
-    public static final String TYPE_EYE = "1";
-    public static final String TYPE_FOOT_RING = "2";
-    public static final String TYPE_PIGEON = "3";
-    public static final String TYPE_COLOR_FEATHER = "4";
-    public static final String TYPE_PIGEON_BLOOD = "5";
-    public static final String TYPE_SEX = "6";
+    public static final String TYPE_EYE = "1";//眼砂
+    public static final String TYPE_FOOT_RING = "2";//足环类型
+    public static final String TYPE_PIGEON = "3";//信鸽类型
+    public static final String TYPE_COLOR_FEATHER = "4";//信鸽羽色
+    public static final String TYPE_PIGEON_BLOOD = "5";//信鸽血统
+    public static final String TYPE_SEX = "6";//信鸽性别
     public static final String TYPE_PIGEON_IMG = "7";//信鸽图片类型
-    public static final String TYPE_FOOT_SOURCE = "8";
-    public static final String TYPE_PIGEON_SOURCE = "9";
-    public static final String STATE_FOOT_RING = "10";
+    public static final String TYPE_FOOT_SOURCE = "8";//足环来源
+    public static final String TYPE_PIGEON_SOURCE = "9";//信鸽来源
+    public static final String STATE_FOOT_RING = "10";//足环状态
     public static final String STATE_STATE = "11";//信鸽状态
+    public static final String STATE_MEDICATE = "12";//用药后状态
+    public static final String STATE_TRAIN = "13";//训鸽状态
 
 
     public String selectType;

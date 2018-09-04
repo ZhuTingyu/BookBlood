@@ -71,7 +71,7 @@
     </string-array>
 
     <string name="text_one_foot_input">单个足环录入</string>
-    <string name="text_foots_input">号码段录入</string>
+    <string name="text_foots_input">按号码段录入</string>
     <string-array name="array_choose_input_foot_number">
         <item>@string/text_one_foot_input</item>
         <item>@string/text_foots_input</item>
@@ -168,12 +168,13 @@
     <string name="text_reset">重置</string>
     <string name="text_sure">确定</string>
     <string name="text_category">类别</string>
+    <string name="text_pigeon_status">状态</string>
     <string name="text_is_hand_ring">是否挂环</string>
     <string name="text_pigeon_blood">血统</string>
     <string name="text_year">年份</string>
     <string name="text_china_code">CHN</string>
     <string name="text_input_foot_numbers">足环号段录入</string>
-    <string name="text_foots">%1$s→%2$s</string>
+    <string name="text_foots">%1$s ···· %2$s</string>
     <string name="text_standard_foot">%1$s-%2$s-%3$s</string>
     <string name="text_foots_divide">-</string>
     <string name="text_foots_details">足环号段详情</string>

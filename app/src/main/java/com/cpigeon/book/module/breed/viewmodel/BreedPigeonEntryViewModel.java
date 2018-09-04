@@ -6,6 +6,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.Lists;
 import com.cpigeon.book.model.BreedPigeonModel;
+import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 
 import java.util.HashMap;
@@ -21,7 +22,7 @@ import io.reactivex.functions.Consumer;
 public class BreedPigeonEntryViewModel extends BaseViewModel {
 
 
-    public MutableLiveData<String> mBreedPigeonData = new MutableLiveData<>();
+    public MutableLiveData<PigeonEntryEntity> mBreedPigeonData = new MutableLiveData<>();
 
     public void addBreedPigeonEntry() {
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Add(countryId,
@@ -42,9 +43,9 @@ public class BreedPigeonEntryViewModel extends BaseViewModel {
 
             if (r.isOk()) {
 
-                mBreedPigeonData.setValue(r.msg);
+                mBreedPigeonData.setValue(r.data);
 
-                hintDialog(r.msg);
+//                hintDialog(r.msg);
             } else throw new HttpErrorException(r);
         });
     }

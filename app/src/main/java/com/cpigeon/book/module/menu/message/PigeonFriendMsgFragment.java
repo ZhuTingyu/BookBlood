@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -90,6 +91,7 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
             mViewModel.getTXGP_Msg_DetailData(mPigeonFriendMsgListEntity.getId());
         });
 
+        mViewModel.getTXGP_Msg_CountData();
     }
 
 
@@ -104,10 +106,15 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
             mAdapter.setEmptyText(s);
         });
 
-
         mViewModel.mPigeonFriendMsgDetail.observe(this, pigeonFriendMsgListEntity -> {
             mAdapter.getData().get(mViewModel.changePosition).setIsread("1");
             mAdapter.notifyItemChanged(mViewModel.changePosition);
+
+            mViewModel.getTXGP_Msg_CountData();
+        });
+
+        mViewModel.mMsgCountData.observe(this, msgCountEntity -> {
+            MsgActivity.initTobData(Lists.newArrayList(MsgActivity.getTobData().get(1), msgCountEntity.getCount()));
         });
     }
 }

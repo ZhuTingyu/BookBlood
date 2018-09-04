@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PigeonFriendMsgModel;
+import com.cpigeon.book.model.entity.MsgCountEntity;
 import com.cpigeon.book.model.entity.PigeonFriendMsgListEntity;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class PigeonFriendMsgViewModel extends BaseViewModel {
 
     public MutableLiveData<List<PigeonFriendMsgListEntity>> pigeonFriendMsgListData = new MutableLiveData<>();
     public MutableLiveData<PigeonFriendMsgListEntity> mPigeonFriendMsgDetail = new MutableLiveData<>();
+    public MutableLiveData<MsgCountEntity> mMsgCountData = new MutableLiveData<>();
 
     //获取  鸽友消息  列表
     public void getTXGP_GetMsgListData() {
@@ -50,7 +52,7 @@ public class PigeonFriendMsgViewModel extends BaseViewModel {
     public void getTXGP_Msg_CountData() {
         submitRequestThrowError(PigeonFriendMsgModel.getTXGP_Msg_Count(), r -> {
             if (r.isOk()) {
-                hintDialog(r.toJsonString());
+                mMsgCountData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
