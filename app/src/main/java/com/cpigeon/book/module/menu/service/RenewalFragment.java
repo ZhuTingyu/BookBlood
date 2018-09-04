@@ -1,10 +1,16 @@
 package com.cpigeon.book.module.menu.service;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,8 +66,19 @@ public class RenewalFragment extends BaseBookFragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.include_renew_head, null);
         ConstraintLayout item = view.findViewById(R.id.clOpenService);
         ServiceViewHolder viewHolder = new ServiceViewHolder(item);
-        viewHolder.bindData(ServiceViewHolder.TYPE_RENEW, v -> {
 
+        SpannableStringBuilder span = new SpannableStringBuilder("享用所有功能，不受限制，只要:");
+        SpannableString odlMoney = new SpannableString("188");
+        odlMoney.setSpan(new StrikethroughSpan(), 0, odlMoney.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString newMoney = new SpannableString("188");
+        newMoney.setSpan(new ForegroundColorSpan(Color.RED), 0, newMoney.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        span.append(newMoney);
+
+        span.append("不要");
+        span.append(odlMoney);
+
+        viewHolder.bindData(ServiceViewHolder.TYPE_RENEW, span, v -> {
+            PayOpenServiceDialog.show("", getBaseActivity().getSupportFragmentManager());
         });
         return view;
     }

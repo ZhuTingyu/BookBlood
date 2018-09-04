@@ -8,29 +8,25 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
-import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.trainpigeon.adpter.TrainPigeonAdapter;
+import com.cpigeon.book.module.trainpigeon.adpter.TrainProjectListAdapter;
 
 /**
- * Created by Zhu TingYu on 2018/8/31.
+ * Created by Zhu TingYu on 2018/9/4.
  */
 
-public class TrainPigeonListFragment extends BaseBookFragment{
+public class TrainProjectListFragment extends BaseBookFragment {
 
     XRecyclerView mRecyclerView;
-    TrainPigeonAdapter mAdapter;
-
-    TextView mtvOk;
+    TrainProjectListAdapter mAdapter;
 
     public static void start(Activity activity){
-        IntentBuilder.Builder().startParentActivity(activity, TrainPigeonListFragment.class);
+        IntentBuilder.Builder().startParentActivity(activity, TrainProjectListFragment.class);
     }
 
     @Override
@@ -41,26 +37,19 @@ public class TrainPigeonListFragment extends BaseBookFragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.xreclyview_no_pading_with_bottom_btn, container, false);
+        return inflater.inflate(R.layout.xrecyclerview_no_padding_layout, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(R.string.text_train_record);
+        setTitle(R.string.text_project_name);
         mRecyclerView = findViewById(R.id.list);
-        mtvOk = findViewById(R.id.tvOk);
-        mAdapter = new TrainPigeonAdapter();
+        mAdapter = new TrainProjectListAdapter();
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            OpenAndCloseTrainFragment.start(getBaseActivity());
+        });
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setNewData(Lists.newTestArrayList());
-
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            TrainProjectListFragment.start(getBaseActivity());
-        });
-
-        mtvOk.setText(Utils.getString(R.string.text_new));
-        mtvOk.setOnClickListener(v -> {
-            NewTrainPigeonFragment.start(getBaseActivity());
-        });
     }
 }

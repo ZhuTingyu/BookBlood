@@ -237,6 +237,12 @@
         <item>@string/test_pigeon_friend_msg</item>
     </string-array>
 
+    <string-array name="pay_ways">
+        <item>@string/text_pay_ways_score</item>
+        <item>@string/text_pay_ways_balance</item>
+        <item>@string/text_pay_ways_winxin</item>
+    </string-array>
+
     <string name="test_announcement_notice">公告通知</string>
     <string name="test_pigeon_friend_msg">鸽友消息</string>
     <string name="text_sure_modify">确认修改</string>
@@ -253,6 +259,7 @@
     <string name="text_project_name">项目名称</string>
     <string name="text_pleas_input">请输入</string>
     <string name="text_fly_location">放飞地点</string>
+    <string name="text_location_only">地点</string>
     <string name="text_fly_point">放飞坐标</string>
     <string name="text_save">保存</string>
     <string name="text_new_train_pigeon">新建训鸽</string>
@@ -260,5 +267,13 @@
     <string name="text_choose_yet">已选</string>
     <string name="text_all_choose">全选</string>
     <string name="text_add_at_once">立即添加</string>
+    <string name="text_service_name">服务名称</string>
+    <string name="text_price">价格:</string>
+    <string name="text_pay_ways_score">鸽币支付</string>
+    <string name="text_pay_ways_balance">余额支付</string>
+    <string name="text_pay_ways_winxin">微信支付</string>
+    <string name="text_current_weather">当前天气</string>
+    <string name="text_current_position">当前坐标</string>
+    <string name="text_open_fly">开启放飞</string>
 
 </resources>

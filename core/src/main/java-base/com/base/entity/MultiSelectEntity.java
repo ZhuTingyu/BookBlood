@@ -10,7 +10,7 @@ import android.os.Parcelable;
 public class MultiSelectEntity implements Parcelable {
 
     public boolean isChoose;
-    public boolean isVisible;
+    public boolean isVisible = true;
 
     public MultiSelectEntity() {
     }

@@ -37,7 +37,7 @@ public class ServiceViewHolder extends BaseViewHolder {
 
     }
 
-    public void bindData(String type, View.OnClickListener onClickListener){
+    public void bindData(String type,SpannableStringBuilder content, View.OnClickListener onClickListener){
         mTvServiceName.setText("天下鸽谱");
         if(TYPE_OPEN.equals(type)){
             mTvOpen.setText(Utils.getString(R.string.text_open_at_once));
@@ -45,17 +45,7 @@ public class ServiceViewHolder extends BaseViewHolder {
             mTvOpen.setText(Utils.getString(R.string.text_renew_at_once));
         }
 
-        SpannableStringBuilder span = new SpannableStringBuilder("享用所有功能，不受限制，只要:");
-        SpannableString odlMoney = new SpannableString("188");
-        odlMoney.setSpan(new StrikethroughSpan(), 0, odlMoney.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        SpannableString newMoney = new SpannableString("188");
-        newMoney.setSpan(new ForegroundColorSpan(Color.RED), 0, newMoney.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        span.append(newMoney);
-
-        span.append("不要");
-        span.append(odlMoney);
-
-        mTvCount.setText(span);
+        mTvCount.setText(content);
 
         mTvOpen.setOnClickListener(onClickListener);
 

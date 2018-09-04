@@ -122,17 +122,16 @@ public abstract class BaseMultiSelectAdapter<K extends MultiSelectEntity, B exte
     /**
      * 单选
      *
-     * @param item
      * @param position
      */
 
-    public void setSingleItem(K item, int position) {
+    public void setSingleItem(int position) {
         for (int i = 0; i < mData.size(); i++) {
             if (mData.get(i).isChoose) {
                 mData.get(i).isChoose = false;
             }
         }
-        setChoose(item, true);
+        setChoose(getData().get(position), true);
         notifyDataSetChanged();
     }
 
