@@ -24,7 +24,7 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
     public int changePosition;
 
     public MutableLiveData<List<AnnouncementNoticeEntity>> announcementNoticeData = new MutableLiveData<>();
-    public MutableLiveData<MsgCountEntity> mMsgCountData = new MutableLiveData<>();
+    public MutableLiveData<MsgCountEntity> mMsgCountData = new MutableLiveData<>();//统计
     public MutableLiveData<Object> mDetailData = new MutableLiveData<>();
 
     //获取  公告通知列表
@@ -42,7 +42,6 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
         submitRequestThrowError(AnnouncementNoticeModel.getTXGP_GongGao_Count(), r -> {
             if (r.isOk()) {
                 mMsgCountData.setValue(r.data);
-                hintDialog("未读公告条数:" + r.data.getCount());
             } else throw new HttpErrorException(r);
         });
     }

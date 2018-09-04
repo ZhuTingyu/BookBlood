@@ -64,6 +64,7 @@ public class FeedbackListFragment extends BaseBookFragment {
         mRecyclerView = findViewById(R.id.list);
 
         mAdapter = new FeedbackAdapter(null);
+        mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.getData().clear();
@@ -71,7 +72,6 @@ public class FeedbackListFragment extends BaseBookFragment {
             mViewModel.getFeedbackList();
         });
 
-        mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnLoadMoreListener(() -> {
             mViewModel.pi++;
             mViewModel.getFeedbackList();

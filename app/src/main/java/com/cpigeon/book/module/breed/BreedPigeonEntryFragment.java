@@ -216,16 +216,21 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 getBaseActivity().errorDialog.dismiss();
             }
 
-            getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), "种鸽录入成功，是否为该信鸽录入赛绩！", sweetAlertDialog -> {
+            String hintStr = "种鸽录入成功，";
+            if (Integer.valueOf(o.getPigeonMoney()) > 0) {
+                hintStr += "获取" + o.getPigeonMoney() + "个鸽币，";
+            }
+
+            hintStr += "是否为该鸽子录入赛绩！";
+
+            getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
                 //确定
                 sweetAlertDialog.dismiss();
-                PlayAddFragment.start(getBaseActivity());
+                PlayAddFragment.start(getBaseActivity(), o);
             }, sweetAlertDialog -> {
                 //取消
                 sweetAlertDialog.dismiss();
-
             });
-
         });
     }
 

@@ -72,6 +72,17 @@ public class SelectTypeEntity implements MultiItemEntity, Parcelable {
         return names;
     }
 
+
+    public static String getTypeName(List<SelectTypeEntity> data){
+        List<String> names = Lists.newArrayList();
+        for (SelectTypeEntity entity : data) {
+            String typeName = entity.getTypeName();
+            names.add(StringUtil.isStringValid(typeName) ? typeName : StringUtil.emptyString());
+        }
+        return Lists.appendStringByList(names);
+    }
+
+
     public static String getTypeIds(List<SelectTypeEntity> data){
         //全部
         if(data.size() == 1 && !StringUtil.isStringValid(data.get(0).getTypeName())){

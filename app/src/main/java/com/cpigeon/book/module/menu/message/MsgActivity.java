@@ -104,8 +104,7 @@ public class MsgActivity extends BaseTabActivity {
     }
 
     public static void initTobData(List<String> mData) {
-//        mData = Lists.newArrayList("12", "14");
-
+        MsgActivity.mData = mData;
         mCommonNavigatorAdapter.notifyDataSetChanged();
     }
 }

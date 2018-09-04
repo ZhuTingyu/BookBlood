@@ -132,7 +132,15 @@
     <string name="pigeon_breed_details">TXGP_Pigeon_GetInfo</string>
     <!--添加种鸽-->
     <string name="pigeon_breed_add">TXGP_Pigeon_AddBreed</string>
+    <!--种鸽列表，搜索-->
+    <string name="pigeon_breed_search">TXGP_Pigeon_SearchAllPigeon</string>
+    <!--种鸽列表，筛选-->
+    <string name="pigeon_breed_sift">TXGP_Pigeon_SelectAll</string>
 
+    <!--赛绩录入-->
+    <string name="pigeon_play_entry">TXGP_PigeonMatch_Add</string>
+    <!--赛绩列表-->
+    <string name="pigeon_play_list">TXGP_PigeonMatch_SelectAll</string>
 
     <!--足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别-->
     <string name="pigeon_select_all_type">TXGP_Type_Select</string>
