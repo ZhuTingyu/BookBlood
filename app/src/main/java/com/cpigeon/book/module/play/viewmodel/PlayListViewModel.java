@@ -6,6 +6,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PlayModel;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
+import com.cpigeon.book.model.entity.PlayAdditionalInfoEntity;
 
 import java.util.List;
 
@@ -37,5 +38,24 @@ public class PlayListViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
+
+
+
+    public MutableLiveData<List<PlayAdditionalInfoEntity>> mPlayAdditionalInfoListData = new MutableLiveData<>();
+
+
+    public int infoPi = 1;
+    public int infoPs = 15;
+
+    //获取  赛绩 附加信息 列表
+    public void getPlayAdditionalInfoList() {
+        submitRequestThrowError(PlayModel.getTXGP_PigeonInfoList_SelectAll(pigeonid, footid, String.valueOf(infoPi), String.valueOf(infoPs)), r -> {
+            if (r.isOk()) {
+                listEmptyMessage.setValue(r.msg);
+                mPlayAdditionalInfoListData.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
 
 }

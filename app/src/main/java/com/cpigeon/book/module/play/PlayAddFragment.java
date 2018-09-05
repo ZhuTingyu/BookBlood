@@ -20,9 +20,12 @@ import com.base.util.picker.PickerUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
+import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
+import com.cpigeon.book.module.breed.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.play.viewmodel.PlayViewModel;
+import com.cpigeon.book.module.select.PlayOrgFragment;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -105,6 +108,8 @@ public class PlayAddFragment extends BaseBookFragment {
         composite.add(RxUtils.delayed(50, aLong -> {
             llz.setLineInputViewState(false);
         }));
+
+
         mPlayViewModel.isCanCommit();
 
         if (type == 1) {
@@ -119,6 +124,7 @@ public class PlayAddFragment extends BaseBookFragment {
                     llz.setVisibility(View.GONE);
                     rlz_input.setVisibility(View.VISIBLE);
 
+                    mPlayViewModel.isStandardPlay = false;
                 } else {
                     //需要验证码
                     setTitle("赛绩录入");
@@ -126,6 +132,8 @@ public class PlayAddFragment extends BaseBookFragment {
                     isStandard = true;
                     llz.setVisibility(View.VISIBLE);
                     rlz_input.setVisibility(View.GONE);
+
+                    mPlayViewModel.isStandardPlay = true;
                 }
                 return true;
             });
@@ -141,6 +149,9 @@ public class PlayAddFragment extends BaseBookFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        bindUi(RxUtils.textChanges(input_box_editText), mPlayViewModel.setPlayAdditionalInfo());//足环号
+
     }
 
     @Override
@@ -192,6 +203,9 @@ public class PlayAddFragment extends BaseBookFragment {
         llPlayTime.setContent("");
         mPlayViewModel.playTime = "";
 
+        mPlayViewModel.playAdditionalInfo = "";
+        input_box_editText.setText("");
+
         mPlayViewModel.isCanCommit();
     }
 
@@ -205,14 +219,16 @@ public class PlayAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_play_org:
                 //赛事组织
-
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_play_org, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_play_org, 0, content -> {
                             mPlayViewModel.playOrg = content;
                             llPlayOrg.setRightText(content);
                             mInputDialog.hide();
                             mPlayViewModel.isCanCommit();
-                        }, null);
+                        }, () -> {
+                            mInputDialog.hide();
+                            SearchFragmentParentActivity.start(getActivity(), PlayOrgFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE);
+                        });
 
                 break;
             case R.id.ll_project_name:

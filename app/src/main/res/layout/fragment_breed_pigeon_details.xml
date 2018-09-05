@@ -1,27 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        app:elevation="0dp">
+
+        <!--<android.support.design.widget.CollapsingToolbarLayout-->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--详细信息-->
+                <include layout="@layout/layout_pigeon_info_head" />
+
+                <!--血统-->
+                <include layout="@layout/layout_pigeon_info_center" />
+
+                <!--赛绩-->
+                <!--<include layout="@layout/layout_pigeon_play" />-->
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
 
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!--详细信息-->
-        <include layout="@layout/layout_pigeon_info_head" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_view_height"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight">
 
-        <!--血统-->
-        <include layout="@layout/layout_pigeon_info_center" />
+            <com.base.widget.magicindicator.MagicIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:minWidth="20dp" />
 
-        <!--赛绩-->
-        <include layout="@layout/layout_pigeon_play" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
+            <ImageView
+                android:id="@+id/img_play_import"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="32dp"
+                android:src="@mipmap/ic_play_import" />
+
+            <ImageView
+                android:id="@+id/img_play_add"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_play_add" />
+
+        </LinearLayout>
+
+        <include layout="@layout/include_line_view_layout" />
+
+        <com.base.widget.CustomViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--<include layout="@layout/xrecyclerview_layout" />-->
 
     </LinearLayout>
 
 
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>

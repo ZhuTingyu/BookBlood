@@ -128,6 +128,7 @@ public class UserInfoActivity extends BaseBookActivity {
                 AboutAsFragment.start(this);
                 break;
             case R.id.ll_setting:
+                //设置
                 SettingFragment.start(this);
                 break;
             case R.id.ll_my_order:
@@ -149,7 +150,6 @@ public class UserInfoActivity extends BaseBookActivity {
             case R.id.ll_share_txgp:
                 //分享天下鸽谱
                 mShareViewModel.getZGW_Users_SignGuiZeData();
-
 
 //                } catch (Exception e) {
 //                    Log.d("sharemyxiaohl", "onViewClicked: 弹出异常"+e.getLocalizedMessage());

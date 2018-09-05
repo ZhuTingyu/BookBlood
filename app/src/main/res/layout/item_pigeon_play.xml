@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_cen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:gravity="center_vertical"
+            android:text="三观大奖"
+            android:textColor="@color/general_text_color"
+            android:textSize="@dimen/medium_text_size"
+            android:textStyle="bold" />
+
+        <!--空距-->
+        <TextView
+            android:id="@+id/tv_ullage"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="空距 | 1000公里"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
+
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="比赛日期 | 2018-12-22"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
+
+
+        <TextView
+            android:id="@+id/tv_source"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="来源于中鸽直播"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/small_text_size_2" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_paly_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第1名"
+            android:textColor="@color/general_text_color"
+            android:textSize="@dimen/medium_text_size" />
+
+        <TextView
+            android:id="@+id/tv_paly_scale"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="19dp"
+            android:text="总1000羽"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/include_line_view_layout" />
+    </LinearLayout>
+
+
+</RelativeLayout>

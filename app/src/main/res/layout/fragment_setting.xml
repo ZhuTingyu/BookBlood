@@ -88,6 +88,20 @@
             app:lineInputView_LeftString="使用帮助"
             app:lineInputView_RightString="" />
 
+
+        <!--注销用户-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_write_off"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="注销用户"
+            app:lineInputView_isShowLineDivisions="gone"
+            app:lineInputView_RightString="" />
+
     </LinearLayout>
 
     <TextView

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.base.base.FragmentAdapter;
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
+import com.base.widget.CustomViewPager;
+import com.base.widget.magicindicator.MagicIndicator;
+import com.base.widget.magicindicator.ViewPagerHelper;
+import com.base.widget.magicindicator.buildins.commonnavigator.CommonNavigator;
+import com.base.widget.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -22,6 +34,8 @@ import com.cpigeon.book.module.breed.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
+import com.cpigeon.book.module.play.PlayFragment1;
+import com.cpigeon.book.module.play.PlayFragment2;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
 import com.cpigeon.book.widget.mydialog.AddPlayDialog;
 
@@ -81,6 +95,14 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     @BindView(R.id.img_pigeon)
     CircleImageView img_pigeon;
 
+
+    @BindView(R.id.indicator)
+    MagicIndicator mIndicator;
+    @BindView(R.id.viewPager)
+    CustomViewPager mViewPager;
+    protected List<Fragment> mFragments = Lists.newArrayList();
+    protected List<String> mTitles = Lists.newArrayList();
+
     private BreedPigeonDetailsViewModel mBreedPigeonDetailsViewModel;
 
     private PlayListViewModel mPlayListViewModel;
@@ -122,22 +144,83 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
             GrowthReportFragment.start(getBaseActivity(), "");
             return true;
         });
+
         initInputPlayDialog();
 
-
         BreedPigeonEntity mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_TYPE);
-
 
         if (mBreedPigeonEntity != null) {
             mBreedPigeonDetailsViewModel.footid = String.valueOf(mBreedPigeonEntity.getPigeonID());
             mBreedPigeonDetailsViewModel.getPigeonDetails();
+
+
+            mPlayListViewModel.footid = String.valueOf(mBreedPigeonEntity.getFootRingID());
+            mPlayListViewModel.pigeonid = String.valueOf(mBreedPigeonEntity.getPigeonID());
+
         }
+
+        initViewPager();
+    }
+
+    private void initViewPager() {
+
+        PlayFragment1 mPlayFragment1 = new PlayFragment1();
+        mFragments.add(mPlayFragment1);
+
+        PlayFragment2 mPlayFragment2 = new PlayFragment2();
+        mFragments.add(mPlayFragment2);
+
+        String[] titles = {"赛绩", "附加信息"};
+        mTitles = Lists.newArrayList(titles);
+
+        FragmentAdapter adapter = new FragmentAdapter(getBaseActivity().getSupportFragmentManager()
+                , mFragments, mTitles);
+
+        mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(5);
+
+        CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdjustMode(false);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
+            @Override
+            public int getCount() {
+                return mTitles == null ? 0 : mTitles.size();
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
+                simplePagerTitleView.setText(mTitles.get(index));
+                simplePagerTitleView.setTextSize(18);
+                simplePagerTitleView.setNormalColor(getBaseActivity().getResources().getColor(R.color.color_4c4c4c));
+                simplePagerTitleView.setSelectedColor(getBaseActivity().getResources().getColor(R.color.colorPrimary));
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mViewPager.setCurrentItem(index);
+                    }
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                return null;
+            }
+
+            @Override
+            public float getTitleWeight(Context context, int index) {
+                return 1.0f;
+            }
+        });
+        mIndicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(mIndicator, mViewPager);
 
     }
 
+
     private void initInputPlayDialog() {
         mAddPlayDialog = new AddPlayDialog();
-
     }
 
     @Override
@@ -145,9 +228,6 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         super.initObserve();
 
         mBreedPigeonDetailsViewModel.mBreedPigeonData.observe(this, datas -> {
-
-            mPlayListViewModel.pigeonid = datas.getPigeonID();
-            mPlayListViewModel.footid = datas.getFootRingID();
 
             tvFoot.setText(datas.getFootRingNum());//足环号
 
@@ -175,6 +255,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                     .placeholder(R.drawable.ic_img_default)
                     .into(img_pigeon);//鸽子照片
         });
+
+
     }
 
     @OnClick({R.id.img_pigeon, R.id.tv_foot, R.id.img_sex, R.id.ll_foot_vice, R.id.ll_lineage, R.id.ll_state, R.id.ll_eye_sand, R.id.ll_feather_color, R.id.ll_their_shells_date, R.id.ll_foot_source, R.id.ll_score
@@ -244,7 +326,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
             case R.id.tv_make_book:
                 //血统书制作
-                mPlayListViewModel.getZGW_Users_GetLogData();
+
                 break;
 
             case R.id.tv_lineage_analysis:

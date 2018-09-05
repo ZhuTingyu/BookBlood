@@ -6,6 +6,8 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PlayModel;
 
+import io.reactivex.functions.Consumer;
+
 /**
  * Created by Administrator on 2018/8/31.
  */
@@ -32,23 +34,48 @@ public class PlayViewModel extends BaseViewModel {
     public String playTime = "";
 
     public MutableLiveData<Object> addPigeonPlayData = new MutableLiveData<>();
-    //获取  种鸽列表
+
+    //是否是标准赛绩
+    public boolean isStandardPlay = true;
+
+    //赛绩附加信息
+    public String playAdditionalInfo;
+
+    public Consumer<String> setPlayAdditionalInfo() {
+        return s -> {
+            this.playAdditionalInfo = s;
+            isCanCommit2();
+        };
+    }
+
+    //赛绩录入
     public void addPigeonPlay() {
 
-        submitRequestThrowError(PlayModel.getTXGP_PigeonMatch_Add(pigeonid,
-                footid,
-                playOrg,
-                projectName,
-                palyScale,
-                palyRank,
-                plyPlace,
-                plyUllage,
-                playTime,
-                ""), r -> {
-            if (r.isOk()) {
-                addPigeonPlayData.setValue(r.data);
-            } else throw new HttpErrorException(r);
-        });
+        if (isStandardPlay) {
+            submitRequestThrowError(PlayModel.getTXGP_PigeonMatch_Add(pigeonid,
+                    footid,
+                    playOrg,
+                    projectName,
+                    palyScale,
+                    palyRank,
+                    plyPlace,
+                    plyUllage,
+                    playTime,
+                    ""), r -> {
+                if (r.isOk()) {
+                    addPigeonPlayData.setValue(r.data);
+                } else throw new HttpErrorException(r);
+            });
+        } else {
+            submitRequestThrowError(PlayModel.getTXGP_PigeonInfoList_AddInfo(pigeonid,
+                    footid,
+                    playAdditionalInfo), r -> {
+                if (r.isOk()) {
+                    addPigeonPlayData.setValue(r.data);
+                } else throw new HttpErrorException(r);
+            });
+        }
+
 
     }
 
@@ -57,5 +84,9 @@ public class PlayViewModel extends BaseViewModel {
         isCanCommit(playOrg, projectName, palyScale, palyRank, plyUllage, plyPlace, playTime);
     }
 
+
+    public void isCanCommit2() {
+        isCanCommit(playAdditionalInfo);
+    }
 
 }

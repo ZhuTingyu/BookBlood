@@ -167,8 +167,7 @@
             android:hint="请输入"
             android:textColor="@color/general_text_color"
             android:textColorHint="@color/general_text_hint_color"
-            android:textSize="14sp"
-            android:visibility="gone" />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
