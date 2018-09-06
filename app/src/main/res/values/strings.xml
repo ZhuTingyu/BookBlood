@@ -208,6 +208,7 @@
 
     <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_feather_color">羽色添加</string>
+    <string name="text_feather">羽色:%1$s</string>
     <string name="text_feather_count">羽数</string>
     <string name="text_foot_source">录入足环来源</string>
     <string name="text_all_photo">全部照片</string>
@@ -276,5 +277,22 @@
     <string name="text_current_weather">当前天气</string>
     <string name="text_current_position">当前坐标</string>
     <string name="text_open_fly">开启放飞</string>
+    <string name="text_end_yet">已结束</string>
+    <string name="text_end_not">未结束</string>
+    <string name="text_start_not">未开始</string>
+    <string name="text_add">添加</string>
+    <string name="text_training">训放中</string>
+    <string name="text_speed_content">分速:%1$s m/min</string>
+    <string name="text_speed">分速</string>
+    <string name="text_fly_back_time_content">归巢:%1$s</string>
+    <string name="text_fly_back_time">归巢时间</string>
+    <string name="text_score">积分:%1$s</string>
+    <string name="text_blood">血统:%1$s</string>
+    <string name="text_foot_number">足环号码</string>
+    <string name="text_input_please">请输入</string>
+    <string name="text_input_select">请选择</string>
+    <string name="text_time_y_m_d_h_m">%1$s-%2$s-%3$s %4$s:%5$s</string>
+    <string name="text_time_h_m_s"> %1$s:%2$s:%3$s</string>
+    <string name="text_add_homing_recode">添加归巢记录</string>
 
 </resources>

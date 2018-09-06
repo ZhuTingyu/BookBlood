@@ -27,6 +27,8 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
     private TextView mTvFlyPosition;
     private TextView mTvOk;
 
+    private boolean isEnd;
+
     public static void start(Activity activity){
         IntentBuilder.Builder()
                 .startParentActivity(activity, OpenAndCloseTrainFragment.class);
@@ -46,6 +48,8 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        amapManager.setZoomControlsVisible(false);
 
         mMap = findViewById(R.id.map);
         mTvWeather = findViewById(R.id.tvWeather);

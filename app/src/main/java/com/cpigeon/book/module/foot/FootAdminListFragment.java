@@ -107,8 +107,6 @@ public class FootAdminListFragment extends BaseBookFragment {
 
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.addItemDecorationLine();
-
         mAdapter.setOnLoadMoreListener(() -> {
             mViewModel.pi++;
             mViewModel.getFoodList();

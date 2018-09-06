@@ -71,6 +71,7 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
         mRecyclerViewHistory.setAdapter(mSearchHistoryAdapter);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+        mRecyclerView.addItemDecorationLine();
         mRecyclerView.setAdapter(getResultAdapter());
 
         if(!Lists.isEmpty(history)){

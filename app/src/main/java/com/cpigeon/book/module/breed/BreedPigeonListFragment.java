@@ -117,13 +117,11 @@ public class BreedPigeonListFragment extends BaseFragment {
 
         mRecyclerView = findViewById(R.id.list);
         mTvOk = findViewById(R.id.tvOk);
-        mRecyclerView.addItemDecorationLine();
         mAdapter = new BreedPigeonListAdapter();
 //        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 //            GrowthReportFragment.start(getBaseActivity(), "2018-22-1234567");
 //        });
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecorationLine();
 
         mTvOk.setText(R.string.text_add_breed_pigeon);
         mTvOk.setOnClickListener(v -> {

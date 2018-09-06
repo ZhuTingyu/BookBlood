@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.StringRes;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.utility.KeyboardUtils;
 import com.cpigeon.book.R;
@@ -86,7 +84,7 @@ public class SearchTextView extends RelativeLayout {
         }else {
             setBackgroundColor(Utils.getColor(R.color.white));
             mTvCancel.setTextColor(Color.BLACK);
-            mEdSearch.setBackgroundResource(R.drawable.shape_bg_corner_5_solid_gray);
+            mEdSearch.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_b_color);
         }
     }
 

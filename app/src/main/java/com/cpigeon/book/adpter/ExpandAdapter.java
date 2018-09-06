@@ -1,6 +1,6 @@
 package com.cpigeon.book.adpter;
 
-import com.base.base.BaseExpandAdapter;
+import com.base.base.adpter.BaseExpandAdapter;
 import com.base.base.BaseViewHolder;
 import com.base.util.Lists;
 import com.base.util.utility.ToastUtils;

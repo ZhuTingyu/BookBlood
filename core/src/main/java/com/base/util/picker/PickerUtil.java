@@ -65,7 +65,7 @@ public class PickerUtil {
         picker.setTimeRangeStart(0, 0);
         picker.setTimeRangeEnd(23, 59);
         if(isShowEndTime){
-            picker.setSelectedItem(startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH), startCalendar.get(Calendar.DAY_OF_MONTH), 0, 0);
+            picker.setSelectedItem(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH), 0, 0);
         }
         picker.setTopLineColor(activity.getResources().getColor(R.color.colorPrimary));
         picker.setLabelTextColor(activity.getResources().getColor(R.color.colorPrimary));

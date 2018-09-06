@@ -46,9 +46,6 @@ public class TrainProjectListFragment extends BaseBookFragment {
         setTitle(R.string.text_project_name);
         mRecyclerView = findViewById(R.id.list);
         mAdapter = new TrainProjectListAdapter();
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            OpenAndCloseTrainFragment.start(getBaseActivity());
-        });
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setNewData(Lists.newTestArrayList());
     }

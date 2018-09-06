@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:paddingLeft="@dimen/normal_safe_distance"
+        android:paddingRight="@dimen/normal_safe_distance"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/btn_cancel"
+            android:textSize="@dimen/small_text_size_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvSure"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/text_sure"
+            android:textSize="@dimen/small_text_size_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:gravity="center"
+        android:paddingLeft="@dimen/normal_safe_distance"
+        android:paddingRight="@dimen/normal_safe_distance"
+        android:layout_below="@id/rl1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <cn.qqtheme.framework.widget.WheelView
+            android:id="@+id/wheelH"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:textColor="#0288CE"
+            android:textSize="@dimen/small_text_size_2"
+            android:text="时"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <cn.qqtheme.framework.widget.WheelView
+            android:id="@+id/wheelM"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:textColor="#0288CE"
+            android:textSize="@dimen/small_text_size_2"
+            android:text="分"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <cn.qqtheme.framework.widget.WheelView
+            android:id="@+id/wheelS"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:textColor="#0288CE"
+            android:textSize="@dimen/small_text_size_2"
+            android:text="秒"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</RelativeLayout>
+

@@ -68,7 +68,6 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         mTvChooseYet = findViewById(R.id.tvChooseYet);
         mTvAllChoose = findViewById(R.id.tvAllChoose);
         mRecyclerView = findViewById(R.id.list);
-        mRecyclerView.addItemDecorationLine();
 
         mBadgeView = new QBadgeView(getBaseActivity());
         mBadgeView.bindTarget(mTvChooseYet)

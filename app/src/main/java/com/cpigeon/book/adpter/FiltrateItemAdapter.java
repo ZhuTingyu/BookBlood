@@ -3,7 +3,6 @@ package com.cpigeon.book.adpter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,9 +13,7 @@ import com.base.base.BaseViewHolder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
-import com.base.util.utility.KeyboardUtils;
 import com.base.util.utility.StringUtil;
-import com.base.util.utility.ToastUtils;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -85,7 +82,7 @@ public class FiltrateItemAdapter extends BaseMultiItemQuickAdapter<SelectTypeEnt
                     text.setBackgroundResource(R.drawable.shape_bg_filtrate_item_select);
                     text.setTextColor(Utils.getColor(R.color.colorPrimary));
                 } else {
-                    text.setBackgroundResource(R.drawable.shape_bg_corner_5_solid_gray);
+                    text.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_b_color);
                     text.setTextColor(Utils.getColor(R.color.black));
                 }
 
