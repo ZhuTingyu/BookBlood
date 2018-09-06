@@ -23,6 +23,6 @@ public class TrainProjectListAdapter extends BaseQuickAdapter<String, TrainProje
 
     @Override
     protected void convert(TrainProjectViewModel helper, String item) {
-       helper.bindData();
+       helper.bindData(false);
     }
 }

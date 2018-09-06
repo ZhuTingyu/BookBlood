@@ -32,6 +32,6 @@ public class SelectTrainProjectAdapter extends BaseMultiSelectAdapter<TrainProje
     protected void convert(TrainProjectViewModel holder, TrainProjectEntity item) {
         holder.setLlCheckVisibility(true);
         super.convert(holder, item);
-        holder.bindData();
+        holder.bindData(true);
     }
 }

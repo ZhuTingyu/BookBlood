@@ -27,7 +27,7 @@ public class TrainProjectViewModel extends BaseViewHolder {
         mLlCheck.setVisibility(visibility ? View.VISIBLE : View.GONE);
     }
 
-    public void bindData() {
+    public void bindData(boolean isChoose) {
         setText(R.id.tvLocation, "中开");
         setText(R.id.tvCount, "123");
         setText(R.id.tvTime, "2018-11-12");
@@ -35,20 +35,28 @@ public class TrainProjectViewModel extends BaseViewHolder {
 
         if (getAdapterPosition() == 0) {
             setText(R.id.tvStatus, Utils.getString(R.string.text_end_yet));
-            itemView.setOnClickListener(v -> {
-                HomingRecordFragment.start(getActivity(), true);
-            });
         } else if (getAdapterPosition() == 1) {
             setText(R.id.tvStatus, Utils.getString(R.string.text_training));
-            itemView.setOnClickListener(v -> {
-                HomingRecordFragment.start(getActivity(), false);
-            });
 
         } else if (getAdapterPosition() == 2) {
             setText(R.id.tvStatus, Utils.getString(R.string.text_start_not));
-            itemView.setOnClickListener(v -> {
-                OpenAndCloseTrainFragment.start(getActivity());
-            });
+        }
+
+        if(!isChoose){
+            if (getAdapterPosition() == 0) {
+                itemView.setOnClickListener(v -> {
+                    HomingRecordFragment.start(getActivity(), true);
+                });
+            } else if (getAdapterPosition() == 1) {
+                itemView.setOnClickListener(v -> {
+                    HomingRecordFragment.start(getActivity(), false);
+                });
+
+            } else if (getAdapterPosition() == 2) {
+                itemView.setOnClickListener(v -> {
+                    OpenAndCloseTrainFragment.start(getActivity());
+                });
+            }
         }
     }
 }

@@ -54,5 +54,9 @@ public class SelectTrainProjectFragment extends BaseBookFragment {
 
         mAdapter.setNewData(Lists.newArrayList(new TrainProjectEntity()
                 ,new TrainProjectEntity(),new TrainProjectEntity(),new TrainProjectEntity()));
+
+        mTvAll.setOnClickListener(v -> {
+            mAdapter.isChooseAll(true);
+        });
     }
 }
