@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.trainpigeon.adpter;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,12 +8,14 @@ import android.widget.TextView;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseExpandAdapter;
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.HomingRecordEntity;
 import com.cpigeon.book.model.entity.HomingRecordExpandEntity;
+import com.cpigeon.book.module.trainpigeon.FootNumberTrainDetailsFragment;
 
 import java.util.List;
 
@@ -74,5 +77,8 @@ public class HomingRecordAdapter extends BaseExpandAdapter {
         helper.setText(R.id.tvScore,Utils.getString(R.string.text_score,"0.08"));
         helper.setText(R.id.tvColor,Utils.getString(R.string.text_feather,"白色"));
         helper.setText(R.id.tvBlood,Utils.getString(R.string.text_blood,"詹森"));
+        helper.itemView.setOnClickListener(v -> {
+            IntentBuilder.Builder().startParentActivity((Activity)mContext, FootNumberTrainDetailsFragment.class);
+        });
     }
 }

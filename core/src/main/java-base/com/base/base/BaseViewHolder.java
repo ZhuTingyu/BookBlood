@@ -1,6 +1,7 @@
 package com.base.base;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -203,6 +204,10 @@ public class BaseViewHolder extends com.chad.library.adapter.base.BaseViewHolder
         params.setMargins(0, 0, 0, ScreenTool.dip2px(margin));
         view.setLayoutParams(params);
 
+    }
+
+    public Activity getActivity(){
+        return (Activity) itemView.getContext();
     }
 
 }

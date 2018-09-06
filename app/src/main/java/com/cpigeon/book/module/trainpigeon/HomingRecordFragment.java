@@ -75,6 +75,7 @@ public class HomingRecordFragment extends BaseBookFragment {
                 AddHomingRecordFragment.start(getBaseActivity());
                 return false;
             });
+            mTvOk.setText(R.string.text_end_train);
             mTvOk.setOnClickListener(v -> {
 
             });
@@ -90,6 +91,7 @@ public class HomingRecordFragment extends BaseBookFragment {
         }
 
         mAdapter.setNewData(mAdapter.get(data));
+
 
     }
 }

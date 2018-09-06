@@ -25,7 +25,7 @@ public class TrainProjectListFragment extends BaseBookFragment {
     XRecyclerView mRecyclerView;
     TrainProjectListAdapter mAdapter;
 
-    public static void start(Activity activity){
+    public static void start(Activity activity) {
         IntentBuilder.Builder().startParentActivity(activity, TrainProjectListFragment.class);
     }
 
@@ -44,9 +44,15 @@ public class TrainProjectListFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_project_name);
+        setToolbarRight(R.string.text_train_analyze, item -> {
+            IntentBuilder.Builder().startParentActivity(getBaseActivity(), SelectTrainProjectFragment.class);
+            return false;
+        });
         mRecyclerView = findViewById(R.id.list);
         mAdapter = new TrainProjectListAdapter();
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setNewData(Lists.newTestArrayList());
+
+
     }
 }

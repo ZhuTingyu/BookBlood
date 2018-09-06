@@ -38,7 +38,7 @@ public class PlayFragment2 extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel();
+        mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel(getBaseActivity());
         mPlayListViewModel = new PlayListViewModel();
         initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel);
     }
@@ -59,7 +59,7 @@ public class PlayFragment2 extends BaseBookFragment {
         BreedPigeonEntity mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_TYPE);
 
         if (mBreedPigeonEntity != null) {
-            mBreedPigeonDetailsViewModel.footid = String.valueOf(mBreedPigeonEntity.getPigeonID());
+            mBreedPigeonDetailsViewModel.footId = String.valueOf(mBreedPigeonEntity.getPigeonID());
 
             mPlayListViewModel.footid = String.valueOf(mBreedPigeonEntity.getFootRingID());
             mPlayListViewModel.pigeonid = String.valueOf(mBreedPigeonEntity.getPigeonID());

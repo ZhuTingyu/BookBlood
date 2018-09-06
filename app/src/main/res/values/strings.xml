@@ -294,5 +294,12 @@
     <string name="text_time_y_m_d_h_m">%1$s-%2$s-%3$s %4$s:%5$s</string>
     <string name="text_time_h_m_s"> %1$s:%2$s:%3$s</string>
     <string name="text_add_homing_recode">添加归巢记录</string>
+    <string name="text_join_train_count">参训:%1$s羽</string>
+    <string name="text_homing_count">归巢:%1$s羽</string>
+    <string name="text_order_content">第%1$s名 </string>
+    <string name="text_details">详情</string>
+    <string name="text_end_train">结束训赛</string>
+    <string name="text_train_analyze">赛绩分析</string>
+    <string name="text_sure_choose">确认选择</string>
 
 </resources>
