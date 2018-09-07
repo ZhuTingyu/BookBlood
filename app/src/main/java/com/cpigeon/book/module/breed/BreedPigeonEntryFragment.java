@@ -226,7 +226,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
                 //确定
                 sweetAlertDialog.dismiss();
-                PlayAddFragment.start(getBaseActivity(), o);
+                PlayAddFragment.start(getBaseActivity(), o, 0);
             }, sweetAlertDialog -> {
                 //取消
                 sweetAlertDialog.dismiss();
@@ -310,7 +310,6 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.ll_foot_source:
                 //来源
-
                 if (!Lists.isEmpty(mBreedPigeonEntryViewModel.mSelectTypes_Source)) {
                     BottomSheetAdapter.createBottomSheet(getBaseActivity()
                             , SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_Source), p -> {
@@ -318,6 +317,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                                 llFootSource.setContent(mBreedPigeonEntryViewModel.mSelectTypes_Source.get(p).getTypeName());
                                 mBreedPigeonEntryViewModel.isCanCommit();
                             });
+                } else {
+                    mSelectTypeViewModel.getSelectType_PigeonSource();
                 }
 
 
@@ -367,6 +368,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                                 llSex.setContent(mBreedPigeonEntryViewModel.mSelectTypes_Sex.get(p).getTypeName());
                                 mBreedPigeonEntryViewModel.isCanCommit();
                             });
+                } else {
+                    mSelectTypeViewModel.getSelectType_Sex();
                 }
 
                 break;
@@ -390,14 +393,10 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                                         mBreedPigeonEntryViewModel.isCanCommit();
                                     }
                                 });
+                            } else {
+                                mSelectTypeViewModel.getSelectType_FeatherColor();
                             }
                         });
-//                    BottomSheetAdapter.createBottomSheet(getBaseActivity()
-//                            , SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor), p -> {
-//                                mBreedPigeonEntryViewModel.featherColorId = mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor.get(p).getTypeID();
-//                                llSex.setContent(mBreedPigeonEntryViewModel.mSelectTypes_FeatherColor.get(p).getTypeName());
-//                                mBreedPigeonEntryViewModel.isCanCommit();
-//                            });
 
                 break;
             case R.id.ll_eye_sand:
@@ -411,6 +410,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                             mBreedPigeonEntryViewModel.isCanCommit();
                         }
                     });
+                } else {
+                    mSelectTypeViewModel.getSelectType_eyeSand();
                 }
                 break;
             case R.id.ll_their_shells_date:
@@ -439,6 +440,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                                         mBreedPigeonEntryViewModel.isCanCommit();
                                     }
                                 });
+                            } else {
+                                mSelectTypeViewModel.getSelectType_lineage();
                             }
                         });
 
@@ -454,6 +457,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                             mBreedPigeonEntryViewModel.isCanCommit();
                         }
                     });
+                } else {
+                    mSelectTypeViewModel.getSelectType_State();
                 }
 
                 break;

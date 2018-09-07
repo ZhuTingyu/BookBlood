@@ -49,8 +49,39 @@ public class PlayModel {
                 .request();
     }
 
+    //hl 标准赛绩修改
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonMatch_Modify(String matchid,
+                                                                             String pigeonid,
+                                                                             String footid,
+                                                                             String isocname,
+                                                                             String name,
+                                                                             String count,
+                                                                             String number,
+                                                                             String adds,
+                                                                             String interval,
+                                                                             String time,
+                                                                             String remark
+    ) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pigeon_play_modify)
+                .addBody("matchid", matchid)//赛绩id
+                .addBody("pigeonid", pigeonid)//鸽子id
+                .addBody("footid", footid)//足环ID
+                .addBody("isocname", isocname)//赛事组织（传赛事组织名称）
+                .addBody("name", name)//比赛名称
+                .addBody("count", count)//比赛规模
+                .addBody("number", number)//比赛排名
+                .addBody("adds", adds)//比赛地点
+                .addBody("interval", interval)//比赛空距
+                .addBody("time", time)//比赛时间
+                .addBody("remark", remark)//备注
+                .request();
+    }
 
-    //赛绩列表
+
+    //标准赛绩列表
     public static Observable<ApiResponse<List<PigeonPlayEntity>>> getTXGP_PigeonMatch_SelectAll(String pigeonid,
                                                                                                 String footid,
                                                                                                 String pi,
@@ -67,15 +98,59 @@ public class PlayModel {
     }
 
 
-    //添加赛绩附加信息
-    public static Observable<ApiResponse<Object>> getTXGP_PigeonInfoList_AddInfo(String pigeonid,
-                                                                                 String footid,
-                                                                                 String info
-    ) {
+    //标准赛绩 删除
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonMatch_Delete(String pigeonid,
+                                                                             String footid,
+                                                                             String matchid) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
-                .url(R.string.pigeon_play_additional_info)
+                .url(R.string.pigeon_play_del)
+                .addBody("pigeonid", pigeonid)
+                .addBody("footid", footid)
+                .addBody("matchid", matchid)
+                .request();
+    }
+
+    //标准赛绩 详情
+    public static Observable<ApiResponse<PigeonPlayEntity>> getTXGP_PigeonMatch_Select(String pigeonid,
+                                                                                       String footid,
+                                                                                       String matchid) {
+        return RequestData.<ApiResponse<PigeonPlayEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<PigeonPlayEntity>>() {
+                }.getType())
+                .url(R.string.pigeon_play_details)
+                .addBody("pigeonid", pigeonid)
+                .addBody("footid", footid)
+                .addBody("matchid", matchid)
+                .request();
+    }
+
+
+    //添加赛绩附加信息
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonInfoList_AddInfo(String pigeonid,
+                                                                                 String footid,
+                                                                                 String info) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pigeon_play_additional_info_add)
+                .addBody("pigeonid", pigeonid)
+                .addBody("footid", footid)
+                .addBody("info", info)
+                .request();
+    }
+
+    //修改赛绩附加信息
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonInfoList_ModifyInfo(String infoid,
+                                                                                    String pigeonid,
+                                                                                    String footid,
+                                                                                    String info) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pigeon_play_additional_info_modify)
+                .addBody("infoid", infoid)
                 .addBody("pigeonid", pigeonid)
                 .addBody("footid", footid)
                 .addBody("info", info)
@@ -83,8 +158,22 @@ public class PlayModel {
     }
 
 
+    //删除赛绩附加信息
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonInfoList_Delete(String pigeonid,
+                                                                                String footid,
+                                                                                String infoid) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pigeon_play_additional_info_del)
+                .addBody("pigeonid", pigeonid)
+                .addBody("footid", footid)
+                .addBody("infoid", infoid)
+                .request();
+    }
 
-    //添加赛绩附加信息
+
+    //赛绩附加信息列表
     public static Observable<ApiResponse<List<PlayAdditionalInfoEntity>>> getTXGP_PigeonInfoList_SelectAll(String pigeonid,
                                                                                                            String footid,
                                                                                                            String pi,

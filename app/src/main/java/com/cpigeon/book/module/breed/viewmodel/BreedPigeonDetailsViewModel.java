@@ -18,20 +18,22 @@ public class BreedPigeonDetailsViewModel extends BaseViewModel {
     public MutableLiveData<BreedPigeonEntity> mBreedPigeonData = new MutableLiveData<>();
 
 
-    public String  footId;
+    public String footId;
+    public String pigeonId;
 
-    public BreedPigeonDetailsViewModel(Activity activity){
-        footId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
+    public BreedPigeonDetailsViewModel(Activity activity) {
+        footId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
+        pigeonId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
     }
 
     //获取  种鸽列表
     public void getPigeonDetails() {
 
-            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(footId), r -> {
-                if (r.isOk()) {
-                    mBreedPigeonData.setValue(r.data);
-                } else throw new HttpErrorException(r);
-            });
+        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(pigeonId), r -> {
+            if (r.isOk()) {
+                mBreedPigeonData.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
 
     }
 }

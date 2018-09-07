@@ -20,6 +20,19 @@ public class PigeonEntryEntity implements Serializable{
     private String PigeonID;
     private String PigeonMoney;
     private String FootRingID;
+    private String MatchInfoID;
+    private String MatchInfo;
+    private String PigeonMatchID;
+
+    private PigeonEntryEntity(Builder builder) {
+        setFootRingNum(builder.FootRingNum);
+        setPigeonID(builder.PigeonID);
+        setPigeonMoney(builder.PigeonMoney);
+        setFootRingID(builder.FootRingID);
+        setMatchInfoID(builder.MatchInfoID);
+        setMatchInfo(builder.MatchInfo);
+        setPigeonMatchID(builder.PigeonMatchID);
+    }
 
     public String getFootRingNum() {
         return FootRingNum;
@@ -53,11 +66,28 @@ public class PigeonEntryEntity implements Serializable{
         FootRingID = footRingID;
     }
 
-    private PigeonEntryEntity(Builder builder) {
-        FootRingNum = builder.FootRingNum;
-        PigeonID = builder.PigeonID;
-        PigeonMoney = builder.PigeonMoney;
-        FootRingID = builder.FootRingID;
+    public String getMatchInfoID() {
+        return MatchInfoID;
+    }
+
+    public void setMatchInfoID(String matchInfoID) {
+        MatchInfoID = matchInfoID;
+    }
+
+    public String getMatchInfo() {
+        return MatchInfo;
+    }
+
+    public void setMatchInfo(String matchInfo) {
+        MatchInfo = matchInfo;
+    }
+
+    public String getPigeonMatchID() {
+        return PigeonMatchID;
+    }
+
+    public void setPigeonMatchID(String pigeonMatchID) {
+        PigeonMatchID = pigeonMatchID;
     }
 
 
@@ -66,6 +96,9 @@ public class PigeonEntryEntity implements Serializable{
         private String PigeonID;
         private String PigeonMoney;
         private String FootRingID;
+        private String MatchInfoID;
+        private String MatchInfo;
+        private String PigeonMatchID;
 
         public Builder() {
         }
@@ -90,10 +123,23 @@ public class PigeonEntryEntity implements Serializable{
             return this;
         }
 
+        public Builder MatchInfoID(String val) {
+            MatchInfoID = val;
+            return this;
+        }
+
+        public Builder MatchInfo(String val) {
+            MatchInfo = val;
+            return this;
+        }
+
+        public Builder PigeonMatchID(String val) {
+            PigeonMatchID = val;
+            return this;
+        }
+
         public PigeonEntryEntity build() {
             return new PigeonEntryEntity(this);
         }
     }
-
-
 }

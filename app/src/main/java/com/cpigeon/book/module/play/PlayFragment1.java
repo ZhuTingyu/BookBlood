@@ -9,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.module.breed.viewmodel.BreedPigeonDetailsViewModel;
@@ -53,19 +51,12 @@ public class PlayFragment1 extends BaseBookFragment {
         return view;
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        BreedPigeonEntity mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_TYPE);
-
-        if (mBreedPigeonEntity != null) {
-            mBreedPigeonDetailsViewModel.footId = String.valueOf(mBreedPigeonEntity.getPigeonID());
-
-            mPlayListViewModel.footid = String.valueOf(mBreedPigeonEntity.getFootRingID());
-            mPlayListViewModel.pigeonid = String.valueOf(mBreedPigeonEntity.getPigeonID());
-        }
+        mPlayListViewModel.footid = mBreedPigeonDetailsViewModel.footId;
+        mPlayListViewModel.pigeonid = mBreedPigeonDetailsViewModel.pigeonId;
 
         initPlayListData();
     }
@@ -96,7 +87,8 @@ public class PlayFragment1 extends BaseBookFragment {
             PlayAddFragment.start(getBaseActivity(), new PigeonEntryEntity.Builder()
                     .PigeonID(String.valueOf(mPigeonPlayEntity.getPigeonID()))
                     .FootRingID(String.valueOf(mPigeonPlayEntity.getFootRingID()))
-                    .build());
+                    .PigeonMatchID(String.valueOf(mPigeonPlayEntity.getPigeonMatchID()))
+                    .build(), 1);
         });
 
         mRecyclerView.setRefreshListener(() -> {

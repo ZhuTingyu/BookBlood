@@ -14,18 +14,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
-import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
-import com.cpigeon.book.module.breed.BreedPigeonDetailsFragment;
+import com.cpigeon.book.model.entity.PigeonPlayEntity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.play.viewmodel.PlayViewModel;
-import com.cpigeon.book.module.select.PlayOrgFragment;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -34,9 +34,10 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
- * 添加比赛
+ * 添加 修改  删除 比赛 （附加信息）
  * Created by Administrator on 2018/8/31.
  */
 
@@ -70,16 +71,17 @@ public class PlayAddFragment extends BaseBookFragment {
     @BindView(R.id.rlz_input)
     RelativeLayout rlz_input;
     private boolean isStandard = true;//是否是标准的赛绩
-    private int type = 1;//1  标准   2  附加信息
+    private int type = 0;//0 添加赛绩，可切换标准，附加信息   1  标准 修改删除  2 附加信息修改删除
 
 
     private SelectTypeViewModel mSelectTypeViewModel;
     private PlayViewModel mPlayViewModel;
     private PigeonEntryEntity mPigeonEntryEntity;
 
-    public static void start(Activity activity, PigeonEntryEntity mPigeonEntryEntity) {
+    public static void start(Activity activity, PigeonEntryEntity mPigeonEntryEntity, int type) {
         IntentBuilder.Builder()
-                .putExtra(IntentBuilder.KEY_TYPE, mPigeonEntryEntity)
+                .putExtra(IntentBuilder.KEY_DATA, mPigeonEntryEntity)
+                .putExtra(IntentBuilder.KEY_TYPE, type)//类型
                 .startParentActivity(activity, PlayAddFragment.class);
     }
 
@@ -103,19 +105,38 @@ public class PlayAddFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         setTitle("");
 
         composite.add(RxUtils.delayed(50, aLong -> {
             llz.setLineInputViewState(false);
         }));
 
+        type = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TYPE, 0);
 
-        mPlayViewModel.isCanCommit();
+        try {
+            mPigeonEntryEntity = (PigeonEntryEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+            mPlayViewModel.pigeonid = mPigeonEntryEntity.getPigeonID();
+            mPlayViewModel.footid = mPigeonEntryEntity.getFootRingID();
+            llFoot.setContent(mPigeonEntryEntity.getFootRingNum());
 
-        if (type == 1) {
-            //修改登录密码
+            if (type == 1) {
+                mPlayViewModel.matchid = mPigeonEntryEntity.getPigeonMatchID();
+                setProgressVisible(true);//加载框
+                mPlayViewModel.getStandardPlayDatails();//获取标准比赛的详情
+            } else if (type == 2) {
+                mPlayViewModel.infoid = mPigeonEntryEntity.getMatchInfoID();
+                input_box_editText.setText(mPigeonEntryEntity.getMatchInfo());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        if (type == 0) {
+            mPlayViewModel.isAdd = true;
+            mPlayViewModel.isCanCommit();
             setTitle("赛绩录入");
-            //不需要验证码
             setToolbarRight("附加信息", item -> {
                 if (isStandard) {
                     setTitle("附加信息");
@@ -125,6 +146,7 @@ public class PlayAddFragment extends BaseBookFragment {
                     rlz_input.setVisibility(View.VISIBLE);
 
                     mPlayViewModel.isStandardPlay = false;
+                    mPlayViewModel.isCanCommit2();
                 } else {
                     //需要验证码
                     setTitle("赛绩录入");
@@ -134,24 +156,47 @@ public class PlayAddFragment extends BaseBookFragment {
                     rlz_input.setVisibility(View.GONE);
 
                     mPlayViewModel.isStandardPlay = true;
+                    mPlayViewModel.isCanCommit();
                 }
+                return true;
+            });
+        } else if (type == 1) {
+            //修改删除标准赛绩
+            mPlayViewModel.isAdd = false;
+            tv_next_step.setVisibility(View.GONE);
+            isStandard = true;
+            llz.setVisibility(View.VISIBLE);
+            rlz_input.setVisibility(View.GONE);
+
+            mPlayViewModel.isStandardPlay = true;
+
+            setTitle("详情");
+            setToolbarRight("删除", item -> {
+                mPlayViewModel.delStandardPlay();
+                return true;
+            });
+
+        } else if (type == 2) {
+            //修改删除附加信息
+            mPlayViewModel.isAdd = false;
+            tv_next_step.setVisibility(View.GONE);
+            isStandard = false;
+            llz.setVisibility(View.GONE);
+            rlz_input.setVisibility(View.VISIBLE);
+
+            mPlayViewModel.isStandardPlay = false;
+
+            setTitle("详情");
+            setToolbarRight("删除", item -> {
+                mPlayViewModel.delAdditionalPlay();
                 return true;
             });
         }
 
-        try {
-            mPigeonEntryEntity = (PigeonEntryEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_TYPE);
+        bindUi(RxUtils.textChanges(input_box_editText), mPlayViewModel.setPlayAdditionalInfo());//附加信息
 
-            mPlayViewModel.pigeonid = mPigeonEntryEntity.getPigeonID();
-            mPlayViewModel.footid = mPigeonEntryEntity.getFootRingID();
 
-            llFoot.setContent(mPigeonEntryEntity.getFootRingNum());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        bindUi(RxUtils.textChanges(input_box_editText), mPlayViewModel.setPlayAdditionalInfo());//足环号
-
+        mSelectTypeViewModel.getSelectType_PigeonPlay_Org();//赛事组织
     }
 
     @Override
@@ -159,54 +204,66 @@ public class PlayAddFragment extends BaseBookFragment {
         super.initObserve();
 
         mPlayViewModel.isCanCommit.observe(this, aBoolean -> {
+
+            if (aBoolean) {
+                tv_next_step.setVisibility(View.VISIBLE);
+            }
+
             TextViewUtil.setEnabled(tv_next_step, aBoolean);
         });
 
         mPlayViewModel.addPigeonPlayData.observe(this, o -> {
-
+            setProgressVisible(false);//加载框
             getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), "您已成功录入赛绩，是否继续录入", sweetAlertDialog -> {
                 //确定
                 sweetAlertDialog.dismiss();
-                initView();
+                initView(new PigeonPlayEntity.Builder().build());
+                mPlayViewModel.isCanCommit();
             }, sweetAlertDialog -> {
                 //取消
                 sweetAlertDialog.dismiss();
                 getBaseActivity().finish();
             });
-
         });
+
+        mSelectTypeViewModel.mSelectType_Play_Org.observe(this, selectTypeEntities -> {
+            mPlayViewModel.mPlayOrgData = selectTypeEntities;
+        });
+
+        mPlayViewModel.getPigeonPlayDatails.observe(this, pigeonPlayEntity -> {
+            setProgressVisible(false);//加载框
+            initView(pigeonPlayEntity);
+        });
+
+
     }
 
-    private void initView() {
-        mPlayViewModel.playOrg = "";
-        llPlayOrg.setRightText("");
-
-
-        mPlayViewModel.projectName = "";
-        llProjectName.setRightText("");
-
-
-        mPlayViewModel.palyScale = "";
-        llPalyScale.setRightText("");
-
-
-        mPlayViewModel.palyRank = "";
-        llPalyRank.setRightText("");
-
-
-        mPlayViewModel.plyPlace = "";
-        llFlyPlace.setRightText("");
-
-        mPlayViewModel.plyUllage = "";
-        llFlyUllage.setRightText("");
-
-        llPlayTime.setContent("");
-        mPlayViewModel.playTime = "";
-
+    private void initView(PigeonPlayEntity mPigeonPlayEntity) {
+        //组织名称
+        mPlayViewModel.playOrg = mPigeonPlayEntity.getMatchISOCName();
+        llPlayOrg.setRightText(mPigeonPlayEntity.getMatchISOCName());
+        //项目名称
+        mPlayViewModel.projectName = mPigeonPlayEntity.getMatchName();
+        llProjectName.setRightText(mPigeonPlayEntity.getMatchName());
+        //比赛规模
+        mPlayViewModel.palyScale = mPigeonPlayEntity.getMatchCount();
+        llPalyScale.setRightText(mPigeonPlayEntity.getMatchCount());
+        //比赛名次
+        mPlayViewModel.palyRank = mPigeonPlayEntity.getMatchNumber();
+        llPalyRank.setRightText(mPigeonPlayEntity.getMatchNumber());
+        //司放地点
+        mPlayViewModel.plyPlace = mPigeonPlayEntity.getMatchAdds();
+        llFlyPlace.setRightText(mPigeonPlayEntity.getMatchAdds());
+        //司放空距
+        mPlayViewModel.plyUllage = mPigeonPlayEntity.getMatchInterval();
+        llFlyUllage.setRightText(mPigeonPlayEntity.getMatchInterval());
+        //比赛时间
+        llPlayTime.setContent(mPigeonPlayEntity.getMatchTime());
+        mPlayViewModel.playTime = mPigeonPlayEntity.getMatchTime();
+        //
         mPlayViewModel.playAdditionalInfo = "";
         input_box_editText.setText("");
 
-        mPlayViewModel.isCanCommit();
     }
 
     private BaseInputDialog mInputDialog;
@@ -227,7 +284,20 @@ public class PlayAddFragment extends BaseBookFragment {
                             mPlayViewModel.isCanCommit();
                         }, () -> {
                             mInputDialog.hide();
-                            SearchFragmentParentActivity.start(getActivity(), PlayOrgFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE);
+                            if (!Lists.isEmpty(mPlayViewModel.mPlayOrgData)) {
+                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mPlayViewModel.mPlayOrgData), 0, new OptionPicker.OnOptionPickListener() {
+                                    @Override
+                                    public void onOptionPicked(int index, String item) {
+                                        mPlayViewModel.playOrg = mPlayViewModel.mPlayOrgData.get(index).getTypeName();
+                                        llPlayOrg.setRightText(mPlayViewModel.mPlayOrgData.get(index).getTypeName());
+                                        mInputDialog.hide();
+                                        mPlayViewModel.isCanCommit();
+                                    }
+                                });
+                            } else {
+                                mSelectTypeViewModel.getSelectType_PigeonPlay_Org();//赛事组织
+                            }
+
                         });
 
                 break;
@@ -265,7 +335,6 @@ public class PlayAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_fly_place:
                 //司放地点
-
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                         , R.string.tv_fly_place, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mPlayViewModel.plyPlace = content;
@@ -295,8 +364,8 @@ public class PlayAddFragment extends BaseBookFragment {
                 });
                 break;
             case R.id.llz:
-                break;
 
+                break;
             case R.id.tv_next_step:
                 //点击按钮添加赛绩
                 mPlayViewModel.addPigeonPlay();

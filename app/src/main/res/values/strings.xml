@@ -218,8 +218,10 @@
     <string name="tv_project_name">请输入项目名称</string>
     <string name="tv_paly_scale">请输入比赛规模</string>
     <string name="tv_paly_rank">请输入比赛名次</string>
-    <string name="tv_fly_ullage">请输入司放空距（米）</string>
+    <string name="tv_paly_time">请选择比赛时间</string>
+    <string name="tv_fly_ullage">请输入司放空距（千米）</string>
     <string name="tv_fly_place">请输入司放地点</string>
+    <string name="tv_additional_info">请输入附加信息内容</string>
 
     <string name="text_time">时间</string>
     <string name="text_set_photo_face">设为封面</string>
