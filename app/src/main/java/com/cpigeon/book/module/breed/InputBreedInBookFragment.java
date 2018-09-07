@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
 import com.base.util.RxUtils;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.widget.FamilyTreeView;
 
 /**
@@ -35,18 +37,29 @@ public class InputBreedInBookFragment extends BaseBookFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFamilyTreeView = new FamilyTreeView(getBaseActivity());
+        mFamilyTreeView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
         return mFamilyTreeView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setTitle(R.string.text_breed_pigeon_input);
-        mFamilyTreeView.setHaveCurrentGeneration(true);
+        RxUtils.delayed(50,aLong -> {
+            mFamilyTreeView.setData(new BreedPigeonEntity(), 0,0);
+        });
 
-        composite.add(RxUtils.delayed(100,aLong -> {
-            mFamilyTreeView.setData();
-        }));
+        mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
+            @Override
+            public void add(int x, int y) {
+                mFamilyTreeView.setData(new BreedPigeonEntity(), x, y);
+            }
+
+            @Override
+            public void showInfo(BreedPigeonEntity entity) {
+                ToastUtils.showLong(getBaseActivity(), entity.getClass().toString());
+            }
+        });
     }
 }

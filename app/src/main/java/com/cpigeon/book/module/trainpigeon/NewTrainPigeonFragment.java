@@ -21,31 +21,23 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.base.base.BaseMapFragment;
-import com.base.http.ApiResponse;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.LocationFormatUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
-import com.base.util.http.GsonUtil;
 import com.base.util.map.AmapManager;
 import com.base.util.map.MapMarkerManager;
 import com.base.util.system.AppManager;
 import com.base.util.utility.StringUtil;
-import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.pigeonhouse.InputLocationFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
 import com.cpigeon.book.service.SingleLoginService;
-import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.LineInputView;
-import com.google.gson.reflect.TypeToken;
-
-import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 

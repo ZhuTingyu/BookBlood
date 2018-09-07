@@ -19,7 +19,7 @@
 
             <ImageView
                 android:id="@+id/imgAdd"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
@@ -27,7 +27,6 @@
             
             <RelativeLayout
                 android:id="@+id/rlInMemberInfo"
-                android:orientation="vertical"
                 android:padding="6dp"
                 android:visibility="gone"
                 android:layout_width="match_parent"
@@ -36,8 +35,8 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgHead"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
                     tools:src="@drawable/ic_launcher"
+                    android:visibility="visible"
                     android:layout_width="40dp"
                     android:layout_height="40dp" />
 
@@ -46,16 +45,18 @@
                     android:id="@+id/tvFootNumber"
                     android:textSize="10sp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="3dp"
                     tools:text="2018-22-1234567"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:id="@+id/llBlood"
                     android:layout_below="@id/tvFootNumber"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:visibility="visible"
                     android:layout_height="wrap_content">
                     <TextView
                         android:textColor="@color/color_text_hint"
@@ -74,6 +75,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llName"
+                    android:visibility="visible"
                     android:layout_alignParentBottom="true"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

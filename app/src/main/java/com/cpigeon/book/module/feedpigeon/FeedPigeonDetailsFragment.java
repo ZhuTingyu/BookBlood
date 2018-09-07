@@ -1,4 +1,4 @@
-package com.cpigeon.book.test;
+package com.cpigeon.book.module.feedpigeon;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,16 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.base.BaseFragment;
-import com.base.util.RxUtils;
+import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
-import com.cpigeon.book.widget.FamilyTreeView;
+import com.cpigeon.book.base.BaseBookFragment;
 
 /**
- * Created by Zhu TingYu on 2018/6/21.
+ * Created by Zhu TingYu on 2018/9/7.
  */
 
-public class TestFamilyFragment extends BaseFragment {
+public class FeedPigeonDetailsFragment extends BaseBookFragment {
+
+    XRecyclerView mRecyclerView;
 
     @Override
     public void onAttach(Context context) {
@@ -27,15 +28,11 @@ public class TestFamilyFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_test_family_layout, container, false);
+        return inflater.inflate(R.layout.xrecyclerview_no_padding_layout, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FamilyTreeView familyTreeView = findViewById(R.id.familyTreeView);
-        bindUi(RxUtils.delayed(50), aLong -> {
-            //familyTreeView.setData();
-        });
     }
 }

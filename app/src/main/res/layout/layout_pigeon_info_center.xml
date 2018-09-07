@@ -2,15 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
     android:background="@color/color_white"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/spacing_left_reight"
-    android:paddingRight="@dimen/spacing_left_reight"
+
     android:paddingTop="10dp">
 
 
     <LinearLayout
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight"
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:gravity="center_vertical"
@@ -84,6 +86,8 @@
     </LinearLayout>
 
     <com.cpigeon.book.widget.FamilyTreeView
+        app:TreeView_isMiniModel="true"
+        app:TreeView_isHaveCurrent="false"
         android:layout_width="match_parent"
         android:layout_height="323dp">
 

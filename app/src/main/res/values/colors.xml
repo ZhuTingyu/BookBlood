@@ -42,6 +42,7 @@
     <color name="state_enabled_false">#85C2FF</color>
     <color name="color_book_male">#85C2FF</color>
     <color name="color_book_female">#F5C3E4</color>
+    <color name="color_book_female_stroke">#F5C3E4</color>
 
     <!--一般提示颜色-->
     <color name="general_text_hint_color">#b3b3b3</color>
@@ -52,6 +53,7 @@
     <color name="color_010101">#010101</color>
     <color name="color_000000">#000000</color>
     <color name="color_text_enabled_false">#DCEDFF</color>
+    <color name="color_feed_record_line">#CCCCCC</color>
 
 
 </resources>

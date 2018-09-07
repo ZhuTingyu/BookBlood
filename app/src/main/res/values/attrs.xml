@@ -7,6 +7,12 @@
         <attr name="TreeView_MaxGeneration" format="integer" />
         <attr name="TreeView_isHaveCurrent" format="boolean" />
         <attr name="TreeView_isHorizontal" format="boolean" />
+        <attr name="TreeView_moveType">
+            <flag name="h" value="0x00000001" />
+            <flag name="v" value="0x00000002" />
+            <flag name="n" value="0x00000003" />
+        </attr>
+        <attr name="TreeView_isMiniModel" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SimpleTitleView">

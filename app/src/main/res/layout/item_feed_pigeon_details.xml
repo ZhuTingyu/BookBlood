@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/normal_safe_distance"
+        android:background="@drawable/shape_bg_btn_launch_skip"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="用药"
+        android:textColor="@color/white"
+        android:textSize="@dimen/medium_text_size" />
+
+    <View
+        android:id="@+id/v1"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ll1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tvTitle"
+        android:background="@color/color_feed_record_line" />
+
+    <View
+        android:id="@+id/v2"
+        android:layout_width="24dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/v1"
+        android:background="@color/color_feed_record_line" />
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvTitle"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginLeft="44dp"
+            android:layout_marginRight="@dimen/normal_safe_distance"
+            android:layout_toRightOf="@id/tvTitle">
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="2018-12-30 10:18:32"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTime"
+                android:background="@drawable/shape_bg_corner_3_solid_white"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:id="@+id/llImgContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/imgIcon"
+                        android:layout_width="57dp"
+                        android:layout_height="43dp" />
+
+                    <TextView
+                        android:id="@+id/tvBig"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/color_text_title"
+                        android:textSize="@dimen/small_text_size_2"
+                        tools:text="123333333333333333333333333333333333333333333333333333333333" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/llTextContent1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvLeft1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_text_title"
+                                android:textSize="@dimen/small_text_size_2"
+                                tools:text="名称名称" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/color_line" />
+
+                            <TextView
+                                android:id="@+id/tvRight1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_text_title"
+                                android:textSize="@dimen/small_text_size_2"
+                                tools:text="名称名称" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llTextContent2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvLeft2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_text_title"
+                                android:textSize="@dimen/small_text_size_2"
+                                tools:text="名称名称" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/color_line" />
+
+                            <TextView
+                                android:id="@+id/tvRight2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_text_title"
+                                android:textSize="@dimen/small_text_size_2"
+                                tools:text="名称名称" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llTextContent3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvLeft3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_text_title"
+                                android:textSize="@dimen/small_text_size_2"
+                                tools:text="名称名称" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/color_line" />
+
+                            <TextView
+                                android:id="@+id/tvRight3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_text_title"
+                                android:textSize="@dimen/small_text_size_2"
+                                tools:text="名称名称" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llTextContent4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvLeft4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_text_title"
+                                android:textSize="@dimen/small_text_size_2"
+                                tools:text="名称名称" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/color_line" />
+
+                            <TextView
+                                android:id="@+id/tvRight4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_text_title"
+                                android:textSize="@dimen/small_text_size_2"
+                                tools:text="名称名称" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

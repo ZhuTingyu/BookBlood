@@ -287,6 +287,8 @@
     <string name="text_fly_back_time_content">归巢:%1$s</string>
     <string name="text_fly_back_time">归巢时间</string>
     <string name="text_score">积分:%1$s</string>
+    <string name="text_all_score">总积分:%1$s</string>
+    <string name="text_all_speed">总分速:%1$s m/min</string>
     <string name="text_blood">血统:%1$s</string>
     <string name="text_foot_number">足环号码</string>
     <string name="text_input_please">请输入</string>
@@ -301,5 +303,8 @@
     <string name="text_end_train">结束训赛</string>
     <string name="text_train_analyze">赛绩分析</string>
     <string name="text_sure_choose">确认选择</string>
+    <string name="text_title_train_analyze">%1$s训练分析</string>
+    <string name="text_order_by_score">按积分</string>
+    <string name="text_order_by_speed">按分数</string>
 
 </resources>
