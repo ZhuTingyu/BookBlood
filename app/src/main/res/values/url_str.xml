@@ -132,6 +132,9 @@
     <string name="pigeon_breed_details">TXGP_Pigeon_GetInfo</string>
     <!--添加种鸽-->
     <string name="pigeon_breed_add">TXGP_Pigeon_AddBreed</string>
+    <!--修改种鸽信息-->
+    <string name="pigeon_breed_modify">TXGP_Pigeon_EditBreed</string>
+
     <!--种鸽列表，搜索-->
     <string name="pigeon_breed_search">TXGP_Pigeon_SearchAllPigeon</string>
     <!--种鸽列表，筛选-->
@@ -139,10 +142,21 @@
 
     <!--赛绩录入-->
     <string name="pigeon_play_entry">TXGP_PigeonMatch_Add</string>
+    <!--赛绩修改-->
+    <string name="pigeon_play_modify">TXGP_PigeonMatch_Edit</string>
     <!--赛绩列表-->
     <string name="pigeon_play_list">TXGP_PigeonMatch_SelectAll</string>
+    <!--赛绩删除-->
+    <string name="pigeon_play_del">TXGP_PigeonMatch_Delete</string>
+    <!--赛绩详情-->
+    <string name="pigeon_play_details">TXGP_PigeonMatch_Select</string>
+
     <!--添加赛绩附加信息-->
-    <string name="pigeon_play_additional_info">TXGP_PigeonInfoList_AddInfo</string>
+    <string name="pigeon_play_additional_info_add">TXGP_PigeonInfoList_AddInfo</string>
+    <!--修改赛绩附加信息-->
+    <string name="pigeon_play_additional_info_modify">TXGP_PigeonInfoList_Update</string>
+    <!--删除赛绩附加信息-->
+    <string name="pigeon_play_additional_info_del">TXGP_PigeonInfoList_Delete</string>
 
     <!--赛绩附加信息 列表-->
     <string name="pigeon_play_additional_info_list">TXGP_PigeonInfoList_SelectAll</string>

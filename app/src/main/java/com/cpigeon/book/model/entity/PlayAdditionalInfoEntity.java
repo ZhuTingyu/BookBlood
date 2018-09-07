@@ -17,6 +17,7 @@ public class PlayAdditionalInfoEntity {
     private int PigeonID;
     private int InfoListID;
     private int FootRingID;
+    private int MatchInfoID;
     private String MatchInfo;
 
     public int getPigeonID() {
@@ -49,5 +50,13 @@ public class PlayAdditionalInfoEntity {
 
     public void setMatchInfo(String MatchInfo) {
         this.MatchInfo = MatchInfo;
+    }
+
+    public int getMatchInfoID() {
+        return MatchInfoID;
+    }
+
+    public void setMatchInfoID(int matchInfoID) {
+        MatchInfoID = matchInfoID;
     }
 }

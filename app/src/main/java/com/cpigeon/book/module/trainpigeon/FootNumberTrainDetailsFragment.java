@@ -40,7 +40,7 @@ public class FootNumberTrainDetailsFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle("2018-22-1234567");
         setToolbarRight(R.string.text_details, item -> {
-            BreedPigeonDetailsFragment.start(getBaseActivity(),"");
+            BreedPigeonDetailsFragment.start(getBaseActivity(),"","");
             return false;
         });
         mRecyclerView = findViewById(R.id.list);

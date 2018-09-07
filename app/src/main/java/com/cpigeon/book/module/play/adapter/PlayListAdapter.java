@@ -33,7 +33,7 @@ public class PlayListAdapter extends BaseQuickAdapter<PigeonPlayEntity, BaseView
         helper.setText(R.id.tv_paly_rank, "第" + item.getMatchNumber() + "名");//比赛名次
         helper.setText(R.id.tv_paly_scale, "总" + item.getMatchCount() + "羽");//比赛名次
 
-        if (item.getBitUpdate() == 1) {
+        if (Integer.valueOf(item.getBitUpdate()) == 1) {
             //手动录入
             tv_source.setVisibility(View.GONE);
         } else {

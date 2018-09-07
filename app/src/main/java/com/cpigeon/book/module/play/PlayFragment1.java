@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntryEntity;
+import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.module.breed.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.play.adapter.PlayListAdapter;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
@@ -51,19 +51,12 @@ public class PlayFragment1 extends BaseBookFragment {
         return view;
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        BreedPigeonEntity mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_TYPE);
-
-        if (mBreedPigeonEntity != null) {
-            mBreedPigeonDetailsViewModel.footId = String.valueOf(mBreedPigeonEntity.getPigeonID());
-
-            mPlayListViewModel.footid = String.valueOf(mBreedPigeonEntity.getFootRingID());
-            mPlayListViewModel.pigeonid = String.valueOf(mBreedPigeonEntity.getPigeonID());
-        }
+        mPlayListViewModel.footid = mBreedPigeonDetailsViewModel.footId;
+        mPlayListViewModel.pigeonid = mBreedPigeonDetailsViewModel.pigeonId;
 
         initPlayListData();
     }
@@ -74,9 +67,6 @@ public class PlayFragment1 extends BaseBookFragment {
 
         mPlayListViewModel.mPigeonPlayListData.observe(this, pigeonPlayEntities -> {
             setProgressVisible(false);
-
-//            mPlayListAdapter.getData().clear();;
-//            mPlayListAdapter.setNewData(pigeonPlayEntities);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPlayListAdapter, pigeonPlayEntities);
         });
 
@@ -90,6 +80,16 @@ public class PlayFragment1 extends BaseBookFragment {
         mPlayListAdapter = new PlayListAdapter();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+
+        mPlayListAdapter.setOnItemClickListener((adapter, view, position) -> {
+            PigeonPlayEntity mPigeonPlayEntity = (PigeonPlayEntity) adapter.getData().get(position);
+            PlayAddFragment.start(getBaseActivity(), new PigeonEntryEntity.Builder()
+                    .PigeonID(String.valueOf(mPigeonPlayEntity.getPigeonID()))
+                    .FootRingID(String.valueOf(mPigeonPlayEntity.getFootRingID()))
+                    .PigeonMatchID(String.valueOf(mPigeonPlayEntity.getPigeonMatchID()))
+                    .build(), 1);
+        });
 
         mRecyclerView.setRefreshListener(() -> {
             mPlayListAdapter.getData().clear();
@@ -106,6 +106,5 @@ public class PlayFragment1 extends BaseBookFragment {
 
         mPlayListViewModel.getZGW_Users_GetLogData();
     }
-
 
 }

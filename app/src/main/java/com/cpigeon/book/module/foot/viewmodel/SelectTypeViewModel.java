@@ -31,6 +31,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public static final String STATE_STATE = "11";//信鸽状态
     public static final String STATE_MEDICATE = "12";//用药后状态
     public static final String STATE_TRAIN = "13";//训鸽状态
+    public static final String STATE_PLAY_ORG = "14";//赛事组织
 
 
     public String selectType;
@@ -44,6 +45,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_EyeSand = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Foot_Source = new MutableLiveData<>();//足环来源
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Pigeon_Source = new MutableLiveData<>();//信鸽来源
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Play_Org = new MutableLiveData<>();//赛事组织
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Lineage = new MutableLiveData<>();//血统
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_State = new MutableLiveData<>();//信鸽状态
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_ImgType = new MutableLiveData<>();//图片类型
@@ -140,6 +142,16 @@ public class SelectTypeViewModel extends BaseViewModel {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_SOURCE), r -> {
             if (r.isOk()) {
                 mSelectType_Pigeon_Source.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    //获取 赛事组织
+    public void getSelectType_PigeonPlay_Org() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_PLAY_ORG), r -> {
+            if (r.isOk()) {
+                mSelectType_Play_Org.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
