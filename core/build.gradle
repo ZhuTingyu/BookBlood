@@ -88,8 +88,7 @@ dependencies {
     //饺子播放器
     compile 'com.shuyu:GSYVideoPlayer:4.1.0'
 
-    compile('com.github.gzu-liyujiang.Andr' +
-            'oidPicker:WheelPicker:1.5.5') {
+    compile('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:1.5.5') {
         exclude group: 'com.android.support'
     }
 

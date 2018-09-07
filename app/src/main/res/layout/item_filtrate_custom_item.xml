@@ -10,7 +10,7 @@
         android:id="@+id/edText"
         android:layout_width="90dp"
         android:layout_height="24dp"
-        android:background="@drawable/shape_bg_corner_5_solid_gray"
+        android:background="@drawable/shape_bg_corner_3_solid_b_color"
         android:gravity="center"
         android:hint="@string/text_custom"
         android:maxLength="4"

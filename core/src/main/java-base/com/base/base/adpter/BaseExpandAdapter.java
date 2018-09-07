@@ -1,5 +1,6 @@
-package com.base.base;
+package com.base.base.adpter;
 
+import com.base.base.BaseViewHolder;
 import com.base.entity.ExpendEntity;
 import com.base.entity.RaceEntity;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -77,9 +78,9 @@ public abstract class BaseExpandAdapter extends BaseMultiItemQuickAdapter<MultiI
         }
     }
 
-    public abstract void initRace(BaseViewHolder helper, MultiItemEntity item);
-
     public abstract void initOrg(BaseViewHolder helper, MultiItemEntity item);
+
+    public abstract void initRace(BaseViewHolder helper, MultiItemEntity item);
 
     public  List<MultiItemEntity> get(List<ExpendEntity> data) {
         List<MultiItemEntity> result = new ArrayList<>();

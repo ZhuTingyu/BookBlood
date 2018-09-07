@@ -82,7 +82,7 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             BreedPigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
+            BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID());
         });
 
         initObserve();

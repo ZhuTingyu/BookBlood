@@ -112,9 +112,9 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     public static int CODE_ORGANIZE = 0x123;
     public static int CODE_LOFT = 0x234;
 
-    public static void start(Activity activity, BreedPigeonEntity mBreedPigeonEntity) {
+    public static void start(Activity activity, String foodId) {
         IntentBuilder.Builder()
-                .putExtra(IntentBuilder.KEY_TYPE, mBreedPigeonEntity)
+                .putExtra(IntentBuilder.KEY_DATA, foodId)
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
@@ -122,7 +122,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel();
+        mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel(getBaseActivity());
         mPlayListViewModel = new PlayListViewModel();
         initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel);
     }
@@ -147,17 +147,12 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
         initInputPlayDialog();
 
-        BreedPigeonEntity mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_TYPE);
 
-        if (mBreedPigeonEntity != null) {
-            mBreedPigeonDetailsViewModel.footid = String.valueOf(mBreedPigeonEntity.getPigeonID());
-            mBreedPigeonDetailsViewModel.getPigeonDetails();
+        mBreedPigeonDetailsViewModel.getPigeonDetails();
 
 
-            mPlayListViewModel.footid = String.valueOf(mBreedPigeonEntity.getFootRingID());
-            mPlayListViewModel.pigeonid = String.valueOf(mBreedPigeonEntity.getPigeonID());
+        mPlayListViewModel.pigeonid = mBreedPigeonDetailsViewModel.footId;
 
-        }
 
         initViewPager();
     }
