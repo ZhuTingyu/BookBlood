@@ -42,7 +42,7 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     NewTrainAddPigeonAdapter mAdapter;
 
     public static void start(Activity activity) {
-        SearchFragmentParentActivity.start(activity, NewTrainAddPigeonFragment.class);
+        SearchFragmentParentActivity.start(activity, NewTrainAddPigeonFragment.class,null);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getBaseActivity(), SearchTrainPigeonActivity.class);
+            BaseSearchActivity.start(getBaseActivity(), SearchTrainPigeonActivity.class,null);
         });
 
         mTvChooseYet = findViewById(R.id.tvChooseYet);

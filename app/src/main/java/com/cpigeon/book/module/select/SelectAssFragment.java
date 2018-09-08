@@ -73,7 +73,7 @@ public class SelectAssFragment extends BaseFragment {
         SearchFragmentParentActivity activity = (SearchFragmentParentActivity) getBaseActivity();
         activity.setSearchHint(R.string.text_search_ass);
         activity.setSearchClickListener(v -> {
-            SearchAssActivity.start(getBaseActivity(), SearchAssActivity.class);
+            SearchAssActivity.start(getBaseActivity(), SearchAssActivity.class,null);
         });
 
     }

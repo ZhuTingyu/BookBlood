@@ -34,7 +34,7 @@ public class BreedPigeonListModel extends BaseViewModel {
     //获取  种鸽列表
     public void getPigeonList() {
         if (isSearch) {
-            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_SearchBreed(String.valueOf(pi), String.valueOf(ps), searchStr), r -> {
+            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_SearchBreed(String.valueOf(pi), String.valueOf(ps), searchStr, typeid), r -> {
                 if (r.isOk()) {
                     listEmptyMessage.setValue(r.msg);
                     mPigeonListData.setValue(r.data);

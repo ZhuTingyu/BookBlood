@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home;
+package com.cpigeon.book.module.pigeonhouse;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.idcard.IdCardCameraActivity;
@@ -27,6 +28,8 @@ import com.cpigeon.book.module.home.viewmodel.IdCertificationViewModel;
 import com.cpigeon.book.widget.LineInputView;
 
 import java.io.File;
+
+import butterknife.BindView;
 
 /**
  * hl 鸽舍 身份认证
@@ -46,6 +49,9 @@ public class IdCertificationFragment extends BaseBookFragment {
     private LineInputView mLvAddress;
     private LineInputView mLvAuthority;
     private LineInputView mLvIndate;
+
+    @BindView(R.id.ll_top_hint)
+    LinearLayout ll_top_hint;
 
     IdCertificationViewModel mViewModel;
 
@@ -90,13 +96,20 @@ public class IdCertificationFragment extends BaseBookFragment {
         mLvAuthority = findViewById(R.id.lvAuthority);
         mLvIndate = findViewById(R.id.lvIndate);
 
-        bindUi(RxUtils.textChanges(mLvName.getEditText()),mViewModel.setName());
-        bindUi(RxUtils.textChanges(mLvNumber.getEditText()),mViewModel.setCardNumber());
-        bindUi(RxUtils.textChanges(mLvSex.getEditText()),mViewModel.setSex());
-        bindUi(RxUtils.textChanges(mLvFamily.getEditText()),mViewModel.setNation());
-        bindUi(RxUtils.textChanges(mLvAddress.getEditText()),mViewModel.setAddress());
-        bindUi(RxUtils.textChanges(mLvAuthority.getEditText()),mViewModel.setAuthority());
-        bindUi(RxUtils.textChanges(mLvIndate.getEditText()),mViewModel.setInDate());
+
+        ViewGroup.LayoutParams mParams = mLvAddress.getLlContent().getLayoutParams();
+        mParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+        mLvAddress.getLlContent().setLayoutParams(mParams);
+        mLvAddress.getEditText().setSingleLine(false);
+
+        bindUi(RxUtils.textChanges(mLvName.getEditText()), mViewModel.setName());
+        bindUi(RxUtils.textChanges(mLvNumber.getEditText()), mViewModel.setCardNumber());
+        bindUi(RxUtils.textChanges(mLvSex.getEditText()), mViewModel.setSex());
+        bindUi(RxUtils.textChanges(mLvFamily.getEditText()), mViewModel.setNation());
+        bindUi(RxUtils.textChanges(mLvAddress.getEditText()), mViewModel.setAddress());
+        bindUi(RxUtils.textChanges(mLvAuthority.getEditText()), mViewModel.setAuthority());
+        bindUi(RxUtils.textChanges(mLvIndate.getEditText()), mViewModel.setInDate());
 
         mImgIdP.setOnClickListener(v -> {
             IdCardCameraActivity.start(getBaseActivity(), IdCardCameraActivity.TYPE_P);
@@ -110,11 +123,9 @@ public class IdCertificationFragment extends BaseBookFragment {
             mViewModel.setUserIdCard();
         });
 
-        if(!mIsEdit){
+        if (!mIsEdit) {
             mViewModel.getUserIdCard();
         }
-
-
     }
 
     @Override
@@ -124,7 +135,7 @@ public class IdCertificationFragment extends BaseBookFragment {
         });
 
         mViewModel.normalResult.observe(this, s -> {
-            DialogUtils.createHintDialog(getBaseActivity(),s, sweetAlertDialog -> {
+            DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
                 getBaseActivity().setResult(Activity.RESULT_OK);
                 finish();
@@ -132,11 +143,15 @@ public class IdCertificationFragment extends BaseBookFragment {
         });
 
         mViewModel.mUserIdCardLiveData.observe(this, userIdCardEntity -> {
-            if(userIdCardEntity == null){
+            if (userIdCardEntity == null) {
                 return;
             }
+
+            mTvOk.setText("重新认证身份");
+            ll_top_hint.setVisibility(View.INVISIBLE);
+
             mLvName.setContent(userIdCardEntity.getXingming());
-            mLvNumber.setContent(userIdCardEntity.getSfzid());
+            mLvNumber.setContent(userIdCardEntity.getSfzhm());
             mLvSex.setContent(userIdCardEntity.getXingbie());
             mLvFamily.setContent(userIdCardEntity.getMinzu());
             mLvAddress.setContent(userIdCardEntity.getZhuzhi());
@@ -162,8 +177,9 @@ public class IdCertificationFragment extends BaseBookFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK){
-            if(requestCode == IdCardCameraActivity.CODE_ID_CARD_P){
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == IdCardCameraActivity.CODE_ID_CARD_P) {
+                //身份证正面
                 IdCardPInfoEntity pInfoEntity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
                 mLvName.setContent(pInfoEntity.name);
                 mLvNumber.setContent(pInfoEntity.id);
@@ -172,7 +188,8 @@ public class IdCertificationFragment extends BaseBookFragment {
                 mLvAddress.setContent(pInfoEntity.address);
                 Glide.with(getBaseActivity()).load(pInfoEntity.frontimage).into(mImgIdP);
                 mViewModel.idCardP = CacheUtils.getInstance().getString(IdCardCameraActivity.IMAGE_P_PATH);
-            }else {
+            } else {
+                //身份证反面
                 IdCardNInfoEntity nInfoEntity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
                 mLvAuthority.setContent(nInfoEntity.authority);
                 mLvIndate.setContent(nInfoEntity.valid_date);

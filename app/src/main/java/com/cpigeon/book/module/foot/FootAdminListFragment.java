@@ -12,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.alibaba.idst.nls.internal.utils.L;
 import com.base.util.Lists;
 import com.base.util.Utils;
-import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
@@ -64,7 +62,7 @@ public class FootAdminListFragment extends BaseBookFragment {
     }
 
     public static void start(Activity activity) {
-        SearchFragmentParentActivity.start(activity, FootAdminListFragment.class, true);
+        SearchFragmentParentActivity.start(activity, FootAdminListFragment.class, true, null);
     }
 
     @Nullable
@@ -80,7 +78,7 @@ public class FootAdminListFragment extends BaseBookFragment {
         EventBus.getDefault().register(this);
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getActivity(), SearchFootActivity.class);
+            BaseSearchActivity.start(getActivity(), SearchFootActivity.class,null);
         });
 
 

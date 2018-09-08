@@ -121,10 +121,17 @@ public class HomeFragment extends BaseBookFragment {
         mAdapter.setNewData(Lists.newArrayList("", ""));
 
         mSTvFootManager.setOnClickListener(v -> {
+            //足环管理
             FootAdminListFragment.start(getBaseActivity());
         });
         mSTvBreedPigeonManager.setOnClickListener(v -> {
-            BreedPigeonListFragment.start(getBaseActivity());
+            //种鸽管理
+            BreedPigeonListFragment.start(getBaseActivity(), getString(R.string.pigeon_type_breed));
+        });
+
+        mSTvMatchPigeonManger.setOnClickListener(v -> {
+            //赛鸽管理
+            BreedPigeonListFragment.start(getBaseActivity(), getString(R.string.pigeon_type_racing));
         });
 
         mSTvPigeonPhoto.setOnClickListener(v -> {
@@ -135,7 +142,8 @@ public class HomeFragment extends BaseBookFragment {
         });
 
         mSTvFeedPigeonRecord.setOnClickListener(v -> {
-            SearchFragmentParentActivity.start(getBaseActivity(), FeedPigeonRecordListFragment.class);
+            //养鸽记录
+            SearchFragmentParentActivity.start(getBaseActivity(), FeedPigeonRecordListFragment.class, null);
         });
 
 

@@ -24,7 +24,7 @@ import com.cpigeon.book.widget.FamilyTreeView;
 public class InputBreedInBookFragment extends BaseBookFragment {
     FamilyTreeView mFamilyTreeView;
 
-    public static void start(Activity activity){
+    public static void start(Activity activity) {
         IntentBuilder.Builder().startParentActivity(activity, InputBreedInBookFragment.class);
     }
 
@@ -46,14 +46,14 @@ public class InputBreedInBookFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_breed_pigeon_input);
-        RxUtils.delayed(50,aLong -> {
-            mFamilyTreeView.setData(new BreedPigeonEntity(), 0,0);
+        RxUtils.delayed(50, aLong -> {
+            mFamilyTreeView.setData(new BreedPigeonEntity.Builder().build(), 0, 0);
         });
 
         mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
             @Override
             public void add(int x, int y) {
-                mFamilyTreeView.setData(new BreedPigeonEntity(), x, y);
+                mFamilyTreeView.setData(new BreedPigeonEntity.Builder().build(), x, y);
             }
 
             @Override

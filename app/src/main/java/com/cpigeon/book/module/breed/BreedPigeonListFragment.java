@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.BaseFragment;
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.utility.LogUtil;
@@ -47,8 +48,12 @@ public class BreedPigeonListFragment extends BaseFragment {
 
     private BreedPigeonListModel mBreedPigeonListModel;
 
-    public static void start(Activity activity) {
-        SearchFragmentParentActivity.start(activity, BreedPigeonListFragment.class, true);
+    public static void start(Activity activity, String pigeonType) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_TYPE, pigeonType);
+        SearchFragmentParentActivity.
+                start(activity, BreedPigeonListFragment.class, true, bundle);
     }
 
     @Override
@@ -61,6 +66,8 @@ public class BreedPigeonListFragment extends BaseFragment {
         initViewModels(mSelectTypeViewModel, mBreedPigeonListModel);
     }
 
+    private String pigeonType;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,10 +77,18 @@ public class BreedPigeonListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        pigeonType = getBaseActivity().getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
+
+        mBreedPigeonListModel.typeid = pigeonType;
+
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
             //搜索
-            BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(IntentBuilder.KEY_TYPE, pigeonType);
+
+            BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonActivity.class, bundle);
         });
         mDrawerLayout = mActivity.getDrawerLayout();
         mFiltrate = mActivity.getFiltrate();
@@ -132,7 +147,9 @@ public class BreedPigeonListFragment extends BaseFragment {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             BreedPigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID(),mBreedPigeonEntity.getFootRingID());
+            BreedPigeonDetailsFragment.start(getBaseActivity(),
+                    mBreedPigeonEntity.getPigeonID(),
+                    mBreedPigeonEntity.getFootRingID());
         });
 
         mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.STATE_STATE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
