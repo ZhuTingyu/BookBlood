@@ -108,10 +108,19 @@ public class PictureSelectUtil {
                 .circleDimmedLayer(true)
                 //.compressGrade(Luban.THIRD_GEAR)// luban压缩档次，默认3档 Luban.FIRST_GEAR、Luban.CUSTOM_GEAR
                 .isCamera(false)// 是否显示拍照按钮
-                .compress(true)// 是否压缩
+                .compress(true)
+                .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//// / 是否压缩
                 .forResult(PictureMimeType.ofImage());//结果回调
     }
 
+    public static void openCamera(Activity activity){
+        PictureSelector.create(activity)
+                .openCamera(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()
+                .maxSelectNum(1)// 最大图片选择数量
+                .compress(true)// 是否压缩
+                .compressMode(PictureConfig.LUBAN_COMPRESS_MODE)//系统自带 or 鲁班压缩 PictureConfig.SYSTEM_COMPRESS_MODE or LUBAN_COMPRESS_MODE
+                .forResult(PictureMimeType.ofImage());//结果回调
+    }
 
     public void cleanCache(Activity activity) {
         PictureFileUtils.deleteCacheDirFile(activity);

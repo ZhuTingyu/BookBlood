@@ -8,6 +8,9 @@ import java.io.Serializable;
 
 public class ImgTypeEntity implements Serializable{
 
+    public static final String TYPE_NEF = "随拍";
+
+
     private String imgPath;
     private String imgType;
     private String imgTypeId;

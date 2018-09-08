@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
@@ -48,6 +49,9 @@ public class FeedPigeonRecordListFragment extends BaseBookFragment {
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
         mAdapter = new FeedPigeonRecordListAdapter();
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            IntentBuilder.Builder().startParentActivity(getBaseActivity(), FeedPigeonDetailsFragment.class);
+        });
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setNewData(Lists.newTestArrayList());
     }

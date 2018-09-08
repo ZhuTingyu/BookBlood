@@ -26,14 +26,17 @@
     <color name="colorDarkGrey">#9C9C9C</color>
     <color name="color_262626">#262626</color>
     <color name="color_feedback_not_handle">#13B156</color>
+    <color name="color_bg_green">#0CB91D</color>
     <color name="color_feedback_handled">#D90000</color>
     <color name="color_count_add">#D90000</color>
     <color name="color_order_price">#D90000</color>
     <color name="color_text_red">#D90000</color>
+    <color name="color_bg_red">#E21F30</color>
 
 
     <!--背景-->
     <color name="color_bg_orange">#FFB288</color>
+    <color name="color_bg_deep_orange">#D45E15</color>
     <color name="color_bg_yellow">#F9B855</color>
     <color name="color_bg_dcedff">#DCEDFF</color>
 
@@ -54,6 +57,7 @@
     <color name="color_000000">#000000</color>
     <color name="color_text_enabled_false">#DCEDFF</color>
     <color name="color_feed_record_line">#CCCCCC</color>
+    <color name="color_CAE2FF">#CAE2FF</color>
 
 
 </resources>
