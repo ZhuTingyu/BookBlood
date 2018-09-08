@@ -23,9 +23,9 @@ public class PigeonHouseViewModel extends BaseViewModel {
     public String mPigeonHomePhone;
     public String mLatitude;
     public String mLongitude;
-    public String mCounty;
-    public String mCity;
-    public String mProvince;
+    public String mCounty;//县
+    public String mCity;//市
+    public String mProvince;//省
     public String mPigeonISOCID;
     public String mPigeonHomeAdds;
     public String mPigeonMatchNum;

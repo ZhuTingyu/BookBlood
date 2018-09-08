@@ -128,6 +128,10 @@
     <!--&lt;!&ndash;获取足环类型&ndash;&gt;-->
     <!--<string name="foot_type_select">TXGP_FootRingType_Select</string>-->
 
+
+    <!--添加赛鸽-->
+    <string name="pigeon_racing_add">TXGP_Pigeon_AddPigeon</string>
+
     <!--获取种鸽详细-->
     <string name="pigeon_breed_details">TXGP_Pigeon_GetInfo</string>
     <!--添加种鸽-->
@@ -175,6 +179,8 @@
     <string name="get_county_area_list">TXGP_FootRingCode_GetCodeList</string>
     <string name="modify_foots">TXGP_FootRing_EditSection</string>
     <string name="get_home_ad">TXGP_Get_IndexAd</string>
+
+    <string name="get_user_id_card">ZGW_Users_GetID</string>
 
 
 </resources>

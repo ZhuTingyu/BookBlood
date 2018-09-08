@@ -27,6 +27,7 @@ import com.cpigeon.book.module.home.HomeFragment2;
 import com.cpigeon.book.module.home.HomeFragment3;
 import com.cpigeon.book.module.home.HomeFragment4;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
+import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 import com.cpigeon.book.widget.BottomAddTabView;
 import com.cpigeon.book.widget.SimpleTitleView;
 
@@ -126,6 +127,7 @@ public class MainActivity extends BaseBookActivity {
 
         ImageView close = view.findViewById(R.id.imgClose);
         SimpleTitleView simpleText2 = view.findViewById(R.id.simpleText2);
+        SimpleTitleView simpleText3 = view.findViewById(R.id.simpleText3);
         close.setOnClickListener(v -> {
             mPopupWindow.dismiss();
         });
@@ -135,6 +137,13 @@ public class MainActivity extends BaseBookActivity {
             mPopupWindow.dismiss();
             BreedPigeonEntryFragment.start(getBaseActivity());
         });
+
+        simpleText3.setOnClickListener(v -> {
+            //赛鸽录入
+            mPopupWindow.dismiss();
+            RacingPigeonEntryFragment.start(getBaseActivity());
+        });
+
 
         spring = new SpringForce(0)
                 .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)

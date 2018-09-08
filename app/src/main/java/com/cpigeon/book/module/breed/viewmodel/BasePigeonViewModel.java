@@ -4,6 +4,7 @@ import com.base.base.BaseViewModel;
 import com.base.util.Lists;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -54,6 +55,9 @@ public class BasePigeonViewModel extends BaseViewModel {
     //出壳日期
     public String theirShellsDate = "";
 
+    //挂环日期
+    public String llHangingRingDate = "";
+
     //血统
     public List<SelectTypeEntity> mSelectTypes_Lineage;
     public String lineage = "";
@@ -66,5 +70,14 @@ public class BasePigeonViewModel extends BaseViewModel {
     public List<SelectTypeEntity> mSelectTypes_ImgType;
     public String imgTypeStr = "";
     public String imgTypeId = "";
+
+    public HashMap<String, String> setImageMap() {
+        HashMap<String, String> map = new HashMap<>();
+        for (int i = 0, len = images.size(); i < len; i++) {
+            map.put("photo", images.get(i));
+        }
+        return map;
+    }
+
 
 }

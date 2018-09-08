@@ -110,8 +110,8 @@ public class BreedPigeonModel {
     }
 
 
-    //hl 种鸽列表，搜索
-    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum) {
+    //hl 种鸽(赛鸽)列表，搜索
+    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum,String typeid) {
         return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
                 }.getType())
@@ -119,6 +119,7 @@ public class BreedPigeonModel {
                 .addBody("pi", pi)
                 .addBody("ps", ps)
                 .addBody("footnum", footnum)
+                .addBody("typeid", typeid)
                 .request();
     }
 
@@ -137,8 +138,8 @@ public class BreedPigeonModel {
                 .addBody("pi", pi)
                 .addBody("ps", ps)
                 .addBody("typeid", typeid)
-                .addBody("bloodid", bloodid)
-                .addBody("sexid", sexid)
+                .addBody("blood", bloodid)
+                .addBody("sex", sexid)
                 .addBody("year", year)
                 .addBody("stateid", stateid)
                 .request();

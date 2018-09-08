@@ -44,7 +44,7 @@ public class FeedPigeonRecordListFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getBaseActivity(), SearchFeedPigeonRecordActivity.class);
+            BaseSearchActivity.start(getBaseActivity(), SearchFeedPigeonRecordActivity.class,null);
         });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();

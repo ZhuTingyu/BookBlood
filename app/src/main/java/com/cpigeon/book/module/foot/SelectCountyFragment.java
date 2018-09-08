@@ -59,13 +59,13 @@ public class SelectCountyFragment extends BaseFragment {
 
         mActivity.setSearchHint(R.string.text_input_county_name_and_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getBaseActivity(), SearchCountyActivity.class);
+            BaseSearchActivity.start(getBaseActivity(), SearchCountyActivity.class, null);
         });
 
         mRecyclerView = findViewById(R.id.list);
         mWaveSideBar = findViewById(R.id.side_bar);
 
-        mAdapter =  new SelectCountyAdapter();
+        mAdapter = new SelectCountyAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 
         setProgressVisible(true);
@@ -87,7 +87,7 @@ public class SelectCountyFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK){
+        if (resultCode == Activity.RESULT_OK) {
             try {
                 CountyAreaEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
                 IntentBuilder.Builder()

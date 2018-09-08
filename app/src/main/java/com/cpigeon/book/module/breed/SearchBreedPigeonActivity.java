@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.IntentBuilder;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.cpigeon.book.base.BaseSearchActivity;
@@ -24,6 +25,7 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
     BreedPigeonListAdapter mAdapter;
 
     private BreedPigeonListModel mBreedPigeonListModel;
+    private String pigeonType;
 
     @Override
     protected List<DbEntity> getHistory() {
@@ -45,9 +47,12 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
         initViewModel(mBreedPigeonListModel);
 
 
+        pigeonType = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
+        mBreedPigeonListModel.typeid = pigeonType;
+
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
-            public void search(String key) {
+                public void search(String key) {
 
                 setProgressVisible(true);
                 mAdapter.getData().clear();
@@ -64,9 +69,7 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
             }
         });
 
-
         mBreedPigeonListModel.isSearch = true;
-        mBreedPigeonListModel.typeid = "8";
 
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.getData().clear();

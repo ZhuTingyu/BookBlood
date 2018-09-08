@@ -35,30 +35,40 @@ public class SearchFragmentParentActivity extends BaseBookActivity {
     private FiltrateListView mFiltrate;
 
 
-    public static void start(Activity activity, Class clz, boolean isHaveMenu) {
+    public static void start(Activity activity, Class clz, boolean isHaveMenu, Bundle mBundle) {
         Intent intent = new Intent();
         intent.setClass(activity, SearchFragmentParentActivity.class);
         intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);
         intent.putExtra(IntentBuilder.KEY_BOOLEAN, isHaveMenu);
+        try {
+            intent.putExtras(mBundle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
     }
 
-    public static void start(Activity activity, Class clz, int requestCode, boolean isHaveMenu) {
+    public static void start(Activity activity, Class clz, int requestCode, boolean isHaveMenu, Bundle mBundle) {
         Intent intent = new Intent();
         intent.setClass(activity, SearchFragmentParentActivity.class);
         intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);
         intent.putExtra(IntentBuilder.KEY_BOOLEAN, isHaveMenu);
+        try {
+            intent.putExtras(mBundle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         activity.startActivityForResult(intent, requestCode);
         activity.overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
     }
 
-    public static void start(Activity activity, Class clz, int requestCode) {
-        start(activity, clz, requestCode, false);
+    public static void start(Activity activity, Class clz, int requestCode, Bundle mBundle) {
+        start(activity, clz, requestCode, false, mBundle);
     }
 
-    public static void start(Activity activity, Class clz) {
-        start(activity, clz, false);
+    public static void start(Activity activity, Class clz, Bundle mBundle) {
+        start(activity, clz, false, mBundle);
     }
 
 

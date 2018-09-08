@@ -142,7 +142,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".module.home.TestActivity" />
         <activity
             android:name=".module.order.OrderListActivity"
             android:launchMode="singleTask"

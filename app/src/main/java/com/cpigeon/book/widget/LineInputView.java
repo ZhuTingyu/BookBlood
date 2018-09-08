@@ -193,6 +193,10 @@ public class LineInputView extends RelativeLayout {
         setCanEdit(mIsCanEdit);
     }
 
+    public LinearLayout getLlContent(){
+        return mLlContent;
+    }
+
     public void setIsLookState(boolean isLookState) {
         if (isLookState) {
             mEditText.setOnFocusChangeListener((v, hasFocus) -> {

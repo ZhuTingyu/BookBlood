@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
@@ -41,9 +42,10 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
 
     protected List<DbEntity> history;
 
-    public  static <A extends  BaseSearchActivity> void start(Activity activity, Class<A> aClass){
+    public static <A extends BaseSearchActivity> void start(Activity activity, Class<A> aClass, Bundle mBundle) {
         Intent intent = new Intent();
         intent.setClass(activity, aClass);
+        intent.putExtras(mBundle);
         activity.startActivityForResult(intent, CODE_SEARCH);
         activity.overridePendingTransition(R.anim.bottom_out, R.anim.anim_no);
     }
@@ -57,6 +59,8 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String pigeonTypes = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
 
         history = getHistory();
 
@@ -74,10 +78,10 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
         mRecyclerView.addItemDecorationLine();
         mRecyclerView.setAdapter(getResultAdapter());
 
-        if(!Lists.isEmpty(history)){
+        if (!Lists.isEmpty(history)) {
             mRlHistory.setVisibility(View.VISIBLE);
             mSearchHistoryAdapter.setNewData(AppDatabase.getDates(history, SearchHistoryEntity.class));
-        }else {
+        } else {
             mRlHistory.setVisibility(View.GONE);
         }
 
@@ -89,7 +93,7 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
 
         mSearchHistoryAdapter.setOnDeleteClickListener(p -> {
             AppDatabase.getInstance(getBaseActivity()).DbEntityDao().delete(history.get(p));
-            if(mSearchHistoryAdapter.getData().isEmpty()){
+            if (mSearchHistoryAdapter.getData().isEmpty()) {
                 mRlHistory.setVisibility(View.GONE);
             }
         });
@@ -106,18 +110,18 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
         overridePendingTransition(R.anim.anim_no, R.anim.bottom_in);
     }
 
-    protected void saveHistory(String key, String type){
+    protected void saveHistory(String key, String type) {
         SearchHistoryEntity historyEntity = new SearchHistoryEntity();
         historyEntity.searchTitle = key;
         AppDatabase.getInstance(getBaseActivity()).saveData(historyEntity
-                ,type, UserModel.getInstance().getUserId());
+                , type, UserModel.getInstance().getUserId());
     }
 
-    public void setSearchHint(@StringRes int resId){
+    public void setSearchHint(@StringRes int resId) {
         mSearchTextView.setHint(resId);
     }
 
-    public void goneHistroy(){
+    public void goneHistroy() {
         mRlHistory.setVisibility(View.GONE);
     }
 

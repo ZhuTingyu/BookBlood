@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tvOk"
         style="@style/bottom_style"
-        android:layout_margin="20dp"
-        android:layout_alignParentBottom="true"
-        android:text="@string/text_commit"
         android:layout_width="match_parent"
-        android:layout_height="45dp"/>
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:text="开始认证" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollView"
-        android:layout_above="@id/tvOk"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/tvOk">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,72 +26,107 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_top_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="13dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/svg_not_null" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="身份证"
+                    android:textColor="@color/color_4c4c4c"
+                    android:textSize="@dimen/small_text_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="照片须为本人真实身份证，身份证号清晰可见。"
+                    android:textColor="@color/color_text_hint"
+                    android:textSize="@dimen/small_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="91dp"
-                android:layout_margin="15dp"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="14dp"
                 android:orientation="horizontal">
-                
+
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
-                    android:layout_height="match_parent">
-                    
+                    android:layout_weight="1"
+                    android:background="@color/color_bg_window">
+
                     <LinearLayout
-                        android:layout_centerInParent="true"
-                        android:orientation="vertical"
-                        android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
                         <ImageView
-                            android:layout_marginBottom="13dp"
-                            android:src="@mipmap/ic_id_card_add"
                             android:layout_width="30dp"
-                            android:layout_height="30dp" />
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="13dp"
+                            android:src="@mipmap/ic_id_card_add" />
 
                         <TextView
-                            android:textColor="@color/color_text_hint"
-                            android:text="@string/text_id_card_p"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_id_card_p"
+                            android:textColor="@color/color_text_hint" />
 
                     </LinearLayout>
 
-                    
+
                     <ImageView
                         android:id="@+id/imgIdP"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
-                    
-                </RelativeLayout>
 
+                </RelativeLayout>
 
 
                 <RelativeLayout
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:background="@color/color_bg_window">
 
                     <LinearLayout
-                        android:layout_centerInParent="true"
-                        android:orientation="vertical"
-                        android:gravity="center_horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
                         <ImageView
-                            android:layout_marginBottom="13dp"
-                            android:src="@mipmap/ic_id_card_add"
                             android:layout_width="30dp"
-                            android:layout_height="30dp" />
+                            android:layout_height="30dp"
+                            android:layout_marginBottom="13dp"
+                            android:src="@mipmap/ic_id_card_add" />
 
                         <TextView
-                            android:textColor="@color/color_text_hint"
-                            android:text="@string/text_id_card_n"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_id_card_n"
+                            android:textColor="@color/color_text_hint" />
 
                     </LinearLayout>
 
@@ -110,15 +144,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="40dp"
                 android:gravity="center_vertical"
-                android:layout_marginRight="15dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="4dp"
-                    android:layout_marginRight="8dp"
                     android:layout_height="8dp"
+                    android:layout_marginRight="8dp"
                     android:background="#1b8d93" />
 
                 <TextView
@@ -134,52 +169,57 @@
             <com.cpigeon.book.widget.LineInputListLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/shape_btn_stroke_gray"
                 android:orientation="vertical"
-                android:paddingTop="1dp"
                 android:paddingBottom="1dp"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                android:paddingRight="16dp"
+                android:paddingTop="1dp">
 
                 <!--姓名-->
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:lineInputView_isShowRightImage="gone"
+                    app:lineInputView_IsLeft="true"
                     app:lineInputView_IsCanEdit="false"
-                    app:lineInputView_LeftString="@string/text_name" />
+                    app:lineInputView_LeftString="@string/text_name"
+                    app:lineInputView_isShowRightImage="gone" />
                 <!--身份证号-->
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvNumber"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
-                    app:lineInputView_LeftString="@string/text_id_card_number" />
+                    app:lineInputView_LeftString="@string/text_id_card_number"
+                    app:lineInputView_isShowRightImage="gone" />
                 <!--性别-->
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvSex"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
-                    app:lineInputView_LeftString="@string/text_sex" />
+                    app:lineInputView_LeftString="@string/text_sex"
+                    app:lineInputView_isShowRightImage="gone" />
 
                 <!--名族-->
                 <com.cpigeon.book.widget.LineInputView
+                    app:lineInputView_IsLeft="true"
                     android:id="@+id/lvFamily"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
-                    app:lineInputView_LeftString="@string/text_family" />
+                    app:lineInputView_LeftString="@string/text_family"
+                    app:lineInputView_isShowRightImage="gone" />
 
                 <!--地址-->
                 <com.cpigeon.book.widget.LineInputView
+                    app:lineInputView_IsLeft="true"
                     android:id="@+id/lvAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -192,16 +232,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="39dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="4dp"
-                    android:layout_marginRight="8dp"
                     android:layout_height="8dp"
+                    android:layout_marginRight="8dp"
                     android:background="#ffff8d1a" />
 
                 <TextView
@@ -217,33 +257,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginBottom="43dp"
+                android:layout_marginLeft="@dimen/spacing_left_reight"
+                android:layout_marginRight="@dimen/spacing_left_reight"
+                android:layout_marginTop="14dp"
                 android:background="@drawable/shape_btn_stroke_gray"
                 android:orientation="vertical"
-                android:paddingTop="1dp"
                 android:paddingBottom="1dp"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                android:paddingRight="16dp"
+                android:paddingTop="1dp">
 
                 <!--签证机关-->
                 <com.cpigeon.book.widget.LineInputView
                     android:id="@+id/lvAuthority"
+                    app:lineInputView_IsLeft="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
-                    app:lineInputView_LeftString="@string/text_authority" />
+                    app:lineInputView_LeftString="@string/text_authority"
+                    app:lineInputView_isShowRightImage="gone" />
 
                 <!--有效期-->
                 <com.cpigeon.book.widget.LineInputView
+                    app:lineInputView_IsLeft="true"
                     android:id="@+id/lvIndate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:lineInputView_isShowRightImage="gone"
                     app:lineInputView_IsCanEdit="false"
-                    app:lineInputView_LeftString="@string/text_indate" />
+                    app:lineInputView_LeftString="@string/text_indate"
+                    app:lineInputView_isShowRightImage="gone" />
 
             </LinearLayout>
 

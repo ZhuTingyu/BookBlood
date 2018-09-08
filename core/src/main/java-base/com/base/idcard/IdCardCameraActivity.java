@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -20,13 +19,11 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.base.base.BaseActivity;
 import com.base.http.R;
 import com.base.util.IntentBuilder;
-import com.base.util.Utils;
 import com.base.util.cache.CacheUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.http.GsonUtil;
@@ -38,8 +35,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -234,6 +229,9 @@ public class IdCardCameraActivity extends AppCompatActivity {
                             IdCardPInfoEntity idCardPInfoEntity = GsonUtil.fromJson(jsonObject.toString(),new TypeToken<IdCardPInfoEntity>(){}.getType());
                             if(idCardPInfoEntity.errorcode == 0){
                                 idCardPInfoEntity.frontimage = file.getPath();
+
+                                CacheUtils.getInstance().put(IdCardCameraActivity.IMAGE_P_PATH,file.getPath());
+
                                 Intent intent = new Intent();
                                 intent.putExtra(IntentBuilder.KEY_DATA, idCardPInfoEntity);
                                 setResult(RESULT_OK, intent);
@@ -254,6 +252,9 @@ public class IdCardCameraActivity extends AppCompatActivity {
                             IdCardNInfoEntity idCardNInfoEntity = GsonUtil.fromJson(jsonObject.toString(),new TypeToken<IdCardNInfoEntity>(){}.getType());
                             if(idCardNInfoEntity.errorcode == 0){
                                 idCardNInfoEntity.backimage = file.getPath();
+
+                                CacheUtils.getInstance().put(IdCardCameraActivity.IMAGE_N_PATH,file.getPath());
+
                                 Intent intent = new Intent();
                                 intent.putExtra(IntentBuilder.KEY_DATA, idCardNInfoEntity);
                                 setResult(RESULT_OK, intent);

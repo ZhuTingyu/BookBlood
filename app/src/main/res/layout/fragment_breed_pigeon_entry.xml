@@ -177,6 +177,21 @@
             app:lineInputView_LeftString="出壳日期" />
 
 
+        <!--挂环日期-->
+        <com.cpigeon.book.widget.LineInputView
+            android:visibility="gone"
+            android:id="@+id/ll_hanging_ring_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="请选择"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="挂环日期" />
+
         <!--血统-->
         <com.cpigeon.book.widget.LineInputView
             android:id="@+id/ll_lineage"

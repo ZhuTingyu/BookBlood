@@ -35,7 +35,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.MainActivity;
-import com.cpigeon.book.module.home.IdCertificationFragment;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
@@ -157,7 +156,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mLvPhone.setRightText(UserModel.getInstance().getUserData().handphone);
 
         mLvOrganize.setOnRightClickListener(lineInputView -> {
-            SearchFragmentParentActivity.start(getBaseActivity(), SelectAssFragment.class, CODE_ORGANIZE);
+            SearchFragmentParentActivity.start(getBaseActivity(), SelectAssFragment.class, CODE_ORGANIZE, null);
         });
 
         String[] chooseWays = getResources().getStringArray(R.array.array_choose_photo);
@@ -210,7 +209,10 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
                 @Override
                 public void onAddressPicked(Province province, City city, County county) {
-                    mLvCity.setContent(province.getName() + city.getName());
+                    mLvCity.setContent(province.getName() + city.getName() );
+                    mViewModel.mProvince = province.getName();//省
+                    mViewModel.mCity = city.getName();//市
+                    mViewModel.mCounty = county.getName();//县
                 }
             });
         });
@@ -288,7 +290,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mLvAddress.setContent(r.getPigeonHomeAdds());
 
 
-            if(StringUtil.isStringValid(r.getXingming())){
+            if (StringUtil.isStringValid(r.getXingming())) {
                 mTvAuth.setText(getString(R.string.text_yet_auth));
                 mTvAuth.setBackgroundResource(R.drawable.shape_btn_stroke_blue);
                 mTvAuth.setTextColor(Utils.getColor(R.color.colorPrimary));
@@ -296,9 +298,9 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
                     IdCertificationFragment.start(getBaseActivity(), false);
                 });
 
-                if(Utils.getString(R.string.text_male).equals(r.getXingbie())){
+                if (Utils.getString(R.string.text_male).equals(r.getXingbie())) {
                     mImgSex.setImageResource(R.mipmap.ic_male);
-                }else if(Utils.getString(R.string.text_female).equals(r.getXingbie())){
+                } else if (Utils.getString(R.string.text_female).equals(r.getXingbie())) {
                     mImgSex.setImageResource(R.mipmap.ic_female);
                 }
             }

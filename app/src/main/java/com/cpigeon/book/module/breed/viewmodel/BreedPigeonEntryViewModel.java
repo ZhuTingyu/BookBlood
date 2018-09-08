@@ -6,8 +6,6 @@ import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 
-import java.util.HashMap;
-
 import io.reactivex.functions.Consumer;
 
 /**
@@ -60,13 +58,5 @@ public class BreedPigeonEntryViewModel extends BasePigeonViewModel {
         isCanCommit(foot, sourceId, sexId, featherColor, eyeSandId, theirShellsDate, lineage, stateId);
     }
 
-
-    public HashMap<String, String> setImageMap() {
-        HashMap<String, String> map = new HashMap<>();
-        for (int i = 0, len = images.size(); i < len; i++) {
-            map.put("photo", images.get(i));
-        }
-        return map;
-    }
 
 }

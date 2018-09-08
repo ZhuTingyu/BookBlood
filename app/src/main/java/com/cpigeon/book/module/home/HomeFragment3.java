@@ -1,7 +1,6 @@
 package com.cpigeon.book.module.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,9 +15,9 @@ import com.cpigeon.book.module.foot.BreedPigeonFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.foot.StatisticalFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
+import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.module.menu.message.AnnouncementNoticeFragment;
 import com.cpigeon.book.module.menu.message.PigeonFriendMsgFragment;
-import com.cpigeon.book.module.menu.UserInfoActivity;
 
 import butterknife.OnClick;
 
@@ -72,7 +71,7 @@ public class HomeFragment3 extends BaseBookFragment {
         });
 
         ac_btns2.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), TestActivity.class));
+
         });
 
         ac_btns3.setOnClickListener(v -> {
