@@ -54,7 +54,6 @@ public class LineInputView extends RelativeLayout {
     int mInputType;
     int mRightImageVisible;
 
-
     TextView mTextView;
     ClickGetFocusEditText mEditText;
     ImageView mImgRight;
@@ -71,6 +70,7 @@ public class LineInputView extends RelativeLayout {
 
     int line_paddingLeft = 0;
     int line_paddingRight = 0;
+    boolean left_gravity = true;
 
     public interface OnRightClickListener {
         void click(LineInputView lineInputView);
@@ -100,8 +100,8 @@ public class LineInputView extends RelativeLayout {
         }
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.LineInputView);
         mWeight = array.getInteger(R.styleable.LineInputView_lineInputView_Weight, 4);
-        mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, R.color.color_4c4c4c);
-        mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, R.color.color_000000);
+        mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, getContext().getColor(R.color.color_4c4c4c));
+        mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, getContext().getColor(R.color.color_000000));
         mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, Color.parseColor("#FFFFFF"));
         mLeftTextSize = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
         mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
@@ -127,6 +127,9 @@ public class LineInputView extends RelativeLayout {
         line_paddingLeft = (int) array.getDimension(R.styleable.LineInputView_lineInputView_line_paddingLift, 0);
         line_paddingRight = (int) array.getDimension(R.styleable.LineInputView_lineInputView_line_paddingRight, 0);
 
+
+        left_gravity = array.getBoolean(R.styleable.LineInputView_lineInputView_LeftTextGravity, true);
+
     }
 
     private void initView() {
@@ -145,12 +148,19 @@ public class LineInputView extends RelativeLayout {
         imgLeft = view.findViewById(R.id.img_left);
 
         mTextView.setText(mLeftString);
-        mTextView.setTextColor(getResources().getColor(mLeftColor));
+        mTextView.setTextColor(mLeftColor);
         mTextView.setTextSize(mLeftTextSize);
+
+        if (left_gravity) {
+            mTextView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+        } else {
+            mTextView.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        }
+
 
         mEditText.setText(mRightString);
         mEditText.setHint(mEtHintStr);
-        mEditText.setTextColor(getResources().getColor(mRightColor));
+        mEditText.setTextColor(mRightColor);
         mEditText.setTextSize(mRightTextSize);
         if (mInputType != 0) {
             mEditText.setInputType(mInputType);
@@ -193,7 +203,7 @@ public class LineInputView extends RelativeLayout {
         setCanEdit(mIsCanEdit);
     }
 
-    public LinearLayout getLlContent(){
+    public LinearLayout getLlContent() {
         return mLlContent;
     }
 

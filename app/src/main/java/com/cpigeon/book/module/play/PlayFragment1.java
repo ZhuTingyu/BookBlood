@@ -14,7 +14,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
-import com.cpigeon.book.module.breed.viewmodel.BreedPigeonDetailsViewModel;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.play.adapter.PlayListAdapter;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;

@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed.adpter;
+package com.cpigeon.book.module.breedpigeon.adpter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -10,9 +10,6 @@ import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.model.entity.ImageEntity;
-
-import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/8/31.

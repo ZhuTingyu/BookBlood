@@ -23,7 +23,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breed.viewmodel.BreedPigeonEntryViewModel;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonEntryViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.viewmodel.ImgUploadViewModel;
 import com.cpigeon.book.util.TextViewUtil;

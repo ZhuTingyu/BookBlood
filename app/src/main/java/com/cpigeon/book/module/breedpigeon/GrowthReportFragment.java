@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed;
+package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,8 @@ import com.base.util.RxUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.breed.adpter.GrowthReportAdapter;
-import com.cpigeon.book.module.breed.viewmodel.GrowthReportViewModel;
+import com.cpigeon.book.module.breedpigeon.adpter.GrowthReportAdapter;
+import com.cpigeon.book.module.breedpigeon.viewmodel.GrowthReportViewModel;
 
 /**
  * Created by Zhu TingYu on 2018/8/29.

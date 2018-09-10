@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.base.util.dialog.DialogUtils;
-import com.cpigeon.book.module.breed.BasePigeonEntryFragment;
+import com.cpigeon.book.module.breedpigeon.BasePigeonEntryFragment;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.racing.viewmodel.RacingPigeonEntryViewModel;
 import com.cpigeon.book.util.TextViewUtil;

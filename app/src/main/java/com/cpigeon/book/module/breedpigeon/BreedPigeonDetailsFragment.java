@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed;
+package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,8 +34,8 @@ import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breed.viewmodel.BreedPigeonDetailsViewModel;
-import com.cpigeon.book.module.breed.viewmodel.BreedPigeonModifyViewModel;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonModifyViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;

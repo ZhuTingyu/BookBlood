@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.RacingPigeonModel;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
-import com.cpigeon.book.module.breed.viewmodel.BasePigeonViewModel;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BasePigeonViewModel;
 
 /**
  * Created by Administrator on 2018/9/8.

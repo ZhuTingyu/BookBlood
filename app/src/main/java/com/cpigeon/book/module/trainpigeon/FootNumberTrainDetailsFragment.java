@@ -12,7 +12,7 @@ import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.breed.BreedPigeonDetailsFragment;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.trainpigeon.adpter.FootNumberTrainDetailsAdapter;
 
 /**

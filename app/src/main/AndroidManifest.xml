@@ -147,7 +147,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".module.breed.SearchBreedPigeonActivity"
+        <activity android:name=".module.breedpigeon.SearchBreedPigeonActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity android:name=".module.photo.PigeonPhotoHomeActivity"

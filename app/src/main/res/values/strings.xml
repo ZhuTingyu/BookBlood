@@ -77,6 +77,33 @@
         <item>@string/text_foots_input</item>
     </string-array>
 
+    <!--繁育信息-->
+    <string name="array_pairing_add">添加配对</string>
+    <string name="array_pairing_recommend">推荐配对</string>
+    <string name="array_blind_date">相亲配对</string>
+    <string-array name="text_breeding_info">
+        <item>@string/array_pairing_add</item>
+        <item>@string/array_pairing_recommend</item>
+        <item>@string/array_blind_date</item>
+    </string-array>
+
+    <!--产蛋信息-->
+    <string name="string_lay_eggs_yes">已产蛋</string>
+    <string name="string_lay_eggs_no">未产蛋</string>
+    <string-array name="array_lay_eggs">
+        <item>@string/string_lay_eggs_yes</item>
+        <item>@string/string_lay_eggs_no</item>
+    </string-array>
+
+    <!--出壳状态-->
+    <string name="string_hatches_info_yes">已出壳</string>
+    <string name="string_hatches_info_no">未出壳</string>
+    <string-array name="array_hatches_info">
+        <item>@string/string_hatches_info_yes</item>
+        <item>@string/string_hatches_info_no</item>
+    </string-array>
+
+
     <!--关于我们-->
     <string name="string_about_as_tv">天下鸽谱是一款方便快捷录入并管理信鸽信息，基于中鸽网12年来高达100G的赛鸽数据进行云计算分析处理，特别推出的产品！ \n特色功能划分： \n种：足环管理，种鸽管理，血统书制作，血缘寻根。 \n养：爱鸽日记，配对牵线，病情分析，药物推荐。 \n训：记录、分析每一次训鸽成绩，优胜劣汰。 \n赛：赛鸽管理，赛鸽成绩汇总，通过云系统进行大数据全面分析赛鸽成绩，铭鸽评选。 </string>
     <string name="string_about_as_tv1">天下鸽谱是一款方便快捷录入并管理信鸽信息，基于中鸽网12年来高达100G的赛鸽数据进行云计算分析处理，特别推出的产品！</string>
@@ -103,6 +130,7 @@
     <string name="btn_next_step">下一步</string>
     <string name="btn_save">保存</string>
     <string name="btn_sure_inport">确定导入</string>
+    <string name="btn_sure_add">立即添加</string>
     <string name="btn_sure_modify">确定修改</string>
     <string name="btn_sure_upload">确定上传</string>
 
@@ -222,6 +250,10 @@
     <string name="tv_fly_ullage">请输入司放空距（千米）</string>
     <string name="tv_fly_place">请输入司放地点</string>
     <string name="tv_additional_info">请输入附加信息内容</string>
+
+    <string name="tv_fertilized_egg">请输入受精蛋个数</string>
+    <string name="tv_fertilized_egg_no">请输入无精蛋个数</string>
+    <string name="tv_hatches_num">请输入出壳个数</string>
 
     <string name="text_time">时间</string>
     <string name="text_set_photo_face">设为封面</string>

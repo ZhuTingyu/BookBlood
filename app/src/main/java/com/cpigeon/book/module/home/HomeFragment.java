@@ -20,7 +20,8 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
-import com.cpigeon.book.module.breed.BreedPigeonListFragment;
+import com.cpigeon.book.module.breeding.BreedingFootListFragment;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonListFragment;
 import com.cpigeon.book.module.feedpigeon.FeedPigeonRecordListFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.adapter.HomeTopAdapter;
@@ -132,6 +133,10 @@ public class HomeFragment extends BaseBookFragment {
         mSTvMatchPigeonManger.setOnClickListener(v -> {
             //赛鸽管理
             BreedPigeonListFragment.start(getBaseActivity(), getString(R.string.pigeon_type_racing));
+        });
+
+        mSTvBreedInfo.setOnClickListener(v -> {
+            BreedingFootListFragment.start(getBaseActivity());
         });
 
         mSTvPigeonPhoto.setOnClickListener(v -> {
