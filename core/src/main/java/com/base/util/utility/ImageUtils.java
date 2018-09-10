@@ -1,6 +1,8 @@
 package com.base.util.utility;
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -23,7 +25,10 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
@@ -36,6 +41,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.base.application.BaseApplication;
+import com.base.util.cache.CacheUtils;
 import com.base.util.cache.CloseUtils;
 
 import java.io.BufferedOutputStream;
@@ -1809,6 +1815,37 @@ public final class ImageUtils {
         options.inJustDecodeBounds = false;
         if (recycle && !src.isRecycled()) src.recycle();
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+    }
+
+    //保存文件到指定路径
+    public static String saveImageToGallery(Context context, Bitmap bmp) {
+
+        String storePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "dearxy";
+        save(bmp, storePath, CompressFormat.JPEG);
+        // 首先保存图片
+        try {
+            FileOutputStream fos = new FileOutputStream(storePath);
+            //通过io流的方式来压缩保存图片
+            boolean isSuccess = bmp.compress(Bitmap.CompressFormat.JPEG, 60, fos);
+            fos.flush();
+            fos.close();
+
+            File file = new File(storePath);
+            //把文件插入到系统图库
+            MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), "血统书", null);
+
+            //保存图片后发送广播通知更新数据库
+            Uri uri = Uri.fromFile(new File(storePath));
+            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+            if (isSuccess) {
+                return storePath;
+            } else {
+                return "";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     private static File getFileByPath(final String filePath) {

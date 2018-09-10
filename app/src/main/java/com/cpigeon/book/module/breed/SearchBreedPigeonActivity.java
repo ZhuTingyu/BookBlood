@@ -36,6 +36,10 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
     @Override
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new BreedPigeonListAdapter();
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            BreedPigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+            BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID(),mBreedPigeonEntity.getFootRingID());
+        });
         return mAdapter;
     }
 
@@ -81,12 +85,6 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
             mBreedPigeonListModel.pi++;
             mBreedPigeonListModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
-
-
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            BreedPigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID(),mBreedPigeonEntity.getFootRingID());
-        });
 
         initObserve();
     }

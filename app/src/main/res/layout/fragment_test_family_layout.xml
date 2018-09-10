@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.cpigeon.book.widget.FamilyTreeView
+    <com.cpigeon.book.widget.family.FamilyTreeView
         android:id="@+id/familyTreeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

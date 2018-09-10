@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.base.BaseFragment;
 import com.base.util.RxUtils;
 import com.cpigeon.book.R;
-import com.cpigeon.book.widget.FamilyTreeView;
+import com.cpigeon.book.widget.family.FamilyTreeView;
 
 /**
  * Created by Zhu TingYu on 2018/6/21.

@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.Utils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
@@ -45,9 +46,9 @@ public class BreedPigeonListAdapter extends BaseQuickAdapter<BreedPigeonEntity, 
                 .into((ImageView) helper.getView(R.id.imgHead));
 
 
-        if (item.getPigeonSexName().equals("雌")) {
+        if (Utils.getString(R.string.text_male_a).equals(item.getPigeonSexName())) {
             imgSex.setImageResource(R.mipmap.ic_female);
-        } else if (item.getPigeonSexName().equals("雄")) {
+        } else if (Utils.getString(R.string.text_female_a).equals(item.getPigeonSexName())) {
             imgSex.setImageResource(R.mipmap.ic_male);
         } else {
             imgSex.setImageResource(R.mipmap.ic_sex_no);

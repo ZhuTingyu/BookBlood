@@ -1,4 +1,4 @@
-package com.cpigeon.book.widget;
+package com.cpigeon.book.widget.family;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -15,7 +16,6 @@ import android.widget.LinearLayout;
 
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
-import com.base.util.utility.LogUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 
@@ -33,6 +33,7 @@ public class FamilyTreeView extends LinearLayout {
     public static final int TYPE_IS_CAN_MOVE_N = 0x00000003;
 
     private boolean isMiniModel = false;
+    private boolean isPrintModel;
 
     private int mTypeMove = TYPE_IS_CAN_MOVE_N;
     private static final int COUNT_OF_GENERATIONS = 3; //屏幕中显示的辈数
@@ -77,6 +78,8 @@ public class FamilyTreeView extends LinearLayout {
     private int mLineWidthPX;
 
     List<LinearLayout> generationLinearLayouts = Lists.newArrayList();
+
+    Point mCurrentPoint = new Point();
 
 
     public FamilyTreeView(Context context) {
@@ -137,6 +140,7 @@ public class FamilyTreeView extends LinearLayout {
             maxOfGeneration = array.getInteger(R.styleable.FamilyTreeView_TreeView_MaxGeneration, MAX_OF_GENERATIONS);
             mTypeMove = array.getInteger(R.styleable.FamilyTreeView_TreeView_moveType, TYPE_IS_CAN_MOVE_N);
             isMiniModel = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isMiniModel, false);
+            isPrintModel = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isPrintModel, false);
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
@@ -145,7 +149,8 @@ public class FamilyTreeView extends LinearLayout {
 
 
     public void initView() {
-
+        removeAllViews();
+        generationLinearLayouts.clear();
         mWidth = getMeasuredWidth();
         mHeight = getMeasuredHeight();
 
@@ -179,31 +184,38 @@ public class FamilyTreeView extends LinearLayout {
     }
 
 
-    private FamilyMemberView getMemberView(Context context, int generationsPoint, int generationsOrder, int generationCount) {
-        FamilyMemberView view = new FamilyMemberView(context, generationsPoint, generationsOrder, isMiniModel);
-        LinearLayout.LayoutParams params;
-        if (isHorizontal) {
-            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
-                    , mHeight / generationCount);
-        } else {
-            params = new LinearLayout.LayoutParams(mWidth / generationCount
-                    , ViewGroup.LayoutParams.MATCH_PARENT);
-        }
-        view.setLayoutParams(params);
-        if (mOnFamilyClickListener != null) {
-            view.setOnMemberClickListener(new FamilyMemberView.OnMemberClickListener() {
-                @Override
-                public void add(int x, int y) {
-                    mOnFamilyClickListener.add(x, y);
-                }
+    private View getMemberView(Context context, int generationsPoint, int generationsOrder, int generationCount) {
 
-                @Override
-                public void showInfo(BreedPigeonEntity entity) {
-                    mOnFamilyClickListener.showInfo(entity);
-                }
-            });
+        if (isPrintModel) {
+            FamilyPrintModelMemberView view = new FamilyPrintModelMemberView(context, generationsPoint, generationsOrder, isHorizontal);
+            return view;
+        } else {
+            FamilyMemberView view = new FamilyMemberView(context, generationsPoint, generationsOrder, isMiniModel, isHorizontal);
+            LinearLayout.LayoutParams params;
+            if (isHorizontal) {
+                params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
+                        , mHeight / generationCount);
+            } else {
+                params = new LinearLayout.LayoutParams(mWidth / generationCount
+                        , ViewGroup.LayoutParams.MATCH_PARENT);
+            }
+            view.setLayoutParams(params);
+            if (mOnFamilyClickListener != null) {
+                view.setOnMemberClickListener(new FamilyMemberView.OnMemberClickListener() {
+                    @Override
+                    public void add(int x, int y) {
+                        mCurrentPoint.set(x, y);
+                        mOnFamilyClickListener.add(x, y);
+                    }
+
+                    @Override
+                    public void showInfo(BreedPigeonEntity entity) {
+                        mOnFamilyClickListener.showInfo(entity);
+                    }
+                });
+            }
+            return view;
         }
-        return view;
     }
 
 
@@ -216,18 +228,18 @@ public class FamilyTreeView extends LinearLayout {
                 int currentPosition = i1; // 1
                 int fatherPosition = (currentPosition * 2);
                 int motherPosition = fatherPosition + 1;
-                FamilyMemberView currentView = (FamilyMemberView) linearLayout.getChildAt(currentPosition);
-                FamilyMemberView mother = (FamilyMemberView) nextLinearLayout.getChildAt(motherPosition);
-                FamilyMemberView father = (FamilyMemberView) nextLinearLayout.getChildAt(fatherPosition);
+                FamilyMember currentView = (FamilyMember) linearLayout.getChildAt(currentPosition);
+                FamilyMember mother = (FamilyMember) nextLinearLayout.getChildAt(motherPosition);
+                FamilyMember father = (FamilyMember) nextLinearLayout.getChildAt(fatherPosition);
                 drawLine(canvas, currentView, mother, linearLayout, nextLinearLayout);
                 drawLine(canvas, currentView, father, linearLayout, nextLinearLayout);
             }
         }
     }
 
-    private void drawLine(Canvas canvas, FamilyMemberView currentView, FamilyMemberView toView, LinearLayout currentLl, LinearLayout nextLl) {
-        View currentInfo = currentView.getRlMemberInfo();
-        View toViewInfo = toView.getRlMemberInfo();
+    private void drawLine(Canvas canvas, FamilyMember currentView, FamilyMember toView, LinearLayout currentLl, LinearLayout nextLl) {
+        View currentInfo = currentView.getInfoView();
+        View toViewInfo = toView.getInfoView();
         mPath.reset();
         float fromX, fromY, toX, toY;
         if (isHorizontal) {
@@ -281,7 +293,10 @@ public class FamilyTreeView extends LinearLayout {
                         }
 
                     } else if (mTypeMove == TYPE_IS_CAN_MOVE_V) {
-                        this.scrollTo(0, mCurrentY);
+                        if (mCurrentY > 0 && mCurrentY < limitH) {
+                            this.scrollTo(0, mCurrentY);
+                        }
+
                     }
                     mLastTouchX = currentTouchX;
                     mLastTouchY = currentTouchY;
@@ -392,24 +407,26 @@ public class FamilyTreeView extends LinearLayout {
         mTypeMove = typeMove;
     }
 
-    public FamilyMemberView getMemberView(int generation, int whichOne) {
+    public FamilyMember getMemberView(int generation, int whichOne) {
         LinearLayout linearLayout = generationLinearLayouts.get(generation);
-        FamilyMemberView memberView = (FamilyMemberView) linearLayout.getChildAt(whichOne);
+        FamilyMember memberView = (FamilyMember) linearLayout.getChildAt(whichOne);
         return memberView;
     }
 
     public void setData(BreedPigeonEntity entity, int x, int y) {
         getMemberView(x, y).bindData(entity);
-        List<FamilyMemberView> memberViews = getParents(x, y);
-        for (FamilyMemberView memberView : memberViews) {
+        List<FamilyMember> memberViews = getParents(x, y);
+        for (FamilyMember memberView : memberViews) {
             memberView.setCanAdd();
+
         }
+
     }
 
-    public List<FamilyMemberView> getParents(int x, int y) {
-        List<FamilyMemberView> list = Lists.newArrayList();
+    public List<FamilyMember> getParents(int x, int y) {
+        List<FamilyMember> list = Lists.newArrayList();
 
-        if(generationLinearLayouts.size() == x + 1){
+        if (generationLinearLayouts.size() == x + 1) {
             return list;
         }
 
@@ -417,13 +434,17 @@ public class FamilyTreeView extends LinearLayout {
 
         int fatherPosition = (y * 2);
         int motherPosition = fatherPosition + 1;
-        FamilyMemberView mother = (FamilyMemberView) nextLinearLayout.getChildAt(motherPosition);
-        FamilyMemberView father = (FamilyMemberView) nextLinearLayout.getChildAt(fatherPosition);
+        FamilyMember mother = (FamilyMember) nextLinearLayout.getChildAt(motherPosition);
+        FamilyMember father = (FamilyMember) nextLinearLayout.getChildAt(fatherPosition);
 
         list.add(father);
         list.add(mother);
 
         return list;
+    }
+
+    public Point getCurrentPoint() {
+        return mCurrentPoint;
     }
 
     public interface OnFamilyClickListener {

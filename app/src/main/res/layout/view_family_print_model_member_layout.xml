@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:visibility="visible">
+
+    <com.cpigeon.book.widget.ShadowRelativeLayout
+        android:id="@+id/rlShadow"
+        android:layout_width="236dp"
+        android:layout_height="510dp"
+        android:background="@color/transparent">
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollViewInfo"
+            android:layout_width="226dp"
+            android:layout_height="500dp">
+
+            <LinearLayout
+                android:id="@+id/rlInMemberInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20px"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/imgHead"
+                    android:layout_width="match_parent"
+                    android:layout_height="310px"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_launcher"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tvFootNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32px"
+                    android:layout_below="@id/imgHead"
+                    android:layout_marginTop="20px"
+                    android:gravity="center"
+                    android:textColor="@color/color_text_red_2"
+                    android:textStyle="bold"
+                    tools:text="2018-22-1234567" />
+
+
+                <TextView
+                    android:id="@+id/tvBlood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32px"
+                    android:layout_marginTop="30px"
+                    android:text="詹森系"
+                    android:textColor="@color/color_4c4c4c" />
+
+
+                <TextView
+                    android:id="@+id/tvColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32px"
+                    android:layout_marginTop="30px"
+                    android:text="雨色"
+                    android:textColor="@color/color_4c4c4c" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </com.cpigeon.book.widget.ShadowRelativeLayout>
+</LinearLayout>

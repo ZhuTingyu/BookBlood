@@ -179,7 +179,6 @@ public class IdCardCameraActivity extends AppCompatActivity {
 
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            // TODO Auto-generated method stub
             try {
 
                 Bitmap bitmap = Bytes2Bimap(data);
@@ -274,7 +273,6 @@ public class IdCardCameraActivity extends AppCompatActivity {
                 //跳到新的页面
 
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -293,7 +291,6 @@ public class IdCardCameraActivity extends AppCompatActivity {
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width,
                                    int height) {
-            // TODO Auto-generated method stub
 
         }
 

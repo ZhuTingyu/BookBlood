@@ -1,12 +1,15 @@
 package com.cpigeon.book.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by Administrator on 2018/9/4.
  */
 
-public class PigeonEntryEntity implements Serializable{
+public class PigeonEntryEntity implements Parcelable {
 
 
     /**
@@ -142,4 +145,42 @@ public class PigeonEntryEntity implements Serializable{
             return new PigeonEntryEntity(this);
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.FootRingNum);
+        dest.writeString(this.PigeonID);
+        dest.writeString(this.PigeonMoney);
+        dest.writeString(this.FootRingID);
+        dest.writeString(this.MatchInfoID);
+        dest.writeString(this.MatchInfo);
+        dest.writeString(this.PigeonMatchID);
+    }
+
+    protected PigeonEntryEntity(Parcel in) {
+        this.FootRingNum = in.readString();
+        this.PigeonID = in.readString();
+        this.PigeonMoney = in.readString();
+        this.FootRingID = in.readString();
+        this.MatchInfoID = in.readString();
+        this.MatchInfo = in.readString();
+        this.PigeonMatchID = in.readString();
+    }
+
+    public static final Parcelable.Creator<PigeonEntryEntity> CREATOR = new Parcelable.Creator<PigeonEntryEntity>() {
+        @Override
+        public PigeonEntryEntity createFromParcel(Parcel source) {
+            return new PigeonEntryEntity(source);
+        }
+
+        @Override
+        public PigeonEntryEntity[] newArray(int size) {
+            return new PigeonEntryEntity[size];
+        }
+    };
 }

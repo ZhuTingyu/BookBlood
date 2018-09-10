@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="invisible"
+    android:id="@+id/rlImage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/normal_safe_distance"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgHead"
+            android:layout_width="190px"
+            android:layout_height="190px"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="46px"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size"
+            tools:text="1233123412323123" />
+    </LinearLayout>
+
+    <com.cpigeon.book.widget.family.FamilyTreeView
+        android:id="@+id/familyTreeView"
+        android:layout_marginTop="108px"
+        android:layout_marginBottom="108px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:TreeView_isHaveCurrent="true"
+        app:TreeView_isHorizontal="true"
+        app:TreeView_isPrintModel="true"
+        app:TreeView_moveType="n" />
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rlText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="@dimen/normal_safe_distance">
+
+        <LinearLayout
+            android:id="@+id/llTextV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="46px"
+                android:text="@string/text_pigeon_master_sign"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="46px"
+                android:layout_below="@+id/tv1"
+                android:layout_marginBottom="126px"
+                android:layout_marginTop="76px"
+                android:text="@string/text_connection_phone_m"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/llTextH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_pigeon_master_sign"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/text_connection_phone_m"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

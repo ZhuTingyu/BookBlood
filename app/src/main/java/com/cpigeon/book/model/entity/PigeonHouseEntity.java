@@ -1,10 +1,13 @@
 package com.cpigeon.book.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Zhu TingYu on 2018/8/3.
  */
 
-public class PigeonHouseEntity {
+public class PigeonHouseEntity implements Parcelable {
 
 
     /**
@@ -168,4 +171,63 @@ public class PigeonHouseEntity {
     public void setPigeonHomeID(String PigeonHomeID) {
         this.PigeonHomeID = PigeonHomeID;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(this.Longitude);
+        dest.writeString(this.UsePigeonHomeNum);
+        dest.writeString(this.touxiangurl);
+        dest.writeString(this.PigeonHomeName);
+        dest.writeString(this.PigeonISOCID);
+        dest.writeString(this.xingming);
+        dest.writeString(this.PigeonMatchNum);
+        dest.writeString(this.xingbie);
+        dest.writeString(this.PigeonHomePhone);
+        dest.writeString(this.Province);
+        dest.writeString(this.City);
+        dest.writeString(this.County);
+        dest.writeString(this.Remark);
+        dest.writeDouble(this.Latitude);
+        dest.writeString(this.PigeonHomeAdds);
+        dest.writeString(this.PigeonHomeID);
+    }
+
+    public PigeonHouseEntity() {
+    }
+
+    protected PigeonHouseEntity(Parcel in) {
+        this.Longitude = in.readDouble();
+        this.UsePigeonHomeNum = in.readString();
+        this.touxiangurl = in.readString();
+        this.PigeonHomeName = in.readString();
+        this.PigeonISOCID = in.readString();
+        this.xingming = in.readString();
+        this.PigeonMatchNum = in.readString();
+        this.xingbie = in.readString();
+        this.PigeonHomePhone = in.readString();
+        this.Province = in.readString();
+        this.City = in.readString();
+        this.County = in.readString();
+        this.Remark = in.readString();
+        this.Latitude = in.readDouble();
+        this.PigeonHomeAdds = in.readString();
+        this.PigeonHomeID = in.readString();
+    }
+
+    public static final Parcelable.Creator<PigeonHouseEntity> CREATOR = new Parcelable.Creator<PigeonHouseEntity>() {
+        @Override
+        public PigeonHouseEntity createFromParcel(Parcel source) {
+            return new PigeonHouseEntity(source);
+        }
+
+        @Override
+        public PigeonHouseEntity[] newArray(int size) {
+            return new PigeonHouseEntity[size];
+        }
+    };
 }

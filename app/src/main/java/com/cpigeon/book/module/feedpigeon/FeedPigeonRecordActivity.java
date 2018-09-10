@@ -124,15 +124,15 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
         if (isSelect){
             view.setBackgroundResource(R.drawable.shape_bg_add_feed_pigeon_record_select);
             view.setTextColor(Utils.getColor(R.color.colorPrimary));
-            new CrazyShadow.Builder()
-                    .setContext(getBaseActivity())
-                    .setBaseShadowColor(Utils.getColor(R.color.colorPrimary))
-                    .setDirection(CrazyShadowDirection.BOTTOM)
-                    .setShadowRadius(ScreenTool.dip2px(5))
-                    .setCorner(ScreenTool.dip2px(5))
-                    .setBackground(Utils.getColor(R.color.white))
-                    .setImpl(CrazyShadow.IMPL_DRAW)
-                    .action(mLinearLayouts.get(position));
+//            new CrazyShadow.Builder()
+//                    .setContext(getBaseActivity())
+//                    .setBaseShadowColor(Utils.getColor(R.color.colorPrimary))
+//                    .setDirection(CrazyShadowDirection.BOTTOM)
+//                    .setShadowRadius(ScreenTool.dip2px(5))
+//                    .setCorner(ScreenTool.dip2px(5))
+//                    .setBackground(Utils.getColor(R.color.white))
+//                    .setImpl(CrazyShadow.IMPL_DRAW)
+//                    .action(mLinearLayouts.get(position));
 
 
         }else {
