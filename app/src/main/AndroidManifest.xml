@@ -161,7 +161,12 @@
         <activity android:name=".module.trainpigeon.SearchFootRingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
-        <activity android:name=".module.feedpigeon.SearchFeedPigeonRecordActivity" />
+        <activity android:name=".module.feedpigeon.SearchFeedPigeonRecordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".module.feedpigeon.FeedPigeonRecordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>

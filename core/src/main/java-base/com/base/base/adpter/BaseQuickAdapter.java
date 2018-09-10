@@ -5,12 +5,15 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.application.BaseApplication;
 import com.base.base.BaseActivity;
 import com.base.http.R;
+import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -41,26 +44,27 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
     }
 
     public void setEmptyView() {
-        if(!getData().isEmpty()){
+        if (!getData().isEmpty()) {
             return;
         }
         if (getEmptyViewImage() == 0) {
             setSelfEmptyView(getEmptyViewText());
         } else {
-           setSelfEmptyView(StringUtil.isStringValid(getEmptyViewText()) ?
-                   getEmptyViewText() : emptyText  ,getEmptyViewImage());
+            setSelfEmptyView(StringUtil.isStringValid(getEmptyViewText()) ?
+                    getEmptyViewText() : emptyText, getEmptyViewImage());
         }
     }
+
     public void setEmptyView(String emptyMsg) {
         this.emptyText = emptyMsg;
-        if(!getData().isEmpty()){
+        if (!getData().isEmpty()) {
             return;
         }
         if (getEmptyViewImage() == 0) {
             setSelfEmptyView(emptyMsg);
         } else {
             setSelfEmptyView(StringUtil.isStringValid(getEmptyViewText()) ?
-                    getEmptyViewText() : emptyText  ,getEmptyViewImage());
+                    getEmptyViewText() : emptyText, getEmptyViewImage());
         }
     }
 
@@ -68,12 +72,11 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
     public void setLoadMore(boolean isEnd) {
         if (isEnd) {
             this.loadMoreEnd();
-        }
-        else this.loadMoreComplete();
+        } else this.loadMoreComplete();
     }
 
-    public void setSelfEmptyView(String message, @DrawableRes int resId){
-        View view = View.inflate(BaseApplication.getAppContext(), R.layout.list_empty_layout,null);
+    public void setSelfEmptyView(String message, @DrawableRes int resId) {
+        View view = View.inflate(BaseApplication.getAppContext(), R.layout.list_empty_layout, null);
         TextView textView = view.findViewById(R.id.empty);
         textView.setTextColor(BaseApplication.getAppContext().getResources().getColor(R.color.colorPrimary));
         textView.setText(message);
@@ -82,20 +85,21 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         setEmptyView(view);
     }
 
-    public void setSelfEmptyView(String message){
-        View view = View.inflate(BaseApplication.getAppContext(), R.layout.list_empty_layout,null);
+    public void setSelfEmptyView(String message) {
+        View view = View.inflate(BaseApplication.getAppContext(), R.layout.list_empty_layout, null);
         TextView textView = view.findViewById(R.id.title);
         textView.setTextColor(BaseApplication.getAppContext().getResources().getColor(R.color.colorPrimary));
         textView.setText(message);
         setEmptyView(view);
     }
 
-    protected String getEmptyViewText(){
+    protected String getEmptyViewText() {
         return StringUtil.isStringValid(emptyText) ? emptyText : StringUtil.emptyString();
     }
 
 
-    protected @DrawableRes int getEmptyViewImage(){
+    protected @DrawableRes
+    int getEmptyViewImage() {
         return 0;
     }
 
@@ -107,7 +111,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         return mContext.getResources().getDimension(resId);
     }
 
-    protected BaseActivity getBaseActivity(){
+    protected BaseActivity getBaseActivity() {
         return (BaseActivity) mContext;
     }
 
@@ -115,9 +119,31 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         this.emptyText = emptyText;
     }
 
-    public void cleanList(){
+    public void cleanList() {
         getData().clear();
         notifyDataSetChanged();
     }
+
+    public void addTopAndBttomMargin(com.base.base.BaseViewHolder holder, float margin) {
+
+        int marginT = ScreenTool.dip2px(margin);
+
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        if (getData().size() == 1) {
+            layoutParams.setMargins(0, marginT, 0, 0);
+        } else {
+            if (holder.getAdapterPosition() - getHeaderLayoutCount() == 0) {
+                layoutParams.setMargins(0, marginT, 0, 0);
+            } else if (holder.getAdapterPosition() - getHeaderLayoutCount() == getData().size() - 1) {
+                layoutParams.setMargins(0, 0, 0, marginT);
+            }else {
+                layoutParams.setMargins(0, 0, 0, 0);
+            }
+        }
+
+        holder.itemView.setLayoutParams(layoutParams);
+
+    }
+
 }
 

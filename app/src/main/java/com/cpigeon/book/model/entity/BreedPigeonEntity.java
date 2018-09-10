@@ -75,6 +75,8 @@ public class BreedPigeonEntity implements Serializable {
     private String FootCode;// 国家编码
     private String FootCodeID;// 国家id
 
+    public BreedPigeonEntity(){};
+
     private BreedPigeonEntity(Builder builder) {
         setCoverPhotoUrl(builder.CoverPhotoUrl);
         setCoverPhotoID(builder.CoverPhotoID);

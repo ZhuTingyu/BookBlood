@@ -240,7 +240,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         if (requestCode == PictureMimeType.ofImage()) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 
-            IntentBuilder.Builder().putExtra(IntentBuilder.KEY_TYPE, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath()).build())
+            IntentBuilder.Builder().putExtra(IntentBuilder.KEY_DATA, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath()).build())
                     .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
 
         }
