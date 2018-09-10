@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/tvLeft"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/img_left"
                 android:drawablePadding="5dp"

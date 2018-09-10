@@ -9,7 +9,7 @@ import com.base.util.Utils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
-import com.cpigeon.book.module.breed.BreedPigeonDetailsFragment;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.play.PlayInportFragment;
 import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.widget.LineInputView;

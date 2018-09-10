@@ -21,7 +21,7 @@ import com.base.widget.CustomViewPager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
-import com.cpigeon.book.module.breed.BreedPigeonEntryFragment;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonEntryFragment;
 import com.cpigeon.book.module.home.HomeFragment;
 import com.cpigeon.book.module.home.HomeFragment2;
 import com.cpigeon.book.module.home.HomeFragment3;

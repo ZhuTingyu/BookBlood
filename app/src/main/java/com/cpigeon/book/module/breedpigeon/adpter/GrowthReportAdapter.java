@@ -1,9 +1,8 @@
-package com.cpigeon.book.module.breed.adpter;
+package com.cpigeon.book.module.breedpigeon.adpter;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.base.base.BaseViewHolder;
@@ -12,8 +11,6 @@ import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.module.photo.adpter.ImageItemDecoration;
-
-import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/8/29.

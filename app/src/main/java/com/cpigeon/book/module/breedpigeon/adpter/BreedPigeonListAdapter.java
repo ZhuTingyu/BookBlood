@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed.adpter;
+package com.cpigeon.book.module.breedpigeon.adpter;
 
 import android.widget.ImageView;
 
@@ -53,6 +53,25 @@ public class BreedPigeonListAdapter extends BaseQuickAdapter<BreedPigeonEntity, 
         } else {
             imgSex.setImageResource(R.mipmap.ic_sex_no);
         }
+//        ImageView imgSex = helper.getView(R.id.imgSex);
+//
+//        helper.setText(R.id.tvColor, item.getPigeonPlumeName());
+//
+//        helper.setText(R.id.tvTime, item.getFootRingNum());
+//
+//        Glide.with(mContext)
+//                .load(item.getCoverPhotoUrl())
+//                .placeholder(R.drawable.ic_img_default)
+//                .into((ImageView) helper.getView(R.id.imgHead));
+//
+//
+//        if (item.getPigeonSexName().equals("雌")) {
+//            imgSex.setImageResource(R.mipmap.ic_female);
+//        } else if (item.getPigeonSexName().equals("雄")) {
+//            imgSex.setImageResource(R.mipmap.ic_male);
+//        } else {
+//            imgSex.setImageResource(R.mipmap.ic_sex_no);
+//        }
 
     }
 }

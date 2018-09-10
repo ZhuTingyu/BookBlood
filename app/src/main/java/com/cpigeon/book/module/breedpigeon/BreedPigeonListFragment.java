@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed;
+package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,8 +23,8 @@ import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breed.adpter.BreedPigeonListAdapter;
-import com.cpigeon.book.module.breed.viewmodel.BreedPigeonListModel;
+import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;

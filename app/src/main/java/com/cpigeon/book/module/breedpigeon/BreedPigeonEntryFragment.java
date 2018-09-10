@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed;
+package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,7 +30,7 @@ import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breed.viewmodel.BreedPigeonEntryViewModel;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonEntryViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
@@ -333,13 +333,9 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 } else {
                     mSelectTypeViewModel.getSelectType_PigeonSource();
                 }
-
-
                 break;
             case R.id.ll_foot_father:
                 //父足环
-
-
                 List<String> foots3 = new ArrayList<>();
                 InputSingleFootDialog dialog3 = new InputSingleFootDialog();
                 dialog3.setFoots(foots3);
@@ -430,8 +426,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             case R.id.ll_their_shells_date:
                 //出壳日期
                 PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
-                    llTheirShellsDate.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
-                    mBreedPigeonEntryViewModel.theirShellsDate = year + "-" + monthOfYear + "-" + dayOfMonth;
+                    llTheirShellsDate.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                    mBreedPigeonEntryViewModel.theirShellsDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                 });
                 break;
             case R.id.ll_lineage:

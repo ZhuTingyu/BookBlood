@@ -28,6 +28,7 @@
     </declare-styleable>
 
     <declare-styleable name="LineInputView">
+        <attr name="lineInputView_LeftTextGravity" format="boolean" />
         <attr name="lineInputView_Weight" format="integer" />
         <attr name="lineInputView_LeftTextColor" format="color" />
         <attr name="lineInputView_RightTextColor" format="color" />
@@ -109,7 +110,7 @@
         <attr name="text" format="string" />
         <attr name="text_hint" format="string" />
         <attr name="edit_max_input_line" format="integer" />
-        <attr name="input_high"  format="dimension">
+        <attr name="input_high" format="dimension">
 
         </attr>
         <attr name="inputBoxView_tittle" format="string" />

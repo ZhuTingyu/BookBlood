@@ -197,6 +197,5 @@ public class IdCertificationFragment extends BaseBookFragment {
                 mViewModel.idCardN = CacheUtils.getInstance().getString(IdCardCameraActivity.IMAGE_N_PATH);
             }
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breed;
+package com.cpigeon.book.module.breedpigeon;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +10,8 @@ import com.base.util.db.DbEntity;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
-import com.cpigeon.book.module.breed.adpter.BreedPigeonListAdapter;
-import com.cpigeon.book.module.breed.viewmodel.BreedPigeonListModel;
+import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.SearchTextView;
 
