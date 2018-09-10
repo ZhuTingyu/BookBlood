@@ -10,10 +10,9 @@ import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
-import com.cpigeon.book.module.breed.BreedPigeonDetailsFragment;
-import com.cpigeon.book.module.breed.SearchBreedPigeonActivity;
-import com.cpigeon.book.module.breed.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.SearchBreedPigeonActivity;
+import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+
 
 import java.util.List;
 

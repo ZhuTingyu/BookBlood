@@ -17,8 +17,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
-import com.cpigeon.book.module.breed.SearchBreedPigeonActivity;
-import com.cpigeon.book.module.breed.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 
 /**
  * Created by Zhu TingYu on 2018/9/10.
