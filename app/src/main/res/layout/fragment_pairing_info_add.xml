@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
+    android:paddingLeft="@dimen/spacing_left_reight"
+    android:paddingRight="@dimen/spacing_left_reight"
     android:orientation="vertical">
 
 
@@ -16,8 +18,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_left_reight"
-            android:layout_marginRight="@dimen/spacing_left_reight"
             android:orientation="vertical">
 
             <include layout="@layout/layout_pairing_info_head" />
@@ -31,13 +31,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
-            android:paddingLeft="@dimen/spacing_left_reight"
-            android:paddingRight="@dimen/spacing_left_reight"
+
             app:lineInputView_Hint="请输入"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="配偶环号" />
+
+
+
+
+        <!--血统-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_lineage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            app:lineInputView_Hint="请选择"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="血统" />
+
+
+
+
+        <!--羽色-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_feather_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            app:lineInputView_Hint="请选择"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="羽色" />
+
 
         <!--配对时间-->
         <com.cpigeon.book.widget.LineInputView
@@ -45,13 +75,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
-            android:paddingLeft="@dimen/spacing_left_reight"
-            android:paddingRight="@dimen/spacing_left_reight"
             app:lineInputView_Hint="请选择"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="配对时间" />
+
 
 
     </LinearLayout>

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
     android:layout_marginTop="24dp"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/spacing_left_reight"
-    android:paddingRight="@dimen/spacing_left_reight">
-
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,13 +21,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
-            app:lineInputView_Hint="未挂环"
+            app:lineInputView_RightString="删除"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="第一窝" />
 
+
+        <include layout="@layout/layout_publick_pairing_nest_btm" />
+
     </LinearLayout>
 
 
-</LinearLayout>
+</android.support.v7.widget.CardView>

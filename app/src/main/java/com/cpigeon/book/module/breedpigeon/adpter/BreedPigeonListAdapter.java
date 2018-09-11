@@ -47,31 +47,12 @@ public class BreedPigeonListAdapter extends BaseQuickAdapter<BreedPigeonEntity, 
 
 
         if (Utils.getString(R.string.text_male_a).equals(item.getPigeonSexName())) {
-            imgSex.setImageResource(R.mipmap.ic_female);
-        } else if (Utils.getString(R.string.text_female_a).equals(item.getPigeonSexName())) {
             imgSex.setImageResource(R.mipmap.ic_male);
+        } else if (Utils.getString(R.string.text_female_a).equals(item.getPigeonSexName())) {
+            imgSex.setImageResource(R.mipmap.ic_female);
         } else {
             imgSex.setImageResource(R.mipmap.ic_sex_no);
         }
-//        ImageView imgSex = helper.getView(R.id.imgSex);
-//
-//        helper.setText(R.id.tvColor, item.getPigeonPlumeName());
-//
-//        helper.setText(R.id.tvTime, item.getFootRingNum());
-//
-//        Glide.with(mContext)
-//                .load(item.getCoverPhotoUrl())
-//                .placeholder(R.drawable.ic_img_default)
-//                .into((ImageView) helper.getView(R.id.imgHead));
-//
-//
-//        if (item.getPigeonSexName().equals("雌")) {
-//            imgSex.setImageResource(R.mipmap.ic_female);
-//        } else if (item.getPigeonSexName().equals("雄")) {
-//            imgSex.setImageResource(R.mipmap.ic_male);
-//        } else {
-//            imgSex.setImageResource(R.mipmap.ic_sex_no);
-//        }
 
     }
 }

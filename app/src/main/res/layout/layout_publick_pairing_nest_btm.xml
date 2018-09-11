@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+
+    <!--配对时间-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_pairing_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        app:lineInputView_Hint="0000-00-00"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="配对时间"
+        app:lineInputView_LeftTextColor="@color/general_text_color" />
+
+    <!--产蛋信息-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_lay_eggs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        app:lineInputView_Hint="未产蛋"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="产蛋信息"
+        app:lineInputView_LeftTextColor="@color/general_text_color" />
+
+    <!--产蛋时间-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_lay_eggs_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:visibility="gone"
+        app:lineInputView_Hint="0000-00-00"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="&#160;&#160;&#8210;&#160;&#160;&#8210;时间" />
+
+    <!--产蛋 受精蛋-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_fertilized_egg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:visibility="gone"
+        app:lineInputView_Hint="0枚"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="&#160;&#160;&#8210;受精蛋" />
+
+    <!--产蛋 无精蛋-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_fertilized_egg_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:visibility="gone"
+        app:lineInputView_Hint="0枚"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="&#160;&#160;&#8210;无精蛋" />
+
+    <!--出壳信息-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_hatches_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        app:lineInputView_Hint="已出壳"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="出壳信息"
+        app:lineInputView_LeftTextColor="@color/general_text_color" />
+
+
+    <!--出壳时间-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_hatches_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:visibility="gone"
+        app:lineInputView_Hint="0000-00-00"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="&#160;&#160;&#8201;&#160;&#160;&#8201;时间" />
+
+
+    <!--出壳个数-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_hatches_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:visibility="gone"
+        app:lineInputView_Hint="0个"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="出壳个数" />
+
+
+    <!--子代信息-->
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/ll_offspring_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        app:lineInputView_Hint="已挂环"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_IsLookState="true"
+        app:lineInputView_IsNotNull="true"
+        app:lineInputView_LeftString="子代信息"
+        app:lineInputView_LeftTextColor="@color/general_text_color" />
+
+
+</LinearLayout>

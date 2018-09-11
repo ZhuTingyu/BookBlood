@@ -160,8 +160,8 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
 
         mSelectTypeViewModel.getSelectType_Sex();
         mSelectTypeViewModel.getSelectType_FeatherColor();
-        mSelectTypeViewModel.getSelectType_eyeSand();
         mSelectTypeViewModel.getSelectType_lineage();
+        mSelectTypeViewModel.getSelectType_eyeSand();
         mSelectTypeViewModel.getSelectType_State();
         mSelectTypeViewModel.getSelectType_PigeonSource();
 
@@ -408,6 +408,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
                             mDialogLineage.hide();
                             mBasePigeonViewModel.lineage = content;
                             llLineage.setRightText(content);
+                            btnState();
                         }, () -> {
                             mDialogLineage.hide();
 
