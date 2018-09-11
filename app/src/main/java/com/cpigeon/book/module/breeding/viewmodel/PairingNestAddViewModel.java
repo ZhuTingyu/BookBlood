@@ -1,6 +1,8 @@
 package com.cpigeon.book.module.breeding.viewmodel;
 
 import com.base.base.BaseViewModel;
+import com.base.http.HttpErrorException;
+import com.cpigeon.book.model.PairingModel;
 
 /**
  * 添加窝次
@@ -35,9 +37,19 @@ public class PairingNestAddViewModel extends BaseViewModel {
     public String offspringInfo;
 
 
-    public void isCanCommit() {
-        isCanCommit( pairingTime, layEggs, hatchesInfo, offspringInfo);
+    //添加窝次信息   TXGP_PigeonBreedNest_Add
+    public void getTXGP_PigeonBreedNest_Add() {
+
+        submitRequestThrowError(PairingModel.getTXGP_PigeonBreedNest_Add("", ""), r -> {
+            if (r.isOk()) {
+                hintDialog(r.msg);
+            } else throw new HttpErrorException(r);
+        });
+
     }
 
+    public void isCanCommit() {
+        isCanCommit(pairingTime, layEggs, hatchesInfo, offspringInfo);
+    }
 
 }

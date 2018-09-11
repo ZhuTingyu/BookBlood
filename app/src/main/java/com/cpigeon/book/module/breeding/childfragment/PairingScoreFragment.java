@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breeding;
+package com.cpigeon.book.module.breeding.childfragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,16 +6,17 @@ import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
-import com.cpigeon.book.module.breeding.adapter.PairingNestInfoListAdapter;
+import com.cpigeon.book.module.breeding.PairingNestInfoListFragment;
+import com.cpigeon.book.module.breeding.adapter.PairingScoreAdapter;
 
 /**
- * 窝次信息列表
- * Created by Administrator on 2018/9/10.
+ * 推荐配对--- 》按评分
+ * Created by Administrator on 2018/9/11.
  */
 
-public class PairingNestInfoListFragment extends BaseListFragment {
+public class PairingScoreFragment extends BaseListFragment {
 
-    private PairingNestInfoListAdapter mAdapter;
+    private PairingScoreAdapter mAdapter;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
@@ -29,22 +30,13 @@ public class PairingNestInfoListFragment extends BaseListFragment {
         tvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);
 
-        setTitle("窝次信息");
-        setToolbarRight("添加窝次", item -> {
-
-            PairingNestAddFragment.start(getBaseActivity());
-            return true;
-        });
-
-        mAdapter = new PairingNestInfoListAdapter();
+        mAdapter = new PairingScoreAdapter();
         list.setAdapter(mAdapter);
 
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-
+            getBaseActivity().finish();
         });
-
-
 
 
     }

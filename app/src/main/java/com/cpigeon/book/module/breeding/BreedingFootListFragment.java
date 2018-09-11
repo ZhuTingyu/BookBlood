@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
 import com.cpigeon.book.module.breedpigeon.SearchBreedPigeonActivity;
-import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
  * 繁育信息   足环列表
@@ -54,31 +52,9 @@ public class BreedingFootListFragment extends BaseFootListFagment {
             BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonActivity.class, bundle);
         });
 
-        RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, Lists.newArrayList(new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build(),
-                new BreedPigeonEntity.Builder().build()
-        ));
-
-
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             BreedPigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            PairingInfoListFragment.start(getBaseActivity(),
-                    mBreedPigeonEntity.getPigeonID(),
-                    mBreedPigeonEntity.getFootRingID());
+            PairingInfoListFragment.start(getBaseActivity(), mBreedPigeonEntity);
         });
     }
 }

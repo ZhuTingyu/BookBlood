@@ -6,17 +6,23 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp">
 
 
-        <LinearLayout
+        <com.base.widget.magicindicator.MagicIndicator
+            android:id="@+id/indicator"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        </LinearLayout>
+            android:layout_height="match_parent" />
 
     </android.support.v7.widget.CardView>
+
+    <com.base.widget.CustomViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

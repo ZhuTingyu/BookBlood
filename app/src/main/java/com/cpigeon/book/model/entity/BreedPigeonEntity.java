@@ -25,7 +25,6 @@ public class BreedPigeonEntity implements Serializable {
 
     private String CoverPhotoUrl;
     private String CoverPhotoID;
-    private String PigeonSex;
     private String FootRingID;
     private String StateID;
     private String StateName;
@@ -80,7 +79,6 @@ public class BreedPigeonEntity implements Serializable {
     private BreedPigeonEntity(Builder builder) {
         setCoverPhotoUrl(builder.CoverPhotoUrl);
         setCoverPhotoID(builder.CoverPhotoID);
-        setPigeonSex(builder.PigeonSex);
         setFootRingID(builder.FootRingID);
         setStateID(builder.StateID);
         setStateName(builder.StateName);
@@ -127,14 +125,6 @@ public class BreedPigeonEntity implements Serializable {
 
     public void setCoverPhotoID(String coverPhotoID) {
         CoverPhotoID = coverPhotoID;
-    }
-
-    public String getPigeonSex() {
-        return PigeonSex;
-    }
-
-    public void setPigeonSex(String pigeonSex) {
-        PigeonSex = pigeonSex;
     }
 
     public String getFootRingID() {
