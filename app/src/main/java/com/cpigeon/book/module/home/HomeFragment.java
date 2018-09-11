@@ -26,6 +26,7 @@ import com.cpigeon.book.module.feedpigeon.FeedPigeonRecordListFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.viewmodel.HomeViewModel;
+import com.cpigeon.book.module.makebloodbook.SelectPigeonToMakeBookFragment;
 import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.module.menu.message.MsgActivity;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
@@ -144,6 +145,11 @@ public class HomeFragment extends BaseBookFragment {
         });
         mSTvTrainRecord.setOnClickListener(v -> {
             TrainPigeonListFragment.start(getBaseActivity());
+        });
+
+        mSTvBloodBookMade.setOnClickListener(v -> {
+            SearchFragmentParentActivity.start(getBaseActivity(), SelectPigeonToMakeBookFragment.class
+                    , false, null);
         });
 
         mSTvFeedPigeonRecord.setOnClickListener(v -> {

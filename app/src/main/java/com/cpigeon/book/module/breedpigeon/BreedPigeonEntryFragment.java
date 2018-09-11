@@ -60,6 +60,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
 
 public class BreedPigeonEntryFragment extends BaseBookFragment {
 
+    private static final int CODE_ADD_PLAY = 0x234;
 
     @BindView(R.id.llz)
     LineInputListLayout mLlRoot;
@@ -108,6 +109,11 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
     public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, BreedPigeonEntryFragment.class);
+    }
+
+    public static void start(Activity activity, int requestCode) {
+        IntentBuilder.Builder()
+                .startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
     }
 
     @Override
@@ -226,10 +232,11 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
                 //确定
                 sweetAlertDialog.dismiss();
-                PlayAddFragment.start(getBaseActivity(), o, 0);
+                PlayAddFragment.start(getBaseActivity(), o, 0, CODE_ADD_PLAY);
             }, sweetAlertDialog -> {
                 //取消
                 sweetAlertDialog.dismiss();
+                finish();
             });
         });
     }
@@ -269,6 +276,12 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 mBreedPigeonEntryViewModel.phototypeid = mImgTypeEntity.getImgTypeId();
                 mBreedPigeonEntryViewModel.images.addAll(Lists.newArrayList(mImgTypeEntity.getImgPath()));
 
+                break;
+
+            case CODE_ADD_PLAY:
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntryViewModel.mBreedPigeonData.getValue())
+                        .finishForResult(getBaseActivity());
                 break;
         }
     }

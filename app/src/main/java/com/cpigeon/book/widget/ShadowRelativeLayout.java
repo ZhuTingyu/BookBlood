@@ -19,6 +19,7 @@ import com.base.util.system.ScreenTool;
 
 public class ShadowRelativeLayout extends RelativeLayout {
     private Paint mPaint;
+    private float shadowSize = 10f;
     private int mShadowColor;
     public ShadowRelativeLayout(Context context) {
         super(context);
@@ -40,14 +41,23 @@ public class ShadowRelativeLayout extends RelativeLayout {
         invalidate();
     }
 
+    public void addShadow(@ColorRes int resId, float shadowSize) {
+        mShadowColor = Utils.getColor(resId);
+        mPaint = new Paint();
+        mPaint.setColor(Color.WHITE);
+        this.shadowSize = shadowSize;
+        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //绘制阴影，param1：模糊半径；param2：x轴大小：param3：y轴大小；param4：阴影颜色
-        mPaint.setShadowLayer(5F, 10F, 10F, mShadowColor);
-        RectF rect = new RectF(0 , 0, getWidth() - ScreenTool.dip2px(10)
-                , getHeight() - ScreenTool.dip2px(10));
-        canvas.drawRoundRect(rect, (float)10, (float)10, mPaint);
+        mPaint.setShadowLayer(5F, shadowSize, shadowSize, mShadowColor);
+        RectF rect = new RectF(0 , 0, getWidth() - ScreenTool.dip2px(shadowSize)
+                , getHeight() - ScreenTool.dip2px(shadowSize));
+        canvas.drawRoundRect(rect, shadowSize, shadowSize, mPaint);
     }
 
 }

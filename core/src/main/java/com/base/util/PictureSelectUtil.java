@@ -35,7 +35,12 @@ public class PictureSelectUtil {
             localMedia.setPath(img);
             media.add(localMedia);
         }
-        ShowImageActivity.startActivity(activity, imageView, startPosition, media);
+
+        if(imageView == null){
+            ShowImageActivity.startActivity(activity,startPosition, media);
+        }else {
+            ShowImageActivity.startActivity(activity, imageView, startPosition, media);
+        }
     }
 
     public static void showChooseImage(Activity activity, int type, int count) {

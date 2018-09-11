@@ -1,4 +1,4 @@
-package com.cpigeon.book.widget;
+package com.cpigeon.book.widget.family;
 
 import android.content.Context;
 import android.support.annotation.ColorRes;
@@ -16,6 +16,7 @@ import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.widget.ShadowRelativeLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Zhu TingYu on 2018/6/21.
  */
 
-public class FamilyMemberView extends LinearLayout {
+public class FamilyMemberView extends FamilyMember {
 
     RelativeLayout rlMemberInfo;
     ShadowRelativeLayout rlShadow;
@@ -44,13 +45,15 @@ public class FamilyMemberView extends LinearLayout {
     int imgSize;
     int shadowColor;
     boolean isMiniModel;
+    boolean isHorizontal;
     private BreedPigeonEntity mPigeonEntity;
 
-    public FamilyMemberView(Context context, int generationPoint, int generationsOrder, boolean isMiniModel) {
+    public FamilyMemberView(Context context, int generationPoint, int generationsOrder, boolean isMiniModel, boolean isHorizontal) {
         super(context);
         this.generationPoint = generationPoint;
         this.generationsOrder = generationsOrder;
         this.isMiniModel = isMiniModel;
+        this.isHorizontal = isHorizontal;
         initView(context);
     }
 
@@ -87,9 +90,9 @@ public class FamilyMemberView extends LinearLayout {
         mTvBlood = findViewById(R.id.tvBlood);
         mTvName = findViewById(R.id.tvName);
 
-        if(generationPoint == 0){
+        if (generationPoint == 0) {
             rlMemberInfo.setBackgroundResource(R.drawable.shape_bg_family_member_black);
-        }else {
+        } else {
             if (generationsOrder % 2 == 0) {
                 rlMemberInfo.setBackgroundResource(R.drawable.shape_bg_family_member_blue);
             } else {
@@ -147,9 +150,16 @@ public class FamilyMemberView extends LinearLayout {
         }
         rlShadow.addShadow(shadowColor);
 
-        LayoutParams shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
-        RelativeLayout.LayoutParams infoP = new RelativeLayout.LayoutParams(rootW, rootH);
+        LayoutParams shadowP;
+        RelativeLayout.LayoutParams infoP;
         RelativeLayout.LayoutParams imgP = new RelativeLayout.LayoutParams(imgSize, imgSize);
+        if (isHorizontal) {
+            shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
+            infoP = new RelativeLayout.LayoutParams(rootW, rootH);
+        } else {
+            shadowP = new LayoutParams(rootH + shadowSize, rootW + shadowSize);
+            infoP = new RelativeLayout.LayoutParams(rootH, rootW);
+        }
         imgP.addRule(RelativeLayout.CENTER_IN_PARENT);
         rlMemberInfo.setLayoutParams(infoP);
         imgAdd.setLayoutParams(imgP);
@@ -203,9 +213,6 @@ public class FamilyMemberView extends LinearLayout {
         }
     }
 
-    public RelativeLayout getRlMemberInfo() {
-        return rlShadow;
-    }
 
     @ColorRes
     public int getShadowColor() {
@@ -214,6 +221,11 @@ public class FamilyMemberView extends LinearLayout {
         } else {
             return R.color.color_book_female;
         }
+    }
+
+    @Override
+    public View getInfoView() {
+        return rlShadow;
     }
 
     public interface OnMemberClickListener {

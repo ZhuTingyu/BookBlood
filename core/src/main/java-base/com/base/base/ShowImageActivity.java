@@ -22,6 +22,8 @@ import android.view.ViewGroup;
 
 import com.base.event.ShowImagePositionEvent;
 import com.base.util.BarUtils;
+import com.base.util.regex.RegexUtils;
+import com.base.util.utility.StringUtil;
 import com.base.widget.magicindicator.MagicIndicator;
 import com.base.widget.magicindicator.ViewPagerHelper;
 import com.base.widget.magicindicator.ext.navigator.ScaleCircleNavigator;
@@ -41,10 +43,10 @@ import com.luck.picture.lib.widget.PreviewViewPager;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
 
 
 /**
@@ -75,17 +77,26 @@ public class ShowImageActivity extends BaseActivity {
             intent.putExtra("position", position);
             ActivityCompat.startActivity(activity, intent, activityOptions.toBundle());
         } else {
+            intent.putExtra("previewSelectList", (Serializable) images);
+            intent.putExtra("position", position);
             activity.startActivity(intent);
             activity.overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
         }
     }
 
+    public static void startActivity(Activity activity, int position, List<LocalMedia> images) {
+        Intent intent = new Intent(activity, ShowImageActivity.class);
+        intent.putExtra("previewSelectList", (Serializable) images);
+        intent.putExtra("position", position);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+    }
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BarUtils.setStatusBarVisibility(getWindow(),false);
+        BarUtils.setStatusBarVisibility(getWindow(), false);
         BarUtils.setStatusBarAllAlpha(this);
         setContentView(R.layout.activity_show_image_layout);
         inflater = LayoutInflater.from(this);
@@ -124,7 +135,7 @@ public class ShowImageActivity extends BaseActivity {
         magicIndicator.setNavigator(scaleCircleNavigator);
         ViewPagerHelper.bind(magicIndicator, viewPager);
 
-        if(images.size() == 1){
+        if (images.size() == 1) {
             magicIndicator.setVisibility(View.GONE);
         }
 
@@ -207,23 +218,39 @@ public class ShowImageActivity extends BaseActivity {
                 }
 
                 boolean isGif = PictureMimeType.isGif(pictureType);
-                if(isGif && !media.isCompressed()) {
-                    Glide.with(ShowImageActivity.this).load(path).asGif().override(480, 800).diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.HIGH).into(imageView);
+                if (isGif && !media.isCompressed()) {
+                    if (RegexUtils.isURL(path)){
+                        Glide.with(ShowImageActivity.this).load(path).asGif().override(480, 800)
+                                .diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.HIGH).into(imageView);
+                    }else {
+                        Glide.with(ShowImageActivity.this).load(new File(path)).asGif().override(480, 800)
+                                .diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.HIGH).into(imageView);
+                    }
                     ShowImageActivity.this.dismissDialog();
                 } else {
-                    Glide.with(ShowImageActivity.this).load(path).asBitmap().diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(480, 800) {
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                            imageView.setImageBitmap(resource);
-                            ShowImageActivity.this.dismissDialog();
-                        }
-                    });
+                    if(RegexUtils.isURL(path)){
+
+                        Glide.with(ShowImageActivity.this).load(path).asBitmap().diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(480, 800) {
+                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                imageView.setImageBitmap(resource);
+                                ShowImageActivity.this.dismissDialog();
+                            }
+                        });
+                    }else {
+                        Glide.with(ShowImageActivity.this).load(new File(path)).asBitmap().diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(480, 800) {
+                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                imageView.setImageBitmap(resource);
+                                ShowImageActivity.this.dismissDialog();
+                            }
+                        });
+                    }
+
                 }
 
                 imageView.setOnViewTapListener((view, x, y) -> {
                     onBackPressed();
 
                 });
-
 
 
             }
@@ -236,6 +263,6 @@ public class ShowImageActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        BarUtils.setStatusBarVisibility(getWindow(),true);
+        BarUtils.setStatusBarVisibility(getWindow(), true);
     }
 }

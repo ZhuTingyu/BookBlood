@@ -84,6 +84,13 @@ public class PlayAddFragment extends BaseBookFragment {
                 .putExtra(IntentBuilder.KEY_TYPE, type)//类型
                 .startParentActivity(activity, PlayAddFragment.class);
     }
+    public static void start(Activity activity, PigeonEntryEntity mPigeonEntryEntity, int type, int requestCode) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, mPigeonEntryEntity)
+                .putExtra(IntentBuilder.KEY_TYPE, type)//类型
+                .startParentActivity(activity, PlayAddFragment.class, requestCode);
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -222,7 +229,7 @@ public class PlayAddFragment extends BaseBookFragment {
             }, sweetAlertDialog -> {
                 //取消
                 sweetAlertDialog.dismiss();
-                getBaseActivity().finish();
+                IntentBuilder.Builder().finishForResult(getBaseActivity());
             });
         });
 

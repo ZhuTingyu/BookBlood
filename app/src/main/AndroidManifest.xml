@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 
+
     <uses-sdk android:minSdkVersion="8"></uses-sdk>
 
     <application
@@ -165,6 +166,9 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity android:name=".module.feedpigeon.FeedPigeonRecordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".module.makebloodbook.SearchBreedPigeonToMakeBookActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
 

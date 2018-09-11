@@ -5,10 +5,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
+import com.base.util.Utils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.utility.TimeUtil;
+import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.BreedPigeonEntity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,10 +36,26 @@ public class BreedPigeonListViewHolder extends BaseViewHolder {
 
     }
 
-    public void bindData(String data){
-        GlideUtil.setGlideImageView(itemView.getContext(), UserModel.getInstance().getUserData().touxiangurl,mImgHead);
-        mTvColor.setText("白");
-        mImgSex.setImageResource(R.mipmap.ic_male);
-        mTvTime.setText(TimeUtil.format(System.currentTimeMillis(), TimeUtil.FORMAT_YYYYMMDDHHMM));
+    public void bindData(BreedPigeonEntity data){
+        ImageView imgSex = getView(R.id.imgSex);
+
+        setText(R.id.tvColor, data.getPigeonPlumeName());
+
+        setText(R.id.tvTime, data.getFootRingNum());
+
+        Glide.with(getActivity())
+                .load(data.getCoverPhotoUrl())
+                .placeholder(R.drawable.ic_img_default)
+                .into((ImageView)getView(R.id.imgHead));
+
+
+        if (data.getPigeonSexName().equals(Utils.getString(R.string.text_male_a))) {
+            imgSex.setImageResource(R.mipmap.ic_female);
+        } else if (data.getPigeonSexName().equals(Utils.getString(R.string.text_female_a))) {
+            imgSex.setImageResource(R.mipmap.ic_male);
+        } else {
+            imgSex.setImageResource(R.mipmap.ic_sex_no);
+        }
+
     }
 }

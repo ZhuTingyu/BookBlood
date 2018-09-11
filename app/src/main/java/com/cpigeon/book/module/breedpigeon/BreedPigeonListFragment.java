@@ -93,6 +93,8 @@ public class BreedPigeonListFragment extends BaseFragment {
         mDrawerLayout = mActivity.getDrawerLayout();
         mFiltrate = mActivity.getFiltrate();
 
+
+
         setToolbarRightImage(R.drawable.svg_filtrate, item -> {
             if (mDrawerLayout != null) {
                 mDrawerLayout.openDrawer(Gravity.RIGHT);

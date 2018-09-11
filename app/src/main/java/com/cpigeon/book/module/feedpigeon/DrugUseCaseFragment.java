@@ -1,6 +1,8 @@
 package com.cpigeon.book.module.feedpigeon;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.base.util.IntentBuilder;
 import com.base.util.RxUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -21,6 +24,8 @@ import com.cpigeon.book.widget.LineInputView;
  */
 
 public class DrugUseCaseFragment extends BaseBookFragment {
+
+    public static final int CODE_ILLNESS_RECORD = 0x123;
 
     private LineInputListLayout mLlRoot;
     private LineInputView mLvIllnessRecord;
@@ -69,5 +74,19 @@ public class DrugUseCaseFragment extends BaseBookFragment {
         composite.add(RxUtils.delayed(50, aLong -> {
             mLlRoot.setLineInputViewState(false);
         }));
+
+        mLvIllnessRecord.setOnRightClickListener(lineInputView -> {
+            IntentBuilder.Builder()
+                    .startParentActivity(getBaseActivity(), SelectIllnessRecordFragment.class, CODE_ILLNESS_RECORD);
+        });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            mLvIllnessRecord.setRightText(data.getStringExtra(IntentBuilder.KEY_DATA));
+        }
     }
 }

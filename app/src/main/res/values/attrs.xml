@@ -13,6 +13,7 @@
             <flag name="n" value="0x00000003" />
         </attr>
         <attr name="TreeView_isMiniModel" format="boolean" />
+        <attr name="TreeView_isPrintModel" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SimpleTitleView">
