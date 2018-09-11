@@ -181,6 +181,8 @@
     <string name="get_home_ad">TXGP_Get_IndexAd</string>
 
     <string name="get_user_id_card">ZGW_Users_GetID</string>
+    <string name="get_blood_book_4">TXGP_PigeonGenealogy_SelectFour</string>
+    <string name="get_train_pigeon_list">TXGP_PigeonTrain_SelectAll</string>
 
 
 </resources>

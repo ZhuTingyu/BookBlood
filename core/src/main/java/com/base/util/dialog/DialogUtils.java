@@ -187,11 +187,11 @@ public class DialogUtils {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
         dialogPrompt.setTitleText(context.getString(R.string.string_text_hint));
-        dialogPrompt.setCancelText(context.getString(com.base.http.R.string.btn_confirm));
-        dialogPrompt.setCancelClickListener(leftListener);
-        dialogPrompt.setConfirmClickListener(rightListener);
+        dialogPrompt.setCancelText(context.getString(com.base.http.R.string.btn_cancel));
+        dialogPrompt.setCancelClickListener(rightListener);
+        dialogPrompt.setConfirmClickListener(leftListener);
         dialogPrompt.setContentText(content);
-        dialogPrompt.setConfirmText(context.getString(com.base.http.R.string.btn_cancel));
+        dialogPrompt.setConfirmText(context.getString(com.base.http.R.string.btn_confirm));
         dialogPrompt.show();
 
 

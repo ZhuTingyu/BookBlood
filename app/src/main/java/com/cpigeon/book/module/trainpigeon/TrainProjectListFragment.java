@@ -15,6 +15,8 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.trainpigeon.adpter.TrainProjectListAdapter;
+import com.cpigeon.book.module.trainpigeon.viewmodel.TrainPigeonListViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
  * Created by Zhu TingYu on 2018/9/4.
@@ -24,6 +26,7 @@ public class TrainProjectListFragment extends BaseBookFragment {
 
     XRecyclerView mRecyclerView;
     TrainProjectListAdapter mAdapter;
+    TrainPigeonListViewModel mViewModel;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder().startParentActivity(activity, TrainProjectListFragment.class);
@@ -32,6 +35,8 @@ public class TrainProjectListFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mViewModel = new TrainPigeonListViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -53,6 +58,26 @@ public class TrainProjectListFragment extends BaseBookFragment {
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setNewData(Lists.newTestArrayList());
 
+        mAdapter.setOnLoadMoreListener(() -> {
+            mViewModel.pi++;
+            mViewModel.getTrainPigeonList();
+        }, mRecyclerView.getRecyclerView());
 
+        mRecyclerView.setRefreshListener(() -> {
+            mViewModel.pi = 1;
+            mViewModel.getTrainPigeonList();
+        });
+
+        setProgressVisible(true);
+        mViewModel.getTrainPigeonList();
+
+    }
+
+    @Override
+    protected void initObserve() {
+        mViewModel.mTrainData.observe(this, trainEntities -> {
+            setProgressVisible(false);
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, trainEntities);
+        });
     }
 }

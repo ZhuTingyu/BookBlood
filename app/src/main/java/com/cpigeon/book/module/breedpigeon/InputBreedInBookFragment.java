@@ -15,6 +15,8 @@ import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntryEntity;
+import com.cpigeon.book.module.breedpigeon.viewmodel.InputBreedInBookViewModel;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 /**
@@ -25,6 +27,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
 
     public static final int CODE_ADD_PIGEON = 0x123;
     FamilyTreeView mFamilyTreeView;
+    InputBreedInBookViewModel mViewModel;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder().startParentActivity(activity, InputBreedInBookFragment.class);
@@ -37,6 +40,8 @@ public class InputBreedInBookFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mViewModel = new InputBreedInBookViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -67,11 +72,21 @@ public class InputBreedInBookFragment extends BaseBookFragment {
     }
 
     @Override
+    protected void initObserve() {
+        mViewModel.mBookLiveData.observe(this, bloodBookEntity -> {
+
+        });
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK) return;
-        if(requestCode == CODE_ADD_PIGEON){
-
+        if (resultCode != Activity.RESULT_OK) return;
+        if (requestCode == CODE_ADD_PIGEON) {
+            PigeonEntryEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            mViewModel.foodId = entity.getFootRingID();
+            mViewModel.pigeonId = entity.getPigeonID();
+            mViewModel.getBloodBook();
         }
 
     }

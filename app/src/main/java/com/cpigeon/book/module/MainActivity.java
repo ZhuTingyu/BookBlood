@@ -16,6 +16,7 @@ import com.base.util.Lists;
 import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.RxUtils;
+import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.CustomViewPager;
 import com.cpigeon.book.R;
@@ -90,7 +91,7 @@ public class MainActivity extends BaseBookActivity {
 
         bottomAddTabView.setAddClickListener(() -> {
             mPopupWindow = PopWindowBuilder.builder(this)
-                    .setSize(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                    .setSize(ScreenTool.getScreenWidth(), ScreenTool.getScreenHeight())
                     .setView(initPopView())
                     .setBackgroundColor(R.color.main_home_pop_bg)
                     .setAnimationStyle(R.style.bottom_out_in_anim)

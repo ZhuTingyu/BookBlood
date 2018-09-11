@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.cpigeon.book.widget.BookRootLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:visibility="invisible"
     android:id="@+id/rlImage"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="2480px"
+    android:layout_height="3508px">
 
     <LinearLayout
-        android:id="@+id/llImage"
+        android:id="@+id/llPrintImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/normal_safe_distance"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="40px"
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imgHead"
+            android:id="@+id/imgPrintHead"
             android:layout_width="190px"
             android:layout_height="190px"
             android:src="@drawable/ic_launcher" />
 
         <TextView
+            android:id="@+id/tvPrintNumber"
             android:layout_width="wrap_content"
             android:layout_height="46px"
             android:gravity="center"
@@ -30,26 +32,29 @@
     </LinearLayout>
 
     <com.cpigeon.book.widget.family.FamilyTreeView
-        android:id="@+id/familyTreeView"
+        android:id="@+id/printFamilyTreeView"
         android:layout_marginTop="108px"
         android:layout_marginBottom="108px"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="2480px"
+        android:layout_height="3292px"
         app:TreeView_isHaveCurrent="true"
         app:TreeView_isHorizontal="true"
         app:TreeView_isPrintModel="true"
+        app:TreeView_ShowGeneration="4"
+        app:TreeView_isShowLine="false"
         app:TreeView_moveType="n" />
 
     <RelativeLayout
         android:layout_alignParentBottom="true"
-        android:id="@+id/rlText"
+        android:id="@+id/rlPrintText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="@dimen/normal_safe_distance">
 
         <LinearLayout
-            android:id="@+id/llTextV"
+            android:id="@+id/llPrintTextH"
+            android:layout_marginBottom="126px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -57,26 +62,26 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="46px"
+                android:layout_height="wrap_content"
                 android:text="@string/text_pigeon_master_sign"
                 android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size" />
+                android:textSize="@dimen/large_text_size" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="46px"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/tv1"
-                android:layout_marginBottom="126px"
                 android:layout_marginTop="76px"
                 android:text="@string/text_connection_phone_m"
                 android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size" />
+                android:textSize="@dimen/large_text_size" />
 
         </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/llTextH"
-            android:layout_width="match_parent"
+            android:id="@+id/llPrintTextV"
+            android:layout_width="2480px"
+            android:layout_marginBottom="248px"
             android:layout_height="wrap_content"
             android:visibility="gone">
 
@@ -86,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/text_pigeon_master_sign"
                 android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size" />
+                android:textSize="@dimen/large_text_size" />
 
             <TextView
                 android:id="@+id/tv2"
@@ -95,11 +100,11 @@
                 android:layout_centerInParent="true"
                 android:text="@string/text_connection_phone_m"
                 android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size" />
+                android:textSize="@dimen/large_text_size" />
 
         </RelativeLayout>
 
 
     </RelativeLayout>
 
-</RelativeLayout>
+</com.cpigeon.book.widget.BookRootLayout>

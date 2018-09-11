@@ -14,6 +14,7 @@
         </attr>
         <attr name="TreeView_isMiniModel" format="boolean" />
         <attr name="TreeView_isPrintModel" format="boolean" />
+        <attr name="TreeView_isShowLine" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SimpleTitleView">

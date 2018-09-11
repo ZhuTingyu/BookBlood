@@ -23,6 +23,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String TYPE_USER_DATA = "TYPE_USER_DATA";
     public static final String TYPE_SEARCH_ASS_HISTORY = "TYPE_SEARCH_ASS_HISTORY";
     public static final String TYPE_SEARCH_FOOT_HISTORY = "TYPE_SEARCH_FOOT_HISTORY";
+    public static final String TYPE_SEARCH_FOOT_TO_PHOTO_HISTORY = "TYPE_SEARCH_FOOT_TO_PHOTO_HISTORY";
     public static final String TYPE_SEARCH_COUNTY_HISTORY = "TYPE_SEARCH_COUNTY_HISTORY";
     public static final String TYPE_SEARCH_BREED_PIGEON = "TYPE_SEARCH_BREED_PIGEON";
     public static final String TYPE_SEARCH_TRAIN_PIGEON = "TYPE_SEARCH_TRAIN_PIGEON";

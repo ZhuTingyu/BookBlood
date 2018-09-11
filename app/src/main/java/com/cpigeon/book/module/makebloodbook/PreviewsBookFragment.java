@@ -2,6 +2,7 @@ package com.cpigeon.book.module.makebloodbook;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.base.util.utility.ImageUtils;
 import com.base.widget.photoview.PhotoView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.widget.BookRootLayout;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 /**
@@ -31,14 +33,26 @@ import com.cpigeon.book.widget.family.FamilyTreeView;
 
 public class PreviewsBookFragment extends BaseBookFragment {
 
+    private static final int CODE_CHOOSE_TEMPLATE = 0x123;
+
     private LinearLayout mLlImage;
     private ImageView mImgHead;
     private FamilyTreeView mFamilyTreeView;
+    private FamilyTreeView mPrintFamilyTreeView;
     private LinearLayout mLlTextV;
     private RelativeLayout mLlTextH;
     private CheckBox mCheckbox;
     private TextView mTvOk;
     private PhotoView mImageView;
+
+    private int bookType = SelectTemplateFragment.TYPE_H;
+
+    private ImageView mImgPrintHead;
+    private TextView mTvPrintNumber;
+    private RelativeLayout mLlPrintTextV;
+    private LinearLayout mLlPrintTextH;
+
+
 
     public static void start(Activity activity, String footNumber) {
         IntentBuilder.Builder()
@@ -62,27 +76,41 @@ public class PreviewsBookFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setToolbarRight(R.string.text_choose_template, item -> {
-            mFamilyTreeView.setHorizontal(false);
-            mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
-            mFamilyTreeView.initView();
+            SelectTemplateFragment.start(getBaseActivity(), bookType ,CODE_CHOOSE_TEMPLATE);
             return false;
         });
 
         mLlImage = findViewById(R.id.llImage);
         mImgHead = findViewById(R.id.imgHead);
         mFamilyTreeView = findViewById(R.id.familyTreeView);
+        mPrintFamilyTreeView = findViewById(R.id.printFamilyTreeView);
         mLlTextV = findViewById(R.id.llTextV);
         mLlTextH = findViewById(R.id.llTextH);
         mCheckbox = findViewById(R.id.checkbox);
         mTvOk = findViewById(R.id.tvOk);
         mImageView = findViewById(R.id.img);
 
+
+        mImgPrintHead = findViewById(R.id.imgPrintHead);
+        mTvPrintNumber = findViewById(R.id.tvPrintNumber);
+        mLlPrintTextV = findViewById(R.id.llPrintTextV);
+        mLlPrintTextH = findViewById(R.id.llPrintTextH);
+
         mCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mLlImage.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+            if (isChecked){
+                mImgPrintHead.setVisibility(View.VISIBLE);
+            }else {
+                mImgPrintHead.setVisibility(View.GONE);
+            }
         });
 
         mTvOk.setOnClickListener(v -> {
             getBookView();
+        });
+
+        mImageView.setOnViewTapListener((view1, x, y) -> {
+            mImageView.setVisibility(View.GONE);
         });
 
         mCheckbox.setChecked(true);
@@ -90,9 +118,7 @@ public class PreviewsBookFragment extends BaseBookFragment {
 
     public void getBookView() {
         try {
-            View view = findViewById(R.id.rlImage);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(2480, 3508);
-            view.setLayoutParams(layoutParams);
+            RelativeLayout view = findViewById(R.id.rlImage);
             composite.add(RxUtils.delayed(100, aLong -> {
                 Bitmap bitmap = ImageUtils.view2Bitmap(view);
                 ImageUtils.saveImageToGallery(getBaseActivity(), bitmap);
@@ -105,4 +131,50 @@ public class PreviewsBookFragment extends BaseBookFragment {
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) return;
+
+        if(requestCode == CODE_CHOOSE_TEMPLATE){
+            int type = data.getIntExtra(IntentBuilder.KEY_DATA, bookType);
+            bookType = type;
+
+            if(bookType == SelectTemplateFragment.TYPE_H){
+                mFamilyTreeView.setHorizontal(true);
+                mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
+                mFamilyTreeView.initView();
+
+                mPrintFamilyTreeView.setHorizontal(true);
+                mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
+                mPrintFamilyTreeView.setShowLine(false);
+                mPrintFamilyTreeView.initView();
+
+                mLlPrintTextH.setVisibility(View.VISIBLE);
+                mLlPrintTextV.setVisibility(View.GONE);
+
+            }else if(bookType == SelectTemplateFragment.TYPE_V){
+                mFamilyTreeView.setHorizontal(false);
+                mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
+                mFamilyTreeView.initView();
+
+                mPrintFamilyTreeView.setHorizontal(false);
+                mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
+                mPrintFamilyTreeView.setShowLine(true);
+                mPrintFamilyTreeView.initView();
+
+                mLlPrintTextH.setVisibility(View.GONE);
+                mLlPrintTextV.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    @Override
+    protected void finish() {
+        if(mImageView.getVisibility() == View.VISIBLE){
+            mImageView.setVisibility(View.GONE);
+        }else {
+            super.finish();
+        }
+    }
 }

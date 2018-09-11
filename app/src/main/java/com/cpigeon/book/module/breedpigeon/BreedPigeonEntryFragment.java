@@ -217,7 +217,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         //种鸽录入
         mBreedPigeonEntryViewModel.mBreedPigeonData.observe(this, o -> {
             //保证界面只有一个提示
-
+            setProgressVisible(false);
             if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
                 getBaseActivity().errorDialog.dismiss();
             }
@@ -236,13 +236,22 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             }, sweetAlertDialog -> {
                 //取消
                 sweetAlertDialog.dismiss();
-                finish();
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, o)
+                        .finishForResult(getBaseActivity());
             });
         });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == CODE_ADD_PLAY){
+            IntentBuilder.Builder()
+                    .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntryViewModel.mBreedPigeonData.getValue())
+                    .finishForResult(getBaseActivity());
+        }
+
         if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == PictureMimeType.ofImage()) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
@@ -276,12 +285,6 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 mBreedPigeonEntryViewModel.phototypeid = mImgTypeEntity.getImgTypeId();
                 mBreedPigeonEntryViewModel.images.addAll(Lists.newArrayList(mImgTypeEntity.getImgPath()));
 
-                break;
-
-            case CODE_ADD_PLAY:
-                IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntryViewModel.mBreedPigeonData.getValue())
-                        .finishForResult(getBaseActivity());
                 break;
         }
     }
@@ -477,6 +480,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 //数据交易价格
                 break;
             case R.id.tv_next_step:
+                setProgressVisible(true);
                 mBreedPigeonEntryViewModel.addBreedPigeonEntry();
                 break;
             case R.id.llz:

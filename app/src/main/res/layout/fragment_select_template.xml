@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="@dimen/normal_safe_distance"
+    android:layout_height="match_parent">
+    
+    <RelativeLayout
+        android:id="@+id/rl1"
+        android:layout_width="80dp"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_book_preview_h"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/rlSelect1"
+            android:background="@color/color_black_30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                app:srcCompat="@drawable/svg_select_book_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl2"
+        android:layout_marginLeft="10dp"
+        android:layout_width="80dp"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_book_preview_v"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:id="@+id/rlSelect2"
+            android:visibility="gone"
+            android:background="@color/color_black_30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerInParent="true"
+                app:srcCompat="@drawable/svg_select_book_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+</LinearLayout>

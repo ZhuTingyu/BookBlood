@@ -46,6 +46,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     private TextView mTvBlood;
     private TextView mTvColor;
     private RecyclerView mList;
+    private LinearLayout mLlInfo;
 
     public FamilyPrintModelMemberView(Context context, int generationPoint, int generationsOrder, boolean isHorizontal) {
         super(context);
@@ -66,8 +67,13 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     }
 
     private void initView(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.view_family_print_model_member_layout, this);
-
+        View view;
+        if (isHorizontal) {
+            view = LayoutInflater.from(context).inflate(R.layout.view_family_print_model_member_layout, this);
+        }else {
+            view = LayoutInflater.from(context).inflate(R.layout.view_family_print_model_v_member_layout, this);
+            mLlInfo = view.findViewById(R.id.llInfo);
+        }
 
         mRlShadow = view.findViewById(R.id.rlShadow);
         mScrollViewInfo = view.findViewById(R.id.scrollViewInfo);
@@ -77,43 +83,91 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         mTvBlood = view.findViewById(R.id.tvBlood);
         mTvColor = view.findViewById(R.id.tvColor);
         mList = view.findViewById(R.id.list);
+        rlShadow = findViewById(R.id.rlShadow);
 
+        /*if (generationPoint == 0) {
+            mScrollViewInfo.setBackgroundResource(R.drawable.shape_bg_family_member_black);
+        } else {
+            if (generationsOrder % 2 == 0) {
+                mScrollViewInfo.setBackgroundResource(R.drawable.shape_bg_family_member_blue);
+            } else {
+                mScrollViewInfo.setBackgroundResource(R.drawable.shape_bg_family_member_red);
+            }
+        }*/
 
-        int size_226 = 552;
+        int size_206 = 412;
+        int size_155 = 310;
+        int size_226 = 452;
+        int size_265 = 530;
+        int size_400 = 800;
         int size_500 = 1000;
         int size_366 = 732;
         int size_178 = 356;
+        int size_128 = 256;
         int shadowSize = 20;
-        rlShadow = findViewById(R.id.rlShadow);
 
+        int imgW = 0;
+        int imgH = 0;
         shadowColor = R.color.color_text_hint;
-        rootW = size_226;
         if (generationPoint == 0) {
-            rootH = size_500;
+            if (isHorizontal) {
+                rootW = size_226;
+                rootH = size_500;
+            } else {
+                rootW = size_500;
+                rootH = size_226;
+                imgW = size_206;
+                imgH = size_206;
+            }
             shadowColor = R.color.color_text_hint;
         } else if (generationPoint == 1) {
-            rootH = size_500;
+            if (isHorizontal) {
+                rootW = size_226;
+                rootH = size_500;
+            } else {
+                rootW = size_400;
+                rootH = size_226;
+                imgW = size_155;
+                imgH = size_206;
+            }
             getShadowColor();
         } else if (generationPoint == 2) {
-            rootH = size_366;
+            if (isHorizontal) {
+                rootW = size_226;
+                rootH = size_366;
+            } else {
+                rootW = size_265;
+                rootH = size_226;
+            }
             getShadowColor();
         } else if (generationPoint == 3) {
-            rootH = size_178;
+            if (isHorizontal) {
+                rootW = size_226;
+                rootH = size_178;
+            } else {
+                rootW = size_128;
+                rootH = size_226;
+            }
             getShadowColor();
         }
-        rlShadow.addShadow(shadowColor);
+        rlShadow.addShadow(shadowColor, shadowSize);
 
         LayoutParams shadowP;
         RelativeLayout.LayoutParams infoP;
-        if (isHorizontal) {
-            shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
-            infoP = new RelativeLayout.LayoutParams(rootW, rootH);
-        } else {
-            shadowP = new LayoutParams(rootH + shadowSize, rootW + shadowSize);
-            infoP = new RelativeLayout.LayoutParams(rootH, rootW);
+        infoP = new RelativeLayout.LayoutParams(rootW, rootH);
+        shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
+
+        if(isHorizontal){
+            mScrollViewInfo.setLayoutParams(infoP);
+            rlShadow.setLayoutParams(shadowP);
+        }else {
+            LinearLayout.LayoutParams imgP = new LinearLayout.LayoutParams(imgW, imgH);
+            mImgHead.setLayoutParams(imgP);
+            rlShadow.setLayoutParams(shadowP);
+            mLlInfo.setLayoutParams(infoP);
         }
-        mScrollViewInfo.setLayoutParams(infoP);
-        rlShadow.setLayoutParams(shadowP);
+
+
 
     }
 
@@ -176,7 +230,5 @@ class MatchAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         TextView textView = (TextView) helper.itemView;
-        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 28);
-
     }
 }

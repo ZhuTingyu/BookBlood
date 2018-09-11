@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.BloodBookEntity;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class FamilyTreeView extends LinearLayout {
 
     private boolean isMiniModel = false;
     private boolean isPrintModel;
+    private boolean isShowLine;
 
     private int mTypeMove = TYPE_IS_CAN_MOVE_N;
     private static final int COUNT_OF_GENERATIONS = 3; //屏幕中显示的辈数
@@ -126,7 +128,9 @@ public class FamilyTreeView extends LinearLayout {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         this.mCanvas = canvas;
-        drawPointLine(canvas);
+        if(isShowLine){
+            drawPointLine(canvas);
+        }
     }
 
     private void initAttrs(AttributeSet attrs) {
@@ -141,6 +145,7 @@ public class FamilyTreeView extends LinearLayout {
             mTypeMove = array.getInteger(R.styleable.FamilyTreeView_TreeView_moveType, TYPE_IS_CAN_MOVE_N);
             isMiniModel = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isMiniModel, false);
             isPrintModel = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isPrintModel, false);
+            isShowLine = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isShowLine, true);
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
@@ -186,19 +191,21 @@ public class FamilyTreeView extends LinearLayout {
 
     private View getMemberView(Context context, int generationsPoint, int generationsOrder, int generationCount) {
 
+        LinearLayout.LayoutParams params;
+        if (isHorizontal) {
+            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
+                    , mHeight / generationCount);
+        } else {
+            params = new LinearLayout.LayoutParams(mWidth / generationCount
+                    , ViewGroup.LayoutParams.MATCH_PARENT);
+        }
+
         if (isPrintModel) {
             FamilyPrintModelMemberView view = new FamilyPrintModelMemberView(context, generationsPoint, generationsOrder, isHorizontal);
+            view.setLayoutParams(params);
             return view;
         } else {
             FamilyMemberView view = new FamilyMemberView(context, generationsPoint, generationsOrder, isMiniModel, isHorizontal);
-            LinearLayout.LayoutParams params;
-            if (isHorizontal) {
-                params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
-                        , mHeight / generationCount);
-            } else {
-                params = new LinearLayout.LayoutParams(mWidth / generationCount
-                        , ViewGroup.LayoutParams.MATCH_PARENT);
-            }
             view.setLayoutParams(params);
             if (mOnFamilyClickListener != null) {
                 view.setOnMemberClickListener(new FamilyMemberView.OnMemberClickListener() {
@@ -407,6 +414,10 @@ public class FamilyTreeView extends LinearLayout {
         mTypeMove = typeMove;
     }
 
+    public void setShowLine(boolean showLine) {
+        isShowLine = showLine;
+    }
+
     public FamilyMember getMemberView(int generation, int whichOne) {
         LinearLayout linearLayout = generationLinearLayouts.get(generation);
         FamilyMember memberView = (FamilyMember) linearLayout.getChildAt(whichOne);
@@ -420,8 +431,11 @@ public class FamilyTreeView extends LinearLayout {
             memberView.setCanAdd();
 
         }
+    }
+    public void setData(BloodBookEntity entity) {
 
     }
+
 
     public List<FamilyMember> getParents(int x, int y) {
         List<FamilyMember> list = Lists.newArrayList();
