@@ -31,9 +31,11 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
+import com.cpigeon.book.event.PigeonUpdateEvent;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonModifyViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
@@ -43,7 +45,10 @@ import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.play.PlayFragment1;
 import com.cpigeon.book.module.play.PlayFragment2;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
+import com.cpigeon.book.widget.family.FamilyTreeView;
 import com.cpigeon.book.widget.mydialog.AddPlayDialog;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -99,6 +104,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     TextView tvScore;
     @BindView(R.id.ll_score)
     LinearLayout llScore;
+    @BindView(R.id.familyTreeView)
+    FamilyTreeView mFamilyTreeView;
 
     @BindView(R.id.img_pigeon)
     CircleImageView img_pigeon;
@@ -115,8 +122,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
     private BreedPigeonModifyViewModel mBreedPigeonModifyViewModel;//种鸽修改ViewModel
     private SelectTypeViewModel mSelectTypeViewModel;
-
     private PlayListViewModel mPlayListViewModel;
+    private BookViewModel mBookViewModel;
 
     private AddPlayDialog mAddPlayDialog;
 
@@ -138,7 +145,9 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         mPlayListViewModel = new PlayListViewModel();
         mSelectTypeViewModel = new SelectTypeViewModel();
         mBreedPigeonModifyViewModel = new BreedPigeonModifyViewModel();
-        initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel, mSelectTypeViewModel, mBreedPigeonModifyViewModel);
+        mBookViewModel = new BookViewModel();
+        initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel
+                , mSelectTypeViewModel, mBreedPigeonModifyViewModel, mBookViewModel);
     }
 
     @Nullable
@@ -166,6 +175,9 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         mPlayListViewModel.footid = mBreedPigeonDetailsViewModel.footId;
         mPlayListViewModel.pigeonid = mBreedPigeonDetailsViewModel.pigeonId;
 
+        mBookViewModel.foodId = mBreedPigeonDetailsViewModel.footId;
+        mBookViewModel.pigeonId = mBreedPigeonDetailsViewModel.pigeonId;
+
         initViewPager();
 
         mSelectTypeViewModel.getSelectType_Sex();
@@ -174,6 +186,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_lineage();
         mSelectTypeViewModel.getSelectType_State();
         mSelectTypeViewModel.getSelectType_PigeonSource();
+
+        mBookViewModel.getBloodBook();
 
     }
 
@@ -275,6 +289,13 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
         });
 
+        mBreedPigeonModifyViewModel.mBreedPigeonData.observe(this, pigeonEntryEntity -> {
+            EventBus.getDefault().post(new PigeonUpdateEvent());
+        });
+
+        mBookViewModel.mBookLiveData.observe(this, bloodBookEntity -> {
+            mFamilyTreeView.setData(bloodBookEntity);
+        });
 
         mSelectTypeViewModel.mSelectType_Sex.observe(this, selectTypeEntities -> {
             mBreedPigeonModifyViewModel.mSelectTypes_Sex = selectTypeEntities;

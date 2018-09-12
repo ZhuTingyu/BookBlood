@@ -44,6 +44,8 @@ public class BreedPigeonModel {
                                                                                 String blood,
                                                                                 String stateid,
                                                                                 String phototypeid,
+                                                                                String sonFootId,
+                                                                                String sonPigeonId,
                                                                                 Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntryEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
@@ -64,6 +66,8 @@ public class BreedPigeonModel {
                 .addBody("blood", blood)//  血统 （可选可填，传血统名称）
                 .addBody("stateid", stateid)// 信鸽状态ID
                 .addBody("phototypeid", phototypeid)// 信鸽状态ID
+                .addBody("sonpigeonid", sonPigeonId)// 子类鸽子id
+                .addBody("footid", sonFootId)// 子类足环id
                 .addImageFileBodys(body)
                 .request();
     }

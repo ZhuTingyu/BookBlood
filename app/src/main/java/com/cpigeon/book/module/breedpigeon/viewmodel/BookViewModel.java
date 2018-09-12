@@ -11,7 +11,7 @@ import com.cpigeon.book.model.entity.BloodBookEntity;
  * Created by Zhu TingYu on 2018/9/11.
  */
 
-public class InputBreedInBookViewModel extends BaseViewModel {
+public class BookViewModel extends BaseViewModel {
 
     public String foodId;
     public String pigeonId;

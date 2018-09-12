@@ -1,5 +1,9 @@
 package com.cpigeon.book.model.entity;
 
+import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
+import com.cpigeon.book.R;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +12,8 @@ import java.io.Serializable;
 
 public class BreedPigeonEntity implements Serializable {
 
+    public static final String ID_MALE = "25";
+    public static final String ID_FEMALE = "24";
 
     /**
      * CoverPhotoUrl :
@@ -68,13 +74,29 @@ public class BreedPigeonEntity implements Serializable {
     private String PigeonPlumeID;
     private String Remark;
     private String PigeonEyeID;
-    private String PigeonSexID;
+    private String PigeonSexID; //25雄  24雌
     private String MenFootRingNum;//  父足环号码
     private String WoFootRingNum;//母足环号码
     private String FootCode;// 国家编码
     private String FootCodeID;// 国家id
 
     public BreedPigeonEntity(){};
+
+    public boolean isEmpty(){
+        if(StringUtil.isStringValid(PigeonID)){
+            return false;
+        }else return true;
+    }
+
+    public boolean isHaveDetailsInfo(){
+        if(StringUtil.isStringValid(PigeonBloodName)){
+            return true;
+        }else return false;
+    }
+
+    public boolean isMale(){
+        return Utils.getString(R.string.text_male_a).equals(PigeonSexName);
+    }
 
     private BreedPigeonEntity(Builder builder) {
         setCoverPhotoUrl(builder.CoverPhotoUrl);

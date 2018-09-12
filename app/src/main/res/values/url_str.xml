@@ -5,7 +5,7 @@
     <string name="baseUrl">http://192.168.0.18:8188/</string>
     <string name="baseUrl2">http://192.168.0.18:8188/</string>
     <string name="baseUrl3">http://192.168.0.18:8188/</string>
-    <string name="baseUr_x">http://192.168.0.8:15538/</string>
+    <string name="baseUr_x">http://192.168.0.8:808/</string>
 
     <!--签名加密字符串-->
     <string name="keySign">CioLy49TR23jk4h0Ap8Opy34ho78on</string>

@@ -13,6 +13,9 @@ import com.cpigeon.book.model.entity.BreedPigeonEntity;
  */
 
 public abstract class FamilyMember extends LinearLayout{
+
+    protected  BreedPigeonEntity mPigeonEntity;
+
     public FamilyMember(Context context) {
         super(context);
     }
@@ -28,4 +31,7 @@ public abstract class FamilyMember extends LinearLayout{
    public abstract View getInfoView();
    public abstract void setCanAdd();
    public abstract void bindData(BreedPigeonEntity entity);
+   public BreedPigeonEntity getData(){
+       return mPigeonEntity;
+   }
 }

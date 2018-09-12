@@ -11,13 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
-import com.base.util.utility.ToastUtils;
+import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.event.PigeonUpdateEvent;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
-import com.cpigeon.book.module.breedpigeon.viewmodel.InputBreedInBookViewModel;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.widget.family.FamilyTreeView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Zhu TingYu on 2018/8/29.
@@ -27,7 +33,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
 
     public static final int CODE_ADD_PIGEON = 0x123;
     FamilyTreeView mFamilyTreeView;
-    InputBreedInBookViewModel mViewModel;
+    BookViewModel mViewModel;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder().startParentActivity(activity, InputBreedInBookFragment.class);
@@ -40,8 +46,9 @@ public class InputBreedInBookFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mViewModel = new InputBreedInBookViewModel();
+        mViewModel = new BookViewModel();
         initViewModel(mViewModel);
+        EventBus.getDefault().register(this);
     }
 
     @Nullable
@@ -61,12 +68,29 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
             @Override
             public void add(int x, int y) {
-                BreedPigeonEntryFragment.start(getBaseActivity(), CODE_ADD_PIGEON);
+
+                BreedPigeonEntity breedPigeonEntity =  mFamilyTreeView.getSon(x, y).getData();
+                BreedPigeonEntity.Builder builder = new BreedPigeonEntity.Builder();
+                if(x != mFamilyTreeView.getStartGeneration()){
+                    if (FamilyTreeView.isMale(x, y)) {
+                        builder.PigeonSexID(BreedPigeonEntity.ID_MALE)
+                                .PigeonSexName(Utils.getString(R.string.text_male_a));
+                    }else {
+                        builder.PigeonSexID(BreedPigeonEntity.ID_FEMALE)
+                                .PigeonSexName(Utils.getString(R.string.text_female_a));
+                    }
+                }
+
+                BreedPigeonEntryFragment.start(getBaseActivity(), builder.build(), CODE_ADD_PIGEON);
             }
 
             @Override
             public void showInfo(BreedPigeonEntity entity) {
-                ToastUtils.showLong(getBaseActivity(), entity.getClass().toString());
+                if (!entity.isHaveDetailsInfo()) {
+                    BreedPigeonEntryFragment.start(getBaseActivity(), entity, CODE_ADD_PIGEON);
+                } else {
+                    BreedPigeonDetailsFragment.start(getBaseActivity(), entity.getPigeonID(), entity.getFootRingID());
+                }
             }
         });
     }
@@ -74,7 +98,8 @@ public class InputBreedInBookFragment extends BaseBookFragment {
     @Override
     protected void initObserve() {
         mViewModel.mBookLiveData.observe(this, bloodBookEntity -> {
-
+            setProgressVisible(false);
+            mFamilyTreeView.setData(bloodBookEntity);
         });
     }
 
@@ -83,11 +108,24 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == CODE_ADD_PIGEON) {
-            PigeonEntryEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-            mViewModel.foodId = entity.getFootRingID();
-            mViewModel.pigeonId = entity.getPigeonID();
+            if (!StringUtil.isStringValid(mViewModel.foodId)) {
+                PigeonEntryEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                mViewModel.foodId = entity.getFootRingID();
+                mViewModel.pigeonId = entity.getPigeonID();
+            }
+            setProgressVisible(true);
             mViewModel.getBloodBook();
         }
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(PigeonUpdateEvent event) {
+        mViewModel.getBloodBook();
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

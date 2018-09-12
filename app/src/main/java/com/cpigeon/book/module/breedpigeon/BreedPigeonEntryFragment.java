@@ -21,11 +21,13 @@ import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
+import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
@@ -61,6 +63,8 @@ import cn.qqtheme.framework.picker.OptionPicker;
 public class BreedPigeonEntryFragment extends BaseBookFragment {
 
     private static final int CODE_ADD_PLAY = 0x234;
+    public static final String KEY_SON_FOOT_ID = "KEY_SON_FOOT_ID";
+    public static final String KEY_SON_PIGEON_ID = "KEY_SON_PIGEON_ID";
 
     @BindView(R.id.llz)
     LineInputListLayout mLlRoot;
@@ -111,10 +115,21 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 .startParentActivity(activity, BreedPigeonEntryFragment.class);
     }
 
-    public static void start(Activity activity, int requestCode) {
-        IntentBuilder.Builder()
-                .startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
+    public static void start(Activity activity, @Nullable BreedPigeonEntity breedPigeonEntity, int requestCode) {
+        IntentBuilder builder = IntentBuilder.Builder();
+        if (breedPigeonEntity != null) {
+            builder.putExtra(IntentBuilder.KEY_DATA, breedPigeonEntity);
+        }
+        builder.startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
     }
+
+    /*public static void start(Activity activity, @Nullable BreedPigeonEntity breedPigeonEntity, int requestCode) {
+        IntentBuilder builder = IntentBuilder.Builder();
+        if (breedPigeonEntity != null) {
+            builder.putExtra(IntentBuilder.KEY_DATA, breedPigeonEntity);
+        }
+        builder.startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
+    }*/
 
     @Override
     public void onAttach(Context context) {
@@ -179,6 +194,21 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_lineage();
         mSelectTypeViewModel.getSelectType_State();
         mSelectTypeViewModel.getSelectType_PigeonSource();
+
+        BreedPigeonEntity breedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mBreedPigeonEntryViewModel.mBreedPigeonEntity = breedPigeonEntity;
+
+        if (mBreedPigeonEntryViewModel.isHavePigeonInfo()) {
+            llFoot.setRightText(breedPigeonEntity.getFootRingNum());
+            llCountries.setRightText(breedPigeonEntity.getFootCode());
+        }
+
+        if (mBreedPigeonEntryViewModel.isHaveSex()) {
+            llSex.setRightText(breedPigeonEntity.getPigeonSexName());
+            mBreedPigeonEntryViewModel.sexId = breedPigeonEntity.getPigeonSexID();
+            llSex.setRightImageVisible(false);
+        }
+
     }
 
     @Override
@@ -221,10 +251,11 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
                 getBaseActivity().errorDialog.dismiss();
             }
-
             String hintStr = "种鸽录入成功，";
-            if (Integer.valueOf(o.getPigeonMoney()) > 0) {
-                hintStr += "获取" + o.getPigeonMoney() + "个鸽币，";
+            if (o != null) {
+                if (Integer.valueOf(o.getPigeonMoney()) > 0) {
+                    hintStr += "获取" + o.getPigeonMoney() + "个鸽币，";
+                }
             }
 
             hintStr += "是否为该鸽子录入赛绩！";
@@ -246,7 +277,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == CODE_ADD_PLAY){
+        if (requestCode == CODE_ADD_PLAY) {
             IntentBuilder.Builder()
                     .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntryViewModel.mBreedPigeonData.getValue())
                     .finishForResult(getBaseActivity());
@@ -373,6 +404,11 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.ll_sex:
                 //性别
+
+                if (mBreedPigeonEntryViewModel.isHaveSex()) {
+                    return;
+                }
+
                 if (!Lists.isEmpty(mBreedPigeonEntryViewModel.mSelectTypes_Sex)) {
                     BottomSheetAdapter.createBottomSheet(getBaseActivity()
                             , SelectTypeEntity.getTypeNames(mBreedPigeonEntryViewModel.mSelectTypes_Sex), p -> {
@@ -481,7 +517,11 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.tv_next_step:
                 setProgressVisible(true);
-                mBreedPigeonEntryViewModel.addBreedPigeonEntry();
+                if (mBreedPigeonEntryViewModel.isHavePigeonInfo()) {
+                    mBreedPigeonEntryViewModel.modifyBreedPigeonEntry();
+                } else {
+                    mBreedPigeonEntryViewModel.addBreedPigeonEntry();
+                }
                 break;
             case R.id.llz:
                 break;

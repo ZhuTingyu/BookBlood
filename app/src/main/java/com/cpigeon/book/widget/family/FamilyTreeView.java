@@ -47,6 +47,7 @@ public class FamilyTreeView extends LinearLayout {
     private boolean isHorizontal = true;// 是否横向显示
     private boolean isHaveCurrentGeneration = false; //是否包含当前代
     private int mLineColor;
+    private boolean isShowInfoModel;
 
     private static final int SCROLL_WIDTH = 3;//移动超过3dp，响应滑动，否则属于点击
     private static final float MAX_SCALE = 3f;
@@ -128,7 +129,7 @@ public class FamilyTreeView extends LinearLayout {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         this.mCanvas = canvas;
-        if(isShowLine){
+        if (isShowLine) {
             drawPointLine(canvas);
         }
     }
@@ -146,6 +147,7 @@ public class FamilyTreeView extends LinearLayout {
             isMiniModel = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isMiniModel, false);
             isPrintModel = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isPrintModel, false);
             isShowLine = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isShowLine, true);
+            isShowInfoModel = array.getBoolean(R.styleable.FamilyTreeView_TreeView_isShowInfoModel, false);
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
@@ -418,22 +420,66 @@ public class FamilyTreeView extends LinearLayout {
         isShowLine = showLine;
     }
 
+    public int getStartGeneration() {
+        return startGeneration;
+    }
+
+    public static boolean isMale(int x, int y) {
+        return (y + 1) % 2 == 1;
+    }
+
+    /**
+     * @param generation 代数真实位置
+     * @param whichOne
+     * @return
+     */
+
     public FamilyMember getMemberView(int generation, int whichOne) {
-        LinearLayout linearLayout = generationLinearLayouts.get(generation);
+        LinearLayout linearLayout = generationLinearLayouts.get(generation - startGeneration);
         FamilyMember memberView = (FamilyMember) linearLayout.getChildAt(whichOne);
         return memberView;
     }
 
     public void setData(BreedPigeonEntity entity, int x, int y) {
         getMemberView(x, y).bindData(entity);
-        List<FamilyMember> memberViews = getParents(x, y);
-        for (FamilyMember memberView : memberViews) {
-            memberView.setCanAdd();
 
+        if (!isShowInfoModel) {
+            List<FamilyMember> memberViews = getParents(x, y);
+            for (FamilyMember memberView : memberViews) {
+                memberView.setCanAdd();
+            }
         }
     }
-    public void setData(BloodBookEntity entity) {
 
+    public void setData(BloodBookEntity entity) {
+        List<List<BreedPigeonEntity>> data = Lists.newArrayList();
+        data.add(getData(entity.getOne()));
+        data.add(getData(entity.getTwo()));
+        data.add(getData(entity.getThree()));
+        data.add(getData(entity.getFour()));
+
+        for (int i = 0, len = generationLinearLayouts.size(); i < len; i++) {
+            int dataPosition = i + startGeneration;
+            LinearLayout linearLayout = generationLinearLayouts.get(i);
+            List<BreedPigeonEntity> breedPigeonEntities = data.get(dataPosition);
+            if (Lists.isEmpty(breedPigeonEntities)) {
+                return;
+            }
+            for (int generationOrder = 0, generationLen = linearLayout.getChildCount(); generationOrder < generationLen; generationOrder++) {
+                try {
+                    BreedPigeonEntity breedPigeonEntity = breedPigeonEntities.get(generationOrder);
+                    if (!breedPigeonEntity.isEmpty()) {
+                        setData(breedPigeonEntity, dataPosition, generationOrder);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private List<BreedPigeonEntity> getData(List<BreedPigeonEntity> data) {
+        return Lists.isEmpty(data) ? Lists.newArrayList() : data;
     }
 
 
@@ -455,6 +501,11 @@ public class FamilyTreeView extends LinearLayout {
         list.add(mother);
 
         return list;
+    }
+
+    public FamilyMember getSon(int x, int y) {
+        if (x == startGeneration) return null;
+        return getMemberView(x, y);
     }
 
     public Point getCurrentPoint() {

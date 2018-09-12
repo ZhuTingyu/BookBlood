@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.base.util.glide.GlideUtil;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
@@ -46,7 +47,6 @@ public class FamilyMemberView extends FamilyMember {
     int shadowColor;
     boolean isMiniModel;
     boolean isHorizontal;
-    private BreedPigeonEntity mPigeonEntity;
 
     public FamilyMemberView(Context context, int generationPoint, int generationsOrder, boolean isMiniModel, boolean isHorizontal) {
         super(context);
@@ -168,13 +168,18 @@ public class FamilyMemberView extends FamilyMember {
     }
 
     public void bindData(BreedPigeonEntity entity) {
+
+        if(!StringUtil.isStringValid(entity.getPigeonID())){
+            return;
+        }
+
         mPigeonEntity = entity;
         imgAdd.setVisibility(GONE);
         mRlInMemberInfo.setVisibility(VISIBLE);
-        GlideUtil.setGlideImageView(getContext(), UserModel.getInstance().getUserData().touxiangurl, mImgHead);
-        mTvFootNumber.setText("2018-22-1234555");
-        mTvBlood.setText("詹森");
-        mTvName.setText("神奇小鸟");
+        GlideUtil.setGlideImageView(getContext(), entity.getCoverPhotoUrl(), mImgHead);
+        mTvFootNumber.setText(entity.getFootRingNum());
+        mTvBlood.setText(entity.getPigeonBloodName());
+        mTvName.setText(entity.getPigeonName());
 
         if (generationPoint == 0) {
             if (isMiniModel) {
