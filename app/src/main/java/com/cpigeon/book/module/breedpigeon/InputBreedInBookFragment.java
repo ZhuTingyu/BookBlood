@@ -69,19 +69,32 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             @Override
             public void add(int x, int y) {
 
-                BreedPigeonEntity breedPigeonEntity =  mFamilyTreeView.getSon(x, y).getData();
                 BreedPigeonEntity.Builder builder = new BreedPigeonEntity.Builder();
-                if(x != mFamilyTreeView.getStartGeneration()){
+                if (x != mFamilyTreeView.getStartGeneration()) {
                     if (FamilyTreeView.isMale(x, y)) {
                         builder.PigeonSexID(BreedPigeonEntity.ID_MALE)
                                 .PigeonSexName(Utils.getString(R.string.text_male_a));
-                    }else {
+                    } else {
                         builder.PigeonSexID(BreedPigeonEntity.ID_FEMALE)
                                 .PigeonSexName(Utils.getString(R.string.text_female_a));
                     }
                 }
 
-                BreedPigeonEntryFragment.start(getBaseActivity(), builder.build(), CODE_ADD_PIGEON);
+                BreedPigeonEntity breedPigeonEntity = null;
+                if (mFamilyTreeView.getSon(x, y) != null) {
+                    breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
+                }
+
+                if (breedPigeonEntity != null) {
+                    BreedPigeonEntryFragment.start(getBaseActivity(), builder.build()
+                            , breedPigeonEntity.getFootRingID()
+                            , breedPigeonEntity.getPigeonID()
+                            , CODE_ADD_PIGEON);
+                } else {
+                    BreedPigeonEntryFragment.start(getBaseActivity(), builder.build(), CODE_ADD_PIGEON);
+
+                }
+
             }
 
             @Override

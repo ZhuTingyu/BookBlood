@@ -505,7 +505,7 @@ public class FamilyTreeView extends LinearLayout {
 
     public FamilyMember getSon(int x, int y) {
         if (x == startGeneration) return null;
-        return getMemberView(x, y);
+        return getMemberView(x - 1, y);
     }
 
     public Point getCurrentPoint() {

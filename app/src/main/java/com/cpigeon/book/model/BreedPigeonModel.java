@@ -67,7 +67,7 @@ public class BreedPigeonModel {
                 .addBody("stateid", stateid)// 信鸽状态ID
                 .addBody("phototypeid", phototypeid)// 信鸽状态ID
                 .addBody("sonpigeonid", sonPigeonId)// 子类鸽子id
-                .addBody("footid", sonFootId)// 子类足环id
+                .addBody("sonfootid", sonFootId)// 子类足环id
                 .addImageFileBodys(body)
                 .request();
     }

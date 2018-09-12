@@ -123,13 +123,13 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         builder.startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
     }
 
-    /*public static void start(Activity activity, @Nullable BreedPigeonEntity breedPigeonEntity, int requestCode) {
+    public static void start(Activity activity, @Nullable BreedPigeonEntity breedPigeonEntity, String sonFootId, String pigeonId, int requestCode) {
         IntentBuilder builder = IntentBuilder.Builder();
-        if (breedPigeonEntity != null) {
-            builder.putExtra(IntentBuilder.KEY_DATA, breedPigeonEntity);
-        }
+        builder.putExtra(KEY_SON_FOOT_ID, sonFootId);
+        builder.putExtra(KEY_SON_PIGEON_ID, pigeonId);
+        builder.putExtra(IntentBuilder.KEY_DATA, breedPigeonEntity);
         builder.startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
-    }*/
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -197,6 +197,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
         BreedPigeonEntity breedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         mBreedPigeonEntryViewModel.mBreedPigeonEntity = breedPigeonEntity;
+        mBreedPigeonEntryViewModel.sonFootId = getBaseActivity().getIntent().getStringExtra(KEY_SON_FOOT_ID);
+        mBreedPigeonEntryViewModel.sonPigeonId = getBaseActivity().getIntent().getStringExtra(KEY_SON_PIGEON_ID);
 
         if (mBreedPigeonEntryViewModel.isHavePigeonInfo()) {
             llFoot.setRightText(breedPigeonEntity.getFootRingNum());

@@ -87,6 +87,33 @@ public class BreedPigeonEntryViewModel extends BasePigeonViewModel {
         };
     }
 
+    public Consumer<String> setFootVice() {
+        return s -> {
+            this.footVice = s;
+            isCanCommit();
+        };
+    }
+
+    public Consumer<String> setFootFather(){
+        return s -> {
+            footFather = s;
+        };
+    }
+
+    public Consumer<String> setFootMother(){
+        return s -> {
+            footMother = s;
+        };
+    }
+
+    public Consumer<String> setPigeonName(){
+        return s -> {
+            pigeonName = s;
+        };
+    }
+
+
+
 
     public void isCanCommit() {
         isCanCommit(foot, sourceId, sexId, featherColor, eyeSandId, theirShellsDate, lineage, stateId);
