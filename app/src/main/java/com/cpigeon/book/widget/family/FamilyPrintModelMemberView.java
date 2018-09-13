@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.widget.ShadowRelativeLayout;
@@ -172,7 +173,9 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     }
 
     public void bindData(BreedPigeonEntity entity) {
-
+        if(!StringUtil.isStringValid(entity.getPigeonID())){
+            return;
+        }
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
         MatchAdapter matchAdapter = new MatchAdapter();
         mList.setAdapter(matchAdapter);
