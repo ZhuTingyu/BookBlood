@@ -29,6 +29,46 @@ public class ApiResponse<T> implements Serializable{
         return errorCode == 0 ;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String getListmsg() {
+        return listmsg;
+    }
+
+    public void setListmsg(String listmsg) {
+        this.listmsg = listmsg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
     public String toJsonString() {
         return GsonUtil.toJson(this);
     }
