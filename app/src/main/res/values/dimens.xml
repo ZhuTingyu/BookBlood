@@ -45,4 +45,28 @@
     <dimen name="dialog_plr">10dp</dimen>
     <dimen name="dialog_ptb">25dp</dimen>
 
+    <dimen name="small_tools_img_wh">51dp</dimen>
+    <dimen name="small_tools_item_w">153dp</dimen>
+    <dimen name="small_tools_tv_mt">20dp</dimen>
+
+
+    <!--测量小工具-->
+    <dimen name="ullage_tool_img_wh">16dp</dimen>
+    <dimen name="ullage_tool_img_wh2">12dp</dimen>
+    <dimen name="ullage_tool_lola_cen_img_mlr">10dp</dimen>
+    <dimen name="ullage_tool_lola_item_p">5dp</dimen>
+    <dimen name="ullage_tool_item_ptb">10dp</dimen>
+    <dimen name="ullage_tool_tv_size">14sp</dimen>
+
+    <dimen name="ullage_tool_tv_h1">30dp</dimen>
+    <dimen name="ullage_tool_tv_h2">50dp</dimen>
+    <dimen name="ullage_tool_tv_h3">40dp</dimen>
+
+    <!--赛线天气-->
+    <dimen name="line_weather_lr">20dp</dimen>
+    <dimen name="line_weather_lr2">30dp</dimen>
+    <dimen name="line_weather_tv_size">15dp</dimen>
+    <dimen name="line_weather_item_h">40dp</dimen>
+
+
 </resources>

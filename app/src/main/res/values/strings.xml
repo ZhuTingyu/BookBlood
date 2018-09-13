@@ -390,4 +390,13 @@
     <string name="text_photo_all_place">相册总容量 %1$sM</string>
     <string name="text_photo_user_and_remain_place">(已用%1$sM，剩余%2$sM)</string>
 
+
+    <string name="str_copyright_information_hint">天气仅供参考，天下鸽谱提醒您切勿作为商业用途！</string>
+    <!--测量小工具-->
+    <string name="str_ullage_tool_bottom">1、经纬度的格式为：度，分，秒，百分秒。如：123.234467 为123度23分44.67秒。\n2、以上的单元填写项不得为空，应以"0"补足。如5：30分，就应输入5时30分0秒。\n3、空距计算采用中国信鸽协会统一标准算法(2005-8-31公布)，由于算法、精度取舍等不同，各种软件计算结果可能存在一定误差。\n4、由于各地日出日落不一致，只计算当日归巢分速。\n</string>
+    <string name="str_line_seconds">00.00\"</string>
+    <!--中鸽网-->
+    <string name="package_cpigeon">com.cpigeon.app</string>
+    <string name="package_cpigeonhelp">com.cpigeon.cpigeonhelper</string>
+
 </resources>

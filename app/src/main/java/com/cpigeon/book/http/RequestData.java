@@ -43,5 +43,5 @@ public class RequestData<T> extends RequestUtil {
                 PhoneUtils.getCombinedDeviceID(Utils.getApp()) + "|" + System.currentTimeMillis() / 1000;*/
        return builder.toString();
     }
-
 }
+

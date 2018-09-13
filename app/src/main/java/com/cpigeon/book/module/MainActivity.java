@@ -7,7 +7,6 @@ import android.support.animation.SpringForce;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
@@ -28,6 +27,7 @@ import com.cpigeon.book.module.home.HomeFragment2;
 import com.cpigeon.book.module.home.HomeFragment3;
 import com.cpigeon.book.module.home.HomeFragment4;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
+import com.cpigeon.book.module.menu.smalltools.SmallToolsHomeFragment;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 import com.cpigeon.book.widget.BottomAddTabView;
 import com.cpigeon.book.widget.SimpleTitleView;
@@ -129,6 +129,7 @@ public class MainActivity extends BaseBookActivity {
         ImageView close = view.findViewById(R.id.imgClose);
         SimpleTitleView simpleText2 = view.findViewById(R.id.simpleText2);
         SimpleTitleView simpleText3 = view.findViewById(R.id.simpleText3);
+        SimpleTitleView simpleText6 = view.findViewById(R.id.simpleText6);
         close.setOnClickListener(v -> {
             mPopupWindow.dismiss();
         });
@@ -145,6 +146,10 @@ public class MainActivity extends BaseBookActivity {
             RacingPigeonEntryFragment.start(getBaseActivity());
         });
 
+        simpleText6.setOnClickListener(v -> {
+            //赛鸽工具
+            SmallToolsHomeFragment.start(getBaseActivity());
+        });
 
         spring = new SpringForce(0)
                 .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
