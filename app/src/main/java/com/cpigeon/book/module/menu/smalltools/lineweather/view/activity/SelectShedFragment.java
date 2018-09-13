@@ -80,10 +80,8 @@ public class SelectShedFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.getMenu().clear();
+
         setTitle("选择公棚");
-        toolbar.setNavigationOnClickListener(v -> finish());
 
         mAdapter = new SelectShedAdapter(getBaseActivity(), null);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

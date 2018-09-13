@@ -106,50 +106,6 @@
     <include layout="@layout/layout_line_weathers" />
 
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:clipToPadding="true"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@android:color/white">
-
-            <!--<TextView
-                android:id="@+id/toolbar_title"
-                tools:text="中鸽网"
-                android:textSize="18dp"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>-->
-
-            <com.cpigeon.cpigeonhelper.ui.AlwaysMarqueeTextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:maxLines="1"
-                android:textColor="@color/colorWhite"
-                android:textSize="18dp"
-                tools:text="中鸽网" />
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
-
     <com.amap.api.maps.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"

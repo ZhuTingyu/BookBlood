@@ -85,10 +85,7 @@ public class SelectFlyFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.getMenu().clear();
         setTitle("选择司放地");
-        toolbar.setNavigationOnClickListener(v -> finish());
 
         mAdapter = new SelectFlyAdapter(getBaseActivity(), null);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

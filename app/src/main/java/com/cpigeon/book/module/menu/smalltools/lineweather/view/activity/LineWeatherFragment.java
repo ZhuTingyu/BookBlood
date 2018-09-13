@@ -3,6 +3,7 @@ package com.cpigeon.book.module.menu.smalltools.lineweather.view.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -192,14 +193,11 @@ public class LineWeatherFragment extends BaseBookFragment {
         Log.d("aaas", "initView: 111333----ss");
 
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.getMenu().clear();
-        toolbar.getMenu().add("").setIcon(R.drawable.ic_share_line_weather).setOnMenuItemClickListener(item -> {
+        setToolbarRightImage(R.drawable.ic_share_line_weather,item -> {
             showLoading();
             getImageByMap();
-            return false;
-
-        }).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            return true;
+        });
 
         setTitle("赛线天气");
         toolbar.setNavigationOnClickListener(v -> finish());
