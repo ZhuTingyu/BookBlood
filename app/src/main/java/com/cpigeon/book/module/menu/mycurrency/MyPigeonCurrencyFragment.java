@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu.mycurrency;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,10 +14,10 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
-import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.menu.mycurrency.adapter.MyPigeonCurrencyAdapter;
+import com.cpigeon.book.module.menu.viewmodel.PigeonCurrencyViewModel;
 import com.cpigeon.book.widget.SimpleTitleView;
 
 /**
@@ -32,6 +33,16 @@ public class MyPigeonCurrencyFragment extends BaseBookFragment {
     private RecyclerView mList;
 
     MyPigeonCurrencyAdapter mAdapter;
+
+    private PigeonCurrencyViewModel mPigeonCurrencyViewModel;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mPigeonCurrencyViewModel = new PigeonCurrencyViewModel();
+        initViewModels(mPigeonCurrencyViewModel);
+    }
 
 
     public static void start(Activity activity) {
@@ -56,13 +67,31 @@ public class MyPigeonCurrencyFragment extends BaseBookFragment {
         mList = findViewById(R.id.list);
         mList.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
         addItemDecorationLine(mList);
+
+        mSTvCurrencyExchange.setOnClickListener(v -> {
+            //鸽币兑换
+            PigeonCurrencyExchangeFragment.start(getBaseActivity());
+        });
+
         mSTvCurrencyDetails.setOnClickListener(v -> {
-            IntentBuilder.Builder().startParentActivity(getBaseActivity(), PigeonCurrencyDetailsFragment.class);
+            //鸽币明细
+            PigeonCurrencyDetailsFragment.start(getBaseActivity());
         });
 
         mAdapter = new MyPigeonCurrencyAdapter();
         mList.setAdapter(mAdapter);
 
         mAdapter.setNewData(Lists.newTestArrayList());
+
+
+        mPigeonCurrencyViewModel.getTXGP_Account_GeBi();//获取我的鸽币数量
+    }
+
+    @Override
+    protected void initObserve() {
+        super.initObserve();
+        mPigeonCurrencyViewModel.mGeBi.observe(this, data -> {
+
+        });
     }
 }

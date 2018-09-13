@@ -28,7 +28,6 @@
     <!--中鸽助手app分享-->
     <string name="app_share_zgzs">http://www.cpigeon.com:818/APP/DownloadCpigeonHelper</string>
 
-
     <!--单点登录-->
     <string name="user_single_login">ZGW_Users_SingleLogin</string>
     <!--用户注册-->
@@ -91,6 +90,12 @@
     <string name="launch_img">TXGP_Get_StartUpAd</string>
     <string name="get_ass_list">TXGP_PigeonISCO_GetList</string>
 
+    <!--鸽币兑换 列表-->
+    <string name="pigeon_currency_exchange_list">TXGP_GeBi_List</string>
+    <!--鸽币明细 列表-->
+    <string name="pigeon_currency_details_list">TXGP_GeBi_List</string>
+    <!--获取鸽币-->
+    <string name="get_my_gebi">TXGP_Account_GeBi</string>
 
     <!--添加单个足环-->
     <string name="foot_add_single">TXGP_FootRing_Add</string>
@@ -105,7 +110,6 @@
     <!--足环号码 列表所有-->
     <string name="foot_list_all">TXGP_FootRing_SelectAll</string>
     <string name="delete_foots">TXGP_FootRing_DeleteSection</string>
-
 
     <!--获取各个类型的足环数-->
     <string name="foot_num_type">TXGP_FootRing_SelectType</string>
