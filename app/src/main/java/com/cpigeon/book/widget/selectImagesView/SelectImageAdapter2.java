@@ -120,8 +120,7 @@ public class SelectImageAdapter2 extends RecyclerView.Adapter<BaseViewHolder> {
 
         void bindData(int position) {
 
-            File img = new File(mImgData.get(position).getImgPath());
-            GlideUtil.setGlideImageViewHaveRound(mBaseActivity, img, icon);
+            GlideUtil.setGlideImageViewHaveRound(mBaseActivity, mImgData.get(position).getImgPath(), icon, 5);
 
             tv_img_type.setText(mImgData.get(position).getImgType());
 

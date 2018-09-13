@@ -109,7 +109,7 @@ public class LoginFragment extends BaseBookFragment {
 
         tvLogin.setOnClickListener(v -> {
 
-            MainActivity.start(getActivity());
+            //MainActivity.start(getActivity());
 
             if (UserModel.getInstance().getUserData() == null) {
                 mViewModel.login();

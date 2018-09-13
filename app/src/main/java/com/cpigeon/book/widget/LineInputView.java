@@ -214,9 +214,9 @@ public class LineInputView extends RelativeLayout {
             });
         } else {
             mEditText.setOnFocusChangeListener(null);
-            if (mIsHaveEditBoard) {
+            /*if (mIsHaveEditBoard) {
                 mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
-            }
+            }*/
             setNotNullDrawable(mIsNotNull);
         }
     }

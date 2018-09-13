@@ -19,9 +19,12 @@ public class BreedPigeonEntryViewModel extends BasePigeonViewModel {
 
 
     public MutableLiveData<PigeonEntryEntity> mBreedPigeonData = new MutableLiveData<>();
-    public BreedPigeonEntity mBreedPigeonEntity;
+    public MutableLiveData<BreedPigeonEntity> mPigeonDetailsData = new MutableLiveData<>();
+    public String pigeonId;
     public String sonFootId;
     public String sonPigeonId;
+
+    public BreedPigeonEntity mBreedPigeonEntity = new BreedPigeonEntity();
 
     //种鸽录入
     public void addBreedPigeonEntry() {
@@ -79,6 +82,16 @@ public class BreedPigeonEntryViewModel extends BasePigeonViewModel {
         });
     }
 
+    public void getPigeonDetails() {
+
+        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(pigeonId), r -> {
+            if (r.isOk()) {
+                mBreedPigeonEntity = r.data;
+                mPigeonDetailsData.setValue(mBreedPigeonEntity);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
 
     public Consumer<String> setFootNumber() {
         return s -> {
@@ -86,33 +99,6 @@ public class BreedPigeonEntryViewModel extends BasePigeonViewModel {
             isCanCommit();
         };
     }
-
-    public Consumer<String> setFootVice() {
-        return s -> {
-            this.footVice = s;
-            isCanCommit();
-        };
-    }
-
-    public Consumer<String> setFootFather(){
-        return s -> {
-            footFather = s;
-        };
-    }
-
-    public Consumer<String> setFootMother(){
-        return s -> {
-            footMother = s;
-        };
-    }
-
-    public Consumer<String> setPigeonName(){
-        return s -> {
-            pigeonName = s;
-        };
-    }
-
-
 
 
     public void isCanCommit() {

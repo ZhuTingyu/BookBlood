@@ -104,9 +104,7 @@ public class SelectImageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         void bindData(int position) {
 
-            File img = new File(mImgData.get(position));
-
-            GlideUtil.setGlideImageViewHaveRound(mBaseActivity, img, icon);
+            GlideUtil.setGlideImageViewHaveRound(mBaseActivity, mImgData.get(position), icon);
 
             del.setVisibility(View.VISIBLE);
             del.setOnClickListener(v -> {

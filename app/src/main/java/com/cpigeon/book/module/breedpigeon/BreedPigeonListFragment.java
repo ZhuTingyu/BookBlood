@@ -21,6 +21,7 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
@@ -28,6 +29,10 @@ import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -59,10 +64,10 @@ public class BreedPigeonListFragment extends BaseFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        EventBus.getDefault().register(this);
         mActivity = (SearchFragmentParentActivity) context;
         mSelectTypeViewModel = new SelectTypeViewModel();
         mBreedPigeonListModel = new BreedPigeonListModel();
-
         initViewModels(mSelectTypeViewModel, mBreedPigeonListModel);
     }
 
@@ -192,5 +197,18 @@ public class BreedPigeonListFragment extends BaseFragment {
             mAdapter.setEmptyText(s);
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(PigeonAddEvent event) {
+        mAdapter.cleanList();
+        mBreedPigeonListModel.pi = 1;
+        mBreedPigeonListModel.getPigeonList();
     }
 }
