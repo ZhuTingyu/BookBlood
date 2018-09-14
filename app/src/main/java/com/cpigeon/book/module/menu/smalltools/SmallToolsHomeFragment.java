@@ -40,6 +40,13 @@ public class SmallToolsHomeFragment extends BaseBookFragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        setTitle("小工具");
+    }
+
     @OnClick({R.id.ll_line_water, R.id.ll_ullage_calculation, R.id.ll_cpigeon, R.id.ll_cpigeonhelp})
     public void onViewClicked(View view) {
         switch (view.getId()) {

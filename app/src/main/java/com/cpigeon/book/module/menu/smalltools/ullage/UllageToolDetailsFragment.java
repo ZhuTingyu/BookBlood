@@ -1,5 +1,7 @@
 package com.cpigeon.book.module.menu.smalltools.ullage;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.services.weather.LocalWeatherLive;
 import com.base.base.BaseMapFragment;
+import com.base.util.IntentBuilder;
 import com.base.util.RxUtils;
 import com.base.util.http.GsonUtil;
 import com.base.util.map.MapMarkerManager;
@@ -29,11 +32,13 @@ import com.base.util.utility.ImageUtils;
 import com.base.util.utility.LogUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.module.menu.smalltools.lineweather.view.activity.AWeekWeatherFragment;
+import com.cpigeon.book.util.BitmapUtils;
 import com.cpigeon.book.util.MapUtil;
 import com.cpigeon.book.util.MathUtil;
 import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
 import com.cpigeon.book.widget.mydialog.ViewControlShare;
 import com.google.gson.reflect.TypeToken;
+import com.umeng.socialize.UMShareAPI;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -41,6 +46,8 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 
 
@@ -51,8 +58,7 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class UllageToolDetailsFragment extends BaseMapFragment {
 
-    @BindView(R.id.map)
-    TextureMapView mMapView;//地图控件
+
     @BindView(R.id.img)
     ImageView img;
     @BindView(R.id.tv_kj)
@@ -63,6 +69,7 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
     LinearLayout llZ;//
 
     private AMap aMap;
+    protected Unbinder unbinder;
 
     private ShareDialogFragment dialogFragment;
 
@@ -73,6 +80,7 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_ullage_tool_details, container, false);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -81,6 +89,7 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setTitle("空距计算");
         sfd_lo = getBaseActivity().getIntent().getDoubleExtra("sfd_lo", 0);
         sfd_la = getBaseActivity().getIntent().getDoubleExtra("sfd_la", 0);
 
@@ -93,7 +102,22 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+    }
+
     protected void initViews(Bundle savedInstanceState) {
+
+
+        if (aMap == null) {
+            aMap = mapView.getMap();
+            markerManager = new MapMarkerManager(aMap, getBaseActivity());
+        }
 
         if (!result.equals("")) {
             tvKj.setText(String.valueOf(MathUtil.doubleformat(Double.parseDouble(result), 2)) + "公里");//空距
@@ -188,14 +212,14 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
         aMap.addPolyline(new PolylineOptions().
                 addAll(afterPoints).width(10).color(Color.argb(255, 61, 188, 196)));
 
-        markerManager.addCustomMarker2(afterPoints.get(0), null, ImageUtils.view2Bitmap(getInfoWindow(GsonUtil.toJson(weatherList.get(0)), MARKER_START, 0, distanceOne)));
+        markerManager.addCustomMarker2(afterPoints.get(0), null, BitmapUtils.getViewBitmap(getInfoWindow(GsonUtil.toJson(weatherList.get(0)), MARKER_START, 0, distanceOne)));
 
         for (int i = 1, len = afterPoints.size() - 1; i < len; i++) {
-            markerManager.addCustomMarker2(afterPoints.get(i), null, ImageUtils.view2Bitmap(getInfoWindow(GsonUtil.toJson(weatherList.get(i)), MARKER_NORMAL, i, distanceOne)));
+            markerManager.addCustomMarker2(afterPoints.get(i), null, BitmapUtils.getViewBitmap(getInfoWindow(GsonUtil.toJson(weatherList.get(i)), MARKER_NORMAL, i, distanceOne)));
         }
 
         markerManager.addCustomMarker2(afterPoints.get(afterPoints.size() - 1), null,
-                ImageUtils.view2Bitmap(getInfoWindow(GsonUtil.toJson(weatherList.get(afterPoints.size() - 1)), MARKER_END, afterPoints.size() - 1, distanceOne)));
+                BitmapUtils.getViewBitmap(getInfoWindow(GsonUtil.toJson(weatherList.get(afterPoints.size() - 1)), MARKER_END, afterPoints.size() - 1, distanceOne)));
 
 
         List<Marker> markerList = markerManager.addMap();
@@ -219,7 +243,7 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
                 for (int i = 0; i < siez; i++) {
                     if (markerList.get(i).getPosition().latitude == marker.getPosition().latitude &&
                             markerList.get(i).getPosition().longitude == marker.getPosition().longitude) {
-                        AWeekWeatherFragment.start(getBaseActivity(),markerList.get(i).getPosition());
+                        AWeekWeatherFragment.start(getBaseActivity(), markerList.get(i).getPosition());
                         return true;
                     }
                 }
@@ -351,6 +375,8 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
 
     //截图
     private void startJt() {
+
+        showLoading();
         /**
          * 对地图进行截屏
          */
@@ -375,6 +401,8 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
                         dialogFragment.dismiss();
                     }
 
+                    hideLoading();
+
                     if (dialogFragment != null) {
                         dialogFragment.setShareContent(bitmaps);
                         dialogFragment.setShareListener(ViewControlShare.getShareResultsDown(getContext(), dialogFragment, "tp"));
@@ -386,5 +414,19 @@ public class UllageToolDetailsFragment extends BaseMapFragment {
                 }
             }
         });
+    }
+
+    private void showLoading() {
+        setProgressVisible(true);
+    }
+
+    private void hideLoading() {
+        setProgressVisible(false);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(getBaseActivity()).onActivityResult(requestCode, resultCode, data);
     }
 }

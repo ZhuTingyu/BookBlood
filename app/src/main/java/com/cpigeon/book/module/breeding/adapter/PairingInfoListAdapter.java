@@ -19,10 +19,9 @@ public class PairingInfoListAdapter extends BaseQuickAdapter<PairingInfoEntity, 
 
     @Override
     protected void convert(BaseViewHolder helper, PairingInfoEntity item) {
-        helper.setText(R.id.tv_foot, helper.getPosition());
-        helper.setText(R.id.tv_lineage, "神奇的小鸟" + helper.getPosition());
-        helper.setText(R.id.tv_nest_num, helper.getPosition() + "窝");
+//        helper.setText(R.id.tv_foot, "" + helper.getPosition());
+//        helper.setText(R.id.tv_lineage, "神奇的小鸟" + helper.getPosition());
+//        helper.setText(R.id.tv_nest_num, helper.getPosition() + "窝");
 
-        
     }
 }

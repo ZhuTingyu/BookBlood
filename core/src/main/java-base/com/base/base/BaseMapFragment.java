@@ -20,13 +20,16 @@ public class BaseMapFragment extends BaseFragment {
     protected AMap aMap;
     protected AmapManager amapManager;
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mapView = findViewById(R.id.map);
         aMap = mapView.getMap();
         amapManager = new AmapManager(aMap);
         mapView.onCreate(savedInstanceState);
+
     }
 
     @Override

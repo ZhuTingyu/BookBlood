@@ -29,9 +29,21 @@ public abstract class BaseBookActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
-
         unbinder = ButterKnife.bind(this);
+
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initObserve();
+    }
+
+    protected void initObserve() {
+
+    }
+
 
     protected abstract int getContentView();
 
@@ -74,7 +86,6 @@ public abstract class BaseBookActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
-
 
 
 }

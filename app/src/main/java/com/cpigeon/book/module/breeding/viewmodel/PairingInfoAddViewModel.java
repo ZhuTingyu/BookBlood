@@ -16,13 +16,12 @@ public class PairingInfoAddViewModel extends BaseViewModel {
 
     public BreedPigeonEntity mBreedPigeonEntity;
 
-    //配偶环号
+    //配偶环号  配对的足环号码
     public String pairingFoot;
 
     //母足环号码
     public String wofootnum;
-    //父足环号码
-    public String menfootnum;
+
     //羽色
     public List<SelectTypeEntity> mSelectTypes_FeatherColor;
     public String featherColor = "";
@@ -41,10 +40,10 @@ public class PairingInfoAddViewModel extends BaseViewModel {
     public String hum;
     //配对风向
     public String dir;
-    //是否是平台配对（1和2）
-    public String reamrk;
-    //配对备注
+    //是否是平台配对（1和2）   是否相亲配对
     public String bitpair;
+    //配对备注
+    public String reamrk;
 
     public void isCanCommit() {
         isCanCommit(pairingFoot, pairingTime, featherColor, lineage);
@@ -52,16 +51,16 @@ public class PairingInfoAddViewModel extends BaseViewModel {
 
     public void getTXGP_PigeonBreed_AddData() {
 
-        if (mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
-            //
-            wofootnum = mBreedPigeonEntity.getFootRingNum();
-            menfootnum = pairingFoot;
-        } else {
-            wofootnum = pairingFoot;
-            menfootnum = mBreedPigeonEntity.getFootRingNum();
-        }
+//        if (mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
+//            //
+//            wofootnum = mBreedPigeonEntity.getFootRingNum();
+//            menfootnum = pairingFoot;
+//        } else {
+//            wofootnum = pairingFoot;
+//            menfootnum = mBreedPigeonEntity.getFootRingNum();
+//        }
 
-        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(wofootnum, menfootnum, pairingTime, weather, temper, hum, dir, bitpair, reamrk), r -> {
+        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(mBreedPigeonEntity.getFootRingID(), pairingFoot, pairingTime, weather, temper, hum, dir, bitpair, reamrk), r -> {
             if (r.isOk()) {
                 hintDialog(r.msg);
             } else throw new HttpErrorException(r);

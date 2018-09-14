@@ -2,6 +2,7 @@ package com.cpigeon.book.module.menu.smalltools.lineweather.view.activity;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -65,7 +66,7 @@ public class SelectFlyFragment extends BaseBookFragment {
     private SelectFlyAdapter mAdapter;
 
 
-    private LineWeatherPresenter mPresenter = new LineWeatherPresenter();
+    private LineWeatherPresenter mPresenter;
 
     @Nullable
     @Override
@@ -74,12 +75,30 @@ public class SelectFlyFragment extends BaseBookFragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mPresenter = new LineWeatherPresenter();
+        initViewModels(mPresenter);
+    }
+
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, SelectFlyFragment.class,0x0035);
+                .startParentActivity(activity, SelectFlyFragment.class, 0x0035);
     }
 
+    @Override
+    protected void initObserve() {
+        super.initObserve();
+
+        mPresenter.mGetSiFangDiData.observe(this, data -> {
+            mSwipeLayout.setRefreshing(false);
+            hideLoading();
+            seperateLists(data);
+        });
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -103,19 +122,11 @@ public class SelectFlyFragment extends BaseBookFragment {
         });
 
         showLoading();
-        mPresenter.getTool_GetSiFangDi("", data -> {
-            mSwipeLayout.setRefreshing(false);
-            hideLoading();
-            seperateLists(data);
-        });
+        mPresenter.getTool_GetSiFangDi();
 
         //下拉刷新
         setRefreshListener(() -> {
-            mPresenter.getTool_GetSiFangDi("", data -> {
-                mSwipeLayout.setRefreshing(false);
-                hideLoading();
-                seperateLists(data);
-            });
+            mPresenter.getTool_GetSiFangDi();
         });
 
         sideBar.setIndexItems("A", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "Q", "R", "S", "T", "W", "X", "Y", "Z", "#");
@@ -145,11 +156,8 @@ public class SelectFlyFragment extends BaseBookFragment {
                     if (!et_search.getText().toString().isEmpty()) {
                         //完成自己的事件
                         showLoading();
-                        mPresenter.getTool_GetSiFangDi(et_search.getText().toString(), data -> {
-                            mSwipeLayout.setRefreshing(false);
-                            hideLoading();
-                            seperateLists(data);
-                        });
+                        mPresenter.sfdStr = et_search.getText().toString();
+                        mPresenter.getTool_GetSiFangDi();
                     }
                 }
                 return false;
@@ -161,11 +169,8 @@ public class SelectFlyFragment extends BaseBookFragment {
             if (!et_search.getText().toString().isEmpty()) {
                 //完成自己的事件
                 showLoading();
-                mPresenter.getTool_GetSiFangDi(et_search.getText().toString(), data -> {
-                    mSwipeLayout.setRefreshing(false);
-                    hideLoading();
-                    seperateLists(data);
-                });
+                mPresenter.sfdStr = et_search.getText().toString();
+                mPresenter.getTool_GetSiFangDi();
             }
         });
 

@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu.smalltools.lineweather.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -35,6 +36,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.menu.smalltools.lineweather.view.adapter.AWeekWeatherAdapter;
 import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
 import com.cpigeon.book.widget.mydialog.ViewControlShare;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.List;
 
@@ -65,30 +67,28 @@ public class AWeekWeatherFragment extends BaseBookFragment {
     }
 
 
+    public static void start(Activity activity, LatLng mLatLng) {
+        IntentBuilder.Builder()
+                .putExtra("data", mLatLng)
+                .startParentActivity(activity, AWeekWeatherFragment.class);
+    }
+
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         dialogFragment = new ShareDialogFragment();
 
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.getMenu().clear();
-        toolbar.getMenu().add("").setIcon(R.drawable.ic_share_line_weather).setOnMenuItemClickListener(item -> {
-
+        setToolbarRightImage(R.drawable.ic_share_line_weather, item -> {
             showLoading();
             getImageByMap();
 
             return false;
-        }).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
-
+        });
 
         setTitle("赛线天气");
-        toolbar.setNavigationOnClickListener(v -> finish());
-
         initViews();
-
         try {
             mLatLng = getBaseActivity().getIntent().getParcelableExtra("data");
             getAddressByLatlng(mLatLng.longitude, mLatLng.latitude);
@@ -96,13 +96,6 @@ public class AWeekWeatherFragment extends BaseBookFragment {
             e.printStackTrace();
         }
     }
-
-    public static void start(Activity activity, LatLng mLatLng) {
-        IntentBuilder.Builder()
-                .putExtra("data", mLatLng)
-                .startParentActivity(activity, AWeekWeatherFragment.class);
-    }
-
 
     private void initViews() {
         mAdapter = new AWeekWeatherAdapter(null);
@@ -200,6 +193,11 @@ public class AWeekWeatherFragment extends BaseBookFragment {
         hideLoading();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(getBaseActivity()).onActivityResult(requestCode, resultCode, data);
+    }
 
     private void showLoading() {
         setProgressVisible(true);

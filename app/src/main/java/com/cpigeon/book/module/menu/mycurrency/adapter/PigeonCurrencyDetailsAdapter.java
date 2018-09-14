@@ -16,26 +16,20 @@ import com.cpigeon.book.model.entity.PigeonCurrencyEntity;
 public class PigeonCurrencyDetailsAdapter extends BaseQuickAdapter<PigeonCurrencyEntity, BaseViewHolder> {
 
     public PigeonCurrencyDetailsAdapter() {
-        super(R.layout.item_pigeon_currency_details, Lists.newArrayList(new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity()));
+        super(R.layout.item_pigeon_currency_details, Lists.newArrayList());
     }
 
     @Override
     protected void convert(BaseViewHolder helper, PigeonCurrencyEntity item) {
-        helper.setText(R.id.tvTitle, "足环号码录入");
-        helper.setText(R.id.tvTime, "2018-11-11 12:12:12");
+        helper.setText(R.id.tvTitle, item.getItem());
+        helper.setText(R.id.tvTime, item.getDatetime());
         TextView count = helper.getView(R.id.tvCount);
-        if (helper.getAdapterPosition() == 0) {
+        if (Integer.valueOf(item.getGb()) >= 0) {
             count.setTextColor(Utils.getColor(R.color.color_count_add));
-            count.setText("+50");
+            count.setText("+" + item.getGb());
         } else {
             count.setTextColor(Utils.getColor(R.color.color_text_hint));
-            count.setText("-50");
+            count.setText(item.getGb());
         }
     }
 }

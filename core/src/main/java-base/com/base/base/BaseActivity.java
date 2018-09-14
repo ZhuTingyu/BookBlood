@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.base.http.R;
 import com.base.util.BarUtils;
+import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.system.AppManager;
 import com.base.util.dialog.DialogUtils;
@@ -30,6 +31,7 @@ import com.base.widget.LoadingView;
 import com.luck.picture.lib.permissions.RxPermissions;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import io.reactivex.Observable;
@@ -57,6 +59,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected BaseViewModel viewModel;
 
+    private List<BaseViewModel> viewModels = Lists.newArrayList();
+
     private TextView title;
 
     private RxPermissions mRxPermission;
@@ -73,10 +77,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseActivity = this;
-        if(getIntent() != null){
+        if (getIntent() != null) {
             isBarImmersive = getBaseActivity().getIntent().getBooleanExtra(IS_BAR_IMMERSIVE, true);
         }
-        if(isBarImmersive){
+        if (isBarImmersive) {
             BarUtils.setNavBarImmersive(this);
             BarUtils.setStatusBarAllAlpha(this);
         }
@@ -85,14 +89,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
-
-
     @Override
     protected void onDestroy() {
         composite.clear();
-        if (viewModel != null) {
-            viewModel.onDestroy();
+        for (BaseViewModel viewModel : viewModels) {
+            if (viewModel != null) {
+                viewModel.onDestroy();
+            }
         }
 
         super.onDestroy();
@@ -106,12 +109,50 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initViewModel(BaseViewModel viewModel) {
         this.viewModel = viewModel;
         this.viewModel.setBaseActivity(getBaseActivity());
+        viewModels.add(this.viewModel);
         viewModel.getError().observe(this, restErrorInfo -> {
             if (restErrorInfo != null) {
                 error(restErrorInfo.code, restErrorInfo.message);
             }
         });
     }
+
+    protected void initViewModels(BaseViewModel... viewModels) {
+        List<BaseViewModel> viewModelList = Lists.newArrayList(viewModels);
+        for (BaseViewModel viewModel : viewModelList) {
+            viewModel.setBaseActivity(getBaseActivity());
+            viewModel.getError().observe(this, restErrorInfo -> {
+                if (restErrorInfo != null) {
+                    error(restErrorInfo.code, restErrorInfo.message);
+                }
+            });
+
+
+            viewModel.getHintClosePage().observe(this, restHintInfo -> {
+                if (restHintInfo != null) {
+                    setProgressVisible(false);
+
+                    if (!StringUtil.isStringValid(restHintInfo.message)) {
+                        return;
+                    }
+
+                    //保证界面只有一个错误提示
+                    if (baseActivity.errorDialog == null || !baseActivity.errorDialog.isShowing()) {
+                        baseActivity.errorDialog = DialogUtils.createHintDialog(baseActivity, restHintInfo.message, SweetAlertDialog.SUCCESS_TYPE, restHintInfo.cancelable, sweetAlertDialog -> {
+                            sweetAlertDialog.dismiss();
+
+                            if (restHintInfo.isClosePage) {
+                                finish();
+                            }
+                        });
+                    }
+
+                }
+            });
+        }
+        this.viewModels = viewModelList;
+    }
+
 
     protected <T extends BaseViewModel> T getViewModel(Class<T> viewModelClass) {
         return ViewModelProviders.of(getBaseActivity()).get(viewModelClass);

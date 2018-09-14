@@ -148,6 +148,7 @@ public class MainActivity extends BaseBookActivity {
 
         simpleText6.setOnClickListener(v -> {
             //赛鸽工具
+            mPopupWindow.dismiss();
             SmallToolsHomeFragment.start(getBaseActivity());
         });
 
