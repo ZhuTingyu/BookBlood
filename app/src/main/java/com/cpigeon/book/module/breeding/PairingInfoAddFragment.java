@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.map.LocationLiveData;
+import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -98,6 +101,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_FeatherColor();
         mSelectTypeViewModel.getSelectType_lineage();
 
+
     }
 
     @Override
@@ -114,6 +118,21 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
         mSelectTypeViewModel.mSelectType_Lineage.observe(this, selectTypeEntities -> {
             mPairingInfoAddViewModel.mSelectTypes_Lineage = selectTypeEntities;
+        });
+
+
+        LocationLiveData.get(true).observe(this, aMapLocation -> {
+
+            Log.d("dingwei", "initObserve: 城市--》" + aMapLocation.getCity());
+            WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
+
+                Log.d("dingwei", "initObserve: 天气" + localWeatherLive.getWeather());
+                mPairingInfoAddViewModel.weather = localWeatherLive.getWeather();//天气
+                mPairingInfoAddViewModel.temper = localWeatherLive.getTemperature();//气温
+                mPairingInfoAddViewModel.hum = localWeatherLive.getHumidity();//湿度
+                mPairingInfoAddViewModel.dir = localWeatherLive.getWindDirection();//风向
+            });
+
         });
     }
 

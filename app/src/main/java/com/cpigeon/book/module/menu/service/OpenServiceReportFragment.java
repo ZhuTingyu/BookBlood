@@ -15,17 +15,21 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.menu.service.adpter.OpenServiceAdapter;
+import com.cpigeon.book.module.menu.service.viewmodel.ServerReportViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
+ * 开通续费记录
  * Created by Zhu TingYu on 2018/8/31.
  */
 
-public class OpenServiceReportFragment extends BaseBookFragment{
+public class OpenServiceReportFragment extends BaseBookFragment {
 
     XRecyclerView mRecyclerView;
     OpenServiceAdapter mAdapter;
+    private ServerReportViewModel mViewModel;
 
-    public static void start(Activity activity){
+    public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, OpenServiceReportFragment.class);
     }
@@ -33,6 +37,9 @@ public class OpenServiceReportFragment extends BaseBookFragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+        mViewModel = new ServerReportViewModel();
+        initViewModels(mViewModel);
     }
 
     @Nullable
@@ -49,6 +56,35 @@ public class OpenServiceReportFragment extends BaseBookFragment{
         mRecyclerView.addItemDecorationLine();
         mAdapter = new OpenServiceAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
+
+
+        mAdapter.setOnLoadMoreListener(() -> {
+            mViewModel.pi++;
+            mViewModel.getTXGP_GetServiceListData();
+        }, mRecyclerView.getRecyclerView());
+
+        mRecyclerView.setRefreshListener(() -> {
+            mAdapter.getData().clear();
+            mViewModel.pi = 1;
+            mViewModel.getTXGP_GetServiceListData();
+        });
+
+
+        setProgressVisible(true);
+        mViewModel.getTXGP_GetServiceListData();
     }
+
+    @Override
+    protected void initObserve() {
+
+        mViewModel.mServerReportData.observe(this, datas -> {
+            setProgressVisible(false);
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+        });
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+    }
+
 }

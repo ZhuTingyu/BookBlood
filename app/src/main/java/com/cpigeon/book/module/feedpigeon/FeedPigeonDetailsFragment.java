@@ -23,6 +23,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonDetailsAdapter;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
+import com.cpigeon.book.util.RecyclerViewUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.entity.LocalMedia;
 
@@ -76,8 +77,13 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         mRecyclerView = findViewById(R.id.list);
         mAdapter = new FeedPigeonDetailsAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newArrayList("", "", "", "", ""));
+        mAdapter.setNewData(Lists.newArrayList());
+//        mAdapter.setNewData(Lists.newArrayList("", "", "", "", ""));
         mAdapter.addHeaderView(initView());
+
+        mRecyclerView.setRefreshListener(() -> {
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, Lists.newArrayList());
+        });
     }
 
     private View initView() {

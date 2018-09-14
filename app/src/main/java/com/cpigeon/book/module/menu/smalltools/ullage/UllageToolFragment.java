@@ -1,9 +1,12 @@
 package com.cpigeon.book.module.menu.smalltools.ullage;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +14,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.LocationFormatUtils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.module.menu.smalltools.lineweather.presenter.LineWeatherPresenter;
 import com.cpigeon.book.module.menu.smalltools.lineweather.view.activity.LineWeatherFragment;
 import com.cpigeon.book.module.trainpigeon.SelectTimeHaveHMSDialog;
+import com.cpigeon.book.util.MathUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +70,7 @@ public class UllageToolFragment extends BaseBookFragment {
     @BindView(R.id.tv_time2)
     TextView tvTime2;
 
+    private LineWeatherPresenter mPresenter;
 
     @Nullable
     @Override
@@ -78,11 +86,18 @@ public class UllageToolFragment extends BaseBookFragment {
     }
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mPresenter = new LineWeatherPresenter();
+        initViewModels(mPresenter);
+    }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setTitle("空距计算");
         initViews(savedInstanceState);
     }
 
@@ -116,14 +131,13 @@ public class UllageToolFragment extends BaseBookFragment {
                 mSelectTimeHaveHMSDialog.setOnTimeSelectListener((hours, minute, second) -> {
                     tvTime1.setText(hours + "时" + minute + "分" + second + "秒");
                 });
-//                PickerChooseUtil.showTimePickerChooseSMF(this, tvTime1);
+                mSelectTimeHaveHMSDialog.show(getBaseActivity().getSupportFragmentManager());
                 break;
             case R.id.ll_xzsj2://鸽舍经纬度选择时间
-
                 mSelectTimeHaveHMSDialog.setOnTimeSelectListener((hours, minute, second) -> {
                     tvTime2.setText(hours + "时" + minute + "分" + second + "秒");
                 });
-
+                mSelectTimeHaveHMSDialog.show(getBaseActivity().getSupportFragmentManager());
                 break;
             case R.id.tv_djjs://点击计算
                 uploadIdCardInfo();
@@ -131,12 +145,40 @@ public class UllageToolFragment extends BaseBookFragment {
         }
     }
 
+    @Override
+    protected void initObserve() {
+        super.initObserve();
+
+        mPresenter.mUllageToolData.observe(this, data -> {
+            double result = data.getResult();
+
+            IntentBuilder mIntentBuilder = IntentBuilder.Builder();
+
+            mIntentBuilder.putExtra("sfd_lo", LocationFormatUtils.Aj2GPSLocation(UlageToolPresenter.strPj(etUllage1Lo1, etUllage1Lo2, etUllage1Lo3)));
+            mIntentBuilder.putExtra("sfd_la", LocationFormatUtils.Aj2GPSLocation(UlageToolPresenter.strPj(etUllage1La1, etUllage1La2, etUllage1La3)));
+            mIntentBuilder.putExtra("gc_lo", LocationFormatUtils.Aj2GPSLocation(UlageToolPresenter.strPj(etUllage2Lo1, etUllage2Lo2, etUllage2Lo3)));
+            mIntentBuilder.putExtra("gc_la", LocationFormatUtils.Aj2GPSLocation(UlageToolPresenter.strPj(etUllage2La1, etUllage2La2, etUllage2La3)));
+            mIntentBuilder.putExtra("result", String.valueOf(result));
+
+
+            if (!tvTime1.getText().toString().equals("请选择时间") && !tvTime2.getText().toString().equals("请选择时间")) {
+                double time1 = TimeUtil.parse(tvTime1.getText().toString(), TimeUtil.FORMAT_HHMMSS);
+                double time2 = TimeUtil.parse(tvTime2.getText().toString(), TimeUtil.FORMAT_HHMMSS);
+                if (time2 < time1) {
+                    getBaseActivity().errorDialog = DialogUtils.createErrorDialog(getBaseActivity(), "归巢时间小于司放时间");
+                    return;
+                }
+                mIntentBuilder.putExtra("time", String.valueOf(MathUtil.doubleformat(result * 1000 / (time2 - time1), 2) + "米/秒"));
+            }
+
+            mIntentBuilder.startParentActivity(getBaseActivity(), UllageToolDetailsFragment.class);
+
+        });
+    }
+
     public void uploadIdCardInfo() {
 
-        Map<String, Object> postParams = new HashMap<>();//存放参数
-        long timestamp;//时间搓
-        timestamp = System.currentTimeMillis() / 1000;
-
+        mPresenter.body = new HashMap<>();//存放参数
         if (errotToast(etUllage1Lo1)) return;
         if (errotToast(etUllage1Lo2)) return;
         if (errotToast(etUllage1Lo3)) return;
@@ -151,22 +193,24 @@ public class UllageToolFragment extends BaseBookFragment {
         if (errotToast(etUllage2La2)) return;
         if (errotToast(etUllage2La3)) return;
 
-        postParams.clear();//清除集合中之前的数据
-        postParams.put("uid", UserModel.getInstance().getUserId());//用户id
-        postParams.put("fangfeijingdu_du", etUllage1Lo1.getText().toString());//
-        postParams.put("fangfeijingdu_fen", etUllage1Lo2.getText().toString());//
-        postParams.put("fangfeijingdu_miao", etUllage1Lo3.getText().toString());//
-        postParams.put("fangfeiweidu_du", etUllage1La1.getText().toString());//
-        postParams.put("fangfeiweidu_fen", etUllage1La2.getText().toString());//
-        postParams.put("fangfeiweidu_miao", etUllage1La3.getText().toString());//
+        mPresenter.body.clear();//清除集合中之前的数据
+        mPresenter.body.put("uid", UserModel.getInstance().getUserId());//用户id
+        mPresenter.body.put("fangfeijingdu_du", etUllage1Lo1.getText().toString());//
+        mPresenter.body.put("fangfeijingdu_fen", etUllage1Lo2.getText().toString());//
+        mPresenter.body.put("fangfeijingdu_miao", etUllage1Lo3.getText().toString());//
+        mPresenter.body.put("fangfeiweidu_du", etUllage1La1.getText().toString());//
+        mPresenter.body.put("fangfeiweidu_fen", etUllage1La2.getText().toString());//
+        mPresenter.body.put("fangfeiweidu_miao", etUllage1La3.getText().toString());//
 
+        mPresenter.body.put("guichaojingdu_du", etUllage2Lo1.getText().toString());//
+        mPresenter.body.put("guichaojingdu_fen", etUllage2Lo2.getText().toString());//
+        mPresenter.body.put("guichaojingdu_miao", etUllage2Lo3.getText().toString());//
+        mPresenter.body.put("guichaoweidu_du", etUllage2La1.getText().toString());//
+        mPresenter.body.put("guichaoweidu_fen", etUllage2La2.getText().toString());//
+        mPresenter.body.put("guichaoweidu_miao", etUllage2La3.getText().toString());//
 
-        postParams.put("guichaojingdu_du", etUllage2Lo1.getText().toString());//
-        postParams.put("guichaojingdu_fen", etUllage2Lo2.getText().toString());//
-        postParams.put("guichaojingdu_miao", etUllage2Lo3.getText().toString());//
-        postParams.put("guichaoweidu_du", etUllage2La1.getText().toString());//
-        postParams.put("guichaoweidu_fen", etUllage2La2.getText().toString());//
-        postParams.put("guichaoweidu_miao", etUllage2La3.getText().toString());//
+        mPresenter.getKongJuData();
+
 
 //        if (!tvTime1.getText().toString().equals("请选择时间")) {
 //            Log.d(TAG, "时间: " + DateUtils.hmsTolong(tvTime1.getText().toString()));

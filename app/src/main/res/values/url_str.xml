@@ -59,6 +59,11 @@
     <!--意见反馈详情-->
     <string name="detail_feedback">ZGW_Users_Feedback_Detail</string>
 
+
+    <!--获取服务开通续费纪录-->
+    <string name="get_server_record">TXGP_GetServiceList</string>
+
+
     <!--公告通知-->
     <string name="get_announcement_notice_list">TXGP_GongGao_GetList</string>
     <!--公告通知统计-->
@@ -71,6 +76,10 @@
     <string name="pigeon_friend_msg_detail">TXGP_Msg_Detail</string>
     <!--鸽友消息 统计-->
     <string name="pigeon_friend_msg_count">TXGP_Msg_Count</string>
+
+    <!--获取用户服务、帐户余额、鸽币-->
+    <string name="get_user_info">TXGP_GetUserInfo</string>
+
 
     <!--签到规则-->
     <string name="sign_rule">ZGW_Users_SignGuiZe</string>
@@ -91,7 +100,7 @@
     <string name="get_ass_list">TXGP_PigeonISCO_GetList</string>
 
     <!--鸽币兑换 列表-->
-    <string name="pigeon_currency_exchange_list">TXGP_GeBi_List</string>
+    <string name="pigeon_currency_exchange_list">TXGP_GeBi_DuiHuan_List</string>
     <!--鸽币明细 列表-->
     <string name="pigeon_currency_details_list">TXGP_GeBi_List</string>
     <!--获取鸽币-->
@@ -149,9 +158,18 @@
     <string name="pigeon_breed_sift">TXGP_Pigeon_SelectAll</string>
     <!--配对信息列表-->
     <string name="pairing_info_list">TXGP_PigeonBreed_SelectPigeonAll</string>
+    <!--添加配对信息-->
+    <string name="pairing_info_add">TXGP_PigeonBreed_Add</string>
 
     <!--添加窝次信息-->
     <string name="pairing_nest_info_add">TXGP_PigeonBreedNest_Add</string>
+
+    <!--信鸽血统推荐-->
+    <string name="pairing_recommend_lineage">TXGP_PigeonBreed_RecomBlood</string>
+    <!--信鸽赛绩推荐-->
+    <string name="pairing_recommend_play">TXGP_PigeonBreed_RecomMatch</string>
+    <!--信鸽评分推荐-->
+    <string name="pairing_recommend_sorce">TXGP_PigeonTrain_RecomSorce</string>
 
     <!--赛绩录入-->
     <string name="pigeon_play_entry">TXGP_PigeonMatch_Add</string>
@@ -196,7 +214,7 @@
     <!--赛鸽工具相关接口-->
     <string name="api_tool_get_gong_peng_info">Tool_GetGongPengInfo</string>
     <string name="api_tool_get_sfd_info">Tool_GetSiFangDi</string>
-    <string name="api_get_kongju">GetKongJu</string>
+    <string name="api_get_kongju">Tool_GetKongJu</string>
     <!--获取协会列表-->
     <string name="api_XH_GetUsersList">XH_GetUsersList</string>
 

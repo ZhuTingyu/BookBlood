@@ -51,7 +51,6 @@ public class ILineWeatherView {
                 .setToJsonType(new TypeToken<ApiResponse<List<GetSiFangDiEntity>>>() {
                 }.getType())
                 .url(R.string.api_tool_get_sfd_info)
-
                 .addBody("s", str)
                 .request();
     }

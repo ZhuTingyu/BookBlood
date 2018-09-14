@@ -14,17 +14,12 @@ public class PigeonCurrencyExchangeAdapter extends BaseQuickAdapter<PigeonCurren
 
 
     public PigeonCurrencyExchangeAdapter() {
-        super(R.layout.item_pigeon_currency_exchange,  Lists.newArrayList(new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity(),
-                new PigeonCurrencyEntity()));
+        super(R.layout.item_pigeon_currency_exchange, Lists.newArrayList());
     }
 
     @Override
     protected void convert(BaseViewHolder helper, PigeonCurrencyEntity item) {
+
 
     }
 }

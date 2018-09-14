@@ -17,7 +17,7 @@ import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.menu.mycurrency.adapter.MyPigeonCurrencyAdapter;
-import com.cpigeon.book.module.menu.viewmodel.PigeonCurrencyViewModel;
+import com.cpigeon.book.module.menu.mycurrency.viewmodel.PigeonCurrencyViewModel;
 import com.cpigeon.book.widget.SimpleTitleView;
 
 /**
@@ -82,16 +82,20 @@ public class MyPigeonCurrencyFragment extends BaseBookFragment {
         mList.setAdapter(mAdapter);
 
         mAdapter.setNewData(Lists.newTestArrayList());
-
-
-        mPigeonCurrencyViewModel.getTXGP_Account_GeBi();//获取我的鸽币数量
     }
 
     @Override
     protected void initObserve() {
         super.initObserve();
         mPigeonCurrencyViewModel.mGeBi.observe(this, data -> {
-
+            mTvCount.setText(data.getGb());
         });
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPigeonCurrencyViewModel.getTXGP_Account_GeBi();//获取我的鸽币数量
     }
 }

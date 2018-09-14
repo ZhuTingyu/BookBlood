@@ -17,6 +17,7 @@ import com.cpigeon.book.module.menu.balance.AccountBalanceFragment;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
 import com.cpigeon.book.module.menu.service.RenewalFragment;
 import com.cpigeon.book.module.menu.viewmodel.ShareViewModel;
+import com.cpigeon.book.module.menu.viewmodel.UserInfoViewModel;
 import com.cpigeon.book.module.order.OrderListActivity;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
@@ -37,6 +38,7 @@ public class UserInfoActivity extends BaseBookActivity {
     private ShareDialogFragment dialogFragment;
 
     private ShareViewModel mShareViewModel;
+    private UserInfoViewModel mUserInfoViewModel;
 
     public static void start(Activity activity) {
         Intent intent = new Intent();
@@ -51,7 +53,8 @@ public class UserInfoActivity extends BaseBookActivity {
         super.onCreate(savedInstanceState);
 
         mShareViewModel = new ShareViewModel();
-        initViewModel(mShareViewModel);
+        mUserInfoViewModel = new UserInfoViewModel();
+        initViewModels(mShareViewModel, mUserInfoViewModel);
 
         mShareViewModel.mInviteCodeData.observe(this, inviteCodeEntity -> {
 
@@ -83,8 +86,19 @@ public class UserInfoActivity extends BaseBookActivity {
         });
 
         dialogFragment = new ShareDialogFragment();
+
+        mUserInfoViewModel.getTXGP_GetUserInfoData();
     }
 
+    @Override
+    protected void initObserve() {
+        super.initObserve();
+
+        mUserInfoViewModel.mUserInfoData.observe(this, data -> {
+            //获取用户信息回调
+
+        });
+    }
 
     @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting, R.id.ll_my_order,
             R.id.ll_my_gebi, R.id.ll_renewal, R.id.ll_account_balance, R.id.ll_share_txgp})

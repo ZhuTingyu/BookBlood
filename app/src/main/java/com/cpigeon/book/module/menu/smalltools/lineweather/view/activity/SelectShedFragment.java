@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu.smalltools.lineweather.view.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -61,7 +62,16 @@ public class SelectShedFragment extends BaseBookFragment {
 
     private SelectShedAdapter mAdapter;
 
-    private  LineWeatherPresenter  mPresenter = new LineWeatherPresenter();
+    private  LineWeatherPresenter  mPresenter ;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mPresenter = new LineWeatherPresenter();
+        initViewModels(mPresenter);
+    }
 
 
     @Nullable
@@ -75,6 +85,18 @@ public class SelectShedFragment extends BaseBookFragment {
         IntentBuilder.Builder()
                 .startParentActivity(activity, SelectShedFragment.class,0x0032);
     }
+
+    @Override
+    protected void initObserve() {
+        super.initObserve();
+
+        mPresenter.mGetGongPengData.observe(this,data -> {
+            mSwipeLayout.setRefreshing(false);
+            hideLoading();
+            seperateLists(data);
+        });
+    }
+
 
 
     @Override
@@ -98,19 +120,11 @@ public class SelectShedFragment extends BaseBookFragment {
         });
 
         showLoading();
-        mPresenter.getTool_GetGongPengInfo("", data -> {
-            mSwipeLayout.setRefreshing(false);
-            hideLoading();
-            seperateLists(data);
-        });
+        mPresenter.getTool_GetGongPengInfo();
 
         //下拉刷新
         setRefreshListener(() -> {
-            mPresenter.getTool_GetGongPengInfo("", data -> {
-                mSwipeLayout.setRefreshing(false);
-                hideLoading();
-                seperateLists(data);
-            });
+            mPresenter.getTool_GetGongPengInfo();
         });
 
         sideBar.setIndexItems("A", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "Q", "R", "S", "T", "W", "X", "Y", "Z", "#");
@@ -139,11 +153,8 @@ public class SelectShedFragment extends BaseBookFragment {
                     //完成自己的事件
                     if (!et_search.getText().toString().isEmpty()){
                         showLoading();
-                        mPresenter.getTool_GetGongPengInfo(et_search.getText().toString(), data -> {
-                            mSwipeLayout.setRefreshing(false);
-                            hideLoading();
-                            seperateLists(data);
-                        });
+                        mPresenter.gpStr = et_search.getText().toString();
+                        mPresenter.getTool_GetGongPengInfo();
                     }
                 }
                 return false;
@@ -155,11 +166,8 @@ public class SelectShedFragment extends BaseBookFragment {
             //完成自己的事件
             if (!et_search.getText().toString().isEmpty()){
                 showLoading();
-                mPresenter.getTool_GetGongPengInfo(et_search.getText().toString(), data -> {
-                    mSwipeLayout.setRefreshing(false);
-                    hideLoading();
-                    seperateLists(data);
-                });
+                mPresenter.gpStr = et_search.getText().toString();
+                mPresenter.getTool_GetGongPengInfo();
             }
         });
     }

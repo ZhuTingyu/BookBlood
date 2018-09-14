@@ -1,6 +1,8 @@
 package com.cpigeon.book.module.menu.smalltools.lineweather.presenter;
 
 
+import android.arch.lifecycle.MutableLiveData;
+
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.Lists;
@@ -20,21 +22,16 @@ import io.reactivex.functions.Consumer;
  */
 
 public class LineWeatherPresenter extends BaseViewModel {
-
+    public MutableLiveData<List<GetGongPengListEntity>> mGetGongPengData = new MutableLiveData<>();
+    public String gpStr;
 
     //获取公棚坐标信息
-    public void getTool_GetGongPengInfo(String str, Consumer<List<GetGongPengListEntity>> consumer) {
-        submitRequestThrowError(ILineWeatherView.getTool_GetGongPengInfoData(str).map(r -> {
+    public void getTool_GetGongPengInfo() {
+        submitRequestThrowError(ILineWeatherView.getTool_GetGongPengInfoData(gpStr), r -> {
             if (r.isOk()) {
-                if (r.status) {
-                    return r.data;
-                } else {
-                    return Lists.newArrayList();
-                }
-            } else {
-                throw new HttpErrorException(r);
-            }
-        }), consumer);
+                mGetGongPengData.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
     }
 
 
@@ -54,34 +51,30 @@ public class LineWeatherPresenter extends BaseViewModel {
     }
 
 
+    public MutableLiveData<List<GetSiFangDiEntity>> mGetSiFangDiData = new MutableLiveData<>();
+
+
+    public String sfdStr;
+
     //获取司放地信息
-    public void getTool_GetSiFangDi(String str, Consumer<List<GetSiFangDiEntity>> consumer) {
-        submitRequestThrowError(ILineWeatherView.getTool_GetSiFangDiData(str).map(r -> {
+    public void getTool_GetSiFangDi() {
+        submitRequestThrowError(ILineWeatherView.getTool_GetSiFangDiData(sfdStr), r -> {
             if (r.isOk()) {
-                if (r.status) {
-                    return r.data;
-                } else {
-                    return Lists.newArrayList();
-                }
-            } else {
-                throw new HttpErrorException(r);
-            }
-        }), consumer);
+                mGetSiFangDiData.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
     }
 
 
-    //获取司放地信息
-    public void getKongJuData(Map<String, String> body, Consumer<UllageToolEntity> consumer) {
-        submitRequestThrowError(ILineWeatherView.getKongju(body).map(r -> {
+    public MutableLiveData<UllageToolEntity> mUllageToolData = new MutableLiveData<>();
+    public Map<String, String> body;
+
+    //获取空距
+    public void getKongJuData() {
+        submitRequestThrowError(ILineWeatherView.getKongju(body), r -> {
             if (r.isOk()) {
-                if (r.status) {
-                    return r.data;
-                } else {
-                    return null;
-                }
-            } else {
-                throw new HttpErrorException(r);
-            }
-        }), consumer);
+                mUllageToolData.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
     }
 }

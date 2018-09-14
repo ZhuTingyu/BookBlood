@@ -57,12 +57,14 @@ import com.amap.api.services.weather.LocalWeatherLive;
 import com.base.util.IntentBuilder;
 import com.base.util.LocationFormatUtils;
 import com.base.util.RxUtils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.http.GsonUtil;
 import com.base.util.map.MapMarkerManager;
 import com.base.util.map.WeatherManager;
 import com.base.util.utility.ImageUtils;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.StringUtil;
+import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.guideview.Component;
 import com.base.widget.guideview.GuideBuilder;
@@ -72,8 +74,10 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.menu.smalltools.lineweather.model.bean.ContactModel;
 import com.cpigeon.book.module.menu.smalltools.lineweather.presenter.LineWeatherPresenter;
 import com.cpigeon.book.module.menu.smalltools.ullage.UlageToolPresenter;
+import com.cpigeon.book.module.menu.smalltools.ullage.UllageToolDetailsFragment;
 import com.cpigeon.book.util.BitmapUtils;
 import com.cpigeon.book.util.MapUtil;
+import com.cpigeon.book.util.MathUtil;
 import com.cpigeon.book.util.SharedPreferencesTool;
 import com.cpigeon.book.widget.mydialog.CustomAlertDialog;
 import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
@@ -166,13 +170,20 @@ public class LineWeatherFragment extends BaseBookFragment {
     private Handler handler;
 
 
-    private LineWeatherPresenter mPresenter = new LineWeatherPresenter();
+    private LineWeatherPresenter mPresenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_line_weather, container, false);
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mPresenter = new LineWeatherPresenter();
+        initViewModels(mPresenter);
     }
 
 
@@ -348,6 +359,16 @@ public class LineWeatherFragment extends BaseBookFragment {
                 .show(getBaseActivity());
     }
 
+    @Override
+    protected void initObserve() {
+        super.initObserve();
+
+        mPresenter.mUllageToolData.observe(this, data -> {
+            showLoading();
+            Log.d("sousuo", "onViewClicked: " + data.getResult());
+            addLinePoint(data.getResult() * 1000);
+        });
+    }
 
 
     @OnClick({R.id.llz_sfd, R.id.llz_gcd, R.id.tv_sure, R.id.img_close1, R.id.img_close2,
@@ -396,32 +417,24 @@ public class LineWeatherFragment extends BaseBookFragment {
                 String gcdLo = LocationFormatUtils.GPS2AjLocation(sureGcdLo);
                 String gcdLa = LocationFormatUtils.GPS2AjLocation(sureGcdLa);
 
-                Map<String, String> map = new HashMap<>();
-                map.put("fangfeijingdu_du", LocationFormatUtils.strToD(sfdLo));
-                map.put("fangfeijingdu_fen", LocationFormatUtils.strToM(sfdLo));
-                map.put("fangfeijingdu_miao", LocationFormatUtils.strToS(sfdLo));
+                mPresenter.body = new HashMap<>();
+                mPresenter.body.put("fangfeijingdu_du", LocationFormatUtils.strToD(sfdLo));
+                mPresenter.body.put("fangfeijingdu_fen", LocationFormatUtils.strToM(sfdLo));
+                mPresenter.body.put("fangfeijingdu_miao", LocationFormatUtils.strToS(sfdLo));
 
-                map.put("fangfeiweidu_du", LocationFormatUtils.strToD(sfdLa));
-                map.put("fangfeiweidu_fen", LocationFormatUtils.strToM(sfdLa));
-                map.put("fangfeiweidu_miao", LocationFormatUtils.strToS(sfdLa));
+                mPresenter.body.put("fangfeiweidu_du", LocationFormatUtils.strToD(sfdLa));
+                mPresenter.body.put("fangfeiweidu_fen", LocationFormatUtils.strToM(sfdLa));
+                mPresenter.body.put("fangfeiweidu_miao", LocationFormatUtils.strToS(sfdLa));
 
-                map.put("guichaojingdu_du", LocationFormatUtils.strToD(gcdLo));
-                map.put("guichaojingdu_fen", LocationFormatUtils.strToM(gcdLo));
-                map.put("guichaojingdu_miao", LocationFormatUtils.strToS(gcdLo));
+                mPresenter.body.put("guichaojingdu_du", LocationFormatUtils.strToD(gcdLo));
+                mPresenter.body.put("guichaojingdu_fen", LocationFormatUtils.strToM(gcdLo));
+                mPresenter.body.put("guichaojingdu_miao", LocationFormatUtils.strToS(gcdLo));
 
-                map.put("guichaoweidu_du", LocationFormatUtils.strToD(gcdLa));
-                map.put("guichaoweidu_fen", LocationFormatUtils.strToM(gcdLa));
-                map.put("guichaoweidu_miao", LocationFormatUtils.strToS(gcdLa));
+                mPresenter.body.put("guichaoweidu_du", LocationFormatUtils.strToD(gcdLa));
+                mPresenter.body.put("guichaoweidu_fen", LocationFormatUtils.strToM(gcdLa));
+                mPresenter.body.put("guichaoweidu_miao", LocationFormatUtils.strToS(gcdLa));
 
-                mPresenter.getKongJuData(map, data -> {
-                    try {
-                        Log.d("sousuo", "onViewClicked: " + data.getResult());
-                        showLoading();
-                        addLinePoint(data.getResult() * 1000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+                mPresenter.getKongJuData();
 
                 break;
             case R.id.img_close1:
@@ -1306,4 +1319,5 @@ public class LineWeatherFragment extends BaseBookFragment {
             e.printStackTrace();
         }
     }
+
 }

@@ -14,7 +14,7 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.module.menu.mycurrency.adapter.PigeonCurrencyExchangeAdapter;
-import com.cpigeon.book.module.menu.viewmodel.PigeonCurrencyViewModel;
+import com.cpigeon.book.module.menu.mycurrency.viewmodel.PigeonCurrencyViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
@@ -51,7 +51,7 @@ public class PigeonCurrencyExchangeFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(R.string.text_currency_details);
+        setTitle(R.string.text_currency_exchange);
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
         mAdapter = new PigeonCurrencyExchangeAdapter();
@@ -64,10 +64,10 @@ public class PigeonCurrencyExchangeFragment extends BaseFragment {
             mPigeonCurrencyViewModel.getTXGP_GeBi_DuiHuan_ListData();
         });
 
-        mAdapter.setOnLoadMoreListener(() -> {
-            mPigeonCurrencyViewModel.ecchangePi++;
-            mPigeonCurrencyViewModel.getTXGP_GeBi_DuiHuan_ListData();
-        }, mRecyclerView.getRecyclerView());
+//        mAdapter.setOnLoadMoreListener(() -> {
+//            mPigeonCurrencyViewModel.ecchangePi++;
+//            mPigeonCurrencyViewModel.getTXGP_GeBi_DuiHuan_ListData();
+//        }, mRecyclerView.getRecyclerView());
         setProgressVisible(true);
         mPigeonCurrencyViewModel.getTXGP_GeBi_DuiHuan_ListData();
     }

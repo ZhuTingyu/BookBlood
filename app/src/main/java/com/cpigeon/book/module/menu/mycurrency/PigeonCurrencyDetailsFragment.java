@@ -14,7 +14,7 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.module.menu.mycurrency.adapter.PigeonCurrencyDetailsAdapter;
-import com.cpigeon.book.module.menu.viewmodel.PigeonCurrencyViewModel;
+import com.cpigeon.book.module.menu.mycurrency.viewmodel.PigeonCurrencyViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**

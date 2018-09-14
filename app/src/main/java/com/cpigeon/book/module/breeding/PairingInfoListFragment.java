@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -74,7 +73,9 @@ public class PairingInfoListFragment extends BaseListFragment {
         });
 
         mPairingInfoListAdapter = new PairingInfoListAdapter();
-        initHeadView(view);
+
+        initHeadView();
+
         list.setAdapter(mPairingInfoListAdapter);
         mPairingInfoListAdapter.setOnItemClickListener((adapter, view1, position) -> {
             PairingNestInfoListFragment.start(getBaseActivity());
@@ -82,6 +83,7 @@ public class PairingInfoListFragment extends BaseListFragment {
 
         list.setRefreshListener(() -> {
             mPairingInfoListAdapter.getData().clear();
+            mPairingInfoListAdapter.notifyDataSetChanged();
             mPairingInfoListViewModel.pi = 1;
             mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
         });
@@ -102,28 +104,38 @@ public class PairingInfoListFragment extends BaseListFragment {
 
         mPairingInfoListViewModel.mPairingInfoListData.observe(this, breedPigeonEntities -> {
             setProgressVisible(false);
-            RecyclerViewUtils.setLoadMoreCallBack(list, mPairingInfoListAdapter, breedPigeonEntities);
+            RecyclerViewUtils.setLoadMoreCallBack2(list, mPairingInfoListAdapter, breedPigeonEntities);
+        });
+
+        mPairingInfoListViewModel.listEmptyMessage.observe(this, s -> {
+            mPairingInfoListAdapter.setEmptyText(s);
         });
 
     }
 
     //初始化头部视图
-    private void initHeadView(View view) {
-        CardView mHeadView = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.layout_pairing_info_head, (ViewGroup) view, false);
+    private void initHeadView() {
+        try {
+//            CardView mHeadView = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.layout_pairing_info_head, list, null);
 
-        TextView tv_hint_foot = mHeadView.findViewById(R.id.tv_hint_foot);
-        ImageView img_hint_sex = mHeadView.findViewById(R.id.img_hint_sex);
+            View mHeadView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.layout_pairing_info_head, list, false);
 
-        tv_hint_foot.setText(mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingNum());
+            TextView tv_hint_foot = mHeadView.findViewById(R.id.tv_hint_foot);
+            ImageView img_hint_sex = mHeadView.findViewById(R.id.img_hint_sex);
 
-        if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
-            img_hint_sex.setImageResource(R.mipmap.ic_female);
-        } else if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雄")) {
-            img_hint_sex.setImageResource(R.mipmap.ic_male);
-        } else {
-            img_hint_sex.setImageResource(R.mipmap.ic_sex_no);
+            tv_hint_foot.setText(mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingNum());
+
+            if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
+                img_hint_sex.setImageResource(R.mipmap.ic_female);
+            } else if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雄")) {
+                img_hint_sex.setImageResource(R.mipmap.ic_male);
+            } else {
+                img_hint_sex.setImageResource(R.mipmap.ic_sex_no);
+            }
+
+            mPairingInfoListAdapter.addHeaderView(mHeadView);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        mPairingInfoListAdapter.addHeaderView(mHeadView);
     }
 }
