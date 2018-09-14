@@ -238,7 +238,7 @@
     <string name="text_pigeon_name">请输入鸽子名称</string>
 
     <string name="text_pigeon_lineage">血统添加</string>
-    <string name="text_feather_color">羽色添加</string>
+    <string name="text_feather_color">羽色</string>
     <string name="text_feather">羽色:%1$s</string>
     <string name="text_feather_count">羽数</string>
     <string name="text_foot_source">录入足环来源</string>
@@ -398,5 +398,17 @@
     <!--中鸽网-->
     <string name="package_cpigeon">com.cpigeon.app</string>
     <string name="package_cpigeonhelp">com.cpigeon.cpigeonhelper</string>
+    <string name="text_join_match_count">参赛次数</string>
+    <string name="text_match_rank">比赛名次</string>
+    <string name="text_match_distance">比赛空距</string>
+    <string name="text_match_current_speed">当前分速</string>
+    <string name="text_match_pigeon_count">比赛羽数</string>
+    <string name="text_match_first_speed">历次第一名</string>
+    <string name="text_match_time">比赛时间</string>
+    <string name="text_organize_name">组织名称</string>
+    <string name="text_rank">名次</string>
+    <string name="text_sure_add_good_pigeon">确定加入铭鸽库</string>
+    <string name="text_apply_add_content_1">您正在申请将您的爱鸽</string>
+    <string name="text_apply_add_content_2">加入铭鸽库。通过后，所有鸽友将能查看您的爱鸽信息和血统书且不能修改已加入铭鸽库的信鸽信息。</string>
 
 </resources>

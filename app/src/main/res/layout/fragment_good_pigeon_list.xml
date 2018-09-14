@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_search_toolbar" />
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="26dp"
+        android:gravity="center_vertical"
+        android:paddingRight="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="@dimen/large_text_size"
+            android:textColor="@color/black"
+            android:text="世界铭鸽"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="@dimen/medium_text_size"
+            android:textColor="@color/color_text_title"
+            android:layout_centerHorizontal="true"
+            android:text="世界铭鸽"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="@dimen/medium_text_size"
+            android:textColor="@color/color_text_title"
+            android:layout_alignParentRight="true"
+            android:text="申请中"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/xrecyclerview_no_padding_layout" />
+
+</LinearLayout>

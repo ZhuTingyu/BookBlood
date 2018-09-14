@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="192dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="3dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <TextView
+                    android:textColor="@color/color_text_title"
+                    android:textSize="@dimen/small_text_size_2"
+                    android:text="@string/text_match_rank"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tvRank"
+                    android:textColor="@color/color_text_orange"
+                    android:textSize="@dimen/small_text_size_2"
+                    tools:text="5名"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <TextView
+                    android:textColor="@color/color_text_title"
+                    android:textSize="@dimen/small_text_size_2"
+                    android:text="@string/text_match_distance"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tvDistance"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_text_size_2"
+                    tools:text="30KM"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <TextView
+                    android:textColor="@color/color_text_title"
+                    android:textSize="@dimen/small_text_size_2"
+                    android:text="@string/text_match_current_speed"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tvCurrentSpeed"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_text_size_2"
+                    tools:text="30KM"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <TextView
+                    android:textColor="@color/color_text_title"
+                    android:textSize="@dimen/small_text_size_2"
+                    android:text="@string/text_match_pigeon_count"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tvPigeonCount"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_text_size_2"
+                    tools:text="300羽"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <TextView
+                    android:textColor="@color/color_text_title"
+                    android:textSize="@dimen/small_text_size_2"
+                    android:text="@string/text_match_first_speed"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tvFirstSpeed"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_text_size_2"
+                    tools:text="1000KM"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <TextView
+                    android:textColor="@color/color_text_title"
+                    android:textSize="@dimen/small_text_size_2"
+                    android:text="@string/text_match_time"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_text_size_2"
+                    tools:text="2018-11-11 12"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <TextView
+                    android:textColor="@color/color_text_title"
+                    android:textSize="@dimen/small_text_size_2"
+                    android:text="@string/text_organize_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <com.base.widget.MarqueeTextView
+                    style="@style/Marquee"
+                    android:id="@+id/tvOrganizeName"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_text_size_2"
+                    tools:text="四川东坡国际公1233"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+                <TextView
+                    android:textColor="@color/color_text_title"
+                    android:textSize="@dimen/small_text_size_2"
+                    android:text="@string/text_project_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <com.base.widget.MarqueeTextView
+                    style="@style/Marquee"
+                    android:id="@+id/tvProjectName"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/small_text_size_2"
+                    tools:text="四川东坡国际公123"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvOrder"
+        android:textSize="@dimen/large_text_size"
+        android:textColor="@color/black"
+        android:text="1"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/shape_bg_100_radius"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+</RelativeLayout>

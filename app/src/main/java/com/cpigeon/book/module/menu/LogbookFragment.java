@@ -13,7 +13,7 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.home.adapter.LogbookAdapter;
+import com.cpigeon.book.module.home.home.adapter.LogbookAdapter;
 import com.cpigeon.book.module.menu.viewmodel.LogbookViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 

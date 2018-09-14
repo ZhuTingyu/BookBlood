@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home.adapter;
+package com.cpigeon.book.module.home.home.adapter;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;

@@ -92,7 +92,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                             , StringUtil.emptyString()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                            , FamilyTreeView.isMale(x, y) ? BreedPigeonEntryFragment.TYPE_SEX_MALE : BreedPigeonEntryFragment.TYPE_SEX_FEMALE
+                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment.TYPE_SEX_MALE : BreedPigeonEntryFragment.TYPE_SEX_FEMALE
                             , CODE_ADD_PIGEON);
                 }
             }
@@ -138,11 +138,6 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             setProgressVisible(true);
             mViewModel.getBloodBook();
         }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnEvent(PigeonAddEvent event) {
-        mViewModel.getBloodBook();
     }
 
     @Override

@@ -1,17 +1,13 @@
-package com.cpigeon.book.module.home.adapter;
+package com.cpigeon.book.module.home.home.adapter;
 
 import android.support.constraint.ConstraintLayout;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
-import com.google.android.exoplayer2.C;
-
-import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/8/10.

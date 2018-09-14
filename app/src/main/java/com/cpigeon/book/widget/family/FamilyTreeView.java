@@ -113,6 +113,11 @@ public class FamilyTreeView extends LinearLayout {
         addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             if (!isDrawView) {
                 initView();
+                LinearLayout first = generationLinearLayouts.get(0);
+                for (int i = 0, len = first.getChildCount(); i < len; i++) {
+                    FamilyMember member = (FamilyMember) first.getChildAt(i);
+                    member.setCanAdd();
+                }
                 isDrawView = true;
             }
         });
@@ -321,7 +326,7 @@ public class FamilyTreeView extends LinearLayout {
             }
             return true;
         }
-     }
+    }
 
 
     @Override
@@ -430,7 +435,7 @@ public class FamilyTreeView extends LinearLayout {
         return startGeneration;
     }
 
-    public static boolean isMale(int x, int y) {
+    public static boolean isMale(int y) {
         return (y + 1) % 2 == 1;
     }
 
@@ -488,15 +493,17 @@ public class FamilyTreeView extends LinearLayout {
         return Lists.isEmpty(data) ? Lists.newArrayList() : data;
     }
 
-
     public List<FamilyMember> getParents(int x, int y) {
+
+        int position = x - startGeneration;
+
         List<FamilyMember> list = Lists.newArrayList();
 
-        if (generationLinearLayouts.size() == x + 1) {
+        if (generationLinearLayouts.size() == position + 1) {
             return list;
         }
 
-        LinearLayout nextLinearLayout = generationLinearLayouts.get(x + 1);
+        LinearLayout nextLinearLayout = generationLinearLayouts.get(position + 1);
 
         int fatherPosition = (y * 2);
         int motherPosition = fatherPosition + 1;

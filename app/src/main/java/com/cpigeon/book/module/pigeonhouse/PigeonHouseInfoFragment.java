@@ -260,7 +260,6 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             //todo 添加过后返回鸽舍信息
             UserModel.getInstance().setIsHaveHouseInfo(true);
             UserModel.getInstance().setPigeonHouseInfo(mViewModel.mLongitude, mViewModel.mLatitude);
-            ToastUtils.showLong(getBaseActivity(), s);
             MainActivity.start(getBaseActivity());
         });
 

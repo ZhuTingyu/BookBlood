@@ -60,8 +60,6 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String pigeonTypes = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
-
         history = getHistory();
 
         mRecyclerView = findViewById(R.id.list);
