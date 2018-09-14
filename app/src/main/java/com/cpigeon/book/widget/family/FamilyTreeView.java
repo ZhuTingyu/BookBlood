@@ -271,92 +271,98 @@ public class FamilyTreeView extends LinearLayout {
         }
 
         canvas.drawPath(mPath, mPaint);
-
     }
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (mTypeMove == TYPE_IS_CAN_MOVE_N) {
+            return super.onTouchEvent(event);
+        } else {
+            int limitW = getMeasuredWidth() / 3;
+            int limitH = getMeasuredHeight() / 3;
 
-        int limitW = getMeasuredWidth() / 3;
-        int limitH = getMeasuredHeight() / 3;
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
 
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-
-            case MotionEvent.ACTION_MOVE:
+                case MotionEvent.ACTION_MOVE:
 //                if (isTwoTouch) {
 //                    float endDis = distance(event);
 //                    float scale = endDis / startDis;
 //                    setScale(scale);
 //                } else {
-                if (mLastTouchX != 0 && mLastTouchY != 0) {
-                    final int currentTouchX = (int) event.getX();
-                    final int currentTouchY = (int) event.getY();
-                    final int distanceX = currentTouchX - mLastTouchX;
-                    final int distanceY = currentTouchY - mLastTouchY;
-                    mCurrentX -= distanceX;
-                    mCurrentY -= distanceY;
-                    if (mTypeMove == TYPE_IS_CAN_MOVE_H) {
-                        if (mCurrentX > 0 && mCurrentX < limitW) {
-                            this.scrollTo(mCurrentX, 0);
-                        }
+                    if (mLastTouchX != 0 && mLastTouchY != 0) {
+                        final int currentTouchX = (int) event.getX();
+                        final int currentTouchY = (int) event.getY();
+                        final int distanceX = currentTouchX - mLastTouchX;
+                        final int distanceY = currentTouchY - mLastTouchY;
+                        mCurrentX -= distanceX;
+                        mCurrentY -= distanceY;
+                        if (mTypeMove == TYPE_IS_CAN_MOVE_H) {
+                            if (mCurrentX > 0 && mCurrentX < limitW) {
+                                this.scrollTo(mCurrentX, 0);
+                            }
 
-                    } else if (mTypeMove == TYPE_IS_CAN_MOVE_V) {
-                        if (mCurrentY > 0 && mCurrentY < limitH) {
-                            this.scrollTo(0, mCurrentY);
-                        }
+                        } else if (mTypeMove == TYPE_IS_CAN_MOVE_V) {
+                            if (mCurrentY > 0 && mCurrentY < limitH) {
+                                this.scrollTo(0, mCurrentY);
+                            }
 
+                        }
+                        mLastTouchX = currentTouchX;
+                        mLastTouchY = currentTouchY;
                     }
-                    mLastTouchX = currentTouchX;
-                    mLastTouchY = currentTouchY;
-                }
 //                }
 
-                break;
-            case MotionEvent.ACTION_POINTER_UP:
-            case MotionEvent.ACTION_UP:
-                isTwoTouch = false;
-                break;
+                    break;
+                case MotionEvent.ACTION_POINTER_UP:
+                case MotionEvent.ACTION_UP:
+                    isTwoTouch = false;
+                    break;
+            }
+            return true;
         }
-        return true;
-    }
+     }
 
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
 
-        boolean intercept = false;
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN:
-                mCurrentX = getScrollX();
-                mCurrentY = getScrollY();
-                mLastTouchX = (int) event.getX();
-                mLastTouchY = (int) event.getY();
-                mLastInterceptX = (int) event.getX();
-                mLastInterceptY = (int) event.getY();
-                intercept = false;
-                break;
-
-            case MotionEvent.ACTION_POINTER_DOWN:
-                startDis = distance(event);
-                isTwoTouch = true;
-                mLastTouchX = 0;
-                mLastTouchY = 0;
-                intercept = true;
-                break;
-
-            case MotionEvent.ACTION_MOVE:
-                final int distanceX = Math.abs((int) event.getX() - mLastInterceptX);
-                final int distanceY = Math.abs((int) event.getY() - mLastInterceptY);
-                if (distanceX < mScrollWidth && distanceY < mScrollWidth) {
+        if (mTypeMove == TYPE_IS_CAN_MOVE_N) {
+            return false;
+        } else {
+            boolean intercept = false;
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                case MotionEvent.ACTION_DOWN:
+                    mCurrentX = getScrollX();
+                    mCurrentY = getScrollY();
+                    mLastTouchX = (int) event.getX();
+                    mLastTouchY = (int) event.getY();
+                    mLastInterceptX = (int) event.getX();
+                    mLastInterceptY = (int) event.getY();
                     intercept = false;
-                } else {
-                    intercept = true;
-                }
+                    break;
 
-                break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    startDis = distance(event);
+                    isTwoTouch = true;
+                    mLastTouchX = 0;
+                    mLastTouchY = 0;
+                    intercept = true;
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    final int distanceX = Math.abs((int) event.getX() - mLastInterceptX);
+                    final int distanceY = Math.abs((int) event.getY() - mLastInterceptY);
+                    if (distanceX < mScrollWidth && distanceY < mScrollWidth) {
+                        intercept = false;
+                    } else {
+                        intercept = true;
+                    }
+
+                    break;
+            }
+            return intercept;
         }
-        return intercept;
     }
 
 
@@ -505,7 +511,7 @@ public class FamilyTreeView extends LinearLayout {
 
     public FamilyMember getSon(int x, int y) {
         if (x == startGeneration) return null;
-        return getMemberView(x - 1, y);
+        return getMemberView(x - 1, y / 2);
     }
 
     public Point getCurrentPoint() {

@@ -31,7 +31,7 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
-import com.cpigeon.book.event.PigeonUpdateEvent;
+import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -49,6 +49,8 @@ import com.cpigeon.book.widget.family.FamilyTreeView;
 import com.cpigeon.book.widget.mydialog.AddPlayDialog;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -140,12 +142,12 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        EventBus.getDefault().register(this);
         mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel(getBaseActivity());
         mPlayListViewModel = new PlayListViewModel();
         mSelectTypeViewModel = new SelectTypeViewModel();
         mBreedPigeonModifyViewModel = new BreedPigeonModifyViewModel();
-        mBookViewModel = new BookViewModel();
+        mBookViewModel = new BookViewModel(getBaseActivity());
         initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel
                 , mSelectTypeViewModel, mBreedPigeonModifyViewModel, mBookViewModel);
     }
@@ -188,6 +190,10 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_PigeonSource();
 
         mBookViewModel.getBloodBook();
+
+        mFamilyTreeView.setOnClickListener(v -> {
+            InputBreedInBookFragment.start(getBaseActivity(), mBookViewModel.foodId, mBookViewModel.pigeonId);
+        });
 
     }
 
@@ -290,7 +296,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         });
 
         mBreedPigeonModifyViewModel.mBreedPigeonData.observe(this, pigeonEntryEntity -> {
-            EventBus.getDefault().post(new PigeonUpdateEvent());
+
         });
 
         mBookViewModel.mBookLiveData.observe(this, bloodBookEntity -> {
@@ -545,5 +551,16 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(PigeonAddEvent event) {
+        mBookViewModel.getBloodBook();
     }
 }

@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import android.support.annotation.IdRes;
 import android.widget.ImageView;
 
+import com.base.util.regex.RegexUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 
 import java.io.File;
 
@@ -42,30 +44,29 @@ public class GlideUtil {
     }
 
     public static void setGlideImageView(Context context, String url, ImageView imageView) {
-        Glide.with(context).load(url).into(imageView);
-    }
-
-    public void setGlideImageViewHaveRound(Context context, String url, ImageView imageView) {
-        setGlideImageViewHaveRound(context, url, imageView, 5);
+        setGlideImageViewHaveRound(context, url, imageView, 0);
     }
 
     public static void setGlideImageViewHaveRound(Context context, String url, ImageView imageView, int radius) {
-        Glide.with(context).load(url)
-                .centerCrop()
-                .bitmapTransform(new RoundedCornersTransformation(context, radius, 0))
-                .into(imageView);
+
+        if (RegexUtils.isURL(url)) {
+            Glide.with(context).load(url)
+                    .centerCrop()
+                    .bitmapTransform(new RoundedCornersTransformation(context, radius, 0))
+                    .into(imageView);
+        } else {
+
+            Glide.with(context).load(new File(url))
+                    .centerCrop()
+                    .bitmapTransform(new RoundedCornersTransformation(context, radius, 0))
+                    .into(imageView);
+        }
+
     }
 
-    public static void setGlideImageViewHaveRound(Context context, File url, ImageView imageView) {
+    public static void setGlideImageViewHaveRound(Context context, String url, ImageView imageView) {
         setGlideImageViewHaveRound(context, url, imageView, 5);
-    }
 
-    public static void setGlideImageViewHaveRound(Context context, File url, ImageView imageView, int radius) {
-        Glide.with(context).load(url)
-                .centerCrop()
-                .bitmapTransform(new RoundedCornersTransformation(context, radius, 0))
-                .into(imageView);
     }
-
 
 }

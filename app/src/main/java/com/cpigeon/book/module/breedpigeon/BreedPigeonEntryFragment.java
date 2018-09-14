@@ -12,6 +12,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
@@ -63,8 +64,12 @@ import cn.qqtheme.framework.picker.OptionPicker;
 public class BreedPigeonEntryFragment extends BaseBookFragment {
 
     private static final int CODE_ADD_PLAY = 0x234;
-    public static final String KEY_SON_FOOT_ID = "KEY_SON_FOOT_ID";
-    public static final String KEY_SON_PIGEON_ID = "KEY_SON_PIGEON_ID";
+    private static final String KEY_SON_FOOT_ID = "KEY_SON_FOOT_ID";
+    private static final String KEY_SON_PIGEON_ID = "KEY_SON_PIGEON_ID";
+    private static final String KEY_PIGEON_SEX_TYPE = "KEY_PIGEON_SEX_TYPE";
+
+    public static final String TYPE_SEX_MALE = "TYPE_SEX_MALE";
+    public static final String TYPE_SEX_FEMALE = "TYPE_SEX_FEMALE";
 
     @BindView(R.id.llz)
     LineInputListLayout mLlRoot;
@@ -110,24 +115,20 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
     @BindView(R.id.tv_next_step)
     TextView tvNextStep;
 
+    @BindView(R.id.llImage)
+    LinearLayout mLlImage;
+
     public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, BreedPigeonEntryFragment.class);
     }
 
-    public static void start(Activity activity, @Nullable BreedPigeonEntity breedPigeonEntity, int requestCode) {
+    public static void start(Activity activity, @Nullable String footId, String sonFootId, String pigeonId, String sex ,int requestCode) {
         IntentBuilder builder = IntentBuilder.Builder();
-        if (breedPigeonEntity != null) {
-            builder.putExtra(IntentBuilder.KEY_DATA, breedPigeonEntity);
-        }
-        builder.startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
-    }
-
-    public static void start(Activity activity, @Nullable BreedPigeonEntity breedPigeonEntity, String sonFootId, String pigeonId, int requestCode) {
-        IntentBuilder builder = IntentBuilder.Builder();
+        builder.putExtra(IntentBuilder.KEY_DATA, footId);
         builder.putExtra(KEY_SON_FOOT_ID, sonFootId);
         builder.putExtra(KEY_SON_PIGEON_ID, pigeonId);
-        builder.putExtra(IntentBuilder.KEY_DATA, breedPigeonEntity);
+        builder.putExtra(KEY_PIGEON_SEX_TYPE, sex);
         builder.startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
     }
 
@@ -183,7 +184,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         });
 
 
-        llCountries.setRightText("CHN");
+        llCountries.setRightText(Utils.getString(R.string.text_china_code));
 
         bindUi(RxUtils.textChanges(llFoot.getEditText()), mBreedPigeonEntryViewModel.setFootNumber());//足环号
 
@@ -195,22 +196,27 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_State();
         mSelectTypeViewModel.getSelectType_PigeonSource();
 
-        BreedPigeonEntity breedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
-        mBreedPigeonEntryViewModel.mBreedPigeonEntity = breedPigeonEntity;
+        mBreedPigeonEntryViewModel.pigeonId = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_DATA);
         mBreedPigeonEntryViewModel.sonFootId = getBaseActivity().getIntent().getStringExtra(KEY_SON_FOOT_ID);
         mBreedPigeonEntryViewModel.sonPigeonId = getBaseActivity().getIntent().getStringExtra(KEY_SON_PIGEON_ID);
 
-        if (mBreedPigeonEntryViewModel.isHavePigeonInfo()) {
-            llFoot.setRightText(breedPigeonEntity.getFootRingNum());
-            llCountries.setRightText(breedPigeonEntity.getFootCode());
-        }
-
-        if (mBreedPigeonEntryViewModel.isHaveSex()) {
-            llSex.setRightText(breedPigeonEntity.getPigeonSexName());
-            mBreedPigeonEntryViewModel.sexId = breedPigeonEntity.getPigeonSexID();
+        String sexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
+        if(TYPE_SEX_MALE.equals(sexType)){
+            mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(BreedPigeonEntity.ID_MALE);
+            mBreedPigeonEntryViewModel.sexId = (BreedPigeonEntity.ID_MALE);
+            llSex.setRightText(Utils.getString(R.string.text_male_a));
+            llSex.setRightImageVisible(false);
+        }else if(TYPE_SEX_FEMALE.equals(sexType)){
+            mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(BreedPigeonEntity.ID_FEMALE);
+            mBreedPigeonEntryViewModel.sexId = (BreedPigeonEntity.ID_FEMALE);
+            llSex.setRightText(Utils.getString(R.string.text_female_a));
             llSex.setRightImageVisible(false);
         }
 
+        if (StringUtil.isStringValid(mBreedPigeonEntryViewModel.pigeonId)) {
+            setProgressVisible(true);
+            mBreedPigeonEntryViewModel.getPigeonDetails();
+        }
     }
 
     @Override
@@ -218,6 +224,54 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
         mBreedPigeonEntryViewModel.isCanCommit.observe(this, aBoolean -> {
             TextViewUtil.setEnabled(tvNextStep, aBoolean);
+        });
+
+        mBreedPigeonEntryViewModel.mPigeonDetailsData.observe(this, breedPigeonEntity -> {
+
+            mLlImage.setVisibility(View.GONE);
+            llCountries.setRightText(breedPigeonEntity.getFootCode());
+            llFoot.setRightText(breedPigeonEntity.getFootRingNum());
+            llFootVice.setRightText(breedPigeonEntity.getFootRingIDToNum());
+            llFootSource.setRightText(breedPigeonEntity.getSourceName());
+            llFootFather.setRightText(breedPigeonEntity.getMenFootRingNum());
+            llFootMother.setRightText(breedPigeonEntity.getWoFootRingNum());
+            llPigeonName.setRightText(breedPigeonEntity.getPigeonName());
+            llSex.setRightText(breedPigeonEntity.getPigeonSexName());
+            llSex.setRightImageVisible(false);
+            llFeatherColor.setRightText(breedPigeonEntity.getPigeonPlumeName());
+            llEyeSand.setRightText(breedPigeonEntity.getPigeonEyeName());
+            llTheirShellsDate.setRightText(breedPigeonEntity.getFootRingTime());
+            llLineage.setRightText(breedPigeonEntity.getPigeonBloodName());
+            llState.setRightText(breedPigeonEntity.getStateName());
+
+
+
+            mBreedPigeonEntryViewModel.countryId = breedPigeonEntity.getFootCodeID();
+            mBreedPigeonEntryViewModel.footVice = breedPigeonEntity.getFootRingIDToNum();
+            mBreedPigeonEntryViewModel.sourceId = breedPigeonEntity.getSourceID();
+            mBreedPigeonEntryViewModel.footFather = breedPigeonEntity.getMenFootRingNum();
+            mBreedPigeonEntryViewModel.footMother = breedPigeonEntity.getWoFootRingNum();
+            mBreedPigeonEntryViewModel.pigeonName = breedPigeonEntity.getPigeonName();
+            mBreedPigeonEntryViewModel.sexId = breedPigeonEntity.getPigeonSexID();
+            mBreedPigeonEntryViewModel.featherColor = breedPigeonEntity.getPigeonSexID();
+            mBreedPigeonEntryViewModel.eyeSandId = breedPigeonEntity.getPigeonEyeID();
+            mBreedPigeonEntryViewModel.theirShellsDate = breedPigeonEntity.getFootRingTimeTo();
+            mBreedPigeonEntryViewModel.lineage = breedPigeonEntity.getPigeonBloodID();
+            mBreedPigeonEntryViewModel.stateId = breedPigeonEntity.getStateID();
+
+            if(StringUtil.isStringValid(breedPigeonEntity.getCoverPhotoUrl())){
+                List<ImgTypeEntity> imgs = Lists.newArrayList();
+                ImgTypeEntity entity = new ImgTypeEntity.Builder()
+                        .imgTypeId(breedPigeonEntity.getCoverPhotoTypeID())
+                        .imgType(breedPigeonEntity.getCoverPhotoTypeName())
+                        .imgPath(breedPigeonEntity.getCoverPhotoUrl())
+                        .build();
+                imgs.add(0, entity);
+                mAdapter.addImage(imgs);
+
+                mBreedPigeonEntryViewModel.phototypeid = breedPigeonEntity.getCoverPhotoID();
+                mBreedPigeonEntryViewModel.images.addAll(Lists.newArrayList(breedPigeonEntity.getCoverPhotoUrl()));
+            }
         });
 
         mSelectTypeViewModel.mSelectType_Sex.observe(this, selectTypeEntities -> {

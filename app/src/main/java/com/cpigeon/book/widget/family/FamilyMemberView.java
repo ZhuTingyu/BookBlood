@@ -170,6 +170,8 @@ public class FamilyMemberView extends FamilyMember {
     public void bindData(BreedPigeonEntity entity) {
 
         if(!StringUtil.isStringValid(entity.getPigeonID())){
+            imgAdd.setVisibility(VISIBLE);
+            mRlInMemberInfo.setVisibility(GONE);
             return;
         }
 

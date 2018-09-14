@@ -369,4 +369,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     public ViewGroup getRootView() {
         return rootView;
     }
+
+    public interface OnActivityFinishListener{
+        void finish();
+    }
+
+    private OnActivityFinishListener mOnActivityFinishListener;
+
+    public void setOnActivityFinishListener(OnActivityFinishListener onActivityFinishListener) {
+        mOnActivityFinishListener = onActivityFinishListener;
+    }
 }
+

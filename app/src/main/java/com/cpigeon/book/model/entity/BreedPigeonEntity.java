@@ -79,6 +79,8 @@ public class BreedPigeonEntity implements Serializable {
     private String WoFootRingNum;//母足环号码
     private String FootCode;// 国家编码
     private String FootCodeID;// 国家id
+    private String CoverPhotoTypeID;// 图片typeId
+    private String CoverPhotoTypeName;// 图片typeName
 
     public BreedPigeonEntity(){};
 
@@ -131,6 +133,22 @@ public class BreedPigeonEntity implements Serializable {
         setWoFootRingNum(builder.WoFootRingNum);
         setFootCode(builder.FootCode);
         setFootCodeID(builder.FootCodeID);
+    }
+
+    public String getCoverPhotoTypeID() {
+        return CoverPhotoTypeID;
+    }
+
+    public void setCoverPhotoTypeID(String coverPhotoTypeID) {
+        CoverPhotoTypeID = coverPhotoTypeID;
+    }
+
+    public String getCoverPhotoTypeName() {
+        return CoverPhotoTypeName;
+    }
+
+    public void setCoverPhotoTypeName(String coverPhotoTypeName) {
+        CoverPhotoTypeName = coverPhotoTypeName;
     }
 
     public String getCoverPhotoUrl() {
@@ -431,6 +449,9 @@ public class BreedPigeonEntity implements Serializable {
         private String WoFootRingNum;
         private String FootCode;
         private String FootCodeID;
+        private String CoverPhotoTypeID;// 图片typeId
+        private String CoverPhotoTypeName;// 图片typeName
+
 
         public Builder() {
         }
@@ -445,8 +466,33 @@ public class BreedPigeonEntity implements Serializable {
             return this;
         }
 
+        public String getCoverPhotoUrl() {
+            return CoverPhotoUrl;
+        }
+
+        public void setCoverPhotoUrl(String coverPhotoUrl) {
+            CoverPhotoUrl = coverPhotoUrl;
+        }
+
+        public String getCoverPhotoTypeID() {
+            return CoverPhotoTypeID;
+        }
+
+        public void setCoverPhotoTypeID(String coverPhotoTypeID) {
+            CoverPhotoTypeID = coverPhotoTypeID;
+        }
+
+        public String getCoverPhotoTypeName() {
+            return CoverPhotoTypeName;
+        }
+
+        public void setCoverPhotoTypeName(String coverPhotoTypeName) {
+            CoverPhotoTypeName = coverPhotoTypeName;
+        }
+
         public Builder CoverPhotoID(String val) {
             CoverPhotoID = val;
+
             return this;
         }
 

@@ -32,7 +32,7 @@ public class RecyclerViewUtils {
         } else {
             adapter.setLoadMore(false);
             if (adapter.getHeaderLayoutCount() != 0) {
-                adapter.addData(adapter.getHeaderLayoutCount()+1, data);
+                adapter.addData(adapter.getHeaderLayoutCount() + 1, data);
             } else {
                 adapter.addData(data);
             }
