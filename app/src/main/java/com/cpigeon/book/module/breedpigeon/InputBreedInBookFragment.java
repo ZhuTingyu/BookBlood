@@ -51,7 +51,6 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         super.onAttach(context);
         mViewModel = new BookViewModel(getBaseActivity());
         initViewModel(mViewModel);
-        EventBus.getDefault().register(this);
     }
 
     @Nullable
@@ -67,7 +66,6 @@ public class InputBreedInBookFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_breed_pigeon_input);
-
         mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
             @Override
             public void add(int x, int y) {
@@ -138,11 +136,5 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             setProgressVisible(true);
             mViewModel.getBloodBook();
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroy();
     }
 }
