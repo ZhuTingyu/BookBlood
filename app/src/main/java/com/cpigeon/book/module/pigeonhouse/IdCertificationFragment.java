@@ -58,10 +58,10 @@ public class IdCertificationFragment extends BaseBookFragment {
     boolean mIsEdit;
 
 
-    public static void start(Activity activity, boolean isEdit) {
+    public static void start(Activity activity, boolean isEdit, int code) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_BOOLEAN, isEdit)
-                .startParentActivity(activity, IdCertificationFragment.class);
+                .startParentActivity(activity, IdCertificationFragment.class, code);
     }
 
     @Override
