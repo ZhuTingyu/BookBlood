@@ -17,6 +17,7 @@ import com.base.util.Lists;
 import com.base.util.map.LocationLiveData;
 import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
+import com.base.util.utility.LogUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
@@ -90,13 +91,27 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         setTitle("添加配对");
 
         setToolbarRight("推荐配对", item -> {
-            PairingInfoRecommendFragment.start(getBaseActivity());
+            PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoAddViewModel.mBreedPigeonEntity);
             return true;
         });
 
         mPairingInfoAddViewModel.isCanCommit();
 
         mPairingInfoAddViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+
+
+        tvHintFoot.setText(mPairingInfoAddViewModel.mBreedPigeonEntity.getFootRingNum());
+
+        if (mPairingInfoAddViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
+            imgHintSex.setImageResource(R.mipmap.ic_female);
+            mPairingInfoAddViewModel.sex = "雄";
+        } else if (mPairingInfoAddViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雄")) {
+            imgHintSex.setImageResource(R.mipmap.ic_male);
+            mPairingInfoAddViewModel.sex = "雌";
+        } else {
+            mPairingInfoAddViewModel.sex = "未知";
+            imgHintSex.setImageResource(R.mipmap.ic_sex_no);
+        }
 
         mSelectTypeViewModel.getSelectType_FeatherColor();
         mSelectTypeViewModel.getSelectType_lineage();
@@ -122,8 +137,8 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
 
         LocationLiveData.get(true).observe(this, aMapLocation -> {
-
             Log.d("dingwei", "initObserve: 城市--》" + aMapLocation.getCity());
+            LogUtil.print(aMapLocation);
             WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
 
                 Log.d("dingwei", "initObserve: 天气" + localWeatherLive.getWeather());

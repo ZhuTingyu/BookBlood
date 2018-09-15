@@ -155,9 +155,12 @@
     <!--种鸽列表，搜索-->
     <string name="pigeon_breed_search">TXGP_FootRing_SelectAll</string>
     <!--种鸽列表，筛选-->
-    <string name="pigeon_breed_sift">TXGP_Pigeon_SelectAll</string>
+    <!--<string name="pigeon_breed_sift">TXGP_Pigeon_SelectAll</string>-->
+    <string name="pigeon_breed_sift">TXGP_PigeonList_SelectAll</string>
     <!--配对信息列表-->
     <string name="pairing_info_list">TXGP_PigeonBreed_SelectPigeonAll</string>
+    <!--窝次信息列表-->
+    <string name="pairing_nest_info_list">TXGP_PigeonBreed_SelectIDAll</string>
     <!--添加配对信息-->
     <string name="pairing_info_add">TXGP_PigeonBreed_Add</string>
 

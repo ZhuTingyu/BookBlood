@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
-
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <!--配对时间-->
@@ -13,12 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white"
+        app:leftTextBold="true"
         app:lineInputView_Hint="0000-00-00"
         app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="配对时间"
-        app:lineInputView_LeftTextColor="@color/general_text_color" />
+        app:lineInputView_LeftTextColor="@color/general_text_color"
+        app:rightTextBold="true" />
 
     <!--产蛋信息-->
     <com.cpigeon.book.widget.LineInputView
@@ -26,12 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white"
+        app:leftTextBold="true"
         app:lineInputView_Hint="未产蛋"
         app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="产蛋信息"
-        app:lineInputView_LeftTextColor="@color/general_text_color" />
+        app:lineInputView_LeftTextColor="@color/general_text_color"
+        app:rightTextBold="true" />
 
     <!--产蛋时间-->
     <com.cpigeon.book.widget.LineInputView
@@ -78,12 +81,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white"
+        app:leftTextBold="true"
         app:lineInputView_Hint="已出壳"
         app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="出壳信息"
-        app:lineInputView_LeftTextColor="@color/general_text_color" />
+        app:lineInputView_LeftTextColor="@color/general_text_color"
+        app:rightTextBold="true" />
 
 
     <!--出壳时间-->
@@ -120,12 +125,85 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white"
+        app:leftTextBold="true"
         app:lineInputView_Hint="已挂环"
         app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLookState="true"
         app:lineInputView_IsNotNull="true"
         app:lineInputView_LeftString="子代信息"
-        app:lineInputView_LeftTextColor="@color/general_text_color" />
+        app:lineInputView_LeftTextColor="@color/general_text_color"
+        app:rightTextBold="true" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_view_height"
+        android:background="@color/color_white"
+        android:gravity="center_vertical">
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/ic_del" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="0000-00-0000000  雨白条"
+            android:textColor="@color/general_text_color"
+            android:textSize="@dimen/medium_text_size" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/ic_arrow_right" />
+
+
+    </LinearLayout>
+
+    <include layout="@layout/include_line_view_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_view_height"
+        android:background="@color/color_white"
+        android:gravity="center_vertical">
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/ic_del" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="0000-00-0000000  雨白条"
+            android:textColor="@color/general_text_color"
+            android:textSize="@dimen/medium_text_size" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/ic_arrow_right" />
+
+
+    </LinearLayout>
+
+    <include layout="@layout/include_line_view_layout" />
 
 
 </LinearLayout>

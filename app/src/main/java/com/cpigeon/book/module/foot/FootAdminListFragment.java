@@ -78,7 +78,7 @@ public class FootAdminListFragment extends BaseBookFragment {
         EventBus.getDefault().register(this);
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getActivity(), SearchFootActivity.class,null);
+            BaseSearchActivity.start(getActivity(), SearchFootActivity.class,new Bundle());
         });
 
 

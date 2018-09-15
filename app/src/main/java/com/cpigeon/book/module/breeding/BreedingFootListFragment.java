@@ -1,3 +1,4 @@
+
 package com.cpigeon.book.module.breeding;
 
 import android.app.Activity;
@@ -11,7 +12,7 @@ import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
-import com.cpigeon.book.module.breedpigeon.SearchBreedPigeonActivity;
+
 
 /**
  * 繁育信息   足环列表
@@ -19,7 +20,6 @@ import com.cpigeon.book.module.breedpigeon.SearchBreedPigeonActivity;
  */
 
 public class BreedingFootListFragment extends BaseFootListFagment {
-
 
     private SearchFragmentParentActivity mActivity;
 
@@ -48,8 +48,7 @@ public class BreedingFootListFragment extends BaseFootListFagment {
             //搜索
             Bundle bundle = new Bundle();
             bundle.putString(IntentBuilder.KEY_TYPE, "8");
-
-            BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonActivity.class, bundle);
+            BaseSearchActivity.start(getBaseActivity(), SearchBreedingFootActivity.class, bundle);
         });
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {

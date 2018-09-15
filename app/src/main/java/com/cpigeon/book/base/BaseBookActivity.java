@@ -1,8 +1,11 @@
 package com.cpigeon.book.base;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+import android.view.View;
 
 import com.base.base.BaseActivity;
 import com.base.util.dialog.DialogUtils;
@@ -30,14 +33,6 @@ public abstract class BaseBookActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
         unbinder = ButterKnife.bind(this);
-
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        initObserve();
     }
 
     protected void initObserve() {

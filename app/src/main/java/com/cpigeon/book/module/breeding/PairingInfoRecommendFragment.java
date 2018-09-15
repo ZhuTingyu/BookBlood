@@ -24,6 +24,7 @@ import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePage
 import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breeding.childfragment.PairingLineageFragment;
 import com.cpigeon.book.module.breeding.childfragment.PairingPlayFragment;
 import com.cpigeon.book.module.breeding.childfragment.PairingScoreFragment;
@@ -46,8 +47,9 @@ public class PairingInfoRecommendFragment extends BaseBookFragment {
     protected List<Fragment> mFragments = Lists.newArrayList();
     protected List<String> mTitles = Lists.newArrayList();
 
-    public static void start(Activity activity) {
+    public static void start(Activity activity, PigeonEntity mBreedPigeonEntity) {
         IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
                 .startParentActivity(activity, PairingInfoRecommendFragment.class);
     }
 

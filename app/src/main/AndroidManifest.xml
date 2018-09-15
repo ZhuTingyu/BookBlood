@@ -184,6 +184,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
 
+        <activity android:name=".module.breeding.SearchBreedingFootActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>
         <!--极光推送-->
@@ -193,10 +197,7 @@
             tools:node="replace">
 
         </service>
-
-
         <!--友盟-->
-
 
     </application>
 

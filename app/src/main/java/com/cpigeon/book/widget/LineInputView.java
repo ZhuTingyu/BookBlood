@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
@@ -22,6 +23,8 @@ import android.widget.TextView;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
+
+import java.time.format.TextStyle;
 
 
 /**
@@ -49,6 +52,9 @@ public class LineInputView extends RelativeLayout {
     boolean mIsCanEdit;
     boolean mIsEditLeft;
     boolean mIsHaveEditBoard;
+
+    boolean leftTextBold = false;
+    boolean rightTextBold = false;
 
     int mShowLineDivision;//是否显示分割线
     int mInputType;
@@ -103,8 +109,8 @@ public class LineInputView extends RelativeLayout {
         mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, Utils.getColor(R.color.color_4c4c4c));
         mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, Utils.getColor(R.color.color_000000));
         mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, Color.parseColor("#FFFFFF"));
-        mLeftTextSize = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
-        mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
+        mLeftTextSize = array.getFloat(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
+        mRightTextSize = array.getFloat(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);
         mRightString = array.getString(R.styleable.LineInputView_lineInputView_RightString);
         mEtHintStr = array.getString(R.styleable.LineInputView_lineInputView_Hint);
@@ -130,6 +136,9 @@ public class LineInputView extends RelativeLayout {
 
         left_gravity = array.getBoolean(R.styleable.LineInputView_lineInputView_LeftTextGravity, true);
 
+        leftTextBold = array.getBoolean(R.styleable.LineInputView_leftTextBold, false);
+        rightTextBold = array.getBoolean(R.styleable.LineInputView_rightTextBold, false);
+
     }
 
     private void initView() {
@@ -149,7 +158,7 @@ public class LineInputView extends RelativeLayout {
 
         mTextView.setText(mLeftString);
         mTextView.setTextColor(mLeftColor);
-        mTextView.setTextSize(mLeftTextSize);
+        mTextView.setTextSize(ScreenTool.dip2px(mLeftTextSize));
 
         if (left_gravity) {
             mTextView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
@@ -157,6 +166,14 @@ public class LineInputView extends RelativeLayout {
             mTextView.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         }
 
+
+//        if (leftTextBold){
+//            mTextView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
+//        }
+//
+//        if (rightTextBold){
+//            mEditText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
+//        }
 
         mEditText.setText(mRightString);
         mEditText.setHint(mEtHintStr);

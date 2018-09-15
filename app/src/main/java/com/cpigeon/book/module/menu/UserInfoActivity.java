@@ -88,9 +88,9 @@ public class UserInfoActivity extends BaseBookActivity {
         dialogFragment = new ShareDialogFragment();
 
         mUserInfoViewModel.getTXGP_GetUserInfoData();
+        initObserve();
     }
 
-    @Override
     protected void initObserve() {
         super.initObserve();
 

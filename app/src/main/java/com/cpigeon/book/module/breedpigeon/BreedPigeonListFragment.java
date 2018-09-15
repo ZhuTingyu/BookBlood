@@ -27,6 +27,7 @@ import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
 
@@ -146,7 +147,11 @@ public class BreedPigeonListFragment extends BaseFragment {
 
         mTvOk.setText(R.string.text_add_breed_pigeon);
         mTvOk.setOnClickListener(v -> {
-            InputBreedInBookFragment.start(getBaseActivity());
+            if(pigeonType.equals(PigeonEntity.ID_MATCH_PIGEON)){
+                RacingPigeonEntryFragment.start(getBaseActivity());
+            }else {
+                InputBreedInBookFragment.start(getBaseActivity());
+            }
         });
 
 //        mAdapter.setNewData(Lists.newTestArrayList());
