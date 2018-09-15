@@ -49,6 +49,11 @@ public class SearchFragmentParentActivity extends BaseBookActivity {
         activity.overridePendingTransition(R.anim.anim_right_in, R.anim.anim_left_out);
     }
 
+    public static void start(Activity activity, Class clz, boolean isHaveMenu) {
+        start(activity ,clz, isHaveMenu,null);
+    }
+
+
     public static void start(Activity activity, Class clz, int requestCode, boolean isHaveMenu, Bundle mBundle) {
         Intent intent = new Intent();
         intent.setClass(activity, SearchFragmentParentActivity.class);

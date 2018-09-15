@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Zhu TingYu on 2018/9/11.
  */
 
-public class TrainEntity implements Parcelable {
+public class  TrainEntity implements Parcelable {
 
     /**
      * AddTime : 添加时间

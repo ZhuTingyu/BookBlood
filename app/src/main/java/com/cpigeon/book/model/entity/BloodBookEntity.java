@@ -7,40 +7,40 @@ import java.util.List;
  */
 
 public class BloodBookEntity {
-    private List<BreedPigeonEntity> four;
-    private List<BreedPigeonEntity> three;
-    private List<BreedPigeonEntity> one;
-    private List<BreedPigeonEntity> two;
+    private List<PigeonEntity> four;
+    private List<PigeonEntity> three;
+    private List<PigeonEntity> one;
+    private List<PigeonEntity> two;
 
-    public List<BreedPigeonEntity> getFour() {
+    public List<PigeonEntity> getFour() {
         return four;
     }
 
-    public void setFour(List<BreedPigeonEntity> four) {
+    public void setFour(List<PigeonEntity> four) {
         this.four = four;
     }
 
-    public List<BreedPigeonEntity> getThree() {
+    public List<PigeonEntity> getThree() {
         return three;
     }
 
-    public void setThree(List<BreedPigeonEntity> three) {
+    public void setThree(List<PigeonEntity> three) {
         this.three = three;
     }
 
-    public List<BreedPigeonEntity> getOne() {
+    public List<PigeonEntity> getOne() {
         return one;
     }
 
-    public void setOne(List<BreedPigeonEntity> one) {
+    public void setOne(List<PigeonEntity> one) {
         this.one = one;
     }
 
-    public List<BreedPigeonEntity> getTwo() {
+    public List<PigeonEntity> getTwo() {
         return two;
     }
 
-    public void setTwo(List<BreedPigeonEntity> two) {
+    public void setTwo(List<PigeonEntity> two) {
         this.two = two;
     }
 }

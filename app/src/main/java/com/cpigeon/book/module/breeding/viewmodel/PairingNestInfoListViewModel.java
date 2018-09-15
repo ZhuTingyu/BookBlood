@@ -5,9 +5,9 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PairingNestInfoEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class PairingNestInfoListViewModel extends BaseViewModel {
 
-    public BreedPigeonEntity mBreedPigeonEntity;
+    public PigeonEntity mBreedPigeonEntity;
 
     public PairingInfoEntity mPairingInfoEntity;
     public int pi = 1;

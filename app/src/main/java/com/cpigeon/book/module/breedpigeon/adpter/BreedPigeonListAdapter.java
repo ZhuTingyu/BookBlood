@@ -7,7 +7,7 @@ import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Utils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 /**
  * Created by Zhu TingYu on 2018/8/28.
@@ -25,14 +25,14 @@ import com.cpigeon.book.model.entity.BreedPigeonEntity;
 //    }
 //}
 
-public class BreedPigeonListAdapter extends BaseQuickAdapter<BreedPigeonEntity, BaseViewHolder> {
+public class BreedPigeonListAdapter extends BaseQuickAdapter<PigeonEntity, BaseViewHolder> {
 
     public BreedPigeonListAdapter() {
         super(R.layout.item_breed_pigeon_list, null);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, BreedPigeonEntity item) {
+    protected void convert(BaseViewHolder helper, PigeonEntity item) {
 
         ImageView imgSex = helper.getView(R.id.imgSex);
 

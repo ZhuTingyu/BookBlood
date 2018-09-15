@@ -79,7 +79,7 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
         setTitle(R.string.text_foots_details);
         setToolbarRight(R.string.text_delete, item -> {
             DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_is_delete_foot_numbers)
-                    ,sweetAlertDialog -> {
+                    , sweetAlertDialog -> {
                         setProgressVisible(true);
                         sweetAlertDialog.dismiss();
                         mViewModel.deleteMultiFoot();
@@ -123,7 +123,7 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
                 public void eFoot(String foot) {
                     mViewModel.eFootNumber = foot;
                     mLvFoot.setRightText(Utils.getString(R.string.text_foots
-                            ,mViewModel.sFootNumber,mViewModel.eFootNumber));//足环号
+                            , mViewModel.sFootNumber, mViewModel.eFootNumber));//足环号
                 }
             });
             dialog.show(getBaseActivity().getSupportFragmentManager());
@@ -155,7 +155,7 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
         });
 
         mBoxViewRemark.getEditText().setOnFocusChangeListener((v, hasFocus) -> {
-            if(hasFocus){
+            if (hasFocus) {
                 mTvOk.setVisibility(View.VISIBLE);
             }
         });
@@ -178,12 +178,20 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
             setProgressVisible(false);
             if (footEntity != null) {
                 mLvFoot.setRightText(Utils.getString(R.string.text_foots
-                        ,footEntity.getFootRingNum(),footEntity.getEndFootRingNum()));//足环号
+                        , footEntity.getFootRingNum(), footEntity.getEndFootRingNum()));//足环号
                 mLvCategory.setRightText(footEntity.getTypeName());//类别
                 mLvSource.setRightText(footEntity.getSourceName());//来源
                 mViewModel.typeId = String.valueOf(footEntity.getTypeID());
                 mLvMoney.setRightText(Utils.getString(R.string.text_yuan, footEntity.getFootRingMoney()));//金额
             }
+        });
+
+        mViewModel.modifyR.observe(this, s -> {
+            setProgressVisible(false);
+            DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                EventBus.getDefault().post(new FootUpdateEvent());
+            });
         });
 
         mViewModel.deleteR.observe(this, s -> {

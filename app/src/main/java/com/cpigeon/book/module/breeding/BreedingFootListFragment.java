@@ -1,3 +1,4 @@
+
 package com.cpigeon.book.module.breeding;
 
 import android.app.Activity;
@@ -9,7 +10,7 @@ import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
 
 
@@ -51,7 +52,7 @@ public class BreedingFootListFragment extends BaseFootListFagment {
         });
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            BreedPigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
             PairingInfoListFragment.start(getBaseActivity(), mBreedPigeonEntity);
         });
     }

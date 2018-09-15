@@ -44,6 +44,7 @@
                 android:id="@+id/lv_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:lineInputView_isShowRightImage="invisible"
                 app:lineInputView_InputType="number"
                 app:lineInputView_IsCanEdit="true"
                 app:lineInputView_IsNotNull="true"
@@ -72,7 +73,7 @@
                 app:lineInputView_isShowRightImage="invisible"
                 app:lineInputView_IsCanEdit="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_InputType="numberDecimal"
+                app:lineInputView_InputType="number"
                 app:lineInputView_LeftString="总金额" />
 
 

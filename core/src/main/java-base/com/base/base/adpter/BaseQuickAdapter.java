@@ -120,6 +120,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
     }
 
     public void cleanList() {
+        removeAllHeaderView();
         getData().clear();
         notifyDataSetChanged();
     }

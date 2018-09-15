@@ -3,7 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PairingNestInfoEntity;
 import com.cpigeon.book.model.entity.PriringRecommendEntity;
@@ -21,7 +21,7 @@ public class PairingModel {
 
 
     //hl 添加配對
-    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_PigeonBreed_Add(String footid,
+    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_PigeonBreed_Add(String footid,
                                                                                            String footnum,
                                                                                            String blood,
                                                                                            String plume,
@@ -33,8 +33,8 @@ public class PairingModel {
                                                                                            String dir,
                                                                                            String bitpair,
                                                                                            String reamrk) {
-        return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
+        return RequestData.<ApiResponse<List<PigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
                 .url(R.string.pairing_info_add)
                 .addBody("footid", footid)//要配对的足环id
@@ -146,9 +146,9 @@ public class PairingModel {
 
     //hl 信鸽赛绩推荐
     public static Observable<ApiResponse<List<PriringRecommendEntity>>> getTXGP_PigeonBreed_RecomMatch(String pi,
-                                                                                                  String ps,
-                                                                                                  String sex,
-                                                                                                  String pigeonid) {
+                                                                                                       String ps,
+                                                                                                       String sex,
+                                                                                                       String pigeonid) {
         return RequestData.<ApiResponse<List<PriringRecommendEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PriringRecommendEntity>>>() {
                 }.getType())
@@ -163,9 +163,9 @@ public class PairingModel {
 
     //hl 信鸽评分推荐
     public static Observable<ApiResponse<List<PriringRecommendEntity>>> getTXGP_PigeonTrain_RecomSorce(String pi,
-                                                                                                  String ps,
-                                                                                                  String sex,
-                                                                                                  String pigeonid) {
+                                                                                                       String ps,
+                                                                                                       String sex,
+                                                                                                       String pigeonid) {
         return RequestData.<ApiResponse<List<PriringRecommendEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PriringRecommendEntity>>>() {
                 }.getType())

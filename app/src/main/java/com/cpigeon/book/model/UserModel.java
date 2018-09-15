@@ -11,6 +11,7 @@ import com.base.util.http.GsonUtil;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
+import com.cpigeon.book.model.entity.PigeonHouseEntity;
 import com.cpigeon.book.model.entity.UserEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -123,9 +124,8 @@ public class UserModel {
          save();
     }
 
-    public void setPigeonHouseInfo(String lo, String la) {
-        getInstance().getUserData().la = la;
-        getInstance().getUserData().lo = lo;
+    public void setPigeonHouseInfo(PigeonHouseEntity entity) {
+        getInstance().getUserData().pigeonHouseEntity = entity;
         save();
     }
 

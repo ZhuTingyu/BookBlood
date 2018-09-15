@@ -140,7 +140,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mImgSex = findViewById(R.id.imgSex);
 
         mTvAuth.setOnClickListener(v -> {
-            IdCertificationFragment.start(getBaseActivity(), true);
+            IdCertificationFragment.start(getBaseActivity(), true, CODE_AUTH);
         });
 
         bindUi(RxUtils.textChanges(mLvHouseName.getEditText()), mViewModel.setPigeonHomeName());
@@ -257,9 +257,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         });
 
         mViewModel.addR.observe(this, s -> {
-            //todo 添加过后返回鸽舍信息
             UserModel.getInstance().setIsHaveHouseInfo(true);
-            UserModel.getInstance().setPigeonHouseInfo(mViewModel.mLongitude, mViewModel.mLatitude);
             MainActivity.start(getBaseActivity());
         });
 
@@ -295,7 +293,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
                 mTvAuth.setBackgroundResource(R.drawable.shape_btn_stroke_blue);
                 mTvAuth.setTextColor(Utils.getColor(R.color.colorPrimary));
                 mTvAuth.setOnClickListener(v -> {
-                    IdCertificationFragment.start(getBaseActivity(), false);
+                    IdCertificationFragment.start(getBaseActivity(), false, CODE_AUTH);
                 });
 
                 if (Utils.getString(R.string.text_male).equals(r.getXingbie())) {
@@ -334,7 +332,12 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
             bindAddress(address);
         } else if (requestCode == CODE_AUTH) {
-            mViewModel.getPigeonHouse();
+            mTvAuth.setText(getString(R.string.text_yet_auth));
+            mTvAuth.setBackgroundResource(R.drawable.shape_btn_stroke_blue);
+            mTvAuth.setTextColor(Utils.getColor(R.color.colorPrimary));
+            mTvAuth.setOnClickListener(v -> {
+                IdCertificationFragment.start(getBaseActivity(), false, CODE_AUTH);
+            });
         }
     }
 

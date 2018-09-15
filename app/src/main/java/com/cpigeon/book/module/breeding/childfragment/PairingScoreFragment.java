@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.PairingNestInfoListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingPlayAdapter;
@@ -46,7 +46,7 @@ public class PairingScoreFragment extends BaseListFragment {
         view_placeholder.setVisibility(View.GONE);
 
 
-        mPairingRecommendViewModel.mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mPairingRecommendViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         mPairingRecommendViewModel.pigeonid = mPairingRecommendViewModel.mBreedPigeonEntity.getPigeonID();
         if (mPairingRecommendViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
             mPairingRecommendViewModel.sex = "雄";

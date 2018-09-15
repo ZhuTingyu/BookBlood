@@ -40,7 +40,6 @@ public class SearchTrainPigeonActivity extends BaseSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAdapter.setNewData(Lists.newTestArrayList());
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
 
         });
@@ -48,7 +47,6 @@ public class SearchTrainPigeonActivity extends BaseSearchActivity {
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
             public void search(String key) {
-                mAdapter.setNewData(Lists.newTestArrayList());
             }
 
             @Override

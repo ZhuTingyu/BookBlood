@@ -10,10 +10,13 @@ import java.io.Serializable;
  * Created by Administrator on 2018/9/4.
  */
 
-public class BreedPigeonEntity implements Serializable {
+public class PigeonEntity implements Serializable {
 
     public static final String ID_MALE = "25";
     public static final String ID_FEMALE = "24";
+    public static final String ID_BREED_PIGEON= "8";
+    public static final String ID_MATCH_PIGEON= "9";
+    public static final String ID_YOUNG_PIGEON= "10";
 
     /**
      * CoverPhotoUrl :
@@ -82,7 +85,9 @@ public class BreedPigeonEntity implements Serializable {
     private String CoverPhotoTypeID;// 图片typeId
     private String CoverPhotoTypeName;// 图片typeName
 
-    public BreedPigeonEntity(){};
+    private boolean isSelect = false;
+
+    public PigeonEntity(){};
 
     public boolean isEmpty(){
         if(StringUtil.isStringValid(PigeonID)){
@@ -100,7 +105,7 @@ public class BreedPigeonEntity implements Serializable {
         return Utils.getString(R.string.text_male_a).equals(PigeonSexName);
     }
 
-    private BreedPigeonEntity(Builder builder) {
+    private PigeonEntity(Builder builder) {
         setCoverPhotoUrl(builder.CoverPhotoUrl);
         setCoverPhotoID(builder.CoverPhotoID);
         setFootRingID(builder.FootRingID);
@@ -149,6 +154,14 @@ public class BreedPigeonEntity implements Serializable {
 
     public void setCoverPhotoTypeName(String coverPhotoTypeName) {
         CoverPhotoTypeName = coverPhotoTypeName;
+    }
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelecte(boolean select) {
+        isSelect = select;
     }
 
     public String getCoverPhotoUrl() {
@@ -661,8 +674,8 @@ public class BreedPigeonEntity implements Serializable {
             return this;
         }
 
-        public BreedPigeonEntity build() {
-            return new BreedPigeonEntity(this);
+        public PigeonEntity build() {
+            return new PigeonEntity(this);
         }
     }
 }

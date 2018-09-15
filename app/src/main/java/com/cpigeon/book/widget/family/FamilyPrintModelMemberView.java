@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,7 +19,7 @@ import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.widget.ShadowRelativeLayout;
 
 /**
@@ -36,7 +35,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     int rootH;
     int shadowColor;
     boolean isHorizontal;
-    private BreedPigeonEntity mPigeonEntity;
+    private PigeonEntity mPigeonEntity;
 
 
     private ShadowRelativeLayout mRlShadow;
@@ -172,7 +171,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
 
     }
 
-    public void bindData(BreedPigeonEntity entity) {
+    public void bindData(PigeonEntity entity) {
         if(!StringUtil.isStringValid(entity.getPigeonID())){
             return;
         }
@@ -218,7 +217,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     public interface OnMemberClickListener {
         void add(int x, int y);
 
-        void showInfo(BreedPigeonEntity entity);
+        void showInfo(PigeonEntity entity);
     }
 
     private OnMemberClickListener mOnMemberClickListener;

@@ -24,8 +24,8 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breeding.viewmodel.PairingNestAddViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
@@ -72,7 +72,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
 
     private PairingNestAddViewModel mPairingNestAddViewModel;
 
-    public static void start(Activity activity, PairingInfoEntity mPairingInfoEntity, BreedPigeonEntity mBreedPigeonEntity, int maxNest) {
+    public static void start(Activity activity, PairingInfoEntity mPairingInfoEntity, PigeonEntity mBreedPigeonEntity, int maxNest) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPairingInfoEntity)
                 .putExtra(IntentBuilder.KEY_DATA_2, mBreedPigeonEntity)
@@ -101,7 +101,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
         setTitle("添加窝次");
 
         mPairingNestAddViewModel.mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
-        mPairingNestAddViewModel.mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA_2);
+        mPairingNestAddViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA_2);
 
         int nestNum = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA_3, 0);
 

@@ -98,8 +98,9 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         mCardView = findViewById(R.id.card);
 
 
-        /*mPigeonHousePosition = new LatLng(Double.valueOf(UserModel.getInstance().getUserData().la)
-                ,Double.valueOf(UserModel.getInstance().getUserData().lo));*/
+        mPigeonHousePosition = new LatLng(Double.valueOf(UserModel.getInstance()
+                .getUserData().pigeonHouseEntity.getLatitude())
+                ,Double.valueOf(UserModel.getInstance().getUserData().pigeonHouseEntity.getLongitude()));
 
 
         amapManager.moveByLatLng(mPigeonHousePosition);
@@ -125,12 +126,6 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
                             , LocationFormatUtils.Aj2GPSLocation(Double.valueOf(la)));
                     LatLng c = AmapManager.converter(getContext(), latLng);
 
-                    /*mViewModel.mLongitude = String.valueOf(c.longitude);
-                    mViewModel.mLatitude = String.valueOf(c.latitude);*/
-
-//                    mPointToAddressManager.setSearchPoint(new LatLonPoint(Double.valueOf(mViewModel.mLatitude)
-//                            , Double.valueOf(mViewModel.mLongitude))).search();
-
                 }
 
                 @Override
@@ -148,11 +143,12 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
         addItemDecorationLine(mList);
         mAdapter = new NewTrainPigeonListAdapter();
+        mAdapter.setEmptyText(Utils.getString(R.string.text_not_choose_pigeon));
         mAdapter.setOnDeleteListener(position -> {
             mAdapter.remove(position);
         });
         mList.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
+        mAdapter.setNewData(Lists.newArrayList());
 
     }
 
@@ -178,14 +174,15 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
             mMapMarkerManager.clean();
 
             mMapMarkerManager.addCustomCenterMarker(mPigeonHousePosition,"",R.mipmap.ic_blue_point);
-            mMapMarkerManager.addCustomCenterMarker(new LatLng(point.getLatitude(),point.getLongitude())
-                    ,"",R.mipmap.ic_red_point);
+            LatLng selectPoint = new LatLng(point.getLatitude(),point.getLongitude());
+            mMapMarkerManager.addCustomCenterMarker(selectPoint,"",R.mipmap.ic_red_point);
             mMapMarkerManager.addMap();
 
             int d = (int) AMapUtils.calculateLineDistance(mPigeonHousePosition,new LatLng(point.getLatitude(),point.getLongitude())) / 1000;
             mCardView.setVisibility(View.VISIBLE);
             mTvDis.setText(Utils.getString(R.string.text_KM, String.valueOf(d)));
 
+            addLine(Lists.newArrayList(mPigeonHousePosition, selectPoint), R.color.colorPrimary);
         }
     }
 
@@ -205,7 +202,6 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
             if (!StringUtil.isStringValid(error)) {
                 return;
             }
-
             //保证界面只有一个错误提示
             if (getBaseActivity().errorDialog == null || !getBaseActivity().errorDialog.isShowing()) {
                 getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), error, SweetAlertDialog.ERROR_TYPE, false, dialog -> {

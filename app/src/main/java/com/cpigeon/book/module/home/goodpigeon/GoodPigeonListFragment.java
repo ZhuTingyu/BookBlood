@@ -17,6 +17,7 @@ import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.module.home.goodpigeon.adpter.GoodPigeonListAdapter;
 
 /**
@@ -50,11 +51,16 @@ public class GoodPigeonListFragment extends BaseBookFragment {
             IntentBuilder.Builder().startParentActivity(getBaseActivity(), ApplyAddGoodPigeonFragment.class);
             return false;
         });
+        setToolbarNotBack();
         mTvSearch = findViewById(R.id.tvSearch);
-        mTvSearch.setText(R.string.text_input_foot_number_search);
-        mRecyclerView = findViewById(R.id.list);
-        mRecyclerView.setListPadding(15, 0, 15, 0);
         mRlSearch = findViewById(R.id.rlSearch);
+        mRecyclerView = findViewById(R.id.list);
+
+        mRlSearch.setOnClickListener(v -> {
+            BaseSearchActivity.start(getBaseActivity(), SearchGoodPigeonActivity.class);
+        });
+        mTvSearch.setText(R.string.text_input_foot_number_search);
+        mRecyclerView.setListPadding(15, 0, 15, 0);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2
                 , StaggeredGridLayoutManager.VERTICAL));
         mAdapter = new GoodPigeonListAdapter();

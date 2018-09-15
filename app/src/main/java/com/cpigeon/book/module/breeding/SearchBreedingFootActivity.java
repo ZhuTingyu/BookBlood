@@ -1,7 +1,7 @@
 package com.cpigeon.book.module.breeding;
 
 import com.base.base.adpter.BaseQuickAdapter;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.SearchBreedPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
@@ -16,7 +16,7 @@ public class SearchBreedingFootActivity extends SearchBreedPigeonActivity {
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new BreedPigeonListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            BreedPigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
             PairingInfoListFragment.start(getBaseActivity(), mBreedPigeonEntity);
         });
         return mAdapter;

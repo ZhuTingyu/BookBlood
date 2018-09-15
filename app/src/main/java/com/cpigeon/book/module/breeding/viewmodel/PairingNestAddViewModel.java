@@ -3,8 +3,8 @@ package com.cpigeon.book.module.breeding.viewmodel;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 /**
  * 添加窝次
@@ -15,7 +15,7 @@ public class PairingNestAddViewModel extends BaseViewModel {
 
 
     public PairingInfoEntity mPairingInfoEntity;
-    public BreedPigeonEntity mBreedPigeonEntity;
+    public PigeonEntity mBreedPigeonEntity;
 
     //窝次
     public String nestNum;

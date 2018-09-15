@@ -66,7 +66,7 @@ public class FootDetailsMultiViewModel extends BaseViewModel {
         submitRequestThrowError(FootAdminModel.modifyMultiFoot(sFootId, eFootId, sFootNumber
                 , eFootNumber, typeId, source, cityCode, money, remark), r -> {
             if(r.isOk()){
-                hintDialog(r.msg);
+                modifyR.setValue(r.msg);
             }else throw new HttpErrorException(r);
         });
     }

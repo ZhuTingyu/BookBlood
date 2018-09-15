@@ -1,14 +1,21 @@
 package com.base.base;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.view.View;
 
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.PolylineOptions;
 import com.base.BaseFragment;
 import com.base.http.R;
+import com.base.util.Utils;
 import com.base.util.map.AmapManager;
+
+import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/3/30.
@@ -30,6 +37,11 @@ public class BaseMapFragment extends BaseFragment {
         amapManager = new AmapManager(aMap);
         mapView.onCreate(savedInstanceState);
 
+    }
+
+    public void addLine(List<LatLng> points, @ColorRes int resId){
+        aMap.addPolyline(new PolylineOptions().
+                addAll(points).width(10).color(Utils.getColor(resId)));
     }
 
     @Override

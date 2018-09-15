@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.BreedPigeonModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class BreedPigeonListModel extends BaseViewModel {
     public String stateid;//状态
     public String bloodid;//血统id （1,2）
 
-    public MutableLiveData<List<BreedPigeonEntity>> mPigeonListData = new MutableLiveData<>();
+    public MutableLiveData<List<PigeonEntity>> mPigeonListData = new MutableLiveData<>();
 
     public String searchStr;
 

@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingNestInfoListAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingNestInfoListViewModel;
@@ -33,7 +33,7 @@ public class PairingNestInfoListFragment extends BaseListFragment {
         initViewModels(mPairingNestInfoListViewModel);
     }
 
-    public static void start(Activity activity, PairingInfoEntity mPairingInfoEntity, BreedPigeonEntity mBreedPigeonEntity) {
+    public static void start(Activity activity, PairingInfoEntity mPairingInfoEntity, PigeonEntity mBreedPigeonEntity) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPairingInfoEntity)
                 .putExtra(IntentBuilder.KEY_DATA_2, mBreedPigeonEntity)
@@ -49,7 +49,7 @@ public class PairingNestInfoListFragment extends BaseListFragment {
 
 
         mPairingNestInfoListViewModel.mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
-        mPairingNestInfoListViewModel.mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA_2);
+        mPairingNestInfoListViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA_2);
 
         setTitle("窝次信息");
         setToolbarRight("添加窝次", item -> {

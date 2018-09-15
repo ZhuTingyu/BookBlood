@@ -28,9 +28,7 @@ public class UserEntity implements Parcelable {
     public String touxiangurl;
     public String userid;
     public String password;
-    public String lo;
-    public String la;
-    public PigeonHouseEntity PigeonHouseEntity;
+    public PigeonHouseEntity pigeonHouseEntity;
 
     public UserEntity() {
     }
@@ -50,9 +48,7 @@ public class UserEntity implements Parcelable {
         dest.writeString(this.touxiangurl);
         dest.writeString(this.userid);
         dest.writeString(this.password);
-        dest.writeString(this.lo);
-        dest.writeString(this.la);
-        dest.writeParcelable(this.PigeonHouseEntity, flags);
+        dest.writeParcelable(this.pigeonHouseEntity, flags);
     }
 
     protected UserEntity(Parcel in) {
@@ -64,9 +60,7 @@ public class UserEntity implements Parcelable {
         this.touxiangurl = in.readString();
         this.userid = in.readString();
         this.password = in.readString();
-        this.lo = in.readString();
-        this.la = in.readString();
-        this.PigeonHouseEntity = in.readParcelable(com.cpigeon.book.model.entity.PigeonHouseEntity.class.getClassLoader());
+        this.pigeonHouseEntity = in.readParcelable(com.cpigeon.book.model.entity.PigeonHouseEntity.class.getClassLoader());
     }
 
     public static final Creator<UserEntity> CREATOR = new Creator<UserEntity>() {

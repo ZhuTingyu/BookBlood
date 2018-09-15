@@ -56,7 +56,7 @@ public class SelectPigeonToLeagueFragment extends BaseBookFragment {
         mRecyclerView.setAdapter(mAdapter);
         //mAdapter.setNewData(Lists.newTestArrayList());
         mRecyclerView.setRefreshListener(() -> {
-            mAdapter.removeAllHeaderView();
+            mAdapter.cleanList();
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, Lists.newArrayList());
             mAdapter.addHeaderView(initHead());
         });

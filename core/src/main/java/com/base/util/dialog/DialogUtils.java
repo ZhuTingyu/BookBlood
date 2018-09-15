@@ -173,7 +173,13 @@ public class DialogUtils {
             dialogPrompt.setCancelText(left);
         }
         dialogPrompt.setCancelClickListener(leftListener);
-        dialogPrompt.setConfirmClickListener(rightListener);
+        if(rightListener == null){
+            dialogPrompt.setConfirmClickListener(sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+            });
+        }else {
+            dialogPrompt.setConfirmClickListener(rightListener);
+        }
         dialogPrompt.setContentText(content);
         dialogPrompt.setConfirmText(right);
         dialogPrompt.show();

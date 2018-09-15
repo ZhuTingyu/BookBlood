@@ -316,6 +316,7 @@
     <string name="text_open_fly">开启放飞</string>
     <string name="text_end_yet">已结束</string>
     <string name="text_end_not">未结束</string>
+    <string name="text_pigeon_training">训鸽中</string>
     <string name="text_start_not">未开始</string>
     <string name="text_add">添加</string>
     <string name="text_training">训放中</string>
@@ -410,5 +411,11 @@
     <string name="text_sure_add_good_pigeon">确定加入铭鸽库</string>
     <string name="text_apply_add_content_1">您正在申请将您的爱鸽</string>
     <string name="text_apply_add_content_2">加入铭鸽库。通过后，所有鸽友将能查看您的爱鸽信息和血统书且不能修改已加入铭鸽库的信鸽信息。</string>
+    <string name="text_my_share">我的共享</string>
+    <string name="text_add_share_pigeon">共享种鸽</string>
+    <string name="text_pigeon_master_name">鸽主姓名</string>
+    <string name="text_connection_pigeon_master">联系鸽主</string>
+    <string name="text_sure_share">确认共享</string>
+    <string name="text_not_choose_pigeon">你还没有选鸽子！</string>
 
 </resources>

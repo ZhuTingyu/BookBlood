@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.BreedPigeonModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
     //鸽子id
     public String pigeonid;
 
-    public BreedPigeonEntity mBreedPigeonEntity;
+    public PigeonEntity mBreedPigeonEntity;
 
     //种鸽修改
     public void modifyBreedPigeonEntry() {
