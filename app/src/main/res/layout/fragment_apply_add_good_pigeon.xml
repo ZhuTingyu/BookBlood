@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.cpigeon.book.widget.LineInputView
+        android:id="@+id/lvFoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="@dimen/normal_safe_distance"
+        android:paddingRight="@dimen/normal_safe_distance"
+        app:lineInputView_Hint="@string/text_pleas_choose"
+        app:lineInputView_IsCanEdit="false"
+        app:lineInputView_LeftString="@string/text_foot_number"
+        app:lineInputView_isShowLineDivisions="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lvFoot"
+        android:background="@color/color_bg_window"
+        android:padding="23dp">
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingMultiplier="1.5"
+            android:textColor="@color/colorPrimary"
+            tools:text="您正在申请将您的爱鸽加入铭鸽库。通过后，所有鸽友将能查看您的爱鸽信息和血统书且不能修改已加入铭鸽库的信鸽信息。" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvOk"
+        style="@style/bottom_style"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/normal_safe_distance"
+        android:text="@string/text_sure_add_good_pigeon" />
+
+
+</RelativeLayout>

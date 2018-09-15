@@ -153,7 +153,7 @@
         <item name="android:paddingRight">10dp</item>
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_height">44dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@drawable/selector_btn_rect</item>
     </style>
@@ -167,16 +167,19 @@
         <item name="android:background">@drawable/selector_btn_rect3</item>
     </style>
 
-    <style name="GridPasswordView"/>
+    <style name="GridPasswordView" />
+
     <style name="GridPasswordView.Divider">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginTop">1dp</item>
         <item name="android:layout_marginBottom">1dp</item>
     </style>
+
     <style name="GridPasswordView.EditText" parent="GridPasswordView.TextView">
         <item name="android:cursorVisible">false</item>
     </style>
+
     <style name="GridPasswordView.TextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>

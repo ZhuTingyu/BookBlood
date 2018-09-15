@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home;
+package com.cpigeon.book.module.home.home;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -24,13 +24,13 @@ import com.cpigeon.book.module.breeding.BreedingFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonListFragment;
 import com.cpigeon.book.module.feedpigeon.FeedPigeonRecordListFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
-import com.cpigeon.book.module.home.adapter.HomeTopAdapter;
-import com.cpigeon.book.module.home.viewmodel.HomeViewModel;
+import com.cpigeon.book.module.home.home.adapter.HomeTopAdapter;
+import com.cpigeon.book.module.home.home.viewmodel.HomeViewModel;
 import com.cpigeon.book.module.makebloodbook.SelectPigeonToMakeBookFragment;
 import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.module.menu.message.MsgActivity;
-import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
+import com.cpigeon.book.module.pigeonleague.SelectPigeonToLeagueFragment;
 import com.cpigeon.book.module.trainpigeon.TrainPigeonListFragment;
 import com.cpigeon.book.widget.SimpleTitleView;
 
@@ -156,6 +156,10 @@ public class HomeFragment extends BaseBookFragment {
         mSTvFeedPigeonRecord.setOnClickListener(v -> {
             //养鸽记录
             SearchFragmentParentActivity.start(getBaseActivity(), FeedPigeonRecordListFragment.class, null);
+        });
+
+        mSTvPigeonMatchInfo.setOnClickListener(v -> {
+            SearchFragmentParentActivity.start(getBaseActivity(), SelectPigeonToLeagueFragment.class, null);
         });
 
 

@@ -17,6 +17,7 @@ import com.base.base.FragmentAdapter;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.picker.PickerUtil;
+import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.base.widget.CustomViewPager;
 import com.base.widget.magicindicator.MagicIndicator;
@@ -171,7 +172,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         });
 
         initInputPlayDialog();
-
+        setProgressVisible(true);
         mBreedPigeonDetailsViewModel.getPigeonDetails();
 
         mPlayListViewModel.footid = mBreedPigeonDetailsViewModel.footId;
@@ -191,8 +192,39 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
         mBookViewModel.getBloodBook();
 
-        mFamilyTreeView.setOnClickListener(v -> {
-            InputBreedInBookFragment.start(getBaseActivity(), mBookViewModel.foodId, mBookViewModel.pigeonId);
+        mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
+            @Override
+            public void add(int x, int y) {
+
+                if (x == mFamilyTreeView.getStartGeneration()) {
+                    BreedPigeonEntryFragment.start(getBaseActivity()
+                            , StringUtil.emptyString()
+                            , mBookViewModel.foodId
+                            , mBookViewModel.pigeonId
+                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment.TYPE_SEX_MALE : BreedPigeonEntryFragment.TYPE_SEX_FEMALE
+                            , 0);
+                } else {
+
+                    BreedPigeonEntity breedPigeonEntity = null;
+                    if (mFamilyTreeView.getSon(x, y) != null) {
+                        breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
+                    }
+
+                    BreedPigeonEntryFragment.start(getBaseActivity()
+                            , StringUtil.emptyString()
+                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
+                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
+                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment.TYPE_SEX_MALE : BreedPigeonEntryFragment.TYPE_SEX_FEMALE
+                            , 0);
+
+                }
+            }
+
+            @Override
+            public void showInfo(BreedPigeonEntity breedPigeonEntity) {
+                BreedPigeonDetailsFragment.start(getBaseActivity(), breedPigeonEntity.getPigeonID()
+                        , breedPigeonEntity.getPigeonID());
+            }
         });
 
     }
@@ -263,7 +295,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         super.initObserve();
 
         mBreedPigeonDetailsViewModel.mBreedPigeonData.observe(this, datas -> {
-
+            setProgressVisible(false);
             mBreedPigeonModifyViewModel.mBreedPigeonEntity = datas;
 
             tvFoot.setText(datas.getFootRingNum());//足环号

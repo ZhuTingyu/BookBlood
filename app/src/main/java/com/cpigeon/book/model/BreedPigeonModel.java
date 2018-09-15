@@ -29,6 +29,30 @@ public class BreedPigeonModel {
     }
 
 
+    //hl 种鸽列表，筛选
+    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_Pigeon_SelectAll(String pi, String ps,
+                                                                                            String typeid,
+                                                                                            String bloodid,
+                                                                                            String sexid,
+                                                                                            String year,
+                                                                                            String stateid) {
+        return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
+                }.getType())
+                .url(R.string.pigeon_breed_sift)
+                .addBody("pi", pi)
+                .addBody("ps", ps)
+                .addBody("typeid", typeid)
+                .addBody("blood", bloodid)
+                .addBody("sex", sexid)
+                .addBody("year", year)
+                .addBody("stateid", stateid)
+                .request();
+    }
+
+
+
+
     //hl 添加种鸽
     public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Add(String coodid,
                                                                                 String footnum,
@@ -125,28 +149,6 @@ public class BreedPigeonModel {
                 .addBody("ps", ps)
                 .addBody("footnum", footnum)
                 .addBody("typeid", typeid)
-                .request();
-    }
-
-
-    //hl 种鸽列表，筛选
-    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_Pigeon_SelectAll(String pi, String ps,
-                                                                                            String typeid,
-                                                                                            String bloodid,
-                                                                                            String sexid,
-                                                                                            String year,
-                                                                                            String stateid) {
-        return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
-                }.getType())
-                .url(R.string.pigeon_breed_sift)
-                .addBody("pi", pi)
-                .addBody("ps", ps)
-                .addBody("typeid", typeid)
-                .addBody("blood", bloodid)
-                .addBody("sex", sexid)
-                .addBody("year", year)
-                .addBody("stateid", stateid)
                 .request();
     }
 }

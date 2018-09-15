@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="26dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        android:paddingTop="26dp">
+
+        <com.cpigeon.book.widget.SimpleTitleView
+            android:id="@+id/sTvMatchFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:simpleTitleView_DefaultTextColor="@color/color_match_order_text_color"
+            app:simpleTitleView_image="@mipmap/ic_match_first"
+            app:simpleTitleView_image_size="40dp"
+            app:simpleTitleView_text="冠军" />
+
+        <com.cpigeon.book.widget.SimpleTitleView
+            android:id="@+id/sTvMatchSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:simpleTitleView_DefaultTextColor="@color/color_match_order_text_color"
+            app:simpleTitleView_image="@mipmap/ic_match_second"
+            app:simpleTitleView_image_size="40dp"
+            app:simpleTitleView_text="亚军" />
+
+        <com.cpigeon.book.widget.SimpleTitleView
+            android:id="@+id/sTvMatchThird"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            app:simpleTitleView_DefaultTextColor="@color/color_match_order_text_color"
+            app:simpleTitleView_image="@mipmap/ic_match_third"
+            app:simpleTitleView_image_size="40dp"
+            app:simpleTitleView_text="季军" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_bg_window"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="32dp"
+        android:paddingTop="@dimen/dp_10">
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:paddingLeft="@dimen/normal_safe_distance"
+        android:paddingRight="@dimen/normal_safe_distance"
+        android:background="@color/color_line"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="30dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:gravity="left"
+            android:text="@string/text_foot_number"
+            android:textSize="@dimen/medium_text_size" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="@string/text_feather_color"
+            android:textSize="@dimen/medium_text_size" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="@string/text_join_match_count"
+            android:textSize="@dimen/medium_text_size" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -114,8 +114,7 @@ public class BreedPigeonListFragment extends BaseFragment {
             setProgressVisible(true);
             mBreedPigeonListModel.pi = 1;
             mBreedPigeonListModel.isSearch = false;
-            mAdapter.getData().clear();
-            mAdapter.notifyDataSetChanged();
+            mAdapter.cleanList();
 
             //年份
             List<SelectTypeEntity> mSelectTypeYear = selectItems.get(0);

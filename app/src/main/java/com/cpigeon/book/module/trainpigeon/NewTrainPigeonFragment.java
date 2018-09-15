@@ -98,8 +98,8 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         mCardView = findViewById(R.id.card);
 
 
-        mPigeonHousePosition = new LatLng(Double.valueOf(UserModel.getInstance().getUserData().la)
-                ,Double.valueOf(UserModel.getInstance().getUserData().lo));
+        /*mPigeonHousePosition = new LatLng(Double.valueOf(UserModel.getInstance().getUserData().la)
+                ,Double.valueOf(UserModel.getInstance().getUserData().lo));*/
 
 
         amapManager.moveByLatLng(mPigeonHousePosition);

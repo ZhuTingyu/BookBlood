@@ -16,6 +16,7 @@ import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.select.SearchFootRingActivity;
 import com.cpigeon.book.module.trainpigeon.viewmodel.AddHomingRecordViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;

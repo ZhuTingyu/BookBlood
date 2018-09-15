@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home.viewmodel;
+package com.cpigeon.book.module.home.home.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 

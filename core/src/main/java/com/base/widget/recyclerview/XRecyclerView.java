@@ -208,11 +208,16 @@ public class XRecyclerView extends FrameLayout {
      */
 
     public void addItemDecorationLine(){
-        addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f));
+        addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f), 0);
     }
 
-    protected void addItemDecorationLine( @ColorRes int color, int size){
+    public void addItemDecorationLine(int margin){
+        addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f), margin);
+    }
+
+    protected void addItemDecorationLine( @ColorRes int color, int size, int margin){
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(recyclerView.getContext())
+                .margin(ScreenTool.dip2px(margin))
                 .colorResId(color).size(size).build());
     }
 

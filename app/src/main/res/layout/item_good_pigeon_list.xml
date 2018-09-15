@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="163dp"
+    android:layout_height="288dp"
+    android:layout_margin="5dp"
+    android:background="@drawable/shape_bg_corner_3_solid_white">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        app:srcCompat="@mipmap/about_logo" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@mipmap/ic_good_pigeon_female" />
+
+    <TextView
+        android:layout_below="@+id/img"
+        android:id="@+id/tvFootNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="2018-22-1234567"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img" />
+
+    <TextView
+        android:id="@+id/tvBlood"
+        android:layout_below="@id/tvFootNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="詹森"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFootNumber" />
+</RelativeLayout>

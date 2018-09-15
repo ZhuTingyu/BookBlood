@@ -89,7 +89,6 @@
         android:id="@+id/familyTreeView"
         app:TreeView_isMiniModel="true"
         app:TreeView_isHaveCurrent="false"
-        app:TreeView_isShowInfoModel="true"
         android:layout_width="match_parent"
         android:layout_height="323dp">
 

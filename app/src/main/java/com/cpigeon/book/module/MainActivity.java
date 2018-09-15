@@ -22,8 +22,8 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonEntryFragment;
-import com.cpigeon.book.module.home.HomeFragment;
-import com.cpigeon.book.module.home.HomeFragment2;
+import com.cpigeon.book.module.home.goodpigeon.GoodPigeonListFragment;
+import com.cpigeon.book.module.home.home.HomeFragment;
 import com.cpigeon.book.module.home.HomeFragment3;
 import com.cpigeon.book.module.home.HomeFragment4;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
@@ -66,11 +66,11 @@ public class MainActivity extends BaseBookActivity {
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, false);
 
         HomeFragment homeFragment = new HomeFragment();
-        HomeFragment2 homeFragment2 = new HomeFragment2();
+        GoodPigeonListFragment goodPigeonListFragment = new GoodPigeonListFragment();
         HomeFragment3 homeFragment3 = new HomeFragment3();
         HomeFragment4 homeFragment4 = new HomeFragment4();
         homeFragment.setArguments(bundle);
-        homeFragment2.setArguments(bundle);
+        goodPigeonListFragment.setArguments(bundle);
         homeFragment3.setArguments(bundle);
         homeFragment4.setArguments(bundle);
 
@@ -80,7 +80,7 @@ public class MainActivity extends BaseBookActivity {
                 , getString(R.string.title_home_fragment4));
 
         ContentFragmentAdapter adapter = new ContentFragmentAdapter(getSupportFragmentManager()
-                , Lists.newArrayList(homeFragment, homeFragment2, homeFragment3, homeFragment4));
+                , Lists.newArrayList(homeFragment, goodPigeonListFragment, homeFragment3, homeFragment4));
 
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(5);
@@ -171,6 +171,5 @@ public class MainActivity extends BaseBookActivity {
             anim.start();
         });
     }
-
-
 }
+

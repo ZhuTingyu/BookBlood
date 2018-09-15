@@ -24,7 +24,7 @@ import com.base.util.file.FileUtils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.home.viewmodel.IdCertificationViewModel;
+import com.cpigeon.book.module.home.home.viewmodel.IdCertificationViewModel;
 import com.cpigeon.book.widget.LineInputView;
 
 import java.io.File;

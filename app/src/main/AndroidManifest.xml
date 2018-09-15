@@ -151,11 +151,6 @@
         <activity android:name=".module.breedpigeon.SearchBreedPigeonActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
-
-        <activity android:name=".module.breeding.SearchBreedingFootActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-
         <activity android:name=".module.photo.PigeonPhotoHomeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -164,7 +159,7 @@
         <activity android:name=".module.trainpigeon.SearchTrainPigeonActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
-        <activity android:name=".module.trainpigeon.SearchFootRingActivity"
+        <activity android:name=".module.select.SearchFootRingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity android:name=".module.feedpigeon.SearchFeedPigeonRecordActivity"
@@ -179,6 +174,16 @@
         <activity android:name=".module.photo.SearchFootToPhotoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
+        <activity android:name=".module.pigeonleague.PigeonMatchDetailsActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".module.pigeonleague.SearchPigeonToLeagueActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
+
+        <activity android:name=".module.breeding.SearchBreedingFootActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>
@@ -189,10 +194,7 @@
             tools:node="replace">
 
         </service>
-
-
         <!--友盟-->
-
 
     </application>
 

@@ -42,6 +42,7 @@
     <!--背景-->
     <color name="color_bg_orange">#FFB288</color>
     <color name="color_bg_deep_orange">#D45E15</color>
+    <color name="color_text_orange">#FF9A63</color>
     <color name="color_bg_yellow">#F9B855</color>
     <color name="color_bg_dcedff">#DCEDFF</color>
 
@@ -69,6 +70,10 @@
     <color name="bg_line_weather3_tv">#969696</color>
     <color name="color_line_weather3_et_hint">#c2c2c2</color>
     <color name="color_line_weather3_et">#000000</color>
+    <color name="color_match_order_text_color">#1F1F1F</color>
+    <color name="color_k_line_rank">#FF9A63</color>
+    <color name="color_k_line_speed">#40A0FF</color>
+    <color name="color_k_line_first_speed">#FF6ACC</color>
 
 </resources>
 

@@ -1,10 +1,8 @@
-package com.cpigeon.book.module.trainpigeon;
+package com.cpigeon.book.module.select;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.view.View;
 
 import com.base.base.adpter.BaseQuickAdapter;

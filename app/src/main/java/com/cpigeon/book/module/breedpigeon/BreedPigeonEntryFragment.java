@@ -28,6 +28,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
@@ -47,6 +48,8 @@ import com.kyleduo.switchbutton.SwitchButton;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -123,11 +126,11 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 .startParentActivity(activity, BreedPigeonEntryFragment.class);
     }
 
-    public static void start(Activity activity, @Nullable String footId, String sonFootId, String pigeonId, String sex ,int requestCode) {
+    public static void start(Activity activity, @Nullable String pigeonId, String sonFootId, String sonPigeonId, String sex ,int requestCode) {
         IntentBuilder builder = IntentBuilder.Builder();
-        builder.putExtra(IntentBuilder.KEY_DATA, footId);
+        builder.putExtra(IntentBuilder.KEY_DATA, pigeonId);
         builder.putExtra(KEY_SON_FOOT_ID, sonFootId);
-        builder.putExtra(KEY_SON_PIGEON_ID, pigeonId);
+        builder.putExtra(KEY_SON_PIGEON_ID, sonPigeonId);
         builder.putExtra(KEY_PIGEON_SEX_TYPE, sex);
         builder.startParentActivity(activity, BreedPigeonEntryFragment.class, requestCode);
     }
@@ -302,6 +305,9 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
         //种鸽录入
         mBreedPigeonEntryViewModel.mBreedPigeonData.observe(this, o -> {
+
+            EventBus.getDefault().post(new PigeonAddEvent());
+
             //保证界面只有一个提示
             setProgressVisible(false);
             if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
