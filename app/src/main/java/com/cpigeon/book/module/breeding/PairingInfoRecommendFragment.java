@@ -40,6 +40,8 @@ import butterknife.BindView;
 
 public class PairingInfoRecommendFragment extends BaseBookFragment {
 
+    private int RECOMMEND_REQUEST = 0x002323;
+
     @BindView(R.id.indicator)
     MagicIndicator mIndicator;
     @BindView(R.id.viewPager)
@@ -50,7 +52,7 @@ public class PairingInfoRecommendFragment extends BaseBookFragment {
     public static void start(Activity activity, BreedPigeonEntity mBreedPigeonEntity) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
-                .startParentActivity(activity, PairingInfoRecommendFragment.class);
+                .startParentActivity(activity, PairingInfoRecommendFragment.class );
     }
 
     @Nullable

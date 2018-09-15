@@ -109,8 +109,8 @@ public class LineInputView extends RelativeLayout {
         mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, getContext().getColor(R.color.color_4c4c4c));
         mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, getContext().getColor(R.color.color_000000));
         mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, Color.parseColor("#FFFFFF"));
-        mLeftTextSize = array.getFloat(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
-        mRightTextSize = array.getFloat(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
+        mLeftTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
+        mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);
         mRightString = array.getString(R.styleable.LineInputView_lineInputView_RightString);
         mEtHintStr = array.getString(R.styleable.LineInputView_lineInputView_Hint);
@@ -158,7 +158,7 @@ public class LineInputView extends RelativeLayout {
 
         mTextView.setText(mLeftString);
         mTextView.setTextColor(mLeftColor);
-        mTextView.setTextSize(ScreenTool.dip2px(mLeftTextSize));
+        mTextView.setTextSize(mLeftTextSize);
 
         if (left_gravity) {
             mTextView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
