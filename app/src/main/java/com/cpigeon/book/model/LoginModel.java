@@ -53,6 +53,7 @@ public class LoginModel {
 //                .addBody("uid", UserModel.getInstance().getUserId())//登录用户ID
                 .addBody("ly", "安卓")//来源，值等于安卓或苹果
                 .addBody("sb", PhoneUtils.getModel())//设备信息
+                .addBody("t", "1")//设备信息
                 .request();
     }
 

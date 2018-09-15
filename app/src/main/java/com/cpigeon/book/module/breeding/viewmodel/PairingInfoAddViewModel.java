@@ -3,7 +3,7 @@ package com.cpigeon.book.module.breeding.viewmodel;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PairingInfoAddViewModel extends BaseViewModel {
 
-    public BreedPigeonEntity mBreedPigeonEntity;
+    public PigeonEntity mBreedPigeonEntity;
 
     //配偶环号  配对的足环号码
     public String pairingFoot;

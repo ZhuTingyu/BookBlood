@@ -29,7 +29,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.PigeonAddEvent;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
@@ -205,13 +205,13 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
         String sexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
         if(TYPE_SEX_MALE.equals(sexType)){
-            mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(BreedPigeonEntity.ID_MALE);
-            mBreedPigeonEntryViewModel.sexId = (BreedPigeonEntity.ID_MALE);
+            mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(PigeonEntity.ID_MALE);
+            mBreedPigeonEntryViewModel.sexId = (PigeonEntity.ID_MALE);
             llSex.setRightText(Utils.getString(R.string.text_male_a));
             llSex.setRightImageVisible(false);
         }else if(TYPE_SEX_FEMALE.equals(sexType)){
-            mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(BreedPigeonEntity.ID_FEMALE);
-            mBreedPigeonEntryViewModel.sexId = (BreedPigeonEntity.ID_FEMALE);
+            mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(PigeonEntity.ID_FEMALE);
+            mBreedPigeonEntryViewModel.sexId = (PigeonEntity.ID_FEMALE);
             llSex.setRightText(Utils.getString(R.string.text_female_a));
             llSex.setRightImageVisible(false);
         }

@@ -33,7 +33,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.PigeonAddEvent;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
@@ -58,7 +58,6 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -226,7 +225,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                             , 0);
                 } else {
 
-                    BreedPigeonEntity breedPigeonEntity = null;
+                    PigeonEntity breedPigeonEntity = null;
                     if (mFamilyTreeView.getSon(x, y) != null) {
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
@@ -242,7 +241,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
             }
 
             @Override
-            public void showInfo(BreedPigeonEntity breedPigeonEntity) {
+            public void showInfo(PigeonEntity breedPigeonEntity) {
                 BreedPigeonDetailsFragment.start(getBaseActivity(), breedPigeonEntity.getPigeonID()
                         , breedPigeonEntity.getPigeonID());
             }
@@ -612,7 +611,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
             case R.id.img_play_add:
                 //手动添加赛绩
                 try {
-                    BreedPigeonEntity mBreedPigeonEntity = mBreedPigeonDetailsViewModel.mBreedPigeonData.getValue();
+                    PigeonEntity mBreedPigeonEntity = mBreedPigeonDetailsViewModel.mBreedPigeonData.getValue();
                     PlayAddFragment.start(getBaseActivity(),
                             new PigeonEntryEntity.Builder()
                                     .FootRingID(mBreedPigeonEntity.getFootRingID())

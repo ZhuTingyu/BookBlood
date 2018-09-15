@@ -80,7 +80,7 @@
             />
 
         <TextView
-            android:id="@+id/tvCount"
+            android:id="@+id/tvPigeonCount"
             tools:text="12312313"
             android:textSize="@dimen/small_text_size_2"
             android:textColor="@color/color_text_title"

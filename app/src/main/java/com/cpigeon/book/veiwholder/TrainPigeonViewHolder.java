@@ -4,7 +4,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
+import com.base.util.Utils;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.TrainEntity;
 
 /**
  * Created by Zhu TingYu on 2018/8/31.
@@ -14,7 +16,7 @@ public class TrainPigeonViewHolder extends BaseViewHolder {
 
     private TextView mTvName;
     private TextView mTvTime;
-    private TextView mTvCount;
+    private TextView mTvPigeonCount;
     private TextView mTvTrainedCount;
     private TextView mTvStatus;
 
@@ -23,16 +25,22 @@ public class TrainPigeonViewHolder extends BaseViewHolder {
         super(itemView);
         mTvName = itemView.findViewById(R.id.tvName);
         mTvTime = itemView.findViewById(R.id.tvTime);
-        mTvCount = itemView.findViewById(R.id.tvCount);
+        mTvPigeonCount = itemView.findViewById(R.id.tvPigeonCount);
         mTvTrainedCount = itemView.findViewById(R.id.tvTrainedCount);
         mTvStatus = itemView.findViewById(R.id.tvStatus);
     }
 
-    public void bindData(){
-        mTvName.setText("训练1");
-        mTvTime.setText("2018-11");
-        mTvCount.setText("22");
-        mTvTrainedCount.setText("11");
-        mTvStatus.setText("已结束");
+    public void bindData(TrainEntity trainEntity){
+        mTvName.setText(trainEntity.getPigeonTrainName());
+        mTvTime.setText(trainEntity.getAddTime());
+        mTvPigeonCount.setText(trainEntity.getTrainCount());
+        mTvTrainedCount.setText(trainEntity.getFlyCount());
+        mTvStatus.setText(trainEntity.getTrainStateName());
+
+        if(Utils.getString(R.string.text_pigeon_training).equals(trainEntity.getPigeonTrainName())){
+            mTvStatus.setTextColor(Utils.getColor(R.color.color_text_red));
+        }else {
+            mTvStatus.setTextColor(Utils.getColor(R.color.color_text_title));
+        }
     }
 }

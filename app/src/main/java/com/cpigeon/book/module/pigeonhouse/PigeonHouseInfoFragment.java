@@ -259,7 +259,6 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mViewModel.addR.observe(this, s -> {
             //todo 添加过后返回鸽舍信息
             UserModel.getInstance().setIsHaveHouseInfo(true);
-            UserModel.getInstance().setPigeonHouseInfo(mViewModel.mLongitude, mViewModel.mLatitude);
             MainActivity.start(getBaseActivity());
         });
 

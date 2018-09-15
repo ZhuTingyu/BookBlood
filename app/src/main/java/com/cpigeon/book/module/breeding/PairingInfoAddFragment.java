@@ -20,7 +20,7 @@ import com.base.util.picker.PickerUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoAddViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
@@ -63,7 +63,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
     private PairingInfoAddViewModel mPairingInfoAddViewModel;
     protected SelectTypeViewModel mSelectTypeViewModel;
 
-    public static void start(Activity activity, BreedPigeonEntity mBreedPigeonEntity) {
+    public static void start(Activity activity, PigeonEntity mBreedPigeonEntity) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
                 .startParentActivity(activity, PairingInfoAddFragment.class);
@@ -96,7 +96,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
         mPairingInfoAddViewModel.isCanCommit();
 
-        mPairingInfoAddViewModel.mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mPairingInfoAddViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
 
         mSelectTypeViewModel.getSelectType_FeatherColor();
         mSelectTypeViewModel.getSelectType_lineage();

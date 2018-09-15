@@ -11,10 +11,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.base.util.Lists;
 import com.base.util.PopWindowBuilder;
+import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.system.ScreenTool;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
@@ -23,6 +27,9 @@ import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainAddPigeonAdapter;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
+import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainAddPigeonViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
+import com.paradoxie.shopanimlibrary.AniManager;
 
 import q.rorbin.badgeview.QBadgeView;
 
@@ -40,15 +47,22 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     QBadgeView mBadgeView;
     XRecyclerView mRecyclerView;
     NewTrainAddPigeonAdapter mAdapter;
+    NewTrainPigeonListAdapter mSelectAdapter;
+    NewTrainAddPigeonViewModel mViewModel;
+    View mPopView;
+    AniManager mAniManager;
+    PopupWindow mPopupWindow;
 
     public static void start(Activity activity) {
-        SearchFragmentParentActivity.start(activity, NewTrainAddPigeonFragment.class,null);
+        SearchFragmentParentActivity.start(activity, NewTrainAddPigeonFragment.class, null);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (SearchFragmentParentActivity) getBaseActivity();
+        mViewModel = new NewTrainAddPigeonViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -60,14 +74,16 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mAniManager = new AniManager();
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getBaseActivity(), SearchTrainPigeonActivity.class,null);
+            BaseSearchActivity.start(getBaseActivity(), SearchTrainPigeonActivity.class, null);
         });
 
         mTvChooseYet = findViewById(R.id.tvChooseYet);
         mTvAllChoose = findViewById(R.id.tvAllChoose);
         mRecyclerView = findViewById(R.id.list);
+        mRecyclerView.addItemDecorationLine();
 
         mBadgeView = new QBadgeView(getBaseActivity());
         mBadgeView.bindTarget(mTvChooseYet)
@@ -77,32 +93,75 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
                 .setBadgeTextSize(10, true)
                 .setBadgeText("0");
         mAdapter = new NewTrainAddPigeonAdapter();
+        mAdapter.setOnAddPigeonListener(this::startAnim);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
-
+        initPopView();
         mTvChooseYet.setOnClickListener(v -> {
-            PopWindowBuilder.builder(getBaseActivity())
+            if (Lists.isEmpty(mSelectAdapter.getData())) {
+                DialogUtils.createHintDialog(getBaseActivity(), Utils.getString(R.string.text_not_choose_pigeon));
+                return;
+            }
+            mPopupWindow = PopWindowBuilder.builder(getBaseActivity())
                     .setSize(ScreenTool.getScreenWidth(), ScreenTool.getScreenHeight())
                     .setBackgroundColor(R.color.color_black_30)
-                    .setView(initPopView())
-                    .setAnimationStyle(R.style.bottom_out_in_anim)
+                    .setView(mPopView)
+                    .setAnimationStyle(R.style.anim_fade_in_out)
                     .showAtLocation(getBaseActivity().getRootView(), 0, 0, Gravity.CENTER);
+        });
+
+        setProgressVisible(true);
+        mViewModel.getPigeonList();
+    }
+
+    private void initPopView() {
+
+        mPopView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.pop_add_pigeon_yet, null);
+        mPopView.setOnClickListener(v -> {
+            mPopupWindow.dismiss();
+        });
+        addList = mPopView.findViewById(R.id.list);
+        addItemDecorationLine(addList);
+        addList.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+        mSelectAdapter = new NewTrainPigeonListAdapter();
+        addList.setAdapter(mSelectAdapter);
+        mSelectAdapter.setOnDeleteListener(position -> {
+            for (int i = 0, len = mAdapter.getData().size(); i < len; i++) {
+
+            }
         });
     }
 
-    private View initPopView() {
+    public void startAnim(View v, int position) {
+        int[] end_location = new int[2];
+        int[] start_location = new int[2];
+        v.getLocationInWindow(start_location);// 获取购买按钮的在屏幕的X、Y坐标（动画开始的坐标）
+        mBadgeView.getLocationInWindow(end_location);// 这是用来存储动画结束位置，也就是购物车图标的X、Y坐标
+        ImageView buyImg = new ImageView(getBaseActivity());// buyImg是动画的图片
+        buyImg.setImageResource(R.mipmap.ic_blue_point);// 设置buyImg的图片
 
-        View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.pop_add_pigeon_yet, null);
+        mAniManager.setTime(500);//自定义时间
+        mAniManager.setAnim(getBaseActivity(), buyImg, start_location, end_location);// 开始执行动画
 
-        addList  = view.findViewById(R.id.list);
-        addItemDecorationLine(addList);
-        addList.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
-        NewTrainPigeonListAdapter adapter =  new NewTrainPigeonListAdapter();
-        addList.setAdapter(adapter);
-        adapter.setOnDeleteListener(position -> {
+        mAniManager.setOnAnimListener(new AniManager.AnimListener() {
+            @Override
+            public void setAnimBegin(AniManager a) {
 
+            }
+
+            @Override
+            public void setAnimEnd(AniManager a) {
+                mAdapter.setSelect(position, true);
+                mSelectAdapter.addData(mAdapter.getData().get(position));
+                mBadgeView.setBadgeNumber(mSelectAdapter.getData().size());
+            }
         });
-        adapter.setNewData(Lists.newTestArrayList());
-        return view;
+    }
+
+    @Override
+    protected void initObserve() {
+        mViewModel.mDataPigeon.observe(this, pigeonEntities -> {
+            setProgressVisible(false);
+            mAdapter.setNewData(pigeonEntities);
+        });
     }
 }

@@ -15,8 +15,7 @@ import com.base.util.glide.GlideUtil;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.widget.ShadowRelativeLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -167,7 +166,7 @@ public class FamilyMemberView extends FamilyMember {
 
     }
 
-    public void bindData(BreedPigeonEntity entity) {
+    public void bindData(PigeonEntity entity) {
 
         if(!StringUtil.isStringValid(entity.getPigeonID())){
             imgAdd.setVisibility(VISIBLE);
@@ -238,7 +237,7 @@ public class FamilyMemberView extends FamilyMember {
     public interface OnMemberClickListener {
         void add(int x, int y);
 
-        void showInfo(BreedPigeonEntity entity);
+        void showInfo(PigeonEntity entity);
     }
 
     private OnMemberClickListener mOnMemberClickListener;

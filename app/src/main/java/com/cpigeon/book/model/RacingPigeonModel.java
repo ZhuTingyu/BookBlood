@@ -3,6 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -53,6 +54,7 @@ public class RacingPigeonModel {
                 .addBody("stateid", stateid)// 信鸽状态ID
                 .addBody("phototypeid", phototypeid)// 信鸽状态ID
                 .addBody("foottime", foottime)// 挂环日期
+                .addBody("typeid", PigeonEntity.ID_MATCH_PIGEON)// 挂环日期
                 .addImageFileBodys(body)
                 .request();
     }

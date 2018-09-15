@@ -18,7 +18,6 @@ public class RecyclerViewUtils {
             adapter.setEmptyView();
         } else {
             adapter.setLoadMore(false);
-
             adapter.addData(data);
         }
     }

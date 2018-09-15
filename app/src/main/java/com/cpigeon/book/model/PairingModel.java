@@ -3,7 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -19,17 +19,17 @@ public class PairingModel {
 
 
     //hl 添加配對
-    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_PigeonBreed_Add(String footid,
-                                                                                           String footnum,
-                                                                                           String time,
-                                                                                           String weather,
-                                                                                           String temper,
-                                                                                           String hum,
-                                                                                           String dir,
-                                                                                           String bitpair,
-                                                                                           String reamrk) {
-        return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
+    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_PigeonBreed_Add(String footid,
+                                                                                      String footnum,
+                                                                                      String time,
+                                                                                      String weather,
+                                                                                      String temper,
+                                                                                      String hum,
+                                                                                      String dir,
+                                                                                      String bitpair,
+                                                                                      String reamrk) {
+        return RequestData.<ApiResponse<List<PigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
                 .url(R.string.pairing_info_add)
                 .addBody("footid", footid)//要配对的足环id

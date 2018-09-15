@@ -3,7 +3,6 @@ package com.cpigeon.book.module.breeding;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,7 +13,7 @@ import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingInfoListAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
@@ -31,7 +30,7 @@ public class PairingInfoListFragment extends BaseListFragment {
 
     private PairingInfoListViewModel mPairingInfoListViewModel;
 
-    public static void start(Activity activity, BreedPigeonEntity mBreedPigeonEntity) {
+    public static void start(Activity activity, PigeonEntity mBreedPigeonEntity) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
                 .startParentActivity(activity, PairingInfoListFragment.class);
@@ -48,7 +47,7 @@ public class PairingInfoListFragment extends BaseListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mPairingInfoListViewModel.mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mPairingInfoListViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
 
         tvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);

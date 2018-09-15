@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.breeding.BreedingFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonListFragment;
 import com.cpigeon.book.module.feedpigeon.FeedPigeonRecordListFragment;
@@ -30,6 +31,7 @@ import com.cpigeon.book.module.makebloodbook.SelectPigeonToMakeBookFragment;
 import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.module.menu.message.MsgActivity;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
+import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.pigeonleague.SelectPigeonToLeagueFragment;
 import com.cpigeon.book.module.trainpigeon.TrainPigeonListFragment;
 import com.cpigeon.book.widget.SimpleTitleView;
@@ -45,6 +47,7 @@ public class HomeFragment extends BaseBookFragment {
     RecyclerView mTopList;
     HomeTopAdapter mAdapter;
     HomeViewModel mViewModel;
+    PigeonHouseViewModel mPigeonHouseViewModel;
 
     private SimpleTitleView mSTvFootManager;
     private SimpleTitleView mSTvBreedPigeonManager;
@@ -65,7 +68,8 @@ public class HomeFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mViewModel = new HomeViewModel();
-        initViewModel(mViewModel);
+        mPigeonHouseViewModel = new PigeonHouseViewModel();
+        initViewModels(mViewModel, mPigeonHouseViewModel);
     }
 
     @Nullable
@@ -164,6 +168,7 @@ public class HomeFragment extends BaseBookFragment {
 
 
         mViewModel.getHomeAd();
+        mPigeonHouseViewModel.getPigeonHouse();
 
     }
 
@@ -179,6 +184,10 @@ public class HomeFragment extends BaseBookFragment {
                 BaseWebViewActivity.start(getBaseActivity(), homeAdEntity.getAdUrl());
             });
 
+        });
+
+        mPigeonHouseViewModel.mHouseEntityInfo.observe(this, pigeonHouseEntity -> {
+            UserModel.getInstance().setPigeonHouseInfo(pigeonHouseEntity);
         });
     }
 }

@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 /**
  * Created by Zhu TingYu on 2018/9/10.
@@ -14,7 +14,7 @@ import com.cpigeon.book.model.entity.BreedPigeonEntity;
 
 public abstract class FamilyMember extends LinearLayout{
 
-    protected  BreedPigeonEntity mPigeonEntity;
+    protected PigeonEntity mPigeonEntity;
 
     public FamilyMember(Context context) {
         super(context);
@@ -30,8 +30,8 @@ public abstract class FamilyMember extends LinearLayout{
 
    public abstract View getInfoView();
    public abstract void setCanAdd();
-   public abstract void bindData(BreedPigeonEntity entity);
-   public BreedPigeonEntity getData(){
+   public abstract void bindData(PigeonEntity entity);
+   public PigeonEntity getData(){
        return mPigeonEntity;
    }
 }

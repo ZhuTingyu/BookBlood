@@ -6,12 +6,9 @@ import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.util.Utils;
-import com.base.util.glide.GlideUtil;
-import com.base.util.utility.TimeUtil;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,7 +33,7 @@ public class BreedPigeonListViewHolder extends BaseViewHolder {
 
     }
 
-    public void bindData(BreedPigeonEntity data){
+    public void bindData(PigeonEntity data){
         ImageView imgSex = getView(R.id.imgSex);
 
         setText(R.id.tvColor, data.getPigeonPlumeName());

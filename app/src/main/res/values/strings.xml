@@ -316,6 +316,7 @@
     <string name="text_open_fly">开启放飞</string>
     <string name="text_end_yet">已结束</string>
     <string name="text_end_not">未结束</string>
+    <string name="text_pigeon_training">训鸽中</string>
     <string name="text_start_not">未开始</string>
     <string name="text_add">添加</string>
     <string name="text_training">训放中</string>
@@ -415,5 +416,6 @@
     <string name="text_pigeon_master_name">鸽主姓名</string>
     <string name="text_connection_pigeon_master">联系鸽主</string>
     <string name="text_sure_share">确认共享</string>
+    <string name="text_not_choose_pigeon">你还没有选鸽子！</string>
 
 </resources>

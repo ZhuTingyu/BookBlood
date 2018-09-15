@@ -3,7 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -19,9 +19,9 @@ import io.reactivex.Observable;
 public class BreedPigeonModel {
 
     //hl 获取种鸽详细
-    public static Observable<ApiResponse<BreedPigeonEntity>> getTXGP_Pigeon_GetInfo(String pigeonid) {
-        return RequestData.<ApiResponse<BreedPigeonEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<BreedPigeonEntity>>() {
+    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_GetInfo(String pigeonid) {
+        return RequestData.<ApiResponse<PigeonEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_details)
                 .addBody("pigeonid", pigeonid)
@@ -115,9 +115,9 @@ public class BreedPigeonModel {
 
 
     //hl 种鸽(赛鸽)列表，搜索
-    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum,String typeid) {
-        return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
+    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum, String typeid) {
+        return RequestData.<ApiResponse<List<PigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_search)
                 .addBody("pi", pi)
@@ -129,14 +129,14 @@ public class BreedPigeonModel {
 
 
     //hl 种鸽列表，筛选
-    public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_Pigeon_SelectAll(String pi, String ps,
-                                                                                            String typeid,
-                                                                                            String bloodid,
-                                                                                            String sexid,
-                                                                                            String year,
-                                                                                            String stateid) {
-        return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
+    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SelectAll(String pi, String ps,
+                                                                                       String typeid,
+                                                                                       String bloodid,
+                                                                                       String sexid,
+                                                                                       String year,
+                                                                                       String stateid) {
+        return RequestData.<ApiResponse<List<PigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_sift)
                 .addBody("pi", pi)

@@ -22,14 +22,14 @@ import com.cpigeon.book.util.RecyclerViewUtils;
  * Created by Zhu TingYu on 2018/9/4.
  */
 
-public class TrainProjectListFragment extends BaseBookFragment {
+public class TrainProjectInListFragment extends BaseBookFragment {
 
     XRecyclerView mRecyclerView;
     TrainProjectListAdapter mAdapter;
     TrainPigeonListViewModel mViewModel;
 
     public static void start(Activity activity) {
-        IntentBuilder.Builder().startParentActivity(activity, TrainProjectListFragment.class);
+        IntentBuilder.Builder().startParentActivity(activity, TrainProjectInListFragment.class);
     }
 
     @Override
@@ -56,7 +56,6 @@ public class TrainProjectListFragment extends BaseBookFragment {
         mRecyclerView = findViewById(R.id.list);
         mAdapter = new TrainProjectListAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
 
         mAdapter.setOnLoadMoreListener(() -> {
             mViewModel.pi++;

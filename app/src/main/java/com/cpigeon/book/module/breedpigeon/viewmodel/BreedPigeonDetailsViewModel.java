@@ -7,7 +7,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.model.BreedPigeonModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 /**
  * Created by Administrator on 2018/9/3.
@@ -15,7 +15,7 @@ import com.cpigeon.book.model.entity.BreedPigeonEntity;
 
 public class BreedPigeonDetailsViewModel extends BaseViewModel {
 
-    public MutableLiveData<BreedPigeonEntity> mBreedPigeonData = new MutableLiveData<>();
+    public MutableLiveData<PigeonEntity> mBreedPigeonData = new MutableLiveData<>();
 
 
     public String footId;

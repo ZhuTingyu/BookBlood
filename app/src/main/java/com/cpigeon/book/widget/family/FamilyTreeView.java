@@ -18,7 +18,7 @@ import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BloodBookEntity;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 import java.util.List;
 
@@ -223,7 +223,7 @@ public class FamilyTreeView extends LinearLayout {
                     }
 
                     @Override
-                    public void showInfo(BreedPigeonEntity entity) {
+                    public void showInfo(PigeonEntity entity) {
                         mOnFamilyClickListener.showInfo(entity);
                     }
                 });
@@ -451,7 +451,7 @@ public class FamilyTreeView extends LinearLayout {
         return memberView;
     }
 
-    public void setData(BreedPigeonEntity entity, int x, int y) {
+    public void setData(PigeonEntity entity, int x, int y) {
         getMemberView(x, y).bindData(entity);
 
         if (!isShowInfoModel) {
@@ -463,7 +463,7 @@ public class FamilyTreeView extends LinearLayout {
     }
 
     public void setData(BloodBookEntity entity) {
-        List<List<BreedPigeonEntity>> data = Lists.newArrayList();
+        List<List<PigeonEntity>> data = Lists.newArrayList();
         data.add(getData(entity.getOne()));
         data.add(getData(entity.getTwo()));
         data.add(getData(entity.getThree()));
@@ -472,13 +472,13 @@ public class FamilyTreeView extends LinearLayout {
         for (int i = 0, len = generationLinearLayouts.size(); i < len; i++) {
             int dataPosition = i + startGeneration;
             LinearLayout linearLayout = generationLinearLayouts.get(i);
-            List<BreedPigeonEntity> breedPigeonEntities = data.get(dataPosition);
+            List<PigeonEntity> breedPigeonEntities = data.get(dataPosition);
             if (Lists.isEmpty(breedPigeonEntities)) {
                 return;
             }
             for (int generationOrder = 0, generationLen = linearLayout.getChildCount(); generationOrder < generationLen; generationOrder++) {
                 try {
-                    BreedPigeonEntity breedPigeonEntity = breedPigeonEntities.get(generationOrder);
+                    PigeonEntity breedPigeonEntity = breedPigeonEntities.get(generationOrder);
                     if (!breedPigeonEntity.isEmpty()) {
                         setData(breedPigeonEntity, dataPosition, generationOrder);
                     }
@@ -489,7 +489,7 @@ public class FamilyTreeView extends LinearLayout {
         }
     }
 
-    private List<BreedPigeonEntity> getData(List<BreedPigeonEntity> data) {
+    private List<PigeonEntity> getData(List<PigeonEntity> data) {
         return Lists.isEmpty(data) ? Lists.newArrayList() : data;
     }
 
@@ -528,7 +528,7 @@ public class FamilyTreeView extends LinearLayout {
     public interface OnFamilyClickListener {
         void add(int x, int y);
 
-        void showInfo(BreedPigeonEntity entity);
+        void showInfo(PigeonEntity entity);
     }
 
     public OnFamilyClickListener mOnFamilyClickListener;

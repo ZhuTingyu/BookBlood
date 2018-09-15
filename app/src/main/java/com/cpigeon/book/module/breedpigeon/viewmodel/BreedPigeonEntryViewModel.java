@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.http.HttpErrorException;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.model.BreedPigeonModel;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 
 import io.reactivex.functions.Consumer;
@@ -19,12 +19,12 @@ public class BreedPigeonEntryViewModel extends BasePigeonViewModel {
 
 
     public MutableLiveData<PigeonEntryEntity> mBreedPigeonData = new MutableLiveData<>();
-    public MutableLiveData<BreedPigeonEntity> mPigeonDetailsData = new MutableLiveData<>();
+    public MutableLiveData<PigeonEntity> mPigeonDetailsData = new MutableLiveData<>();
     public String pigeonId;
     public String sonFootId;
     public String sonPigeonId;
 
-    public BreedPigeonEntity mBreedPigeonEntity = new BreedPigeonEntity();
+    public PigeonEntity mBreedPigeonEntity = new PigeonEntity();
 
     //种鸽录入
     public void addBreedPigeonEntry() {

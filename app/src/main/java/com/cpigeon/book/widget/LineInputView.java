@@ -100,8 +100,8 @@ public class LineInputView extends RelativeLayout {
         }
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.LineInputView);
         mWeight = array.getInteger(R.styleable.LineInputView_lineInputView_Weight, 4);
-        mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, getContext().getColor(R.color.color_4c4c4c));
-        mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, getContext().getColor(R.color.color_000000));
+        mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, Utils.getColor(R.color.color_4c4c4c));
+        mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, Utils.getColor(R.color.color_000000));
         mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, Color.parseColor("#FFFFFF"));
         mLeftTextSize = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
         mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);

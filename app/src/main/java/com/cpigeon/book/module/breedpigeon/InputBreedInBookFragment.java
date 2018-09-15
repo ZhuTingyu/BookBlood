@@ -15,15 +15,12 @@ import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.PigeonAddEvent;
-import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
-import com.cpigeon.book.widget.family.FamilyMember;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Zhu TingYu on 2018/8/29.
@@ -80,7 +77,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                             , CODE_ADD_PIGEON);
 
                 }else {
-                    BreedPigeonEntity breedPigeonEntity = null;
+                    PigeonEntity breedPigeonEntity = null;
                     if (mFamilyTreeView.getSon(x, y) != null) {
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
@@ -96,7 +93,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             }
 
             @Override
-            public void showInfo(BreedPigeonEntity breedPigeonEntity) {
+            public void showInfo(PigeonEntity breedPigeonEntity) {
                 BreedPigeonEntryFragment.start(getBaseActivity()
                         , breedPigeonEntity != null ? breedPigeonEntity.getPigeonID() : StringUtil.emptyString()
                         , StringUtil.emptyString()

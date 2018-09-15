@@ -146,13 +146,13 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     });
         });
 
-        lvMoney.setOnRightClickListener(lineInputView -> {
-            mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.text_foot_input_price, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
-                        lvMoney.setRightText(content);
-                        mDialogMoney.hide();
-                    }, null);
-        });
+//        lvMoney.setOnRightClickListener(lineInputView -> {
+//            mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                    , R.string.text_foot_input_price, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+//                        lvMoney.setRightText(content);
+//                        mDialogMoney.hide();
+//                    }, null);
+//        });
 
         if (mIsLook) {
             setToolbarRight(R.string.text_delete, item -> {
