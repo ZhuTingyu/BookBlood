@@ -50,6 +50,10 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
         activity.overridePendingTransition(R.anim.bottom_out, R.anim.anim_no);
     }
 
+    public static <A extends BaseSearchActivity> void start(Activity activity, Class<A> aClass) {
+        start(activity, aClass, null);
+    }
+
 
     @Override
     protected int getContentView() {

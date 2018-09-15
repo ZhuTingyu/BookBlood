@@ -1,106 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        app:elevation="0dp">
-
-        <!--<android.support.design.widget.CollapsingToolbarLayout-->
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <!--详细信息-->
-                <include layout="@layout/layout_pigeon_info_head" />
-
-                <!--血统-->
-                <include layout="@layout/layout_pigeon_info_center" />
-
-                <!--赛绩-->
-                <!--<include layout="@layout/layout_pigeon_play" />-->
-
-            </LinearLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp" />
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
-
-
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/clRoot"
+        android:layout_above="@id/llButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            app:elevation="0dp">
+
+            <!--<android.support.design.widget.CollapsingToolbarLayout-->
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--详细信息-->
+                    <include layout="@layout/layout_pigeon_info_head" />
+
+                    <!--血统-->
+                    <include layout="@layout/layout_pigeon_info_center" />
+
+                    <!--赛绩-->
+                    <!--<include layout="@layout/layout_pigeon_play" />-->
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_view_height"
-            android:layout_marginTop="10dp"
-            android:background="@color/color_white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/spacing_left_reight"
-            android:paddingRight="@dimen/spacing_left_reight">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <com.base.widget.magicindicator.MagicIndicator
-                android:id="@+id/indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:minWidth="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_view_height"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_left_reight"
+                android:paddingRight="@dimen/spacing_left_reight">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                <com.base.widget.magicindicator.MagicIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_horizontal"
+                    android:minWidth="20dp" />
 
-            <ImageView
-                android:id="@+id/img_play_import"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="32dp"
-                android:src="@mipmap/ic_play_import" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/img_play_add"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@mipmap/ic_play_add" />
+                <ImageView
+                    android:id="@+id/img_play_import"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="32dp"
+                    android:src="@mipmap/ic_play_import" />
+
+                <ImageView
+                    android:id="@+id/img_play_add"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@mipmap/ic_play_add" />
+
+            </LinearLayout>
+
+            <include layout="@layout/include_line_view_layout" />
+
+            <com.base.widget.CustomViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--<include layout="@layout/xrecyclerview_layout" />-->
 
         </LinearLayout>
 
-        <include layout="@layout/include_line_view_layout" />
 
-        <com.base.widget.CustomViewPager
-            android:id="@+id/viewPager"
+    </android.support.design.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/llButton"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:background="@color/color_bg_window"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="10dp"/>
 
-        <!--<include layout="@layout/xrecyclerview_layout" />-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <TextView
+                android:id="@+id/tvLeft"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text_size"
+                android:gravity="center"
+                android:text="@string/text_pigeon_master_name"
+                android:background="@color/color_bg_yellow"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tvRight"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text_size"
+                android:gravity="center"
+                android:background="@color/colorPrimary"
+                android:text="@string/text_connection_pigeon_master"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+        
 
     </LinearLayout>
 
+</RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>

@@ -180,6 +180,9 @@
         <activity android:name=".module.pigeonleague.SearchPigeonToLeagueActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape" />
+        <activity android:name=".module.home.goodpigeon.SearchGoodPigeonActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"/>
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>

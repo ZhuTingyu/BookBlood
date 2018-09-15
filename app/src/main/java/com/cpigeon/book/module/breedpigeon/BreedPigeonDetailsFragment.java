@@ -58,7 +58,9 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import cn.qqtheme.framework.picker.OptionPicker;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -68,7 +70,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class BreedPigeonDetailsFragment extends BaseBookFragment {
-
     @BindView(R.id.tv_foot)
     TextView tvFoot;
     @BindView(R.id.img_sex)
@@ -120,6 +121,13 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     CustomViewPager mViewPager;
     protected List<Fragment> mFragments = Lists.newArrayList();
     protected List<String> mTitles = Lists.newArrayList();
+    @BindView(R.id.tvLeft)
+    TextView tvLeft;
+    @BindView(R.id.tvRight)
+    TextView tvRight;
+    @BindView(R.id.llButton)
+    LinearLayout llButton;
+    Unbinder unbinder;
 
     private BreedPigeonDetailsViewModel mBreedPigeonDetailsViewModel;
 
@@ -130,13 +138,26 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
     private AddPlayDialog mAddPlayDialog;
 
-    public static int CODE_ORGANIZE = 0x123;
-    public static int CODE_LOFT = 0x234;
+    public static final int CODE_ORGANIZE = 0x123;
+    public static final int CODE_LOFT = 0x234;
+    public static final String TYPE_MY_SHARE = "TYPE_MY_SHARE";
+    public static final String TYPE_HIS_SHARE = "TYPE_HIS_SHARE";
+
+
+    private String mType;
 
     public static void start(Activity activity, String pigeonId, String footId) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
                 .putExtra(IntentBuilder.KEY_DATA_2, footId)
+                .startParentActivity(activity, BreedPigeonDetailsFragment.class);
+    }
+
+    public static void start(Activity activity, String pigeonId, String footId, String type) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, pigeonId)
+                .putExtra(IntentBuilder.KEY_DATA_2, footId)
+                .putExtra(IntentBuilder.KEY_TYPE, type)
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
@@ -163,7 +184,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        mType = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
         setTitle("详情");
 
         setToolbarRight("成长记录", item -> {
@@ -226,6 +247,26 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                         , breedPigeonEntity.getPigeonID());
             }
         });
+
+        if (StringUtil.isStringValid(mType)) {
+            llButton.setVisibility(View.VISIBLE);
+            if (TYPE_MY_SHARE.equals(mType)) {
+                tvLeft.setVisibility(View.GONE);
+                tvRight.setText(R.string.text_sure_share);
+                tvRight.setOnClickListener(v -> {
+
+                });
+            } else if (TYPE_HIS_SHARE.equals(mType)) {
+                tvLeft.setOnClickListener(v -> {
+
+                });
+
+                tvRight.setOnClickListener(v -> {
+
+                });
+            }
+        }
+
 
     }
 

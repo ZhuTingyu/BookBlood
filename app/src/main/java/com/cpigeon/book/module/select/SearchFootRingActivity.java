@@ -22,6 +22,7 @@ import java.util.List;
 public class SearchFootRingActivity extends BaseSearchActivity {
 
     SearchFootRingAdapter mAdapter;
+    public static final int CODE_SEARCH_FOOT_RING = 0;
 
     public static void start(Activity activity, int code) {
         IntentBuilder.Builder(activity, SearchFootRingActivity.class)
