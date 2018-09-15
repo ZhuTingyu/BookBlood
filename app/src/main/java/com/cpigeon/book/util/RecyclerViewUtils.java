@@ -14,29 +14,15 @@ public class RecyclerViewUtils {
     public static void setLoadMoreCallBack(XRecyclerView xRecyclerView, BaseQuickAdapter adapter, List data) {
         xRecyclerView.setRefreshing(false);
         if (data.isEmpty() || data.size() == 0) {
+            if (adapter.getData().size() == 0) {
+                adapter.removeAllHeaderView();
+            }
             adapter.setLoadMore(true);
             adapter.setEmptyView();
         } else {
             adapter.setLoadMore(false);
-
             adapter.addData(data);
         }
     }
 
-
-    public static void setLoadMoreCallBack2(XRecyclerView xRecyclerView, BaseQuickAdapter adapter, List data) {
-        xRecyclerView.setRefreshing(false);
-        if (data.isEmpty() || data.size() == 0) {
-            adapter.setLoadMore(true);
-            adapter.setEmptyView();
-        } else {
-            adapter.setLoadMore(false);
-            if (adapter.getHeaderLayoutCount() != 0) {
-                adapter.addData(adapter.getHeaderLayoutCount() + 1, data);
-            } else {
-                adapter.addData(data);
-            }
-
-        }
-    }
 }

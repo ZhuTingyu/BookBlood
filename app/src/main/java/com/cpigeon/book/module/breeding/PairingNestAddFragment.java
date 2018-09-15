@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,17 @@ import android.widget.TextView;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.map.LocationLiveData;
+import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
+import com.base.util.utility.LogUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
+import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.module.breeding.viewmodel.PairingNestAddViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
@@ -66,8 +72,11 @@ public class PairingNestAddFragment extends BaseBookFragment {
 
     private PairingNestAddViewModel mPairingNestAddViewModel;
 
-    public static void start(Activity activity) {
+    public static void start(Activity activity, PairingInfoEntity mPairingInfoEntity, BreedPigeonEntity mBreedPigeonEntity, int maxNest) {
         IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, mPairingInfoEntity)
+                .putExtra(IntentBuilder.KEY_DATA_2, mBreedPigeonEntity)
+                .putExtra(IntentBuilder.KEY_DATA_3, maxNest)
                 .startParentActivity(activity, PairingNestAddFragment.class);
     }
 
@@ -91,6 +100,17 @@ public class PairingNestAddFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle("添加窝次");
 
+        mPairingNestAddViewModel.mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mPairingNestAddViewModel.mBreedPigeonEntity = (BreedPigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA_2);
+
+        int nestNum = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA_3, 0);
+
+        //窝次
+        llNestNum.setContent(String.valueOf(++nestNum));
+        //父足环号码
+        llFootFather.setContent(mPairingNestAddViewModel.mPairingInfoEntity.getMenFootRingNum());
+        //母足环号码
+        llFootMother.setContent(mPairingNestAddViewModel.mPairingInfoEntity.getWoFootRingNum());
 
         mPairingNestAddViewModel.isCanCommit();
 
@@ -102,6 +122,20 @@ public class PairingNestAddFragment extends BaseBookFragment {
         super.initObserve();
         mPairingNestAddViewModel.isCanCommit.observe(this, aBoolean -> {
             TextViewUtil.setEnabled(tvNextStep, aBoolean);
+        });
+
+        LocationLiveData.get(true).observe(this, aMapLocation -> {
+            Log.d("dingwei", "initObserve: 城市--》" + aMapLocation.getCity());
+            LogUtil.print(aMapLocation);
+            WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
+
+                Log.d("dingwei", "initObserve: 天气" + localWeatherLive.getWeather());
+                mPairingNestAddViewModel.weather = localWeatherLive.getWeather();//天气
+                mPairingNestAddViewModel.temper = localWeatherLive.getTemperature();//气温
+                mPairingNestAddViewModel.hum = localWeatherLive.getHumidity();//湿度
+                mPairingNestAddViewModel.dir = localWeatherLive.getWindDirection();//风向
+            });
+
         });
     }
 
@@ -228,7 +262,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.tv_next_step:
                 //立即添加
-                ToastUtils.showLong(getBaseActivity(), "点击立即添加");
+                mPairingNestAddViewModel.getTXGP_PigeonBreedNest_Add();
                 break;
         }
     }

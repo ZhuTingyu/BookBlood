@@ -15,6 +15,7 @@ import com.base.util.Utils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingInfoListAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
@@ -63,7 +64,7 @@ public class PairingInfoListFragment extends BaseListFragment {
                     PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
                 } else if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_recommend))) {
                     //推荐配对
-                    PairingInfoRecommendFragment.start(getBaseActivity());
+                    PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
                 } else if (chooseWays[p].equals(Utils.getString(R.string.array_blind_date))) {
                     //相亲配对
 
@@ -72,16 +73,18 @@ public class PairingInfoListFragment extends BaseListFragment {
             return false;
         });
 
-        mPairingInfoListAdapter = new PairingInfoListAdapter();
+        mPairingInfoListAdapter = new PairingInfoListAdapter(mPairingInfoListViewModel.mBreedPigeonEntity);
 
         initHeadView();
 
         list.setAdapter(mPairingInfoListAdapter);
         mPairingInfoListAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PairingNestInfoListFragment.start(getBaseActivity());
+            PairingInfoEntity mPairingInfoEntity = (PairingInfoEntity) adapter.getData().get(position);
+            PairingNestInfoListFragment.start(getBaseActivity(), mPairingInfoEntity,mPairingInfoListViewModel.mBreedPigeonEntity);
         });
 
         list.setRefreshListener(() -> {
+            setProgressVisible(true);
             mPairingInfoListAdapter.getData().clear();
             mPairingInfoListAdapter.notifyDataSetChanged();
             mPairingInfoListViewModel.pi = 1;
@@ -89,13 +92,13 @@ public class PairingInfoListFragment extends BaseListFragment {
         });
 
         mPairingInfoListAdapter.setOnLoadMoreListener(() -> {
+            setProgressVisible(true);
             mPairingInfoListViewModel.pi++;
             mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
         }, list.getRecyclerView());
 
         setProgressVisible(true);
         mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
-
     }
 
     @Override
@@ -104,7 +107,7 @@ public class PairingInfoListFragment extends BaseListFragment {
 
         mPairingInfoListViewModel.mPairingInfoListData.observe(this, breedPigeonEntities -> {
             setProgressVisible(false);
-            RecyclerViewUtils.setLoadMoreCallBack2(list, mPairingInfoListAdapter, breedPigeonEntities);
+            RecyclerViewUtils.setLoadMoreCallBack(list, mPairingInfoListAdapter, breedPigeonEntities);
         });
 
         mPairingInfoListViewModel.listEmptyMessage.observe(this, s -> {

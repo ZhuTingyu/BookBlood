@@ -35,8 +35,8 @@
         <attr name="lineInputView_LeftTextColor" format="color" />
         <attr name="lineInputView_RightTextColor" format="color" />
         <attr name="lineInputView_ContentColor" format="color" />
-        <attr name="lineInputView_LeftTextSize" format="dimension" />
-        <attr name="lineInputView_RightTextSize" format="dimension" />
+        <attr name="lineInputView_LeftTextSize" format="float" />
+        <attr name="lineInputView_RightTextSize" format="float" />
         <attr name="lineInputView_LeftString" format="string" />
         <attr name="lineInputView_RightString" format="string" />
         <attr name="lineInputView_IsLookState" format="boolean" />
@@ -57,6 +57,8 @@
             <flag name="invisible" value="0x00000004" />
         </attr>
         <attr name="lineInputView_isShowEditBoard" format="boolean" />
+        <attr name="rightTextBold" format="boolean" />
+        <attr name="leftTextBold" format="boolean" />
         <attr name="lineInputView_InputType">
             <flag name="none" value="0x00000000" />
             <flag name="text" value="0x00000001" />

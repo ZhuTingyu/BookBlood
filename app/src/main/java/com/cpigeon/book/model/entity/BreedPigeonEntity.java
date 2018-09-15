@@ -34,7 +34,7 @@ public class BreedPigeonEntity implements Serializable {
     private String FootRingID;
     private String StateID;
     private String StateName;
-    private String PigeonPlumeName;
+    private String PigeonPlumeName;//
     private String PigeonSexName;
     private String PigeonID;
     private String FootRingNum;

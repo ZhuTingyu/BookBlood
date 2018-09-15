@@ -9,7 +9,8 @@
 
     <dimen name="normal_safe_distance">20dp</dimen>
 
-    
+    <dimen name="medium_text_size2">14</dimen>
+
     <dimen name="spacing_left_reight">20dp</dimen>
     <dimen name="spacing_left_reight2">8dp</dimen>
     <dimen name="spacing_info_details_line">53dp</dimen>

@@ -119,7 +119,8 @@ public class BreedPigeonModel {
         return RequestData.<ApiResponse<List<BreedPigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<BreedPigeonEntity>>>() {
                 }.getType())
-                .url(R.string.pigeon_breed_search)
+//                .url(R.string.pigeon_breed_search)
+                .url(R.string.pigeon_breed_sift)
                 .addBody("pi", pi)
                 .addBody("ps", ps)
                 .addBody("footnum", footnum)

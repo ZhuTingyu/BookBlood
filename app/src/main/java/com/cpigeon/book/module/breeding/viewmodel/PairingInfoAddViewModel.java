@@ -19,8 +19,8 @@ public class PairingInfoAddViewModel extends BaseViewModel {
     //配偶环号  配对的足环号码
     public String pairingFoot;
 
-    //母足环号码
-    public String wofootnum;
+    //性别
+    public String sex;
 
     //羽色
     public List<SelectTypeEntity> mSelectTypes_FeatherColor;
@@ -41,7 +41,7 @@ public class PairingInfoAddViewModel extends BaseViewModel {
     //配对风向
     public String dir;
     //是否是平台配对（1和2）   是否相亲配对
-    public String bitpair;
+    public String bitpair = "2";
     //配对备注
     public String reamrk;
 
@@ -51,16 +51,7 @@ public class PairingInfoAddViewModel extends BaseViewModel {
 
     public void getTXGP_PigeonBreed_AddData() {
 
-//        if (mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
-//            //
-//            wofootnum = mBreedPigeonEntity.getFootRingNum();
-//            menfootnum = pairingFoot;
-//        } else {
-//            wofootnum = pairingFoot;
-//            menfootnum = mBreedPigeonEntity.getFootRingNum();
-//        }
-
-        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(mBreedPigeonEntity.getFootRingID(), pairingFoot, pairingTime, weather, temper, hum, dir, bitpair, reamrk), r -> {
+        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(mBreedPigeonEntity.getFootRingID(), pairingFoot, lineage, featherColor, sex, pairingTime, weather, temper, hum, dir, bitpair, reamrk), r -> {
             if (r.isOk()) {
                 hintDialog(r.msg);
             } else throw new HttpErrorException(r);

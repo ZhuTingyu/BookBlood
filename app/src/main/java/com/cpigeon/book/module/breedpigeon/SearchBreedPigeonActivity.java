@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 public class SearchBreedPigeonActivity extends BaseSearchActivity {
-    BreedPigeonListAdapter mAdapter;
+    protected BreedPigeonListAdapter mAdapter;
 
     private BreedPigeonListModel mBreedPigeonListModel;
     private String pigeonType;
@@ -38,7 +38,7 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
         mAdapter = new BreedPigeonListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             BreedPigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID(),mBreedPigeonEntity.getFootRingID());
+            BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID(), mBreedPigeonEntity.getFootRingID());
         });
         return mAdapter;
     }
@@ -50,18 +50,19 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
         mBreedPigeonListModel = new BreedPigeonListModel();
         initViewModel(mBreedPigeonListModel);
 
-
         pigeonType = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
         mBreedPigeonListModel.typeid = pigeonType;
+        mBreedPigeonListModel.isSearch = true;
 
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
-                public void search(String key) {
+            public void search(String key) {
 
                 setProgressVisible(true);
                 mAdapter.getData().clear();
                 mAdapter.notifyDataSetChanged();
                 mBreedPigeonListModel.searchStr = key;
+                mBreedPigeonListModel.pi = 1;
                 mBreedPigeonListModel.getPigeonList();
 
 //                mAdapter.setNewData(Lists.newTestArrayList());
@@ -73,15 +74,16 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
             }
         });
 
-        mBreedPigeonListModel.isSearch = true;
-
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.getData().clear();
+            mAdapter.notifyDataSetChanged();
+            setProgressVisible(true);
             mBreedPigeonListModel.pi = 1;
             mBreedPigeonListModel.getPigeonList();
         });
 
         mAdapter.setOnLoadMoreListener(() -> {
+            setProgressVisible(true);
             mBreedPigeonListModel.pi++;
             mBreedPigeonListModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
@@ -100,6 +102,5 @@ public class SearchBreedPigeonActivity extends BaseSearchActivity {
         mBreedPigeonListModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
         });
-
     }
 }

@@ -5,6 +5,8 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PairingNestInfoEntity;
+import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -21,6 +23,9 @@ public class PairingModel {
     //hl 添加配對
     public static Observable<ApiResponse<List<BreedPigeonEntity>>> getTXGP_PigeonBreed_Add(String footid,
                                                                                            String footnum,
+                                                                                           String blood,
+                                                                                           String plume,
+                                                                                           String sex,
                                                                                            String time,
                                                                                            String weather,
                                                                                            String temper,
@@ -34,6 +39,9 @@ public class PairingModel {
                 .url(R.string.pairing_info_add)
                 .addBody("footid", footid)//要配对的足环id
                 .addBody("footnum", footnum)//配对的足环号码
+                .addBody("blood", blood)//配对的血统
+                .addBody("plume", plume)//配对的羽色
+                .addBody("sex", sex)//要配对的性别
                 .addBody("time", time)//配对时间
                 .addBody("weather", weather)//配对天气
                 .addBody("temper", temper)//配对气温
@@ -63,66 +71,109 @@ public class PairingModel {
                 .request();
     }
 
+    //hl 获取  单个繁育表里的窝次信息 列表
+    public static Observable<ApiResponse<List<PairingNestInfoEntity>>> getTXGP_PigeonBreed_SelectIDAll(String pi,
+                                                                                                       String ps,
+                                                                                                       String breedid) {
+        return RequestData.<ApiResponse<List<PairingNestInfoEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PairingNestInfoEntity>>>() {
+                }.getType())
+                .url(R.string.pairing_nest_info_list)
+                .addBody("pi", pi)//
+                .addBody("ps", ps)//
+                .addBody("breedid", breedid)//
+                .request();
+    }
 
     //hl 添加窝次信息
-    public static Observable<ApiResponse<List<PairingInfoEntity>>> getTXGP_PigeonBreedNest_Add(String pi,
-                                                                                               String ps) {
+    public static Observable<ApiResponse<List<PairingInfoEntity>>> getTXGP_PigeonBreedNest_Add(String breedid,
+                                                                                               String time,
+                                                                                               String eggtime,
+                                                                                               String igg,
+                                                                                               String fgg,
+                                                                                               String eggweather,
+                                                                                               String eggtemper,
+                                                                                               String egghum,
+                                                                                               String eggdir,
+                                                                                               String outtime,
+                                                                                               String outcount,
+                                                                                               String outweather,
+                                                                                               String outtemper,
+                                                                                               String outhum,
+                                                                                               String outdir,
+                                                                                               String reamrk) {
         return RequestData.<ApiResponse<List<PairingInfoEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PairingInfoEntity>>>() {
                 }.getType())
                 .url(R.string.pairing_nest_info_add)
-                .addBody("pi", pi)//
-                .addBody("ps", ps)//
+                .addBody("breedid", breedid)//
+                .addBody("time", time)//
+                .addBody("eggtime", eggtime)//
+                .addBody("igg", igg)//
+                .addBody("fgg", fgg)//
+                .addBody("eggweather", eggweather)//
+                .addBody("eggtemper", eggtemper)//
+                .addBody("egghum", egghum)//
+                .addBody("eggdir", eggdir)//
+                .addBody("outtime", outtime)//
+                .addBody("outcount", outcount)//
+                .addBody("outweather", outweather)//
+                .addBody("outtemper", outtemper)//
+                .addBody("outhum", outhum)//
+                .addBody("outdir", outdir)//
+                .addBody("reamrk", reamrk)//
                 .request();
     }
 
     //hl 信鸽血统推荐
-    public static Observable<ApiResponse<List<PairingInfoEntity>>> getTXGP_PigeonBreed_RecomBlood(String pi,
-                                                                                                  String ps,
-                                                                                                  String sex,
-                                                                                                  String puserid) {
-        return RequestData.<ApiResponse<List<PairingInfoEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<PairingInfoEntity>>>() {
+    public static Observable<ApiResponse<List<PriringRecommendEntity>>> getTXGP_PigeonBreed_RecomBlood(String pi,
+                                                                                                       String ps,
+                                                                                                       String sex,
+                                                                                                       String pigeonid,
+                                                                                                       String blood) {
+        return RequestData.<ApiResponse<List<PriringRecommendEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PriringRecommendEntity>>>() {
                 }.getType())
                 .url(R.string.pairing_recommend_lineage)
                 .addBody("pi", pi)//
                 .addBody("ps", ps)//
                 .addBody("sex", sex)//
-                .addBody("puserid", puserid)//
+                .addBody("pigeonid", pigeonid)//
+                .addBody("blood", blood)//
                 .request();
     }
 
 
     //hl 信鸽赛绩推荐
-    public static Observable<ApiResponse<List<PairingInfoEntity>>> getTXGP_PigeonBreed_RecomMatch(String pi,
+    public static Observable<ApiResponse<List<PriringRecommendEntity>>> getTXGP_PigeonBreed_RecomMatch(String pi,
                                                                                                   String ps,
                                                                                                   String sex,
-                                                                                                  String puserid) {
-        return RequestData.<ApiResponse<List<PairingInfoEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<PairingInfoEntity>>>() {
+                                                                                                  String pigeonid) {
+        return RequestData.<ApiResponse<List<PriringRecommendEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PriringRecommendEntity>>>() {
                 }.getType())
                 .url(R.string.pairing_recommend_play)
                 .addBody("pi", pi)//
                 .addBody("ps", ps)//
                 .addBody("sex", sex)//
-                .addBody("puserid", puserid)//
+                .addBody("pigeonid", pigeonid)//
                 .request();
     }
 
 
     //hl 信鸽评分推荐
-    public static Observable<ApiResponse<List<PairingInfoEntity>>> getTXGP_PigeonTrain_RecomSorce(String pi,
+    public static Observable<ApiResponse<List<PriringRecommendEntity>>> getTXGP_PigeonTrain_RecomSorce(String pi,
                                                                                                   String ps,
                                                                                                   String sex,
-                                                                                                  String puserid) {
-        return RequestData.<ApiResponse<List<PairingInfoEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<PairingInfoEntity>>>() {
+                                                                                                  String pigeonid) {
+        return RequestData.<ApiResponse<List<PriringRecommendEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PriringRecommendEntity>>>() {
                 }.getType())
                 .url(R.string.pairing_recommend_sorce)
                 .addBody("pi", pi)//
                 .addBody("ps", ps)//
                 .addBody("sex", sex)//
-                .addBody("puserid", puserid)//
+                .addBody("pigeonid", pigeonid)//
                 .request();
     }
 

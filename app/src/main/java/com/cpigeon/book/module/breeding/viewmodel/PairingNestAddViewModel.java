@@ -3,6 +3,8 @@ package com.cpigeon.book.module.breeding.viewmodel;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
+import com.cpigeon.book.model.entity.BreedPigeonEntity;
+import com.cpigeon.book.model.entity.PairingInfoEntity;
 
 /**
  * 添加窝次
@@ -10,6 +12,10 @@ import com.cpigeon.book.model.PairingModel;
  */
 
 public class PairingNestAddViewModel extends BaseViewModel {
+
+
+    public PairingInfoEntity mPairingInfoEntity;
+    public BreedPigeonEntity mBreedPigeonEntity;
 
     //窝次
     public String nestNum;
@@ -35,17 +41,37 @@ public class PairingNestAddViewModel extends BaseViewModel {
     public String hatchesNum;
     //子代信息
     public String offspringInfo;
-
+    //配对天气
+    public String weather;
+    //配对气温
+    public String temper;
+    //配对湿度
+    public String hum;
+    //配对风向
+    public String dir;
 
     //添加窝次信息   TXGP_PigeonBreedNest_Add
     public void getTXGP_PigeonBreedNest_Add() {
-
-        submitRequestThrowError(PairingModel.getTXGP_PigeonBreedNest_Add("", ""), r -> {
+        submitRequestThrowError(PairingModel.getTXGP_PigeonBreedNest_Add(mBreedPigeonEntity.getPigeonID(),
+                pairingTime,
+                layEggsTime,
+                fertilizedEgg,
+                fertilizedEggNo,
+                weather,
+                temper,
+                hum,
+                dir,
+                hatchesTime,
+                hatchesNum,
+                weather,
+                temper,
+                hum,
+                dir,
+                ""), r -> {
             if (r.isOk()) {
                 hintDialog(r.msg);
             } else throw new HttpErrorException(r);
         });
-
     }
 
     public void isCanCommit() {

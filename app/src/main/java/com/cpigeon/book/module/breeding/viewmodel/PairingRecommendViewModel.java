@@ -7,6 +7,7 @@ import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
 import com.cpigeon.book.model.entity.BreedPigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PriringRecommendEntity;
 
 import java.util.List;
 
@@ -23,17 +24,18 @@ public class PairingRecommendViewModel extends BaseViewModel {
     public int pi = 1;
     public int ps = 15;
     public String sex;
-    public String puserid;
+    public String blood;
+    public String pigeonid;
 
-    public MutableLiveData<List<PairingInfoEntity>> mPairingInfoListData = new MutableLiveData<>();
+    public MutableLiveData<List<PriringRecommendEntity>> mPriringRecommendData = new MutableLiveData<>();
 
     //获取  信鸽血统推荐
     public void getTXGP_PigeonBreed_RecomBloodData() {
         submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_RecomBlood(String.valueOf(pi),
-                String.valueOf(ps), sex, puserid), r -> {
+                String.valueOf(ps), sex, pigeonid, blood), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
-                mPairingInfoListData.setValue(r.data);
+                mPriringRecommendData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
@@ -42,10 +44,10 @@ public class PairingRecommendViewModel extends BaseViewModel {
     //获取  信鸽赛绩推荐
     public void getTXGP_PigeonBreed_RecomMatchData() {
         submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_RecomMatch(String.valueOf(pi),
-                String.valueOf(ps), sex, puserid), r -> {
+                String.valueOf(ps), sex, pigeonid), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
-                mPairingInfoListData.setValue(r.data);
+                mPriringRecommendData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
@@ -53,10 +55,10 @@ public class PairingRecommendViewModel extends BaseViewModel {
     //获取  信鸽评分推荐
     public void getTXGP_PigeonTrain_RecomSorceData() {
         submitRequestThrowError(PairingModel.getTXGP_PigeonTrain_RecomSorce(String.valueOf(pi),
-                String.valueOf(ps), sex, puserid), r -> {
+                String.valueOf(ps), sex, pigeonid), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
-                mPairingInfoListData.setValue(r.data);
+                mPriringRecommendData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
