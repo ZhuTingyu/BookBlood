@@ -126,7 +126,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 .startParentActivity(activity, BreedPigeonEntryFragment.class);
     }
 
-    public static void start(Activity activity, @Nullable String pigeonId, String sonFootId, String sonPigeonId, String sex ,int requestCode) {
+    public static void start(Activity activity, @Nullable String pigeonId, String sonFootId, String sonPigeonId, String sex, int requestCode) {
         IntentBuilder builder = IntentBuilder.Builder();
         builder.putExtra(IntentBuilder.KEY_DATA, pigeonId);
         builder.putExtra(KEY_SON_FOOT_ID, sonFootId);
@@ -204,12 +204,12 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         mBreedPigeonEntryViewModel.sonPigeonId = getBaseActivity().getIntent().getStringExtra(KEY_SON_PIGEON_ID);
 
         String sexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
-        if(TYPE_SEX_MALE.equals(sexType)){
+        if (TYPE_SEX_MALE.equals(sexType)) {
             mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(PigeonEntity.ID_MALE);
             mBreedPigeonEntryViewModel.sexId = (PigeonEntity.ID_MALE);
             llSex.setRightText(Utils.getString(R.string.text_male_a));
             llSex.setRightImageVisible(false);
-        }else if(TYPE_SEX_FEMALE.equals(sexType)){
+        } else if (TYPE_SEX_FEMALE.equals(sexType)) {
             mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(PigeonEntity.ID_FEMALE);
             mBreedPigeonEntryViewModel.sexId = (PigeonEntity.ID_FEMALE);
             llSex.setRightText(Utils.getString(R.string.text_female_a));
@@ -248,7 +248,6 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             llState.setRightText(breedPigeonEntity.getStateName());
 
 
-
             mBreedPigeonEntryViewModel.countryId = breedPigeonEntity.getFootCodeID();
             mBreedPigeonEntryViewModel.footVice = breedPigeonEntity.getFootRingIDToNum();
             mBreedPigeonEntryViewModel.sourceId = breedPigeonEntity.getSourceID();
@@ -262,7 +261,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
             mBreedPigeonEntryViewModel.lineage = breedPigeonEntity.getPigeonBloodID();
             mBreedPigeonEntryViewModel.stateId = breedPigeonEntity.getStateID();
 
-            if(StringUtil.isStringValid(breedPigeonEntity.getCoverPhotoUrl())){
+            if (StringUtil.isStringValid(breedPigeonEntity.getCoverPhotoUrl())) {
                 List<ImgTypeEntity> imgs = Lists.newArrayList();
                 ImgTypeEntity entity = new ImgTypeEntity.Builder()
                         .imgTypeId(breedPigeonEntity.getCoverPhotoTypeID())

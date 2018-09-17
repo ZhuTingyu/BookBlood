@@ -15,16 +15,18 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonRecordListAdapter;
 
 /**
+ * 养鸽记录   足环列表
  * Created by Zhu TingYu on 2018/9/7.
  */
 
-public class FeedPigeonRecordListFragment extends BaseBookFragment {
+public class FeedPigeonRecordListFragment extends BaseFootListFagment {
 
-    XRecyclerView mRecyclerView;
-    FeedPigeonRecordListAdapter mAdapter;
+
     SearchFragmentParentActivity mActivity;
 
     @Override
@@ -33,26 +35,26 @@ public class FeedPigeonRecordListFragment extends BaseBookFragment {
         mActivity = (SearchFragmentParentActivity) getActivity();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.xrecyclerview_layout, container, false);
-    }
+    protected void initData() {
+        super.initData();
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        mTvOk.setVisibility(View.GONE);
+        view_placeholder.setVisibility(View.GONE);
+
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getBaseActivity(), SearchFeedPigeonRecordActivity.class,null);
+            Bundle mBundle = new Bundle();
+            mBundle.putString(IntentBuilder.KEY_TYPE, "");
+            BaseSearchActivity.start(getBaseActivity(), SearchFeedPigeonRecordActivity.class, mBundle);
         });
-        mRecyclerView = findViewById(R.id.list);
-        mRecyclerView.addItemDecorationLine();
+
         mAdapter = new FeedPigeonRecordListAdapter();
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            IntentBuilder.Builder().startParentActivity(getBaseActivity(), FeedPigeonDetailsFragment.class);
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+            FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
         });
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
+        mRecyclerView.addItemDecorationLine();
     }
 }

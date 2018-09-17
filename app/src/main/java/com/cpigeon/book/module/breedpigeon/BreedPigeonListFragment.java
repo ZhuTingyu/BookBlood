@@ -100,7 +100,6 @@ public class BreedPigeonListFragment extends BaseFragment {
         mFiltrate = mActivity.getFiltrate();
 
 
-
         setToolbarRightImage(R.drawable.svg_filtrate, item -> {
             if (mDrawerLayout != null) {
                 mDrawerLayout.openDrawer(Gravity.RIGHT);
@@ -147,9 +146,9 @@ public class BreedPigeonListFragment extends BaseFragment {
 
         mTvOk.setText(R.string.text_add_breed_pigeon);
         mTvOk.setOnClickListener(v -> {
-            if(pigeonType.equals(PigeonEntity.ID_MATCH_PIGEON)){
+            if (pigeonType.equals(PigeonEntity.ID_MATCH_PIGEON)) {
                 RacingPigeonEntryFragment.start(getBaseActivity());
-            }else {
+            } else {
                 InputBreedInBookFragment.start(getBaseActivity());
             }
         });

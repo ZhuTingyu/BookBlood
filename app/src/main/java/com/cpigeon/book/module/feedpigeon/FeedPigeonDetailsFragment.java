@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.feedpigeon;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonDetailsAdapter;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -43,6 +46,12 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+    }
+
+    public static void start(Activity activity, PigeonEntity mBreedPigeonEntity) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
+                .startParentActivity(activity, FeedPigeonDetailsFragment.class);
     }
 
     @Nullable

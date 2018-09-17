@@ -84,6 +84,7 @@ public class PlayAddFragment extends BaseBookFragment {
                 .putExtra(IntentBuilder.KEY_TYPE, type)//类型
                 .startParentActivity(activity, PlayAddFragment.class);
     }
+
     public static void start(Activity activity, PigeonEntryEntity mPigeonEntryEntity, int type, int requestCode) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPigeonEntryEntity)
@@ -122,7 +123,7 @@ public class PlayAddFragment extends BaseBookFragment {
         type = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TYPE, 0);
 
         try {
-            mPigeonEntryEntity = (PigeonEntryEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+            mPigeonEntryEntity = (PigeonEntryEntity) getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA);
             mPlayViewModel.pigeonid = mPigeonEntryEntity.getPigeonID();
             mPlayViewModel.footid = mPigeonEntryEntity.getFootRingID();
             llFoot.setContent(mPigeonEntryEntity.getFootRingNum());
@@ -241,7 +242,6 @@ public class PlayAddFragment extends BaseBookFragment {
             setProgressVisible(false);//加载框
             initView(pigeonPlayEntity);
         });
-
 
     }
 

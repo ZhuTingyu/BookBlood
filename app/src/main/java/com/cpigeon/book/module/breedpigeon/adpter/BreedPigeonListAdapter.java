@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
 
+import java.util.List;
+
 /**
  * Created by Zhu TingYu on 2018/8/28.
  */
@@ -30,6 +32,11 @@ public class BreedPigeonListAdapter extends BaseQuickAdapter<PigeonEntity, BaseV
     public BreedPigeonListAdapter() {
         super(R.layout.item_breed_pigeon_list, null);
     }
+
+    public BreedPigeonListAdapter(int layoutResId, List<PigeonEntity> data) {
+        super(layoutResId, data);
+    }
+
 
     @Override
     protected void convert(BaseViewHolder helper, PigeonEntity item) {
