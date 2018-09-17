@@ -13,20 +13,28 @@ import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.feedpigeon.adapter.SelectIllnessRecordAdapter;
+import com.cpigeon.book.module.feedpigeon.viewmodel.DrugUseCaseListViewModel;
+import com.cpigeon.book.module.feedpigeon.viewmodel.DrugUseCaseViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
  * Created by Zhu TingYu on 2018/9/10.
  */
 
-public class SelectIllnessRecordFragment extends BaseBookFragment{
+public class SelectIllnessRecordFragment extends BaseBookFragment {
 
     XRecyclerView mRecyclerView;
     SelectIllnessRecordAdapter mAdapter;
 
+    private DrugUseCaseListViewModel mDrugUseCaseListViewModel;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mDrugUseCaseListViewModel = new DrugUseCaseListViewModel();
+        initViewModels(mDrugUseCaseListViewModel);
     }
 
     @Nullable
@@ -39,16 +47,56 @@ public class SelectIllnessRecordFragment extends BaseBookFragment{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        setTitle("病情记录");
+
+        mDrugUseCaseListViewModel.mPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+
         mRecyclerView = findViewById(R.id.list);
         mAdapter = new SelectIllnessRecordAdapter();
         mRecyclerView.addItemDecorationLine();
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             IntentBuilder.Builder()
                     .putExtra(IntentBuilder.KEY_DATA, "疾病名称")
                     .finishForResult(getBaseActivity());
         });
+
+
+        mRecyclerView.setRefreshListener(() -> {
+            setProgressVisible(true);
+            mAdapter.getData().clear();
+            mAdapter.notifyDataSetChanged();
+            mDrugUseCaseListViewModel.pi = 1;
+            mDrugUseCaseListViewModel.getTXGP_PigeonDisease_SelectAllData();
+        });
+
+        mAdapter.setOnLoadMoreListener(() -> {
+            setProgressVisible(true);
+            mDrugUseCaseListViewModel.pi++;
+            mDrugUseCaseListViewModel.getTXGP_PigeonDisease_SelectAllData();
+        }, mRecyclerView.getRecyclerView());
+
+
+        setProgressVisible(true);
+        mDrugUseCaseListViewModel.getTXGP_PigeonDisease_SelectAllData();
+
+    }
+
+
+    @Override
+    protected void initObserve() {
+        super.initObserve();
+
+        mDrugUseCaseListViewModel.mDrugUseCaseData.observe(this, datas -> {
+            setProgressVisible(false);
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+        });
+
+        mDrugUseCaseListViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
     }
 }

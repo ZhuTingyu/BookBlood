@@ -52,7 +52,7 @@ public class PairingNestAddViewModel extends BaseViewModel {
 
     //添加窝次信息   TXGP_PigeonBreedNest_Add
     public void getTXGP_PigeonBreedNest_Add() {
-        submitRequestThrowError(PairingModel.getTXGP_PigeonBreedNest_Add(mBreedPigeonEntity.getPigeonID(),
+        submitRequestThrowError(PairingModel.getTXGP_PigeonBreedNest_Add(mPairingInfoEntity.getPigeonBreedID(),
                 pairingTime,
                 layEggsTime,
                 fertilizedEgg,

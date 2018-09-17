@@ -9,6 +9,10 @@ import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
+import com.cpigeon.book.module.breeding.PairingInfoListFragment;
+import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonRecordListAdapter;
 import com.cpigeon.book.widget.SearchTextView;
 
@@ -18,35 +22,16 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/7.
  */
 
-public class SearchFeedPigeonRecordActivity extends BaseSearchActivity {
-
-    FeedPigeonRecordListAdapter mAdapter;
-
-    @Override
-    protected List<DbEntity> getHistory() {
-        return AppDatabase.getInstance(getBaseActivity()).DbEntityDao()
-                .getDataByUserAndType(UserModel.getInstance().getUserId(),AppDatabase.TYPE_SEARCH_FEED_PIGEON_RECORD);
-    }
+public class SearchFeedPigeonRecordActivity extends BaseSearchPigeonActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new FeedPigeonRecordListAdapter();
-        return mAdapter;
-    }
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+            FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
-            @Override
-            public void search(String key) {
-                mAdapter.setNewData(Lists.newTestArrayList());
-            }
-
-            @Override
-            public void cancel() {
-                finish();
-            }
         });
+        return mAdapter;
     }
 }

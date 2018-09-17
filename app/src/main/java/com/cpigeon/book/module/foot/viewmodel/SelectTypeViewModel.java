@@ -48,6 +48,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Play_Org = new MutableLiveData<>();//赛事组织
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Lineage = new MutableLiveData<>();//血统
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_State = new MutableLiveData<>();//信鸽状态
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Medicate = new MutableLiveData<>();//用药后的状态
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_ImgType = new MutableLiveData<>();//图片类型
 
 
@@ -150,6 +151,15 @@ public class SelectTypeViewModel extends BaseViewModel {
     //获取 赛事组织
     public void getSelectType_PigeonPlay_Org() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_PLAY_ORG), r -> {
+            if (r.isOk()) {
+                mSelectType_Play_Org.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取 用药后的状态
+    public void getSelectTypem__Medicate() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_MEDICATE), r -> {
             if (r.isOk()) {
                 mSelectType_Play_Org.setValue(r.data);
             } else throw new HttpErrorException(r);

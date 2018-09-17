@@ -179,13 +179,13 @@
 
         <!--挂环日期-->
         <com.cpigeon.book.widget.LineInputView
-            android:visibility="gone"
             android:id="@+id/ll_hanging_ring_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
             android:paddingLeft="@dimen/spacing_left_reight"
             android:paddingRight="@dimen/spacing_left_reight"
+            android:visibility="gone"
             app:lineInputView_Hint="请选择"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
@@ -286,9 +286,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="16dp"
                 android:paddingLeft="@dimen/spacing_left_reight"
-                android:paddingRight="@dimen/spacing_left_reight">
+                android:paddingRight="@dimen/spacing_left_reight"
+                android:paddingTop="16dp">
 
 
                 <TextView

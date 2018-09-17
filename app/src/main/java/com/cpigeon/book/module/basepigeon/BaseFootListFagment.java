@@ -41,9 +41,9 @@ public class BaseFootListFagment extends BaseBookFragment {
     protected BreedPigeonListAdapter mAdapter;
 
 
-    SelectTypeViewModel mSelectTypeViewModel;
+    protected SelectTypeViewModel mSelectTypeViewModel;
 
-    private BreedPigeonListModel mBreedPigeonListModel;
+    protected BreedPigeonListModel mBreedPigeonListModel;
 
     public static void start(Activity activity, String pigeonType) {
 
@@ -73,6 +73,9 @@ public class BaseFootListFagment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        mBreedPigeonListModel.typeid = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
         mAdapter = new BreedPigeonListAdapter();
 
         mRecyclerView.setAdapter(mAdapter);

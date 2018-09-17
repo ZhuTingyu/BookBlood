@@ -73,9 +73,13 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
         mLinearLayouts.add(mLl3);
         mLinearLayouts.add(mLl4);
 
+        //疫苗注射
         UseVaccineFragment addUseVaccineFragment = new UseVaccineFragment();
+        //病情记录
         StatusIllnessRecordFragment addStatusIllnessRecordFragment = new StatusIllnessRecordFragment();
+        //用药情况
         DrugUseCaseFragment addDrugUseCaseFragment = new DrugUseCaseFragment();
+        //保健品
         CareDrugFragment addCareDrugFragment = new CareDrugFragment();
 
         List<Fragment> fragments = Lists.newArrayList();
@@ -104,9 +108,9 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
 
             @Override
             public void onPageSelected(int position) {
-                setTextStatus(mCPosition,false);
+                setTextStatus(mCPosition, false);
                 mCPosition = position;
-                setTextStatus(position,true);
+                setTextStatus(position, true);
             }
 
             @Override
@@ -121,7 +125,7 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
 
         TextView view = mTextViews.get(position);
 
-        if (isSelect){
+        if (isSelect) {
             view.setBackgroundResource(R.drawable.shape_bg_add_feed_pigeon_record_select);
             view.setTextColor(Utils.getColor(R.color.colorPrimary));
 //            new CrazyShadow.Builder()
@@ -135,7 +139,7 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
 //                    .action(mLinearLayouts.get(position));
 
 
-        }else {
+        } else {
             view.setBackgroundResource(R.drawable.shape_bg_add_feed_pigeon_record_not_select);
             view.setTextColor(Utils.getColor(R.color.color_text_hint));
         }

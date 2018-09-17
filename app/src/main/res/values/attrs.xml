@@ -114,6 +114,7 @@
         <attr name="text" format="string" />
         <attr name="text_hint" format="string" />
         <attr name="edit_max_input_line" format="integer" />
+        <attr name="is_mandatory" format="boolean" />
         <attr name="input_high" format="dimension">
 
         </attr>
