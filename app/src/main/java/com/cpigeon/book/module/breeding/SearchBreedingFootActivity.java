@@ -2,15 +2,14 @@ package com.cpigeon.book.module.breeding;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
-import com.cpigeon.book.module.breedpigeon.SearchBreedPigeonActivity;
+import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 
 /**
  * Created by Administrator on 2018/9/15 0015.
  */
 
-public class SearchBreedingFootActivity extends SearchBreedPigeonActivity {
+public class SearchBreedingFootActivity extends BaseSearchPigeonActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {

@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.breedpigeon;
+package com.cpigeon.book.module.basepigeon;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,7 @@ import com.base.util.db.DbEntity;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/28.
  */
 
-public class SearchBreedPigeonActivity extends BaseSearchActivity {
+public class BaseSearchPigeonActivity extends BaseSearchActivity {
     protected BreedPigeonListAdapter mAdapter;
 
     private BreedPigeonListModel mBreedPigeonListModel;

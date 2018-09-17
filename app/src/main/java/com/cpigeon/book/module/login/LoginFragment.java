@@ -75,6 +75,7 @@ public class LoginFragment extends BaseBookFragment {
             } else {
                 //已完善鸽舍信息
                 MainActivity.start(getActivity());
+                finish();
             }
         });
 

@@ -76,5 +76,4 @@ public class PopWindowBuilder {
         mPopupWindow.showAtLocation(parent, xoff, yoff, gravity);
         return this.mPopupWindow;
     }
-
 }
