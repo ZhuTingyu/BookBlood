@@ -25,6 +25,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainAddPigeonAdapter;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainAddPigeonViewModel;
@@ -125,8 +126,14 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         mSelectAdapter = new NewTrainPigeonListAdapter();
         addList.setAdapter(mSelectAdapter);
         mSelectAdapter.setOnDeleteListener(position -> {
+            mSelectAdapter.remove(position);
+            PigeonEntity selectEntity = mSelectAdapter.getItem(position);
             for (int i = 0, len = mAdapter.getData().size(); i < len; i++) {
-
+                PigeonEntity entity = mAdapter.getData().get(i);
+                if(selectEntity.getFootRingNum().equals(entity.getFootRingNum())){
+                    mAdapter.setSelect(i, false);
+                    break;
+                }
             }
         });
     }
@@ -145,7 +152,7 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         mAniManager.setOnAnimListener(new AniManager.AnimListener() {
             @Override
             public void setAnimBegin(AniManager a) {
-
+                v.setVisibility(View.GONE);
             }
 
             @Override

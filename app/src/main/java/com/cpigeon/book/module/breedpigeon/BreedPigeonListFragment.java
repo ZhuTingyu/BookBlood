@@ -24,6 +24,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
@@ -94,7 +95,7 @@ public class BreedPigeonListFragment extends BaseFragment {
             Bundle bundle = new Bundle();
             bundle.putString(IntentBuilder.KEY_TYPE, pigeonType);
 
-            BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonActivity.class, bundle);
+            BaseSearchActivity.start(getBaseActivity(), BaseSearchPigeonActivity.class, bundle);
         });
         mDrawerLayout = mActivity.getDrawerLayout();
         mFiltrate = mActivity.getFiltrate();
