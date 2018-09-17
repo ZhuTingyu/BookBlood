@@ -100,7 +100,6 @@ public class FamilyMemberView extends FamilyMember {
         }
 
         if (generationPoint == 0) {
-            imgAdd.setVisibility(VISIBLE);
             if (isMiniModel) {
                 rootW = size_80;
                 rootH = size_80;

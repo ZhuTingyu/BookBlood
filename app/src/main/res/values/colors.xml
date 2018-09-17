@@ -75,5 +75,12 @@
     <color name="color_k_line_speed">#40A0FF</color>
     <color name="color_k_line_first_speed">#FF6ACC</color>
 
+
+    <color name="color_scale_yellow_data">#F9B855</color>
+    <color name="color_scale_blue_data">#0080FF</color>
+    <color name="color_scale_blue_other">#C2D9F0</color>
+    <color name="color_scale_red_data">#F72BB1</color>
+    <color name="color_scale_red_other">#F5C3E4</color>
+
 </resources>
 

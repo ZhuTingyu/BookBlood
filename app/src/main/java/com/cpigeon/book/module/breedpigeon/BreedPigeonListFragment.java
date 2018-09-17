@@ -23,6 +23,7 @@ import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonSexCountEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
@@ -31,6 +32,7 @@ import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
+import com.cpigeon.book.widget.stats.StatView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -101,7 +103,6 @@ public class BreedPigeonListFragment extends BaseFragment {
         mFiltrate = mActivity.getFiltrate();
 
 
-
         setToolbarRightImage(R.drawable.svg_filtrate, item -> {
             if (mDrawerLayout != null) {
                 mDrawerLayout.openDrawer(Gravity.RIGHT);
@@ -139,6 +140,7 @@ public class BreedPigeonListFragment extends BaseFragment {
         });
 
         mRecyclerView = findViewById(R.id.list);
+        mRecyclerView.addItemDecorationLine();
         mTvOk = findViewById(R.id.tvOk);
         mAdapter = new BreedPigeonListAdapter();
 //        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
@@ -148,9 +150,9 @@ public class BreedPigeonListFragment extends BaseFragment {
 
         mTvOk.setText(R.string.text_add_breed_pigeon);
         mTvOk.setOnClickListener(v -> {
-            if(pigeonType.equals(PigeonEntity.ID_MATCH_PIGEON)){
+            if (pigeonType.equals(PigeonEntity.ID_MATCH_PIGEON)) {
                 RacingPigeonEntryFragment.start(getBaseActivity());
-            }else {
+            } else {
                 InputBreedInBookFragment.start(getBaseActivity());
             }
         });
@@ -177,9 +179,9 @@ public class BreedPigeonListFragment extends BaseFragment {
             mBreedPigeonListModel.pi++;
             mBreedPigeonListModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
-
         setProgressVisible(true);
         mBreedPigeonListModel.getPigeonList();
+        mBreedPigeonListModel.getPigeonCount();
     }
 
     @Override
@@ -198,10 +200,32 @@ public class BreedPigeonListFragment extends BaseFragment {
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 
+        mBreedPigeonListModel.mLivePigeonSexCount.observe(this, pigeonSexCountEntity -> {
+            mAdapter.addHeaderView(initHeadView(pigeonSexCountEntity));
+        });
+
         mBreedPigeonListModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
         });
 
+    }
+
+    private View initHeadView(PigeonSexCountEntity countEntity) {
+        View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_stat_list_head, null);
+        StatView mStat1;
+        StatView mStat2;
+        StatView mStat3;
+
+        mStat1 = view.findViewById(R.id.stat1);
+        mStat2 = view.findViewById(R.id.stat2);
+        mStat3 = view.findViewById(R.id.stat3);
+
+        mStat1.bindData(countEntity.xiongCount + countEntity.ciCount
+                , countEntity.xiongCount + countEntity.ciCount);
+        mStat2.bindData(countEntity.xiongCount, countEntity.allCount);
+        mStat3.bindData(countEntity.ciCount, countEntity.allCount);
+
+        return view;
     }
 
     @Override

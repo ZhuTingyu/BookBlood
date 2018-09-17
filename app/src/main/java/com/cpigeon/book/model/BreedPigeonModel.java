@@ -5,6 +5,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
+import com.cpigeon.book.model.entity.PigeonSexCountEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -31,11 +32,11 @@ public class BreedPigeonModel {
 
     //hl 种鸽列表，筛选
     public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SelectAll(String pi, String ps,
-                                                                                            String typeid,
-                                                                                            String bloodid,
-                                                                                            String sexid,
-                                                                                            String year,
-                                                                                            String stateid) {
+                                                                                       String typeid,
+                                                                                       String bloodid,
+                                                                                       String sexid,
+                                                                                       String year,
+                                                                                       String stateid) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
@@ -49,8 +50,6 @@ public class BreedPigeonModel {
                 .addBody("stateid", stateid)
                 .request();
     }
-
-
 
 
     //hl 添加种鸽
@@ -117,7 +116,7 @@ public class BreedPigeonModel {
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_modify)
-                .addBody("typeid", String.valueOf(8))//
+                .addBody("typeid", PigeonEntity.ID_BREED_PIGEON)//
                 .addBody("pigeonid", pigeonid)// 鸽子id
                 .addBody("coodid", coodid)// 国家Id
                 .addBody("footnum", footnum)//足环（可选可填，传足环号）
@@ -139,7 +138,7 @@ public class BreedPigeonModel {
 
 
     //hl 种鸽(赛鸽)列表，搜索
-    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum,String typeid) {
+    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum, String typeid) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
@@ -149,6 +148,15 @@ public class BreedPigeonModel {
                 .addBody("ps", ps)
                 .addBody("footnum", footnum)
                 .addBody("typeid", typeid)
+                .request();
+    }
+
+    public static Observable<ApiResponse<PigeonSexCountEntity>> getPigeonSexCount(String typeId) {
+        return RequestData.<ApiResponse<PigeonSexCountEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<PigeonSexCountEntity>>() {
+                }.getType())
+                .url(R.string.get_pigeon_sex_count)
+                .addBody("typeid", typeId)
                 .request();
     }
 }

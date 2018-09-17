@@ -220,6 +220,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         if (!mIsLook) {
             mTvOk.setVisibility(View.VISIBLE);
             mTvOk.setOnClickListener(v -> {
+                setProgressVisible(true);
                 mViewModel.setPigeonHouse();
             });
         } else {
@@ -230,6 +231,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mViewModel.getPigeonHouse();
             mTvOk.setText(Utils.getString(R.string.text_sure_commit));
             mTvOk.setOnClickListener(v -> {
+                setProgressVisible(true);
                 mViewModel.setPigeonHouse();
             });
 
@@ -257,6 +259,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         });
 
         mViewModel.addR.observe(this, s -> {
+            setProgressVisible(false);
             UserModel.getInstance().setIsHaveHouseInfo(true);
             MainActivity.start(getBaseActivity());
         });

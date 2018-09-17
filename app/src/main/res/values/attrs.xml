@@ -157,4 +157,11 @@
         <attr name="middle_page_cover" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="StatView">
+        <attr name="statView_title" format="string"/>
+        <attr name="statView_data_color" format="color"/>
+        <attr name="statView_other_color" format="color"/>
+        <attr name="statView_stat_w" format="dimension"/>
+    </declare-styleable>
+
 </resources>

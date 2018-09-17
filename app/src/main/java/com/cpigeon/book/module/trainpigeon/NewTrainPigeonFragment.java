@@ -32,12 +32,16 @@ import com.base.util.system.AppManager;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.pigeonhouse.InputLocationFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
 import com.cpigeon.book.service.SingleLoginService;
 import com.cpigeon.book.widget.LineInputView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -46,6 +50,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 
 public class NewTrainPigeonFragment extends BaseMapFragment {
+
+    private static final int CODE_SELECT_PIGEONS = 0x123;
+
     private LineInputView mLvName;
     private LineInputView mLvFlyLocation;
     private LineInputView mLvFlyPoint;
@@ -137,7 +144,8 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         });
 
         mImgAdd.setOnClickListener(v -> {
-            NewTrainAddPigeonFragment.start(getBaseActivity());
+            NewTrainAddPigeonFragment.start(getBaseActivity()
+                    , (ArrayList<PigeonEntity>) mAdapter.getData(),CODE_SELECT_PIGEONS);
         });
 
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -183,6 +191,9 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
             mTvDis.setText(Utils.getString(R.string.text_KM, String.valueOf(d)));
 
             addLine(Lists.newArrayList(mPigeonHousePosition, selectPoint), R.color.colorPrimary);
+        }else if(requestCode == CODE_SELECT_PIGEONS){
+            List<PigeonEntity> pigeonEntities = (List<PigeonEntity>) data.getSerializableExtra(IntentBuilder.KEY_DATA);
+            mAdapter.setNewData(pigeonEntities);
         }
     }
 
@@ -193,6 +204,7 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         mViewModel.mCity = mAddress.getCity();
         mViewModel.mCounty = mAddress.getDistrict();*/
     }
+
 
     @Override
     public void error(int code, String error) {

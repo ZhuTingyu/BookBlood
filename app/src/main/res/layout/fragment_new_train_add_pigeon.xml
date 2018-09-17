@@ -36,6 +36,7 @@
             android:layout_height="wrap_content" />
         
         <TextView
+            android:id="@+id/tvAddAtOnce"
             android:background="@color/state_enabled_false"
             android:textColor="@color/color_text_enabled_false"
             android:text="@string/text_add_at_once"

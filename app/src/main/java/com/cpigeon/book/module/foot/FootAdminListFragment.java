@@ -27,6 +27,7 @@ import com.cpigeon.book.module.foot.viewmodel.FootAdminListViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
+import com.cpigeon.book.widget.stats.StatView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -78,7 +79,7 @@ public class FootAdminListFragment extends BaseBookFragment {
         EventBus.getDefault().register(this);
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getActivity(), SearchFootActivity.class,new Bundle());
+            BaseSearchActivity.start(getActivity(), SearchFootActivity.class, new Bundle());
         });
 
 
@@ -159,7 +160,6 @@ public class FootAdminListFragment extends BaseBookFragment {
             }
         });
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();

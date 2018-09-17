@@ -113,10 +113,12 @@ public class FamilyTreeView extends LinearLayout {
         addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             if (!isDrawView) {
                 initView();
-                LinearLayout first = generationLinearLayouts.get(0);
-                for (int i = 0, len = first.getChildCount(); i < len; i++) {
-                    FamilyMember member = (FamilyMember) first.getChildAt(i);
-                    member.setCanAdd();
+                if(!isShowInfoModel){
+                    LinearLayout first = generationLinearLayouts.get(0);
+                    for (int i = 0, len = first.getChildCount(); i < len; i++) {
+                        FamilyMember member = (FamilyMember) first.getChildAt(i);
+                        member.setCanAdd();
+                    }
                 }
                 isDrawView = true;
             }

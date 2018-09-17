@@ -494,7 +494,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                     PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonModifyViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
                         @Override
                         public void onOptionPicked(int index, String item) {
-                            tvState.setText(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeID());
+                            tvState.setText(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeName());
 
                             mBreedPigeonModifyViewModel.mBreedPigeonEntity.setStateID(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeID());
                             mBreedPigeonModifyViewModel.mBreedPigeonEntity.setStateName(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeName());

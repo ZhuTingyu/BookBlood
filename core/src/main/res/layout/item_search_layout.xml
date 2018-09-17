@@ -9,7 +9,6 @@
         android:layout_height="32dp"
         android:layout_margin="10dp"
         android:background="@drawable/shape_solid_f7f7f7_radius_15"
-        android:drawableLeft="@drawable/svg_search"
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
         android:hint="  搜索"

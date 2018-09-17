@@ -16,6 +16,7 @@ import com.base.http.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class IntentBuilder {
@@ -187,6 +188,11 @@ public class IntentBuilder {
         return this;
     }
 
+    public IntentBuilder putSerializableArrayListExtra(String name, ArrayList<? extends Serializable> value) {
+        intent.putExtra(name, value);
+        return this;
+    }
+
     public IntentBuilder putIntegerArrayListExtra(String name, ArrayList<Integer> value) {
         intent.putExtra(name, value);
         return this;
@@ -350,8 +356,7 @@ public class IntentBuilder {
     }
 
     public void finishForResult(Activity activity){
-        activity.setResult(Activity.RESULT_OK, intent);
-        activity.finish();
+        finishForResult(activity, Activity.RESULT_OK);
     }
     public void finishForResult(Activity activity, int resultCode){
         activity.setResult(resultCode, intent);
