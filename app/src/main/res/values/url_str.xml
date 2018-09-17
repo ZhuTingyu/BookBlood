@@ -163,9 +163,22 @@
     <string name="pairing_nest_info_list">TXGP_PigeonBreed_SelectIDAll</string>
     <!--添加配对信息-->
     <string name="pairing_info_add">TXGP_PigeonBreed_Add</string>
-
     <!--添加窝次信息-->
     <string name="pairing_nest_info_add">TXGP_PigeonBreedNest_Add</string>
+
+    <!--养鸽记录列表-->
+    <string name="feed_pigeon_list">TXGP_Pigeon_SelectRecord</string>
+    <!--养鸽记录统计-->
+    <string name="feed_pigeon_statistical">TXGP_Pigeon_SelectIDCount</string>
+    <!--添加疫苗注射-->
+    <string name="use_vaccine_add">TXGP_PigeonVaccine_Add</string>
+    <!--添加病情记录-->
+    <string name="status_illness_record_add">TXGP_PigeonDisease_Add</string>
+    <!--病情记录  列表-->
+    <string name="status_illness_record_list">TXGP_PigeonDisease_SelectAll</string>
+    <!--添加用药记录-->
+    <string name="drug_use_case_add">TXGP_PigeonDrug_Add</string>
+
 
     <!--信鸽血统推荐-->
     <string name="pairing_recommend_lineage">TXGP_PigeonBreed_RecomBlood</string>

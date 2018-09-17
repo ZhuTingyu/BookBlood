@@ -10,6 +10,7 @@ import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.FeedPigeonEntity;
 
 import java.util.List;
 
@@ -17,13 +18,13 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/7.
  */
 
-public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity, BaseViewHolder> {
     public FeedPigeonDetailsAdapter() {
         super(R.layout.item_feed_pigeon_details, Lists.newArrayList());
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, FeedPigeonEntity item) {
         TextView mTvTitle;
         LinearLayout mLlImgContent;
         LinearLayout mLlTextRoot;
@@ -41,12 +42,11 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<String, BaseViewH
         TextView mTvRight4;
 
         View v3 = helper.getView(R.id.v3);
-        if(helper.getAdapterPosition() - getHeaderLayoutCount() == 0){
+        if (helper.getAdapterPosition() - getHeaderLayoutCount() == 0) {
             v3.setVisibility(View.GONE);
-        }else {
+        } else {
             v3.setVisibility(View.VISIBLE);
         }
-
 
 
         helper.setTextView(R.id.tvTime, "2018-11-11 12:12:12");
@@ -77,7 +77,7 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<String, BaseViewH
             mTvTitle.setText(R.string.text_nef);
             mTvTitle.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_blue);
             helper.setGlideImageViewHaveRound(mContext, R.id.imgIcon, UserModel.getInstance().getUserData().touxiangurl);
-            helper.setText(R.id.tvImageContent,"112112333333333123123123123123123123123123123");
+            helper.setText(R.id.tvImageContent, "112112333333333123123123123123123123123123123");
 
         } else if (helper.getAdapterPosition() == 2) {//用药
             mTvTitle.setText(R.string.text_drug_use);

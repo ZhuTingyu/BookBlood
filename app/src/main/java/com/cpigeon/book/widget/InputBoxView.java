@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class InputBoxView extends LinearLayout {
     private int hintColor;
     private int textColor;
     private int maxInputLine;
+    private boolean isMandatory = false;//是否必填  显示小红点
     private int inputHigh;
     private String text;
     private String textHint;
@@ -36,6 +38,7 @@ public class InputBoxView extends LinearLayout {
     private TextView tv_hint;
     private TextView mTvTitle;
     private RelativeLayout rlz_input;
+    private ImageView img_is_mandatory;
     private LinearLayout layout_z;
 
     public InputBoxView(Context context) {
@@ -68,12 +71,16 @@ public class InputBoxView extends LinearLayout {
         text = array.getString(R.styleable.InputBoxView_text);
         textHint = array.getString(R.styleable.InputBoxView_text_hint);
         title = array.getString(R.styleable.InputBoxView_inputBoxView_tittle);
+
+
+        isMandatory = array.getBoolean(R.styleable.InputBoxView_is_mandatory, false);
     }
 
     private void initView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_input_box, this, true);
 
         input_box_editText = view.findViewById(R.id.input_box_editText);
+        img_is_mandatory = view.findViewById(R.id.img_is_mandatory);
         tv_hint = view.findViewById(R.id.tv_hint);
         mTvTitle = view.findViewById(R.id.tvTitle);
         rlz_input = view.findViewById(R.id.rlz_input);
@@ -87,6 +94,12 @@ public class InputBoxView extends LinearLayout {
         input_box_editText.setTextSize(textSize);
         input_box_editText.setMaxLines(maxInputLine);
         input_box_editText.setText(text);
+
+        if (isMandatory) {
+            img_is_mandatory.setVisibility(VISIBLE);
+        } else {
+            img_is_mandatory.setVisibility(GONE);
+        }
 
         input_box_editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -127,5 +140,9 @@ public class InputBoxView extends LinearLayout {
 
     public EditText getEditText() {
         return input_box_editText;
+    }
+
+    public RelativeLayout getRlz_input() {
+        return rlz_input;
     }
 }

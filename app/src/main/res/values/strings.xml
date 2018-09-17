@@ -30,8 +30,7 @@
     <string name="text_location">所在省市</string>
     <string name="text_details_address">地址</string>
     <string name="text_go_auth">去认证</string>
-    <string name="text_open_gallery">打开相册</string>
-    <string name="text_open_camera">打开相机</string>
+
     <string name="text_input_right_phone">请输入正确的手机号码！</string>
     <string name="text_input_right_auth_code">请输入正确的验证码！</string>
     <string name="text_input_right_password">请输入密码！</string>
@@ -59,11 +58,21 @@
         <item>@string/title_select_loft</item>
     </string-array>
 
-
+    <string name="text_open_gallery">打开相册</string>
+    <string name="text_open_camera">打开相机</string>
     <string-array name="array_choose_photo">
         <item>@string/text_open_camera</item>
         <item>@string/text_open_gallery</item>
     </string-array>
+
+    <!--有无副作用-->
+    <string name="text_side_effects_y">有副作用</string>
+    <string name="text_side_effects_n">无副作用</string>
+    <string-array name="array_side_effects">
+        <item>@string/text_side_effects_y</item>
+        <item>@string/text_side_effects_n</item>
+    </string-array>
+
 
     <!--账户安全-->
     <string-array name="array_account_security">
@@ -186,6 +195,7 @@
     <string name="text_add_foot_number">添加足环号码</string>
     <string name="text_input_foot_number_search">请输入足环号码进行搜索</string>
     <string name="text_remark">备注</string>
+    <string name="text_edit_lenth_hint">500字内</string>
     <string name="text_yuan">%1$s元</string>
     <string name="text_foot_details">足环详情</string>
     <string name="text_delete">删除</string>
@@ -257,6 +267,17 @@
     <string name="tv_fertilized_egg">请输入受精蛋个数</string>
     <string name="tv_fertilized_egg_no">请输入无精蛋个数</string>
     <string name="tv_hatches_num">请输入出壳个数</string>
+
+    <string name="tv_body_temperature">请输入体温</string>
+    <string name="tv_vaccine_name">请输入疫苗名称</string>
+    <string name="tv_illness_name">请输入疾病名称</string>
+    <string name="tv_illness_symptom">请输入症状</string>
+    <string name="tv_input_vaccine_reason">请输入注射原因</string>
+    <string name="tv_input_remark">请输入备注</string>
+
+    <string name="tv_drug_name">请输入药品名称</string>
+
+
 
     <string name="text_time">时间</string>
     <string name="text_set_photo_face">设为封面</string>

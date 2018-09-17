@@ -10,8 +10,8 @@ import com.base.util.db.DbEntity;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breeding.PairingInfoListFragment;
-import com.cpigeon.book.module.breedpigeon.SearchBreedPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonRecordListAdapter;
 import com.cpigeon.book.widget.SearchTextView;
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/7.
  */
 
-public class SearchFeedPigeonRecordActivity extends SearchBreedPigeonActivity {
+public class SearchFeedPigeonRecordActivity extends BaseSearchPigeonActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {

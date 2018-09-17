@@ -128,14 +128,12 @@ public class PairingNestAddFragment extends BaseBookFragment {
             Log.d("dingwei", "initObserve: 城市--》" + aMapLocation.getCity());
             LogUtil.print(aMapLocation);
             WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
-
                 Log.d("dingwei", "initObserve: 天气" + localWeatherLive.getWeather());
                 mPairingNestAddViewModel.weather = localWeatherLive.getWeather();//天气
                 mPairingNestAddViewModel.temper = localWeatherLive.getTemperature();//气温
                 mPairingNestAddViewModel.hum = localWeatherLive.getHumidity();//湿度
                 mPairingNestAddViewModel.dir = localWeatherLive.getWindDirection();//风向
             });
-
         });
     }
 

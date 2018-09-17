@@ -38,11 +38,9 @@ public class FeedPigeonRecordListFragment extends BaseFootListFagment {
     @Override
     protected void initData() {
         super.initData();
-
         mTvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);
 
-        mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
             Bundle mBundle = new Bundle();
             mBundle.putString(IntentBuilder.KEY_TYPE, "");
@@ -50,10 +48,11 @@ public class FeedPigeonRecordListFragment extends BaseFootListFagment {
         });
 
         mAdapter = new FeedPigeonRecordListAdapter();
-        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
             PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
             FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
         });
+
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecorationLine();
     }

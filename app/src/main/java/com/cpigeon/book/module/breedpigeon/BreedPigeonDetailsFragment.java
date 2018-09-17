@@ -46,6 +46,7 @@ import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.play.PlayFragment1;
 import com.cpigeon.book.module.play.PlayFragment2;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
+import com.cpigeon.book.util.PigeonPublicUtil;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 import com.cpigeon.book.widget.mydialog.AddPlayDialog;
 
@@ -126,7 +127,6 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     TextView tvRight;
     @BindView(R.id.llButton)
     LinearLayout llButton;
-    Unbinder unbinder;
 
     private BreedPigeonDetailsViewModel mBreedPigeonDetailsViewModel;
 
@@ -340,13 +340,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
             tvFoot.setText(datas.getFootRingNum());//足环号
 
-            if (datas.getPigeonSexName().equals("雌")) {
-                imgSex.setImageResource(R.mipmap.ic_female);
-            } else if (datas.getPigeonSexName().equals("雄")) {
-                imgSex.setImageResource(R.mipmap.ic_male);
-            } else {
-                imgSex.setImageResource(R.mipmap.ic_sex_no);
-            }
+            //设置性别
+            PigeonPublicUtil.setPigeonSexImg(datas.getPigeonSexName(), imgSex);
 
             tvFootVice.setText(datas.getFootRingIDToNum());//副足环
             tvLineage.setText(datas.getPigeonBloodName());//血统
