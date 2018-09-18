@@ -120,6 +120,7 @@ public class IdCertificationFragment extends BaseBookFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
+            setProgressVisible(true);
             mViewModel.setUserIdCard();
         });
 
@@ -135,6 +136,7 @@ public class IdCertificationFragment extends BaseBookFragment {
         });
 
         mViewModel.normalResult.observe(this, s -> {
+            setProgressVisible(false);
             DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
                 getBaseActivity().setResult(Activity.RESULT_OK);
@@ -143,6 +145,7 @@ public class IdCertificationFragment extends BaseBookFragment {
         });
 
         mViewModel.mUserIdCardLiveData.observe(this, userIdCardEntity -> {
+            setProgressVisible(false);
             if (userIdCardEntity == null) {
                 return;
             }

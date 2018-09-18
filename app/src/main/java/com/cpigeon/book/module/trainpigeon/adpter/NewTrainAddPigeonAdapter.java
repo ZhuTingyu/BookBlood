@@ -9,6 +9,8 @@ import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
 
+import java.util.List;
+
 /**
  * Created by Zhu TingYu on 2018/9/3.
  */
@@ -43,6 +45,17 @@ public class NewTrainAddPigeonAdapter extends BaseQuickAdapter<PigeonEntity, Bas
     public void setSelect(int position, boolean isSelect){
         getData().get(position).setSelecte(isSelect);
         notifyItemChanged(position);
+    }
+
+    public List<PigeonEntity> getNotSelectAll(){
+        List<PigeonEntity> pigeonEntities = Lists.newArrayList();
+        for (PigeonEntity entity : getData()) {
+            if (!entity.isSelect()) {
+                pigeonEntities.add(entity);
+                entity.setSelecte(true);
+            }
+        }
+        return pigeonEntities;
     }
 
     public interface OnAddPigeonListener {

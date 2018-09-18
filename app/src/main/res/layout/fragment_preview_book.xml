@@ -40,6 +40,7 @@
         android:layout_height="match_parent"
         android:layout_above="@id/rlText"
         android:layout_marginTop="54dp"
+        app:TreeView_isShowInfoModel="true"
         app:TreeView_isHaveCurrent="true"
         app:TreeView_isHorizontal="true"
         app:TreeView_moveType="h" />

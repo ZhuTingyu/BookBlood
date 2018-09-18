@@ -10,12 +10,12 @@ import java.text.NumberFormat;
 public class MathUtil {
 
 
-    public static String doubleformat(double d, int cout) {
+    public static String doubleformat(double d, int pointCount) {
         NumberFormat nf = NumberFormat.getNumberInstance();
 
 
         // 保留两位小数
-        nf.setMaximumFractionDigits(cout);
+        nf.setMaximumFractionDigits(pointCount);
 
 
         // 如果不需要四舍五入，可以使用RoundingMode.DOWN

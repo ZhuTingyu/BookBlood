@@ -68,7 +68,7 @@ public class LoginFragment extends BaseBookFragment {
 //            SingleLoginService.start(getActivity());
 
 //            MainActivity.start(getActivity());
-
+            setProgressVisible(false);
             if (!UserModel.getInstance().isHaveHouseInfo()) {
                 //未完善鸽舍信息
                 PigeonHouseInfoFragment.start(getActivity(), false);
@@ -117,6 +117,7 @@ public class LoginFragment extends BaseBookFragment {
                 return;
             }
             mSingleLoginViewModel.getSingleLogin(o -> {
+                setProgressVisible(true);
                 if (!o.isEmpty()) {
                     if (dialogPrompt == null || !dialogPrompt.isShowing()) {
                         dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o,true, dialog1 -> {

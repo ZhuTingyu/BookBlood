@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PopWindowBuilder;
 import com.base.util.Utils;
@@ -32,6 +33,10 @@ import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainAddPigeonViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.paradoxie.shopanimlibrary.AniManager;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import q.rorbin.badgeview.QBadgeView;
 
 /**
@@ -45,6 +50,7 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     SearchFragmentParentActivity mActivity;
     private TextView mTvChooseYet;
     private TextView mTvAllChoose;
+    private TextView mTvAddAtOnce;
     QBadgeView mBadgeView;
     XRecyclerView mRecyclerView;
     NewTrainAddPigeonAdapter mAdapter;
@@ -53,9 +59,12 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     View mPopView;
     AniManager mAniManager;
     PopupWindow mPopupWindow;
+    List<PigeonEntity> mSelectYetPigeon;
 
-    public static void start(Activity activity) {
-        SearchFragmentParentActivity.start(activity, NewTrainAddPigeonFragment.class, null);
+    public static void start(Activity activity, ArrayList<PigeonEntity> pigeonEntities, int code) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(IntentBuilder.KEY_DATA, pigeonEntities);
+        SearchFragmentParentActivity.start(activity, NewTrainAddPigeonFragment.class, code,null);
     }
 
     @Override
@@ -75,6 +84,9 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mSelectYetPigeon = (List<PigeonEntity>) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+
         mAniManager = new AniManager();
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
@@ -84,6 +96,8 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         mTvChooseYet = findViewById(R.id.tvChooseYet);
         mTvAllChoose = findViewById(R.id.tvAllChoose);
         mRecyclerView = findViewById(R.id.list);
+        mTvAddAtOnce = findViewById(R.id.tvAddAtOnce);
+
         mRecyclerView.addItemDecorationLine();
 
         mBadgeView = new QBadgeView(getBaseActivity());
@@ -110,6 +124,18 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
                     .showAtLocation(getBaseActivity().getRootView(), 0, 0, Gravity.CENTER);
         });
 
+        mTvAllChoose.setOnClickListener(v -> {
+            mSelectAdapter.addData(mAdapter.getNotSelectAll());
+            mAdapter.notifyDataSetChanged();
+            mBadgeView.setBadgeText(String.valueOf(mSelectAdapter.getData().size()));
+        });
+
+        mTvAddAtOnce.setOnClickListener(v -> {
+            IntentBuilder.Builder()
+                    .putSerializableArrayListExtra(IntentBuilder.KEY_DATA, (ArrayList<? extends Serializable>) mSelectAdapter.getData())
+                    .finishForResult(getBaseActivity());
+        });
+
         setProgressVisible(true);
         mViewModel.getPigeonList();
     }
@@ -126,7 +152,6 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         mSelectAdapter = new NewTrainPigeonListAdapter();
         addList.setAdapter(mSelectAdapter);
         mSelectAdapter.setOnDeleteListener(position -> {
-            mSelectAdapter.remove(position);
             PigeonEntity selectEntity = mSelectAdapter.getItem(position);
             for (int i = 0, len = mAdapter.getData().size(); i < len; i++) {
                 PigeonEntity entity = mAdapter.getData().get(i);
@@ -134,6 +159,11 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
                     mAdapter.setSelect(i, false);
                     break;
                 }
+            }
+            mSelectAdapter.remove(position);
+            mBadgeView.setBadgeText(String.valueOf(mSelectAdapter.getData().size()));
+            if(mSelectAdapter.getData().size() == 0){
+                mPopupWindow.dismiss();
             }
         });
     }
