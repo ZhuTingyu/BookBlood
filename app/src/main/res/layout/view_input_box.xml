@@ -43,7 +43,7 @@
         android:focusableInTouchMode="true"
         android:padding="5dp">
 
-        <EditText
+        <com.cpigeon.book.widget.ClickGetFocusEditText
             android:id="@+id/input_box_editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -158,10 +158,10 @@ public class SelectTypeViewModel extends BaseViewModel {
     }
 
     //获取 用药后的状态
-    public void getSelectTypem__Medicate() {
+    public void getSelectTypem_Medicate() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_MEDICATE), r -> {
             if (r.isOk()) {
-                mSelectType_Play_Org.setValue(r.data);
+                mSelectType_Medicate.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

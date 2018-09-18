@@ -34,7 +34,7 @@ public class InputBoxView extends LinearLayout {
     private String text;
     private String textHint;
     private String title;
-    private EditText input_box_editText;
+    private ClickGetFocusEditText input_box_editText;
     private TextView tv_hint;
     private TextView mTvTitle;
     private RelativeLayout rlz_input;
@@ -138,7 +138,7 @@ public class InputBoxView extends LinearLayout {
     }
 
 
-    public EditText getEditText() {
+    public ClickGetFocusEditText getEditText() {
         return input_box_editText;
     }
 

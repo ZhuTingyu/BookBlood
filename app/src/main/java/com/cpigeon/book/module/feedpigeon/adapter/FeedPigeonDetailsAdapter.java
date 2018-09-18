@@ -49,7 +49,6 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
         }
 
 
-        helper.setTextView(R.id.tvTime, "2018-11-11 12:12:12");
         mTvTitle = helper.getView(R.id.tvTitle);
         mLlImgContent = helper.getView(R.id.llImgContent);
         mLlTextRoot = helper.getView(R.id.llTextRoot);
@@ -70,8 +69,9 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
         mTvLeft4 = helper.getView(R.id.tvLeft4);
         mTvRight4 = helper.getView(R.id.tvRight4);
 
+        helper.setTextView(R.id.tvTime, item.getUseTime());
 
-        if (helper.getAdapterPosition() == 1) { //随拍
+        if (item.getTypeID() == 5) { //随拍
             mLlImgContent.setVisibility(View.VISIBLE);
             mLlTextRoot.setVisibility(View.GONE);
             mTvTitle.setText(R.string.text_nef);
@@ -79,7 +79,7 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             helper.setGlideImageViewHaveRound(mContext, R.id.imgIcon, UserModel.getInstance().getUserData().touxiangurl);
             helper.setText(R.id.tvImageContent, "112112333333333123123123123123123123123123123");
 
-        } else if (helper.getAdapterPosition() == 2) {//用药
+        } else if (item.getTypeID() == 3) {//用药
             mTvTitle.setText(R.string.text_drug_use);
             mTvTitle.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_red);
             mLlImgContent.setVisibility(View.GONE);
@@ -89,16 +89,16 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mLlTextContent3.setVisibility(View.VISIBLE);
             mLlTextContent4.setVisibility(View.GONE);
             mTvLeft1.setText(R.string.text_drug_name);
-            mTvRight1.setText("阿莫西林");
+            mTvRight1.setText(item.getName());
 
             mTvLeft2.setText(R.string.text_drug_after_result);
-            mTvRight2.setText("无");
+            mTvRight2.setText(item.getBitEffect());
 
             mTvLeft3.setText(R.string.text_drug_after_status);
-            mTvRight3.setText("好转");
+            mTvRight3.setText(item.getState());
 
 
-        } else if (helper.getAdapterPosition() == 3) {//保健
+        } else if (item.getTypeID() == 1) {//保健
             mTvTitle.setText(R.string.text_care);
             mTvTitle.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_deep_orange);
             mLlImgContent.setVisibility(View.GONE);
@@ -109,18 +109,18 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mLlTextContent4.setVisibility(View.VISIBLE);
 
             mTvLeft1.setText(R.string.text_care_drug_name);
-            mTvRight1.setText("阿莫西林");
+            mTvRight1.setText(item.getName());
 
             mTvLeft2.setText(R.string.text_function);
-            mTvRight2.setText("无");
+            mTvRight2.setText(item.getListInfo());
 
             mTvLeft3.setText(R.string.text_drug_after_result);
-            mTvRight3.setText("好转");
+            mTvRight3.setText(item.getBitEffect());
 
             mTvLeft4.setText(R.string.text_drug_use_effect);
-            mTvRight4.setText("有");
+            mTvRight4.setText(item.getState());
 
-        } else if (helper.getAdapterPosition() == 4) {//疫苗
+        } else if (item.getTypeID() == 2) {//疫苗
             mTvTitle.setText(R.string.text_vaccine);
             mTvTitle.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_green);
             mLlImgContent.setVisibility(View.GONE);
@@ -131,11 +131,11 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mLlTextContent4.setVisibility(View.GONE);
 
             mTvLeft1.setText(R.string.text_vaccine_name);
-            mTvRight1.setText("阿莫西林");
+            mTvRight1.setText(item.getName());
 
             mTvLeft2.setText(R.string.text_use_vaccine_reason);
-            mTvRight2.setText("无");
-        } else if (helper.getAdapterPosition() == 5) {//病情
+            mTvRight2.setText(item.getListInfo());
+        } else if (item.getTypeID() == 4) {//病情
             mTvTitle.setText(R.string.text_state_illness);
             mTvTitle.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_red);
             mLlImgContent.setVisibility(View.GONE);
@@ -146,13 +146,13 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mLlTextContent4.setVisibility(View.GONE);
 
             mTvLeft1.setText(R.string.text_illness_symptom);
-            mTvRight1.setText("阿莫西林");
+            mTvRight1.setText(item.getListInfo());
 
             mTvLeft2.setText(R.string.text_illness_name);
-            mTvRight2.setText("无");
+            mTvRight2.setText(item.getName());
 
             mTvLeft3.setText(R.string.text_is_user_drug);
-            mTvRight3.setText("好转");
+            mTvRight3.setText(item.getState());
         }
 
         addTopAndBttomMargin(helper, 16);

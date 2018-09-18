@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.feedpigeon;
+package com.cpigeon.book.module.feedpigeon.childfragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
-import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
 import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
@@ -25,22 +25,23 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
+import com.cpigeon.book.model.entity.DrugUseCaseEntity;
+import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
+import com.cpigeon.book.module.feedpigeon.SelectIllnessRecordFragment;
 import com.cpigeon.book.module.feedpigeon.viewmodel.DrugUseCaseViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
-import com.luck.picture.lib.config.PictureMimeType;
 
 import java.util.Date;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
@@ -93,7 +94,18 @@ public class DrugUseCaseFragment extends BaseBookFragment {
         mDrugUseCaseViewModel = new DrugUseCaseViewModel();
         mSelectTypeViewModel = new SelectTypeViewModel();
         initViewModels(mDrugUseCaseViewModel, mSelectTypeViewModel);
+
+        mDrugUseCaseViewModel.setmBaseFragment(this);
     }
+
+    public static void start(Activity activity, PigeonEntity mPigeonEntity, FeedPigeonEntity mFeedPigeonEntity, int type) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
+                .putExtra(IntentBuilder.KEY_DATA_2, mFeedPigeonEntity)
+                .putExtra(IntentBuilder.KEY_TYPE, type)//类型
+                .startParentActivity(activity, DrugUseCaseFragment.class);
+    }
+
 
     @Nullable
     @Override
@@ -108,7 +120,37 @@ public class DrugUseCaseFragment extends BaseBookFragment {
 
         mDrugUseCaseViewModel.mPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
 
-        mSelectTypeViewModel.getSelectTypem__Medicate();//获取用药后的状态
+        mDrugUseCaseViewModel.mFeedPigeonEntity = getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA_2);
+        mDrugUseCaseViewModel.typePag = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TYPE, 0);
+        if (mDrugUseCaseViewModel.typePag == 1) {
+            //修改  删除
+            setTitle(getString(R.string.str_drug_use_case_details));
+
+
+            setProgressVisible(true);
+            mDrugUseCaseViewModel.getTXGP_PigeonDrug_SelectData();
+            tvOk.setVisibility(View.GONE);
+
+            setToolbarRight(getString(R.string.text_delete), item -> {
+                //删除
+                getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), getString(R.string.text_delete_warning_hint), sweetAlertDialog -> {
+                    //确定
+                    sweetAlertDialog.dismiss();
+                    setProgressVisible(true);
+                    mDrugUseCaseViewModel.getTXGP_PigeonDrug_DeleteData();
+                }, sweetAlertDialog -> {
+                    //取消
+                    sweetAlertDialog.dismiss();
+                });
+
+                return true;
+            });
+        }
+
+
+        inputRemark.getEditText().setCanEdit(false);//不可编辑
+
+        mSelectTypeViewModel.getSelectTypem_Medicate();//获取用药后的状态
     }
 
     @Override
@@ -124,20 +166,57 @@ public class DrugUseCaseFragment extends BaseBookFragment {
             TextViewUtil.setEnabled(tvOk, aBoolean);
         });
 
-        LocationLiveData.get(true).observe(this, aMapLocation -> {
-            WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
-                mDrugUseCaseViewModel.weather = localWeatherLive.getWeather();//天气
-                mDrugUseCaseViewModel.temper = localWeatherLive.getTemperature();//气温
-                mDrugUseCaseViewModel.hum = localWeatherLive.getHumidity();//湿度
-                mDrugUseCaseViewModel.dir = localWeatherLive.getWindDirection();//风向
+        if (mDrugUseCaseViewModel.typePag == 0) {
+            LocationLiveData.get(true).observe(this, aMapLocation -> {
+                WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
+                    mDrugUseCaseViewModel.weather = localWeatherLive.getWeather();//天气
+                    mDrugUseCaseViewModel.temper = localWeatherLive.getTemperature();//气温
+                    mDrugUseCaseViewModel.hum = localWeatherLive.getHumidity();//湿度
+                    mDrugUseCaseViewModel.dir = localWeatherLive.getWindDirection();//风向
+                });
             });
-        });
+
+        }
 
 
         //用药后的状态
-        mSelectTypeViewModel.mSelectType_Pigeon_Source.observe(this, selectTypeEntities -> {
+        mSelectTypeViewModel.mSelectType_Medicate.observe(this, selectTypeEntities -> {
             setProgressVisible(false);
             mDrugUseCaseViewModel.mSelectTypes_drugAfterStatus = selectTypeEntities;
+        });
+
+        mDrugUseCaseViewModel.mDrugUseCaseDetails.observe(this, datas -> {
+            setProgressVisible(false);
+
+            mDrugUseCaseViewModel.illnessRecord = String.valueOf(datas.getPigeonDiseaseID());//病情记录id
+            mDrugUseCaseViewModel.drugName = datas.getDrugName();//药品名称
+            mDrugUseCaseViewModel.drugUseTime = datas.getUseDrugTime();//用药日期
+            mDrugUseCaseViewModel.recordTime = datas.getRecordTime();//记录日期
+            mDrugUseCaseViewModel.drugAfterStatus = String.valueOf(datas.getEffectStateID());//用药后状态
+            mDrugUseCaseViewModel.isHaveAfterResult = String.valueOf(datas.getBitEffect());//有无副作用
+            mDrugUseCaseViewModel.bodyTemp = datas.getBodytemper();
+            mDrugUseCaseViewModel.remark = datas.getRemark();//备注
+
+
+            lvIllnessRecord.setContent(datas.getPigeonDiseaseName());//病情记录
+            lvDrugName.setRightText(mDrugUseCaseViewModel.drugName);//药品名称
+            lvDrugUseTime.setContent(mDrugUseCaseViewModel.drugUseTime);//用药日期
+            lvRecordTime.setContent(mDrugUseCaseViewModel.recordTime);//记录日期
+            lvDrugAfterStatus.setContent(datas.getEffectStateName());//用药后状态
+            if (datas.getBitEffect() == 1) {
+                lvIsHaveAfterResult.setContent(Utils.getString(R.string.text_side_effects_y));//有副作用
+            } else {
+                lvIsHaveAfterResult.setContent(Utils.getString(R.string.text_side_effects_n));//无副作用
+            }
+            lvBodyTemp.setRightText(mDrugUseCaseViewModel.bodyTemp);//体温
+            inputRemark.setText(mDrugUseCaseViewModel.remark);//备注
+
+
+            mDrugUseCaseViewModel.weather = datas.getWeather();//天气
+            mDrugUseCaseViewModel.temper = datas.getTemperature();//气温
+            mDrugUseCaseViewModel.hum = datas.getHumidity();//湿度
+            mDrugUseCaseViewModel.dir = datas.getDirection();//风向
+
         });
     }
 
@@ -146,7 +225,12 @@ public class DrugUseCaseFragment extends BaseBookFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            lvIllnessRecord.setRightText(data.getStringExtra(IntentBuilder.KEY_DATA));
+
+            StatusIllnessRecordEntity mStatusIllnessRecordEntity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            mDrugUseCaseViewModel.illnessRecord = String.valueOf(mStatusIllnessRecordEntity.getPigeonDiseaseId());
+
+            lvIllnessRecord.setContent(mStatusIllnessRecordEntity.getPigeonDiseaseName());
+            mDrugUseCaseViewModel.isCanCommit();
         }
     }
 
@@ -158,7 +242,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
             case R.id.lvIllnessRecord:
                 //病情记录
                 IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA,mDrugUseCaseViewModel.mPigeonEntity)
+                        .putExtra(IntentBuilder.KEY_DATA, mDrugUseCaseViewModel.mPigeonEntity)
                         .startParentActivity(getBaseActivity(), SelectIllnessRecordFragment.class, CODE_ILLNESS_RECORD);
 
                 break;
@@ -200,7 +284,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
                         }
                     });
                 } else {
-                    mSelectTypeViewModel.getSelectTypem__Medicate();//获取用药后的状态
+                    mSelectTypeViewModel.getSelectTypem_Medicate();//获取用药后的状态
                 }
                 break;
             case R.id.lvIsHaveAfterResult:
@@ -217,6 +301,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
                         mDrugUseCaseViewModel.isHaveAfterResult = "2";
                     }
 
+                    lvIsHaveAfterResult.setContent(way);
                     mDrugUseCaseViewModel.isCanCommit();
                 });
 

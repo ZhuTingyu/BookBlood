@@ -170,14 +170,47 @@
     <string name="feed_pigeon_list">TXGP_Pigeon_SelectRecord</string>
     <!--养鸽记录统计-->
     <string name="feed_pigeon_statistical">TXGP_Pigeon_SelectIDCount</string>
-    <!--添加疫苗注射-->
+
+
+    <!--疫苗注射添加-->
     <string name="use_vaccine_add">TXGP_PigeonVaccine_Add</string>
-    <!--添加病情记录-->
+    <!--疫苗注射修改-->
+    <string name="use_vaccine_modify">TXGP_PigeonVaccine_Update</string>
+    <!--疫苗注射详情-->
+    <string name="use_vaccine_details">TXGP_PigeonVaccine_Select</string>
+    <!--疫苗注射删除-->
+    <string name="use_vaccine_del">TXGP_PigeonVaccine_Delete</string>
+
+    <!--病情记录  添加-->
     <string name="status_illness_record_add">TXGP_PigeonDisease_Add</string>
+    <!--病情记录  修改-->
+    <string name="status_illness_record_modify">TXGP_PigeonDisease_Edit</string>
+    <!--病情记录  详情-->
+    <string name="status_illness_record_details">TXGP_PigeonDisease_Select</string>
+    <!--病情记录  删除-->
+    <string name="status_illness_record_del">TXGP_Delete_PigeonDisease</string>
     <!--病情记录  列表-->
     <string name="status_illness_record_list">TXGP_PigeonDisease_SelectAll</string>
-    <!--添加用药记录-->
+
+
+    <!--用药记录  添加-->
     <string name="drug_use_case_add">TXGP_PigeonDrug_Add</string>
+    <!--用药记录  修改-->
+    <string name="drug_use_case_modify">TXGP_PigeonDrug_Edit</string>
+    <!--用药记录  详情-->
+    <string name="drug_use_case_details">TXGP_PigeonDrug_Select</string>
+    <!--用药记录  删除-->
+    <string name="drug_use_case_del">TXGP_PigeonDrug_Delete</string>
+
+    <!--保健品  添加-->
+    <string name="drug_care_drug_add">TXGP_PigeonHealth_Add</string>
+    <!--保健品  修改-->
+    <string name="drug_care_drug_modify">TXGP_PigeonHealth_Update</string>
+    <!--保健品  详情-->
+    <string name="drug_care_drug_details">TXGP_PigeonHealth_Select</string>
+    <!--保健品  删除-->
+    <string name="drug_care_drug_del">TXGP_PigeonHealth_Delete</string>
+
 
 
     <!--信鸽血统推荐-->

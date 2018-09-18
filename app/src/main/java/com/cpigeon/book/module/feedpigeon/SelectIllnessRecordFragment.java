@@ -13,7 +13,9 @@ import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.DrugUseCaseEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
 import com.cpigeon.book.module.feedpigeon.adapter.SelectIllnessRecordAdapter;
 import com.cpigeon.book.module.feedpigeon.viewmodel.DrugUseCaseListViewModel;
 import com.cpigeon.book.module.feedpigeon.viewmodel.DrugUseCaseViewModel;
@@ -58,8 +60,11 @@ public class SelectIllnessRecordFragment extends BaseBookFragment {
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+
+            StatusIllnessRecordEntity mStatusIllnessRecordEntity = (StatusIllnessRecordEntity) adapter.getData().get(position);
+
             IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, "疾病名称")
+                    .putExtra(IntentBuilder.KEY_DATA, mStatusIllnessRecordEntity)
                     .finishForResult(getBaseActivity());
         });
 
@@ -89,7 +94,7 @@ public class SelectIllnessRecordFragment extends BaseBookFragment {
     protected void initObserve() {
         super.initObserve();
 
-        mDrugUseCaseListViewModel.mDrugUseCaseData.observe(this, datas -> {
+        mDrugUseCaseListViewModel.mStatusIllnessRecordData.observe(this, datas -> {
             setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });

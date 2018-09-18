@@ -22,16 +22,24 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonDetailsAdapter;
+import com.cpigeon.book.module.feedpigeon.childfragment.CareDrugFragment;
+import com.cpigeon.book.module.feedpigeon.childfragment.DrugUseCaseFragment;
+import com.cpigeon.book.module.feedpigeon.childfragment.StatusIllnessRecordFragment;
+import com.cpigeon.book.module.feedpigeon.childfragment.UseVaccineFragment;
 import com.cpigeon.book.module.feedpigeon.viewmodel.FeedPigeonListViewModel;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.PigeonPublicUtil;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.entity.LocalMedia;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -112,6 +120,8 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        EventBus.getDefault().register(this);//在当前界面注册一个订阅者
+
         toolbar.getMenu().clear();
         toolbar.getMenu().add("")
                 .setIcon(R.mipmap.ic_feed_record_photo)
@@ -142,7 +152,34 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         mAdapter.addHeaderView(initView());
 
         mRecyclerView.setRefreshListener(() -> {
-            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, Lists.newArrayList());
+            initData();
+        });
+
+        mAdapter.setOnLoadMoreListener(() -> {
+            mAdapter.setLoadMore(true);
+
+//            setProgressVisible(true);
+//            mFeedPigeonListViewModel.pi++;
+//            mFeedPigeonListViewModel.getTXGP_Pigeon_SelectIDCountData();
+//            mFeedPigeonListViewModel.getTXGP_Pigeon_SelectRecordData();
+        }, mRecyclerView.getRecyclerView());
+
+
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+
+            FeedPigeonEntity item = mAdapter.getData().get(position);
+
+            if (item.getTypeID() == 5) { //随拍
+
+            } else if (item.getTypeID() == 3) {//用药
+                DrugUseCaseFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+            } else if (item.getTypeID() == 1) {//保健
+                CareDrugFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+            } else if (item.getTypeID() == 2) {//疫苗
+                UseVaccineFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+            } else if (item.getTypeID() == 4) {//病情
+                StatusIllnessRecordFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+            }
         });
 
         setProgressVisible(true);
@@ -188,5 +225,27 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
                     .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
 
         }
+    }
+
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.FEED_PIGEON_DETAILS_REFRESH)) {
+            initData();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//取消注册
+    }
+
+    private void initData() {
+        setProgressVisible(true);
+        mAdapter.getData().clear();
+        mAdapter.notifyDataSetChanged();
+        mFeedPigeonListViewModel.pi = 1;
+        mFeedPigeonListViewModel.getTXGP_Pigeon_SelectIDCountData();
+        mFeedPigeonListViewModel.getTXGP_Pigeon_SelectRecordData();
     }
 }

@@ -159,26 +159,34 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        if (getArguments() != null) {
-            isBack = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
-        }
-        toolbar = view.findViewById(R.id.toolbar);
-        titleView = view.findViewById(R.id.toolbar_title);
-        stateBar = view.findViewById(R.id.stateBar);
-        imgTitle = view.findViewById(R.id.imgTitle);
-        if (toolbar == null) {
-            toolbar = getActivity().findViewById(R.id.toolbar);
-            titleView = getActivity().findViewById(R.id.toolbar_title);
-            imgTitle = getActivity().findViewById(R.id.imgTitle);
-        }
-        if (toolbar != null && isBack) {
-            toolbar.setNavigationOnClickListener(v -> {
-                getActivity().finish();
-            });
-        }
+        try {
+            if (getArguments() != null) {
+                isBack = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
+            }
+            toolbar = view.findViewById(R.id.toolbar);
+            titleView = view.findViewById(R.id.toolbar_title);
+            stateBar = view.findViewById(R.id.stateBar);
+            imgTitle = view.findViewById(R.id.imgTitle);
+            if (toolbar == null) {
+                toolbar = getActivity().findViewById(R.id.toolbar);
+                titleView = getActivity().findViewById(R.id.toolbar_title);
+                imgTitle = getActivity().findViewById(R.id.imgTitle);
+            }
+            if (toolbar != null && isBack) {
+                toolbar.setNavigationOnClickListener(v -> {
+                    if (getBaseActivity()!=null){
+                        getBaseActivity().finish();
+                    }
+                });
+            }
 
-        if (stateBar == null) {
-            stateBar = getActivity().findViewById(R.id.stateBar);
+            if (stateBar == null) {
+                if (getBaseActivity()!=null){
+                    stateBar =  getBaseActivity().findViewById(R.id.stateBar);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         initObserve();

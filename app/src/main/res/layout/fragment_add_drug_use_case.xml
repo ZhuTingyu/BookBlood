@@ -128,7 +128,7 @@
                 android:id="@+id/inputRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:inputBoxView_tittle="@string/text_remark"
+                app:inputBoxView_tittle="@string/text_remark_explain"
                 app:text_hint="500字以内" />
 
         </com.cpigeon.book.widget.LineInputListLayout>
