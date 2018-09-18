@@ -7,4 +7,8 @@ package com.cpigeon.book.service;
 public class EventBusService {
 
     public static final String BREED_PIGEON_IMG_TYPE = "BREED_PIGEON_IMG_TYPE";
+
+    public static final String FEED_PIGEON_DETAILS_REFRESH = "FEED_PIGEON_DETAILS_REFRESH";//养鸽记录详情  刷新
+
+
 }

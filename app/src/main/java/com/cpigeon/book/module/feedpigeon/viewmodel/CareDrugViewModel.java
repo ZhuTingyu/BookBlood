@@ -6,37 +6,44 @@ import com.base.BaseFragment;
 import com.base.base.BaseViewModel;
 import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
-import com.cpigeon.book.model.StatusIllnessRecordAddModel;
-import com.cpigeon.book.model.UseVaccineModel;
+import com.cpigeon.book.model.CareDrugModel;
+import com.cpigeon.book.model.DrugUseCaseModel;
+import com.cpigeon.book.model.entity.CareDrugEntity;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
+import com.cpigeon.book.model.entity.UseVaccineEntity;
 import com.cpigeon.book.service.EventBusService;
 
 import org.greenrobot.eventbus.EventBus;
 
 /**
- * Created by Administrator on 2018/9/17 0017.
+ * Created by Administrator on 2018/9/18 0018.
  */
 
-public class StatusIllnessRecordAddViewModel extends BaseViewModel {
-
+public class CareDrugViewModel extends BaseViewModel {
 
     public PigeonEntity mPigeonEntity;
-
     public FeedPigeonEntity mFeedPigeonEntity;
 
     public int typePag = 0; //0添加    1   编辑
 
-    //疾病名称
-    public String illnessName;
-    //症状
-    public String illnessSymptom;
-    //生病日期
-    public String illnessTime;
-    //体温
-    public String bodyTemperature;
+    //保健品名称
+    public String careDrugName;
+    //保健品功能
+    public String careDrugFunction;
+    //使用效果
+    public String useEffect;
 
+    //使用时间
+    public String useTime;
+    //记录时间
+    public String recordTime;
+
+
+    //是否副作用
+    public String isHaveAfterResult;
+    //体温
+    public String bodyTemp;
     //配对天气
     public String weather;
     //配对气温
@@ -48,41 +55,53 @@ public class StatusIllnessRecordAddViewModel extends BaseViewModel {
     //备注
     public String remark;
 
-    // 病情记录 添加
-    public void getTXGP_PigeonVaccine_AddData() {
-        submitRequestThrowError(StatusIllnessRecordAddModel.getTXGP_PigeonDisease_Add(
+    // 保健品记录 添加
+    public void getTXGP_PigeonHealth_AddData() {
+        submitRequestThrowError(CareDrugModel.getTXGP_PigeonHealth_Add(
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
-                illnessName,
-                illnessSymptom,
+                careDrugName,
+                careDrugFunction,
+
+                useEffect,
+                isHaveAfterResult,
+
+                useTime,
+                recordTime,
+                bodyTemp,
+
                 weather,
                 temper,
-                bodyTemperature,
-                illnessTime,
                 hum,
                 dir,
                 remark
         ), r -> {
             if (r.isOk()) {
-                EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
                 hintDialog(r.msg);
+                EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
             } else throw new HttpErrorException(r);
         });
-
     }
 
-    //病情记录  修改
-    public void getTXGP_PigeonDisease_EditData() {
-        submitRequestThrowError(StatusIllnessRecordAddModel.getTXGP_PigeonDisease_Edit(
+
+    // 保健品记录 修改
+    public void getTXGP_PigeonHealth_UpdateData() {
+        submitRequestThrowError(CareDrugModel.getTXGP_PigeonHealth_Update(
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
                 mFeedPigeonEntity.getViewID(),
-                illnessName,
-                illnessSymptom,
+                careDrugName,
+                careDrugFunction,
+
+                useEffect,
+                isHaveAfterResult,
+
+                useTime,
+                recordTime,
+                bodyTemp,
+
                 weather,
                 temper,
-                bodyTemperature,
-                illnessTime,
                 hum,
                 dir,
                 remark
@@ -95,26 +114,24 @@ public class StatusIllnessRecordAddViewModel extends BaseViewModel {
     }
 
 
-    public MutableLiveData<StatusIllnessRecordEntity> mStatusIllnessRecordDetails = new MutableLiveData<>();
+    public MutableLiveData<CareDrugEntity> mCareDrugDetails = new MutableLiveData<>();
 
-    //病情记录  详情
-    public void getTXGP_PigeonDisease_SelectData() {
-        submitRequestThrowError(StatusIllnessRecordAddModel.getTXGP_PigeonDisease_Select(
+    // 保健品记录 详情
+    public void getTXGP_PigeonHealth_SelectData() {
+        submitRequestThrowError(CareDrugModel.getTXGP_PigeonHealth_Select(
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
                 mFeedPigeonEntity.getViewID()
         ), r -> {
             if (r.isOk()) {
-                mStatusIllnessRecordDetails.postValue(r.data);
+                mCareDrugDetails.postValue(r.data);
             } else throw new HttpErrorException(r);
         });
-
     }
 
-
-    //病情记录  删除
-    public void getTXGP_Delete_PigeonDiseaseData() {
-        submitRequestThrowError(StatusIllnessRecordAddModel.getTXGP_Delete_PigeonDisease(
+    // 保健品记录 删除
+    public void getTXGP_PigeonHealth_DeleteData() {
+        submitRequestThrowError(CareDrugModel.getTXGP_PigeonHealth_Delete(
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
                 mFeedPigeonEntity.getViewID()
@@ -133,12 +150,13 @@ public class StatusIllnessRecordAddViewModel extends BaseViewModel {
         this.mBaseFragment = mBaseFragment;
     }
     public void isCanCommit() {
+
         if (typePag == 1) {
+            //编辑
             mBaseFragment.setProgressVisible(true);//加载框
-            getTXGP_PigeonDisease_EditData();
-        } else {
-            isCanCommit(illnessName, illnessSymptom, illnessTime);
+            getTXGP_PigeonHealth_UpdateData();
+        }else {
+            isCanCommit(careDrugName, careDrugFunction, useEffect, recordTime, useTime, isHaveAfterResult);
         }
     }
-
 }

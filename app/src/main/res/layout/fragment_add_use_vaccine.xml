@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 app:lineInputView_Hint="@string/text_pleas_choose"
                 app:lineInputView_IsCanEdit="false"
-                app:lineInputView_IsNotNull="true"
+                app:lineInputView_IsNotNull="false"
                 app:lineInputView_LeftString="@string/text_current_body_temp" />
 
             <com.cpigeon.book.widget.InputBoxView
@@ -98,7 +98,7 @@
                 android:id="@+id/inputRemark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:inputBoxView_tittle="@string/text_remark"
+                app:inputBoxView_tittle="@string/text_remark_explain"
                 app:text_hint="@string/text_edit_lenth_hint" />
 
 

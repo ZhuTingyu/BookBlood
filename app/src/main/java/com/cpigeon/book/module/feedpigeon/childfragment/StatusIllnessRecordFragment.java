@@ -1,5 +1,6 @@
-package com.cpigeon.book.module.feedpigeon;
+package com.cpigeon.book.module.feedpigeon.childfragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,12 +14,14 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.RxUtils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
 import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
+import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.feedpigeon.viewmodel.StatusIllnessRecordAddViewModel;
 import com.cpigeon.book.util.TextViewUtil;
@@ -29,9 +32,7 @@ import com.cpigeon.book.widget.LineInputView;
 import java.util.Date;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 病情记录
@@ -73,6 +74,15 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
         super.onAttach(context);
         mStatusIllnessRecordAddViewModel = new StatusIllnessRecordAddViewModel();
         initViewModels(mStatusIllnessRecordAddViewModel);
+        mStatusIllnessRecordAddViewModel.setmBaseFragment(this);
+    }
+
+    public static void start(Activity activity, PigeonEntity mPigeonEntity, FeedPigeonEntity mFeedPigeonEntity, int type) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
+                .putExtra(IntentBuilder.KEY_DATA_2, mFeedPigeonEntity)
+                .putExtra(IntentBuilder.KEY_TYPE, type)//类型
+                .startParentActivity(activity, StatusIllnessRecordFragment.class);
     }
 
     @Nullable
@@ -86,6 +96,37 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mStatusIllnessRecordAddViewModel.mPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+
+        mStatusIllnessRecordAddViewModel.mFeedPigeonEntity = getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA_2);
+        mStatusIllnessRecordAddViewModel.typePag = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TYPE, 0);
+        if (mStatusIllnessRecordAddViewModel.typePag == 1) {
+            //修改  删除
+            setTitle(getString(R.string.str_status_illness_record_details));
+
+            setProgressVisible(true);
+            //获取详情
+            mStatusIllnessRecordAddViewModel.getTXGP_PigeonDisease_SelectData();
+            tvOk.setVisibility(View.GONE);
+
+
+            setToolbarRight(getString(R.string.text_delete), item -> {
+                //删除
+                getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), getString(R.string.text_delete_warning_hint), sweetAlertDialog -> {
+                    //确定
+                    sweetAlertDialog.dismiss();
+                    setProgressVisible(true);
+                    mStatusIllnessRecordAddViewModel.getTXGP_Delete_PigeonDiseaseData();
+                }, sweetAlertDialog -> {
+                    //取消
+                    sweetAlertDialog.dismiss();
+                });
+
+                return true;
+            });
+        }
+
+
+        inputRemark.getEditText().setCanEdit(false);//不可编辑
 
     }
 
@@ -102,13 +143,39 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
             TextViewUtil.setEnabled(tvOk, aBoolean);
         });
 
-        LocationLiveData.get(true).observe(this, aMapLocation -> {
-            WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
-                mStatusIllnessRecordAddViewModel.weather = localWeatherLive.getWeather();//天气
-                mStatusIllnessRecordAddViewModel.temper = localWeatherLive.getTemperature();//气温
-                mStatusIllnessRecordAddViewModel.hum = localWeatherLive.getHumidity();//湿度
-                mStatusIllnessRecordAddViewModel.dir = localWeatherLive.getWindDirection();//风向
+        if (mStatusIllnessRecordAddViewModel.typePag == 0) {
+            LocationLiveData.get(true).observe(this, aMapLocation -> {
+                WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
+                    mStatusIllnessRecordAddViewModel.weather = localWeatherLive.getWeather();//天气
+                    mStatusIllnessRecordAddViewModel.temper = localWeatherLive.getTemperature();//气温
+                    mStatusIllnessRecordAddViewModel.hum = localWeatherLive.getHumidity();//湿度
+                    mStatusIllnessRecordAddViewModel.dir = localWeatherLive.getWindDirection();//风向
+                });
             });
+        }
+
+        //详情
+        mStatusIllnessRecordAddViewModel.mStatusIllnessRecordDetails.observe(this, datas -> {
+            setProgressVisible(false);
+
+            mStatusIllnessRecordAddViewModel.illnessName = datas.getPigeonDiseaseName();//疾病名称
+            mStatusIllnessRecordAddViewModel.illnessSymptom = datas.getDiseaseInfo();//症状
+            mStatusIllnessRecordAddViewModel.illnessTime = datas.getDiseaseTime();//生病日期
+            mStatusIllnessRecordAddViewModel.bodyTemperature = datas.getBodytemper();//体温
+            mStatusIllnessRecordAddViewModel.remark = datas.getRemark();//备注
+
+            lvIllnessName.setRightText(mStatusIllnessRecordAddViewModel.illnessName);
+            lvIllnessSymptom.setContent(mStatusIllnessRecordAddViewModel.illnessSymptom);
+            lvIllTime.setContent(mStatusIllnessRecordAddViewModel.illnessTime);
+            lvBodyTemp.setRightText(mStatusIllnessRecordAddViewModel.bodyTemperature);
+            inputRemark.setText(mStatusIllnessRecordAddViewModel.remark);
+
+            mStatusIllnessRecordAddViewModel.weather = datas.getWeather();//天气
+            mStatusIllnessRecordAddViewModel.temper = datas.getTemperature();//气温
+            mStatusIllnessRecordAddViewModel.hum = datas.getHumidity();//湿度
+            mStatusIllnessRecordAddViewModel.dir = datas.getDirection();//风向
+
+
         });
     }
 
@@ -125,6 +192,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
                             mStatusIllnessRecordAddViewModel.illnessName = content;
                             lvIllnessName.setRightText(content);
                             mInputDialog.hide();
+                            mStatusIllnessRecordAddViewModel.isCanCommit();
                         }, null);
 
                 break;
@@ -135,6 +203,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
                             mStatusIllnessRecordAddViewModel.illnessSymptom = content;
                             lvIllnessSymptom.setRightText(content);
                             mInputDialog.hide();
+                            mStatusIllnessRecordAddViewModel.isCanCommit();
                         }, null);
 
                 break;

@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.feedpigeon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,12 @@ import android.widget.TextView;
 import com.base.base.FragmentAdapter;
 import com.base.util.Lists;
 import com.base.util.Utils;
-import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
-import com.hitomi.cslibrary.CrazyShadow;
-import com.hitomi.cslibrary.base.CrazyShadowDirection;
+import com.cpigeon.book.module.feedpigeon.childfragment.CareDrugFragment;
+import com.cpigeon.book.module.feedpigeon.childfragment.DrugUseCaseFragment;
+import com.cpigeon.book.module.feedpigeon.childfragment.StatusIllnessRecordFragment;
+import com.cpigeon.book.module.feedpigeon.childfragment.UseVaccineFragment;
 
 import java.util.List;
 
@@ -39,6 +41,8 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
 
     List<TextView> mTextViews = Lists.newArrayList();
     List<LinearLayout> mLinearLayouts = Lists.newArrayList();
+    private UseVaccineFragment addUseVaccineFragment;
+    private DrugUseCaseFragment addDrugUseCaseFragment;
 
 
     @Override
@@ -74,11 +78,11 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
         mLinearLayouts.add(mLl4);
 
         //疫苗注射
-        UseVaccineFragment addUseVaccineFragment = new UseVaccineFragment();
+        addUseVaccineFragment = new UseVaccineFragment();
         //病情记录
         StatusIllnessRecordFragment addStatusIllnessRecordFragment = new StatusIllnessRecordFragment();
         //用药情况
-        DrugUseCaseFragment addDrugUseCaseFragment = new DrugUseCaseFragment();
+        addDrugUseCaseFragment = new DrugUseCaseFragment();
         //保健品
         CareDrugFragment addCareDrugFragment = new CareDrugFragment();
 
@@ -92,6 +96,8 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
 
         mViewPager.setAdapter(adapter);
 
+
+        mViewPager.setOffscreenPageLimit(5);
         mViewPager.setCurrentItem(mCPosition);
         setTextStatus(mCPosition, true);
         for (int i = 0, len = mTextViews.size(); i < len; i++) {
@@ -145,5 +151,11 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        addDrugUseCaseFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -6,6 +6,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.DrugUseCaseEntity;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
+import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -20,15 +21,15 @@ import io.reactivex.Observable;
 public class DrugUseCaseModel {
 
 
-    //hl 病情记录  添加
+    //hl 用药情况  添加
     public static Observable<ApiResponse<Object>> getTXGP_PigeonDrug_Add(String footid,
                                                                          String pigeonid,
                                                                          String diseaseid,
                                                                          String drugname,
                                                                          String stateid,
-                                                                         String sideeffect,
+                                                                         String biteffect,
                                                                          String bodytemper,
-                                                                         String diseasetime,
+                                                                         String drugtime,
                                                                          String recordtime,
 
                                                                          String weather,
@@ -44,15 +45,14 @@ public class DrugUseCaseModel {
                 .addBody("footid", footid)//
                 .addBody("pigeonid", pigeonid)//
                 .addBody("diseaseid", diseaseid)//
-                .addBody("drugname", drugname)//
-                .addBody("stateid", stateid)//
-                .addBody("sideeffect", sideeffect)//
-                .addBody("bodytemper", bodytemper)//
-                .addBody("diseasetime", diseasetime)//
-                .addBody("recordtime", recordtime)//
-
-                .addBody("weather", weather)//
-                .addBody("temper", temper)//
+                .addBody("drugname", drugname)//药品名称
+                .addBody("stateid", stateid)//用药后状态
+                .addBody("biteffect", biteffect)//是否有副作用
+                .addBody("bodytemper", bodytemper)//体温
+                .addBody("drugtime", drugtime)// 药瓶使用时间
+                .addBody("recordtime", recordtime)//记录时间
+                .addBody("weather", weather)//天气
+                .addBody("temper", temper)//气温
                 .addBody("hum", hum)//
                 .addBody("hum", dir)//
                 .addBody("remark", remark)//
@@ -60,13 +60,87 @@ public class DrugUseCaseModel {
     }
 
 
+    //hl 用药情况  修改
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonDrug_Edit(String footid,
+                                                                          String pigeonid,
+                                                                          String drugid,
+                                                                          String diseaseid,
+                                                                          String drugname,
+                                                                          String stateid,
+                                                                          String biteffect,
+                                                                          String bodytemper,
+                                                                          String drugtime,
+                                                                          String recordtime,
+
+                                                                          String weather,
+                                                                          String temper,
+                                                                          String hum,
+                                                                          String dir,
+                                                                          String remark
+    ) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.drug_use_case_modify)
+                .addBody("footid", footid)//
+                .addBody("pigeonid", pigeonid)//
+                .addBody("drugid", drugid)//
+                .addBody("diseaseid", diseaseid)//
+                .addBody("drugname", drugname)//药品名称
+                .addBody("stateid", stateid)//用药后状态
+                .addBody("biteffect", biteffect)//是否有副作用
+                .addBody("bodytemper", bodytemper)//体温
+                .addBody("drugtime", drugtime)// 药瓶使用时间
+                .addBody("recordtime", recordtime)//记录时间
+                .addBody("weather", weather)//天气
+                .addBody("temper", temper)//气温
+                .addBody("hum", hum)//
+                .addBody("hum", dir)//
+                .addBody("remark", remark)//
+                .request();
+    }
+
+
+    //hl 用药情况  详情
+    public static Observable<ApiResponse<DrugUseCaseEntity>> getTXGP_PigeonDrug_Select(String footid,
+                                                                            String pigeonid,
+                                                                            String drugid
+    ) {
+        return RequestData.<ApiResponse<DrugUseCaseEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<DrugUseCaseEntity>>() {
+                }.getType())
+                .url(R.string.drug_use_case_details)
+                .addBody("footid", footid)//
+                .addBody("pigeonid", pigeonid)//
+                .addBody("drugid", drugid)//用药记录ID
+                .request();
+    }
+
+
+    //hl 用药情况  删除
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonDrug_Delete(String footid,
+                                                                            String pigeonid,
+                                                                            String drugid
+    ) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.drug_use_case_del)
+                .addBody("footid", footid)//
+                .addBody("pigeonid", pigeonid)//
+                .addBody("drugid", drugid)//用药记录ID
+
+                .request();
+    }
+
+
     //hl 获取 病情记录  列表
-    public static Observable<ApiResponse<List<DrugUseCaseEntity>>> getTXGP_PigeonDisease_SelectAll(String pi,
-                                                                                                   String ps,
-                                                                                                   String footid,
-                                                                                                   String pigeonid) {
-        return RequestData.<ApiResponse<List<DrugUseCaseEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<DrugUseCaseEntity>>>() {
+    public static Observable<ApiResponse<List<StatusIllnessRecordEntity>>> getTXGP_PigeonDisease_SelectAll(String pi,
+                                                                                                           String ps,
+                                                                                                           String footid,
+                                                                                                           String pigeonid) {
+        return RequestData.<ApiResponse<List<StatusIllnessRecordEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<StatusIllnessRecordEntity>>>() {
                 }.getType())
                 .url(R.string.status_illness_record_list)
                 .addBody("pi", pi)//

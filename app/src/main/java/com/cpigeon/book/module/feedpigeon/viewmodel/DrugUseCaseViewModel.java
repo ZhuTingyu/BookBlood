@@ -2,15 +2,22 @@ package com.cpigeon.book.module.feedpigeon.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.base.BaseFragment;
 import com.base.base.BaseViewModel;
+import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.DrugUseCaseModel;
 import com.cpigeon.book.model.FeedPigeonModel;
 import com.cpigeon.book.model.UseVaccineModel;
+import com.cpigeon.book.model.entity.DrugUseCaseEntity;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.FeedPigeonStatistical;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
+import com.cpigeon.book.service.EventBusService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -21,6 +28,11 @@ import java.util.List;
 public class DrugUseCaseViewModel extends BaseViewModel {
 
     public PigeonEntity mPigeonEntity;
+
+    public FeedPigeonEntity mFeedPigeonEntity;
+
+    public int typePag = 0; //0添加    1   编辑
+
 
     //病情记录
     public String illnessRecord;
@@ -49,7 +61,7 @@ public class DrugUseCaseViewModel extends BaseViewModel {
     public String remark;
 
 
-    // 疫苗注射 添加
+    // 用药情况 添加
     public void getTXGP_PigeonDrug_AddData() {
         submitRequestThrowError(DrugUseCaseModel.getTXGP_PigeonDrug_Add(
                 mPigeonEntity.getFootRingID(),
@@ -68,14 +80,86 @@ public class DrugUseCaseViewModel extends BaseViewModel {
                 remark
         ), r -> {
             if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
                 hintDialog(r.msg);
             } else throw new HttpErrorException(r);
         });
-
     }
 
+    // 用药情况 修改
+    public void getTXGP_PigeonDrug_EditData() {
+        submitRequestThrowError(DrugUseCaseModel.getTXGP_PigeonDrug_Edit(
+                mPigeonEntity.getFootRingID(),
+                mPigeonEntity.getPigeonID(),
+                mFeedPigeonEntity.getViewID(),
+                illnessRecord,
+                drugName,
+                drugAfterStatus,
+                isHaveAfterResult,
+                bodyTemp,
+                drugUseTime,
+                recordTime,
+                weather,
+                temper,
+                hum,
+                dir,
+                remark
+        ), r -> {
+            if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
+                hintDialog(r.msg);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    public MutableLiveData<DrugUseCaseEntity> mDrugUseCaseDetails = new MutableLiveData<>();
+
+
+    // 用药情况 详情
+    public void getTXGP_PigeonDrug_SelectData() {
+        submitRequestThrowError(DrugUseCaseModel.getTXGP_PigeonDrug_Select(
+                mPigeonEntity.getFootRingID(),
+                mPigeonEntity.getPigeonID(),
+                mFeedPigeonEntity.getViewID()
+        ), r -> {
+            if (r.isOk()) {
+                mDrugUseCaseDetails.postValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+    // 用药情况 删除
+    public void getTXGP_PigeonDrug_DeleteData() {
+        submitRequestThrowError(DrugUseCaseModel.getTXGP_PigeonDrug_Delete(
+                mPigeonEntity.getFootRingID(),
+                mPigeonEntity.getPigeonID(),
+                mFeedPigeonEntity.getViewID()
+        ), r -> {
+            if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
+                showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).cancelable(false).isClosePage(true).build());
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+
+
+    private BaseFragment mBaseFragment;
+
+    public void setmBaseFragment(BaseFragment mBaseFragment) {
+        this.mBaseFragment = mBaseFragment;
+    }
     public void isCanCommit() {
-        isCanCommit(illnessRecord, drugName, drugUseTime, recordTime, drugAfterStatus, isHaveAfterResult);
+
+        if (typePag == 1) {
+            //编辑
+            mBaseFragment.setProgressVisible(true);//加载框
+            getTXGP_PigeonDrug_EditData();
+        }else {
+            isCanCommit(illnessRecord, drugName, drugUseTime, recordTime, drugAfterStatus, isHaveAfterResult);
+        }
     }
 
 }

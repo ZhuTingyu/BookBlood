@@ -9,6 +9,7 @@ import com.cpigeon.book.model.entity.DrugUseCaseEntity;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
 
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class DrugUseCaseListViewModel extends BaseViewModel {
     public int pi = 1;
     public int ps = 15;
 
-    public MutableLiveData<List<DrugUseCaseEntity>> mDrugUseCaseData = new MutableLiveData<>();
+    public MutableLiveData<List<StatusIllnessRecordEntity>> mStatusIllnessRecordData = new MutableLiveData<>();
+
 
     //获取  病情记录  列表
     public void getTXGP_PigeonDisease_SelectAllData() {
@@ -33,7 +35,7 @@ public class DrugUseCaseListViewModel extends BaseViewModel {
                 mPigeonEntity.getPigeonID()), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
-                mDrugUseCaseData.setValue(r.data);
+                mStatusIllnessRecordData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
