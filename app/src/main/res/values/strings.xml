@@ -439,5 +439,6 @@
     <string name="text_sure_share">确认共享</string>
     <string name="text_not_choose_pigeon">你还没有选鸽子！</string>
     <string name="text_breed_pigeon">种鸽</string>
+    <string name="text_my">我的</string>
 
 </resources>

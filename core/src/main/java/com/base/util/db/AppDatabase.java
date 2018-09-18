@@ -10,6 +10,7 @@ import android.content.Context;
 import com.base.util.Lists;
 import com.base.util.http.GsonUtil;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/7/3.
  */
 
-@Database(entities = {DbEntity.class},version = 1, exportSchema = false)
+@Database(entities = {DbEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public static final String TYPE_USER_DATA = "TYPE_USER_DATA";
@@ -30,15 +31,17 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String TYPE_SEARCH_FEED_PIGEON_RECORD = "TYPE_SEARCH_FEED_PIGEON_RECORD";
     public static final String TYPE_SEARCH_PIGEON_TO_LEAGUE = "TYPE_SEARCH_PIGEON_TO_LEAGUE";
     public static final String TYPE_SEARCH_GOOD_PIGEON = "TYPE_SEARCH_GOOD_PIGEON";
+    public static final String TYPE_SELECT_PIGEON_TO_TRAINING = "TYPE_SELECT_PIGEON_TO_TRAINING";
 
     private static AppDatabase INSTANCE;
     private static final Object sLok = new Object();
+
     public abstract DbEntityDao DbEntityDao();
 
-    public static AppDatabase getInstance(Context context){
-        synchronized (sLok){
-            if(INSTANCE == null){
-                INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class,"data.db")
+    public static AppDatabase getInstance(Context context) {
+        synchronized (sLok) {
+            if (INSTANCE == null) {
+                INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "data.db")
                         .allowMainThreadQueries()
                         .build();
             }
@@ -46,7 +49,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     }
 
-    public static  <T> List<T> getDates(List<DbEntity> data, Class<T> tClass){
+    public static <T> List<T> getDates(List<DbEntity> data, Class<T> tClass) {
         List<T> entities = Lists.newArrayList();
         for (DbEntity dbEntity : data) {
             entities.add(dbEntity.getData(tClass));
@@ -54,7 +57,22 @@ public abstract class AppDatabase extends RoomDatabase {
         return entities;
     }
 
-    public <T> void saveData(T data, String type, String userId){
+    public static <T> T getDates(DbEntity data, Class<T> tClass) {
+        return data.getData(tClass);
+    }
+
+    public void delete(DbEntity data) {
+        DbEntityDao().delete(data);
+    }
+
+    public void delete(List<DbEntity> data) {
+        for (DbEntity dbEntity : data) {
+            delete(dbEntity);
+        }
+    }
+
+
+    public <T> void saveData(T data, String type, String userId) {
         DbEntity dbEntity = new DbEntity();
         dbEntity.setUserId(userId);
         dbEntity.setType(type);
@@ -63,7 +81,13 @@ public abstract class AppDatabase extends RoomDatabase {
         DbEntityDao().insert(dbEntity);
     }
 
-    public  void delectAll(List<DbEntity> data){
+    public <T> void saveData(List<T> data, String type, String userId) {
+        for (int i = 0, len = data.size(); i < len; i++) {
+            saveData(data.get(i), type, userId);
+        }
+    }
+
+    public void deleteAll(List<DbEntity> data) {
         for (DbEntity t : data) {
             DbEntityDao().deleteAll(t);
         }

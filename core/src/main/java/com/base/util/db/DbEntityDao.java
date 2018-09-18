@@ -32,6 +32,9 @@ public interface DbEntityDao {
     @Insert
     void insertAll(DbEntity... dbEntities);
 
+    @Insert
+    void insertAll(List<DbEntity> dbEntities);
+
     @Delete
     void delete(DbEntity dbEntity);
 

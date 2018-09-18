@@ -29,7 +29,6 @@ import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.home.viewmodel.HomeViewModel;
 import com.cpigeon.book.module.makebloodbook.SelectPigeonToMakeBookFragment;
-import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.module.menu.message.MsgActivity;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
@@ -87,14 +86,8 @@ public class HomeFragment extends BaseBookFragment {
         setToolbarColor(R.color.white);
         BarUtils.setStatusBarLightMode(getBaseActivity(), true);
 
-        setToolbarLeft(R.drawable.svg_home_my, v -> {
-            UserInfoActivity.start(getBaseActivity());
-        });
-
-        setToolbarRightImage(R.drawable.svg_home_message, item -> {
-            //公告通知 ，鸽友消息
+        setToolbarLeft(R.drawable.svg_home_message, v -> {
             MsgActivity.start(getBaseActivity());
-            return false;
         });
 
         mTopList = findViewById(R.id.topList);

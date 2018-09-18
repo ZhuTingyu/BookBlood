@@ -16,28 +16,34 @@ import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.event.NewTrainEvent;
 import com.cpigeon.book.module.trainpigeon.adpter.TrainPigeonAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.TrainPigeonListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Zhu TingYu on 2018/8/31.
  */
 
-public class TrainPigeonListFragment extends BaseBookFragment{
+public class TrainPigeonListFragment extends BaseBookFragment {
 
     XRecyclerView mRecyclerView;
     TrainPigeonAdapter mAdapter;
     TextView mtvOk;
     TrainPigeonListViewModel mViewModel;
 
-    public static void start(Activity activity){
+    public static void start(Activity activity) {
         IntentBuilder.Builder().startParentActivity(activity, TrainPigeonListFragment.class);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        EventBus.getDefault().post(this);
         mViewModel = new TrainPigeonListViewModel();
         initViewModel(mViewModel);
     }
@@ -79,6 +85,20 @@ public class TrainPigeonListFragment extends BaseBookFragment{
             NewTrainPigeonFragment.start(getBaseActivity());
         });
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(NewTrainEvent event){
+        mAdapter.cleanList();
+        mViewModel.pi = 1;
+        mViewModel.getTrainPigeonList();
+    }
+
     @Override
     protected void initObserve() {
 

@@ -96,6 +96,17 @@ public class PreviewsBookFragment extends BaseBookFragment {
         mLlPrintTextV = findViewById(R.id.llPrintTextV);
         mLlPrintTextH = findViewById(R.id.llPrintTextH);
 
+        composite.add(RxUtils.delayed(500, aLong -> {
+            mFamilyTreeView.setHorizontal(true);
+            mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
+            mFamilyTreeView.initView();
+
+            mPrintFamilyTreeView.setHorizontal(true);
+            mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
+            mPrintFamilyTreeView.setShowLine(false);
+            mPrintFamilyTreeView.initView();
+        }));
+
         mCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mLlImage.setVisibility(isChecked ? View.VISIBLE : View.GONE);
             if (isChecked){

@@ -43,7 +43,7 @@ public class FeedbackDetailsAdapter extends BaseMultiItemQuickAdapter<FeedbackDe
                     });
                     FeedbackDetailsImageAdapter adapter = (FeedbackDetailsImageAdapter) imgs.getAdapter();
                     if(adapter == null){
-                        adapter = new FeedbackDetailsImageAdapter(getRecyclerView());
+                        adapter = new FeedbackDetailsImageAdapter(imgs);
                     }
                     imgs.setAdapter(adapter);
                     adapter.setNewData(item.getImglist());
@@ -54,6 +54,7 @@ public class FeedbackDetailsAdapter extends BaseMultiItemQuickAdapter<FeedbackDe
 
                 break;
             case FeedbackDetailEntity.TYPE_REPLY:
+                helper.setText(R.id.tvTime, item.getReplytime());
                 helper.setText(R.id.tvContent, item.getReplycontent());
                 break;
         }

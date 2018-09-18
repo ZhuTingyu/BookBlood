@@ -2,6 +2,7 @@ package com.cpigeon.book.module.trainpigeon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,14 +12,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.amap.api.maps.model.LatLng;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PopWindowBuilder;
 import com.base.util.Utils;
+import com.base.util.db.AppDatabase;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.system.ScreenTool;
 import com.base.widget.recyclerview.XRecyclerView;
@@ -26,11 +30,11 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainAddPigeonAdapter;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
-import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainAddPigeonViewModel;
-import com.cpigeon.book.util.RecyclerViewUtils;
+import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainPigeonAddViewModel;
 import com.paradoxie.shopanimlibrary.AniManager;
 
 import java.io.Serializable;
@@ -55,23 +59,24 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     XRecyclerView mRecyclerView;
     NewTrainAddPigeonAdapter mAdapter;
     NewTrainPigeonListAdapter mSelectAdapter;
-    NewTrainAddPigeonViewModel mViewModel;
+    NewTrainPigeonAddViewModel mViewModel;
     View mPopView;
     AniManager mAniManager;
     PopupWindow mPopupWindow;
-    List<PigeonEntity> mSelectYetPigeon;
+    List<PigeonEntity> mSaveAllPigeon;
+    List<PigeonEntity> mSelectPigeon;
 
     public static void start(Activity activity, ArrayList<PigeonEntity> pigeonEntities, int code) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(IntentBuilder.KEY_DATA, pigeonEntities);
-        SearchFragmentParentActivity.start(activity, NewTrainAddPigeonFragment.class, code,null);
+        SearchFragmentParentActivity.start(activity, NewTrainAddPigeonFragment.class, code, bundle);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (SearchFragmentParentActivity) getBaseActivity();
-        mViewModel = new NewTrainAddPigeonViewModel();
+        mViewModel = getViewModel(NewTrainPigeonAddViewModel.class);
         initViewModel(mViewModel);
     }
 
@@ -84,9 +89,8 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        mSelectYetPigeon = (List<PigeonEntity>) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
-
+        getPigeon();
+        mSelectPigeon = (List<PigeonEntity>) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         mAniManager = new AniManager();
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
@@ -108,7 +112,11 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
                 .setBadgeTextSize(10, true)
                 .setBadgeText("0");
         mAdapter = new NewTrainAddPigeonAdapter();
-        mAdapter.setOnAddPigeonListener(this::startAnim);
+        mAdapter.setOnAddPigeonListener((view1, position) -> {
+            startAnim(view1, position);
+            mAdapter.setSelect(position, true);
+            mViewModel.setSelect(position);
+        });
         mRecyclerView.setAdapter(mAdapter);
         initPopView();
         mTvChooseYet.setOnClickListener(v -> {
@@ -125,23 +133,33 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         });
 
         mTvAllChoose.setOnClickListener(v -> {
-            mSelectAdapter.addData(mAdapter.getNotSelectAll());
+            mViewModel.setSelectAll(mAdapter.getNotSelectAll());
             mAdapter.notifyDataSetChanged();
-            mBadgeView.setBadgeText(String.valueOf(mSelectAdapter.getData().size()));
         });
 
         mTvAddAtOnce.setOnClickListener(v -> {
+            savePigeon();
             IntentBuilder.Builder()
                     .putSerializableArrayListExtra(IntentBuilder.KEY_DATA, (ArrayList<? extends Serializable>) mSelectAdapter.getData())
                     .finishForResult(getBaseActivity());
         });
 
-        setProgressVisible(true);
-        mViewModel.getPigeonList();
+
+        if (Lists.isEmpty(mSaveAllPigeon)) {
+            setProgressVisible(true);
+            mViewModel.getPigeonList();
+        } else {
+            mViewModel.mAllPigeon = mSaveAllPigeon;
+            mViewModel.mDataAllPigeon.setValue(mSaveAllPigeon);
+        }
+
+        if (!Lists.isEmpty(mSelectPigeon)) {
+            mViewModel.mSelectPigeon = mSelectPigeon;
+            mViewModel.mDataSelectPigeon.setValue(mSelectPigeon);
+        }
     }
 
     private void initPopView() {
-
         mPopView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.pop_add_pigeon_yet, null);
         mPopView.setOnClickListener(v -> {
             mPopupWindow.dismiss();
@@ -152,18 +170,9 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         mSelectAdapter = new NewTrainPigeonListAdapter();
         addList.setAdapter(mSelectAdapter);
         mSelectAdapter.setOnDeleteListener(position -> {
-            PigeonEntity selectEntity = mSelectAdapter.getItem(position);
-            for (int i = 0, len = mAdapter.getData().size(); i < len; i++) {
-                PigeonEntity entity = mAdapter.getData().get(i);
-                if(selectEntity.getFootRingNum().equals(entity.getFootRingNum())){
-                    mAdapter.setSelect(i, false);
-                    break;
-                }
-            }
-            mSelectAdapter.remove(position);
-            mBadgeView.setBadgeText(String.valueOf(mSelectAdapter.getData().size()));
-            if(mSelectAdapter.getData().size() == 0){
-                mPopupWindow.dismiss();
+            int p = mViewModel.removeSelect(position);
+            if (p != -1) {
+                mAdapter.setSelect(p, false);
             }
         });
     }
@@ -187,18 +196,38 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
 
             @Override
             public void setAnimEnd(AniManager a) {
-                mAdapter.setSelect(position, true);
-                mSelectAdapter.addData(mAdapter.getData().get(position));
-                mBadgeView.setBadgeNumber(mSelectAdapter.getData().size());
+
             }
         });
     }
 
+    public void savePigeon() {
+        AppDatabase.getInstance(getBaseActivity())
+                .saveData(mAdapter.getData()
+                        , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING
+                        , UserModel.getInstance().getUserId());
+    }
+
+    public void getPigeon() {
+        mSaveAllPigeon = AppDatabase.getDates(AppDatabase.getInstance(getBaseActivity()).DbEntityDao()
+                .getDataByUserAndType(UserModel.getInstance().getUserId()
+                        , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING), PigeonEntity.class);
+    }
+
+
     @Override
     protected void initObserve() {
-        mViewModel.mDataPigeon.observe(this, pigeonEntities -> {
+        mViewModel.mDataAllPigeon.observe(this, pigeonEntities -> {
             setProgressVisible(false);
             mAdapter.setNewData(pigeonEntities);
+        });
+
+        mViewModel.mDataSelectPigeon.observe(this, pigeonEntities -> {
+            mSelectAdapter.setNewData(pigeonEntities);
+            mBadgeView.setBadgeText(String.valueOf(mSelectAdapter.getData().size()));
+            if (mSelectAdapter.getData().size() == 0) {
+                mPopupWindow.dismiss();
+            }
         });
     }
 }

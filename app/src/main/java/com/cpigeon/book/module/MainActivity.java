@@ -1,6 +1,7 @@
 package com.cpigeon.book.module;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
@@ -15,13 +16,16 @@ import com.base.util.Lists;
 import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.RxUtils;
+import com.base.util.db.AppDatabase;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.CustomViewPager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonEntryFragment;
+import com.cpigeon.book.module.home.UserInfoFragment;
 import com.cpigeon.book.module.home.goodpigeon.GoodPigeonListFragment;
 import com.cpigeon.book.module.home.home.HomeFragment;
 import com.cpigeon.book.module.home.HomeFragment3;
@@ -48,6 +52,7 @@ public class MainActivity extends BaseBookActivity {
     LoginViewModel mViewModel;
 
     private PopupWindow mPopupWindow;
+    private UserInfoFragment mUserInfoFragment;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder(activity, MainActivity.class)
@@ -58,6 +63,7 @@ public class MainActivity extends BaseBookActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        cleanCache();
         PermissionUtil.getAppDetailSettingIntent(this);
         viewPager = findViewById(R.id.viewPager);
         bottomAddTabView = findViewById(R.id.bottomAddView);
@@ -69,10 +75,11 @@ public class MainActivity extends BaseBookActivity {
         HomeFragment homeFragment = new HomeFragment();
         GoodPigeonListFragment goodPigeonListFragment = new GoodPigeonListFragment();
         ShareHallHomeFragment shareHallHomeFragment = new ShareHallHomeFragment();
-        HomeFragment4 homeFragment4 = new HomeFragment4();
+        mUserInfoFragment = new UserInfoFragment();
+
         homeFragment.setArguments(bundle);
         goodPigeonListFragment.setArguments(bundle);
-        homeFragment4.setArguments(bundle);
+        mUserInfoFragment.setArguments(bundle);
         shareHallHomeFragment.setArguments(bundle);
 
         titles = Lists.newArrayList(getString(R.string.title_home_fragment)
@@ -81,7 +88,7 @@ public class MainActivity extends BaseBookActivity {
                 , getString(R.string.title_home_fragment4));
 
         ContentFragmentAdapter adapter = new ContentFragmentAdapter(getSupportFragmentManager()
-                , Lists.newArrayList(homeFragment, goodPigeonListFragment, homeFragment4, shareHallHomeFragment));
+                , Lists.newArrayList(homeFragment, goodPigeonListFragment, shareHallHomeFragment, mUserInfoFragment));
 
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(5);
@@ -108,6 +115,12 @@ public class MainActivity extends BaseBookActivity {
             ToastUtils.showLong(this, r);
         });
 
+    }
+
+    private void cleanCache() {
+        AppDatabase.getInstance(getBaseActivity()).delete(AppDatabase.getInstance(getBaseActivity()).DbEntityDao()
+                .getDataByUserAndType(UserModel.getInstance().getUserId()
+                        , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING));
     }
 
 
@@ -171,6 +184,12 @@ public class MainActivity extends BaseBookActivity {
             anim.cancel();
             anim.start();
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mUserInfoFragment.onActivityResult(requestCode, resultCode, data);
     }
 }
 

@@ -1,157 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<LinearLayout android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.cpigeon.book.widget.LineInputListLayout
-            android:paddingLeft="@dimen/normal_safe_distance"
-            android:paddingRight="@dimen/normal_safe_distance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:paddingLeft="@dimen/normal_safe_distance"
+            android:paddingRight="@dimen/normal_safe_distance">
+
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lvName"
-                app:lineInputView_LeftString="@string/text_project_name"
-                app:lineInputView_Hint="@string/text_pleas_input"
-                app:lineInputView_isShowRightImage="invisible"
-                app:lineInputView_IsNotNull="true"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                app:lineInputView_Hint="@string/text_pleas_input"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="@string/text_project_name"
+                app:lineInputView_isShowRightImage="invisible" />
 
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lvFlyLocation"
-                app:lineInputView_LeftString="@string/text_fly_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:lineInputView_Hint="@string/text_pleas_input"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                app:lineInputView_LeftString="@string/text_fly_location" />
 
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lvFlyPoint"
-                app:lineInputView_LeftString="@string/text_fly_point"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:lineInputView_Hint="E:      N:     "
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_isShowRightImage="invisible"
-                app:lineInputView_Hint="E:      N:     "
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                app:lineInputView_LeftString="@string/text_fly_point"
+                app:lineInputView_isShowRightImage="invisible" />
 
 
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lvPigeonHousePoint"
-                app:lineInputView_LeftString="@string/text_pigeon_house_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_isShowRightImage="invisible"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                app:lineInputView_LeftString="@string/text_pigeon_house_location"
+                app:lineInputView_isShowRightImage="invisible" />
 
 
         </com.cpigeon.book.widget.LineInputListLayout>
 
         <RelativeLayout
-            android:background="@color/white"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:layout_marginBottom="10dp"
-            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:paddingBottom="10dp"
             android:paddingLeft="@dimen/normal_safe_distance"
             android:paddingRight="@dimen/normal_safe_distance"
-            android:paddingBottom="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="120dp">
+            android:paddingTop="10dp">
 
             <com.amap.api.maps.MapView
                 android:id="@+id/map"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-            
+                android:layout_height="match_parent" />
+
             <android.support.v7.widget.CardView
                 android:id="@+id/card"
-                android:visibility="gone"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                app:cardElevation="3dp"
-                app:cardCornerRadius="3dp"
                 android:layout_width="67dp"
-                android:layout_height="20dp">
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="3dp">
 
                 <TextView
                     android:id="@+id/tvDis"
-                    android:textSize="10sp"
-                    tools:text="1000km"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    tools:text="1000km" />
 
             </android.support.v7.widget.CardView>
 
+            <FrameLayout
+                android:id="@+id/frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </RelativeLayout>
 
 
         <LinearLayout
-            android:orientation="vertical"
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
             <RelativeLayout
-                android:paddingLeft="@dimen/normal_safe_distance"
-                android:paddingRight="@dimen/normal_safe_distance"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="44dp">
+                android:layout_height="44dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/normal_safe_distance"
+                android:paddingRight="@dimen/normal_safe_distance">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="赛鸽列表"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/large_text_size"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
+                    android:textSize="@dimen/large_text_size" />
 
 
                 <ImageView
                     android:id="@+id/imgAdd"
-                    android:layout_alignParentRight="true"
-                    android:src="@mipmap/ic_train_pigeon_add_pigeon"
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@mipmap/ic_train_pigeon_add_pigeon" />
 
 
             </RelativeLayout>
 
-            <include layout="@layout/include_line_view_layout"/>
+            <include layout="@layout/include_line_view_layout" />
 
             <android.support.v7.widget.RecyclerView
-                android:paddingLeft="@dimen/normal_safe_distance"
                 android:id="@+id/list"
-                android:paddingRight="@dimen/normal_safe_distance"
                 android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_height="0dp"/>
+                android:paddingLeft="@dimen/normal_safe_distance"
+                android:paddingRight="@dimen/normal_safe_distance" />
 
             <TextView
                 android:id="@+id/tvOk"
-                android:text="@string/text_save"
                 style="@style/bottom_style"
-                android:textSize="@dimen/large_text_size"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/normal_safe_distance"
                 android:layout_marginLeft="@dimen/normal_safe_distance"
-                android:layout_marginRight="@dimen/normal_safe_distance"/>
+                android:layout_marginRight="@dimen/normal_safe_distance"
+                android:text="@string/text_save"
+                android:textSize="@dimen/large_text_size" />
         </LinearLayout>
 
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>
 
 
 

@@ -226,6 +226,7 @@
     <string name="get_blood_book_4">TXGP_PigeonGenealogy_SelectFour</string>
     <string name="get_train_pigeon_list">TXGP_PigeonTrain_SelectAll</string>
     <string name="get_all_pigeon_list">TXGP_PigeonList_SelectAll</string>
+    <string name="new_train_pigeon">TXGP_PigeonTrain_Add</string>
 
 
     <!--赛鸽工具相关接口-->
