@@ -86,11 +86,6 @@ public class UserInfoFragment extends BaseBookFragment {
         });
         setToolbarNotBack();
         setTitle("我的");
-        setToolbarRight("签到", item -> {
-            //签到
-            SignFragment.start(getBaseActivity());
-            return true;
-        });
 
         dialogFragment = new ShareDialogFragment();
 

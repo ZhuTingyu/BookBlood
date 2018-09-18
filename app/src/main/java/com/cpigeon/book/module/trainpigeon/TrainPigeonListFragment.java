@@ -73,6 +73,7 @@ public class TrainPigeonListFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
 
         mRecyclerView.setRefreshListener(() -> {
+            mAdapter.cleanList();
             mViewModel.pi = 1;
             mViewModel.getTrainPigeonList();
         });

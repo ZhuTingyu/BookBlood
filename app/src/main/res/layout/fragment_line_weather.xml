@@ -13,7 +13,7 @@
         android:layout_marginRight="@dimen/normal_safe_distance"
         android:layout_marginTop="25dp"
         android:layout_width="32dp"
-        app:srcCompat="@drawable/svg_white_close"
+        app:srcCompat="@drawable/svg_close"
         android:layout_height="32dp" />
 
     <com.amap.api.maps.MapView

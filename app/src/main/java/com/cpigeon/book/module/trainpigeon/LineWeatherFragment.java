@@ -102,7 +102,7 @@ public class LineWeatherFragment extends BaseMapFragment {
 
         mImgClose = findViewById(R.id.imgClose);
         mImgClose.setOnClickListener(v -> {
-            FragmentUtils.hide(this);
+            FragmentUtils.remove(this);
         });
 
         markerManager = new MapMarkerManager(aMap,getBaseActivity());

@@ -33,6 +33,7 @@ import com.base.util.map.AmapManager;
 import com.base.util.map.MapMarkerManager;
 import com.base.util.system.AppManager;
 import com.base.util.utility.StringUtil;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.event.NewTrainEvent;
 import com.cpigeon.book.model.UserModel;
@@ -173,14 +174,19 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         });
 
         mFrameLayout.setOnClickListener(v -> {
+
+            if(mViewModel.endLa == 0){
+                ToastUtils.showLong(getBaseActivity(),"请选择归巢地");
+                return;
+            }
+
             mLineWeatherFragment = new LineWeatherFragment();
             Bundle bundle = new Bundle();
             bundle.putParcelable(IntentBuilder.KEY_DATA, new LatLng(mViewModel.fromLa, mViewModel.fromLo));
             bundle.putParcelable(IntentBuilder.KEY_DATA_2, new LatLng(mViewModel.endLa, mViewModel.endLo));
             bundle.putFloat(IntentBuilder.KEY_DATA_3, mViewModel.dis);
             mLineWeatherFragment.setArguments(bundle);
-
-            FragmentUtils.add(getFragmentManager(), mLineWeatherFragment,R.id.rlMap);
+            FragmentUtils.add(mLineWeatherFragment.getFragmentManager(), mLineWeatherFragment,R.id.rlMap);
 //            FragmentUtils.show(mLineWeatherFragment);
         });
 
@@ -246,6 +252,7 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         mViewModel.mCity = mAddress.getCity();
         mViewModel.mCounty = mAddress.getDistrict();*/
     }
+
 
     @Override
     protected void initObserve() {
