@@ -29,7 +29,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/15.
  */
 
-public class ShareHallHomeFragment extends BaseBookFragment {
+public class ShareHallFragment extends BaseBookFragment {
 
     private DrawerLayout mDrawerLayout;
     private RelativeLayout mRlSearch;

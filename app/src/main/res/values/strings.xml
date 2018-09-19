@@ -196,8 +196,10 @@
     <string name="title_pigeon_house_info">鸽舍信息</string>
     <string name="text_male">男</string>
     <string name="text_male_a">雄</string>
+    <string name="text_male_pigeon">雄鸽</string>
     <string name="text_female">女</string>
     <string name="text_female_a">雌</string>
+    <string name="text_female_pigeon">雌鸽</string>
     <string name="text_id_card_p">正面照片</string>
     <string name="text_id_card_n">反面照片</string>
     <string name="text_foot_number_input">足环录入</string>
@@ -459,5 +461,20 @@
     <string name="text_not_choose_pigeon">你还没有选鸽子！</string>
     <string name="text_breed_pigeon">种鸽</string>
     <string name="text_my">我的</string>
+    <string name="text_word_good_pigeon">世界铭鸽</string>
+    <string name="text_my_good_pigeon">我的铭鸽</string>
+    <string name="text_applying">申请中</string>
+    <string name="text_not_setting">未设置</string>
+
+    <string-array name="array_good_pigeon">
+        <item>@string/text_word_good_pigeon</item>
+        <item>@string/text_my_good_pigeon</item>
+        <item>@string/text_applying</item>
+    </string-array>
+    
+    <string name="text_temp">%1$s°C</string>
+    <string name="text_wind_direction">%1$s风</string>
+    <string name="text_not_get_weather">获取天气失败!</string>
+    <string name="text_altitude">海拔：%1$sm</string>
 
 </resources>

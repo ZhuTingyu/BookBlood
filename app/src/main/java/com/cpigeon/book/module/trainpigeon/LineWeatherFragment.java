@@ -32,6 +32,8 @@ import com.cpigeon.book.module.menu.smalltools.lineweather.view.activity.AWeekWe
 import com.cpigeon.book.util.BitmapUtils;
 import com.google.gson.reflect.TypeToken;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +104,7 @@ public class LineWeatherFragment extends BaseMapFragment {
 
         mImgClose = findViewById(R.id.imgClose);
         mImgClose.setOnClickListener(v -> {
-            FragmentUtils.remove(this);
+            EventBus.getDefault().post(new CloseMapEvent());
         });
 
         markerManager = new MapMarkerManager(aMap,getBaseActivity());
@@ -347,4 +349,9 @@ public class LineWeatherFragment extends BaseMapFragment {
         }
     }
 
+}
+
+
+class CloseMapEvent{
+    public CloseMapEvent(){}
 }

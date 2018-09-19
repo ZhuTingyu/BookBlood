@@ -14,6 +14,7 @@ import com.base.BaseFragment;
 import com.base.http.R;
 import com.base.util.Utils;
 import com.base.util.map.AmapManager;
+import com.base.util.map.MapMarkerManager;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class BaseMapFragment extends BaseFragment {
     protected MapView mapView;
     protected AMap aMap;
     protected AmapManager amapManager;
+    protected MapMarkerManager mMapMarkerManager;
 
 
     @Override
@@ -35,6 +37,7 @@ public class BaseMapFragment extends BaseFragment {
         mapView = findViewById(R.id.map);
         aMap = mapView.getMap();
         amapManager = new AmapManager(aMap);
+        mMapMarkerManager = new MapMarkerManager(aMap, getBaseActivity());
         mapView.onCreate(savedInstanceState);
 
     }

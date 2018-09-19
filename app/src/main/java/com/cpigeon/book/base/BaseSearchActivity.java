@@ -45,7 +45,9 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
     public static <A extends BaseSearchActivity> void start(Activity activity, Class<A> aClass, Bundle mBundle) {
         Intent intent = new Intent();
         intent.setClass(activity, aClass);
-        intent.putExtras(mBundle);
+        if(mBundle != null){
+            intent.putExtras(mBundle);
+        }
         activity.startActivityForResult(intent, CODE_SEARCH);
         activity.overridePendingTransition(R.anim.bottom_out, R.anim.anim_no);
     }

@@ -68,4 +68,8 @@ public class WeatherLiveData extends LiveData<LocalWeatherLive> {
         mweathersearch.searchWeatherAsyn(); //异步搜索
     }
 
+    @Override
+    protected void onInactive() {
+        super.onInactive();
+    }
 }

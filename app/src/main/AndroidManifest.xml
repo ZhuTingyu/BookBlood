@@ -179,10 +179,10 @@
             android:screenOrientation="landscape"/>
         <activity android:name=".module.pigeonleague.SearchPigeonToLeagueActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity android:name=".module.home.goodpigeon.SearchGoodPigeonActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".module.breeding.SearchBreedingFootActivity"
             android:launchMode="singleTask"

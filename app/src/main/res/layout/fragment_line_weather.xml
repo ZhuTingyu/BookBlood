@@ -7,14 +7,7 @@
 
     <include layout="@layout/layout_line_weathers" />
 
-    <ImageView
-        android:id="@+id/imgClose"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/normal_safe_distance"
-        android:layout_marginTop="25dp"
-        android:layout_width="32dp"
-        app:srcCompat="@drawable/svg_close"
-        android:layout_height="32dp" />
+
 
     <com.amap.api.maps.MapView
         android:id="@+id/map"
@@ -24,5 +17,14 @@
         android:layout_marginRight="@dimen/normal_safe_distance"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/imgClose"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/normal_safe_distance"
+        android:layout_marginTop="25dp"
+        android:layout_width="40dp"
+        app:srcCompat="@drawable/svg_close"
+        android:layout_height="40dp" />
 
 </RelativeLayout>

@@ -54,7 +54,7 @@ public class TrainProjectViewModel extends BaseViewHolder {
 
             } else if (getAdapterPosition() == 2) {
                 itemView.setOnClickListener(v -> {
-                    OpenAndCloseTrainFragment.start(getActivity());
+                    //OpenAndCloseTrainFragment.start(getActivity());
                 });
             }
         }

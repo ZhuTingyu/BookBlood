@@ -1,46 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/layout_search_toolbar" />
 
-    <RelativeLayout
-        android:background="@color/white"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingLeft="26dp"
-        android:gravity="center_vertical"
-        android:paddingRight="26dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
 
-        <TextView
-            android:textSize="@dimen/large_text_size"
-            android:textColor="@color/black"
-            android:text="世界铭鸽"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <com.base.widget.magicindicator.MagicIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal" />
 
-        <TextView
-            android:textSize="@dimen/medium_text_size"
-            android:textColor="@color/color_text_title"
-            android:layout_centerHorizontal="true"
-            android:text="世界铭鸽"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
-        <TextView
-            android:textSize="@dimen/medium_text_size"
-            android:textColor="@color/color_text_title"
-            android:layout_alignParentRight="true"
-            android:text="申请中"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    </RelativeLayout>
+            <com.cpigeon.book.widget.stats.StatView
+                android:id="@+id/stat1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:statView_data_color="@color/color_scale_yellow_data"
+                app:statView_stat_w="64dp"
+                app:statView_title="@string/text_all"/>
 
-    <include layout="@layout/xrecyclerview_no_padding_layout" />
+            <com.cpigeon.book.widget.stats.StatView
+                android:id="@+id/stat2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:statView_data_color="@color/color_scale_blue_data"
+                app:statView_other_color="@color/color_scale_blue_other"
+                app:statView_stat_w="64dp"
+                app:statView_title="@string/text_male_pigeon"/>
+
+            <com.cpigeon.book.widget.stats.StatView
+                android:id="@+id/stat3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:statView_data_color="@color/color_scale_red_data"
+                app:statView_other_color="@color/color_scale_red_other"
+                app:statView_stat_w="64dp"
+                app:statView_title="@string/text_female_pigeon"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

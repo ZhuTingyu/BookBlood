@@ -64,14 +64,14 @@ public class CircleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        mRectF = new RectF(mCircleWidth, mCircleWidth,
+                getWidth() - mCircleWidth, getHeight() - mCircleWidth);
         if (mDataCount == 0) {
             mPaint.setColor(mOtherColor);
             canvas.drawArc(mRectF, 90, 360, false, mPaint);
             return;
         }
 
-        mRectF = new RectF(mCircleWidth, mCircleWidth,
-                getWidth() - mCircleWidth, getHeight() - mCircleWidth);
         float scale = mDataCount / mDataMax;
         //数量的比例
         float scaleC = (360 * scale);

@@ -26,11 +26,9 @@ import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonEntryFragment;
 import com.cpigeon.book.module.home.UserInfoFragment;
-import com.cpigeon.book.module.home.goodpigeon.GoodPigeonListFragment;
+import com.cpigeon.book.module.home.goodpigeon.GoodPigeonHomeFragment;
 import com.cpigeon.book.module.home.home.HomeFragment;
-import com.cpigeon.book.module.home.HomeFragment3;
-import com.cpigeon.book.module.home.HomeFragment4;
-import com.cpigeon.book.module.home.sharehall.ShareHallHomeFragment;
+import com.cpigeon.book.module.home.sharehall.ShareHallFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.module.menu.smalltools.SmallToolsHomeFragment;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
@@ -73,8 +71,8 @@ public class MainActivity extends BaseBookActivity {
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, false);
 
         HomeFragment homeFragment = new HomeFragment();
-        GoodPigeonListFragment goodPigeonListFragment = new GoodPigeonListFragment();
-        ShareHallHomeFragment shareHallHomeFragment = new ShareHallHomeFragment();
+        GoodPigeonHomeFragment goodPigeonListFragment = new GoodPigeonHomeFragment();
+        ShareHallFragment shareHallHomeFragment = new ShareHallFragment();
         mUserInfoFragment = new UserInfoFragment();
 
         homeFragment.setArguments(bundle);

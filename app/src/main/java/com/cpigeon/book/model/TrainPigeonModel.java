@@ -75,4 +75,43 @@ public class TrainPigeonModel {
                 .addBody("idstr", footIds)
                 .request();
     }
+
+    public static Observable<ApiResponse<TrainEntity>> getTrainDetails(String trainId, String stateId) {
+        return RequestData.<ApiResponse<TrainEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<TrainEntity>>() {
+                }.getType())
+                .url(R.string.get_train_pigeon_details)
+                .addBody("trainid", String.valueOf(trainId))
+                .addBody("StateID", String.valueOf(stateId))
+                .request();
+    }
+
+    public static Observable<ApiResponse> openTrain(
+            String temper,//气温
+            String windPower,//训练风力
+            String weather,//比赛天气
+            String trainId,//训练表id
+            String count,//训练次数表
+            String dir,// 风向
+            String hum,//湿度
+            String alt,//海拔
+            double fromLo,// 放飞的东经坐标
+            double fromLa //放飞的北纬坐标
+    ) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.open_train_pigeon)
+                .addBody("temper", temper)
+                .addBody("windpower", windPower)
+                .addBody("weather", weather)
+                .addBody("trainid", trainId)
+                .addBody("countid", count)
+                .addBody("dir", dir)
+                .addBody("hum", hum)
+                .addBody("alt", alt)
+                .addBody("fromlo", String.valueOf(fromLo))
+                .addBody("fromla", String.valueOf(fromLa))
+                .request();
+    }
 }

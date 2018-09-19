@@ -50,7 +50,7 @@
     <color name="colorButton_secondary_focus">#1989fc</color>
 
     <color name="colorButton_Default_disable">#d7dde1</color>
-    <color name="colorButton_Default_normal">#fa2626</color>
+    <color name="colorButton_Default_normal">#D90000</color>
     <color name="colorButton_Default_focus">#ff5f5f</color>
 
     <color name="colorButton_orange_normal">#ffa750</color>

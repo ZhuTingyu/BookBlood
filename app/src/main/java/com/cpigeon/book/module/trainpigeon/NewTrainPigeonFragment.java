@@ -29,25 +29,25 @@ import com.base.util.LocationFormatUtils;
 import com.base.util.Utils;
 import com.base.util.db.AppDatabase;
 import com.base.util.dialog.DialogUtils;
-import com.base.util.map.AmapManager;
 import com.base.util.map.MapMarkerManager;
 import com.base.util.system.AppManager;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
-import com.cpigeon.book.event.NewTrainEvent;
+import com.cpigeon.book.event.UpdateTrainEvent;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.pigeonhouse.InputLocationFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
-import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainPigeonAddViewModel;
 import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainPigeonViewModel;
 import com.cpigeon.book.service.SingleLoginService;
 import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +91,7 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         super.onAttach(context);
         mViewModel = new NewTrainPigeonViewModel();
         initViewModel(mViewModel);
+        EventBus.getDefault().register(this);
     }
 
     @Nullable
@@ -175,19 +176,25 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
 
         mFrameLayout.setOnClickListener(v -> {
 
-            if(mViewModel.endLa == 0){
-                ToastUtils.showLong(getBaseActivity(),"请选择归巢地");
+            if (mViewModel.endLa == 0) {
+                ToastUtils.showLong(getBaseActivity(), "请选择司放地！");
                 return;
             }
 
-            mLineWeatherFragment = new LineWeatherFragment();
-            Bundle bundle = new Bundle();
-            bundle.putParcelable(IntentBuilder.KEY_DATA, new LatLng(mViewModel.fromLa, mViewModel.fromLo));
-            bundle.putParcelable(IntentBuilder.KEY_DATA_2, new LatLng(mViewModel.endLa, mViewModel.endLo));
-            bundle.putFloat(IntentBuilder.KEY_DATA_3, mViewModel.dis);
-            mLineWeatherFragment.setArguments(bundle);
-            FragmentUtils.add(mLineWeatherFragment.getFragmentManager(), mLineWeatherFragment,R.id.rlMap);
-//            FragmentUtils.show(mLineWeatherFragment);
+            mapView.setVisibility(View.GONE);
+
+
+            if (FragmentUtils.getAllFragments(getFragmentManager()).size() == 2) {
+                FragmentUtils.show(mLineWeatherFragment);
+            } else {
+                mLineWeatherFragment = new LineWeatherFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(IntentBuilder.KEY_DATA, new LatLng(mViewModel.fromLa, mViewModel.fromLo));
+                bundle.putParcelable(IntentBuilder.KEY_DATA_2, new LatLng(mViewModel.endLa, mViewModel.endLo));
+                bundle.putFloat(IntentBuilder.KEY_DATA_3, mViewModel.dis);
+                mLineWeatherFragment.setArguments(bundle);
+                FragmentUtils.add(getFragmentManager(), mLineWeatherFragment, R.id.rlMap);
+            }
         });
 
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -260,14 +267,38 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
             setProgressVisible(false);
             DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
-                EventBus.getDefault().post(new NewTrainEvent());
+                EventBus.getDefault().post(new UpdateTrainEvent());
                 finish();
             });
         });
     }
 
-    public void hideLine(){
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(CloseMapEvent event) {
+        hideLine();
+        mapView.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLine() {
         FragmentUtils.hide(mLineWeatherFragment);
+    }
+
+    @Override
+    public boolean OnBackClick() {
+        if (FragmentUtils.getTopShow(getBaseActivity().getSupportFragmentManager()).getClass()
+                .equals(LineWeatherFragment.class)) {
+            hideLine();
+            mapView.setVisibility(View.VISIBLE);
+            return true;
+        }
+
+        return false;
     }
 
     @Override

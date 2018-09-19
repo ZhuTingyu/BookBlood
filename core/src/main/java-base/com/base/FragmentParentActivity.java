@@ -47,4 +47,11 @@ public class FragmentParentActivity extends BaseActivity {
         if(baseFragment!=null)
             baseFragment.onActivityResult(requestCode,resultCode,data);
     }
+
+    @Override
+    public void onBackPressed() {
+        if(!baseFragment.OnBackClick()){
+            super.onBackPressed();
+        }
+    }
 }

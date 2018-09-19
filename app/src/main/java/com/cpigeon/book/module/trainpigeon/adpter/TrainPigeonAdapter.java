@@ -22,6 +22,5 @@ public class TrainPigeonAdapter extends BaseQuickAdapter<TrainEntity,TrainPigeon
     @Override
     protected void convert(TrainPigeonViewHolder helper, TrainEntity item) {
         helper.bindData(item);
-
     }
 }

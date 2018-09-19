@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.event.NewTrainEvent;
+import com.cpigeon.book.event.UpdateTrainEvent;
 import com.cpigeon.book.module.trainpigeon.adpter.TrainPigeonAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.TrainPigeonListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -94,7 +93,7 @@ public class TrainPigeonListFragment extends BaseBookFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnEvent(NewTrainEvent event){
+    public void OnEvent(UpdateTrainEvent event){
         mAdapter.cleanList();
         mViewModel.pi = 1;
         mViewModel.getTrainPigeonList();

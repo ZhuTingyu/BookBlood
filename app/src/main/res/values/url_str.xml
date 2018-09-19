@@ -269,6 +269,8 @@
     <!--获取协会列表-->
     <string name="api_XH_GetUsersList">XH_GetUsersList</string>
     <string name="get_pigeon_sex_count">TXGP_Pigeon_SelectSexCount</string>
+    <string name="get_train_pigeon_details">TXGP_PigeonTrainCount_StartFly</string>
+    <string name="open_train_pigeon">TXGP_PigeonTrain_Release</string>
 
 
 </resources>

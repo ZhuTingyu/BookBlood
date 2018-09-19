@@ -74,4 +74,8 @@ public class StringUtil {
     public static String emptyString() {
         return "";
     }
+
+    public static String blankString() {
+        return "    ";
+    }
 }
