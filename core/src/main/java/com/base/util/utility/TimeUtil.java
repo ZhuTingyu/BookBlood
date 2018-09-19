@@ -10,7 +10,6 @@ public class TimeUtil {
     public static final String FORMAT_YYYYMM = "yyyy-MM";
     public static final String FORMAT_YYYY = "yyyy";
     public static final String FORMAT_YYYYMMDD = "yyyy-MM-dd";
-    public static final String FORMAT_YYYYMMDD_ = "yyyy-MM-dd";
 
     public static final String FORMAT_YYYYMM01 = "yyyy-MM-01";
     public static final String FORMAT_YYYYMMDDHHMM = "yyyy-MM-dd HH:mm";

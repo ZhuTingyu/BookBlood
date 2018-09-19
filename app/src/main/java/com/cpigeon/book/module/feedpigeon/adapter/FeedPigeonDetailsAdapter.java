@@ -19,6 +19,7 @@ import java.util.List;
  */
 
 public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity, BaseViewHolder> {
+
     public FeedPigeonDetailsAdapter() {
         super(R.layout.item_feed_pigeon_details, Lists.newArrayList());
     }
@@ -76,8 +77,8 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mLlTextRoot.setVisibility(View.GONE);
             mTvTitle.setText(R.string.text_nef);
             mTvTitle.setBackgroundResource(R.drawable.shape_bg_corner_3_solid_blue);
-            helper.setGlideImageViewHaveRound(mContext, R.id.imgIcon, UserModel.getInstance().getUserData().touxiangurl);
-            helper.setText(R.id.tvImageContent, "112112333333333123123123123123123123123123123");
+            helper.setGlideImageViewHaveRound(mContext, R.id.imgIcon, item.getName());
+            helper.setText(R.id.tvImageContent, item.getListInfo());
 
         } else if (item.getTypeID() == 3) {//用药
             mTvTitle.setText(R.string.text_drug_use);

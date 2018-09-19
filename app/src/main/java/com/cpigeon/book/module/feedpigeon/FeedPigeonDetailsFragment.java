@@ -31,7 +31,10 @@ import com.cpigeon.book.module.feedpigeon.childfragment.DrugUseCaseFragment;
 import com.cpigeon.book.module.feedpigeon.childfragment.StatusIllnessRecordFragment;
 import com.cpigeon.book.module.feedpigeon.childfragment.UseVaccineFragment;
 import com.cpigeon.book.module.feedpigeon.viewmodel.FeedPigeonListViewModel;
+import com.cpigeon.book.module.photo.BaseImgUploadFragment;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
+import com.cpigeon.book.module.photo.PigeonPhotoDetailsFragment;
+import com.cpigeon.book.module.photo.SnapshotImgUploadFragment;
 import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.PigeonPublicUtil;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -170,7 +173,7 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
             FeedPigeonEntity item = mAdapter.getData().get(position);
 
             if (item.getTypeID() == 5) { //随拍
-
+                PigeonPhotoDetailsFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity.getFootRingNum(), 0);
             } else if (item.getTypeID() == 3) {//用药
                 DrugUseCaseFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
             } else if (item.getTypeID() == 1) {//保健
@@ -219,11 +222,14 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         if (requestCode == 1) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 
-            IntentBuilder.Builder().putExtra(IntentBuilder.KEY_TYPE, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath())
-                    .imgType(ImgTypeEntity.TYPE_NEF)
-                    .build())
-                    .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
-
+            BaseImgUploadFragment.start(getBaseActivity(),
+                    SnapshotImgUploadFragment.class,
+                    new ImgTypeEntity.Builder()
+                            .foootId(mFeedPigeonListViewModel.mPigeonEntity.getFootRingID())
+                            .pigeonId(mFeedPigeonListViewModel.mPigeonEntity.getPigeonID())
+                            .imgTypeSpecified(getString(R.string.text_nef))
+                            .imgPath(selectList.get(0).getCompressPath())
+                            .build());
         }
     }
 

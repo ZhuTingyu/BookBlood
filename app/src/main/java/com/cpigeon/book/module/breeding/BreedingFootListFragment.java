@@ -21,18 +21,17 @@ import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
 
 public class BreedingFootListFragment extends BaseFootListFagment {
 
-    private SearchFragmentParentActivity mActivity;
+
 
     public static void start(Activity activity) {
         SearchFragmentParentActivity.
                 start(activity, BreedingFootListFragment.class, false, null);
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mActivity = (SearchFragmentParentActivity) context;
+
     }
 
     @Override
@@ -41,8 +40,6 @@ public class BreedingFootListFragment extends BaseFootListFagment {
         setProgressVisible(false);
         mTvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);
-
-        mActivity.setSearchHint(R.string.text_input_foot_number_search);
 
         mActivity.setSearchClickListener(v -> {
             //搜索

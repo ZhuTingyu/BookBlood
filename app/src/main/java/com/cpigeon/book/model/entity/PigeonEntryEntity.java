@@ -26,6 +26,7 @@ public class PigeonEntryEntity implements Parcelable {
     private String MatchInfoID;
     private String MatchInfo;
     private String PigeonMatchID;
+    private String PigeonPlumeName;//雨色
 
     private PigeonEntryEntity(Builder builder) {
         setFootRingNum(builder.FootRingNum);
@@ -35,6 +36,14 @@ public class PigeonEntryEntity implements Parcelable {
         setMatchInfoID(builder.MatchInfoID);
         setMatchInfo(builder.MatchInfo);
         setPigeonMatchID(builder.PigeonMatchID);
+    }
+
+    public String getPigeonPlumeName() {
+        return PigeonPlumeName;
+    }
+
+    public void setPigeonPlumeName(String pigeonPlumeName) {
+        PigeonPlumeName = pigeonPlumeName;
     }
 
     public String getFootRingNum() {
@@ -160,6 +169,7 @@ public class PigeonEntryEntity implements Parcelable {
         dest.writeString(this.MatchInfoID);
         dest.writeString(this.MatchInfo);
         dest.writeString(this.PigeonMatchID);
+        dest.writeString(this.PigeonPlumeName);
     }
 
     protected PigeonEntryEntity(Parcel in) {
@@ -170,9 +180,10 @@ public class PigeonEntryEntity implements Parcelable {
         this.MatchInfoID = in.readString();
         this.MatchInfo = in.readString();
         this.PigeonMatchID = in.readString();
+        this.PigeonPlumeName = in.readString();
     }
 
-    public static final Parcelable.Creator<PigeonEntryEntity> CREATOR = new Parcelable.Creator<PigeonEntryEntity>() {
+    public static final Creator<PigeonEntryEntity> CREATOR = new Creator<PigeonEntryEntity>() {
         @Override
         public PigeonEntryEntity createFromParcel(Parcel source) {
             return new PigeonEntryEntity(source);

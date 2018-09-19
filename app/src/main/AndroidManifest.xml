@@ -19,7 +19,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 
-
     <uses-sdk android:minSdkVersion="8"></uses-sdk>
 
     <application
@@ -139,54 +138,65 @@
 
 
         <activity
-            android:name=".module.home.UserInfoFragment"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".module.order.OrderListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".module.basepigeon.BaseSearchPigeonActivity"
+        <activity
+            android:name=".module.basepigeon.BaseSearchPigeonActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.photo.PigeonPhotoHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.photo.PigeonPhotoHomeActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
         <activity android:name=".module.menu.message.MsgActivity" />
-        <activity android:name=".module.trainpigeon.SearchTrainPigeonActivity"
+        <activity
+            android:name=".module.trainpigeon.SearchTrainPigeonActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.select.SearchFootRingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.select.SearchFootRingActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.feedpigeon.SearchFeedPigeonRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.feedpigeon.SearchFeedPigeonRecordActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.feedpigeon.FeedPigeonRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.feedpigeon.FeedPigeonRecordActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.makebloodbook.SearchBreedPigeonToMakeBookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.makebloodbook.SearchBreedPigeonToMakeBookActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.photo.SearchFootToPhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.photo.SearchFootToPhotoActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.pigeonleague.PigeonMatchDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.pigeonleague.PigeonMatchDetailsActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".module.pigeonleague.SearchPigeonToLeagueActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".module.pigeonleague.SearchPigeonToLeagueActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity android:name=".module.home.goodpigeon.SearchGoodPigeonActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".module.breeding.SearchBreedingFootActivity"
+        <activity
+            android:name=".module.breeding.SearchBreedingFootActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".module.breeding.OffspringSearchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>

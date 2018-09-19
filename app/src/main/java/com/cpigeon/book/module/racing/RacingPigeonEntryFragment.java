@@ -6,6 +6,7 @@ import android.view.View;
 import com.base.util.IntentBuilder;
 import com.base.util.dialog.DialogUtils;
 import com.cpigeon.book.module.breedpigeon.BasePigeonEntryFragment;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BasePigeonViewModel;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.racing.viewmodel.RacingPigeonEntryViewModel;
 import com.cpigeon.book.util.TextViewUtil;
@@ -28,7 +29,7 @@ public class RacingPigeonEntryFragment extends BasePigeonEntryFragment {
     @Override
     protected void onAttachs() {
         super.onAttachs();
-        mBasePigeonViewModel = new RacingPigeonEntryViewModel();
+        mBasePigeonViewModel = new BasePigeonViewModel();
         mRacingPigeonEntryViewModel = (RacingPigeonEntryViewModel) mBasePigeonViewModel;
         initViewModels(mSelectTypeViewModel, mRacingPigeonEntryViewModel);
     }
