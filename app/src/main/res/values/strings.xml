@@ -120,6 +120,16 @@
         <item>@string/string_hatches_info_yes</item>
         <item>@string/string_hatches_info_no</item>
     </string-array>
+    <string name="text_status_not_set_foot_ring">未挂环</string>
+    <string name="text_status_set_foot_ring">已挂环</string>
+
+
+    <string name="text_breed_pigeon">种鸽</string>
+    <string name="text_racing_pigeon">赛鸽</string>
+    <string-array name="array_pigeon_type">
+        <item>@string/text_breed_pigeon</item>
+        <item>@string/text_racing_pigeon</item>
+    </string-array>
 
 
     <!--关于我们-->
@@ -152,6 +162,7 @@
     <string name="btn_sure_modify">确定修改</string>
     <string name="btn_sure_upload">确定上传</string>
 
+    <string name="str_img_upload">上传照片</string>
 
     <!--养鸽管理-->
     <string name="str_use_vaccine_details">疫苗注射详情</string>
@@ -245,8 +256,7 @@
     <string name="text_not_handle">未处理</string>
     <string name="text_handled">已处理</string>
     <string name="text_not_reply">已经回复</string>
-    <string name="text_status_not_set_foot_ring">未挂环</string>
-    <string name="text_status_set_foot_ring">已挂环</string>
+
     <string name="text_input_foot_numbers_count_limit">录入的足环数量不超过10000个</string>
     <string name="text_currency_exchange">鸽币兑换</string>
     <string name="text_currency_details">鸽币明细</string>
@@ -457,6 +467,12 @@
     <string name="text_connection_pigeon_master">联系鸽主</string>
     <string name="text_sure_share">确认共享</string>
     <string name="text_not_choose_pigeon">你还没有选鸽子！</string>
-    <string name="text_breed_pigeon">种鸽</string>
+
+
+
+    <!--繁育-->
+    <string name="str_pairing_nest_info">窝次信息</string>
+    <string name="str_pairing_nest_add">添加窝次</string>
+    <string name="str_offspring_add">子代录入</string>
 
 </resources>

@@ -253,9 +253,11 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_offspring_info:
                 //子代信息
+                OffspringChooseFragment.start(getBaseActivity());
+
+
                 llOffspringInfo.setContent("已挂环");
                 mPairingNestAddViewModel.offspringInfo = "已挂环";
-
                 mPairingNestAddViewModel.isCanCommit();
                 break;
             case R.id.tv_next_step:

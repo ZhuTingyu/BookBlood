@@ -172,6 +172,10 @@
     <string name="feed_pigeon_statistical">TXGP_Pigeon_SelectIDCount</string>
 
 
+    <!--上传图片  一张-->
+    <string name="upload_img_one">TXGP_PigeonPhoto_Add</string>
+
+
     <!--疫苗注射添加-->
     <string name="use_vaccine_add">TXGP_PigeonVaccine_Add</string>
     <!--疫苗注射修改-->
@@ -210,7 +214,6 @@
     <string name="drug_care_drug_details">TXGP_PigeonHealth_Select</string>
     <!--保健品  删除-->
     <string name="drug_care_drug_del">TXGP_PigeonHealth_Delete</string>
-
 
 
     <!--信鸽血统推荐-->

@@ -38,6 +38,7 @@ import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonEntryViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.photo.BaseImgUploadFragment;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.util.TextViewUtil;
@@ -348,9 +349,15 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
         if (requestCode == PictureMimeType.ofImage()) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 
-            IntentBuilder.Builder().putExtra(IntentBuilder.KEY_DATA, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath()).build())
-                    .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
+//            IntentBuilder.Builder().putExtra(IntentBuilder.KEY_DATA, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath()).build())
+//                    .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
 
+
+            BaseImgUploadFragment.start(getBaseActivity(),
+                    ImgUploadFragment.class,
+                    new ImgTypeEntity.Builder()
+                            .imgPath(selectList.get(0).getCompressPath())
+                            .build(), ImgUploadFragment.CODE_SELECT_COUNTY);
         }
 
         switch (requestCode) {
@@ -368,7 +375,7 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
                 break;
 
             case ImgUploadFragment.CODE_SELECT_COUNTY:
-                ImgTypeEntity mImgTypeEntity = (ImgTypeEntity) data.getSerializableExtra(IntentBuilder.KEY_TYPE);
+                ImgTypeEntity mImgTypeEntity = (ImgTypeEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
 
                 List<ImgTypeEntity> imgs = Lists.newArrayList();
                 imgs.add(0, mImgTypeEntity);

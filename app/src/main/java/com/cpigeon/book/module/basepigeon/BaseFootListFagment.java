@@ -44,6 +44,8 @@ public class BaseFootListFagment extends BaseBookFragment {
     protected SelectTypeViewModel mSelectTypeViewModel;
 
     protected BreedPigeonListModel mBreedPigeonListModel;
+    protected SearchFragmentParentActivity mActivity;
+
 
     public static void start(Activity activity, String pigeonType) {
 
@@ -56,6 +58,8 @@ public class BaseFootListFagment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mActivity = (SearchFragmentParentActivity) context;
+
 
         mSelectTypeViewModel = new SelectTypeViewModel();
         mBreedPigeonListModel = new BreedPigeonListModel();
@@ -74,6 +78,7 @@ public class BaseFootListFagment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mActivity.setSearchHint(R.string.text_input_foot_number_search);
 
         mBreedPigeonListModel.typeid = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
         mAdapter = new BreedPigeonListAdapter();

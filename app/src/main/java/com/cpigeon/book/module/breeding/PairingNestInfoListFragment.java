@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
+import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
@@ -51,8 +52,8 @@ public class PairingNestInfoListFragment extends BaseListFragment {
         mPairingNestInfoListViewModel.mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         mPairingNestInfoListViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA_2);
 
-        setTitle("窝次信息");
-        setToolbarRight("添加窝次", item -> {
+        setTitle(getString(R.string.str_pairing_nest_info));
+        setToolbarRight(getString(R.string.str_pairing_nest_add), item -> {
             PairingNestAddFragment.start(getBaseActivity(), mPairingNestInfoListViewModel.mPairingInfoEntity,
                     mPairingNestInfoListViewModel.mBreedPigeonEntity,
                     mAdapter.getData().size());

@@ -143,6 +143,7 @@ public class HomeFragment extends BaseBookFragment {
         });
 
         mSTvBreedInfo.setOnClickListener(v -> {
+            //繁育信息
             BreedingFootListFragment.start(getBaseActivity());
         });
 

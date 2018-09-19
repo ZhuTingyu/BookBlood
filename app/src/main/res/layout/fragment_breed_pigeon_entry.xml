@@ -13,6 +13,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!--子代类型-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_pigeon_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_RightString="种鸽"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="true"
+            app:lineInputView_LeftString="子代类型" />
+
         <!--国家-->
         <com.cpigeon.book.widget.LineInputView
             android:id="@+id/ll_countries"
