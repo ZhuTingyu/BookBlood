@@ -29,7 +29,7 @@ import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.home.viewmodel.HomeViewModel;
 import com.cpigeon.book.module.makebloodbook.SelectPigeonToMakeBookFragment;
-import com.cpigeon.book.module.menu.UserInfoActivity;
+import com.cpigeon.book.module.menu.SignFragment;
 import com.cpigeon.book.module.menu.message.MsgActivity;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
@@ -88,7 +88,7 @@ public class HomeFragment extends BaseBookFragment {
         BarUtils.setStatusBarLightMode(getBaseActivity(), true);
 
         setToolbarLeft(R.drawable.svg_home_my, v -> {
-            UserInfoActivity.start(getBaseActivity());
+            SignFragment.start(getBaseActivity());
         });
 
         setToolbarRightImage(R.drawable.svg_home_message, item -> {

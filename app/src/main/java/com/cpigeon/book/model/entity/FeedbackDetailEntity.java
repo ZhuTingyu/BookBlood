@@ -28,9 +28,18 @@ public class FeedbackDetailEntity implements MultiItemEntity {
     private String datetime;
     private String id;
     private String replycontent;
+    private String replytime;
     private List<ImageEntity> imglist;
 
     private int itemType;
+
+    public String getReplytime() {
+        return replytime;
+    }
+
+    public void setReplytime(String replytime) {
+        this.replytime = replytime;
+    }
 
     public String getState() {
         return state;

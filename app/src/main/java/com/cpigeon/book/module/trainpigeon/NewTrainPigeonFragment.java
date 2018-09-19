@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,24 +22,32 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.base.base.BaseMapFragment;
+import com.base.util.FragmentUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.LocationFormatUtils;
 import com.base.util.Utils;
+import com.base.util.db.AppDatabase;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.map.AmapManager;
 import com.base.util.map.MapMarkerManager;
 import com.base.util.system.AppManager;
 import com.base.util.utility.StringUtil;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
+import com.cpigeon.book.event.NewTrainEvent;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.pigeonhouse.InputLocationFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
+import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainPigeonAddViewModel;
+import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainPigeonViewModel;
 import com.cpigeon.book.service.SingleLoginService;
 import com.cpigeon.book.widget.LineInputView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,9 +74,12 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
     private TextView mTvDis;
     private CardView mCardView;
     private MapMarkerManager mMapMarkerManager;
+    FrameLayout mFrameLayout;
+
 
     private LatLng mPigeonHousePosition;
-
+    NewTrainPigeonViewModel mViewModel;
+    private LineWeatherFragment mLineWeatherFragment;
 
 
     public static void start(Activity activity) {
@@ -77,6 +89,8 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mViewModel = new NewTrainPigeonViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -103,16 +117,20 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         mTvOk = findViewById(R.id.tvOk);
         mTvDis = findViewById(R.id.tvDis);
         mCardView = findViewById(R.id.card);
+        mFrameLayout = findViewById(R.id.frame);
 
 
         mPigeonHousePosition = new LatLng(Double.valueOf(UserModel.getInstance()
                 .getUserData().pigeonHouseEntity.getLatitude())
-                ,Double.valueOf(UserModel.getInstance().getUserData().pigeonHouseEntity.getLongitude()));
+                , Double.valueOf(UserModel.getInstance().getUserData().pigeonHouseEntity.getLongitude()));
+
+        mViewModel.fromLa = mPigeonHousePosition.latitude;
+        mViewModel.fromLo = mPigeonHousePosition.longitude;
 
 
         amapManager.moveByLatLng(mPigeonHousePosition);
 
-        mMapMarkerManager.addCustomCenterMarker(mPigeonHousePosition,"",R.mipmap.ic_blue_point);
+        mMapMarkerManager.addCustomCenterMarker(mPigeonHousePosition, "", R.mipmap.ic_blue_point);
         mMapMarkerManager.addMap();
 
         amapManager.setMapZoomLevel(11f);
@@ -131,8 +149,8 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
 
                     LatLng latLng = new LatLng(LocationFormatUtils.Aj2GPSLocation(Double.valueOf(lo))
                             , LocationFormatUtils.Aj2GPSLocation(Double.valueOf(la)));
-                    LatLng c = AmapManager.converter(getContext(), latLng);
-
+                    mViewModel.endLa = latLng.latitude;
+                    mViewModel.endLo = latLng.longitude;
                 }
 
                 @Override
@@ -145,7 +163,31 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
 
         mImgAdd.setOnClickListener(v -> {
             NewTrainAddPigeonFragment.start(getBaseActivity()
-                    , (ArrayList<PigeonEntity>) mAdapter.getData(),CODE_SELECT_PIGEONS);
+                    , (ArrayList<PigeonEntity>) mAdapter.getData(), CODE_SELECT_PIGEONS);
+        });
+
+        mTvOk.setOnClickListener(v -> {
+            mViewModel.name = mLvName.getContent();
+            mViewModel.fromLocation = mLvFlyLocation.getContent();
+            setProgressVisible(true);
+            mViewModel.newTrainPigeon();
+        });
+
+        mFrameLayout.setOnClickListener(v -> {
+
+            if(mViewModel.endLa == 0){
+                ToastUtils.showLong(getBaseActivity(),"请选择归巢地");
+                return;
+            }
+
+            mLineWeatherFragment = new LineWeatherFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(IntentBuilder.KEY_DATA, new LatLng(mViewModel.fromLa, mViewModel.fromLo));
+            bundle.putParcelable(IntentBuilder.KEY_DATA_2, new LatLng(mViewModel.endLa, mViewModel.endLo));
+            bundle.putFloat(IntentBuilder.KEY_DATA_3, mViewModel.dis);
+            mLineWeatherFragment.setArguments(bundle);
+            FragmentUtils.add(mLineWeatherFragment.getFragmentManager(), mLineWeatherFragment,R.id.rlMap);
+//            FragmentUtils.show(mLineWeatherFragment);
         });
 
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -157,6 +199,12 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         });
         mList.setAdapter(mAdapter);
         mAdapter.setNewData(Lists.newArrayList());
+        getBaseActivity().setOnActivityFinishListener(() -> {
+            AppDatabase.getInstance(getBaseActivity()).delete(AppDatabase.getInstance(getBaseActivity()).DbEntityDao()
+                    .getDataByUserAndType(UserModel.getInstance().getUserId()
+                            , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING));
+        });
+
 
     }
 
@@ -172,28 +220,28 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
                     , LocationFormatUtils.loLaToDMS(point.getLongitude())
                     , LocationFormatUtils.loLaToDMS(point.getLatitude())));
 
-            /*mViewModel.mLongitude = String.valueOf(point.getLongitude());
-            mViewModel.mLatitude = String.valueOf(point.getLatitude());
-
-            bindAddress(address);*/
+            //bindAddress(address);
 
             mLvFlyLocation.setContent(data.getStringExtra(SelectLocationByMapFragment.KEY_ADDRESS_NAME));
 
             mMapMarkerManager.clean();
 
-            mMapMarkerManager.addCustomCenterMarker(mPigeonHousePosition,"",R.mipmap.ic_blue_point);
-            LatLng selectPoint = new LatLng(point.getLatitude(),point.getLongitude());
-            mMapMarkerManager.addCustomCenterMarker(selectPoint,"",R.mipmap.ic_red_point);
+            mMapMarkerManager.addCustomCenterMarker(mPigeonHousePosition, "", R.mipmap.ic_blue_point);
+            LatLng selectPoint = new LatLng(point.getLatitude(), point.getLongitude());
+            mMapMarkerManager.addCustomCenterMarker(selectPoint, "", R.mipmap.ic_red_point);
             mMapMarkerManager.addMap();
 
-            int d = (int) AMapUtils.calculateLineDistance(mPigeonHousePosition,new LatLng(point.getLatitude(),point.getLongitude())) / 1000;
+            float dis = AMapUtils.calculateLineDistance(mPigeonHousePosition, new LatLng(point.getLatitude(), point.getLongitude()));
             mCardView.setVisibility(View.VISIBLE);
-            mTvDis.setText(Utils.getString(R.string.text_KM, String.valueOf(d)));
-
+            mTvDis.setText(Utils.getString(R.string.text_KM, String.valueOf((int) (dis / 1000))));
             addLine(Lists.newArrayList(mPigeonHousePosition, selectPoint), R.color.colorPrimary);
-        }else if(requestCode == CODE_SELECT_PIGEONS){
+            mViewModel.endLo = point.getLongitude();
+            mViewModel.endLa = point.getLatitude();
+            mViewModel.dis = dis;
+        } else if (requestCode == CODE_SELECT_PIGEONS) {
             List<PigeonEntity> pigeonEntities = (List<PigeonEntity>) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             mAdapter.setNewData(pigeonEntities);
+            mViewModel.mPigeonEntities = pigeonEntities;
         }
     }
 
@@ -205,6 +253,22 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         mViewModel.mCounty = mAddress.getDistrict();*/
     }
 
+
+    @Override
+    protected void initObserve() {
+        mViewModel.normalResult.observe(this, s -> {
+            setProgressVisible(false);
+            DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                EventBus.getDefault().post(new NewTrainEvent());
+                finish();
+            });
+        });
+    }
+
+    public void hideLine(){
+        FragmentUtils.hide(mLineWeatherFragment);
+    }
 
     @Override
     public void error(int code, String error) {

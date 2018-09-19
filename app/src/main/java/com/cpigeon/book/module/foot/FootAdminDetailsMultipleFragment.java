@@ -183,6 +183,7 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
                 mLvSource.setRightText(footEntity.getSourceName());//来源
                 mViewModel.typeId = String.valueOf(footEntity.getTypeID());
                 mLvMoney.setRightText(Utils.getString(R.string.text_yuan, footEntity.getFootRingMoney()));//金额
+                mBoxViewRemark.setText(footEntity.getRemark());
             }
         });
 

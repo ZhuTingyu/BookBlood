@@ -17,7 +17,6 @@ import com.cpigeon.book.util.MathUtil;
  */
 
 public class CircleView extends View {
-    private Canvas mCanvas;
     private Paint mPaint;
     private float mCircleWidth = 10;
     private RectF mRectF;
@@ -65,10 +64,9 @@ public class CircleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mCanvas = canvas;
         if (mDataCount == 0) {
             mPaint.setColor(mOtherColor);
-            mCanvas.drawArc(mRectF, 90, 360, false, mPaint);
+            canvas.drawArc(mRectF, 90, 360, false, mPaint);
             return;
         }
 
@@ -78,10 +76,10 @@ public class CircleView extends View {
         //数量的比例
         float scaleC = (360 * scale);
         mPaint.setColor(mDataColor);
-        mCanvas.drawArc(mRectF, -90, scaleC, false, mPaint);
+        canvas.drawArc(mRectF, -90, scaleC, false, mPaint);
 
         mPaint.setColor(mOtherColor);
-        mCanvas.drawArc(mRectF, scaleC - 90, 360 - (360 * scale), false, mPaint);
+        canvas.drawArc(mRectF, scaleC - 90, 360 - (360 * scale), false, mPaint);
     }
 
     public void setDataColor(int dataColor) {

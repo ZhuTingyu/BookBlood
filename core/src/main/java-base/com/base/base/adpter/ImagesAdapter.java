@@ -29,22 +29,18 @@ import java.util.Map;
 
 public class ImagesAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
-    int size;
     int position = 0;
     RecyclerView recyclerView;
 
     public ImagesAdapter(RecyclerView recyclerView) {
         super(R.layout.item_one_image_layout, Lists.newArrayList());
         this.recyclerView = recyclerView;
-        size = ((ScreenTool.getScreenWidth() - ScreenTool.dip2px(20)) / 3) - 10;
         EventBus.getDefault().register(this);
     }
 
     @Override
     protected void convert(BaseViewHolder holder, String item) {
         AppCompatImageView view = holder.getView(R.id.icon);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
-        view.setLayoutParams(params);
         holder.setGlideImageView(mContext,R.id.icon, item);
 
         view.setOnClickListener(v -> {
@@ -52,16 +48,6 @@ public class ImagesAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
             setBackImage();
             PictureSelectUtil.showImagePhoto((Activity) mContext,view, getData(), position);
         });
-    }
-
-    @Override
-    protected String getEmptyViewText() {
-        return "暂时没有发布";
-    }
-
-    @Override
-    protected int getEmptyViewImage() {
-        return 0;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

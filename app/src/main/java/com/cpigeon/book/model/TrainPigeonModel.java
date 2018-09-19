@@ -50,4 +50,29 @@ public class TrainPigeonModel {
                 .addBody("footnum", footNumber)
                 .request();
     }
+
+    public static Observable<ApiResponse> newTrainPigeon(
+            String name,
+            double fromLo,
+            double fromLa,
+            double endLo,
+            double endLa,
+            String fromLocation,
+            String dis,
+            String footIds
+    ) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.new_train_pigeon)
+                .addBody("name", name)
+                .addBody("fromlo", String.valueOf(fromLo))
+                .addBody("fromla", String.valueOf(fromLa))
+                .addBody("endlo", String.valueOf(endLo))
+                .addBody("endla", String.valueOf(endLa))
+                .addBody("fromplace", fromLocation)
+                .addBody("dis", dis)
+                .addBody("idstr", footIds)
+                .request();
+    }
 }

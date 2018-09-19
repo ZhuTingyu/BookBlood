@@ -5,7 +5,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.alibaba.fastjson.JSON;
 import com.base.util.http.GsonUtil;
+
+import java.lang.reflect.Type;
 
 /**
  * Created by Zhu TingYu on 2018/7/2.
@@ -69,8 +72,12 @@ public class DbEntity {
         this.timeSample = timeSample;
     }
 
-    public  <T> T getData(Class<T> tClass){
-        return GsonUtil.fromJson(getData(), tClass);
+    public  <T> T getData(Type tClass){
+        try {
+            return GsonUtil.fromJson(getData(), tClass);
+        } catch (Exception e) {
+            return JSON.parseObject(getData(), tClass);
+        }
     }
 }
 

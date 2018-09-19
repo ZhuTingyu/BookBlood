@@ -65,7 +65,7 @@ public class FeedbackDetailsImageAdapter extends BaseQuickAdapter<ImageEntity, B
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ShowImagePositionEvent event) {
-        position = event.position;
+        setPosition(event.position);
     }
 
     public void setBackImage(){

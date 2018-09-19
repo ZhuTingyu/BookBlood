@@ -88,7 +88,7 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
         }
 
         mTvCleanHistory.setOnClickListener(v -> {
-            AppDatabase.getInstance(getBaseActivity()).delectAll(history);
+            AppDatabase.getInstance(getBaseActivity()).deleteAll(history);
             mSearchHistoryAdapter.getData().clear();
             mRlHistory.setVisibility(View.GONE);
         });

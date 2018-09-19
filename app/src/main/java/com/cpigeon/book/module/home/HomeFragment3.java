@@ -15,7 +15,6 @@ import com.cpigeon.book.module.foot.BreedPigeonFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.foot.StatisticalFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
-import com.cpigeon.book.module.menu.UserInfoActivity;
 import com.cpigeon.book.module.menu.message.AnnouncementNoticeFragment;
 import com.cpigeon.book.module.menu.message.PigeonFriendMsgFragment;
 
@@ -76,7 +75,7 @@ public class HomeFragment3 extends BaseBookFragment {
 
         ac_btns3.setOnClickListener(v -> {
             //用户信息
-            UserInfoActivity.start(getActivity());
+            //UserInfoFragment.start(getActivity());
         });
 
         ac_btns4.setOnClickListener(v -> {
