@@ -18,7 +18,11 @@ import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingInfoListAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 /**
  * 配对信息
@@ -47,6 +51,7 @@ public class PairingInfoListFragment extends BaseListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        EventBus.getDefault().register(this);//在当前界面注册一个订阅者
 
         mPairingInfoListViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
 
@@ -79,15 +84,12 @@ public class PairingInfoListFragment extends BaseListFragment {
         list.setAdapter(mPairingInfoListAdapter);
         mPairingInfoListAdapter.setOnItemClickListener((adapter, view1, position) -> {
             PairingInfoEntity mPairingInfoEntity = (PairingInfoEntity) adapter.getData().get(position);
-            PairingNestInfoListFragment.start(getBaseActivity(), mPairingInfoEntity,mPairingInfoListViewModel.mBreedPigeonEntity);
+            PairingNestInfoListFragment.start(getBaseActivity(), mPairingInfoEntity, mPairingInfoListViewModel.mBreedPigeonEntity);
         });
 
         list.setRefreshListener(() -> {
             setProgressVisible(true);
-            mPairingInfoListAdapter.getData().clear();
-            mPairingInfoListAdapter.notifyDataSetChanged();
-            mPairingInfoListViewModel.pi = 1;
-            mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
+            initData();
         });
 
         mPairingInfoListAdapter.setOnLoadMoreListener(() -> {
@@ -139,5 +141,26 @@ public class PairingInfoListFragment extends BaseListFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.PAIRING_INFO_REFRESH)) {
+            initData();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//取消注册
+    }
+
+    private void initData() {
+        setProgressVisible(true);
+        mPairingInfoListAdapter.getData().clear();
+        mPairingInfoListAdapter.notifyDataSetChanged();
+        mPairingInfoListViewModel.pi = 1;
+        mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
     }
 }

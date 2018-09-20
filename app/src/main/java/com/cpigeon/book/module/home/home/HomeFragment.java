@@ -148,13 +148,17 @@ public class HomeFragment extends BaseBookFragment {
         });
 
         mSTvPigeonPhoto.setOnClickListener(v -> {
+            //信鸽相册
             SelectFootToPhotoFragment.start(getBaseActivity());
         });
+
         mSTvTrainRecord.setOnClickListener(v -> {
+            //训鸽记录
             TrainPigeonListFragment.start(getBaseActivity());
         });
 
         mSTvBloodBookMade.setOnClickListener(v -> {
+            //血统书制作
             SearchFragmentParentActivity.start(getBaseActivity(), SelectPigeonToMakeBookFragment.class
                     , false, null);
         });
@@ -167,6 +171,7 @@ public class HomeFragment extends BaseBookFragment {
         });
 
         mSTvPigeonMatchInfo.setOnClickListener(v -> {
+            //信鸽赛绩
             SearchFragmentParentActivity.start(getBaseActivity(), SelectPigeonToLeagueFragment.class, null);
         });
 

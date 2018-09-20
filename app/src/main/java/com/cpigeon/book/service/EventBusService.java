@@ -10,5 +10,7 @@ public class EventBusService {
 
     public static final String FEED_PIGEON_DETAILS_REFRESH = "FEED_PIGEON_DETAILS_REFRESH";//养鸽记录详情  刷新
 
+    public static final String PAIRING_INFO_REFRESH = "PAIRING_NEST_REFRESH";//繁育  刷新
+
 
 }

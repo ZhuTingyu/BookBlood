@@ -132,6 +132,7 @@ public class StatusIllnessRecordAddViewModel extends BaseViewModel {
     public void setmBaseFragment(BaseFragment mBaseFragment) {
         this.mBaseFragment = mBaseFragment;
     }
+
     public void isCanCommit() {
         if (typePag == 1) {
             mBaseFragment.setProgressVisible(true);//加载框

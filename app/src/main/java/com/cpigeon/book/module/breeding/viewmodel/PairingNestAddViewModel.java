@@ -1,10 +1,16 @@
 package com.cpigeon.book.module.breeding.viewmodel;
 
+import android.util.Log;
+
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.breeding.adapter.OffspringInfoAdapter;
+import com.cpigeon.book.service.EventBusService;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 添加窝次
@@ -41,6 +47,13 @@ public class PairingNestAddViewModel extends BaseViewModel {
     public String hatchesNum;
     //子代信息
     public String offspringInfo;
+
+
+    //子代鸽子id
+    public String pigeonidstr;
+    //子代足环ID
+    public String footidstr;
+
     //配对天气
     public String weather;
     //配对气温
@@ -63,6 +76,10 @@ public class PairingNestAddViewModel extends BaseViewModel {
                 dir,
                 hatchesTime,
                 hatchesNum,
+
+                pigeonidstr,
+                footidstr,
+
                 weather,
                 temper,
                 hum,
@@ -70,12 +87,36 @@ public class PairingNestAddViewModel extends BaseViewModel {
                 ""), r -> {
             if (r.isOk()) {
                 hintDialog(r.msg);
+                EventBus.getDefault().post(EventBusService.PAIRING_INFO_REFRESH);
             } else throw new HttpErrorException(r);
         });
     }
 
     public void isCanCommit() {
-        isCanCommit(pairingTime, layEggs, hatchesInfo, offspringInfo);
+        isCanCommit(pairingTime);
     }
 
+    public void setIdStr(OffspringInfoAdapter mOffspringInfoAdapter) {
+
+        pigeonidstr = "";
+        footidstr = "";
+
+        try {
+            int size = mOffspringInfoAdapter.getData().size();
+            for (int i = 0; i < size; i++) {
+                pigeonidstr += mOffspringInfoAdapter.getData().get(i).getPigeonID() + ",";
+                footidstr += mOffspringInfoAdapter.getData().get(i).getFootRingID() + ",";
+            }
+
+            Log.d("sdfasdfa", "setIdStr: " + pigeonidstr);
+
+            pigeonidstr = pigeonidstr.substring(0, pigeonidstr.length() - 1);
+            footidstr = footidstr.substring(0, footidstr.length() - 1);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Log.d("sdfasdfa", "setIdStr: " + pigeonidstr);
+    }
 }

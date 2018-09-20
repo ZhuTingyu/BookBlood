@@ -495,6 +495,7 @@
     <string name="text_wind_direction">%1$s风</string>
     <string name="text_not_get_weather">获取天气失败!</string>
     <string name="text_altitude">海拔：%1$sm</string>
+    <string name="text_default">0001-01-01</string>
 
 
 </resources>

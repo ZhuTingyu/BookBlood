@@ -2,9 +2,12 @@ package com.cpigeon.book.module.breeding;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,13 +22,17 @@ import com.base.util.map.LocationLiveData;
 import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.LogUtil;
+import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
+import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PairingNestInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.breeding.adapter.OffspringInfoAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingNestAddViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
@@ -70,7 +77,11 @@ public class PairingNestAddFragment extends BaseBookFragment {
     @BindView(R.id.tv_next_step)
     TextView tvNextStep;
 
+    @BindView(R.id.rv_offspring_info)
+    RecyclerView rv_offspring_info;
+
     private PairingNestAddViewModel mPairingNestAddViewModel;
+    private OffspringInfoAdapter mOffspringInfoAdapter;
 
     public static void start(Activity activity, PairingInfoEntity mPairingInfoEntity, PigeonEntity mBreedPigeonEntity, int maxNest) {
         IntentBuilder.Builder()
@@ -112,7 +123,18 @@ public class PairingNestAddFragment extends BaseBookFragment {
         //母足环号码
         llFootMother.setContent(mPairingNestAddViewModel.mPairingInfoEntity.getWoFootRingNum());
 
+        llPairingTime.setContent(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD));
+        mPairingNestAddViewModel.pairingTime = TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD);
         mPairingNestAddViewModel.isCanCommit();
+
+        mOffspringInfoAdapter = new OffspringInfoAdapter();
+        rv_offspring_info.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+        rv_offspring_info.setAdapter(mOffspringInfoAdapter);
+        mOffspringInfoAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            adapter.remove(position);
+            mPairingNestAddViewModel.setIdStr(mOffspringInfoAdapter);
+        });
+
 
     }
 
@@ -136,7 +158,6 @@ public class PairingNestAddFragment extends BaseBookFragment {
             });
         });
     }
-
 
     private BaseInputDialog mInputDialog;
 
@@ -253,11 +274,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_offspring_info:
                 //子代信息
-                OffspringChooseFragment.start(getBaseActivity());
-
-
-                llOffspringInfo.setContent("已挂环");
-                mPairingNestAddViewModel.offspringInfo = "已挂环";
+                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode);
                 mPairingNestAddViewModel.isCanCommit();
                 break;
             case R.id.tv_next_step:
@@ -266,4 +283,33 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PairingNestAddFragment.requestCode) {
+            //选择子代后返回
+            try {
+                PigeonEntity mBreedPigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
+                Log.d("hehheheheh", "onActivityResult: " + mBreedPigeonEntity.getFootRingNum());
+
+                PairingNestInfoEntity.PigeonListBean mOffspringInfo = new PairingNestInfoEntity.PigeonListBean.Builder()
+                        .FootRingID(mBreedPigeonEntity.getFootRingID())
+                        .FootRingNum(mBreedPigeonEntity.getFootRingNum())
+                        .PigeonID(mBreedPigeonEntity.getPigeonID())
+                        .PigeonPlumeName(mBreedPigeonEntity.getPigeonPlumeName())
+                        .build();
+                mOffspringInfoAdapter.addData(mOffspringInfo);
+                mOffspringInfoAdapter.notifyDataSetChanged();
+
+                mPairingNestAddViewModel.setIdStr(mOffspringInfoAdapter);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static final int requestCode = 0x0000201;
+
+
 }

@@ -28,7 +28,7 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="第一窝"
+                app:lineInputView_LeftString="窝次"
                 app:lineInputView_LeftTextColor="@color/general_text_color"
                 app:lineInputView_RightString="1"
                 app:lineInputView_isShowRightImage="invisible" />

@@ -163,8 +163,13 @@
     <string name="pairing_nest_info_list">TXGP_PigeonBreed_SelectIDAll</string>
     <!--添加配对信息-->
     <string name="pairing_info_add">TXGP_PigeonBreed_Add</string>
-    <!--添加窝次信息-->
+    <!--窝次信息  添加-->
     <string name="pairing_nest_info_add">TXGP_PigeonBreedNest_Add</string>
+    <!--窝次信息  修改-->
+    <string name="pairing_nest_info_modify">TXGP_PigeonBreedNest_Update</string>
+    <!--窝次信息  删除-->
+    <string name="pairing_nest_info_del">TXGP_PigeonBreedNest_Delete</string>
+
 
     <!--养鸽记录列表-->
     <string name="feed_pigeon_list">TXGP_Pigeon_SelectRecord</string>

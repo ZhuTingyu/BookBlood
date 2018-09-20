@@ -1,23 +1,20 @@
 package com.cpigeon.book.module.breeding;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
-import com.base.util.PictureSelectUtil;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.breeding.viewmodel.OffspringViewModel;
-import com.cpigeon.book.module.breedpigeon.BasePigeonEntryFragment;
-import com.cpigeon.book.module.breedpigeon.viewmodel.BasePigeonViewModel;
-import com.cpigeon.book.module.play.PlayAddFragment;
-import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
-import com.cpigeon.book.module.racing.viewmodel.RacingPigeonEntryViewModel;
+import com.cpigeon.book.module.basepigeon.BasePigeonEntryFragment;
 import com.cpigeon.book.util.TextViewUtil;
-import com.luck.picture.lib.config.PictureMimeType;
 
 /**
  * 子代录入
@@ -29,9 +26,9 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
 
     private OffspringViewModel mViewModel;
 
-    public static void start(Activity activity) {
+    public static void start(Activity activity, int requestCode) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, OffspringAddFragment.class);
+                .startParentActivity(activity, OffspringAddFragment.class, requestCode);
     }
 
     @Override
@@ -102,12 +99,27 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
             getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
                 //确定
                 sweetAlertDialog.dismiss();
-                getBaseActivity().finish();
+                setRequest(o);
+
             }, sweetAlertDialog -> {
                 //取消
                 sweetAlertDialog.dismiss();
-                getBaseActivity().finish();
+                setRequest(o);
             });
         });
+    }
+
+    public void setRequest(PigeonEntryEntity o) {
+        PigeonEntity mBreedPigeonEntity = new PigeonEntity.Builder()
+                .FootRingID(o.getFootRingID())
+                .FootRingNum(o.getFootRingNum())
+                .PigeonID(o.getPigeonID())
+                .PigeonPlumeName(o.getPigeonPlumeName())
+                .build();
+
+        Intent intent = new Intent();
+        intent.putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity);
+        getBaseActivity().setResult(PairingNestAddFragment.requestCode, intent);
+        getBaseActivity().finish();
     }
 }

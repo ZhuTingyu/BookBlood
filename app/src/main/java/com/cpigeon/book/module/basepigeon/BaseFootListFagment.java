@@ -93,16 +93,17 @@ public class BaseFootListFagment extends BaseBookFragment {
             mBreedPigeonListModel.getPigeonList();
         });
 
-        mAdapter.setOnLoadMoreListener(() -> {
-            setProgressVisible(true);
-            mBreedPigeonListModel.pi++;
-            mBreedPigeonListModel.getPigeonList();
-        }, mRecyclerView.getRecyclerView());
 
         setProgressVisible(true);
         mBreedPigeonListModel.getPigeonList();
 
         initData();
+
+        mAdapter.setOnLoadMoreListener(() -> {
+            setProgressVisible(true);
+            mBreedPigeonListModel.pi++;
+            mBreedPigeonListModel.getPigeonList();
+        }, mRecyclerView.getRecyclerView());
     }
 
     protected void initData() {
