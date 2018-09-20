@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
-import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.select.SearchFootRingActivity;
 import com.cpigeon.book.widget.LineInputView;
 
 /**
@@ -51,7 +49,7 @@ public class ApplyAddGoodPigeonFragment extends BaseBookFragment {
         mTvOk = findViewById(R.id.tvOk);
 
         mLvFoot.setOnRightClickListener(lineInputView -> {
-            SearchFootRingActivity.start(getBaseActivity(), CODE_FOOT);
+           // SearchFootRingActivity.start(getBaseActivity(), CODE_FOOT);
         });
 
         SpannableStringBuilder sb = new SpannableStringBuilder();

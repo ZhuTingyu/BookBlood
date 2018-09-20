@@ -15,7 +15,6 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.module.home.sharehall.adpter.ShareHallHomeAdapter;
-import com.cpigeon.book.module.select.SearchFootRingActivity;
 
 /**
  * Created by Zhu TingYu on 2018/9/15.
@@ -51,7 +50,7 @@ public class MySharePigeonFragment extends BaseBookFragment{
         mAdapter.setNewData(Lists.newTestArrayList());
         mTvOk.setText(R.string.text_add_share_pigeon);
         mTvOk.setOnClickListener(v -> {
-            SearchFootRingActivity.start(getBaseActivity(), SearchFootRingActivity.CODE_SEARCH_FOOT_RING);
+            //SearchFootRingActivity.start(getBaseActivity(), SearchFootRingActivity.CODE_SEARCH_FOOT_RING);
         });
     }
 }

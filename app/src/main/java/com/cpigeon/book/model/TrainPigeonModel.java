@@ -3,6 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
+import com.cpigeon.book.model.entity.FlyBackRecordEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.google.gson.reflect.TypeToken;
@@ -112,6 +113,73 @@ public class TrainPigeonModel {
                 .addBody("alt", alt)
                 .addBody("fromlo", String.valueOf(fromLo))
                 .addBody("fromla", String.valueOf(fromLa))
+                .request();
+    }
+
+    public static Observable<ApiResponse<List<FlyBackRecordEntity>>> getFlyBackRecord(
+            String trainId,
+            String countid,
+            String stateId
+    ) {
+        return RequestData.<ApiResponse<List<FlyBackRecordEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<FlyBackRecordEntity>>>() {
+                }.getType())
+                .url(R.string.get_fly_back_record)
+                .addBody("trainid", String.valueOf(trainId))
+                .addBody("countid", countid)
+                .addBody("StateID", stateId)
+                .addBody("pi", String.valueOf(1))
+                .addBody("ps", String.valueOf(100000))
+                .request();
+    }
+
+    public static Observable<ApiResponse<List<FlyBackRecordEntity>>> addFlyBackRecord(
+            String trainId,
+            String countId,//训练次数表
+            String footId, //足环id
+            String endTime, //结束时间
+            String speed, //得分
+            String pigeonId //得分
+    ) {
+        return RequestData.<ApiResponse<List<FlyBackRecordEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<FlyBackRecordEntity>>>() {
+                }.getType())
+                .url(R.string.add_fly_back_record)
+                .addBody("trainid", trainId)
+                .addBody("countid", countId)
+                .addBody("footid", footId)
+                .addBody("endtime", endTime)
+                .addBody("fraction", speed)
+                .addBody("pigeonID", pigeonId)
+                .request();
+    }
+
+    public static Observable<ApiResponse<List<PigeonEntity>>> searchTrainPigeon(
+            String trainId,
+            String countId,
+            int pi
+    ) {
+        return RequestData.<ApiResponse<List<PigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
+                }.getType())
+                .url(R.string.search_train_pigeon)
+                .addBody("trainid", trainId)
+                .addBody("countid", countId)
+                .addBody("pi", String.valueOf(pi))
+                .addBody("ps", String.valueOf(10000))
+                .request();
+    }
+
+    public static Observable<ApiResponse> endTrainPigeon(
+            String trainId,
+            String countId
+    ) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse> () {
+                }.getType())
+                .url(R.string.end_train_pigeon)
+                .addBody("trainid", trainId)
+                .addBody("countid", countId)
                 .request();
     }
 }

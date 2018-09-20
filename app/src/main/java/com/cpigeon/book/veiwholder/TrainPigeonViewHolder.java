@@ -8,6 +8,7 @@ import com.base.util.Utils;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.TrainEntity;
+import com.cpigeon.book.module.trainpigeon.FlyBackRecordFragment;
 import com.cpigeon.book.module.trainpigeon.OpenAndCloseTrainFragment;
 
 /**
@@ -32,7 +33,7 @@ public class TrainPigeonViewHolder extends BaseViewHolder {
         mTvStatus = itemView.findViewById(R.id.tvStatus);
     }
 
-    public void bindData(TrainEntity trainEntity){
+    public void bindData(TrainEntity trainEntity) {
         mTvName.setText(trainEntity.getPigeonTrainName());
         mTvTime.setText(StringUtil.isStringValid(trainEntity.getTime()) ? trainEntity.getTime()
                 : Utils.getString(R.string.text_not_setting));
@@ -40,16 +41,23 @@ public class TrainPigeonViewHolder extends BaseViewHolder {
         mTvTrainedCount.setText(String.valueOf(trainEntity.getTrainCount()));
         mTvStatus.setText(trainEntity.getTrainStateName());
 
-        if(Utils.getString(R.string.text_pigeon_training).equals(trainEntity.getPigeonTrainName())){
+        if (Utils.getString(R.string.text_pigeon_training).equals(trainEntity.getTrainStateName())) {
             mTvStatus.setTextColor(Utils.getColor(R.color.color_text_red));
-        }else {
+        } else {
             mTvStatus.setTextColor(Utils.getColor(R.color.color_text_title));
         }
 
         itemView.setOnClickListener(v -> {
-            if(trainEntity.getTrainCount() == 0
-                    && trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_start_not))){
-                OpenAndCloseTrainFragment.start(getActivity(),true, trainEntity);
+
+            if (trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_start_not))) {
+                if (trainEntity.getTrainCount() == 0) {
+                    OpenAndCloseTrainFragment.start(getActivity(), true, trainEntity);
+
+                }
+            }else if(trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_training))){
+                if (trainEntity.getTrainCount() == 0) {
+                    FlyBackRecordFragment.start(getActivity(), trainEntity, false);
+                }
             }
         });
 

@@ -118,7 +118,7 @@ public class LineWeatherFragment extends BaseMapFragment {
          mStartLa = start.latitude;
          mEndLo = end.longitude;
          mEndLa = end.latitude;
-        float distance = bundle.getFloat(IntentBuilder.KEY_DATA_3);
+        double distance = bundle.getDouble(IntentBuilder.KEY_DATA_3);
         if (distance < 150 * 1000) {
             point = 2;
             distanceOne = (distance / 2);

@@ -44,6 +44,8 @@ public class PigeonHouseEntity implements Parcelable {
     private String PigeonHomeAdds;
     private String PigeonHomeID;
 
+    public PigeonHouseEntity(){}
+
     public String getCity() {
         return City;
     }
@@ -197,8 +199,7 @@ public class PigeonHouseEntity implements Parcelable {
         dest.writeString(this.PigeonHomeID);
     }
 
-    public PigeonHouseEntity() {
-    }
+
 
     protected PigeonHouseEntity(Parcel in) {
         this.Longitude = in.readDouble();

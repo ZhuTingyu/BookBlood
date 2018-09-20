@@ -42,7 +42,7 @@ public class TrainPigeonListFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        EventBus.getDefault().post(this);
+        EventBus.getDefault().register(this);
         mViewModel = new TrainPigeonListViewModel();
         initViewModel(mViewModel);
     }

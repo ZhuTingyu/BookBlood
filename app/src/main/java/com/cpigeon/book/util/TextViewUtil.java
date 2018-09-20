@@ -19,4 +19,8 @@ public class TextViewUtil {
             textView.setTextColor(Color.WHITE);
         }
     }
+
+    public static void setCancle(TextView textView){
+        textView.setBackgroundResource(R.drawable.selector_bg_cancel_btn);
+    }
 }

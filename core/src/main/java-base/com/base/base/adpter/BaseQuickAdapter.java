@@ -31,6 +31,10 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         super(layoutResId, data);
     }
 
+    public BaseQuickAdapter(List<T> data) {
+        super(data);
+    }
+
 
     @Override
     public void setNewData(List<T> data) {

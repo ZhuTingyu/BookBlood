@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.weather.LocalWeatherLive;
@@ -29,6 +30,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonHouseEntity;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.cpigeon.book.module.trainpigeon.viewmodel.OpenAndCloseTrainViewModel;
+import com.cpigeon.book.util.MathUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -73,7 +75,7 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setTitle(mViewModel.mTrainEntity.getPigeonTrainName());
-        setToolbarRight(Utils.getString(R.string.text_delete),item -> {
+        setToolbarRight(Utils.getString(R.string.text_delete), item -> {
 
             return false;
         });
@@ -91,7 +93,7 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
         mViewModel.getTrainDetails();
 
         mTvOk.setOnClickListener(v -> {
-            if(mViewModel.isOpen){
+            if (mViewModel.isOpen) {
                 setProgressVisible(true);
                 mViewModel.openTrain();
             }
@@ -102,7 +104,7 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
     protected void initObserve() {
 
         mViewModel.mDataTrain.observe(this, trainEntity -> {
-            LocationLiveData.get(true).observe(this,aMapLocation -> {
+            LocationLiveData.get(true).observe(this, aMapLocation -> {
                 PigeonHouseEntity entity = UserModel.getInstance().getUserData().pigeonHouseEntity;
                 LatLng houseP = new LatLng(entity.getLatitude(), entity.getLongitude());
                 LatLng flyP = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
@@ -123,13 +125,16 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
                 mViewModel.fromLa = aMapLocation.getLatitude();
                 mViewModel.fromLo = aMapLocation.getLongitude();
 
+                double dis = AMapUtils.calculateLineDistance(houseP, flyP);
+                mTvDis.setText(Utils.getString(R.string.text_KM
+                        , String.valueOf(MathUtil.doubleformat(dis / 1000, 2))));
 
                 composite.add(mWeatherManager.searchCityByLatLng(flyP, r -> {
                     composite.add(mWeatherManager.requestWeatherByCityName(r.data.getCity(), response -> {
                         setProgressVisible(false);
                         StringBuilder sb = new StringBuilder();
                         if (response.isOk()) {
-                            LocalWeatherLive weatherLive =  response.getData();
+                            LocalWeatherLive weatherLive = response.getData();
                             sb.append(weatherLive.getWeather());
                             sb.append(StringUtil.blankString());
                             sb.append(Utils.getString(R.string.text_temp, weatherLive.getTemperature()));
@@ -143,9 +148,9 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
                             mViewModel.weather = weatherLive.getWeather();
                             mViewModel.dir = weatherLive.getWindDirection();
                             mViewModel.hum = weatherLive.getHumidity();
-                            mViewModel.alt  = String.valueOf(aMapLocation.getAltitude());
+                            mViewModel.alt = String.valueOf(aMapLocation.getAltitude());
 
-                        }else {
+                        } else {
                             sb.append(Utils.getString(R.string.text_not_get_weather));
                         }
                         mTvWeather.setText(sb);
@@ -157,16 +162,12 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
         mViewModel.mDataOpenR.observe(this, s -> {
             EventBus.getDefault().post(new UpdateTrainEvent());
             setProgressVisible(false);
-            DialogUtils.createHintDialog(getBaseActivity(), s);
-            setCloseState();
-        });
-    }
-
-    private void setCloseState() {
-        mTvPosition.setVisibility(View.GONE);
-        mTvOk.setBackgroundResource(R.drawable.selector_bg_cancel_btn);
-        mTvOk.setOnClickListener(v -> {
+            DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                finish();
+            });
 
         });
     }
+
 }

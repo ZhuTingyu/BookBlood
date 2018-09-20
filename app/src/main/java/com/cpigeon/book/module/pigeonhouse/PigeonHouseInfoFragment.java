@@ -264,10 +264,6 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             MainActivity.start(getBaseActivity());
         });
 
-        mViewModel.modifyR.observe(this, s -> {
-
-        });
-
         mViewModel.mHouseEntityInfo.observe(this, r -> {
             setProgressVisible(false);
             if (r == null) {

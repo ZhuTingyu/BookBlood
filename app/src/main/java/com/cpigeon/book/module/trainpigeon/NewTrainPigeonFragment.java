@@ -43,6 +43,7 @@ import com.cpigeon.book.module.select.SelectLocationByMapFragment;
 import com.cpigeon.book.module.trainpigeon.adpter.NewTrainPigeonListAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainPigeonViewModel;
 import com.cpigeon.book.service.SingleLoginService;
+import com.cpigeon.book.util.MathUtil;
 import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -191,7 +192,7 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(IntentBuilder.KEY_DATA, new LatLng(mViewModel.fromLa, mViewModel.fromLo));
                 bundle.putParcelable(IntentBuilder.KEY_DATA_2, new LatLng(mViewModel.endLa, mViewModel.endLo));
-                bundle.putFloat(IntentBuilder.KEY_DATA_3, mViewModel.dis);
+                bundle.putDouble(IntentBuilder.KEY_DATA_3, mViewModel.dis);
                 mLineWeatherFragment.setArguments(bundle);
                 FragmentUtils.add(getFragmentManager(), mLineWeatherFragment, R.id.rlMap);
             }
@@ -238,9 +239,9 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
             mMapMarkerManager.addCustomCenterMarker(selectPoint, "", R.mipmap.ic_red_point);
             mMapMarkerManager.addMap();
 
-            float dis = AMapUtils.calculateLineDistance(mPigeonHousePosition, new LatLng(point.getLatitude(), point.getLongitude()));
+            double dis = AMapUtils.calculateLineDistance(mPigeonHousePosition, new LatLng(point.getLatitude(), point.getLongitude()));
             mCardView.setVisibility(View.VISIBLE);
-            mTvDis.setText(Utils.getString(R.string.text_KM, String.valueOf((int) (dis / 1000))));
+            mTvDis.setText(Utils.getString(R.string.text_KM, MathUtil.doubleformat(dis / 1000, 2)));
             addLine(Lists.newArrayList(mPigeonHousePosition, selectPoint), R.color.colorPrimary);
             mViewModel.endLo = point.getLongitude();
             mViewModel.endLa = point.getLatitude();

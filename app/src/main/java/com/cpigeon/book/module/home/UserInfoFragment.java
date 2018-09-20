@@ -95,7 +95,6 @@ public class UserInfoFragment extends BaseBookFragment {
     protected void initObserve() {
         mUserInfoViewModel.mUserInfoData.observe(this, data -> {
             //获取用户信息回调
-
         });
     }
 
