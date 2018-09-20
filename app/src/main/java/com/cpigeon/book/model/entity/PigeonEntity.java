@@ -427,7 +427,6 @@ public class PigeonEntity implements Serializable {
 
     public static final class Builder {
         private String CoverPhotoUrl;
-        private String PigeonPlume;
         private String CoverPhotoID;
         private String PigeonSex;
         private String FootRingID;
@@ -471,11 +470,6 @@ public class PigeonEntity implements Serializable {
 
         public Builder CoverPhotoUrl(String val) {
             CoverPhotoUrl = val;
-            return this;
-        }
-
-        public Builder PigeonPlume(String val) {
-            PigeonPlume = val;
             return this;
         }
 

@@ -5,6 +5,9 @@ import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.service.EventBusService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -53,6 +56,7 @@ public class PairingInfoAddViewModel extends BaseViewModel {
 
         submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(mBreedPigeonEntity.getFootRingID(), pairingFoot, lineage, featherColor, sex, pairingTime, weather, temper, hum, dir, bitpair, reamrk), r -> {
             if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.PAIRING_INFO_REFRESH);
                 hintDialog(r.msg);
             } else throw new HttpErrorException(r);
         });

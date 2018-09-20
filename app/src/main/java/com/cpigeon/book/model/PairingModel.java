@@ -22,17 +22,17 @@ public class PairingModel {
 
     //hl 添加配對
     public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_PigeonBreed_Add(String footid,
-                                                                                           String footnum,
-                                                                                           String blood,
-                                                                                           String plume,
-                                                                                           String sex,
-                                                                                           String time,
-                                                                                           String weather,
-                                                                                           String temper,
-                                                                                           String hum,
-                                                                                           String dir,
-                                                                                           String bitpair,
-                                                                                           String reamrk) {
+                                                                                      String footnum,
+                                                                                      String blood,
+                                                                                      String plume,
+                                                                                      String sex,
+                                                                                      String time,
+                                                                                      String weather,
+                                                                                      String temper,
+                                                                                      String hum,
+                                                                                      String dir,
+                                                                                      String bitpair,
+                                                                                      String reamrk) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
@@ -85,7 +85,7 @@ public class PairingModel {
                 .request();
     }
 
-    //hl 添加窝次信息
+    //hl 窝次信息  添加
     public static Observable<ApiResponse<List<PairingInfoEntity>>> getTXGP_PigeonBreedNest_Add(String breedid,
                                                                                                String time,
                                                                                                String eggtime,
@@ -97,6 +97,10 @@ public class PairingModel {
                                                                                                String eggdir,
                                                                                                String outtime,
                                                                                                String outcount,
+
+                                                                                               String pigeonidstr,
+                                                                                               String footidstr,
+
                                                                                                String outweather,
                                                                                                String outtemper,
                                                                                                String outhum,
@@ -107,7 +111,7 @@ public class PairingModel {
                 }.getType())
                 .url(R.string.pairing_nest_info_add)
                 .addBody("breedid", breedid)//
-                .addBody("time", time)//
+                .addBody("time", time)//配对时间
                 .addBody("eggtime", eggtime)//
                 .addBody("igg", igg)//
                 .addBody("fgg", fgg)//
@@ -117,6 +121,10 @@ public class PairingModel {
                 .addBody("eggdir", eggdir)//
                 .addBody("outtime", outtime)//
                 .addBody("outcount", outcount)//
+
+                .addBody("pigeonidstr", pigeonidstr)//
+                .addBody("footidstr", footidstr)//
+
                 .addBody("outweather", outweather)//
                 .addBody("outtemper", outtemper)//
                 .addBody("outhum", outhum)//
@@ -124,6 +132,70 @@ public class PairingModel {
                 .addBody("reamrk", reamrk)//
                 .request();
     }
+
+    //hl 窝次信息  修改
+    public static Observable<ApiResponse<List<PairingInfoEntity>>> getTXGP_PigeonBreedNest_Update(String nestid,
+                                                                                                  String breedid,
+                                                                                                  String time,
+                                                                                                  String eggtime,
+                                                                                                  String igg,
+                                                                                                  String fgg,
+                                                                                                  String eggweather,
+                                                                                                  String eggtemper,
+                                                                                                  String egghum,
+                                                                                                  String eggdir,
+                                                                                                  String outtime,
+                                                                                                  String outcount,
+
+                                                                                                  String pigeonidstr,
+                                                                                                  String footidstr,
+
+                                                                                                  String outweather,
+                                                                                                  String outtemper,
+                                                                                                  String outhum,
+                                                                                                  String outdir,
+                                                                                                  String reamrk) {
+        return RequestData.<ApiResponse<List<PairingInfoEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PairingInfoEntity>>>() {
+                }.getType())
+                .url(R.string.pairing_nest_info_modify)
+                .addBody("nestid", nestid)//
+                .addBody("breedid", breedid)//
+                .addBody("time", time)//配对时间
+                .addBody("eggtime", eggtime)//
+                .addBody("igg", igg)//
+                .addBody("fgg", fgg)//
+                .addBody("eggweather", eggweather)//
+                .addBody("eggtemper", eggtemper)//
+                .addBody("egghum", egghum)//
+                .addBody("eggdir", eggdir)//
+                .addBody("outtime", outtime)//
+                .addBody("outcount", outcount)//
+
+                .addBody("pigeonidstr", pigeonidstr)//
+                .addBody("footidstr", footidstr)//
+
+                .addBody("outweather", outweather)//
+                .addBody("outtemper", outtemper)//
+                .addBody("outhum", outhum)//
+                .addBody("outdir", outdir)//
+                .addBody("reamrk", reamrk)//
+                .request();
+    }
+
+
+    //hl 窝次信息  删除
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonBreedNest_Delete(String breedid,
+                                                                                 String nestid) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pairing_nest_info_del)
+                .addBody("breedid", breedid)//
+                .addBody("nestid", nestid)//
+                .request();
+    }
+
 
     //hl 信鸽血统推荐
     public static Observable<ApiResponse<List<PriringRecommendEntity>>> getTXGP_PigeonBreed_RecomBlood(String pi,
