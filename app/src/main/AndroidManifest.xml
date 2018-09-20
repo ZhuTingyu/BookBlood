@@ -157,7 +157,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.select.SearchFootRingActivity"
+            android:name=".module.trainpigeon.SearchInTrainPigeonActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

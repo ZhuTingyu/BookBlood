@@ -371,7 +371,7 @@
     <string name="text_pigeon_training">训鸽中</string>
     <string name="text_start_not">未开始</string>
     <string name="text_add">添加</string>
-    <string name="text_training">训放中</string>
+    <string name="text_training">训鸽中</string>
     <string name="text_speed_content">分速:%1$s m/min</string>
     <string name="text_speed">分速</string>
     <string name="text_fly_back_time_content">归巢:%1$s</string>
@@ -495,6 +495,8 @@
     <string name="text_wind_direction">%1$s风</string>
     <string name="text_not_get_weather">获取天气失败!</string>
     <string name="text_altitude">海拔：%1$sm</string>
+    <string name="text_select_back_fly_time_error">你选择的时间比放飞时间还早哦！</string>
+    <string name="text_all_pigeon_back_yet">所有鸽子已经归巢！</string>
     <string name="text_default">0001-01-01</string>
 
 

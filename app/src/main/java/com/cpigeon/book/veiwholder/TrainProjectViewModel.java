@@ -6,8 +6,7 @@ import android.widget.LinearLayout;
 import com.base.base.BaseViewHolder;
 import com.base.util.Utils;
 import com.cpigeon.book.R;
-import com.cpigeon.book.module.trainpigeon.HomingRecordFragment;
-import com.cpigeon.book.module.trainpigeon.OpenAndCloseTrainFragment;
+import com.cpigeon.book.module.trainpigeon.FlyBackRecordFragment;
 
 /**
  * Created by Zhu TingYu on 2018/9/6.
@@ -45,11 +44,11 @@ public class TrainProjectViewModel extends BaseViewHolder {
         if(!isChoose){
             if (getAdapterPosition() == 0) {
                 itemView.setOnClickListener(v -> {
-                    HomingRecordFragment.start(getActivity(), true);
+                    //FlyBackRecordFragment.start(getActivity(), true);
                 });
             } else if (getAdapterPosition() == 1) {
                 itemView.setOnClickListener(v -> {
-                    HomingRecordFragment.start(getActivity(), false);
+                    //FlyBackRecordFragment.start(getActivity(), false);
                 });
 
             } else if (getAdapterPosition() == 2) {

@@ -32,6 +32,15 @@ public class  TrainEntity implements Parcelable {
     public double FromLongitude;//"开始东经",
     public String FromPlace;//开始地点", "
     public String PigeonTrainCountID;//":"训练次数id""+
+    public double Distance;//":"训练次数id""+
+
+    public double getDistance() {
+        return Distance;
+    }
+
+    public void setDistance(double distance) {
+        Distance = distance;
+    }
 
     public double getEndLatitude() {
         return EndLatitude;
@@ -160,6 +169,7 @@ public class  TrainEntity implements Parcelable {
         dest.writeDouble(this.FromLongitude);
         dest.writeString(this.FromPlace);
         dest.writeString(this.PigeonTrainCountID);
+        dest.writeDouble(this.Distance);
     }
 
     protected TrainEntity(Parcel in) {
@@ -176,6 +186,7 @@ public class  TrainEntity implements Parcelable {
         this.FromLongitude = in.readDouble();
         this.FromPlace = in.readString();
         this.PigeonTrainCountID = in.readString();
+        this.Distance = in.readDouble();
     }
 
     public static final Creator<TrainEntity> CREATOR = new Creator<TrainEntity>() {

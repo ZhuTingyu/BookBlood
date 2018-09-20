@@ -279,6 +279,10 @@
     <string name="get_pigeon_sex_count">TXGP_Pigeon_SelectSexCount</string>
     <string name="get_train_pigeon_details">TXGP_PigeonTrainCount_StartFly</string>
     <string name="open_train_pigeon">TXGP_PigeonTrain_Release</string>
+    <string name="get_fly_back_record">TXGP_PigeonTrainCount_ReturnFly</string>
+    <string name="add_fly_back_record">TXGP_PigeonTrain_AddHome</string>
+    <string name="search_train_pigeon">TXGP_PigeonTrainDate_SelectID</string>
+    <string name="end_train_pigeon">TXGP_PigeonTrain_EndTrain</string>
 
 
 </resources>

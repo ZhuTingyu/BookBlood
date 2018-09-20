@@ -133,7 +133,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:cardCornerRadius="3dp"
         app:cardElevation="3dp">
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.base.base.BaseDialogFragment;
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
 
 import java.util.List;
@@ -59,6 +60,8 @@ public class SelectTimeHaveHMSDialog extends BaseDialogFragment {
         mWheelM = dialog.findViewById(R.id.wheelM);
         mWheelS = dialog.findViewById(R.id.wheelS);
 
+        String[] time = TimeUtil.format(System.currentTimeMillis(), TimeUtil.FORMAT_HHMMSS).split(":");
+
         getH();
         getM();
         getS();
@@ -67,9 +70,10 @@ public class SelectTimeHaveHMSDialog extends BaseDialogFragment {
         setWheelView(mWheelM);
         setWheelView(mWheelS);
 
-        mWheelH.setItems(mH);
-        mWheelM.setItems(mM);
-        mWheelS.setItems(mS);
+        mWheelH.setItems(mH, time[0]);
+        mWheelM.setItems(mM, time[1]);
+        mWheelS.setItems(mS, time[2]);
+
 
         mTvCancel.setOnClickListener(v -> {
             dismiss();

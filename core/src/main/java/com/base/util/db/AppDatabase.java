@@ -32,6 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String TYPE_SEARCH_PIGEON_TO_LEAGUE = "TYPE_SEARCH_PIGEON_TO_LEAGUE";
     public static final String TYPE_SEARCH_GOOD_PIGEON = "TYPE_SEARCH_GOOD_PIGEON";
     public static final String TYPE_SELECT_PIGEON_TO_TRAINING = "TYPE_SELECT_PIGEON_TO_TRAINING";
+    public static final String TYPE_SEARCH_IN_TRAIN_PIGEON = "TYPE_SEARCH_IN_TRAIN_PIGEON";
 
     private static AppDatabase INSTANCE;
     private static final Object sLok = new Object();

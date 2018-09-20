@@ -38,28 +38,42 @@ public class PigeonHouseViewModel extends BaseViewModel {
     public MutableLiveData<String> setHeadUrlR = new MutableLiveData<>();
 
 
-    public void getPigeonHouse(){
-        submitRequestThrowError(PigeonHouseModel.getPigeonHouse(),r -> {
-            if(r.isOk()){
+    public void getPigeonHouse() {
+        submitRequestThrowError(PigeonHouseModel.getPigeonHouse(), r -> {
+            if (r.isOk()) {
                 mHouseEntityInfo.setValue(r.data);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 
-    public void setUserFace(){
+    public void setUserFace() {
         submitRequestThrowError(UserModel.setUserFace(mHeadUrl), r -> {
-            if(r.isOk()){
+            if (r.isOk()) {
                 UserModel.getInstance().setUserHeadUrl(r.data.touxiangurl);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 
-    public void setPigeonHouse(){
-        submitRequestThrowError(PigeonHouseModel.setPigeonHouse(mPigeonHomeName,mUsePigeonHomeNum,mPigeonHomePhone
-                ,mLatitude,mLongitude,mProvince, mCounty, mCity,mPigeonISOCID,mPigeonHomeAdds,mPigeonMatchNum),r -> {
-            if(r.isOk()){
+    public void setPigeonHouse() {
+        submitRequestThrowError(PigeonHouseModel.setPigeonHouse(mPigeonHomeName, mUsePigeonHomeNum, mPigeonHomePhone
+                , mLatitude, mLongitude, mProvince, mCounty, mCity, mPigeonISOCID, mPigeonHomeAdds, mPigeonMatchNum), r -> {
+            if (r.isOk()) {
                 addR.setValue(r.msg);
-            }else throw new HttpErrorException(r);
+                PigeonHouseEntity entity = new PigeonHouseEntity();
+                entity.setLongitude(Double.parseDouble(mLongitude));
+                entity.setUsePigeonHomeNum(mUsePigeonHomeNum);
+                entity.setPigeonHomeName(mPigeonHomeName);
+                entity.setPigeonISOCID(mPigeonISOCID);
+                entity.setXingming(mPigeonHomeName);
+                entity.setPigeonMatchNum(mPigeonMatchNum);
+                entity.setPigeonHomePhone(mPigeonHomePhone);
+                entity.setProvince(mProvince);
+                entity.setCity(mCity);
+                entity.setCounty(mCounty);
+                entity.setLatitude(Double.parseDouble(mLatitude));
+                entity.setPigeonHomeAdds(mPigeonHomeAdds);
+                UserModel.getInstance().setPigeonHouseInfo(entity);
+            } else throw new HttpErrorException(r);
         });
     }
 
@@ -116,7 +130,7 @@ public class PigeonHouseViewModel extends BaseViewModel {
         };
     }
 
-    public void isCanCommit(){
+    public void isCanCommit() {
         isCanCommit(mPigeonHomePhone, mLatitude, mUsePigeonHomeNum);
 
     }

@@ -63,8 +63,8 @@
             app:simpleTitleView_PressTextColor="@color/black"
             app:simpleTitleView_DefaultTextColor="@color/color_text_hint"
             app:simpleTitleView_image_size="24dp"
-            app:simpleTitleView_image="@drawable/svg_home_my"
-            app:simpleTitleView_press_image="@drawable/svg_home_my"
+            app:simpleTitleView_image="@mipmap/ic_home_my"
+            app:simpleTitleView_press_image="@mipmap/ic_home_my_select"
             app:simpleTitleView_text_size="10dp"
             app:simpleTitleView_text="@string/text_my"
             android:layout_height="match_parent"/>

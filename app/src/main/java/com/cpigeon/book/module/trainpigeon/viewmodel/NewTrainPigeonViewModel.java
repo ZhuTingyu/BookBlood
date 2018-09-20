@@ -19,7 +19,7 @@ public class NewTrainPigeonViewModel extends BaseViewModel {
     public double endLo;
     public double endLa;
     public String fromLocation;
-    public float dis;
+    public double dis;
     public List<PigeonEntity> mPigeonEntities;
 
     public void newTrainPigeon() {

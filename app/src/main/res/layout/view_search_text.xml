@@ -9,11 +9,13 @@
     android:layout_height="48dp">
 
     <EditText
+        android:paddingLeft="28dp"
         android:id="@+id/edSearch"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:textSize="@dimen/medium_text_size"
         android:maxLines="1"
+        android:drawablePadding="24dp"
         android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
