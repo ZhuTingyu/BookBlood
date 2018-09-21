@@ -2,6 +2,7 @@ package com.cpigeon.book.module.breeding;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -115,8 +116,6 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
         mSelectTypeViewModel.getSelectType_FeatherColor();
         mSelectTypeViewModel.getSelectType_lineage();
-
-
     }
 
     @Override
@@ -233,5 +232,12 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                 mPairingInfoAddViewModel.getTXGP_PigeonBreed_AddData();
                 break;
         }
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+
+
     }
 }

@@ -64,7 +64,6 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
     @Override
     protected void convert(BaseViewHolder helper, PairingNestInfoEntity item) {
 
-
         LineInputView ll_nest_num = helper.getView(R.id.ll_nest_num);
 //        ll_nest_num.setTitle("第" + MathUtil.toChinese(String.valueOf(Integer.valueOf(item.getLayNum()) + 1)) + "窝");
         ll_nest_num.setTitle("第" + MathUtil.toChinese(String.valueOf(helper.getPosition() + 1)) + "窝");
