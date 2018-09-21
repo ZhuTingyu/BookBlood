@@ -42,7 +42,6 @@ public class TrainPigeonListFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        EventBus.getDefault().register(this);
         mViewModel = new TrainPigeonListViewModel();
         initViewModel(mViewModel);
     }
@@ -86,11 +85,6 @@ public class TrainPigeonListFragment extends BaseBookFragment {
         });
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(UpdateTrainEvent event){

@@ -22,7 +22,7 @@ import com.cpigeon.book.util.RecyclerViewUtils;
 public class PairingScoreFragment extends BaseListFragment {
 
     private PairingScoreAdapter mAdapter;
-
+    public static final int resultCode = 0x000023;
 
     private PairingRecommendViewModel mPairingRecommendViewModel;
 

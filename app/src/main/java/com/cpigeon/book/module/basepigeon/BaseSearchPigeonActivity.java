@@ -5,8 +5,10 @@ import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -23,15 +25,22 @@ import java.util.List;
  */
 
 public class BaseSearchPigeonActivity extends BaseSearchActivity {
-    protected BreedPigeonListAdapter mAdapter;
+
+    protected BasePigeonListAdapter mAdapter;
 
     private BreedPigeonListModel mBreedPigeonListModel;
-    private String pigeonType;
+    protected String SEARCH_HISTORY_KEY;
 
     @Override
     protected List<DbEntity> getHistory() {
-        return AppDatabase.getInstance(getBaseContext()).DbEntityDao()
-                .getDataByUserAndType(UserModel.getInstance().getUserId(), AppDatabase.TYPE_SEARCH_BREED_PIGEON);
+
+        if (StringUtil.isStringValid(SEARCH_HISTORY_KEY)) {
+            return AppDatabase.getInstance(getBaseContext()).DbEntityDao()
+                    .getDataByUserAndType(UserModel.getInstance().getUserId(), SEARCH_HISTORY_KEY);
+        } else {
+            return Lists.newArrayList();
+        }
+
     }
 
     @Override
@@ -46,27 +55,23 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        initData();
         super.onCreate(savedInstanceState);
 
         mBreedPigeonListModel = new BreedPigeonListModel();
         initViewModel(mBreedPigeonListModel);
 
-        pigeonType = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
-        mBreedPigeonListModel.typeid = pigeonType;
+        mBreedPigeonListModel.typeid = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
+        mBreedPigeonListModel.bitmatch = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE_2);
         mBreedPigeonListModel.isSearch = true;
 
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
             public void search(String key) {
-
-                setProgressVisible(true);
-                mAdapter.getData().clear();
-                mAdapter.notifyDataSetChanged();
-                mBreedPigeonListModel.searchStr = key;
-                mBreedPigeonListModel.pi = 1;
-                mBreedPigeonListModel.getPigeonList();
-
-//                mAdapter.setNewData(Lists.newTestArrayList());
+                setRefreshData(key);
+                if (StringUtil.isStringValid(SEARCH_HISTORY_KEY)) {
+                    saveHistory(key,SEARCH_HISTORY_KEY);
+                }
             }
 
             @Override
@@ -89,7 +94,26 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
             mBreedPigeonListModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
 
+
+        mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
+            goneHistroy();
+            setRefreshData(mSearchHistoryAdapter.getItem(position).searchTitle);
+        });
+
         initObserve();
+
+    }
+
+    protected void initData() {
+    }
+
+    private void  setRefreshData(String key){
+        setProgressVisible(true);
+        mAdapter.getData().clear();
+        mAdapter.notifyDataSetChanged();
+        mBreedPigeonListModel.searchStr = key;
+        mBreedPigeonListModel.pi = 1;
+        mBreedPigeonListModel.getPigeonList();
     }
 
 

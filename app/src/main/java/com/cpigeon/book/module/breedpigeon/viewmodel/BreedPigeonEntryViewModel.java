@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.http.HttpErrorException;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.model.BreedPigeonModel;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 
@@ -84,7 +85,7 @@ public class BreedPigeonEntryViewModel extends BasePigeonViewModel {
 
     public void getPigeonDetails() {
 
-        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(pigeonId), r -> {
+        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(pigeonId, UserModel.getInstance().getUserId()), r -> {
             if (r.isOk()) {
                 mBreedPigeonEntity = r.data;
                 mPigeonDetailsData.setValue(mBreedPigeonEntity);

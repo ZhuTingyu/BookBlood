@@ -57,7 +57,6 @@ public class FlyBackRecordFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        EventBus.getDefault().register(this);
         mViewModel = new FlyBackRecordViewModel(getBaseActivity());
         initViewModel(mViewModel);
     }
@@ -107,11 +106,6 @@ public class FlyBackRecordFragment extends BaseBookFragment {
         mViewModel.getFlyBackRecord();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(FlyBackAddRecordEvent event) {

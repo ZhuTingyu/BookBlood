@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.RxUtils;
 import com.base.util.db.AppDatabase;
+import com.base.util.system.AppManager;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.CustomViewPager;
@@ -182,6 +184,30 @@ public class MainActivity extends BaseBookActivity {
             anim.cancel();
             anim.start();
         });
+    }
+
+
+    private long firstTime = 0;//双击返回退出应用，记录时间
+
+    /**
+     * 按两次退出应用
+     */
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                long secondTime = System.currentTimeMillis();
+                if (secondTime - firstTime > 2000) {//如果两次按键时间间隔大于2秒，则不退出
+                    ToastUtils.showLong(getBaseActivity(), "再按一次退出程序");
+                    firstTime = secondTime;//更新firstTime
+                    return true;
+                } else {//两次按键小于2秒时，退出应用
+                    AppManager.getAppManager().killAllActivity();
+                }
+                break;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 
     @Override

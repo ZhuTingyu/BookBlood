@@ -2,6 +2,7 @@ package com.cpigeon.book.module.breeding;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingInfoListAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
@@ -51,7 +53,6 @@ public class PairingInfoListFragment extends BaseListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        EventBus.getDefault().register(this);//在当前界面注册一个订阅者
 
         mPairingInfoListViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
 
@@ -65,7 +66,7 @@ public class PairingInfoListFragment extends BaseListFragment {
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
                 if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_add))) {
                     //添加配对
-                    PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
+                    PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity,null);
                 } else if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_recommend))) {
                     //推荐配对
                     PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
@@ -150,17 +151,44 @@ public class PairingInfoListFragment extends BaseListFragment {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);//取消注册
-    }
-
     private void initData() {
         setProgressVisible(true);
         mPairingInfoListAdapter.getData().clear();
         mPairingInfoListAdapter.notifyDataSetChanged();
         mPairingInfoListViewModel.pi = 1;
         mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PairingInfoRecommendFragment.RECOMMEND_REQUEST) {
+            try {
+
+                PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity,item);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+//            switch (resultCode) {
+//                case PairingLineageFragment.resultCode:
+//                    //血统
+//
+//                    break;
+//                case PairingPlayFragment.resultCode:
+//                    //赛绩
+//
+//                    break;
+//                case PairingScoreFragment.resultCode:
+//                    //评分
+//
+//                    break;
+//            }
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.feedpigeon;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonRecordListAdapter;
+import com.cpigeon.book.module.pigeonleague.PigeonToLeagueFootListFragment;
 
 /**
  * 养鸽记录   足环列表
@@ -33,6 +35,14 @@ public class FeedPigeonRecordListFragment extends BaseFootListFagment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (SearchFragmentParentActivity) getActivity();
+    }
+
+    public static void start(Activity activity) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_TYPE, "");
+        SearchFragmentParentActivity.
+                start(activity, PigeonToLeagueFootListFragment.class, false, bundle);
     }
 
     @Override

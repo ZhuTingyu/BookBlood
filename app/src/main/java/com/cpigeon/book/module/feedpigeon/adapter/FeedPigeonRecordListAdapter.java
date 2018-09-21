@@ -5,15 +5,17 @@ import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.BasePigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 
 import java.util.List;
 
 /**
+ * 养鸽记录
  * Created by Zhu TingYu on 2018/9/7.
  */
 
-public class FeedPigeonRecordListAdapter extends BreedPigeonListAdapter {
+public class FeedPigeonRecordListAdapter extends BasePigeonListAdapter {
 
     public FeedPigeonRecordListAdapter() {
         super(R.layout.item_feed_pigeon_list, Lists.newArrayList());

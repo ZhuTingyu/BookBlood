@@ -8,6 +8,7 @@ import com.base.util.Utils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.BasePigeonListAdapter;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/28.
  */
 
-public class BreedPigeonListAdapter extends BaseQuickAdapter<PigeonEntity, BaseViewHolder> {
+public class BreedPigeonListAdapter extends BasePigeonListAdapter {
 
     public BreedPigeonListAdapter() {
         super(R.layout.item_breed_pigeon_list, null);

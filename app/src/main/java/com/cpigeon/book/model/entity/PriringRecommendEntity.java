@@ -1,10 +1,13 @@
 package com.cpigeon.book.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2018/9/15 0015.
  */
 
-public class PriringRecommendEntity {
+public class PriringRecommendEntity implements Parcelable {
 
 
     /**
@@ -118,4 +121,53 @@ public class PriringRecommendEntity {
     public void setMatchNumber(String matchNumber) {
         MatchNumber = matchNumber;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.PigeonBloodID);
+        dest.writeString(this.PigeonSexName);
+        dest.writeString(this.PigeonSexID);
+        dest.writeString(this.PigeonPlumeID);
+        dest.writeString(this.FootRingID);
+        dest.writeString(this.PigeonBloodName);
+        dest.writeString(this.PigeonPlumeName);
+        dest.writeString(this.PigeonID);
+        dest.writeString(this.FootRingNum);
+        dest.writeString(this.PigeonScore);
+        dest.writeString(this.MatchNumber);
+    }
+
+    public PriringRecommendEntity() {
+    }
+
+    protected PriringRecommendEntity(Parcel in) {
+        this.PigeonBloodID = in.readString();
+        this.PigeonSexName = in.readString();
+        this.PigeonSexID = in.readString();
+        this.PigeonPlumeID = in.readString();
+        this.FootRingID = in.readString();
+        this.PigeonBloodName = in.readString();
+        this.PigeonPlumeName = in.readString();
+        this.PigeonID = in.readString();
+        this.FootRingNum = in.readString();
+        this.PigeonScore = in.readString();
+        this.MatchNumber = in.readString();
+    }
+
+    public static final Parcelable.Creator<PriringRecommendEntity> CREATOR = new Parcelable.Creator<PriringRecommendEntity>() {
+        @Override
+        public PriringRecommendEntity createFromParcel(Parcel source) {
+            return new PriringRecommendEntity(source);
+        }
+
+        @Override
+        public PriringRecommendEntity[] newArray(int size) {
+            return new PriringRecommendEntity[size];
+        }
+    };
 }

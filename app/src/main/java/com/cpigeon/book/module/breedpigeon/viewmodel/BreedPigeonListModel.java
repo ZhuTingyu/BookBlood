@@ -23,6 +23,9 @@ public class BreedPigeonListModel extends BaseViewModel {
     public boolean isSearch = false;//true  搜索   false  删选
 
     public String typeid = PigeonEntity.ID_BREED_PIGEON;//鸽子类型（8为种鸽，9为赛鸽，不传则全部查询）
+
+    public String bitmatch = PigeonEntity.BIT_MATCH;//是否返回赛绩（1，返回）
+
     public String year;//年份
     public String sexid;//性别
     public String stateid;//状态
@@ -36,7 +39,13 @@ public class BreedPigeonListModel extends BaseViewModel {
     //获取  种鸽列表
     public void getPigeonList() {
         if (isSearch) {
-            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_SearchBreed(String.valueOf(pi), String.valueOf(ps), searchStr, typeid), r -> {
+            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_SearchBreed(String.valueOf(pi),
+                    String.valueOf(ps),
+                    searchStr,
+                    typeid,
+                    bitmatch
+
+            ), r -> {
                 if (r.isOk()) {
                     listEmptyMessage.setValue(r.msg);
                     mPigeonListData.setValue(r.data);
@@ -48,7 +57,8 @@ public class BreedPigeonListModel extends BaseViewModel {
                     bloodid,
                     sexid,
                     year,
-                    stateid), r -> {
+                    stateid,
+                    bitmatch), r -> {
 
                 if (r.isOk()) {
                     listEmptyMessage.setValue(r.msg);
@@ -58,11 +68,12 @@ public class BreedPigeonListModel extends BaseViewModel {
         }
     }
 
-    public void getPigeonCount(){
-        submitRequestThrowError(BreedPigeonModel.getPigeonSexCount(PigeonEntity.ID_BREED_PIGEON),r -> {
-            if(r.isOk()){
+    //获取统计数据
+    public void getPigeonCount() {
+        submitRequestThrowError(BreedPigeonModel.getPigeonSexCount(typeid), r -> {
+            if (r.isOk()) {
                 mLivePigeonSexCount.setValue(r.data);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 

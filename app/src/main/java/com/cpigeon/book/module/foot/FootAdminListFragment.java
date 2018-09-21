@@ -76,7 +76,7 @@ public class FootAdminListFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        EventBus.getDefault().register(this);
+
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
             BaseSearchActivity.start(getActivity(), SearchFootActivity.class, new Bundle());
@@ -159,11 +159,6 @@ public class FootAdminListFragment extends BaseBookFragment {
                 mFiltrate.setData(true, selectTypeEntities, titles, mSelectTypeViewModel.whichIds);
             }
         });
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

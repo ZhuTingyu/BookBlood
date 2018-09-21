@@ -82,7 +82,8 @@ public class PlayModel {
 
 
     //标准赛绩列表
-    public static Observable<ApiResponse<List<PigeonPlayEntity>>> getTXGP_PigeonMatch_SelectAll(String pigeonid,
+    public static Observable<ApiResponse<List<PigeonPlayEntity>>> getTXGP_PigeonMatch_SelectAll(String puid,
+                                                                                                String pigeonid,
                                                                                                 String footid,
                                                                                                 String pi,
                                                                                                 String ps) {
@@ -90,6 +91,7 @@ public class PlayModel {
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonPlayEntity>>>() {
                 }.getType())
                 .url(R.string.pigeon_play_list)
+                .addBody("puid", puid)
                 .addBody("pigeonid", pigeonid)
                 .addBody("footid", footid)
                 .addBody("pi", pi)
@@ -174,7 +176,8 @@ public class PlayModel {
 
 
     //赛绩附加信息列表
-    public static Observable<ApiResponse<List<PlayAdditionalInfoEntity>>> getTXGP_PigeonInfoList_SelectAll(String pigeonid,
+    public static Observable<ApiResponse<List<PlayAdditionalInfoEntity>>> getTXGP_PigeonInfoList_SelectAll(String puid,
+                                                                                                           String pigeonid,
                                                                                                            String footid,
                                                                                                            String pi,
                                                                                                            String ps) {
@@ -182,6 +185,7 @@ public class PlayModel {
                 .setToJsonType(new TypeToken<ApiResponse<List<PlayAdditionalInfoEntity>>>() {
                 }.getType())
                 .url(R.string.pigeon_play_additional_info_list)
+                .addBody("puid", puid)
                 .addBody("pigeonid", pigeonid)
                 .addBody("footid", footid)
                 .addBody("pi", pi)

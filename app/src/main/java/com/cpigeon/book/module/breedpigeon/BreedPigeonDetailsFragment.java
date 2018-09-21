@@ -36,6 +36,8 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.module.basepigeon.BasePigeonDetailsFragment;
+import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonModifyViewModel;
@@ -69,64 +71,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Administrator on 2018/8/29.
  */
 
-public class BreedPigeonDetailsFragment extends BaseBookFragment {
-    @BindView(R.id.tv_foot)
-    TextView tvFoot;
-    @BindView(R.id.img_sex)
-    ImageView imgSex;
-    @BindView(R.id.tv_foot_vice)
-    TextView tvFootVice;
-    @BindView(R.id.ll_foot_vice)
-    LinearLayout llFootVice;
-    @BindView(R.id.tv_lineage)
-    TextView tvLineage;
-    @BindView(R.id.ll_lineage)
-    LinearLayout llLineage;
-    @BindView(R.id.tv_state)
-    TextView tvState;
-    @BindView(R.id.ll_state)
-    LinearLayout llState;
-    @BindView(R.id.tv_eye_sand)
-    TextView tvEyeSand;
-    @BindView(R.id.ll_eye_sand)
-    LinearLayout llEyeSand;
-    @BindView(R.id.tv_feather_color)
-    TextView tvFeatherColor;
-    @BindView(R.id.ll_feather_color)
-    LinearLayout llFeatherColor;
-    @BindView(R.id.ll_info1)
-    LinearLayout llInfo1;
-    @BindView(R.id.tv_their_shells_date)
-    TextView tvTheirShellsDate;
-    @BindView(R.id.ll_their_shells_date)
-    LinearLayout llTheirShellsDate;
-    @BindView(R.id.tv_foot_source)
-    TextView tvFootSource;
-    @BindView(R.id.ll_foot_source)
-    LinearLayout llFootSource;
-    @BindView(R.id.tv_score)
-    TextView tvScore;
-    @BindView(R.id.ll_score)
-    LinearLayout llScore;
-    @BindView(R.id.familyTreeView)
-    FamilyTreeView mFamilyTreeView;
-
-    @BindView(R.id.img_pigeon)
-    CircleImageView img_pigeon;
-
-
-    @BindView(R.id.indicator)
-    MagicIndicator mIndicator;
-    @BindView(R.id.viewPager)
-    CustomViewPager mViewPager;
-    protected List<Fragment> mFragments = Lists.newArrayList();
-    protected List<String> mTitles = Lists.newArrayList();
-    @BindView(R.id.tvLeft)
-    TextView tvLeft;
-    @BindView(R.id.tvRight)
-    TextView tvRight;
-    @BindView(R.id.llButton)
-    LinearLayout llButton;
+public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
     private BreedPigeonDetailsViewModel mBreedPigeonDetailsViewModel;
 
@@ -163,7 +108,6 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        EventBus.getDefault().register(this);
         mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel(getBaseActivity());
         mPlayListViewModel = new PlayListViewModel();
         mSelectTypeViewModel = new SelectTypeViewModel();
@@ -173,12 +117,6 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                 , mSelectTypeViewModel, mBreedPigeonModifyViewModel, mBookViewModel);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_breed_pigeon_details, container, false);
-        return view;
-    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -193,7 +131,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
         initInputPlayDialog();
         setProgressVisible(true);
-        mBreedPigeonDetailsViewModel.getPigeonDetails();
+        mBreedPigeonDetailsViewModel.getPigeonDetails();//获取 鸽子  详情
 
         mPlayListViewModel.footid = mBreedPigeonDetailsViewModel.footId;
         mPlayListViewModel.pigeonid = mBreedPigeonDetailsViewModel.pigeonId;
@@ -210,7 +148,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_State();
         mSelectTypeViewModel.getSelectType_PigeonSource();
 
-        mBookViewModel.getBloodBook();
+        mBookViewModel.getBloodBook();// //获取 血统书  四代
 
         mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
             @Override
@@ -336,7 +274,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 
         mBreedPigeonDetailsViewModel.mBreedPigeonData.observe(this, datas -> {
             setProgressVisible(false);
-            mBreedPigeonModifyViewModel.mBreedPigeonEntity = datas;
+            mBreedPigeonModifyViewModel.mPigeonEntity = datas;
 
             tvFoot.setText(datas.getFootRingNum());//足环号
 
@@ -419,7 +357,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                 dialog.setFoots(foots);
                 dialog.setOnFootStringFinishListener(foot -> {
                     tvFoot.setText(foot);
-                    mBreedPigeonModifyViewModel.mBreedPigeonEntity.setFootRingNum(foot);
+                    mBreedPigeonModifyViewModel.mPigeonEntity.setFootRingNum(foot);
                     mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                 });
                 dialog.show(getBaseActivity().getSupportFragmentManager());
@@ -434,8 +372,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
 //                                llSex.setContent(mBreedPigeonModifyViewModel.mSelectTypes_Sex.get(p).getTypeName());
 
 
-                                mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonSexID(mBreedPigeonModifyViewModel.mSelectTypes_Sex.get(p).getTypeID());
-                                mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonSexName(mBreedPigeonModifyViewModel.mSelectTypes_Sex.get(p).getTypeName());
+                                mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonSexID(mBreedPigeonModifyViewModel.mSelectTypes_Sex.get(p).getTypeID());
+                                mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonSexName(mBreedPigeonModifyViewModel.mSelectTypes_Sex.get(p).getTypeName());
 
                                 mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                             });
@@ -451,7 +389,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                 dialog2.setFoots(foots2);
                 dialog2.setOnFootStringFinishListener(foot -> {
                     tvFootVice.setText(foot);
-                    mBreedPigeonModifyViewModel.mBreedPigeonEntity.setFootRingIDToNum(foot);
+                    mBreedPigeonModifyViewModel.mPigeonEntity.setFootRingIDToNum(foot);
                     mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                 });
                 dialog2.show(getBaseActivity().getSupportFragmentManager());
@@ -462,8 +400,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                         , R.string.text_pigeon_lineage, 0, content -> {
                             mInputDialog.hide();
                             tvLineage.setText(content);
-                            mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonBloodID("");
-                            mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonBloodName(content);
+                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID("");
+                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodName(content);
                             mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                         }, () -> {
                             mInputDialog.hide();
@@ -472,8 +410,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                                     @Override
                                     public void onOptionPicked(int index, String item) {
                                         tvLineage.setText(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeName());
-                                        mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonBloodID(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeID());
-                                        mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonBloodName(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeName());
+                                        mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeID());
+                                        mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodName(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeName());
                                         mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
 
                                     }
@@ -491,8 +429,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                         public void onOptionPicked(int index, String item) {
                             tvState.setText(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeName());
 
-                            mBreedPigeonModifyViewModel.mBreedPigeonEntity.setStateID(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeID());
-                            mBreedPigeonModifyViewModel.mBreedPigeonEntity.setStateName(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeName());
+                            mBreedPigeonModifyViewModel.mPigeonEntity.setStateID(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeID());
+                            mBreedPigeonModifyViewModel.mPigeonEntity.setStateName(mBreedPigeonModifyViewModel.mSelectTypes_State.get(index).getTypeName());
                             mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
 
                         }
@@ -509,8 +447,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                         public void onOptionPicked(int index, String item) {
                             tvEyeSand.setText(mBreedPigeonModifyViewModel.mSelectTypes_EyeSand.get(index).getTypeName());
 
-                            mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonEyeID(mBreedPigeonModifyViewModel.mSelectTypes_EyeSand.get(index).getTypeID());
-                            mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonEyeName(mBreedPigeonModifyViewModel.mSelectTypes_EyeSand.get(index).getTypeName());
+                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonEyeID(mBreedPigeonModifyViewModel.mSelectTypes_EyeSand.get(index).getTypeID());
+                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonEyeName(mBreedPigeonModifyViewModel.mSelectTypes_EyeSand.get(index).getTypeName());
                             mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                         }
                     });
@@ -525,8 +463,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                             mInputDialog.hide();
                             tvFeatherColor.setText(content);
 
-                            mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonPlumeID("");
-                            mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonPlumeName(content);
+                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonPlumeID("");
+                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonPlumeName(content);
                             mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
 
                         }, () -> {
@@ -537,8 +475,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                                     @Override
                                     public void onOptionPicked(int index, String item) {
                                         tvFeatherColor.setText(mBreedPigeonModifyViewModel.mSelectTypes_FeatherColor.get(index).getTypeName());
-                                        mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonPlumeID(mBreedPigeonModifyViewModel.mSelectTypes_FeatherColor.get(index).getTypeID());
-                                        mBreedPigeonModifyViewModel.mBreedPigeonEntity.setPigeonPlumeName(mBreedPigeonModifyViewModel.mSelectTypes_FeatherColor.get(index).getTypeName());
+                                        mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonPlumeID(mBreedPigeonModifyViewModel.mSelectTypes_FeatherColor.get(index).getTypeID());
+                                        mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonPlumeName(mBreedPigeonModifyViewModel.mSelectTypes_FeatherColor.get(index).getTypeName());
                                         mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
 
                                     }
@@ -553,7 +491,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                 PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
                     tvTheirShellsDate.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
 
-                    mBreedPigeonModifyViewModel.mBreedPigeonEntity.setOutShellTime(year + "-" + monthOfYear + "-" + dayOfMonth);
+                    mBreedPigeonModifyViewModel.mPigeonEntity.setOutShellTime(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                 });
                 break;
@@ -564,8 +502,8 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                             , SelectTypeEntity.getTypeNames(mBreedPigeonModifyViewModel.mSelectTypes_Source), p -> {
                                 tvFootSource.setText(mBreedPigeonModifyViewModel.mSelectTypes_Source.get(p).getTypeName());
 
-                                mBreedPigeonModifyViewModel.mBreedPigeonEntity.setSourceID(mBreedPigeonModifyViewModel.mSelectTypes_Source.get(p).getTypeID());
-                                mBreedPigeonModifyViewModel.mBreedPigeonEntity.setSourceName(mBreedPigeonModifyViewModel.mSelectTypes_Source.get(p).getTypeName());
+                                mBreedPigeonModifyViewModel.mPigeonEntity.setSourceID(mBreedPigeonModifyViewModel.mSelectTypes_Source.get(p).getTypeID());
+                                mBreedPigeonModifyViewModel.mPigeonEntity.setSourceName(mBreedPigeonModifyViewModel.mSelectTypes_Source.get(p).getTypeName());
                                 mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                             });
                 } else {
@@ -593,6 +531,7 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                 break;
             case R.id.tv_breed_info:
                 //繁育信息
+                PairingInfoListFragment.start(getBaseActivity(),mBreedPigeonModifyViewModel.mPigeonEntity);
 
                 break;
             case R.id.img_play_import:
@@ -618,12 +557,6 @@ public class BreedPigeonDetailsFragment extends BaseBookFragment {
                 }
                 break;
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

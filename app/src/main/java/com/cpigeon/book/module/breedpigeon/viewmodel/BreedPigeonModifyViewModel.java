@@ -6,6 +6,9 @@ import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
+import com.cpigeon.book.service.EventBusService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 
@@ -24,32 +27,33 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
     //鸽子id
     public String pigeonid;
 
-    public PigeonEntity mBreedPigeonEntity;
+    public PigeonEntity mPigeonEntity;
 
     //种鸽修改
     public void modifyBreedPigeonEntry() {
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
-                mBreedPigeonEntity.getPigeonID(),// 鸽子id
-                mBreedPigeonEntity.getFootCodeID(),// 国家Id
-                mBreedPigeonEntity.getFootRingNum(),//足环（可选可填，传足环号）
-                mBreedPigeonEntity.getFootRingIDToNum(),//副足环
-                mBreedPigeonEntity.getSourceID(),//信鸽来源ID
-                mBreedPigeonEntity.getMenFootRingNum(),// 母足环号码
-                mBreedPigeonEntity.getWoFootRingNum(),// 父足环号码
-                mBreedPigeonEntity.getPigeonName(),// 信鸽名称
-                mBreedPigeonEntity.getPigeonSexID(),//  性别（传ID）
-                mBreedPigeonEntity.getPigeonPlumeName(),//  羽色（可选可填，传羽色名称）
-                mBreedPigeonEntity.getPigeonEyeID(),//  眼沙（传ID）
-                mBreedPigeonEntity.getOutShellTime(),//   出壳时间
-                mBreedPigeonEntity.getPigeonBloodName(),//  血统 （可选可填，传血统名称）
-                mBreedPigeonEntity.getStateID(),// 信鸽状态ID
-                mBreedPigeonEntity.getCoverPhotoID(),//
+                mPigeonEntity.getPigeonID(),// 鸽子id
+                mPigeonEntity.getFootCodeID(),// 国家Id
+                mPigeonEntity.getFootRingNum(),//足环（可选可填，传足环号）
+                mPigeonEntity.getFootRingIDToNum(),//副足环
+                mPigeonEntity.getSourceID(),//信鸽来源ID
+                mPigeonEntity.getMenFootRingNum(),// 母足环号码
+                mPigeonEntity.getWoFootRingNum(),// 父足环号码
+                mPigeonEntity.getPigeonName(),// 信鸽名称
+                mPigeonEntity.getPigeonSexID(),//  性别（传ID）
+                mPigeonEntity.getPigeonPlumeName(),//  羽色（可选可填，传羽色名称）
+                mPigeonEntity.getPigeonEyeID(),//  眼沙（传ID）
+                mPigeonEntity.getOutShellTime(),//   出壳时间
+                mPigeonEntity.getPigeonBloodName(),//  血统 （可选可填，传血统名称）
+                mPigeonEntity.getStateID(),// 信鸽状态ID
+                mPigeonEntity.getCoverPhotoID(),//
                 setImageMap()), r -> {
 
             if (r.isOk()) {
 
                 mBreedPigeonData.setValue(r.data);
 
+                EventBus.getDefault().post(EventBusService.BREED_PIGEON_LIST_REFRESH);
             } else throw new HttpErrorException(r);
         });
     }

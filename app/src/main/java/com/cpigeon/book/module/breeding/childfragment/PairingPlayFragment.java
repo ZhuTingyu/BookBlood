@@ -22,6 +22,7 @@ import com.cpigeon.book.util.RecyclerViewUtils;
 public class PairingPlayFragment extends BaseListFragment {
 
     private PairingPlayAdapter mAdapter;
+    public static final int resultCode = 0x000022;
 
     private PairingRecommendViewModel mPairingRecommendViewModel;
 

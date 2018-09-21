@@ -24,6 +24,8 @@ public class PairingLineageFragment extends BaseListFragment {
     private PairingLineageAdapter mAdapter;
     private PairingRecommendViewModel mPairingRecommendViewModel;
 
+    public static final int resultCode = 0x000021;
+
     public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, PairingLineageFragment.class);

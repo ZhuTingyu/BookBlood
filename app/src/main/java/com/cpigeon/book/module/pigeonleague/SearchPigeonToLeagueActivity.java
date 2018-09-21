@@ -9,6 +9,8 @@ import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.pigeonleague.adpter.SelectPigeonToLeagueAdapter;
 import com.cpigeon.book.widget.SearchTextView;
 
@@ -18,37 +20,25 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/14.
  */
 
-public class SearchPigeonToLeagueActivity extends BaseSearchActivity {
-
-    SelectPigeonToLeagueAdapter mAdapter;
-
-    @Override
-    protected List<DbEntity> getHistory() {
-        return AppDatabase.getInstance(getBaseActivity())
-                .DbEntityDao().getDataByUserAndType(UserModel.getInstance().getUserId()
-                        , AppDatabase.TYPE_SEARCH_PIGEON_TO_LEAGUE);
-    }
+public class SearchPigeonToLeagueActivity extends BaseSearchPigeonActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new SelectPigeonToLeagueAdapter();
+
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+            PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID());
+        });
+
         return mAdapter;
     }
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
-            @Override
-            public void search(String key) {
-                mAdapter.setNewData(Lists.newTestArrayList());
-            }
-
-            @Override
-            public void cancel() {
-                finish();
-            }
-        });
+    protected void initData() {
+        super.initData();
+        SEARCH_HISTORY_KEY = "search_history_pigeon_to_league";
     }
+
 }

@@ -40,7 +40,7 @@ import butterknife.BindView;
 
 public class PairingInfoRecommendFragment extends BaseBookFragment {
 
-    private int RECOMMEND_REQUEST = 0x002323;
+    public static int RECOMMEND_REQUEST = 0x002323;
 
     @BindView(R.id.indicator)
     MagicIndicator mIndicator;
@@ -52,7 +52,7 @@ public class PairingInfoRecommendFragment extends BaseBookFragment {
     public static void start(Activity activity, PigeonEntity mBreedPigeonEntity) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
-                .startParentActivity(activity, PairingInfoRecommendFragment.class );
+                .startParentActivity(activity, PairingInfoRecommendFragment.class, PairingInfoRecommendFragment.RECOMMEND_REQUEST);
     }
 
     @Nullable
@@ -73,12 +73,13 @@ public class PairingInfoRecommendFragment extends BaseBookFragment {
 
     private void initViewPager() {
 
+        //血统
         PairingLineageFragment mPairingLineageFragment = new PairingLineageFragment();
         mFragments.add(mPairingLineageFragment);
-
+        //赛绩
         PairingPlayFragment mPairingPlayFragment = new PairingPlayFragment();
         mFragments.add(mPairingPlayFragment);
-
+        //评分
         PairingScoreFragment mPairingScoreFragment = new PairingScoreFragment();
         mFragments.add(mPairingScoreFragment);
 

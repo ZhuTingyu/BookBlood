@@ -7,6 +7,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.model.BreedPigeonModel;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 
 /**
@@ -26,10 +27,9 @@ public class BreedPigeonDetailsViewModel extends BaseViewModel {
         pigeonId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
     }
 
-    //获取  种鸽列表
+    //获取 鸽子  详情
     public void getPigeonDetails() {
-
-        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(pigeonId), r -> {
+        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(pigeonId, UserModel.getInstance().getUserId()), r -> {
             if (r.isOk()) {
                 mBreedPigeonData.setValue(r.data);
             } else throw new HttpErrorException(r);

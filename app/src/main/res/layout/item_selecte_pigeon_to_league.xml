@@ -3,8 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingLeft="@dimen/normal_safe_distance"
-    android:paddingRight="@dimen/normal_safe_distance"
     android:layout_height="44dp">
 
     <LinearLayout

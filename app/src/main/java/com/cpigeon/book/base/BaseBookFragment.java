@@ -13,8 +13,12 @@ import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.login.LoginActivity;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.service.SingleLoginService;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -57,6 +61,13 @@ public class BaseBookFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);//在当前界面注册一个订阅者
+    }
+
+
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+
     }
 
     @Override
@@ -65,13 +76,15 @@ public class BaseBookFragment extends BaseFragment {
         if (unbinder != null) {
             unbinder.unbind();
         }
+        EventBus.getDefault().unregister(this);//取消注册
     }
 
-    protected void addItemDecorationLine(RecyclerView recyclerView){
+
+    protected void addItemDecorationLine(RecyclerView recyclerView) {
         addItemDecorationLine(recyclerView, R.color.color_line, ScreenTool.dip2px(0.5f));
     }
 
-    protected void addItemDecorationLine(RecyclerView recyclerView, @ColorRes int color, int size){
+    protected void addItemDecorationLine(RecyclerView recyclerView, @ColorRes int color, int size) {
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(recyclerView.getContext())
                 .colorResId(color).size(size).build());
     }

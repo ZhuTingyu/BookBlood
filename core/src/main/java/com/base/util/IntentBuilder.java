@@ -22,6 +22,7 @@ import java.util.List;
 public class IntentBuilder {
 
     public static final String KEY_TYPE = "KEY_TYPE";
+    public static final String KEY_TYPE_2 = "KEY_TYPE_2";
     public static final String KEY_TITLE = "KEY_TITLE";
     public static final String KEY_BOOLEAN = "KEY_BOOLEAN";
     public static final String KEY_DATA = "KEY_DATA";

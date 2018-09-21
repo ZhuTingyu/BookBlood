@@ -12,11 +12,14 @@ import java.io.Serializable;
 
 public class PigeonEntity implements Serializable {
 
-    public static final String ID_MALE = "25";
-    public static final String ID_FEMALE = "24";
-    public static final String ID_BREED_PIGEON= "8";
-    public static final String ID_MATCH_PIGEON= "9";
-    public static final String ID_YOUNG_PIGEON= "10";
+    public static final String ID_MALE = "25";//雄
+    public static final String ID_FEMALE = "24";//雌
+    public static final String ID_BREED_PIGEON = "8";//种鸽
+    public static final String ID_MATCH_PIGEON = "9";//赛鸽
+    public static final String ID_YOUNG_PIGEON = "10";
+
+    public static final String BIT_MATCH = "0"; //是否返回赛绩（0，不返回）
+    public static final String BIT_MATCH_NO = "1"; //是否返回赛绩（1，返回）
 
     /**
      * CoverPhotoUrl :
@@ -37,7 +40,7 @@ public class PigeonEntity implements Serializable {
     private String FootRingID;
     private String StateID;
     private String StateName;
-    private String PigeonPlumeName;//
+    private String PigeonPlumeName;//雨色
     private String PigeonSexName;
     private String PigeonID;
     private String FootRingNum;
@@ -84,24 +87,36 @@ public class PigeonEntity implements Serializable {
     private String FootCodeID;// 国家id
     private String CoverPhotoTypeID;// 图片typeId
     private String CoverPhotoTypeName;// 图片typeName
+    private String MatchCount;// 参赛次数
+
+    public String getMatchCount() {
+        return MatchCount;
+    }
+
+    public void setMatchCount(String matchCount) {
+        MatchCount = matchCount;
+    }
 
     private boolean isSelect = false;
 
-    public PigeonEntity(){};
+    public PigeonEntity() {
+    }
 
-    public boolean isEmpty(){
-        if(StringUtil.isStringValid(PigeonID)){
+    ;
+
+    public boolean isEmpty() {
+        if (StringUtil.isStringValid(PigeonID)) {
             return false;
-        }else return true;
+        } else return true;
     }
 
-    public boolean isHaveDetailsInfo(){
-        if(StringUtil.isStringValid(PigeonBloodName)){
+    public boolean isHaveDetailsInfo() {
+        if (StringUtil.isStringValid(PigeonBloodName)) {
             return true;
-        }else return false;
+        } else return false;
     }
 
-    public boolean isMale(){
+    public boolean isMale() {
         return Utils.getString(R.string.text_male_a).equals(PigeonSexName);
     }
 
@@ -138,6 +153,9 @@ public class PigeonEntity implements Serializable {
         setWoFootRingNum(builder.WoFootRingNum);
         setFootCode(builder.FootCode);
         setFootCodeID(builder.FootCodeID);
+        setCoverPhotoTypeID(builder.CoverPhotoTypeID);
+        setCoverPhotoTypeName(builder.CoverPhotoTypeName);
+        setMatchCount(builder.MatchCount);
     }
 
     public String getCoverPhotoTypeID() {
@@ -237,7 +255,6 @@ public class PigeonEntity implements Serializable {
     }
 
 
-
     public String getFootRingIDToNum() {
         return FootRingIDToNum;
     }
@@ -301,7 +318,6 @@ public class PigeonEntity implements Serializable {
     public void setOutShellTime(String outShellTime) {
         OutShellTime = outShellTime;
     }
-
 
 
     public String getPigeonScore() {
@@ -463,6 +479,7 @@ public class PigeonEntity implements Serializable {
         private String FootCodeID;
         private String CoverPhotoTypeID;// 图片typeId
         private String CoverPhotoTypeName;// 图片typeName
+        private String MatchCount;
 
 
         public Builder() {
@@ -665,6 +682,21 @@ public class PigeonEntity implements Serializable {
 
         public Builder FootCodeID(String val) {
             FootCodeID = val;
+            return this;
+        }
+
+        public Builder CoverPhotoTypeID(String val) {
+            CoverPhotoTypeID = val;
+            return this;
+        }
+
+        public Builder CoverPhotoTypeName(String val) {
+            CoverPhotoTypeName = val;
+            return this;
+        }
+
+        public Builder MatchCount(String val) {
+            MatchCount = val;
             return this;
         }
 

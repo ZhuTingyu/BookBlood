@@ -7,6 +7,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.model.BloodBookModel;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.BloodBookEntity;
 
 /**
@@ -18,18 +19,19 @@ public class BookViewModel extends BaseViewModel {
     public String foodId;
     public String pigeonId;
 
-    public BookViewModel(Activity activity){
+    public BookViewModel(Activity activity) {
         foodId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
         pigeonId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
     }
 
     public MutableLiveData<BloodBookEntity> mBookLiveData = new MutableLiveData<>();
 
+    //获取 血统书  四代
     public void getBloodBook() {
-        submitRequestThrowError(BloodBookModel.getBloodBook4(foodId, pigeonId), r -> {
+        submitRequestThrowError(BloodBookModel.getBloodBook4(UserModel.getInstance().getUserId(), foodId, pigeonId), r -> {
             if (r.isOk()) {
                 mBookLiveData.setValue(r.data);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 }

@@ -55,8 +55,6 @@ public class PairingNestInfoListFragment extends BaseListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        EventBus.getDefault().register(this);//在当前界面注册一个订阅者
-
         tvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);
 
@@ -116,12 +114,6 @@ public class PairingNestInfoListFragment extends BaseListFragment {
         if (info.equals(EventBusService.PAIRING_INFO_REFRESH)) {
             initData();
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);//取消注册
     }
 
     private void initData() {

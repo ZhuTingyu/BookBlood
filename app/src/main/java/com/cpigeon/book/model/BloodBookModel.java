@@ -13,11 +13,12 @@ import io.reactivex.Observable;
  */
 
 public class BloodBookModel {
-    public static Observable<ApiResponse<BloodBookEntity>> getBloodBook4(String foodId, String pigeonId) {
+    public static Observable<ApiResponse<BloodBookEntity>> getBloodBook4(String puid,String foodId, String pigeonId) {
         return RequestData.<ApiResponse<BloodBookEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<BloodBookEntity>>() {
                 }.getType())
                 .url(R.string.get_blood_book_4)
+                .addBody("puid", puid)
                 .addBody("footid", foodId)
                 .addBody("pigeonid", pigeonId)
                 .request();

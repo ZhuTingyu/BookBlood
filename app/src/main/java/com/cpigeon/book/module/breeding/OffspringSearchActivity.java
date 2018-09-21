@@ -9,7 +9,7 @@ import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 
 /**
- * 子代搜索
+ * 子代  足环搜索
  * Created by Administrator on 2018/9/19 0019.
  */
 
@@ -28,4 +28,10 @@ public class OffspringSearchActivity extends BaseSearchPigeonActivity {
         return mAdapter;
     }
 
+
+    @Override
+    protected void initData() {
+        super.initData();
+        SEARCH_HISTORY_KEY = "search_history_offspring";
+    }
 }

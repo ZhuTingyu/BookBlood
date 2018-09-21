@@ -29,15 +29,9 @@ public class BreedingFootListFragment extends BaseFootListFagment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-    }
-
-    @Override
     protected void initData() {
         super.initData();
-        setProgressVisible(false);
+
         mTvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);
 

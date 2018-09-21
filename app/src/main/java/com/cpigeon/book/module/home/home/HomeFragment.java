@@ -33,7 +33,8 @@ import com.cpigeon.book.module.menu.SignFragment;
 import com.cpigeon.book.module.menu.message.MsgActivity;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
-import com.cpigeon.book.module.pigeonleague.SelectPigeonToLeagueFragment;
+import com.cpigeon.book.module.pigeonleague.PigeonToLeagueFootListFragment;
+import com.cpigeon.book.module.play.PlayFootListFragment;
 import com.cpigeon.book.module.trainpigeon.TrainPigeonListFragment;
 import com.cpigeon.book.widget.SimpleTitleView;
 
@@ -134,12 +135,12 @@ public class HomeFragment extends BaseBookFragment {
         });
         mSTvBreedPigeonManager.setOnClickListener(v -> {
             //种鸽管理
-            BreedPigeonListFragment.start(getBaseActivity(), getString(R.string.pigeon_type_breed));
+            BreedPigeonListFragment.start(getBaseActivity());
         });
 
         mSTvMatchPigeonManger.setOnClickListener(v -> {
             //赛鸽管理
-            BreedPigeonListFragment.start(getBaseActivity(), getString(R.string.pigeon_type_racing));
+            PlayFootListFragment.start(getBaseActivity());
         });
 
         mSTvBreedInfo.setOnClickListener(v -> {
@@ -165,14 +166,12 @@ public class HomeFragment extends BaseBookFragment {
 
         mSTvFeedPigeonRecord.setOnClickListener(v -> {
             //养鸽记录
-            Bundle mBundle = new Bundle();
-            mBundle.putString(IntentBuilder.KEY_TYPE, "");
-            SearchFragmentParentActivity.start(getBaseActivity(), FeedPigeonRecordListFragment.class, mBundle);
+            FeedPigeonRecordListFragment.start(getBaseActivity());
         });
 
         mSTvPigeonMatchInfo.setOnClickListener(v -> {
             //信鸽赛绩
-            SearchFragmentParentActivity.start(getBaseActivity(), SelectPigeonToLeagueFragment.class, null);
+            PigeonToLeagueFootListFragment.start(getBaseActivity());
         });
 
 

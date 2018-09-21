@@ -272,6 +272,7 @@
     <string name="text_foot">足环</string>
     <string name="text_pleas_input_foot_number">请输入环号</string>
     <string name="text_add_breed_pigeon">添加种鸽</string>
+    <string name="text_add_play_pigeon">添加赛鸽</string>
     <string name="text_go_choose">去选择</string>
     <string name="text_foot_input_price">足环金额录入</string>
     <string name="text_pigeon_name">请输入鸽子名称</string>
@@ -498,6 +499,7 @@
     <string name="text_select_back_fly_time_error">你选择的时间比放飞时间还早哦！</string>
     <string name="text_all_pigeon_back_yet">所有鸽子已经归巢！</string>
     <string name="text_default">0001-01-01</string>
+    <string name="string_die">死亡</string>
 
 
 </resources>

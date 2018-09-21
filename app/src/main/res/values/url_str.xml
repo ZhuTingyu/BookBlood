@@ -145,7 +145,7 @@
     <!--添加赛鸽-->
     <string name="pigeon_racing_add">TXGP_Pigeon_AddPigeon</string>
 
-    <!--获取种鸽详细-->
+    <!--获取鸽子详细-->
     <string name="pigeon_breed_details">TXGP_Pigeon_GetInfo</string>
     <!--添加种鸽-->
     <string name="pigeon_breed_add">TXGP_Pigeon_AddBreed</string>

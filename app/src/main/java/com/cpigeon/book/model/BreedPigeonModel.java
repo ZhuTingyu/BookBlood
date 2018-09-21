@@ -19,13 +19,14 @@ import io.reactivex.Observable;
 
 public class BreedPigeonModel {
 
-    //hl 获取种鸽详细
-    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_GetInfo(String pigeonid) {
+    //hl 获取 鸽子  详情
+    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_GetInfo(String pigeonid,String puid) {
         return RequestData.<ApiResponse<PigeonEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_details)
                 .addBody("pigeonid", pigeonid)
+                .addBody("puid", puid)
                 .request();
     }
 
@@ -36,7 +37,9 @@ public class BreedPigeonModel {
                                                                                        String bloodid,
                                                                                        String sexid,
                                                                                        String year,
-                                                                                       String stateid) {
+                                                                                       String stateid,
+                                                                                       String bitmatch
+                                                                                       ) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
@@ -44,10 +47,11 @@ public class BreedPigeonModel {
                 .addBody("pi", pi)
                 .addBody("ps", ps)
                 .addBody("typeid", typeid)
-                .addBody("blood", bloodid)
-                .addBody("sex", sexid)
+                .addBody("bloodid", bloodid)
+                .addBody("sexid", sexid)
                 .addBody("year", year)
                 .addBody("stateid", stateid)
+                .addBody("bitmatch", bitmatch)
                 .request();
     }
 
@@ -138,7 +142,7 @@ public class BreedPigeonModel {
 
 
     //hl 种鸽(赛鸽)列表，搜索
-    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum, String typeid) {
+    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum, String typeid,String bitmatch) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
@@ -148,6 +152,7 @@ public class BreedPigeonModel {
                 .addBody("ps", ps)
                 .addBody("footnum", footnum)
                 .addBody("typeid", typeid)
+                .addBody("bitmatch", bitmatch)
                 .request();
     }
 

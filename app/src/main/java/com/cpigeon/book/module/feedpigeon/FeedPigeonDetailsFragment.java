@@ -123,8 +123,6 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        EventBus.getDefault().register(this);//在当前界面注册一个订阅者
-
         toolbar.getMenu().clear();
         toolbar.getMenu().add("")
                 .setIcon(R.mipmap.ic_feed_record_photo)
@@ -238,12 +236,6 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         if (info.equals(EventBusService.FEED_PIGEON_DETAILS_REFRESH)) {
             initData();
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);//取消注册
     }
 
     private void initData() {
