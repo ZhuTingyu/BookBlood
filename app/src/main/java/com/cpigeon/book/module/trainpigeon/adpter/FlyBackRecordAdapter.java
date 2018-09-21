@@ -7,16 +7,13 @@ import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseExpandAdapter;
-import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.FlyBackRecordEntity;
-import com.cpigeon.book.model.entity.HomingRecordEntity;
-import com.cpigeon.book.model.entity.HomingRecordExpandEntity;
-import com.cpigeon.book.module.trainpigeon.FootNumberTrainDetailsFragment;
+import com.cpigeon.book.module.trainpigeon.PigeonTrainDetailsFragment;
 import com.cpigeon.book.util.MathUtil;
 
 import java.util.List;
@@ -25,11 +22,11 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/6.
  */
 
-public class HomingRecordAdapter extends BaseExpandAdapter {
+public class FlyBackRecordAdapter extends BaseExpandAdapter {
 
     List<Integer> mIcon;
 
-    public HomingRecordAdapter() {
+    public FlyBackRecordAdapter() {
         super(Lists.newArrayList());
         addItemType(TYPE_ORG, R.layout.item_homing_record);
         addItemType(TYPE_RACE, R.layout.item_homing_record_expand);
@@ -81,7 +78,10 @@ public class HomingRecordAdapter extends BaseExpandAdapter {
         helper.setText(R.id.tvColor, Utils.getString(R.string.text_feather, expandEntity.getPigeonPlumeName()));
         helper.setText(R.id.tvBlood, Utils.getString(R.string.text_blood, expandEntity.getPigeonBloodName()));
         helper.itemView.setOnClickListener(v -> {
-            IntentBuilder.Builder().startParentActivity((Activity) mContext, FootNumberTrainDetailsFragment.class);
+            IntentBuilder.Builder()
+                    .putExtra(IntentBuilder.KEY_DATA, expandEntity.getFootRingID())
+                    .putExtra(IntentBuilder.KEY_DATA_2, expandEntity.getPigeonID())
+                    .startParentActivity((Activity) mContext, PigeonTrainDetailsFragment.class);
         });
     }
 }

@@ -32,7 +32,7 @@ public class FlyBackRecordViewModel extends BaseViewModel {
 
     public void getFlyBackRecord() {
         submitRequestThrowError(TrainPigeonModel.getFlyBackRecord(mTrainEntity.getPigeonTrainID(),
-                mTrainEntity.getPigeonTrainCountID() , mTrainEntity.getTrainStateID()), r -> {
+                mTrainEntity.getPigeonTrainCountID(), mTrainEntity.getTrainStateID()), r -> {
             if (r.isOk()) {
                 mFlyBackRecordEntities = r.data;
                 listEmptyMessage.setValue(r.msg);
@@ -41,20 +41,24 @@ public class FlyBackRecordViewModel extends BaseViewModel {
                     entity.mFlyBackRecordExpandEntity = Lists.newArrayList(entity);
                 }
                 mDataFlyBack.setValue(data);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 
-    public void endTrain(){
+    public void endTrain() {
         submitRequestThrowError(TrainPigeonModel.endTrainPigeon(mTrainEntity.getPigeonTrainID()
-                , mTrainEntity.getPigeonTrainCountID()),r -> {
-            if(r.isOk()){
+                , mTrainEntity.getPigeonTrainCountID()), r -> {
+            if (r.isOk()) {
                 mDataDeleteR.setValue(r.msg);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
+
     //是否还有未归巢的鸽子
-    public boolean isHaveNotBack(){
+    public boolean isHaveNotBack() {
+        if (Lists.isEmpty(mFlyBackRecordEntities)) {
+            return true;
+        }
         return mFlyBackRecordEntities.get(0).getFlyCount() > mFlyBackRecordEntities.size();
     }
 }

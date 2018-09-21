@@ -663,12 +663,12 @@ public final class BarUtils {
                 //activity.getWindow().setStatusBarColor(color);
 */
                 //fitsSystemWindow 为 false, 不预留系统栏位置.
-               /* ViewGroup mContentView = (ViewGroup) activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT);
+                ViewGroup mContentView = (ViewGroup) activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT);
                 View mChildView = mContentView.getChildAt(0);
                 if (mChildView != null) {
                     ViewCompat.setFitsSystemWindows(mChildView, false);
                     ViewCompat.requestApplyInsets(mChildView);
-                }*/
+                }
                 activity.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
         }

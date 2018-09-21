@@ -169,6 +169,7 @@ public class DialogUtils {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
         dialogPrompt.setTitleText(title);
+        dialogPrompt.setCanceledOnTouchOutside(false);
         if (left != null) {
             dialogPrompt.setCancelText(left);
         }

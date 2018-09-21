@@ -76,7 +76,11 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle(mViewModel.mTrainEntity.getPigeonTrainName());
         setToolbarRight(Utils.getString(R.string.text_delete), item -> {
-
+            DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_is_sure_delete_train), sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                setProgressVisible(true);
+                mViewModel.deleteTrain();
+            });
             return false;
         });
         mWeatherManager = new WeatherManager(getBaseActivity());
@@ -89,8 +93,6 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
         mTvDis = findViewById(R.id.tvDis);
         mTvOk = findViewById(R.id.tvOk);
 
-        setProgressVisible(true);
-        mViewModel.getTrainDetails();
 
         mTvOk.setOnClickListener(v -> {
             if (mViewModel.isOpen) {
@@ -98,75 +100,83 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
                 mViewModel.openTrain();
             }
         });
+
+        setProgressVisible(true);
+        LocationLiveData.get(true).observe(this, aMapLocation -> {
+            PigeonHouseEntity entity = UserModel.getInstance().getUserData().pigeonHouseEntity;
+            LatLng houseP = new LatLng(entity.getLatitude(), entity.getLongitude());
+            LatLng flyP = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
+
+            String endLo = LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(houseP.longitude));
+            String endLa = LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(houseP.latitude));
+            String flyLo = LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(flyP.longitude));
+            String flyLa = LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(flyP.latitude));
+            mTvPosition.setText(Utils.getString(R.string.text_location_lo_la, endLo, endLa));
+            mTvFlyPosition.setText(Utils.getString(R.string.text_location_lo_la, flyLo, flyLa));
+
+
+            mMapMarkerManager.addCustomCenterMarker(houseP, "", R.mipmap.ic_blue_point);
+            mMapMarkerManager.addCustomCenterMarker(flyP, "", R.mipmap.ic_red_point);
+            mMapMarkerManager.addMap();
+            addLine(Lists.newArrayList(houseP, flyP), R.color.colorPrimary);
+
+            mViewModel.fromLa = aMapLocation.getLatitude();
+            mViewModel.fromLo = aMapLocation.getLongitude();
+
+            double dis = AMapUtils.calculateLineDistance(houseP, flyP);
+            mTvDis.setText(Utils.getString(R.string.text_KM
+                    , String.valueOf(MathUtil.doubleformat(dis / 1000, 2))));
+
+            composite.add(mWeatherManager.searchCityByLatLng(flyP, r -> {
+                composite.add(mWeatherManager.requestWeatherByCityName(r.data.getCity(), response -> {
+                    setProgressVisible(false);
+                    StringBuilder sb = new StringBuilder();
+                    if (response.isOk()) {
+                        LocalWeatherLive weatherLive = response.getData();
+                        sb.append(weatherLive.getWeather());
+                        sb.append(StringUtil.blankString());
+                        sb.append(Utils.getString(R.string.text_temp, weatherLive.getTemperature()));
+                        sb.append(StringUtil.blankString());
+                        sb.append(Utils.getString(R.string.text_wind_direction, weatherLive.getWindDirection()));
+                        sb.append(StringUtil.blankString());
+                        sb.append(Utils.getString(R.string.text_altitude, aMapLocation.getAltitude()));
+
+                        mViewModel.temper = weatherLive.getTemperature();
+                        mViewModel.windPower = weatherLive.getWindPower();
+                        mViewModel.weather = weatherLive.getWeather();
+                        mViewModel.dir = weatherLive.getWindDirection();
+                        mViewModel.hum = weatherLive.getHumidity();
+                        mViewModel.alt = String.valueOf(aMapLocation.getAltitude());
+
+                    } else {
+                        sb.append(Utils.getString(R.string.text_not_get_weather));
+                    }
+                    mTvWeather.setText(sb);
+                }));
+            }));
+        });
     }
 
     @Override
     protected void initObserve() {
 
-        mViewModel.mDataTrain.observe(this, trainEntity -> {
-            LocationLiveData.get(true).observe(this, aMapLocation -> {
-                PigeonHouseEntity entity = UserModel.getInstance().getUserData().pigeonHouseEntity;
-                LatLng houseP = new LatLng(entity.getLatitude(), entity.getLongitude());
-                LatLng flyP = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
-
-                String endLo = LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(houseP.longitude));
-                String endLa = LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(houseP.latitude));
-                String flyLo = LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(flyP.longitude));
-                String flyLa = LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(flyP.latitude));
-                mTvPosition.setText(Utils.getString(R.string.text_location_lo_la, endLo, endLa));
-                mTvFlyPosition.setText(Utils.getString(R.string.text_location_lo_la, flyLo, flyLa));
-
-
-                mMapMarkerManager.addCustomCenterMarker(houseP, "", R.mipmap.ic_blue_point);
-                mMapMarkerManager.addCustomCenterMarker(flyP, "", R.mipmap.ic_red_point);
-                mMapMarkerManager.addMap();
-                addLine(Lists.newArrayList(houseP, flyP), R.color.colorPrimary);
-
-                mViewModel.fromLa = aMapLocation.getLatitude();
-                mViewModel.fromLo = aMapLocation.getLongitude();
-
-                double dis = AMapUtils.calculateLineDistance(houseP, flyP);
-                mTvDis.setText(Utils.getString(R.string.text_KM
-                        , String.valueOf(MathUtil.doubleformat(dis / 1000, 2))));
-
-                composite.add(mWeatherManager.searchCityByLatLng(flyP, r -> {
-                    composite.add(mWeatherManager.requestWeatherByCityName(r.data.getCity(), response -> {
-                        setProgressVisible(false);
-                        StringBuilder sb = new StringBuilder();
-                        if (response.isOk()) {
-                            LocalWeatherLive weatherLive = response.getData();
-                            sb.append(weatherLive.getWeather());
-                            sb.append(StringUtil.blankString());
-                            sb.append(Utils.getString(R.string.text_temp, weatherLive.getTemperature()));
-                            sb.append(StringUtil.blankString());
-                            sb.append(Utils.getString(R.string.text_wind_direction, weatherLive.getWindDirection()));
-                            sb.append(StringUtil.blankString());
-                            sb.append(Utils.getString(R.string.text_altitude, aMapLocation.getAltitude()));
-
-                            mViewModel.temper = weatherLive.getTemperature();
-                            mViewModel.windPower = weatherLive.getWindPower();
-                            mViewModel.weather = weatherLive.getWeather();
-                            mViewModel.dir = weatherLive.getWindDirection();
-                            mViewModel.hum = weatherLive.getHumidity();
-                            mViewModel.alt = String.valueOf(aMapLocation.getAltitude());
-
-                        } else {
-                            sb.append(Utils.getString(R.string.text_not_get_weather));
-                        }
-                        mTvWeather.setText(sb);
-                    }));
-                }));
-            });
-        });
-
         mViewModel.mDataOpenR.observe(this, s -> {
-            EventBus.getDefault().post(new UpdateTrainEvent());
             setProgressVisible(false);
             DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                EventBus.getDefault().post(new UpdateTrainEvent());
                 sweetAlertDialog.dismiss();
                 finish();
             });
 
+        });
+
+        mViewModel.mDataDeleteR.observe(this, s -> {
+            setProgressVisible(false);
+            DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                EventBus.getDefault().post(new UpdateTrainEvent());
+                sweetAlertDialog.dismiss();
+                finish();
+            });
         });
     }
 

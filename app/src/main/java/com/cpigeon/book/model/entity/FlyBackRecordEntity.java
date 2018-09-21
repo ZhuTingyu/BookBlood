@@ -43,9 +43,34 @@ public class FlyBackRecordEntity extends ExpendEntity implements RaceEntity
     private String PigeonPlumeName;
     private String PigeonBloodName;
     private int FlyCount;
+    private String PigeonID;
 
     public int order;
     public List<FlyBackRecordEntity> mFlyBackRecordExpandEntity;
+
+    public void setFlyCount(int flyCount) {
+        FlyCount = flyCount;
+    }
+
+    public String getPigeonID() {
+        return PigeonID;
+    }
+
+    public void setPigeonID(String pigeonID) {
+        PigeonID = pigeonID;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public List<FlyBackRecordEntity> getFlyBackRecordExpandEntity() {
+        return mFlyBackRecordExpandEntity;
+    }
+
+    public void setFlyBackRecordExpandEntity(List<FlyBackRecordEntity> flyBackRecordExpandEntity) {
+        mFlyBackRecordExpandEntity = flyBackRecordExpandEntity;
+    }
 
     public int getFlyCount() {
         return FlyCount;
@@ -148,6 +173,14 @@ public class FlyBackRecordEntity extends ExpendEntity implements RaceEntity
         return mFlyBackRecordExpandEntity;
     }
 
+    public FlyBackRecordEntity() {
+    }
+
+    @Override
+    public int compare(FlyBackRecordEntity o1, FlyBackRecordEntity o2) {
+        return (int) ((o1.getFraction() * 1000) - (o2.getFraction() * 1000));
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -167,11 +200,9 @@ public class FlyBackRecordEntity extends ExpendEntity implements RaceEntity
         dest.writeString(this.PigeonPlumeName);
         dest.writeString(this.PigeonBloodName);
         dest.writeInt(this.FlyCount);
+        dest.writeString(this.PigeonID);
         dest.writeInt(this.order);
-        dest.writeList(this.mFlyBackRecordExpandEntity);
-    }
-
-    public FlyBackRecordEntity() {
+        dest.writeTypedList(this.mFlyBackRecordExpandEntity);
     }
 
     protected FlyBackRecordEntity(Parcel in) {
@@ -187,12 +218,12 @@ public class FlyBackRecordEntity extends ExpendEntity implements RaceEntity
         this.PigeonPlumeName = in.readString();
         this.PigeonBloodName = in.readString();
         this.FlyCount = in.readInt();
+        this.PigeonID = in.readString();
         this.order = in.readInt();
-        this.mFlyBackRecordExpandEntity = new ArrayList<FlyBackRecordEntity>();
-        in.readList(this.mFlyBackRecordExpandEntity, FlyBackRecordEntity.class.getClassLoader());
+        this.mFlyBackRecordExpandEntity = in.createTypedArrayList(FlyBackRecordEntity.CREATOR);
     }
 
-    public static final Parcelable.Creator<FlyBackRecordEntity> CREATOR = new Parcelable.Creator<FlyBackRecordEntity>() {
+    public static final Creator<FlyBackRecordEntity> CREATOR = new Creator<FlyBackRecordEntity>() {
         @Override
         public FlyBackRecordEntity createFromParcel(Parcel source) {
             return new FlyBackRecordEntity(source);
@@ -203,9 +234,4 @@ public class FlyBackRecordEntity extends ExpendEntity implements RaceEntity
             return new FlyBackRecordEntity[size];
         }
     };
-
-    @Override
-    public int compare(FlyBackRecordEntity o1, FlyBackRecordEntity o2) {
-        return (int) ((o1.getFraction() * 1000) - (o2.getFraction() * 1000));
-    }
 }

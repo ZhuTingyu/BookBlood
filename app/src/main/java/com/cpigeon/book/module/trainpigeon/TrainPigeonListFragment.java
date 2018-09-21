@@ -62,10 +62,6 @@ public class TrainPigeonListFragment extends BaseBookFragment {
         mAdapter = new TrainPigeonAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            TrainProjectInListFragment.start(getBaseActivity());
-        });
-
         mAdapter.setOnLoadMoreListener(() -> {
             mViewModel.pi++;
             mViewModel.getTrainPigeonList();

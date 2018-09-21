@@ -56,8 +56,6 @@ public class SelectTrainProjectFragment extends BaseBookFragment {
         });
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setNewData(Lists.newArrayList(new TrainProjectEntity()
-                ,new TrainProjectEntity(),new TrainProjectEntity(),new TrainProjectEntity()));
 
         mTvAll.setOnClickListener(v -> {
             mAdapter.isChooseAll(true);

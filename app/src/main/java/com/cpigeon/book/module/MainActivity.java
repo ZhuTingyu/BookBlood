@@ -97,11 +97,13 @@ public class MainActivity extends BaseBookActivity {
 
         bottomAddTabView.setAddClickListener(() -> {
             mPopupWindow = PopWindowBuilder.builder(this)
-                    .setSize(ScreenTool.getScreenWidth(), ScreenTool.getScreenHeight())
+                    .setSize(ScreenTool.getScreenWidth(), ScreenTool.getScreenHeight()
+                            - getResources().getDimensionPixelSize(R.dimen.top_bar_height))
                     .setView(initPopView())
                     .setBackgroundColor(R.color.main_home_pop_bg)
                     .setAnimationStyle(R.style.bottom_out_in_anim)
-                    .showAtLocation(rootView, 0, 0, Gravity.CENTER);
+                    .showAtLocation(rootView, 0
+                            , 0, Gravity.CENTER);
 
         });
 

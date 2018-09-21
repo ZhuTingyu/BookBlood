@@ -1,5 +1,7 @@
 package com.cpigeon.book.module.trainpigeon.adpter;
 
+import android.view.View;
+
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
@@ -23,6 +25,8 @@ public class NewTrainPigeonListAdapter extends BaseQuickAdapter<PigeonEntity, Ba
             helper.getView(R.id.imgDel).setOnClickListener(v -> {
                 mOnDeleteListener.onDelete(helper.getAdapterPosition());
             });
+        }else {
+            helper.getView(R.id.imgDel).setVisibility(View.GONE);
         }
     }
 
