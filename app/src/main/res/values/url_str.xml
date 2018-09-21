@@ -277,12 +277,17 @@
     <!--获取协会列表-->
     <string name="api_XH_GetUsersList">XH_GetUsersList</string>
     <string name="get_pigeon_sex_count">TXGP_Pigeon_SelectSexCount</string>
-    <string name="get_train_pigeon_details">TXGP_PigeonTrainCount_StartFly</string>
+    <string name="get_train_pigeon_details_1">TXGP_PigeonTrainCount_StartFly</string>
+    <string name="get_train_pigeon_details">TXGP_PigeonHome_GetCoordinate</string>
     <string name="open_train_pigeon">TXGP_PigeonTrain_Release</string>
+    <string name="delete_train_pigeon">TXGP_PigeonTrain_Delete</string>
     <string name="get_fly_back_record">TXGP_PigeonTrainCount_ReturnFly</string>
     <string name="add_fly_back_record">TXGP_PigeonTrain_AddHome</string>
     <string name="search_train_pigeon">TXGP_PigeonTrainDate_SelectID</string>
     <string name="end_train_pigeon">TXGP_PigeonTrain_EndTrain</string>
+    <string name="get_train_count_list">TXGP_PigeonTrainCount_SelectID</string>
+    <string name="train_again">TXGP_PigeonTrain_ReStart</string>
+    <string name="get_pigeon_train_details">TXGP_PigeonTrain_TrainDataID</string>
 
 
 </resources>

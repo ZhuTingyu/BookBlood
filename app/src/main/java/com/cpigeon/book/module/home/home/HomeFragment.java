@@ -83,7 +83,6 @@ public class HomeFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setImageTitle();
         setToolbarColor(R.color.white);
         BarUtils.setStatusBarLightMode(getBaseActivity(), true);

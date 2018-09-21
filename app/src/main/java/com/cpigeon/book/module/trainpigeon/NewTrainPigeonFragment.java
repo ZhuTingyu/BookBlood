@@ -37,6 +37,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.event.UpdateTrainEvent;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.TrainEntity;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.pigeonhouse.InputLocationFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
@@ -87,10 +88,17 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         IntentBuilder.Builder().startParentActivity(activity, NewTrainPigeonFragment.class);
     }
 
+    public static void start(Activity activity, TrainEntity trainEntity) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, trainEntity)
+                .startParentActivity(activity, NewTrainPigeonFragment.class);
+    }
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mViewModel = new NewTrainPigeonViewModel();
+        mViewModel = new NewTrainPigeonViewModel(getBaseActivity());
         initViewModel(mViewModel);
         EventBus.getDefault().register(this);
     }
@@ -104,7 +112,13 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(R.string.text_new_train_pigeon);
+
+        if (mViewModel.mTrainEntity == null) {
+            setTitle(R.string.text_new_train_pigeon);
+        } else {
+            setTitle(Utils.getString(R.string.text_train_again_content, mViewModel.mTrainEntity.getPigeonTrainName()));
+        }
+
 
         amapManager.setZoomControlsVisible(false);
         mMapMarkerManager = new MapMarkerManager(aMap, getBaseActivity());
@@ -169,10 +183,15 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            mViewModel.name = mLvName.getContent();
-            mViewModel.fromLocation = mLvFlyLocation.getContent();
             setProgressVisible(true);
-            mViewModel.newTrainPigeon();
+            mViewModel.fromLocation = mLvFlyLocation.getContent();
+            if(mViewModel.mTrainEntity == null){
+                mViewModel.name = mLvName.getContent();
+                mViewModel.newTrainPigeon();
+            }else {
+                mViewModel.trainAgain();
+            }
+
         });
 
         mFrameLayout.setOnClickListener(v -> {
@@ -202,9 +221,6 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         addItemDecorationLine(mList);
         mAdapter = new NewTrainPigeonListAdapter();
         mAdapter.setEmptyText(Utils.getString(R.string.text_not_choose_pigeon));
-        mAdapter.setOnDeleteListener(position -> {
-            mAdapter.remove(position);
-        });
         mList.setAdapter(mAdapter);
         mAdapter.setNewData(Lists.newArrayList());
         getBaseActivity().setOnActivityFinishListener(() -> {
@@ -212,6 +228,15 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
                     .getDataByUserAndType(UserModel.getInstance().getUserId()
                             , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING));
         });
+
+        if (mViewModel.mTrainEntity != null) {
+            setProgressVisible(true);
+            mViewModel.getTrainDetails();
+        } else {
+            mAdapter.setOnDeleteListener(position -> {
+                mAdapter.remove(position);
+            });
+        }
 
 
     }
@@ -253,17 +278,18 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
         }
     }
 
-    private void bindAddress(RegeocodeAddress mAddress) {
-        String address = mAddress.getProvince() + mAddress.getCity() + mAddress.getDistrict();
-
-        /*mViewModel.mProvince = mAddress.getProvince();
-        mViewModel.mCity = mAddress.getCity();
-        mViewModel.mCounty = mAddress.getDistrict();*/
-    }
-
-
     @Override
     protected void initObserve() {
+
+        mViewModel.mDataTrain.observe(this, trainEntity -> {
+            setProgressVisible(false);
+            mLvName.setCanEdit(false);
+            mLvName.setRightText(trainEntity.getPigeonTrainName());
+
+            mImgAdd.setVisibility(View.GONE);
+            mAdapter.setNewData(trainEntity.getFootRingList());
+        });
+
         mViewModel.normalResult.observe(this, s -> {
             setProgressVisible(false);
             DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {

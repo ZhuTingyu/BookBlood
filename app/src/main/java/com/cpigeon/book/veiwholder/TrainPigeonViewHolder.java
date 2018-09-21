@@ -10,6 +10,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.cpigeon.book.module.trainpigeon.FlyBackRecordFragment;
 import com.cpigeon.book.module.trainpigeon.OpenAndCloseTrainFragment;
+import com.cpigeon.book.module.trainpigeon.TrainProjectInListFragment;
 
 /**
  * Created by Zhu TingYu on 2018/8/31.
@@ -52,12 +53,17 @@ public class TrainPigeonViewHolder extends BaseViewHolder {
             if (trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_start_not))) {
                 if (trainEntity.getTrainCount() == 0) {
                     OpenAndCloseTrainFragment.start(getActivity(), true, trainEntity);
-
+                }else {
+                    TrainProjectInListFragment.start(getActivity(), trainEntity);
                 }
             }else if(trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_training))){
                 if (trainEntity.getTrainCount() == 0) {
                     FlyBackRecordFragment.start(getActivity(), trainEntity, false);
+                }else {
+                    TrainProjectInListFragment.start(getActivity(), trainEntity);
                 }
+            }else if(trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_end_yet))){
+                TrainProjectInListFragment.start(getActivity(), trainEntity);
             }
         });
 

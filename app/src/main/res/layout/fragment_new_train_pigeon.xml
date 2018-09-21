@@ -143,6 +143,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list"
                 android:layout_width="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:paddingLeft="@dimen/normal_safe_distance"

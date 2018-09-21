@@ -12,8 +12,6 @@ public class MultiSelectEntity implements Parcelable {
     public boolean isChoose;
     public boolean isVisible = true;
 
-    public MultiSelectEntity() {
-    }
 
     @Override
     public int describeContents() {
@@ -24,6 +22,9 @@ public class MultiSelectEntity implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte(this.isChoose ? (byte) 1 : (byte) 0);
         dest.writeByte(this.isVisible ? (byte) 1 : (byte) 0);
+    }
+
+    public MultiSelectEntity() {
     }
 
     protected MultiSelectEntity(Parcel in) {

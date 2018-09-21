@@ -1,10 +1,12 @@
 package com.cpigeon.book.model;
 
 import com.base.http.ApiResponse;
+import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.FlyBackRecordEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonTrainDetailsEntity;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -77,13 +79,12 @@ public class TrainPigeonModel {
                 .request();
     }
 
-    public static Observable<ApiResponse<TrainEntity>> getTrainDetails(String trainId, String stateId) {
+    public static Observable<ApiResponse<TrainEntity>> getTrainDetails(String trainId) {
         return RequestData.<ApiResponse<TrainEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<TrainEntity>>() {
                 }.getType())
                 .url(R.string.get_train_pigeon_details)
                 .addBody("trainid", String.valueOf(trainId))
-                .addBody("StateID", String.valueOf(stateId))
                 .request();
     }
 
@@ -113,6 +114,19 @@ public class TrainPigeonModel {
                 .addBody("alt", alt)
                 .addBody("fromlo", String.valueOf(fromLo))
                 .addBody("fromla", String.valueOf(fromLa))
+                .request();
+    }
+
+    public static Observable<ApiResponse> deleteTrain(
+            String trainId,//训练表id
+            String countId//训练次数表
+    ) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.delete_train_pigeon)
+                .addBody("trainid", trainId)
+                .addBody("countid", countId)
                 .request();
     }
 
@@ -175,11 +189,57 @@ public class TrainPigeonModel {
             String countId
     ) {
         return RequestData.<ApiResponse>build()
-                .setToJsonType(new TypeToken<ApiResponse> () {
+                .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
                 .url(R.string.end_train_pigeon)
                 .addBody("trainid", trainId)
                 .addBody("countid", countId)
+                .request();
+    }
+
+    public static Observable<ApiResponse<List<TrainEntity>>> getTrainCountList(
+            String trainId,
+            int pi
+    ) {
+        return RequestData.<ApiResponse<List<TrainEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<TrainEntity>>>() {
+                }.getType())
+                .url(R.string.get_train_count_list)
+                .addBody("trainid", trainId)
+                .addBody("pi", String.valueOf(pi))
+                .addBody("ps", String.valueOf(10))
+                .request();
+    }
+
+    public static Observable<ApiResponse> trainAgain(
+            String trainId,//训练记录id
+            double fromLo,// 放飞的东经坐标
+            double fromLa,//放飞的北纬坐标
+            String fromPlace,//开始地址
+            double dis//训练空距
+    ) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.train_again)
+                .addBody("trainid", trainId)
+                .addBody("fromlo", String.valueOf(fromLo))
+                .addBody("fromla", String.valueOf(fromLa))
+                .addBody("fromplace", fromPlace)
+                .addBody("dis", String.valueOf(dis))
+                .request();
+    }
+
+    public static Observable<ApiResponse<List<PigeonTrainDetailsEntity>>> getPigeonTrainDetails(
+            String foodId,
+            String pigeonId
+    ) {
+        return RequestData.<ApiResponse<List<PigeonTrainDetailsEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonTrainDetailsEntity>>>() {
+                }.getType())
+                .url(R.string.get_pigeon_train_details)
+                .addBody("footid", foodId)
+                .addBody("pigeonid", pigeonId)
                 .request();
     }
 }

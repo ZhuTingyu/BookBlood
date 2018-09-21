@@ -3,11 +3,16 @@ package com.cpigeon.book.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.base.entity.MultiSelectEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Zhu TingYu on 2018/9/11.
  */
 
-public class  TrainEntity implements Parcelable {
+public class  TrainEntity extends MultiSelectEntity implements Parcelable {
 
     /**
      * AddTime : 添加时间
@@ -33,6 +38,33 @@ public class  TrainEntity implements Parcelable {
     public String FromPlace;//开始地点", "
     public String PigeonTrainCountID;//":"训练次数id""+
     public double Distance;//":"训练次数id""+
+    public String FromFlyTime;//放飞时间
+    public int ReturnCount;//归巢羽数
+    public List<PigeonEntity> FootRingList;//归巢羽数
+
+    public List<PigeonEntity> getFootRingList() {
+        return FootRingList;
+    }
+
+    public void setFootRingList(List<PigeonEntity> footRingList) {
+        FootRingList = footRingList;
+    }
+
+    public int getReturnCount() {
+        return ReturnCount;
+    }
+
+    public void setReturnCount(int returnCount) {
+        ReturnCount = returnCount;
+    }
+
+    public void setFromFlyTime(String fromFlyTime) {
+        FromFlyTime = fromFlyTime;
+    }
+
+    public String getFromFlyTime() {
+        return FromFlyTime;
+    }
 
     public double getDistance() {
         return Distance;
@@ -156,6 +188,7 @@ public class  TrainEntity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
         dest.writeString(this.Time);
         dest.writeString(this.PigeonTrainName);
         dest.writeString(this.TrainStateID);
@@ -170,9 +203,13 @@ public class  TrainEntity implements Parcelable {
         dest.writeString(this.FromPlace);
         dest.writeString(this.PigeonTrainCountID);
         dest.writeDouble(this.Distance);
+        dest.writeString(this.FromFlyTime);
+        dest.writeInt(this.ReturnCount);
+        dest.writeList(this.FootRingList);
     }
 
     protected TrainEntity(Parcel in) {
+        super(in);
         this.Time = in.readString();
         this.PigeonTrainName = in.readString();
         this.TrainStateID = in.readString();
@@ -187,6 +224,10 @@ public class  TrainEntity implements Parcelable {
         this.FromPlace = in.readString();
         this.PigeonTrainCountID = in.readString();
         this.Distance = in.readDouble();
+        this.FromFlyTime = in.readString();
+        this.ReturnCount = in.readInt();
+        this.FootRingList = new ArrayList<PigeonEntity>();
+        in.readList(this.FootRingList, PigeonEntity.class.getClassLoader());
     }
 
     public static final Creator<TrainEntity> CREATOR = new Creator<TrainEntity>() {

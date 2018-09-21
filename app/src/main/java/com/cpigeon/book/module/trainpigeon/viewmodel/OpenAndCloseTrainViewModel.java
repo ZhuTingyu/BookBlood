@@ -29,22 +29,11 @@ public class OpenAndCloseTrainViewModel extends BaseViewModel {
     public double fromLo;// 放飞的东经坐标
     public double fromLa;//放飞的北纬坐标
 
-    public MutableLiveData<TrainEntity> mDataTrain = new MutableLiveData<>();
     public MutableLiveData<String> mDataOpenR = new MutableLiveData<>();
-
+    public MutableLiveData<String> mDataDeleteR = new MutableLiveData<>();
     public OpenAndCloseTrainViewModel(Activity activity) {
         isOpen = activity.getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         mTrainEntity = activity.getIntent().getParcelableExtra(IntentBuilder.KEY_DATA);
-    }
-
-    public void getTrainDetails() {
-        submitRequestThrowError(TrainPigeonModel.getTrainDetails(mTrainEntity.getPigeonTrainID()
-                , mTrainEntity.getTrainStateID()), r -> {
-            if (r.isOk()) {
-                mTrainEntity = r.data;
-                mDataTrain.setValue(r.data);
-            } else throw new HttpErrorException(r);
-        });
     }
 
     public void openTrain() {
@@ -63,6 +52,15 @@ public class OpenAndCloseTrainViewModel extends BaseViewModel {
             if (r.isOk()) {
                 mDataOpenR.setValue(r.msg);
             } else throw new HttpErrorException(r);
+        });
+    }
+
+    public void deleteTrain(){
+        submitRequestThrowError(TrainPigeonModel.deleteTrain(mTrainEntity.getPigeonTrainID()
+                ,mTrainEntity.getPigeonTrainCountID()),r -> {
+            if(r.isOk()){
+                mDataDeleteR.setValue(r.msg);
+            }else throw new HttpErrorException(r);
         });
     }
 }

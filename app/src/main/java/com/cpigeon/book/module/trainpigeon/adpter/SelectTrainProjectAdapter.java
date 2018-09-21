@@ -3,16 +3,14 @@ package com.cpigeon.book.module.trainpigeon.adpter;
 import com.base.base.adpter.BaseMultiSelectAdapter;
 import com.base.util.Lists;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.entity.TrainProjectEntity;
-import com.cpigeon.book.veiwholder.TrainProjectViewModel;
-
-import java.util.List;
+import com.cpigeon.book.model.entity.TrainEntity;
+import com.cpigeon.book.veiwholder.TrainProjectViewHolder;
 
 /**
  * Created by Zhu TingYu on 2018/9/6.
  */
 
-public class SelectTrainProjectAdapter extends BaseMultiSelectAdapter<TrainProjectEntity, TrainProjectViewModel> {
+public class SelectTrainProjectAdapter extends BaseMultiSelectAdapter<TrainEntity, TrainProjectViewHolder> {
 
     public SelectTrainProjectAdapter() {
         super(R.layout.item_train_project_list, Lists.newArrayList());
@@ -29,9 +27,9 @@ public class SelectTrainProjectAdapter extends BaseMultiSelectAdapter<TrainProje
     }
 
     @Override
-    protected void convert(TrainProjectViewModel holder, TrainProjectEntity item) {
+    protected void convert(TrainProjectViewHolder holder, TrainEntity item) {
         holder.setLlCheckVisibility(true);
         super.convert(holder, item);
-        holder.bindData(true);
+        holder.bindData(item,true);
     }
 }

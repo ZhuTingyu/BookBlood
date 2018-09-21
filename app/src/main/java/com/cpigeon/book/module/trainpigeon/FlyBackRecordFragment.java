@@ -19,18 +19,15 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.FlyBackAddRecordEvent;
 import com.cpigeon.book.event.UpdateTrainEvent;
-import com.cpigeon.book.model.entity.FlyBackRecordEntity;
 import com.cpigeon.book.model.entity.TrainEntity;
-import com.cpigeon.book.module.trainpigeon.adpter.HomingRecordAdapter;
+import com.cpigeon.book.module.trainpigeon.adpter.FlyBackRecordAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.FlyBackRecordViewModel;
-import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.util.TextViewUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -43,7 +40,7 @@ public class FlyBackRecordFragment extends BaseBookFragment {
     boolean isEnd = false;
 
     XRecyclerView mRecyclerView;
-    HomingRecordAdapter mAdapter;
+    FlyBackRecordAdapter mAdapter;
     TextView mTvOk;
     FlyBackRecordViewModel mViewModel;
 
@@ -76,7 +73,7 @@ public class FlyBackRecordFragment extends BaseBookFragment {
         isEnd = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         mRecyclerView = findViewById(R.id.list);
         mTvOk = findViewById(R.id.tvOk);
-        mAdapter = new HomingRecordAdapter();
+        mAdapter = new FlyBackRecordAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setRefreshListener(() -> {

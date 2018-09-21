@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/tvOk"
-        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintBottom_toTopOf="@+id/view1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         app:scrollbarStyle="insideOverlay" />
 
     <View
-        android:id="@+id/view5"
+        android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_above="@+id/tvOk"

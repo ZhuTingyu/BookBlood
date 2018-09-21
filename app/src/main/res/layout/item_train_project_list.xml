@@ -132,7 +132,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已训"
+                android:text="训次"
                 android:textColor="@color/color_text_title"
                 android:textSize="@dimen/small_text_size_2" />
 
@@ -145,7 +145,7 @@
                 android:background="@color/color_text_hint" />
 
             <TextView
-                android:id="@+id/tvTrainedCount"
+                android:id="@+id/tvTrainedOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_text_title"
@@ -195,7 +195,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="53dp"
         android:layout_marginRight="20dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:gravity="center">
 
         <ImageView

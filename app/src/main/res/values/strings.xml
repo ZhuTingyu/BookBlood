@@ -390,6 +390,7 @@
     <string name="text_join_train_count">参训:%1$s羽</string>
     <string name="text_homing_count">归巢:%1$s羽</string>
     <string name="text_order_content">第%1$s名 </string>
+    <string name="text_time_content">第%1$s次 </string>
     <string name="text_details">详情</string>
     <string name="text_end_train">结束训赛</string>
     <string name="text_train_analyze">赛绩分析</string>
@@ -472,12 +473,10 @@
     <string name="text_not_choose_pigeon">你还没有选鸽子！</string>
 
 
-
     <!--繁育-->
     <string name="str_pairing_nest_info">窝次信息</string>
     <string name="str_pairing_nest_add">添加窝次</string>
     <string name="str_offspring_add">子代录入</string>
-
 
 
     <string name="text_my">我的</string>
@@ -491,7 +490,7 @@
         <item>@string/text_my_good_pigeon</item>
         <item>@string/text_applying</item>
     </string-array>
-    
+
     <string name="text_temp">%1$s°C</string>
     <string name="text_wind_direction">%1$s风</string>
     <string name="text_not_get_weather">获取天气失败!</string>
@@ -499,7 +498,11 @@
     <string name="text_select_back_fly_time_error">你选择的时间比放飞时间还早哦！</string>
     <string name="text_all_pigeon_back_yet">所有鸽子已经归巢！</string>
     <string name="text_default">0001-01-01</string>
+
     <string name="string_die">死亡</string>
+    <string name="text_train_again">再训一次</string>
+    <string name="text_train_again_content">再训%1$s</string>
+    <string name="text_is_sure_delete_train">是否删除该训练？</string>
 
 
 </resources>
