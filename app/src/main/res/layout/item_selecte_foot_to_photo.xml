@@ -3,13 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    android:paddingLeft="@dimen/normal_safe_distance"
-    android:paddingRight="@dimen/normal_safe_distance"
     android:layout_width="match_parent"
     android:layout_height="64dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/tvHead"
+        android:id="@+id/imgHead"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -29,7 +27,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvHead"
+        app:layout_constraintStart_toEndOf="@+id/imgHead"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

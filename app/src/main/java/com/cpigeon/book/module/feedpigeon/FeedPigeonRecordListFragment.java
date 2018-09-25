@@ -34,7 +34,7 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TYPE, "");
         SearchFragmentParentActivity.
-                start(activity, PigeonToLeagueFootListFragment.class, false, bundle);
+                start(activity, FeedPigeonRecordListFragment.class, false, bundle);
     }
 
     @Override

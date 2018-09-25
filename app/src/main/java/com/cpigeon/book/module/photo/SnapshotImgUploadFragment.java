@@ -34,8 +34,7 @@ public class SnapshotImgUploadFragment extends BaseImgUploadFragment {
     @Override
     protected void initData() {
         super.initData();
-        llLabel.setRightImageVisible(false);
-        llLabel.setContent(getString(R.string.text_nef));
+
     }
 
     @Override
@@ -43,18 +42,28 @@ public class SnapshotImgUploadFragment extends BaseImgUploadFragment {
         super.initObserve();
 
         mSelectTypeViewModel.mSelectType_ImgType.observe(this, datas -> {
-            mImgUploadViewModel.mSelectTypes_ImgType = datas;
-            String type = mImgUploadViewModel.mImgTypeEntity.getImgTypeSpecified();
-            if (StringUtil.isStringValid(type)) {
-                llLabel.setCanEdit(false);
-                llLabel.setRightImageVisible(false);
-                for (SelectTypeEntity entity : datas) {
-                    if (type.equals(entity.getTypeName())) {
-                        mImgUploadViewModel.imgTypeId = entity.getTypeID();
-                        mImgUploadViewModel.imgTypeStr = entity.getTypeName();
-                        break;
+            try {
+                mImgUploadViewModel.mSelectTypes_ImgType = datas;
+                String type = mImgUploadViewModel.mImgTypeEntity.getImgTypeSpecified();
+                if (StringUtil.isStringValid(type)) {
+                    llLabel.setRightImageVisible(false);
+                    llLabel.setCanEdit(false);
+                    llLabel.setRightImageVisible(false);
+                    for (SelectTypeEntity entity : datas) {
+                        if (type.equals(entity.getTypeName())) {
+                            mImgUploadViewModel.imgTypeId = entity.getTypeID();
+                            mImgUploadViewModel.imgTypeStr = entity.getTypeName();
+                            break;
+                        }
                     }
+                } else {
+                    mImgUploadViewModel.imgTypeId = mImgUploadViewModel.mSelectTypes_ImgType.get(0).getTypeID();
+                    mImgUploadViewModel.imgTypeStr = mImgUploadViewModel.mSelectTypes_ImgType.get(0).getTypeName();
                 }
+
+                llLabel.setContent(mImgUploadViewModel.imgTypeStr);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }

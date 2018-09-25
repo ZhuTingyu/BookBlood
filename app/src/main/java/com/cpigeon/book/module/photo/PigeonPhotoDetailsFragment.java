@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,21 +20,30 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PopWindowBuilder;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.picker.PickerUtil;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.viewmodel.PigeonPhotoDetailsViewModel;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.widget.ClickGetFocusEditText;
 import com.cpigeon.book.widget.SimpleTitleView;
 import com.cpigeon.book.widget.mzbanner.MZBannerView;
 import com.cpigeon.book.widget.mzbanner.holder.MZViewHolder;
 import com.hitomi.cslibrary.CrazyShadow;
 import com.hitomi.cslibrary.base.CrazyShadowDirection;
+
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
 
@@ -45,18 +55,20 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
 
     private MZBannerView mBanner;
     private SimpleTitleView mSTvMove;
-    private SimpleTitleView mSTvSetFace;
+    private SimpleTitleView mSTvSetFace;//设为封面
     private SimpleTitleView mSTvDelete;
 
     PigeonPhotoDetailsViewModel mViewModel;
     SelectTypeViewModel mTypeViewModel;
     int typePosition = 0;
     private PopupWindow mPopupWindow;
+    private int position;
 
-    public static void start(Activity activity, String footNumber, int position) {
+    public static void start(Activity activity, PigeonEntity mPigeonEntity, List<PigeonPhotoEntity> mPigeonPhotoData, int position) {
         IntentBuilder.Builder()
-                .putExtra(IntentBuilder.KEY_DATA, position)
-                .putExtra(IntentBuilder.KEY_TITLE, footNumber)
+                .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
+                .putExtra(IntentBuilder.KEY_DATA_2, (ArrayList) mPigeonPhotoData)
+                .putExtra(IntentBuilder.KEY_DATA_3, position)
                 .startParentActivity(activity, PigeonPhotoDetailsFragment.class);
     }
 
@@ -77,7 +89,6 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setToolbarRightImage(R.drawable.svg_pigeon_photo_details, item -> {
             mPopupWindow = PopWindowBuilder.builder(getBaseActivity())
                     .setSize(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -88,34 +99,85 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
             return false;
         });
 
-        String footNumber = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TITLE);
-        int position = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA, 0);
-        setTitle(footNumber);
+        mViewModel.mPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+
+        mViewModel.mPigeonPhotoData = getBaseActivity().getIntent().getParcelableArrayListExtra(IntentBuilder.KEY_DATA_2);
+
+        position = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA_3, 0);
+
+        setTitle(mViewModel.mPigeonEntity.getFootRingNum());
 
         mBanner = findViewById(R.id.banner);
         mSTvMove = findViewById(R.id.sTvMove);
         mSTvSetFace = findViewById(R.id.sTvSetFace);
         mSTvDelete = findViewById(R.id.sTvDelete);
 
-        mBanner.setPages(Lists.newTestArrayList(), () -> {
+        mBanner.setPages(mViewModel.mPigeonPhotoData, () -> {
             return new BannerViewHolder();
         });
 
+        mBanner.getViewPager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                PigeonPhotoDetailsFragment.this.position = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         mBanner.getAdapter().setCurrentItem(position);
-
-
         mSTvMove.setOnClickListener(v -> {
+            //移动
             PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mPhotoType)
                     , typePosition, new OptionPicker.OnOptionPickListener() {
                         @Override
                         public void onOptionPicked(int index, String item) {
                             typePosition = index;
+
+                            mViewModel.typeid = mViewModel.mPhotoType.get(index).getTypeID();
+                            mViewModel.photoid = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPigeonPhotoID();
+
+                            mViewModel.currentImgTypeStr = mViewModel.mPhotoType.get(index).getTypeName();
+
+                            setProgressVisible(true);
+                            mViewModel.getTXGP_PigeonPhoto_UpdateData();
                         }
                     });
         });
+
+        mSTvSetFace.setOnClickListener(v -> {
+            //设为封面
+            setProgressVisible(true);
+            mViewModel.photoid = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPigeonPhotoID();
+            mViewModel.getTXGP_PigeonPhoto_EideConverData();
+        });
+
+        mSTvDelete.setOnClickListener(v -> {
+            //删除
+            getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), getString(R.string.text_delete_warning_hint), sweetAlertDialog -> {
+                //确定
+                sweetAlertDialog.dismiss();
+                setProgressVisible(true);
+                mViewModel.photoid = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPigeonPhotoID();
+                mViewModel.getTXGP_PigeonPhoto_DeleteData();
+            }, sweetAlertDialog -> {
+                //取消
+                sweetAlertDialog.dismiss();
+            });
+        });
+
+        mViewModel.photoid = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPigeonPhotoID();
+
         setProgressVisible(true);
         mTypeViewModel.getSelectType_ImgType();
-
     }
 
     private View initPopView() {
@@ -134,7 +196,6 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         mImgClose.setOnClickListener(v -> {
             mPopupWindow.dismiss();
         });
-
         return view;
     }
 
@@ -144,10 +205,33 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
             setProgressVisible(false);
             mViewModel.mPhotoType = selectTypeEntities;
         });
+
+        mViewModel.imgEditCallBack.observe(this, datas -> {
+            mViewModel.mPigeonPhotoData
+                    .get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount())
+                    .setTypeName(mViewModel.currentImgTypeStr);
+
+            mBanner.setPages(mViewModel.mPigeonPhotoData, () -> {
+                return new BannerViewHolder();
+            });
+
+            mBanner.getAdapter().setCurrentItem(position);
+        });
+    }
+
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.PIGEON_PHOTO_DEL_REFRESH)) {
+            mViewModel.mPigeonPhotoData.remove(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount());
+            mBanner.setPages(mViewModel.mPigeonPhotoData, () -> {
+                return new BannerViewHolder();
+            });
+            mBanner.getAdapter().setCurrentItem(position);
+        }
     }
 }
 
-class BannerViewHolder implements MZViewHolder<String> {
+class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
 
     private ImageView mImg;
     private TextView mTvColor;
@@ -156,7 +240,6 @@ class BannerViewHolder implements MZViewHolder<String> {
     @Override
     public View createView(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_pigeon_photo_details, null);
-
         mImg = view.findViewById(R.id.img);
         mTvColor = view.findViewById(R.id.tvColor);
         mTvNumberAndTime = view.findViewById(R.id.tvNumberAndTime);
@@ -170,12 +253,17 @@ class BannerViewHolder implements MZViewHolder<String> {
                 .setBackground(Utils.getColor(R.color.white))
                 .setImpl(CrazyShadow.IMPL_DRAW)
                 .action(view.findViewById(R.id.llRoot));
+
         return view;
     }
 
     @Override
-    public void onBind(Context context, int position, String data) {
+    public void onBind(Context context, int position, PigeonPhotoEntity data) {
         // 数据绑定
-        GlideUtil.setGlideImageView(context, UserModel.getInstance().getUserData().touxiangurl, mImg);
+        GlideUtil.setGlideImageView(context, data.getPhotoUrl(), mImg);
+        //图片类型
+        mTvColor.setText(data.getTypeName());
+        //时间
+        mTvNumberAndTime.setText(data.getAddTime());
     }
 }

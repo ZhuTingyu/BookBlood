@@ -180,6 +180,16 @@
 
     <!--上传图片  一张-->
     <string name="upload_img_one">TXGP_PigeonPhoto_Add</string>
+    <!--图片列表  筛选-->
+    <string name="pigeion_img_list">TXGP_PigeonPhoto_Select</string>
+    <!--单只鸽子  相片统计-->
+    <string name="pigeion_img_count">TXGP_PigeonPhoto_CountPhoto</string>
+    <!--照片  移动标签-->
+    <string name="pigeion_img_type_move">TXGP_PigeonPhoto_Update</string>
+    <!--照片  删除-->
+    <string name="pigeion_img_one_del">TXGP_PigeonPhoto_Delete</string>
+    <!--照片  设置为封面-->
+    <string name="pigeion_img_set_cover">TXGP_PigeonPhoto_EideConver</string>
 
 
     <!--疫苗注射添加-->

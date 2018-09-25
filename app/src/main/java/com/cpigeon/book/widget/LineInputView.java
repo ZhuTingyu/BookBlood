@@ -53,8 +53,8 @@ public class LineInputView extends RelativeLayout {
     boolean mIsEditLeft;
     boolean mIsHaveEditBoard;
 
-    boolean leftTextBold = false;
-    boolean rightTextBold = false;
+//    boolean leftTextBold = false;
+//    boolean rightTextBold = false;
 
     int mShowLineDivision;//是否显示分割线
     int mInputType;
@@ -136,8 +136,8 @@ public class LineInputView extends RelativeLayout {
 
         left_gravity = array.getBoolean(R.styleable.LineInputView_lineInputView_LeftTextGravity, true);
 
-        leftTextBold = array.getBoolean(R.styleable.LineInputView_leftTextBold, false);
-        rightTextBold = array.getBoolean(R.styleable.LineInputView_rightTextBold, false);
+//        leftTextBold = array.getBoolean(R.styleable.LineInputView_leftTextBold, false);
+//        rightTextBold = array.getBoolean(R.styleable.LineInputView_rightTextBold, false);
 
     }
 

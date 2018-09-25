@@ -11,15 +11,14 @@ import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
-import com.haibin.calendarview.BaseView;
+import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 
-import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/8/29.
  */
 
-public class PigeonPhotoHomeAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class PigeonPhotoHomeAdapter extends BaseQuickAdapter<PigeonPhotoEntity, BaseViewHolder> {
 
     int imgSize;
     RelativeLayout rlRoot;
@@ -32,9 +31,11 @@ public class PigeonPhotoHomeAdapter extends BaseQuickAdapter<String, BaseViewHol
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, PigeonPhotoEntity item) {
         ImageView imageView = helper.getView(R.id.img);
-        helper.setGlideImageView(mContext, R.id.img, UserModel.getInstance().getUserData().touxiangurl);
+        helper.setGlideImageView(mContext, R.id.img, item.getPhotoUrl());
+
+
         rlRoot = helper.getView(R.id.rlRoot);
         RecyclerView.LayoutParams rootP = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, imgSize);
 

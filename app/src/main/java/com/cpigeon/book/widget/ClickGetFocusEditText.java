@@ -59,5 +59,4 @@ public class ClickGetFocusEditText extends AppCompatEditText {
     public void setOnClickAndHaveFocusListener(LineInputView.OnClickAndHaveFocusListener onClickAndHaveFocusListener) {
         mOnClickAndHaveFocusListener = onClickAndHaveFocusListener;
     }
-
 }

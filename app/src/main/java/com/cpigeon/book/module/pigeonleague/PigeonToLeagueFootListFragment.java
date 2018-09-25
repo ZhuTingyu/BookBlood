@@ -48,9 +48,8 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TYPE, "");
         bundle.putString(IntentBuilder.KEY_TYPE_2, PigeonEntity.BIT_MATCH_NO);
-
         SearchFragmentParentActivity.
-                start(activity, PigeonToLeagueFootListFragment.class, false, null);
+                start(activity, PigeonToLeagueFootListFragment.class, false, bundle);
     }
 
     @Override

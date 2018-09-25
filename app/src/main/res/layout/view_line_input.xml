@@ -63,13 +63,17 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@null"
+                android:gravity="center_vertical"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingBottom="8dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
+                android:paddingTop="8dp"
+                android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:textColorHint="@color/gray_m"
                 android:textSize="@dimen/medium_text_size"
                 tools:text="123333334444444444444444444444333333" />
-
 
             <ImageView
                 android:id="@+id/imgRight"
