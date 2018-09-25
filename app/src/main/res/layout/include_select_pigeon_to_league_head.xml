@@ -64,7 +64,7 @@
             app:statView_data_color="@color/color_scale_yellow_data"
             app:statView_other_color="@color/color_scale_yellow_other"
             app:statView_stat_w="64dp"
-            app:statView_title="@string/text_breed_pigeon" />
+            app:statView_title="10名" />
 
         <com.cpigeon.book.widget.stats.StatView
             android:id="@+id/stat2"
@@ -74,7 +74,7 @@
             app:statView_data_color="@color/color_scale_blue_data"
             app:statView_other_color="@color/color_scale_blue_other"
             app:statView_stat_w="64dp"
-            app:statView_title="@string/text_male_a" />
+            app:statView_title="20名" />
 
         <com.cpigeon.book.widget.stats.StatView
             android:id="@+id/stat3"
@@ -84,7 +84,7 @@
             app:statView_data_color="@color/color_scale_red_data"
             app:statView_other_color="@color/color_scale_red_other"
             app:statView_stat_w="64dp"
-            app:statView_title="@string/text_female_a" />
+            app:statView_title="50名" />
 
 
     </LinearLayout>
