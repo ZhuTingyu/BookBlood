@@ -49,6 +49,7 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new PigeonMatchDetailsViewModel(getBaseActivity());
+        setTitle(mViewModel.mPigeonEntity.getFootRingNum());
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()
                 , LinearLayoutManager.HORIZONTAL, false));

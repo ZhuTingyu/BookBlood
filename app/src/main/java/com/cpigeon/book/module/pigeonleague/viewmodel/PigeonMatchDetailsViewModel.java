@@ -18,7 +18,7 @@ import java.util.List;
 
 public class PigeonMatchDetailsViewModel extends BaseViewModel {
 
-    PigeonEntity mPigeonEntity;
+    public PigeonEntity mPigeonEntity;
     public MutableLiveData<List<LeagueDetailsEntity>> mDataLeague = new MutableLiveData<>();
 
     public PigeonMatchDetailsViewModel(Activity activity){
