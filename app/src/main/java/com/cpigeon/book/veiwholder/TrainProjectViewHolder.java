@@ -36,25 +36,31 @@ public class TrainProjectViewHolder extends BaseViewHolder {
         setText(R.id.tvLocation, trainEntity.getFromPlace());
         setText(R.id.tvCount, String.valueOf(trainEntity.getReturnCount()));
 
-        setText(R.id.tvTime, trainEntity.getFromFlyTime());
         setText(R.id.tvTrainedOrder, String.valueOf(trainEntity.getTrainCount()));
         tvStatus.setText(trainEntity.getTrainStateName());
 
-        if(Utils.getString(R.string.text_end_yet).equals(trainEntity.getTrainStateName())){
-            itemView.setOnClickListener(v -> {
-                FlyBackRecordFragment.start(getActivity(), trainEntity, true);
-            });
-            tvStatus.setTextColor(Utils.getColor(R.color.color_text_title));
-        }else if(Utils.getString(R.string.text_training).equals(trainEntity.getTrainStateName())){
-            tvStatus.setTextColor(Utils.getColor(R.color.color_text_red));
-            itemView.setOnClickListener(v -> {
-                FlyBackRecordFragment.start(getActivity(), trainEntity, false);
-            });
-            tvStatus.setTextColor(Utils.getColor(R.color.color_text_title));
-        }else if(Utils.getString(R.string.text_start_not).equals(trainEntity.getTrainStateName())){
-            itemView.setOnClickListener(v -> {
-                OpenAndCloseTrainFragment.start(getActivity(), true, trainEntity);
-            });
+        if(isChoose){
+            setText(R.id.tvTime, trainEntity.getFromFlyTime().split(" ")[0]);
+        }else {
+            if(Utils.getString(R.string.text_end_yet).equals(trainEntity.getTrainStateName())){
+                tvStatus.setTextColor(Utils.getColor(R.color.color_text_title));
+                itemView.setOnClickListener(v -> {
+                    FlyBackRecordFragment.start(getActivity(), trainEntity, true);
+                });
+            }else if(Utils.getString(R.string.text_training).equals(trainEntity.getTrainStateName())){
+                tvStatus.setTextColor(Utils.getColor(R.color.color_text_red));
+                itemView.setOnClickListener(v -> {
+                    FlyBackRecordFragment.start(getActivity(), trainEntity, false);
+                });
+            }else if(Utils.getString(R.string.text_start_not).equals(trainEntity.getTrainStateName())){
+                tvStatus.setTextColor(Utils.getColor(R.color.color_text_title));
+                itemView.setOnClickListener(v -> {
+                    OpenAndCloseTrainFragment.start(getActivity(), true, trainEntity);
+                });
+            }
+            setText(R.id.tvTime, trainEntity.getFromFlyTime());
         }
+
+
     }
 }

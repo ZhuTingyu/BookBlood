@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cpigeon.book.widget.stats.StatView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/statView"
+    android:layout_margin="20dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>

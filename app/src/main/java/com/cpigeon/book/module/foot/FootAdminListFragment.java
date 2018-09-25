@@ -2,10 +2,13 @@ package com.cpigeon.book.module.foot;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.system.ScreenTool;
 import com.base.widget.BottomSheetAdapter;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
@@ -23,6 +27,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.adapter.FootAdminListAdapter;
+import com.cpigeon.book.module.foot.adapter.FootListHeadAdapter;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminListViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -51,6 +56,8 @@ public class FootAdminListFragment extends BaseBookFragment {
     private FootAdminListAdapter mAdapter;
     private TextView mTvOk;
     SearchFragmentParentActivity mActivity;
+    RecyclerView mRvHeadView;
+    FootListHeadAdapter mHeadAdapter;
 
 
     @Override
@@ -102,6 +109,7 @@ public class FootAdminListFragment extends BaseBookFragment {
             mFiltrate.resetData();
             mViewModel.resetData();
             mViewModel.getFoodList();
+            mViewModel.getFootRingStat();
         });
 
         mRecyclerView.setAdapter(mAdapter);
@@ -135,9 +143,23 @@ public class FootAdminListFragment extends BaseBookFragment {
 
         setProgressVisible(true);
         mViewModel.getFoodList();
+        mViewModel.getFootRingStat();
 
         mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_RING, SelectTypeViewModel.STATE_FOOT_RING);
         mSelectTypeViewModel.getSelectTypes();
+
+        initHeadView();
+
+    }
+
+    private void initHeadView() {
+        mRvHeadView = new RecyclerView(getBaseActivity());
+        RecyclerView.LayoutParams params = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, ScreenTool.dip2px(20), 0, ScreenTool.dip2px(20));
+        mRvHeadView.setLayoutParams(params);
+        mRvHeadView.setLayoutManager(new LinearLayoutManager(getBaseActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mHeadAdapter = new FootListHeadAdapter();
+        mRvHeadView.setAdapter(mHeadAdapter);
     }
 
     @Override
@@ -148,7 +170,14 @@ public class FootAdminListFragment extends BaseBookFragment {
 
         mViewModel.footAdminListData.observe(this, logbookEntities -> {
             setProgressVisible(false);
+            mAdapter.removeAllHeaderView();
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, logbookEntities);
+            mAdapter.addHeaderView(mRvHeadView);
+        });
+
+        mViewModel.mDataFootStat.observe(this, footRingStatEntity -> {
+            mHeadAdapter.setMaxCount(footRingStatEntity.getMaxCount());
+            mHeadAdapter.setNewData(footRingStatEntity.getData());
         });
 
         mSelectTypeViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
@@ -166,5 +195,6 @@ public class FootAdminListFragment extends BaseBookFragment {
         mAdapter.getData().clear();
         mViewModel.pi = 1;
         mViewModel.getFoodList();
+        mViewModel.getFootRingStat();
     }
 }

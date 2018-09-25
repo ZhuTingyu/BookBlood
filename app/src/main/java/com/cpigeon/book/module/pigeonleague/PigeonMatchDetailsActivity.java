@@ -13,7 +13,10 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
+import com.cpigeon.book.model.entity.LeagueDetailsEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.pigeonleague.adpter.PigeonMatchDetailsAdapter;
+import com.cpigeon.book.module.pigeonleague.viewmodel.PigeonMatchDetailsViewModel;
 import com.cpigeon.book.util.KLineManager;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -29,10 +32,11 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
 
     RecyclerView mRecyclerView;
     PigeonMatchDetailsAdapter mAdapter;
+    PigeonMatchDetailsViewModel mViewModel;
 
-    public static void start(Activity activity, String pigeonId) {
+    public static void start(Activity activity, PigeonEntity pigeonEntity) {
         IntentBuilder.Builder(activity, PigeonMatchDetailsActivity.class)
-                .putExtra(IntentBuilder.KEY_DATA, pigeonId)
+                .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
                 .startActivity();
     }
 
@@ -44,18 +48,31 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mViewModel = new PigeonMatchDetailsViewModel(getBaseActivity());
+        setTitle(mViewModel.mPigeonEntity.getFootRingNum());
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()
                 , LinearLayoutManager.HORIZONTAL, false));
         mAdapter = new PigeonMatchDetailsAdapter();
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
 
-        mAdapter.addHeaderView(initHeadView(Lists.newTestArrayList()));
+        mViewModel.getDetails();
     }
 
-    private View initHeadView(List<String> data) {
+    @Override
+    protected void initObserve() {
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
+        mViewModel.mDataLeague.observe(this, leagueDetailsEntities -> {
+            mAdapter.setNewData(leagueDetailsEntities);
+            mAdapter.addHeaderView(initHeadView(leagueDetailsEntities));
+        });
+    }
+
+    private View initHeadView(List<LeagueDetailsEntity> data) {
         View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_pigeon_match_details_head, null);
         LineChart mKLine;
         TextView mTvUserName;
@@ -71,7 +88,7 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
                 return "0";
             } else {
                 if (!data.isEmpty()) {
-                    return data.get((int) (v - 1));
+                    return data.get((int) (v - 1)).getMatchInterval();
                 } else {
                     return "0";
                 }
@@ -93,9 +110,9 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
         speed.add(new Entry(0, 0));
         firstSpeed.add(new Entry(0, 0));
 
-        /*kLineManager.addLineData(rank, R.color.color_k_line_rank, "名次", YAxis.AxisDependency.LEFT);
+        kLineManager.addLineData(rank, R.color.color_k_line_rank, "名次", YAxis.AxisDependency.LEFT);
         kLineManager.addLineData(speed, R.color.color_k_line_speed, "分速", YAxis.AxisDependency.RIGHT);
-        kLineManager.addLineData(speed, R.color.color_k_line_first_speed, "第一分速", YAxis.AxisDependency.RIGHT);*/
+        kLineManager.addLineData(firstSpeed, R.color.color_k_line_first_speed, "第一分速", YAxis.AxisDependency.RIGHT);
         kLineManager.setAnimate();
         kLineManager.setDataToChart();
 

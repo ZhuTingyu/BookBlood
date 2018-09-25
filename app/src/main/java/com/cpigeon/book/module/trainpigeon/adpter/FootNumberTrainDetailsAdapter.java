@@ -6,6 +6,7 @@ import com.base.util.Lists;
 import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonTrainDetailsEntity;
+import com.cpigeon.book.util.MathUtil;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class FootNumberTrainDetailsAdapter extends BaseQuickAdapter<PigeonTrainD
     protected void convert(BaseViewHolder helper, PigeonTrainDetailsEntity item) {
         helper.setText(R.id.tvNumber, String.valueOf(helper.getAdapterPosition() + 1));
         helper.setText(R.id.tvSpeed, Utils.getString(R.string.text_speed_content,item.getFraction()));
-        helper.setText(R.id.tvScore, Utils.getString(R.string.text_score, item.getScore()));
+        helper.setText(R.id.tvScore, Utils.getString(R.string.text_score, MathUtil.doubleformat(item.getScore(), 3)));
         helper.setText(R.id.tvJoinCount, Utils.getString(R.string.text_join_train_count,item.getFlyCount()));
         helper.setText(R.id.tvHomingCount, Utils.getString(R.string.text_homing_count,item.getReturnCount()));
         helper.setText(R.id.tvOrder, Utils.getString(R.string.text_order_content,item.getSortRank()));

@@ -87,7 +87,7 @@ public class HomeFragment extends BaseBookFragment {
         setToolbarColor(R.color.white);
         BarUtils.setStatusBarLightMode(getBaseActivity(), true);
 
-        setToolbarLeft(R.drawable.svg_home_my, v -> {
+        setToolbarLeft(R.drawable.svg_home_sign, v -> {
             SignFragment.start(getBaseActivity());
         });
 

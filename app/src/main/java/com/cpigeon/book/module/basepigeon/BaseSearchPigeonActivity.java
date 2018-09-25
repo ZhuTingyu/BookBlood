@@ -9,6 +9,7 @@ import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.base.util.utility.StringUtil;
+import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -73,7 +74,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
             e.printStackTrace();
         }
         mBreedPigeonListModel.isSearch = true;
-
+        mSearchTextView.setHint(R.string.text_input_foot_number_search);
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
             public void search(String key) {

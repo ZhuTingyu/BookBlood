@@ -4,6 +4,7 @@ import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.FootEntity;
+import com.cpigeon.book.model.entity.FootRingStatEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -153,5 +154,13 @@ public class FootAdminModel {
                 .request();
     }
 
+
+    public static Observable<ApiResponse<FootRingStatEntity>> getFootRingStat() {
+        return RequestData.<ApiResponse<FootRingStatEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<FootRingStatEntity>>() {
+                }.getType())
+                .url(R.string.get_foot_stat)
+                .request();
+    }
 
 }

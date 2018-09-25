@@ -19,7 +19,7 @@ public class PigeonTrainDetailsEntity {
      */
 
     private String SortRank;
-    private String Score;
+    private double Score;
     private String Fraction;
     private String ReturnCount;
     private String FootRingNum;
@@ -36,11 +36,11 @@ public class PigeonTrainDetailsEntity {
         this.SortRank = SortRank;
     }
 
-    public String getScore() {
+    public double getScore() {
         return Score;
     }
 
-    public void setScore(String Score) {
+    public void setScore(double Score) {
         this.Score = Score;
     }
 

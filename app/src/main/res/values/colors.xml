@@ -77,6 +77,7 @@
 
 
     <color name="color_scale_yellow_data">#F9B855</color>
+    <color name="color_scale_yellow_other">#EED0A1</color>
     <color name="color_scale_blue_data">#0080FF</color>
     <color name="color_scale_blue_other">#C2D9F0</color>
     <color name="color_scale_red_data">#F72BB1</color>

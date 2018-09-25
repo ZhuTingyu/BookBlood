@@ -56,8 +56,6 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-
-            <!-- android:ellipsize="marquee"-->
             <com.cpigeon.book.widget.ClickGetFocusEditText
                 android:id="@+id/etRight"
                 android:layout_width="0dp"

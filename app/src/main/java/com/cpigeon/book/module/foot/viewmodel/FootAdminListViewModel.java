@@ -6,6 +6,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.FootAdminModel;
 import com.cpigeon.book.model.entity.FootEntity;
+import com.cpigeon.book.model.entity.FootRingStatEntity;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class FootAdminListViewModel extends BaseViewModel {
     public String key = "";
 
     public MutableLiveData<List<FootEntity>> footAdminListData = new MutableLiveData<>();
+    public MutableLiveData<FootRingStatEntity> mDataFootStat = new MutableLiveData<>();
 
     //足环号码 列表
     public void getFoodList() {
@@ -30,6 +32,14 @@ public class FootAdminListViewModel extends BaseViewModel {
                 listEmptyMessage.setValue(r.msg);
                 footAdminListData.setValue(r.data);
             } else throw new HttpErrorException(r);
+        });
+    }
+
+    public void getFootRingStat() {
+        submitRequestThrowError(FootAdminModel.getFootRingStat(), r -> {
+            if(r.isOk()){
+                mDataFootStat.setValue(r.data);
+            }else throw new HttpErrorException(r);
         });
     }
 

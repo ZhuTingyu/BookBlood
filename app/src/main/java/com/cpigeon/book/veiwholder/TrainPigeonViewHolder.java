@@ -36,7 +36,7 @@ public class TrainPigeonViewHolder extends BaseViewHolder {
 
     public void bindData(TrainEntity trainEntity) {
         mTvName.setText(trainEntity.getPigeonTrainName());
-        mTvTime.setText(StringUtil.isStringValid(trainEntity.getTime()) ? trainEntity.getTime()
+        mTvTime.setText(StringUtil.isStringValid(trainEntity.getFromFlyTime()) ? trainEntity.getFromFlyTime()
                 : Utils.getString(R.string.text_not_setting));
         mTvPigeonCount.setText(String.valueOf(trainEntity.getFlyCount()));
         mTvTrainedCount.setText(String.valueOf(trainEntity.getTrainCount()));

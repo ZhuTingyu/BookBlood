@@ -13,10 +13,10 @@
     
     <LinearLayout
         android:id="@+id/ll1"
+        android:paddingBottom="18dp"
+        android:paddingTop="18dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="29dp"
-        android:layout_marginBottom="37dp"
-        android:layout_marginTop="26dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -49,7 +49,7 @@
 
             <View
                 android:layout_width="33dp"
-                android:layout_height="match_parent"
+                android:layout_height="10dp"
                 android:layout_marginRight="5dp"
                 android:background="@color/color_k_line_speed" />
 

@@ -43,16 +43,13 @@ public class TrainProjectInListViewModel extends BaseViewModel {
         });
     }
 
-    public boolean isAllEnd() {
-        boolean isAllEnd = false;
-        if (!Lists.isEmpty(mTrainCountEntities)) {
-            if (mTrainCountEntities.get(0).getTrainStateName()
-                    .equals(Utils.getString(R.string.text_end_yet))) {
-                isAllEnd = true;
+    public List<TrainEntity> getEndTrain(List<TrainEntity> trainCountEntities) {
+        List<TrainEntity> endTrain = Lists.newArrayList();
+        for (TrainEntity trainEntity : trainCountEntities) {
+            if(Utils.getString(R.string.text_end_yet).equals(trainEntity.getTrainStateName())){
+                endTrain.add(trainEntity);
             }
-        }else {
-            isAllEnd = true;
         }
-        return isAllEnd;
+        return endTrain;
     }
 }

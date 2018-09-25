@@ -3,6 +3,7 @@ package com.cpigeon.book.widget.stats;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.util.Utils;
+import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.util.MathUtil;
 
@@ -26,6 +28,7 @@ public class StatView extends LinearLayout {
     private TextView mTvTitle;
     private TextView mTvCount;
     private TextView mTvScale;
+    RelativeLayout mRlScale;
     private int mStatW;
 
 
@@ -69,10 +72,26 @@ public class StatView extends LinearLayout {
         mTvScale = findViewById(R.id.tvScale);
         mCircle.setDataColor(mDataColor);
         mCircle.setOtherColor(mOtherColor);
-        RelativeLayout rlScale = view.findViewById(R.id.rlScale);
+        mRlScale = view.findViewById(R.id.rlScale);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mStatW, mStatW);
-        rlScale.setLayoutParams(params);
+        mRlScale.setLayoutParams(params);
 
+    }
+
+    public void setTitle(String title){
+        mTvTitle.setText(title);
+    }
+
+    public void setStatW(int w){
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(w, w);
+        mRlScale.setLayoutParams(params);
+    }
+
+    public void setColor(@ColorRes int dataColor, @ColorRes int otherColor){
+        mDataColor = Utils.getColor(dataColor);
+        mOtherColor = Utils.getColor(otherColor);
+        mCircle.setDataColor(mDataColor);
+        mCircle.setOtherColor(mOtherColor);
     }
 
     public void bindData(int count, int max) {

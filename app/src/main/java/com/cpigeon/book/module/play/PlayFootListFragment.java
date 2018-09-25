@@ -3,12 +3,13 @@ package com.cpigeon.book.module.play;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
+import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.play.adapter.PlayFootListAdapter;
@@ -21,7 +22,7 @@ import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
  * Created by Administrator on 2018/9/10.
  */
 
-public class PlayFootListFragment extends BaseFootListFagment {
+public class PlayFootListFragment extends BaseFootListFragment {
 
 
     public static void start(Activity activity) {
@@ -31,6 +32,12 @@ public class PlayFootListFragment extends BaseFootListFagment {
                 start(activity, PlayFootListFragment.class, true, bundle);
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRecyclerView.addItemDecorationLine();
+
+    }
 
     @Override
     protected void initData() {
