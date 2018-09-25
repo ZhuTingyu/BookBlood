@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.model.entity.LeagueDetailsEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.pigeonleague.adpter.PigeonMatchDetailsAdapter;
 import com.cpigeon.book.module.pigeonleague.viewmodel.PigeonMatchDetailsViewModel;
 import com.cpigeon.book.util.KLineManager;
@@ -50,6 +52,11 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
         super.onCreate(savedInstanceState);
         mViewModel = new PigeonMatchDetailsViewModel(getBaseActivity());
         setTitle(mViewModel.mPigeonEntity.getFootRingNum());
+        setToolbarRight(Utils.getString(R.string.text_pigeon_details),item -> {
+            BreedPigeonDetailsFragment.start(getBaseActivity(),mViewModel.mPigeonEntity.getPigeonID()
+                    ,mViewModel.mPigeonEntity.getFootRingID());
+            return false;
+        });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()
                 , LinearLayoutManager.HORIZONTAL, false));
@@ -68,7 +75,9 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
 
         mViewModel.mDataLeague.observe(this, leagueDetailsEntities -> {
             mAdapter.setNewData(leagueDetailsEntities);
-            mAdapter.addHeaderView(initHeadView(leagueDetailsEntities));
+            if(!Lists.isEmpty(leagueDetailsEntities)){
+                mAdapter.addHeaderView(initHeadView(leagueDetailsEntities));
+            }
         });
     }
 
