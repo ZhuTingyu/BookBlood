@@ -25,6 +25,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonDetailsAdapter;
 import com.cpigeon.book.module.feedpigeon.childfragment.CareDrugFragment;
 import com.cpigeon.book.module.feedpigeon.childfragment.DrugUseCaseFragment;
@@ -127,6 +128,7 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         toolbar.getMenu().add("")
                 .setIcon(R.mipmap.ic_feed_record_photo)
                 .setOnMenuItemClickListener(item -> {
+
                     PictureSelectUtil.openCamera(getBaseActivity());
 
                     return false;
@@ -171,7 +173,12 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
             FeedPigeonEntity item = mAdapter.getData().get(position);
 
             if (item.getTypeID() == 5) { //随拍
-                PigeonPhotoDetailsFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity.getFootRingNum(), 0);
+//                PigeonPhotoDetailsFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity.getFootRingNum(), 0);
+
+                PigeonPhotoDetailsFragment.start(getBaseActivity(),
+                        mFeedPigeonListViewModel.mPigeonEntity,
+                        Lists.newArrayList(new PigeonPhotoEntity.Builder().build()),
+                        0);
             } else if (item.getTypeID() == 3) {//用药
                 DrugUseCaseFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
             } else if (item.getTypeID() == 1) {//保健
@@ -207,7 +214,7 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         mTvRemark = view.findViewById(R.id.tvRemark);
 
         GlideUtil.setGlideImageView(getBaseActivity(), UserModel.getInstance().getUserData().touxiangurl, mCircleImageView);
-        mTvFootNumber.setText("2018-12-224645");
+        mTvFootNumber.setText("");
 
 
         return view;

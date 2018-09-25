@@ -634,7 +634,7 @@ public class MZBannerView<T> extends RelativeLayout {
          * 获取真实的Count
          * @return
          */
-        private int getRealCount(){
+        public int getRealCount(){
             return  mDatas==null ? 0:mDatas.size();
         }
 

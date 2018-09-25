@@ -18,48 +18,55 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
 import com.cpigeon.book.module.photo.adpter.SelectFootToPhotoAdapter;
+import com.cpigeon.book.module.pigeonleague.PigeonMatchDetailsActivity;
+import com.cpigeon.book.module.pigeonleague.PigeonToLeagueFootListFragment;
+import com.cpigeon.book.module.pigeonleague.SearchPigeonToLeagueActivity;
+import com.cpigeon.book.module.pigeonleague.adpter.SelectPigeonToLeagueAdapter;
 
 /**
+ * 信鸽赛绩   足环列表
  * Created by Zhu TingYu on 2018/9/11.
  */
 
-public class SelectFootToPhotoFragment extends BaseBookFragment {
+public class SelectFootToPhotoFragment extends BaseFootListFagment {
 
-    XRecyclerView mRecyclerView;
-    SelectFootToPhotoAdapter mAdapter;
-    SearchFragmentParentActivity mActivity;
 
     public static void start(Activity activity) {
-        SearchFragmentParentActivity.start(activity, SelectFootToPhotoFragment.class, null);
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_TYPE, "");
+        SearchFragmentParentActivity.
+                start(activity, SelectFootToPhotoFragment.class, false, bundle);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mActivity = (SearchFragmentParentActivity) context;
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.xrecyclerview_layout, container, false);
-    }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mActivity.setSearchHint(R.string.text_input_foot_number_search);
+    protected void initData() {
+        super.initData();
+
+        mTvOk.setVisibility(View.GONE);
+        view_placeholder.setVisibility(View.GONE);
+
+        mAdapter = new SelectFootToPhotoAdapter();
+
         mActivity.setSearchClickListener(v -> {
+            //搜索
             BaseSearchActivity.start(getBaseActivity(), SearchFootToPhotoActivity.class, null);
         });
-        mRecyclerView = findViewById(R.id.list);
-        mRecyclerView.addItemDecorationLine();
-        mAdapter = new SelectFootToPhotoAdapter();
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
+
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+
+            PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
+            PigeonPhotoHomeActivity.start(getBaseActivity(), mPigeonEntity);
+
+        });
+
         mAdapter.addHeaderView(initHead());
+
     }
+
 
     private View initHead() {
         View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_select_foot_to_photo_head, null);

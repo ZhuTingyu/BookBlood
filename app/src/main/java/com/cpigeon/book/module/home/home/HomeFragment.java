@@ -142,15 +142,6 @@ public class HomeFragment extends BaseBookFragment {
             PlayFootListFragment.start(getBaseActivity());
         });
 
-        mSTvBreedInfo.setOnClickListener(v -> {
-            //繁育信息
-            BreedingFootListFragment.start(getBaseActivity());
-        });
-
-        mSTvPigeonPhoto.setOnClickListener(v -> {
-            //信鸽相册
-            SelectFootToPhotoFragment.start(getBaseActivity());
-        });
 
         mSTvTrainRecord.setOnClickListener(v -> {
             //训鸽记录
@@ -168,9 +159,19 @@ public class HomeFragment extends BaseBookFragment {
             FeedPigeonRecordListFragment.start(getBaseActivity());
         });
 
+        mSTvBreedInfo.setOnClickListener(v -> {
+            //繁育信息
+            BreedingFootListFragment.start(getBaseActivity());
+        });
+
         mSTvPigeonMatchInfo.setOnClickListener(v -> {
             //信鸽赛绩
             PigeonToLeagueFootListFragment.start(getBaseActivity());
+        });
+
+        mSTvPigeonPhoto.setOnClickListener(v -> {
+            //信鸽相册
+            SelectFootToPhotoFragment.start(getBaseActivity());
         });
 
 

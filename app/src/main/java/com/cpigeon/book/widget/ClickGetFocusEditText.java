@@ -60,8 +60,8 @@ public class ClickGetFocusEditText extends AppCompatEditText {
         mOnClickAndHaveFocusListener = onClickAndHaveFocusListener;
     }
 
-    @Override
-    public boolean isFocused() {
-        return true;
-    }
+//    @Override
+//    public boolean isFocused() {
+//        return true;
+//    }
 }

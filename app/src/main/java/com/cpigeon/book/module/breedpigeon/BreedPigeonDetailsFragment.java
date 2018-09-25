@@ -347,7 +347,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
             case R.id.img_pigeon:
                 //信鸽相册
-                PigeonPhotoHomeActivity.start(getBaseActivity());
+                PigeonPhotoHomeActivity.start(getBaseActivity(), mBreedPigeonModifyViewModel.mPigeonEntity);
                 break;
 
             case R.id.tv_foot:
@@ -531,7 +531,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.tv_breed_info:
                 //繁育信息
-                PairingInfoListFragment.start(getBaseActivity(),mBreedPigeonModifyViewModel.mPigeonEntity);
+                PairingInfoListFragment.start(getBaseActivity(), mBreedPigeonModifyViewModel.mPigeonEntity);
 
                 break;
             case R.id.img_play_import:

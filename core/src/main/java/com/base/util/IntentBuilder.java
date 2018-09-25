@@ -129,6 +129,12 @@ public class IntentBuilder {
         return this;
     }
 
+
+    public IntentBuilder putExtra(String name, ArrayList value) {
+        intent.putParcelableArrayListExtra(name, value);
+        return this;
+    }
+
     public IntentBuilder putExtra(String name, byte value) {
         intent.putExtra(name, value);
         return this;

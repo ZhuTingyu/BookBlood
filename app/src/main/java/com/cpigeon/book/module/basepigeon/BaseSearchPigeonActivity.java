@@ -61,8 +61,17 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
         mBreedPigeonListModel = new BreedPigeonListModel();
         initViewModel(mBreedPigeonListModel);
 
-        mBreedPigeonListModel.typeid = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
-        mBreedPigeonListModel.bitmatch = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE_2);
+        try {
+            mBreedPigeonListModel.typeid = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            mBreedPigeonListModel.bitmatch = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE_2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBreedPigeonListModel.isSearch = true;
 
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
@@ -70,7 +79,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
             public void search(String key) {
                 setRefreshData(key);
                 if (StringUtil.isStringValid(SEARCH_HISTORY_KEY)) {
-                    saveHistory(key,SEARCH_HISTORY_KEY);
+                    saveHistory(key, SEARCH_HISTORY_KEY);
                 }
             }
 
@@ -107,7 +116,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
     protected void initData() {
     }
 
-    private void  setRefreshData(String key){
+    private void setRefreshData(String key) {
         setProgressVisible(true);
         mAdapter.getData().clear();
         mAdapter.notifyDataSetChanged();

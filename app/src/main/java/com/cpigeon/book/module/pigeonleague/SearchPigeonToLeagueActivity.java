@@ -17,6 +17,7 @@ import com.cpigeon.book.widget.SearchTextView;
 import java.util.List;
 
 /**
+ * 信鸽赛绩  搜索足环列表
  * Created by Zhu TingYu on 2018/9/14.
  */
 

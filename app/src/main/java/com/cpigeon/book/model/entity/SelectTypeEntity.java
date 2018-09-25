@@ -31,6 +31,15 @@ public class SelectTypeEntity implements MultiItemEntity, Parcelable {
 
     private int type;
 
+    private SelectTypeEntity(Builder builder) {
+        setTypeName(builder.TypeName);
+        setTypeID(builder.TypeID);
+        setWhichType(builder.WhichType);
+        setSelect(builder.isSelect);
+        setType(builder.type);
+    }
+
+
     public boolean isSelect() {
         return isSelect;
     }
@@ -136,7 +145,7 @@ public class SelectTypeEntity implements MultiItemEntity, Parcelable {
         this.type = in.readInt();
     }
 
-    public static final Parcelable.Creator<SelectTypeEntity> CREATOR = new Parcelable.Creator<SelectTypeEntity>() {
+    public static final Creator<SelectTypeEntity> CREATOR = new Creator<SelectTypeEntity>() {
         @Override
         public SelectTypeEntity createFromParcel(Parcel source) {
             return new SelectTypeEntity(source);
@@ -147,4 +156,44 @@ public class SelectTypeEntity implements MultiItemEntity, Parcelable {
             return new SelectTypeEntity[size];
         }
     };
+
+    public static final class Builder {
+        private String TypeName;
+        private String TypeID;
+        private String WhichType;
+        private boolean isSelect;
+        private int type;
+
+        public Builder() {
+        }
+
+        public Builder TypeName(String val) {
+            TypeName = val;
+            return this;
+        }
+
+        public Builder TypeID(String val) {
+            TypeID = val;
+            return this;
+        }
+
+        public Builder WhichType(String val) {
+            WhichType = val;
+            return this;
+        }
+
+        public Builder isSelect(boolean val) {
+            isSelect = val;
+            return this;
+        }
+
+        public Builder type(int val) {
+            type = val;
+            return this;
+        }
+
+        public SelectTypeEntity build() {
+            return new SelectTypeEntity(this);
+        }
+    }
 }

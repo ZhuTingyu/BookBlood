@@ -9,6 +9,7 @@ import com.cpigeon.book.model.PhotoAlbumModel;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.service.EventBusService;
 
@@ -43,6 +44,7 @@ public class ImgUploadViewModel extends BaseViewModel {
         };
     }
 
+    //上传图片
     public void getTXGP_PigeonPhoto_AddData() {
         submitRequestThrowError(PhotoAlbumModel.getTXGP_PigeonPhoto_Add(
                 mImgTypeEntity.getPigeonId(),
@@ -55,15 +57,12 @@ public class ImgUploadViewModel extends BaseViewModel {
                 showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).cancelable(false).isClosePage(true).build());
             } else throw new HttpErrorException(r);
         });
-
     }
-
-    public MutableLiveData<Object> mImgUploadCallback = new MutableLiveData<>();
-
 
     public void isCanCommit() {
         isCanCommit(imgTypeStr);
     }
+
 
 
 }
