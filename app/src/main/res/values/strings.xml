@@ -395,7 +395,7 @@
     <string name="text_end_train">结束训赛</string>
     <string name="text_train_analyze">赛绩分析</string>
     <string name="text_sure_choose">确认选择</string>
-    <string name="text_title_train_analyze">%1$s训练分析</string>
+    <string name="text_title_train_analyze">%1$s——训练分析</string>
     <string name="text_order_by_score">按积分</string>
     <string name="text_order_by_speed">按分数</string>
     <string name="text_nef">随拍</string>
@@ -503,6 +503,19 @@
     <string name="text_train_again">再训一次</string>
     <string name="text_train_again_content">再训%1$s</string>
     <string name="text_is_sure_delete_train">是否删除该训练？</string>
+    <string name="text_is_end_train">您是否要结束训练?</string>
+    <string name="text_not_have_end_yet_train">没有可以分析的比赛</string>
+    <string name="text_match_first_count">冠军%1$s羽</string>
+    <string name="text_match_second_count">亚军%1$s羽</string>
+    <string name="text_match_third_count">季军%1$s羽</string>
 
+    <string-array name="array_foot_ring_type">
+        <item>特比环</item>
+        <item>统一足环</item>
+        <item>其他足环</item>
+        <item>私环</item>
+        <item>挂环中</item>
+        <item>未挂环</item>
+    </string-array>
 
 </resources>

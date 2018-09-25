@@ -28,7 +28,7 @@ public class SearchPigeonToLeagueActivity extends BaseSearchPigeonActivity {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID());
+            PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
         });
 
         return mAdapter;

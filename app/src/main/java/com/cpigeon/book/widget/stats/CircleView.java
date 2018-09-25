@@ -56,6 +56,9 @@ public class CircleView extends View {
     }
 
     public String getScale(){
+        if(mDataMax == 0){
+            return "0.0";
+        }
         float scale = (mDataCount / mDataMax) * 100;
         return MathUtil.doubleformat(scale,2);
     }

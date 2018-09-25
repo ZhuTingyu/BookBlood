@@ -92,7 +92,7 @@ public class AddFlyBackRecordFragment extends BaseBookFragment {
             sb.append(s);
             mViewModel.endTime = sb.toString();
 
-            long flyTime = TimeUtil.parse(mViewModel.mTrainEntity.getTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS);
+            long flyTime = TimeUtil.parse(mViewModel.mTrainEntity.getFromFlyTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS);
             long backTime = TimeUtil.parse(mViewModel.endTime, TimeUtil.FORMAT_YYYYMMDDHHMMSS);
 
             long userTime = backTime - flyTime;

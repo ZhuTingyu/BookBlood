@@ -94,8 +94,11 @@ public class FlyBackRecordFragment extends BaseBookFragment {
             TextViewUtil.setCancle(mTvOk);
             mTvOk.setText(R.string.text_end_train);
             mTvOk.setOnClickListener(v -> {
-                setProgressVisible(true);
-                mViewModel.endTrain();
+                DialogUtils.createDialogWithLeft(getBaseActivity(),Utils.getString(R.string.text_is_end_train), sweetAlertDialog -> {
+                    sweetAlertDialog.dismiss();
+                    setProgressVisible(true);
+                    mViewModel.endTrain();
+                });
             });
         }
 

@@ -15,10 +15,12 @@ import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.TrainEntity;
 import com.cpigeon.book.model.entity.TrainProjectEntity;
 import com.cpigeon.book.module.trainpigeon.adpter.SelectTrainProjectAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/9/6.
@@ -30,7 +32,7 @@ public class SelectTrainProjectFragment extends BaseBookFragment {
     private TextView mTvSure;
     private XRecyclerView mRecyclerView;
     SelectTrainProjectAdapter mAdapter;
-
+    List<TrainEntity> mTrainEntities;
 
     @Override
     public void onAttach(Context context) {
@@ -46,6 +48,10 @@ public class SelectTrainProjectFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TrainEntity trainEntity = getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA);
+        mTrainEntities = getBaseActivity().getIntent().getParcelableArrayListExtra(IntentBuilder.KEY_DATA_2);
+        setTitle(trainEntity.getPigeonTrainName());
+
         mTvAll = findViewById(R.id.tvAll);
         mTvSure = findViewById(R.id.tvSure);
         mRecyclerView = findViewById(R.id.list);
@@ -63,8 +69,11 @@ public class SelectTrainProjectFragment extends BaseBookFragment {
 
         mTvSure.setOnClickListener(v -> {
             IntentBuilder.Builder()
-                    .putParcelableArrayListExtra(IntentBuilder.KEY_DATA, (ArrayList<? extends Parcelable>) mAdapter.getSelectedEntity())
+                    .putExtra(IntentBuilder.KEY_DATA, trainEntity)
+                    .putParcelableArrayListExtra(IntentBuilder.KEY_DATA_2, (ArrayList<? extends Parcelable>) mAdapter.getSelectedEntity())
                     .startParentActivity(getBaseActivity(), TrainAnalyzeFragment.class);
         });
+
+        mAdapter.setNewData(mTrainEntities);
     }
 }

@@ -3,6 +3,7 @@ package com.cpigeon.book.module.trainpigeon;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -25,6 +27,8 @@ import com.cpigeon.book.util.RecyclerViewUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zhu TingYu on 2018/9/4.
@@ -46,7 +50,6 @@ public class TrainProjectInListFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        EventBus.getDefault().register(this);
         mViewModel = new TrainProjectInListViewModel(getBaseActivity());
         initViewModel(mViewModel);
     }
@@ -62,7 +65,14 @@ public class TrainProjectInListFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle(mViewModel.mTrainEntity.getPigeonTrainName());
         setToolbarRight(R.string.text_train_analyze, item -> {
-            IntentBuilder.Builder().startParentActivity(getBaseActivity(), SelectTrainProjectFragment.class);
+            if(!Lists.isEmpty(mViewModel.getEndTrain(mAdapter.getData()))){
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mViewModel.mTrainEntity)
+                        .putParcelableArrayListExtra(IntentBuilder.KEY_DATA_2, (ArrayList<? extends Parcelable>) mViewModel.getEndTrain(mAdapter.getData()))
+                        .startParentActivity(getBaseActivity(), SelectTrainProjectFragment.class);
+            }else {
+                DialogUtils.createErrorDialog(getBaseActivity(), Utils.getString(R.string.text_not_have_end_yet_train));
+            }
             return false;
         });
         mRecyclerView = findViewById(R.id.list);
@@ -89,12 +99,6 @@ public class TrainProjectInListFragment extends BaseBookFragment {
 
         setProgressVisible(true);
         mViewModel.getCountList();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -11,7 +11,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonSexCountEntity;
-import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
+import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.service.EventBusService;
@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * Created by Zhu TingYu on 2018/8/28.
  */
 
-public class BreedPigeonListFragment extends BaseFootListFagment {
+public class BreedPigeonListFragment extends BaseFootListFragment {
 
 
     public static void start(Activity activity) {
@@ -35,6 +35,12 @@ public class BreedPigeonListFragment extends BaseFootListFagment {
                 start(activity, BreedPigeonListFragment.class, true, bundle);
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRecyclerView.addItemDecorationLine();
+
+    }
 
     @Override
     protected void initData() {

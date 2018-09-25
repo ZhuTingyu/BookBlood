@@ -23,7 +23,6 @@ public class  TrainEntity extends MultiSelectEntity implements Parcelable {
      * FlyCount  : 放飞羽数
      */
 
-    private String Time;
     private String PigeonTrainName;
     private String TrainStateID;
     private int TrainCount;
@@ -130,14 +129,6 @@ public class  TrainEntity extends MultiSelectEntity implements Parcelable {
         PigeonTrainID = pigeonTrainID;
     }
 
-    public String getTime() {
-        return Time;
-    }
-
-    public void setTime(String AddTime) {
-        this.Time = AddTime;
-    }
-
     public String getPigeonTrainName() {
         return PigeonTrainName;
     }
@@ -189,7 +180,6 @@ public class  TrainEntity extends MultiSelectEntity implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(this.Time);
         dest.writeString(this.PigeonTrainName);
         dest.writeString(this.TrainStateID);
         dest.writeInt(this.TrainCount);
@@ -210,7 +200,6 @@ public class  TrainEntity extends MultiSelectEntity implements Parcelable {
 
     protected TrainEntity(Parcel in) {
         super(in);
-        this.Time = in.readString();
         this.PigeonTrainName = in.readString();
         this.TrainStateID = in.readString();
         this.TrainCount = in.readInt();

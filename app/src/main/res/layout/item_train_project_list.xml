@@ -88,7 +88,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="14dp"
@@ -111,13 +111,14 @@
                 android:layout_marginRight="8dp"
                 android:background="@color/color_text_hint" />
 
-            <TextView
+            <com.base.widget.MarqueeTextView
+                style="@style/Marquee"
                 android:id="@+id/tvLocation"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_text_title"
                 android:textSize="@dimen/small_text_size_2"
-                tools:text="中开大厦" />
+                tools:text="中1231111111111111133111111111111111111111111开大厦" />
 
         </LinearLayout>
 
@@ -193,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="53dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginRight="20dp"
         android:visibility="gone"
         android:gravity="center">

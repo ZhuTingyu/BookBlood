@@ -7,6 +7,7 @@ import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.FlyBackRecordEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonTrainDetailsEntity;
+import com.cpigeon.book.model.entity.TrainAnalyseEntity;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -240,6 +241,21 @@ public class TrainPigeonModel {
                 .url(R.string.get_pigeon_train_details)
                 .addBody("footid", foodId)
                 .addBody("pigeonid", pigeonId)
+                .request();
+    }
+
+    public static Observable<ApiResponse<List<TrainAnalyseEntity>>> getPigeonTrainAnalyse(
+            String trainId,
+            String trainIds,
+            String orderType
+    ) {
+        return RequestData.<ApiResponse<List<TrainAnalyseEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<TrainAnalyseEntity>>>() {
+                }.getType())
+                .url(R.string.get_pigeon_train_analyse)
+                .addBody("countidstr", trainIds)
+                .addBody("sort", orderType)
+                .addBody("trainid", trainId)
                 .request();
     }
 }

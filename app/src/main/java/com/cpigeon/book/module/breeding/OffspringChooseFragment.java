@@ -8,18 +8,17 @@ import android.util.Log;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
-import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
+import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 
 /**
  * 选择子代信息  列表
  * Created by Administrator on 2018/9/19 0019.
  */
 
-public class OffspringChooseFragment extends BaseFootListFagment {
+public class OffspringChooseFragment extends BaseFootListFragment {
 
     public static void start(Activity activity, int requestCode) {
         SearchFragmentParentActivity.
@@ -29,6 +28,13 @@ public class OffspringChooseFragment extends BaseFootListFagment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRecyclerView.addItemDecorationLine();
 
     }
 
