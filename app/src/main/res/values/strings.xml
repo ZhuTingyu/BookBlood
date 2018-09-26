@@ -508,6 +508,7 @@
     <string name="text_match_first_count">冠军%1$s羽</string>
     <string name="text_match_second_count">亚军%1$s羽</string>
     <string name="text_match_third_count">季军%1$s羽</string>
+    <string name="text_pigeon_details">信鸽详情</string>
 
     <string-array name="array_foot_ring_type">
         <item>特比环</item>
