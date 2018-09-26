@@ -24,7 +24,7 @@ import butterknife.OnClick;
 import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
- * 随拍上传
+ * 图片上传上传
  * Created by Administrator on 2018/9/19 0019.
  */
 

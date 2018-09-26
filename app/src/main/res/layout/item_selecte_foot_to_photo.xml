@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_width="match_parent"
+    android:paddingLeft="@dimen/spacing_left_reight"
+    android:paddingRight="@dimen/spacing_left_reight"
     android:layout_height="64dp">
 
     <de.hdodenhof.circleimageview.CircleImageView

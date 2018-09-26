@@ -173,7 +173,6 @@ public class SignFragment extends BaseBookFragment {
 
                     if (signClickEntity != null) {
 
-
                         img_sign.setVisibility(View.GONE);
                         tv_gebi_add.setVisibility(View.VISIBLE);
                         tv_gebi_add.setText("+" + signClickEntity.getGb());

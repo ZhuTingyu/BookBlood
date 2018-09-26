@@ -190,6 +190,8 @@
     <string name="pigeion_img_one_del">TXGP_PigeonPhoto_Delete</string>
     <!--照片  设置为封面-->
     <string name="pigeion_img_set_cover">TXGP_PigeonPhoto_EideConver</string>
+    <!--照片  修改图片备注-->
+    <string name="pigeion_img_edit_remark">TXGP_PigeonPhoto_EideRemark</string>
 
 
     <!--疫苗注射添加-->

@@ -10,6 +10,7 @@ import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.breeding.viewmodel.OffspringViewModel;
@@ -26,8 +27,9 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
 
     private OffspringViewModel mViewModel;
 
-    public static void start(Activity activity, int requestCode) {
+    public static void start(Activity activity, int requestCode, PairingInfoEntity mPairingInfoEntity) {
         IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, mPairingInfoEntity)
                 .startParentActivity(activity, OffspringAddFragment.class, requestCode);
     }
 
@@ -39,6 +41,7 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
         initViewModels(mSelectTypeViewModel, mViewModel);
     }
 
+
     @Override
     protected void initData() {
         super.initData();
@@ -46,6 +49,7 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
 
         llHangingRingDate.setVisibility(View.GONE);
         //选择子代类型
+        llPigeonType.setVisibility(View.VISIBLE);
         llPigeonType.setOnClickListener(v -> {
             String[] chooseWays = getResources().getStringArray(R.array.array_pigeon_type);
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
@@ -70,6 +74,19 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
             mViewModel.addRacingPigeonEntry();
         });
 
+        mViewModel.mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+
+
+        if (mViewModel.mPairingInfoEntity != null) {
+            llFootFather.setContent(mViewModel.mPairingInfoEntity.getMenFootRingNum());
+            llFootMother.setContent(mViewModel.mPairingInfoEntity.getWoFootRingNum());
+
+            llFootFather.setRightImageVisible(false);
+            llFootMother.setRightImageVisible(false);
+
+            llFootFather.setEnabled(false);
+            llFootMother.setEnabled(false);
+        }
     }
 
     @Override

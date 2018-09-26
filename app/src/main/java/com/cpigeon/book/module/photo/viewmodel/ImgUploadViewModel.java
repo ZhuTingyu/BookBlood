@@ -53,6 +53,7 @@ public class ImgUploadViewModel extends BaseViewModel {
                 mImgTypeEntity.getImgPath()
         ), r -> {
             if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_REFRESH);
                 EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
                 showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).cancelable(false).isClosePage(true).build());
             } else throw new HttpErrorException(r);
@@ -62,7 +63,6 @@ public class ImgUploadViewModel extends BaseViewModel {
     public void isCanCommit() {
         isCanCommit(imgTypeStr);
     }
-
 
 
 }

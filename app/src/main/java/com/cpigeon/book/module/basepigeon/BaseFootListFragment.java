@@ -107,6 +107,8 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         mAdapter = new BreedPigeonListAdapter();
 
+        mRecyclerView.addItemDecorationLine(20);
+
         initData();
 
         mRecyclerView.setAdapter(mAdapter);

@@ -174,7 +174,6 @@ public class HomeFragment extends BaseBookFragment {
             SelectFootToPhotoFragment.start(getBaseActivity());
         });
 
-
         mViewModel.getHomeAd();
         mPigeonHouseViewModel.getPigeonHouse();
 
@@ -198,4 +197,6 @@ public class HomeFragment extends BaseBookFragment {
             UserModel.getInstance().setPigeonHouseInfo(pigeonHouseEntity);
         });
     }
+
+
 }

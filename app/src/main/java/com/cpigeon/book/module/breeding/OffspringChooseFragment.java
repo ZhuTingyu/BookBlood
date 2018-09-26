@@ -10,6 +10,7 @@ import android.view.View;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 
@@ -20,22 +21,22 @@ import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 
 public class OffspringChooseFragment extends BaseFootListFragment {
 
-    public static void start(Activity activity, int requestCode) {
-        SearchFragmentParentActivity.
-                start(activity, OffspringChooseFragment.class, requestCode, false, null);
+    private PairingInfoEntity mPairingInfoEntity;
+
+    public static void start(Activity activity, int requestCode, PairingInfoEntity mPairingInfoEntity) {
+        Bundle mBudle = new Bundle();
+        mBudle.putSerializable(IntentBuilder.KEY_DATA, mPairingInfoEntity);
+        SearchFragmentParentActivity
+                .start(activity, OffspringChooseFragment.class, requestCode, false, mBudle);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView.addItemDecorationLine();
 
+        mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
     }
 
     @Override
@@ -49,6 +50,7 @@ public class OffspringChooseFragment extends BaseFootListFragment {
             //搜索
             Bundle bundle = new Bundle();
             bundle.putString(IntentBuilder.KEY_TYPE, "");
+            bundle.putSerializable(IntentBuilder.KEY_DATA, mPairingInfoEntity);
             BaseSearchActivity.start(getBaseActivity(), OffspringSearchActivity.class, PairingNestAddFragment.requestCode, bundle);
         });
 
@@ -61,7 +63,7 @@ public class OffspringChooseFragment extends BaseFootListFragment {
         });
 
         setToolbarRight("添加", item -> {
-            OffspringAddFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode);
+            OffspringAddFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingInfoEntity);
             return true;
         });
     }

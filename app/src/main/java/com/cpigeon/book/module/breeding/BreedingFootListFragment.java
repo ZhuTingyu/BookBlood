@@ -19,8 +19,6 @@ import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 
 public class BreedingFootListFragment extends BaseFootListFragment {
 
-
-
     public static void start(Activity activity) {
         SearchFragmentParentActivity.
                 start(activity, BreedingFootListFragment.class, false, null);

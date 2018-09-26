@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.butterknife.AntiShake;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -66,6 +67,7 @@ public class UserInfoFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         mShareViewModel.mInviteCodeData.observe(this, inviteCodeEntity -> {
             try {
+                setProgressVisible(false);
                 if (dialogFragment != null && dialogFragment.getDialog() != null && dialogFragment.getDialog().isShowing()) {
                     dialogFragment.getDialog().dismiss();
                     dialogFragment.dismiss();
@@ -101,6 +103,11 @@ public class UserInfoFragment extends BaseBookFragment {
     @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting, R.id.ll_my_order,
             R.id.ll_my_gebi, R.id.ll_renewal, R.id.ll_account_balance, R.id.ll_share_txgp})
     public void onViewClicked(View view) {
+
+        if (AntiShake.getInstance().check()) {//防止点击过快
+            return;
+        }
+        
         switch (view.getId()) {
             case R.id.ll_loft_info:
                 //鸽舍信息
@@ -161,6 +168,7 @@ public class UserInfoFragment extends BaseBookFragment {
                 break;
             case R.id.ll_share_txgp:
                 //分享天下鸽谱
+                setProgressVisible(true);
                 mShareViewModel.getZGW_Users_SignGuiZeData();
 
 //                } catch (Exception e) {

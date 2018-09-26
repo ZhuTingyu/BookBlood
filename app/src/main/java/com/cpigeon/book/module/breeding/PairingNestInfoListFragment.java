@@ -60,6 +60,7 @@ public class PairingNestInfoListFragment extends BaseListFragment {
 
 
         mPairingNestInfoListViewModel.mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mPairingNestViewModel.mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         mPairingNestInfoListViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA_2);
 
         setTitle(getString(R.string.str_pairing_nest_info));

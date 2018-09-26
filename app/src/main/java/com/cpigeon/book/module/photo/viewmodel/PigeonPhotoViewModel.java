@@ -25,7 +25,7 @@ public class PigeonPhotoViewModel extends BaseViewModel {
     public String typeid;//
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 15000;
     public int sort = 1;//排序（1，倒序，2顺序，默认倒序）
 
     //单个鸽子   相册列表
@@ -50,15 +50,28 @@ public class PigeonPhotoViewModel extends BaseViewModel {
         });
     }
 
+
     //单只鸽子  相片统计
     public void getTXGP_PigeonPhoto_CountPhotoData() {
         submitRequestThrowError(PhotoAlbumModel.getTXGP_PigeonPhoto_CountPhoto(
-                mPigeonEntity.getPigeonID(),
-                mPigeonEntity.getFootRingID()
+                "",
+                ""
         ), r -> {
             if (r.isOk()) {
                 mPigeonPhotoCount.postValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
+
+//    //单只鸽子  相片统计
+//    public void getTXGP_PigeonPhoto_CountPhotoData() {
+//        submitRequestThrowError(PhotoAlbumModel.getTXGP_PigeonPhoto_CountPhoto(
+//                mPigeonEntity.getPigeonID(),
+//                mPigeonEntity.getFootRingID()
+//        ), r -> {
+//            if (r.isOk()) {
+//                mPigeonPhotoCount.postValue(r.data);
+//            } else throw new HttpErrorException(r);
+//        });
+//    }
 }

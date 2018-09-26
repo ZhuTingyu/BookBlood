@@ -50,14 +50,12 @@ public class BalanceRefillFragment extends BaseBookFragment {
                 .startParentActivity(activity, BalanceRefillFragment.class);
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mBalanceViewModel = new BalanceViewModel();
         initViewModels(mBalanceViewModel);
     }
-
 
     @Nullable
     @Override
@@ -73,8 +71,8 @@ public class BalanceRefillFragment extends BaseBookFragment {
         setTitle("余额充值");
         bindUi(RxUtils.textChanges(et_input_money), mBalanceViewModel.hintMoney(getBaseActivity(), tv_next_step, tv_hint_money));
 
-
         TextViewUtil.setEnabled(tv_next_step, false);
+
 
     }
 

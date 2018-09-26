@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="3dp"
-    android:layout_marginRight="3dp"
+    android:layout_marginLeft="@dimen/spacing_left_reight"
+    android:layout_marginRight="@dimen/spacing_left_reight"
     android:layout_marginTop="24dp"
     android:orientation="vertical">
 

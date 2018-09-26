@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.makebloodbook;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
@@ -16,48 +18,51 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.breeding.PairingInfoListFragment;
+import com.cpigeon.book.module.breeding.SearchBreedingFootActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 
 /**
+ * 血统书制作  足环列表
  * Created by Zhu TingYu on 2018/9/10.
  */
 
-public class SelectPigeonToMakeBookFragment extends BaseBookFragment {
+public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
 
-    XRecyclerView mRecyclerView;
-    BreedPigeonListAdapter mAdapter;
-    private TextView mTvUserCount;
-
-    SearchFragmentParentActivity mActivity;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mActivity = (SearchFragmentParentActivity) getActivity();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_select_pigeon_to_make_book, container, false);
+    public static void start(Activity activity) {
+        SearchFragmentParentActivity.
+                start(activity, SelectPigeonToMakeBookFragment.class, false, null);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mActivity.setSearchHint(R.string.text_input_foot_number_search);
+    protected void initData() {
+        super.initData();
+
+        mTvOk.setVisibility(View.GONE);
+        view_placeholder.setVisibility(View.GONE);
+
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getBaseActivity(),SearchBreedPigeonToMakeBookActivity.class,null);
+            //搜索
+            Bundle bundle = new Bundle();
+            bundle.putString(IntentBuilder.KEY_TYPE, "");
+            BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonToMakeBookActivity.class, bundle);
         });
-        mRecyclerView = findViewById(R.id.list);
-        mTvUserCount = findViewById(R.id.tvUserCount);
-        mRecyclerView.addItemDecorationLine();
-        mAdapter = new BreedPigeonListAdapter();
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PreviewsBookFragment.start(getBaseActivity(),"");
-        });
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newArrayList(new PigeonEntity(),new PigeonEntity(),new PigeonEntity()));
 
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+
+            PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
+            PreviewsBookFragment.start(getBaseActivity(), mPigeonEntity.getFootRingNum());
+        });
+
+        mAdapter.addHeaderView(initHead());
     }
+
+
+    private View initHead() {
+        View mHeadView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.fragment_select_pigeon_to_make_book, null);
+
+        return mHeadView;
+    }
+
 }
