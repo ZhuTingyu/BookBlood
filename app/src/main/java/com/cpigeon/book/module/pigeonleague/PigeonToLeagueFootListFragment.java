@@ -46,7 +46,7 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
     public static void start(Activity activity) {
 
         Bundle bundle = new Bundle();
-        bundle.putString(IntentBuilder.KEY_TYPE, "");
+        bundle.putString(IntentBuilder.KEY_TYPE, PigeonEntity.ID_MATCH_PIGEON);
         bundle.putString(IntentBuilder.KEY_TYPE_2, PigeonEntity.BIT_MATCH_NO);
         SearchFragmentParentActivity.
                 start(activity, PigeonToLeagueFootListFragment.class, false, bundle);
@@ -76,6 +76,7 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
         mActivity.setSearchClickListener(v -> {
             //搜索
             Bundle bundle = new Bundle();
+            bundle.putString(IntentBuilder.KEY_TYPE, PigeonEntity.ID_MATCH_PIGEON);
             bundle.putString(IntentBuilder.KEY_TYPE_2, PigeonEntity.BIT_MATCH_NO);
             BaseSearchActivity.start(getBaseActivity(), SearchPigeonToLeagueActivity.class, bundle);
         });

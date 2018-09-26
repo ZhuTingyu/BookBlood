@@ -57,9 +57,11 @@ public class PigeonMatchDetailsAdapter extends BaseQuickAdapter<LeagueDetailsEnt
 
         mTvRank.setText(item.getMatchNumber());
         mTvDistance.setText(item.getMatchInterval());
-        mTvCurrentSpeed.setText(Utils.getString(R.string.text_speed_content, "0.00"));
-        mTvFirstSpeed.setText(Utils.getString(R.string.text_speed_content, "0.00"));
+        mTvCurrentSpeed.setText(Utils.getString(R.string.text_speed_content_1, "0.00"));
+        mTvFirstSpeed.setText(Utils.getString(R.string.text_speed_content_1, "0.00"));
         mTvTime.setText(item.getMatchTime());
+        mTvPigeonCount.setText(item.getMatchCount());
+        mTvOrganizeName.setText(item.getMatchISOCName());
         mTvProjectName.setText(item.getMatchName());
     }
 }

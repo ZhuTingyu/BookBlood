@@ -51,10 +51,11 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new PigeonMatchDetailsViewModel(getBaseActivity());
+        initViewModel(mViewModel);
         setTitle(mViewModel.mPigeonEntity.getFootRingNum());
-        setToolbarRight(Utils.getString(R.string.text_pigeon_details),item -> {
-            BreedPigeonDetailsFragment.start(getBaseActivity(),mViewModel.mPigeonEntity.getPigeonID()
-                    ,mViewModel.mPigeonEntity.getFootRingID());
+        setToolbarRight(Utils.getString(R.string.text_pigeon_details), item -> {
+            BreedPigeonDetailsFragment.start(getBaseActivity(), mViewModel.mPigeonEntity.getPigeonID()
+                    , mViewModel.mPigeonEntity.getFootRingID());
             return false;
         });
         mRecyclerView = findViewById(R.id.list);
@@ -62,8 +63,9 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
                 , LinearLayoutManager.HORIZONTAL, false));
         mAdapter = new PigeonMatchDetailsAdapter();
         mRecyclerView.setAdapter(mAdapter);
-
+        setProgressVisible(true);
         mViewModel.getDetails();
+        initObserve();
     }
 
     @Override
@@ -74,8 +76,9 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
         });
 
         mViewModel.mDataLeague.observe(this, leagueDetailsEntities -> {
+            setProgressVisible(false);
             mAdapter.setNewData(leagueDetailsEntities);
-            if(!Lists.isEmpty(leagueDetailsEntities)){
+            if (!Lists.isEmpty(leagueDetailsEntities)) {
                 mAdapter.addHeaderView(initHeadView(leagueDetailsEntities));
             }
         });
@@ -118,6 +121,13 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
         rank.add(new Entry(0, 0));
         speed.add(new Entry(0, 0));
         firstSpeed.add(new Entry(0, 0));
+
+        for (int i = 0; i < data.size(); i++) {
+            LeagueDetailsEntity leagueDetailsEntity = data.get(i);
+            rank.add(new Entry(i + 1, -Integer.valueOf(leagueDetailsEntity.getMatchNumber())));
+            speed.add(new Entry(i + 1,0));
+            firstSpeed.add(new Entry(i + 1, 0));
+        }
 
         kLineManager.addLineData(rank, R.color.color_k_line_rank, "名次", YAxis.AxisDependency.LEFT);
         kLineManager.addLineData(speed, R.color.color_k_line_speed, "分速", YAxis.AxisDependency.RIGHT);

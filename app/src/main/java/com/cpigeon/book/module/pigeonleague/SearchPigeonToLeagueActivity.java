@@ -35,6 +35,11 @@ public class SearchPigeonToLeagueActivity extends BaseSearchPigeonActivity {
         return mAdapter;
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mRecyclerView.setListPadding(0, 0, 0, 0);
+    }
 
     @Override
     protected void initData() {

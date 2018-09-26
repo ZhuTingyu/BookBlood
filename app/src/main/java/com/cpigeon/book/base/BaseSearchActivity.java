@@ -37,6 +37,7 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
     protected SearchTextView mSearchTextView;
     protected RelativeLayout mRlHistory;
     protected TextView mTvCleanHistory;
+    protected BaseQuickAdapter mAdapter;
 
     protected SearchHistoryAdapter mSearchHistoryAdapter;
 
@@ -90,7 +91,15 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
         mRecyclerView.addItemDecorationLine();
-        mRecyclerView.setAdapter(getResultAdapter());
+        mAdapter = getResultAdapter();
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                mRlHistory.setVisibility(View.GONE);
+            }
+        });
+        mRecyclerView.setAdapter(mAdapter);
 
         if (!Lists.isEmpty(history)) {
             mRlHistory.setVisibility(View.VISIBLE);

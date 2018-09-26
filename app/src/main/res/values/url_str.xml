@@ -302,6 +302,10 @@
     <string name="get_pigeon_train_analyse">TXGP_PigeonTrain_TrainAnalyse</string>
     <string name="get_pigeon_league_stat">TXGP_PigeonMatch_Count</string>
     <string name="get_pigeon_league_details">TXGP_PigeonMatch_Analysis</string>
+    <string name="get_share_pigeons_details">TXGP_PigeonBreed_PigeonID</string>
+    <string name="get_share_pigeons">TXGP_PigeonBreed_SearchBreedPigeon</string>
+    <string name="add_apply_share_hall">TXGP_PigeonBreed_Determine</string>
+    <string name="cancel_share_hall">TXGP_PigeonBreed_Cancel</string>
 
 
 </resources>

@@ -7,17 +7,18 @@ import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.Utils;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
-
-import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/9/15.
  */
 
-public class ShareHallHomeAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class ShareHallHomeAdapter extends BaseQuickAdapter<PigeonEntity, BaseViewHolder> {
 
     boolean isMyShare;
 
@@ -27,8 +28,9 @@ public class ShareHallHomeAdapter extends BaseQuickAdapter<String, BaseViewHolde
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, PigeonEntity item) {
         ImageView mImgHead;
+        ImageView mImgTagMy;
         TextView mTvFootNumber;
         ImageView mImgSex;
         TextView mTvBlood;
@@ -38,7 +40,6 @@ public class ShareHallHomeAdapter extends BaseQuickAdapter<String, BaseViewHolde
         TextView mTvTime;
         LinearLayout mLlDelete;
 
-        mImgHead = helper.getView(R.id.imgHead);
         mTvFootNumber = helper.getView(R.id.tvFootNumber);
         mImgSex = helper.getView(R.id.imgSex);
         mTvBlood = helper.getView(R.id.tvBlood);
@@ -47,27 +48,58 @@ public class ShareHallHomeAdapter extends BaseQuickAdapter<String, BaseViewHolde
         mTvLocation = helper.getView(R.id.tvLocation);
         mTvTime = helper.getView(R.id.tvTime);
         mLlDelete = helper.getView(R.id.llDelete);
+        mImgTagMy = helper.getView(R.id.imgTagMy);
 
-        if(isMyShare){
+        if (isMyShare) {
             mLlDelete.setVisibility(View.VISIBLE);
             mTvLocation.setVisibility(View.GONE);
-            helper.itemView.setOnClickListener(v -> {
-                BreedPigeonDetailsFragment.start(getBaseActivity(), StringUtil.emptyString()
-                        ,StringUtil.emptyString(),BreedPigeonDetailsFragment.TYPE_MY_SHARE);
-            });
-        }else {
-            helper.itemView.setOnClickListener(v -> {
-                BreedPigeonDetailsFragment.start(getBaseActivity(), StringUtil.emptyString()
-                        ,StringUtil.emptyString(),BreedPigeonDetailsFragment.TYPE_HIS_SHARE);
+            mLlDelete.setOnClickListener(v -> {
+                if (mOnDeleteClickListener != null) {
+                    mOnDeleteClickListener.delete(helper.getAdapterPosition(), getItem(helper.getAdapterPosition()));
+                }
             });
         }
 
-        mTvFootNumber.setText("2018-22-123456");
-        mTvBlood.setText("詹森");
-        mTvEye.setText("眼砂");
-        mTvColor.setText("雨色");
-        mTvLocation.setText("四川省成都市");
-        mTvTime.setText("2017-11-12");
+        mTvLocation.setVisibility(View.VISIBLE);
 
+        if (UserModel.getInstance().getUserId().equals(item.getUserID())) {
+            if (!isMyShare) {
+                mImgTagMy.setVisibility(View.VISIBLE);
+            }
+            helper.itemView.setOnClickListener(v -> {
+                BreedPigeonDetailsFragment.start(getBaseActivity(), item.getPigeonID()
+                        , item.getFootRingID(), BreedPigeonDetailsFragment.TYPE_MY_SHARE, item.getUserID());
+            });
+        } else {
+            mImgTagMy.setVisibility(View.GONE);
+            helper.itemView.setOnClickListener(v -> {
+                BreedPigeonDetailsFragment.start(getBaseActivity(), item.getPigeonID()
+                        , item.getFootRingID(), BreedPigeonDetailsFragment.TYPE_HIS_SHARE, item.getUserID());
+            });
+        }
+
+        if (item.getPigeonSexName().equals(Utils.getString(R.string.text_male_a))) {
+            mImgSex.setImageResource(R.mipmap.ic_male);
+        } else {
+            mImgSex.setImageResource(R.mipmap.ic_female);
+        }
+
+        helper.setGlideImageView(mContext, R.id.imgHead, item.getCoverPhotoUrl());
+        mTvFootNumber.setText(item.getFootRingNum());
+        mTvBlood.setText(item.getPigeonBloodName());
+        mTvEye.setText(item.getPigeonEyeName());
+        mTvColor.setText(item.getPigeonPlumeName());
+        mTvLocation.setText(item.getCity());
+        mTvTime.setText(item.getShareTime());
+    }
+
+    public interface OnDeleteClickListener {
+        void delete(int position, PigeonEntity pigeonEntity);
+    }
+
+    private OnDeleteClickListener mOnDeleteClickListener;
+
+    public void setOnDletetClickLisenter(OnDeleteClickListener mOnDeleteClickListener) {
+        this.mOnDeleteClickListener = mOnDeleteClickListener;
     }
 }

@@ -53,7 +53,7 @@ public class FootAdminListAdapter extends BaseQuickAdapter<FootEntity, BaseViewH
             helper.setTextView(R.id.tvFootNumber, item.getFootRingNum());
             helper.itemView.setOnClickListener(v -> {
                 FootAdminSingleFragment.start(getBaseActivity()
-                        , String.valueOf(getItem(helper.getAdapterPosition()).getFootRingID()));
+                        , String.valueOf(getItem(helper.getAdapterPosition() - getHeaderLayoutCount()).getFootRingID()));
             });
             status.setVisibility(View.VISIBLE);
             if (item.getStateName().equals(Utils.getString(R.string.text_status_not_set_foot_ring))) {

@@ -13,7 +13,6 @@ import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 
 public class SearchBreedPigeonToMakeBookActivity extends BaseSearchPigeonActivity {
 
-    BreedPigeonListAdapter mAdapter;
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {

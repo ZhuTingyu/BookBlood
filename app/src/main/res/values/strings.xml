@@ -279,6 +279,7 @@
 
     <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_feather_color">羽色</string>
+    <string name="text_eye_sand">眼砂</string>
     <string name="text_feather">羽色:%1$s</string>
     <string name="text_feather_count">羽数</string>
     <string name="text_foot_source">录入足环来源</string>
@@ -374,6 +375,7 @@
     <string name="text_add">添加</string>
     <string name="text_training">训鸽中</string>
     <string name="text_speed_content">分速:%1$s m/min</string>
+    <string name="text_speed_content_1">%1$sm/min</string>
     <string name="text_speed">分速</string>
     <string name="text_fly_back_time_content">归巢:%1$s</string>
     <string name="text_fly_back_time">归巢时间</string>
@@ -509,6 +511,9 @@
     <string name="text_match_second_count">亚军%1$s羽</string>
     <string name="text_match_third_count">季军%1$s羽</string>
     <string name="text_pigeon_details">信鸽详情</string>
+    <string name="text_cancel_share">取消共享</string>
+    <string name="text_is_cancel_share">是否确定取消分享该种鸽？</string>
+    <string name="text_is_share_pigeon">您是否共享该种鸽？</string>
 
     <string-array name="array_foot_ring_type">
         <item>特比环</item>

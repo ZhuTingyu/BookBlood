@@ -19,7 +19,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.module.basepigeon.BaseFootListFagment;
+import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.photo.adpter.SelectFootToPhotoAdapter;
 import com.cpigeon.book.module.pigeonleague.PigeonMatchDetailsActivity;
 import com.cpigeon.book.module.pigeonleague.PigeonToLeagueFootListFragment;
@@ -31,7 +31,7 @@ import com.cpigeon.book.module.pigeonleague.adpter.SelectPigeonToLeagueAdapter;
  * Created by Zhu TingYu on 2018/9/11.
  */
 
-public class SelectFootToPhotoFragment extends BaseFootListFagment {
+public class SelectFootToPhotoFragment extends BaseFootListFragment {
 
 
     public static void start(Activity activity) {

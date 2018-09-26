@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.base.base.FragmentAdapter;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
@@ -33,6 +35,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.PigeonAddEvent;
+import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -86,6 +89,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
     public static final int CODE_LOFT = 0x234;
     public static final String TYPE_MY_SHARE = "TYPE_MY_SHARE";
     public static final String TYPE_HIS_SHARE = "TYPE_HIS_SHARE";
+    public static final String TYPE_SHARE_PIGEON = "TYPE_SHARE_PIGEON";
 
 
     private String mType;
@@ -102,6 +106,15 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
                 .putExtra(IntentBuilder.KEY_DATA_2, footId)
                 .putExtra(IntentBuilder.KEY_TYPE, type)
+                .startParentActivity(activity, BreedPigeonDetailsFragment.class);
+    }
+
+    public static void start(Activity activity, String pigeonId, String footId, String type, String userId) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, pigeonId)
+                .putExtra(IntentBuilder.KEY_DATA_2, footId)
+                .putExtra(IntentBuilder.KEY_TYPE, type)
+                .putExtra(IntentBuilder.KEY_DATA_3, userId)
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
@@ -187,11 +200,25 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
         if (StringUtil.isStringValid(mType)) {
             llButton.setVisibility(View.VISIBLE);
-            if (TYPE_MY_SHARE.equals(mType)) {
+            if (TYPE_SHARE_PIGEON.equals(mType)) {
                 tvLeft.setVisibility(View.GONE);
                 tvRight.setText(R.string.text_sure_share);
                 tvRight.setOnClickListener(v -> {
-
+                    DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_is_share_pigeon), sweetAlertDialog -> {
+                        sweetAlertDialog.dismiss();
+                        setProgressVisible(true);
+                        mBreedPigeonDetailsViewModel.addApplyShareHall();
+                    });
+                });
+            } else if (TYPE_MY_SHARE.equals(mType)) {
+                tvRight.setVisibility(View.GONE);
+                tvLeft.setText(Utils.getString(R.string.text_cancel_share));
+                tvLeft.setOnClickListener(v -> {
+                    DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_is_cancel_share), sweetAlertDialog -> {
+                        sweetAlertDialog.dismiss();
+                        setProgressVisible(true);
+                        mBreedPigeonDetailsViewModel.cancelApplyShareHall();
+                    });
                 });
             } else if (TYPE_HIS_SHARE.equals(mType)) {
                 tvLeft.setOnClickListener(v -> {
@@ -298,6 +325,22 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                     .into(img_pigeon);//鸽子照片
 
 
+        });
+
+        mBreedPigeonDetailsViewModel.mDataAddApplyR.observe(this, s -> {
+            DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                finish();
+                EventBus.getDefault().post(new ShareHallEvent());
+            });
+        });
+
+        mBreedPigeonDetailsViewModel.mDataCancelShareR.observe(this, s -> {
+            DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                finish();
+                EventBus.getDefault().post(new ShareHallEvent());
+            });
         });
 
         mBreedPigeonModifyViewModel.mBreedPigeonData.observe(this, pigeonEntryEntity -> {

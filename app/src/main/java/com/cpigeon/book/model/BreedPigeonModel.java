@@ -20,7 +20,7 @@ import io.reactivex.Observable;
 public class BreedPigeonModel {
 
     //hl 获取 鸽子  详情
-    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_GetInfo(String pigeonid,String puid) {
+    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_GetInfo(String pigeonid, String puid) {
         return RequestData.<ApiResponse<PigeonEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
@@ -38,8 +38,12 @@ public class BreedPigeonModel {
                                                                                        String sexid,
                                                                                        String year,
                                                                                        String stateid,
-                                                                                       String bitmatch
-                                                                                       ) {
+                                                                                       String bitmatch,
+                                                                                       String bitbreed,//是否有父母（1存在，2.不存在，其他全查）
+                                                                                       String pigeonidStr,// ：在列表中排除的鸽子
+                                                                                       String bitshare,// ：是否是在共享厅（1：存在，2，不存在，其他全查）
+                                                                                       String bitMotto // ：是不是铭鸽（1：是，2：正在申请 ，3，不是，其他全查）
+    ) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
@@ -52,6 +56,10 @@ public class BreedPigeonModel {
                 .addBody("year", year)
                 .addBody("stateid", stateid)
                 .addBody("bitmatch", bitmatch)
+                .addBody("bitbreed", bitbreed)
+                .addBody("pigeonidStr", pigeonidStr)
+                .addBody("bitshare", bitshare)
+                .addBody("bitMotto", bitMotto)
                 .request();
     }
 
@@ -142,7 +150,14 @@ public class BreedPigeonModel {
 
 
     //hl 种鸽(赛鸽)列表，搜索
-    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SearchBreed(String pi, String ps, String footnum, String typeid,String bitmatch) {
+    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_Pigeon_SearchBreed(
+            String pi,
+            String ps,
+            String footnum,
+            String typeid,
+            String bitmatch
+
+    ) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
@@ -162,6 +177,26 @@ public class BreedPigeonModel {
                 }.getType())
                 .url(R.string.get_pigeon_sex_count)
                 .addBody("typeid", typeId)
+                .request();
+    }
+
+    public static Observable<ApiResponse> applyAddShareHall(String pigeonId, String footId) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.add_apply_share_hall)
+                .addBody("pigeonid", pigeonId)
+                .addBody("footid", footId)
+                .request();
+    }
+
+    public static Observable<ApiResponse> cancelAddShareHall(String pigeonId, String footId) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.cancel_share_hall)
+                .addBody("pigeonid", pigeonId)
+                .addBody("footid", footId)
                 .request();
     }
 }

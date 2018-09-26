@@ -105,7 +105,7 @@ public class FootAdminListFragment extends BaseBookFragment {
         mAdapter = new FootAdminListAdapter(getBaseActivity());
 
         mRecyclerView.setRefreshListener(() -> {
-            mAdapter.getData().clear();
+            mAdapter.cleanList();
             mFiltrate.resetData();
             mViewModel.resetData();
             mViewModel.getFoodList();
@@ -170,14 +170,14 @@ public class FootAdminListFragment extends BaseBookFragment {
 
         mViewModel.footAdminListData.observe(this, logbookEntities -> {
             setProgressVisible(false);
-            mAdapter.removeAllHeaderView();
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, logbookEntities);
-            mAdapter.addHeaderView(mRvHeadView);
         });
 
         mViewModel.mDataFootStat.observe(this, footRingStatEntity -> {
+            mAdapter.removeAllHeaderView();
             mHeadAdapter.setMaxCount(footRingStatEntity.getMaxCount());
             mHeadAdapter.setNewData(footRingStatEntity.getData());
+            mAdapter.addHeaderView(mRvHeadView);
         });
 
         mSelectTypeViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="192dp"
+    android:layout_width="222dp"
     android:layout_marginLeft="20dp"
     android:padding="5dp"
     android:layout_marginTop="3dp"
@@ -43,6 +43,7 @@
                     android:textSize="@dimen/small_text_size_2"
                     tools:text="5名"
                     android:layout_width="0dp"
+                    android:layout_marginLeft="12dp"
                     android:layout_weight="1.4"
                     android:layout_height="wrap_content" />
 
@@ -66,6 +67,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/small_text_size_2"
                     tools:text="30KM"
+                    android:layout_marginLeft="12dp"
                     android:layout_width="0dp"
                     android:layout_weight="1.4"
                     android:layout_height="wrap_content" />
@@ -92,6 +94,7 @@
                     tools:text="30KM"
                     android:layout_width="0dp"
                     android:layout_weight="1.4"
+                    android:layout_marginLeft="12dp"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -116,6 +119,7 @@
                     tools:text="300羽"
                     android:layout_width="0dp"
                     android:layout_weight="1.4"
+                    android:layout_marginLeft="12dp"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -140,6 +144,7 @@
                     tools:text="1000KM"
                     android:layout_width="0dp"
                     android:layout_weight="1.4"
+                    android:layout_marginLeft="12dp"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -164,6 +169,7 @@
                     tools:text="2018-11-11 12"
                     android:layout_width="0dp"
                     android:layout_weight="1.4"
+                    android:layout_marginLeft="12dp"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -187,6 +193,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/small_text_size_2"
                     tools:text="四川东坡国际公1233"
+                    android:layout_marginLeft="12dp"
                     android:layout_width="0dp"
                     android:layout_weight="1.4"
                     android:layout_height="wrap_content" />
@@ -213,6 +220,7 @@
                     android:textSize="@dimen/small_text_size_2"
                     tools:text="四川东坡国际公123"
                     android:layout_width="0dp"
+                    android:layout_marginLeft="12dp"
                     android:layout_weight="1.4"
                     android:layout_height="wrap_content" />
 

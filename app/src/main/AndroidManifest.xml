@@ -197,6 +197,9 @@
             android:name=".module.breeding.OffspringSearchActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        <activity android:name=".module.home.sharehall.SearchSharePigeonActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>

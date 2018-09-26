@@ -89,6 +89,11 @@ public class PigeonEntity implements Serializable {
     private String CoverPhotoTypeName;// 图片typeName
     private String MatchCount;// 参赛次数
 
+    private String ShareTime;
+    private String Province;
+    private String City;
+    private String UserID;
+
     public String getMatchCount() {
         return MatchCount;
     }
@@ -158,6 +163,38 @@ public class PigeonEntity implements Serializable {
         setMatchCount(builder.MatchCount);
     }
 
+    public String getShareTime() {
+        return ShareTime;
+    }
+
+    public void setShareTime(String shareTime) {
+        ShareTime = shareTime;
+    }
+
+    public String getProvince() {
+        return Province;
+    }
+
+    public void setProvince(String province) {
+        Province = province;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
+    }
+
+    public String getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(String userID) {
+        UserID = userID;
+    }
+
     public String getCoverPhotoTypeID() {
         return CoverPhotoTypeID;
     }
@@ -173,6 +210,7 @@ public class PigeonEntity implements Serializable {
     public void setCoverPhotoTypeName(String coverPhotoTypeName) {
         CoverPhotoTypeName = coverPhotoTypeName;
     }
+
 
     public boolean isSelect() {
         return isSelect;

@@ -25,10 +25,19 @@ public class LeagueDetailsEntity {
     private String MatchName;
     private String MatchNumber;
     private String MatchTime;
+    private String MatchISOCName;
     private String PigeonID;
     private String PigeonMatchID;
     private String ConnectUrl;
     private String BitUpdate;
+
+    public String getMatchISOCName() {
+        return MatchISOCName;
+    }
+
+    public void setMatchISOCName(String matchISOCName) {
+        MatchISOCName = matchISOCName;
+    }
 
     public String getFootRingID() {
         return FootRingID;

@@ -68,7 +68,8 @@ public class FiltrateListView extends RelativeLayout {
                     FiltrateItemAdapter adapter = mFiltrateItemViews.get(i).mAdapter;
                     mFiltrateSelectItems.add(adapter.getSelectItem());
                 }
-                if (mOnSureClickListener != null) {
+
+                if (mOnSureClickListener != null && !Lists.isEmpty(mFiltrateSelectItems)) {
                     mOnSureClickListener.onSure(mFiltrateSelectItems);
                 }
             }

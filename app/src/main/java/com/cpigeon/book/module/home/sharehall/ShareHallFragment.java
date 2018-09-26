@@ -18,9 +18,13 @@ import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.home.sharehall.adpter.ShareHallHomeAdapter;
+import com.cpigeon.book.module.home.sharehall.viewmodel.ShareHallViewModel;
+import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
 
 import java.util.List;
@@ -40,13 +44,13 @@ public class ShareHallFragment extends BaseBookFragment {
     private XRecyclerView mRecyclerView;
     private ShareHallHomeAdapter mAdapter;
     private SelectTypeViewModel mSelectTypeViewModel;
-
+    private ShareHallViewModel mViewModel;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mSelectTypeViewModel = new SelectTypeViewModel();
-
+        mViewModel = new ShareHallViewModel();
     }
 
     @Nullable
@@ -66,6 +70,9 @@ public class ShareHallFragment extends BaseBookFragment {
         mFiltrate = findViewById(R.id.filtrate);
         mRecyclerView = findViewById(R.id.list);
         mTvSearch.setText(R.string.text_input_foot_number_search);
+        mRlSearch.setOnClickListener(v -> {
+            SearchSharePigeonActivity.start(getBaseActivity(), false);
+        });
 
         setToolbarRightImage(R.drawable.svg_filtrate, item -> {
             if (mDrawerLayout != null) {
@@ -74,28 +81,49 @@ public class ShareHallFragment extends BaseBookFragment {
             return false;
         });
 
+        mFiltrate.setOnSureClickListener(selectItems -> {
+            mDrawerLayout.closeDrawer(Gravity.RIGHT);
+
+            List<SelectTypeEntity> blood = selectItems.get(0);
+            List<SelectTypeEntity> sex = selectItems.get(1);
+            List<SelectTypeEntity> eye = selectItems.get(2);
+
+            mViewModel.blood = SelectTypeEntity.getTypeIds(blood);
+            mViewModel.sex = SelectTypeEntity.getTypeIds(sex);
+            mViewModel.eye = SelectTypeEntity.getTypeIds(eye);
+
+            mAdapter.cleanList();
+            setProgressVisible(true);
+            mViewModel.getSharePigeons();
+        });
+
         mAdapter = new ShareHallHomeAdapter(false);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newTestArrayList());
 
-        mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.STATE_STATE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
+        mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_PIGEON_BLOOD, SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.TYPE_EYE);
         mSelectTypeViewModel.getSelectTypes();
 
         mLlMyShare.setOnClickListener(v -> {
             SearchFragmentParentActivity.start(getBaseActivity(), MySharePigeonFragment.class, false);
         });
 
+        mViewModel.getSharePigeons();
     }
 
     @Override
     protected void initObserve() {
         mSelectTypeViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
-            List<String> titles = Lists.newArrayList(Utils.getString(R.string.text_sex)
-                    , Utils.getString(R.string.text_pigeon_status), Utils.getString(R.string.text_pigeon_blood));
+            List<String> titles = Lists.newArrayList(Utils.getString(R.string.text_pigeon_blood), Utils.getString(R.string.text_sex)
+                    , Utils.getString(R.string.text_eye_sand));
 
             if (mFiltrate != null) {
-                mFiltrate.setData(true, selectTypeEntities, titles, mSelectTypeViewModel.whichIds);
+                mFiltrate.setData(false, selectTypeEntities, titles, mSelectTypeViewModel.whichIds);
             }
+        });
+
+        mViewModel.mDataSharePigeon.observe(this, sharePigeonEntities -> {
+            setProgressVisible(false);
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, sharePigeonEntities);
         });
     }
 }

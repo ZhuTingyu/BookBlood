@@ -16,6 +16,8 @@ import java.util.List;
 
 public class BreedPigeonListModel extends BaseViewModel {
 
+    public static final String CODE_IN_SHARE_HALL = "1";
+    public static final String CODE_IN_NOT_SHARE_HALL = "2";
 
     public int pi = 1;
     public int ps = 15;
@@ -30,6 +32,11 @@ public class BreedPigeonListModel extends BaseViewModel {
     public String sexid;//性别
     public String stateid;//状态
     public String bloodid;//血统id （1,2）
+
+    public String bitbreed;//是否有父母（1存在，2.不存在，其他全查）
+    public String pigeonidStr;// ：在列表中排除的鸽子
+    public String bitshare;// ：是否是在共享厅（1：存在，2，不存在，其他全查）
+    public String bitMotto;// ：是不是铭鸽（1：是，2：正在申请 ，3，不是，其他全查）
 
     public MutableLiveData<List<PigeonEntity>> mPigeonListData = new MutableLiveData<>();
     public MutableLiveData<PigeonSexCountEntity> mLivePigeonSexCount = new MutableLiveData<>();
@@ -58,7 +65,11 @@ public class BreedPigeonListModel extends BaseViewModel {
                     sexid,
                     year,
                     stateid,
-                    bitmatch), r -> {
+                    bitmatch,
+                    bitbreed,//是否有父母（1存在，2.不存在，其他全查）
+                    pigeonidStr,// ：在列表中排除的鸽子
+                    bitshare,// ：是否是在共享厅（1：存在，2，不存在，其他全查）
+                    bitMotto), r -> {
 
                 if (r.isOk()) {
                     listEmptyMessage.setValue(r.msg);
