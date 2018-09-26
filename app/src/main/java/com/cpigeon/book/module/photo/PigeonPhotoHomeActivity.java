@@ -138,9 +138,7 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
                             mTvAllPhoto.setText(item);
                             mViewModel.typeid = mViewModel.mPhotoType.get(index).getTypeID();
 
-                            setProgressVisible(true);
-                            mAdapter.cleanList();
-                            mViewModel.getTXGP_PigeonPhoto_SelectData();
+                            initData(false);
                         }
                     });
         });
@@ -151,7 +149,7 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
             } else {
                 mViewModel.sort = 2;
             }
-            initData();
+            initData(false);
         });
 
         mCoordinator.setTitle(mViewModel.mPigeonEntity.getFootRingNum());
@@ -222,15 +220,17 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
             setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
 
+            mTvPhotoCount.setText(datas.size() + "张");
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {
+            mTvPhotoCount.setText("0张");
             mAdapter.setEmptyText(s);
         });
 
         //统计数据
         mViewModel.mPigeonPhotoCount.observe(this, datas -> {
-            mTvPhotoCount.setText(datas.getPhotoCount() + "张");
+
         });
     }
 
@@ -242,14 +242,17 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
     @Subscribe //订阅事件FirstEvent
     public void onEventMainThread(String info) {
         if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
-            initData();
+            initData(true);
         }
     }
 
-    private void initData() {
+    private void initData(boolean isCount) {
         setProgressVisible(true);
         mAdapter.cleanList();
         mViewModel.getTXGP_PigeonPhoto_SelectData();
+//        if (isCount) {
+//            mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
+//        }
     }
 
 

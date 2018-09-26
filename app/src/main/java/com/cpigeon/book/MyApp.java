@@ -4,6 +4,7 @@ import android.support.multidex.MultiDex;
 
 import com.base.application.BaseApplication;
 import com.facebook.stetho.Stetho;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -36,5 +37,8 @@ public class MyApp extends BaseApplication {
         UMShareAPI.get(this);//友盟初始化
 
         Config.DEBUG = true;
+
+        //bugly
+        CrashReport.initCrashReport(getApplicationContext(), "4d1c4ee910", false);
     }
 }

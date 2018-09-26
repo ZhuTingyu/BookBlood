@@ -5,6 +5,7 @@ import android.util.Log;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
+import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PairingNestInfoEntity;
 import com.cpigeon.book.module.breeding.adapter.OffspringInfoAdapter;
 import com.cpigeon.book.service.EventBusService;
@@ -19,6 +20,9 @@ public class PairingNestViewModel extends BaseViewModel {
 
 
     public PairingNestInfoEntity mPairingNestInfoEntity;
+
+    public PairingInfoEntity mPairingInfoEntity;
+
     //子代鸽子id
     public String pigeonidstr;
     //子代足环ID

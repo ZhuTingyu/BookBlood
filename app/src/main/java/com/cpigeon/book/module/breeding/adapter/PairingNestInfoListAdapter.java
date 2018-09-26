@@ -51,7 +51,6 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
 //    private RecyclerView rv_offspring_info;//子代信息 列表
 
     private PairingNestViewModel mPairingNestViewModel;
-//    private OffspringInfoAdapter mOffspringInfoAdapter;
 
 
     public int addChildPosition = 0;
@@ -345,7 +344,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
                 break;
             case R.id.ll_offspring_info:
                 //子代信息
-                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode);
+                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode,mPairingNestViewModel.mPairingInfoEntity);
                 break;
         }
     }

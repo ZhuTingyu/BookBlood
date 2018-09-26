@@ -20,21 +20,21 @@ public class RacingPigeonModel {
 
     //hl 添加赛鸽
     public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Racing_Add(String coodid,
-                                                                                String footnum,
-                                                                                String footnumto,
-                                                                                String sourceid,
-                                                                                String menfootnum,
-                                                                                String wofootnum,
-                                                                                String name,
-                                                                                String sex,
-                                                                                String plume,
-                                                                                String eye,
-                                                                                String outtime,
-                                                                                String blood,
-                                                                                String stateid,
-                                                                                String phototypeid,
-                                                                                String foottime,
-                                                                                Map<String, String> body) {
+                                                                                       String footnum,
+                                                                                       String footnumto,
+                                                                                       String sourceid,
+                                                                                       String menfootnum,
+                                                                                       String wofootnum,
+                                                                                       String name,
+                                                                                       String sex,
+                                                                                       String plume,
+                                                                                       String eye,
+                                                                                       String outtime,
+                                                                                       String blood,
+                                                                                       String stateid,
+                                                                                       String phototypeid,
+                                                                                       String foottime,
+                                                                                       Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntryEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
                 }.getType())
@@ -54,7 +54,7 @@ public class RacingPigeonModel {
                 .addBody("stateid", stateid)// 信鸽状态ID
                 .addBody("phototypeid", phototypeid)// 信鸽状态ID
                 .addBody("foottime", foottime)// 挂环日期
-                .addBody("typeid", PigeonEntity.ID_MATCH_PIGEON)// 挂环日期
+                .addBody("typeid", PigeonEntity.ID_MATCH_PIGEON)// 鸽子类型
                 .addImageFileBodys(body)
                 .request();
     }

@@ -33,6 +33,11 @@ public class PigeonPhotoDetailsViewModel extends BaseViewModel {
     public String currentImgTypeStr;
 
     public MutableLiveData<Object> imgEditCallBack = new MutableLiveData<>();//图片编辑后回调
+    public MutableLiveData<Object> imgDelCallBack = new MutableLiveData<>();//图片删除后回调
+
+    public String remark;
+    public MutableLiveData<Object> imgRemarkEditCallBack = new MutableLiveData<>();//图片修改备注后回调
+
 
     //移动图片 到别的标签下
     public void getTXGP_PigeonPhoto_UpdateData() {
@@ -42,6 +47,7 @@ public class PigeonPhotoDetailsViewModel extends BaseViewModel {
         ), r -> {
             if (r.isOk()) {
                 hintDialog(r.msg);
+                EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_REFRESH);
                 imgEditCallBack.setValue(r);
             } else throw new HttpErrorException(r);
         });
@@ -54,6 +60,7 @@ public class PigeonPhotoDetailsViewModel extends BaseViewModel {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_REFRESH);
                 EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_DEL_REFRESH);
+                imgDelCallBack.setValue(r.msg);
                 showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).cancelable(false).isClosePage(false).build());
             } else throw new HttpErrorException(r);
         });
@@ -67,9 +74,27 @@ public class PigeonPhotoDetailsViewModel extends BaseViewModel {
                 photoid
         ), r -> {
             if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_REFRESH);
                 hintDialog(r.msg);
             } else throw new HttpErrorException(r);
         });
     }
+
+
+    //修改图片备注
+    public void getTXGP_PigeonPhoto_EideRemarkData() {
+        submitRequestThrowError(PhotoAlbumModel.getTXGP_PigeonPhoto_EideRemark(
+                mPigeonEntity.getPigeonID(),
+                photoid,
+                remark
+        ), r -> {
+            if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_REFRESH);
+                imgRemarkEditCallBack.setValue(r.msg);
+                hintDialog(r.msg);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
 
 }

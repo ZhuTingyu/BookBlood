@@ -88,6 +88,14 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
 
         mFeedPigeonListViewModel.mFeedPigeonListData.observe(this, datas -> {
             setProgressVisible(false);
+            if (datas.isEmpty() || datas.size() == 0) {
+
+            } else {
+                if (mAdapter.getHeaderViewsCount() == 0) {
+                    mAdapter.addHeaderView(initView());
+                    mFeedPigeonListViewModel.getTXGP_Pigeon_SelectIDCountData();
+                }
+            }
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 
@@ -177,7 +185,14 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
 
                 PigeonPhotoDetailsFragment.start(getBaseActivity(),
                         mFeedPigeonListViewModel.mPigeonEntity,
-                        Lists.newArrayList(new PigeonPhotoEntity.Builder().build()),
+                        Lists.newArrayList(new PigeonPhotoEntity.Builder()
+                                .FootRingID(item.getFootRingID())
+                                .PigeonPhotoID(item.getViewID())
+                                .PhotoUrl(item.getName())
+                                .TypeName(getString(R.string.text_nef))
+                                .AddTime(item.getUseTime())
+                                .Remark(item.getListInfo())
+                                .build()),
                         0);
             } else if (item.getTypeID() == 3) {//用药
                 DrugUseCaseFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
@@ -240,7 +255,7 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
 
     @Subscribe //订阅事件FirstEvent
     public void onEventMainThread(String info) {
-        if (info.equals(EventBusService.FEED_PIGEON_DETAILS_REFRESH)) {
+        if (info.equals(EventBusService.FEED_PIGEON_DETAILS_REFRESH) || info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
             initData();
         }
     }

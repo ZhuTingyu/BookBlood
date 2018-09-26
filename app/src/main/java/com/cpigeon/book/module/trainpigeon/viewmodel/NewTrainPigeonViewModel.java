@@ -64,8 +64,12 @@ public class NewTrainPigeonViewModel extends BaseViewModel {
 
     public String getFootIds() {
         List<String> footId = Lists.newArrayList();
-        for (PigeonEntity pigeonEntity : mPigeonEntities) {
-            footId.add(pigeonEntity.getFootRingID());
+        try {
+            for (PigeonEntity pigeonEntity : mPigeonEntities) {
+                footId.add(pigeonEntity.getFootRingID());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return Lists.appendStringByList(footId);
     }

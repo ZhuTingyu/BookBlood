@@ -19,6 +19,7 @@ public class SearchBreedingFootActivity extends BaseSearchPigeonActivity {
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
             PairingInfoListFragment.start(getBaseActivity(), mBreedPigeonEntity);
+            getBaseActivity().finish();
         });
         return mAdapter;
     }

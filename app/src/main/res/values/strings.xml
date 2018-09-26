@@ -444,8 +444,8 @@
     <string name="text_pigeon_master_sign">鸽主签名：</string>
     <string name="text_choose_template">选择模板</string>
     <string name="text_choos_book_template">选择血统书模板</string>
-    <string name="text_photo_all_place">相册总容量 %1$sM</string>
-    <string name="text_photo_user_and_remain_place">(已用%1$sM，剩余%2$sM)</string>
+    <string name="text_photo_all_place">相册总容量 %1$sM </string>
+    <string name="text_photo_user_and_remain_place">(已用%1%M，剩余%2%M)</string>
 
 
     <string name="str_copyright_information_hint">天气仅供参考，天下鸽谱提醒您切勿作为商业用途！</string>

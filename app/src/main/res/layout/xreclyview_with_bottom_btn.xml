@@ -21,8 +21,7 @@
         app:layout_moreProgress="@layout/view_load_more"
         app:mainLayoutId="@layout/refresh_recyclerview"
         app:recyclerClipToPadding="false"
-        app:recyclerPaddingLeft="@dimen/normal_safe_distance"
-        app:recyclerPaddingRight="@dimen/normal_safe_distance"
+
         app:scrollbarStyle="insideOverlay" />
 
     <View

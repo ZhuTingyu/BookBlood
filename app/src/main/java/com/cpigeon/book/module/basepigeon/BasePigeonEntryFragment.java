@@ -75,9 +75,9 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     @BindView(R.id.ll_foot_source)
     LineInputView llFootSource;
     @BindView(R.id.ll_foot_father)
-    LineInputView llFootFather;
+    protected LineInputView llFootFather;
     @BindView(R.id.ll_foot_mother)
-    LineInputView llFootMother;
+    protected LineInputView llFootMother;
     @BindView(R.id.ll_pigeon_name)
     LineInputView llPigeonName;
     @BindView(R.id.ll_sex)

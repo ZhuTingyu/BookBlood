@@ -61,7 +61,7 @@ public class PhotoAlbumModel {
 
     //hl 图片  删除
     public static Observable<ApiResponse<Object>> getTXGP_PigeonPhoto_Delete(String photoid
-                                                                             ) {
+    ) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
@@ -79,6 +79,20 @@ public class PhotoAlbumModel {
                 .url(R.string.pigeion_img_set_cover)
                 .addBody("pigeonid", pigeonid)//
                 .addBody("photoid", photoid)//
+                .request();
+    }
+
+    //hl 图片  修改图片备注
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonPhoto_EideRemark(String pigeonid,
+                                                                                 String photoid,
+                                                                                 String remark) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.pigeion_img_edit_remark)
+                .addBody("pigeonid", pigeonid)//
+                .addBody("photoid", photoid)//
+                .addBody("remark", remark)//
                 .request();
     }
 

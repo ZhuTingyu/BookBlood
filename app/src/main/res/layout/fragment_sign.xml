@@ -57,14 +57,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fadingEdge="none"
         android:overScrollMode="never">
 
         <LinearLayout
-
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <com.haibin.calendarview.CalendarLayout
@@ -104,14 +103,10 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_guize"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/spacing_left_reight"
+                android:layout_marginBottom="53dp"
                 android:paddingRight="@dimen/spacing_left_reight" />
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="53dp" />
 
 
         </LinearLayout>
