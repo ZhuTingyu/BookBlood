@@ -64,6 +64,9 @@
     <string name="get_server_record">TXGP_GetServiceList</string>
 
 
+    <!--更新-->
+    <string name="update_info">TXGP_GongGao_GetList</string>
+
     <!--公告通知-->
     <string name="get_announcement_notice_list">TXGP_GongGao_GetList</string>
     <!--公告通知统计-->
@@ -176,6 +179,8 @@
     <string name="feed_pigeon_list">TXGP_Pigeon_SelectRecord</string>
     <!--养鸽记录统计-->
     <string name="feed_pigeon_statistical">TXGP_Pigeon_SelectIDCount</string>
+    <!--成长记录  列表-->
+    <string name="pigeon_growth_record">TXGP_Pigeon_SelectGrowAll</string>
 
 
     <!--上传图片  一张-->

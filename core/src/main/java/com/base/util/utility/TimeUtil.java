@@ -8,6 +8,8 @@ import java.util.Locale;
 
 public class TimeUtil {
     public static final String FORMAT_YYYYMM = "yyyy-MM";
+    public static final String FORMAT_MM = "MM";
+    public static final String FORMAT_dd = "dd";
     public static final String FORMAT_YYYY = "yyyy";
     public static final String FORMAT_YYYYMMDD = "yyyy-MM-dd";
 
@@ -33,18 +35,34 @@ public class TimeUtil {
         }
     }
 
+    //时间  字符串   获取 时间戳
+    public static long strToLong(String date) {
+        SimpleDateFormat format = new SimpleDateFormat(FORMAT_YYYYMMDDHHMMSS);
+        long dates = 0;
+        try {
+            dates = format.parse(date).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dates;
+    }
+
+
+    //获取指定时间的时间字符串格式
+    public static String getTimeFormat(String date, String formatStr) {
+        String s = format(strToLong(date), formatStr);
+        return s;
+    }
+
     public static long getBeforeMonth(int month) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date(System.currentTimeMillis()));
         calendar.add(Calendar.MONTH, -month);
         return calendar.getTimeInMillis();
-
     }
 
     /**
      * 获取当前月份 总共天数
-     *
-     * @return
      */
     public static int getDayOfMonth() {
         Calendar aCalendar = Calendar.getInstance(Locale.CHINA);
@@ -52,12 +70,10 @@ public class TimeUtil {
         return day;
     }
 
-
     /**
      * 根据日期获得星期
      */
-    public static int getWeekOfDate(String dates)  {
-
+    public static int getWeekOfDate(String dates) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -78,6 +94,5 @@ public class TimeUtil {
 //        return weekDaysCode[intWeek];
         return intWeek;
     }
-
 
 }

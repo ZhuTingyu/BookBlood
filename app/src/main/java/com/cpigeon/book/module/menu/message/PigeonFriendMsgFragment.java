@@ -79,11 +79,6 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
 
         mViewModel.getTXGP_GetMsgListData();
 
-        mViewModel.listEmptyMessage.observe(this, s -> {
-            mAdapter.setEmptyText(s);
-        });
-
-
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             mViewModel.changePosition = position;
 
@@ -93,7 +88,6 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
 
         mViewModel.getTXGP_Msg_CountData();
     }
-
 
     @Override
     protected void initObserve() {

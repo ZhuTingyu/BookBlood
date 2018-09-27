@@ -3,15 +3,7 @@ package com.cpigeon.book.module.breedpigeon;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.base.base.FragmentAdapter;
 import com.base.util.IntentBuilder;
@@ -21,8 +13,6 @@ import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
-import com.base.widget.CustomViewPager;
-import com.base.widget.magicindicator.MagicIndicator;
 import com.base.widget.magicindicator.ViewPagerHelper;
 import com.base.widget.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.base.widget.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -32,7 +22,6 @@ import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePage
 import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
-import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.event.ShareHallEvent;
@@ -44,6 +33,7 @@ import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonModifyViewModel;
+import com.cpigeon.book.module.feedpigeon.GrowthReportFragment;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
@@ -63,11 +53,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.qqtheme.framework.picker.OptionPicker;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 种鸽详情
@@ -138,7 +125,10 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
         setTitle("详情");
 
         setToolbarRight("成长记录", item -> {
-            GrowthReportFragment.start(getBaseActivity(), "");
+            if (mBreedPigeonModifyViewModel.mPigeonEntity == null) {
+                return true;
+            }
+            GrowthReportFragment.start(getBaseActivity(), mBreedPigeonModifyViewModel.mPigeonEntity);
             return true;
         });
 

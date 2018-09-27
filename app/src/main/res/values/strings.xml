@@ -524,4 +524,6 @@
         <item>未挂环</item>
     </string-array>
 
+    <string name="str_new_code">发现新版本 v%1%来啦</string>
+
 </resources>

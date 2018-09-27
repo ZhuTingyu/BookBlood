@@ -9,14 +9,16 @@ import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.GrowthReportEntity;
 import com.cpigeon.book.module.photo.adpter.ImageItemDecoration;
 
 /**
  * Created by Zhu TingYu on 2018/8/29.
  */
 
-public class GrowthReportAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, BaseViewHolder> {
     private static final int TAG_IS_ADD_DECORATION = 0;
 
     ImageItemDecoration mItemDecoration;
@@ -27,41 +29,100 @@ public class GrowthReportAdapter extends BaseQuickAdapter<String, BaseViewHolder
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, GrowthReportEntity item) {
+
         ImageView icon = helper.getView(R.id.imgIcon);
-        helper.setText(R.id.tvDay, "30");
-        helper.setText(R.id.tvYear, "2018-22");
-        helper.setText(R.id.tvTitle, "用药");
-        helper.setText(R.id.tv1, "第一窝    晴    27℃   东南风");
-        helper.setText(R.id.tv2, "东南风");
+
+        helper.setText(R.id.tvDay, String.valueOf(TimeUtil.getTimeFormat(item.getUseTime(), TimeUtil.FORMAT_dd)));
+        helper.setText(R.id.tvYear, String.valueOf(TimeUtil.getTimeFormat(item.getUseTime(), TimeUtil.FORMAT_YYYYMM)));
+
+        helper.setText(R.id.tvTitle, item.getTypeName());
+
+        helper.setText(R.id.tv2, item.getInfo());
+
+//        helper.setText(R.id.tvDay, "30");
+//        helper.setText(R.id.tvYear, "2018-22");
+//        helper.setText(R.id.tv1, "第一窝    晴    27℃   东南风");
+//        helper.setText(R.id.tv2, "东南风");
         icon.setImageResource(R.mipmap.ic_report_auction);
 
         RecyclerView list = helper.getView(R.id.list);
 
-        if(list.getTag() == null){
+        if (list.getTag() == null) {
             list.addItemDecoration(mItemDecoration);
             list.setTag(true);
         }
 
         list.setLayoutManager(new GridLayoutManager(mContext, 4));
         GrowthReportImageAdapter adapter = (GrowthReportImageAdapter) list.getAdapter();
-        if(adapter == null){
+        if (adapter == null) {
             adapter = new GrowthReportImageAdapter(list);
             list.setAdapter(adapter);
         }
 
-        adapter.setNewData(Lists.newArrayList("","","",""));
+        adapter.setNewData(Lists.newArrayList("", "", "", ""));
         list.setFocusableInTouchMode(false);
 
-        if(getData().size() == 1){
+        if (getData().size() == 1) {
             helper.getView(R.id.rlArrow).setVisibility(View.GONE);
-        }else if(getData().size() >= 2){
-            if(helper.getAdapterPosition() == getData().size() - 1){
+        } else if (getData().size() >= 2) {
+            if (helper.getAdapterPosition() == getData().size() - 1) {
                 helper.getView(R.id.rlArrow).setVisibility(View.GONE);
-            }else {
+            } else {
                 helper.getView(R.id.rlArrow).setVisibility(View.VISIBLE);
             }
         }
+
+
+        switch (item.getTypeName()) {
+            case "配偶"://配偶
+
+                break;
+
+            case "转让"://转让
+
+                break;
+
+            case "拍卖"://拍卖
+
+                break;
+
+            case "用药"://用药
+
+                break;
+            case "病情"://病情
+
+                break;
+            case "保健"://保健
+
+                break;
+
+            case "疫苗"://疫苗
+
+                break;
+            case "比赛"://比赛
+
+                break;
+
+            case "训练"://训练
+
+                break;
+            case "挂环"://挂环
+
+                break;
+
+
+            case "出壳"://挂环
+
+                break;
+
+            case "繁育"://繁育
+
+                break;
+
+
+        }
+
 
     }
 }
