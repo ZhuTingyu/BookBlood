@@ -19,6 +19,7 @@ import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
+import com.base.util.utility.PhoneUtils;
 import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.base.widget.CustomViewPager;
@@ -36,6 +37,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.event.ShareHallEvent;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -118,6 +120,14 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
+    public static void startGoodPigeon(Activity activity, String pigeonId, String footId, String userId) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, pigeonId)
+                .putExtra(IntentBuilder.KEY_DATA_2, footId)
+                .putExtra(IntentBuilder.KEY_DATA_3, userId)
+                .startParentActivity(activity, BreedPigeonDetailsFragment.class);
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -161,7 +171,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
         mSelectTypeViewModel.getSelectType_State();
         mSelectTypeViewModel.getSelectType_PigeonSource();
 
-        mBookViewModel.getBloodBook();// //获取 血统书  四代
 
         mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
             @Override
@@ -198,6 +207,10 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             }
         });
 
+        if(!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())){
+            mFamilyTreeView.setShowInfoModel(true);
+        }
+
         if (StringUtil.isStringValid(mType)) {
             llButton.setVisibility(View.VISIBLE);
             if (TYPE_SHARE_PIGEON.equals(mType)) {
@@ -221,16 +234,22 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                     });
                 });
             } else if (TYPE_HIS_SHARE.equals(mType)) {
-                tvLeft.setOnClickListener(v -> {
-
-                });
-
                 tvRight.setOnClickListener(v -> {
-
+                    List<String> way = Lists.newArrayList(getResources().getStringArray(R.array.array_contact_way));
+                    BottomSheetAdapter.createBottomSheet(getBaseActivity(), way, p -> {
+                        if(p == 0){
+                            //打电话
+                            PhoneUtils.dial(getBaseActivity(),mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
+                        }else {
+                            //发短信
+                            PhoneUtils.sms(getBaseActivity(),mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
+                        }
+                    });
                 });
             }
         }
 
+        mBookViewModel.getBloodBook();// //获取 血统书  四代
 
     }
 
@@ -323,8 +342,9 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                     .load(datas.getCoverPhotoUrl())
                     .placeholder(R.drawable.ic_img_default)
                     .into(img_pigeon);//鸽子照片
-
-
+            if (TYPE_HIS_SHARE.equals(mType)){
+                tvLeft.setText(mBreedPigeonDetailsViewModel.mPigeonEntity.getUserName());
+            }
         });
 
         mBreedPigeonDetailsViewModel.mDataAddApplyR.observe(this, s -> {
@@ -386,6 +406,9 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             , R.id.tv_make_book, R.id.tv_lineage_analysis, R.id.tv_lineage_roots, R.id.tv_breed_info
             , R.id.img_play_import, R.id.img_play_add})
     public void onViewClicked(View view) {
+
+        if(!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) return;
+
         switch (view.getId()) {
 
             case R.id.img_pigeon:

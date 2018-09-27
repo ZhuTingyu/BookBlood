@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.RequiresPermission;
@@ -18,6 +19,7 @@ import com.base.http.BuildConfig;
 import com.base.util.EncryptionTool;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
+import com.base.util.regex.RegexUtils;
 
 import java.net.NetworkInterface;
 import java.util.Collections;
@@ -252,10 +254,12 @@ public final class PhoneUtils {
      * Send sms.
      *
      * @param phoneNumber The phone number.
-     * @param content     The content.
      */
-    public static void sendSms(final String phoneNumber, final String content) {
-        //TODO sendSms
+    public static void sms(Activity activity, String phoneNumber) {
+        if(RegexUtils.isMobileExact(phoneNumber)){
+            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+phoneNumber));
+            activity.startActivity(intent);
+        }
     }
 
     /**

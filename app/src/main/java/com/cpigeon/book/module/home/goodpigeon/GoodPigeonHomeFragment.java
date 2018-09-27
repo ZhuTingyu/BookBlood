@@ -4,37 +4,67 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.base.util.FragmentUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.RxUtils;
 import com.base.util.Utils;
+import com.base.widget.magicindicator.MagicIndicator;
+import com.base.widget.magicindicator.ViewPagerHelper;
+import com.base.widget.magicindicator.buildins.commonnavigator.CommonNavigator;
+import com.base.widget.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
+import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
+import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
+import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.BaseTabFragment;
 import com.cpigeon.book.module.home.goodpigeon.adpter.GoodPigeonListAdapter;
+import com.cpigeon.book.module.home.goodpigeon.viewmodel.GoodPigeonHomeViewModel;
+import com.cpigeon.book.widget.FragmentTabView;
+import com.cpigeon.book.widget.stats.StatView;
+
+import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/9/14.
  */
 
-public class GoodPigeonHomeFragment extends BaseTabFragment {
+public class GoodPigeonHomeFragment extends BaseBookFragment {
 
+
+    protected List<String> mTitles = Lists.newArrayList();
+    protected List<Fragment> mFragments = Lists.newArrayList();
 
     private RelativeLayout mRlSearch;
     private TextView mTvSearch;
+    private FrameLayout mFrameLayout;
+    private FragmentTabView mTabView;
+    GoodPigeonHomeViewModel mViewModel;
+
+    private StatView mStat1;
+    private StatView mStat2;
+    private StatView mStat3;
+
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mViewModel = new GoodPigeonHomeViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -46,44 +76,61 @@ public class GoodPigeonHomeFragment extends BaseTabFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         setToolbarNotBack();
         setToolbarRight(Utils.getString(R.string.text_add), item -> {
             IntentBuilder.Builder().startParentActivity(getBaseActivity(), ApplyAddGoodPigeonFragment.class);
             return false;
         });
+
+        mFrameLayout = findViewById(R.id.frame);
+        mTabView = findViewById(R.id.tab);
         mTvSearch = findViewById(R.id.tvSearch);
         mRlSearch = findViewById(R.id.rlSearch);
+        mStat1 = findViewById(R.id.stat1);
+        mStat2 = findViewById(R.id.stat2);
+        mStat3 = findViewById(R.id.stat3);
 
         mRlSearch.setOnClickListener(v -> {
             BaseSearchActivity.start(getBaseActivity(), SearchGoodPigeonActivity.class);
         });
         mTvSearch.setText(R.string.text_input_foot_number_search);
 
+        initTitles();
+        initFragments();
+
+        composite.add(RxUtils.delayed(500, aLong -> {
+            mTabView.setTitles(mTitles);
+            mTabView.setOnSelectListener(position -> {
+                FragmentUtils.showHide(position, mFragments);
+            });
+        }));
+
+        FragmentUtils.add(getFragmentManager(), mFragments, R.id.frame, 0);
+
+        mViewModel.getCount();
     }
 
     @Override
+    protected void initObserve() {
+        mViewModel.mDataGoodPitgeonCount.observe(this, goodPigeonCountEntity -> {
+            mStat1.bindData(goodPigeonCountEntity.getAllCount(), goodPigeonCountEntity.getAllCount());
+            mStat2.bindData(goodPigeonCountEntity.getAllXiongCount(), goodPigeonCountEntity.getAllCount());
+            mStat3.bindData(goodPigeonCountEntity.getAllCiCount(), goodPigeonCountEntity.getAllCount());
+        });
+    }
+
     protected void initFragments() {
-        for (String title : mTitles) {
+        for (int i = 0; i < mTitles.size(); i++) {
             GoodPigeonListFragment pigeonListFragment = new GoodPigeonListFragment();
             Bundle bundle = new Bundle();
-            bundle.putString(IntentBuilder.KEY_TITLE, title);
+            bundle.putInt(IntentBuilder.KEY_DATA, i + 1);
             pigeonListFragment.setArguments(bundle);
             mFragments.add(pigeonListFragment);
         }
     }
 
-    @Override
     protected void initTitles() {
         mTitles = Lists.newArrayList(getBaseActivity().getResources().getStringArray(R.array.array_good_pigeon));
-    }
-
-    @Override
-    public int getNormalTextColor() {
-        return R.color.black;
-    }
-
-    @Override
-    protected int getSelectTextColor() {
-        return R.color.black;
     }
 }

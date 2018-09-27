@@ -524,4 +524,9 @@
         <item>未挂环</item>
     </string-array>
 
+    <string-array name="array_contact_way">
+        <item>打电话</item>
+        <item>发短信</item>
+    </string-array>
+
 </resources>

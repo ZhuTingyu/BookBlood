@@ -165,4 +165,11 @@
         <attr name="statView_stat_w" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="FragmentTabView">
+        <attr name="normalTextColor" format="color"/>
+        <attr name="selectTextColor" format="color"/>
+        <attr name="selectTextSize" format="dimension"/>
+        <attr name="normalTextSize" format="dimension"/>
+    </declare-styleable>
+
 </resources>
