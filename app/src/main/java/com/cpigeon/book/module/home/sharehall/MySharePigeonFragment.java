@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.widget.recyclerview.XRecyclerView;
@@ -75,7 +74,7 @@ public class MySharePigeonFragment extends BaseBookFragment {
         mRecyclerView.setAdapter(mAdapter);
         mTvOk.setText(R.string.text_add_share_pigeon);
         mTvOk.setOnClickListener(v -> {
-            SearchPigeonToShareFragment.start(getBaseActivity());
+            SearchPigeonFragment.start(getBaseActivity());
         });
 
         mRecyclerView.setRefreshListener(() -> {
