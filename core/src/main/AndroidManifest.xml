@@ -37,7 +37,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name="com.base.base.ShowImageActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.base.util.hipermission.PermissionActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@style/Permission_Dialog" />
     </application>
-
 
 </manifest>

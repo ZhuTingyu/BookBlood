@@ -19,18 +19,21 @@ public class BookViewModel extends BaseViewModel {
     public String foodId;
     public String pigeonId;
 
+    public BloodBookEntity mBloodBookEntity;
+
+    public MutableLiveData<BloodBookEntity> mBookLiveData = new MutableLiveData<>();
+
     public BookViewModel(Activity activity) {
         foodId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
         pigeonId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
     }
 
-    public MutableLiveData<BloodBookEntity> mBookLiveData = new MutableLiveData<>();
-
     //获取 血统书  四代
     public void getBloodBook() {
         submitRequestThrowError(BloodBookModel.getBloodBook4(UserModel.getInstance().getUserId(), foodId, pigeonId), r -> {
             if (r.isOk()) {
-                mBookLiveData.setValue(r.data);
+                mBloodBookEntity = r.data;
+                mBookLiveData.setValue(mBloodBookEntity);
             } else throw new HttpErrorException(r);
         });
     }

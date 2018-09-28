@@ -21,8 +21,7 @@
                 android:id="@+id/imgHead"
                 android:layout_marginRight="20px"
                 android:layout_width="412px"
-                android:layout_height="412px"
-                android:src="@drawable/ic_launcher" />
+                android:layout_height="412px"/>
 
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -43,7 +42,7 @@
                         android:textColor="@color/color_text_red_2"
                         android:textSize="@dimen/large_text_size"
                         android:textStyle="bold"
-                        android:text="2018-22-1234567" />
+                        tools:text="2018-22-1234567" />
 
 
                     <TextView
@@ -51,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30px"
-                        android:text="詹森系"
+                        tools:text="詹森系"
                         android:textColor="@color/color_4c4c4c" />
 
 
@@ -60,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30px"
-                        android:text="雨色"
+                        tools:text="雨色"
                         android:textColor="@color/color_4c4c4c" />
 
                     <android.support.v7.widget.RecyclerView

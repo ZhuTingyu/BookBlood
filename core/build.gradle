@@ -52,7 +52,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //权限管理
-    compile 'me.weyye.hipermission:library:1.0.7'
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 
 

@@ -303,7 +303,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void finish() {
         if(mOnActivityFinishListener != null){
-            mOnActivityFinishListener.finish();
+            if(mOnActivityFinishListener.finish()) return;
         }
         super.finish();
         overridePendingTransition(R.anim.anim_left_in, R.anim.anim_right_out);
@@ -374,7 +374,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public interface OnActivityFinishListener{
-        void finish();
+        boolean finish();
     }
 
     private OnActivityFinishListener mOnActivityFinishListener;

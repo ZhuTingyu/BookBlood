@@ -6,14 +6,15 @@ import android.support.v4.content.res.ResourcesCompat;
 
 
 import com.base.http.R;
+import com.base.util.hipermission.HiPermission;
+import com.base.util.hipermission.PermissionCallback;
+import com.base.util.hipermission.PermissionItem;
 import com.base.util.system.AppManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import me.weyye.hipermission.HiPermission;
-import me.weyye.hipermission.PermissionCallback;
-import me.weyye.hipermission.PermissionItem;
+
 
 /**
  * 权限

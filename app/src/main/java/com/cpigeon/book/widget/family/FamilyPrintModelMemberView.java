@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
+import com.base.util.glide.GlideUtil;
+import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -91,7 +93,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
             if (generationsOrder % 2 == 0) {
                 mScrollViewInfo.setBackgroundResource(R.drawable.shape_bg_family_member_blue);
             } else {
-                mScrollViewInfo.setBackgroundResource(R.drawable.shape_bg_family_member_red);
+                mScrollViewInfo.setBackgroundResource(R.drawable.shape_bg_family_member_r ed);
             }
         }*/
 
@@ -104,7 +106,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         int size_366 = 732;
         int size_178 = 356;
         int size_128 = 256;
-        int shadowSize = 20;
+        int shadowSize = 15;
 
         int imgW = 0;
         int imgH = 0;
@@ -155,7 +157,8 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         LayoutParams shadowP;
         RelativeLayout.LayoutParams infoP;
         infoP = new RelativeLayout.LayoutParams(rootW, rootH);
-        shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
+        shadowP = new LayoutParams(rootW + ScreenTool.dip2px(shadowSize)
+                , rootH + ScreenTool.dip2px(shadowSize));
 
         if(isHorizontal){
             mScrollViewInfo.setLayoutParams(infoP);
@@ -167,7 +170,15 @@ public class FamilyPrintModelMemberView extends FamilyMember {
             mLlInfo.setLayoutParams(infoP);
         }
 
+        if (generationPoint == 0) {
 
+        } else if (generationPoint == 1) {
+
+        } else if (generationPoint == 2) {
+            mImgHead.setVisibility(GONE);
+        } else if (generationPoint == 3) {
+            mImgHead.setVisibility(GONE);
+        }
 
     }
 
@@ -180,15 +191,11 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         mList.setAdapter(matchAdapter);
         matchAdapter.setNewData(Lists.newArrayList("", ""));
 
-        if (generationPoint == 0) {
+        mTvFootNumber.setText(entity.getFootRingNum());
+        mTvBlood.setText(entity.getPigeonBloodName());
+        mTvColor.setText(entity.getPigeonPlumeName());
+        GlideUtil.setGlideImageView(getContext(),entity.getCoverPhotoUrl(),mImgHead);
 
-        } else if (generationPoint == 1) {
-
-        } else if (generationPoint == 2) {
-            mImgHead.setVisibility(GONE);
-        } else if (generationPoint == 3) {
-            mImgHead.setVisibility(GONE);
-        }
     }
 
     public RelativeLayout getRlMemberInfo() {

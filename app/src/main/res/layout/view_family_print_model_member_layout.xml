@@ -15,6 +15,7 @@
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scrollViewInfo"
+            android:background="@drawable/shape_bg_family_member_black"
             android:layout_width="226dp"
             android:layout_height="500dp">
 
@@ -31,7 +32,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="310px"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_launcher"
                     android:visibility="visible" />
 
                 <TextView
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30px"
-                    android:text="詹森系"
+                    tools:text="詹森系"
                     android:textColor="@color/color_4c4c4c" />
 
 
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30px"
-                    android:text="雨色"
+                    tools:text="雨色"
                     android:textColor="@color/color_4c4c4c" />
 
                 <android.support.v7.widget.RecyclerView

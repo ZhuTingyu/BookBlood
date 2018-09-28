@@ -227,6 +227,7 @@ public class NewTrainPigeonFragment extends BaseMapFragment {
             AppDatabase.getInstance(getBaseActivity()).delete(AppDatabase.getInstance(getBaseActivity()).DbEntityDao()
                     .getDataByUserAndType(UserModel.getInstance().getUserId()
                             , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING));
+            return false;
         });
 
         if (mViewModel.mTrainEntity != null) {

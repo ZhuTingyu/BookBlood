@@ -109,6 +109,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         }
         getBaseActivity().setOnActivityFinishListener(() -> {
             EventBus.getDefault().post(new PigeonAddEvent());
+            return false;
         });
     }
 

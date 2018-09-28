@@ -43,16 +43,13 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         view_placeholder.setVisibility(View.GONE);
 
         mActivity.setSearchClickListener(v -> {
-            //搜索
-            Bundle bundle = new Bundle();
-            bundle.putString(IntentBuilder.KEY_TYPE, "");
-            BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonToMakeBookActivity.class, bundle);
+            BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonToMakeBookActivity.class, null);
         });
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
             PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
-            PreviewsBookFragment.start(getBaseActivity(), mPigeonEntity.getFootRingNum());
+            PreviewsBookFragment.start(getBaseActivity(), mPigeonEntity);
         });
 
         mAdapter.addHeaderView(initHead());
@@ -61,7 +58,6 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
 
     private View initHead() {
         View mHeadView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.fragment_select_pigeon_to_make_book, null);
-
         return mHeadView;
     }
 

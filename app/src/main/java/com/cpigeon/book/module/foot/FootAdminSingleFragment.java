@@ -75,9 +75,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     private BaseInputDialog mDialogSource;
     private BaseInputDialog mDialogMoney;
 
-
     boolean mIsLook;
-
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()

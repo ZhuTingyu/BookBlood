@@ -17,7 +17,7 @@ public class SearchBreedPigeonToMakeBookActivity extends BaseSearchPigeonActivit
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new BreedPigeonListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PreviewsBookFragment.start(getBaseActivity(), "");
+            PreviewsBookFragment.start(getBaseActivity(), mAdapter.getItem(position));
         });
         return mAdapter;
     }

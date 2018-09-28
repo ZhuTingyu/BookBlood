@@ -12,10 +12,11 @@
 
     <LinearLayout
         android:id="@+id/llImage"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/normal_safe_distance"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -25,6 +26,7 @@
             android:src="@drawable/ic_launcher" />
 
         <TextView
+            android:id="@+id/tvFootNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -40,7 +42,7 @@
         android:layout_height="match_parent"
         android:layout_above="@id/rlText"
         android:layout_marginTop="54dp"
-        app:TreeView_isShowInfoModel="true"
+        app:TreeView_isShowInfoModel="false"
         app:TreeView_isHaveCurrent="true"
         app:TreeView_isHorizontal="true"
         app:TreeView_moveType="h" />

@@ -20,10 +20,14 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
+import com.base.util.glide.GlideUtil;
 import com.base.util.utility.ImageUtils;
 import com.base.widget.photoview.PhotoView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.widget.BookRootLayout;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
@@ -44,6 +48,8 @@ public class PreviewsBookFragment extends BaseBookFragment {
     private CheckBox mCheckbox;
     private TextView mTvOk;
     private PhotoView mImageView;
+    private TextView mTvFootNumber;
+
 
     private int bookType = SelectTemplateFragment.TYPE_H;
 
@@ -52,17 +58,22 @@ public class PreviewsBookFragment extends BaseBookFragment {
     private RelativeLayout mLlPrintTextV;
     private LinearLayout mLlPrintTextH;
 
+    private BookViewModel mViewModel;
 
 
-    public static void start(Activity activity, String footNumber) {
+    public static void start(Activity activity, PigeonEntity entity) {
         IntentBuilder.Builder()
-                .putExtra(IntentBuilder.KEY_DATA, footNumber)
+                .putExtra(IntentBuilder.KEY_DATA, entity.getFootRingID())
+                .putExtra(IntentBuilder.KEY_DATA_2, entity.getPigeonID())
+                .putExtra(IntentBuilder.KEY_TITLE, entity.getFootRingNum())
                 .startParentActivity(activity, PreviewsBookFragment.class);
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mViewModel = new BookViewModel(getBaseActivity());
+        initViewModel(mViewModel);
     }
 
     @Nullable
@@ -74,12 +85,15 @@ public class PreviewsBookFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        String footNumber = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TITLE);
+        setTitle(footNumber);
         setToolbarRight(R.string.text_choose_template, item -> {
-            SelectTemplateFragment.start(getBaseActivity(), bookType ,CODE_CHOOSE_TEMPLATE);
+            SelectTemplateFragment.start(getBaseActivity(), bookType, CODE_CHOOSE_TEMPLATE);
             return false;
         });
 
+
+        mTvFootNumber = findViewById(R.id.tvFootNumber);
         mLlImage = findViewById(R.id.llImage);
         mImgHead = findViewById(R.id.imgHead);
         mFamilyTreeView = findViewById(R.id.familyTreeView);
@@ -96,22 +110,22 @@ public class PreviewsBookFragment extends BaseBookFragment {
         mLlPrintTextV = findViewById(R.id.llPrintTextV);
         mLlPrintTextH = findViewById(R.id.llPrintTextH);
 
-        composite.add(RxUtils.delayed(500, aLong -> {
-            mFamilyTreeView.setHorizontal(true);
-            mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
-            mFamilyTreeView.initView();
+        GlideUtil.setGlideImageView(getBaseActivity(), UserModel.getInstance().getUserData().touxiangurl
+                , mImgHead);
 
-            mPrintFamilyTreeView.setHorizontal(true);
-            mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
-            mPrintFamilyTreeView.setShowLine(false);
-            mPrintFamilyTreeView.initView();
-        }));
+        mTvFootNumber.setText(UserModel.getInstance().getUserData().pigeonHouseEntity.getXingming());
+
+        GlideUtil.setGlideImageView(getBaseActivity(), UserModel.getInstance().getUserData().touxiangurl
+                , mImgPrintHead);
+
 
         mCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mLlImage.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-            if (isChecked){
+            if (isChecked) {
+                mTvPrintNumber.setText(UserModel.getInstance().getUserData().pigeonHouseEntity.getXingming());
                 mImgPrintHead.setVisibility(View.VISIBLE);
-            }else {
+            } else {
+                mTvPrintNumber.setText(footNumber);
                 mImgPrintHead.setVisibility(View.GONE);
             }
         });
@@ -125,6 +139,31 @@ public class PreviewsBookFragment extends BaseBookFragment {
         });
 
         mCheckbox.setChecked(true);
+
+        getBaseActivity().setOnActivityFinishListener(() -> {
+            if (mImageView.getVisibility() == View.VISIBLE) {
+                mImageView.setVisibility(View.GONE);
+                return true;
+            }
+            return false;
+        });
+
+        setProgressVisible(true);
+        composite.add(RxUtils.delayed(250, aLong -> {
+            mFamilyTreeView.setHorizontal(true);
+            mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
+            mFamilyTreeView.initView();
+
+            mPrintFamilyTreeView.setHorizontal(true);
+            mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
+            mPrintFamilyTreeView.setShowLine(false);
+            mPrintFamilyTreeView.initView();
+            mViewModel.getBloodBook();
+
+            initObserve();
+        }));
+
+
     }
 
     public void getBookView() {
@@ -143,49 +182,55 @@ public class PreviewsBookFragment extends BaseBookFragment {
     }
 
     @Override
+    protected void initObserve() {
+        mViewModel.mBookLiveData.observe(this, bloodBookEntity -> {
+            setProgressVisible(false);
+            mFamilyTreeView.setData(bloodBookEntity);
+            mPrintFamilyTreeView.setData(bloodBookEntity);
+        });
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
 
-        if(requestCode == CODE_CHOOSE_TEMPLATE){
+        if (requestCode == CODE_CHOOSE_TEMPLATE) {
             int type = data.getIntExtra(IntentBuilder.KEY_DATA, bookType);
             bookType = type;
 
-            if(bookType == SelectTemplateFragment.TYPE_H){
+            if (bookType == SelectTemplateFragment.TYPE_H) {
                 mFamilyTreeView.setHorizontal(true);
                 mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
                 mFamilyTreeView.initView();
+                mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
 
                 mPrintFamilyTreeView.setHorizontal(true);
                 mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
                 mPrintFamilyTreeView.setShowLine(false);
                 mPrintFamilyTreeView.initView();
 
+                mPrintFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+
                 mLlPrintTextH.setVisibility(View.VISIBLE);
                 mLlPrintTextV.setVisibility(View.GONE);
 
-            }else if(bookType == SelectTemplateFragment.TYPE_V){
+            } else if (bookType == SelectTemplateFragment.TYPE_V) {
                 mFamilyTreeView.setHorizontal(false);
                 mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
                 mFamilyTreeView.initView();
+                mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
 
                 mPrintFamilyTreeView.setHorizontal(false);
                 mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
                 mPrintFamilyTreeView.setShowLine(true);
                 mPrintFamilyTreeView.initView();
 
+                mPrintFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+
                 mLlPrintTextH.setVisibility(View.GONE);
                 mLlPrintTextV.setVisibility(View.VISIBLE);
             }
-        }
-    }
-
-    @Override
-    protected void finish() {
-        if(mImageView.getVisibility() == View.VISIBLE){
-            mImageView.setVisibility(View.GONE);
-        }else {
-            super.finish();
         }
     }
 }

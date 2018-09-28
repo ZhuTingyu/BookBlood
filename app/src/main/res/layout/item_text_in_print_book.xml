@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:textColor="@color/color_4c4c4c"
     android:textSize="28px"
     android:layout_marginTop="20px"
-    android:text="12312312312222222222222222222222222222222222222222222222222222222222231231"
-    android:layout_height="wrap_content"/>
+    tools:text="12312312312222222222222222222222222222222222222222222222222222222222231231"
+    android:layout_height="wrap_content" />
 
