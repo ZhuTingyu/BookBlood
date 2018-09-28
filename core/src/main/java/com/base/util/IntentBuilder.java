@@ -300,12 +300,6 @@ public class IntentBuilder {
         return this;
     }
 
-    public IntentBuilder finish(Activity activity){
-        activity.finish();
-        return this;
-    }
-
-
     public IntentBuilder startActivity() {
         if (mContext != null){
             mContext.startActivity(intent);

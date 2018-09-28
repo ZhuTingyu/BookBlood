@@ -91,6 +91,11 @@ public class FragmentTabView extends LinearLayout {
     }
 
     public void setSelect(int position) {
+
+        if(mCPosition == position){
+            return;
+        }
+
         TextView s = mTextViews.get(position);
         if(mCPosition != -1){
             TextView c = mTextViews.get(mCPosition);

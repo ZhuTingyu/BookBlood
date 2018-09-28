@@ -62,6 +62,7 @@ public class ShareHallFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setToolbarNotBack();
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mRlSearch = findViewById(R.id.rlSearch);
         mTvSearch = findViewById(R.id.tvSearch);
@@ -99,6 +100,16 @@ public class ShareHallFragment extends BaseBookFragment {
 
         mAdapter = new ShareHallHomeAdapter(false);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnLoadMoreListener(() -> {
+            mViewModel.pi++;
+            mViewModel.getSharePigeons();
+        },mRecyclerView.getRecyclerView());
+
+        mRecyclerView.setRefreshListener(() -> {
+            mAdapter.cleanList();
+            mViewModel.pi = 0;
+            mViewModel.getSharePigeons();
+        });
 
         mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_PIGEON_BLOOD, SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.TYPE_EYE);
         mSelectTypeViewModel.getSelectTypes();

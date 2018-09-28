@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class GoodPigeonListViewModel extends BaseViewModel{
-    public int type = 1;
+    public int type = 1; // 1 世界铭鸽，2 我的铭鸽 3 申请中铭鸽
     public int pi = 1;
     public String foodNumber;
 

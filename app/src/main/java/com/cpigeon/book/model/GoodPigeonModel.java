@@ -21,9 +21,9 @@ public class GoodPigeonModel {
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
                 .url(R.string.get_good_pigeon)
-                .addBody("type", String.valueOf(type))//手机号码
-                .addBody("pi", String.valueOf(pi)) //登录密码，使用32位MD5加密
-                .addBody("ps", String.valueOf(20))//手机验证码
+                .addBody("type", String.valueOf(type))
+                .addBody("pi", String.valueOf(pi))
+                .addBody("ps", String.valueOf(20))
                 .addBody("footnum", footNumber)
                 .request();
     }
@@ -33,6 +33,16 @@ public class GoodPigeonModel {
                 .setToJsonType(new TypeToken<ApiResponse<GoodPigeonCountEntity>>() {
                 }.getType())
                 .url(R.string.get_good_pigeon_count)
+                .request();
+    }
+
+    public static Observable<ApiResponse> applyAddGoodPigeon(String foodId, String pigeonId) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.apply_add_good_pigeon)
+                .addBody("pigeonid", pigeonId)
+                .addBody("footid", foodId)
                 .request();
     }
 }

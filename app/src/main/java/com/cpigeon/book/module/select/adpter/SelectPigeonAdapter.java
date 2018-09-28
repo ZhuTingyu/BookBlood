@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.home.sharehall.adpter;
+package com.cpigeon.book.module.select.adpter;
 
 import android.widget.ImageView;
 
@@ -15,31 +15,22 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/28.
  */
 
-public class SearchPigeonToShareAdapter extends BasePigeonListAdapter {
+public class SelectPigeonAdapter extends BasePigeonListAdapter {
 
-    public SearchPigeonToShareAdapter() {
+    public SelectPigeonAdapter() {
         super(R.layout.item_search_all_pigeon, null);
     }
-
-    public SearchPigeonToShareAdapter(int layoutResId, List<PigeonEntity> data) {
-        super(layoutResId, data);
-    }
-
 
     @Override
     protected void convert(BaseViewHolder helper, PigeonEntity item) {
 
         ImageView imgSex = helper.getView(R.id.imgSex);
 
-        helper.setText(R.id.tvColor, item.getPigeonPlumeName());
-
         helper.setText(R.id.tvFootNumber, item.getFootRingNum());
 
-        Glide.with(mContext)
-                .load(item.getCoverPhotoUrl())
-                .placeholder(R.drawable.ic_img_default)
-                .into((ImageView) helper.getView(R.id.imgHead));
+        helper.setText(R.id.tvColor, item.getPigeonPlumeName());
 
+        helper.setText(R.id.tvBlood, item.getPigeonBloodName());
 
         if (Utils.getString(R.string.text_male_a).equals(item.getPigeonSexName())) {
             imgSex.setImageResource(R.mipmap.ic_male);

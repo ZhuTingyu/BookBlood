@@ -18,6 +18,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.module.home.sharehall.adpter.ShareHallHomeAdapter;
 import com.cpigeon.book.module.home.sharehall.viewmodel.ShareHallViewModel;
+import com.cpigeon.book.module.select.SelectPigeonFragment;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -74,7 +75,7 @@ public class MySharePigeonFragment extends BaseBookFragment {
         mRecyclerView.setAdapter(mAdapter);
         mTvOk.setText(R.string.text_add_share_pigeon);
         mTvOk.setOnClickListener(v -> {
-            SearchPigeonFragment.start(getBaseActivity());
+            SelectPigeonFragment.start(getBaseActivity(), SelectPigeonFragment.TYPE_SHARE_PIGEON);
         });
 
         mRecyclerView.setRefreshListener(() -> {

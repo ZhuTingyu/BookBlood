@@ -5,5 +5,8 @@ package com.cpigeon.book.event;
  */
 
 public class GoodPigeonEvent {
-    public GoodPigeonEvent(){}
+    public int type;
+    public GoodPigeonEvent(int type){
+        this.type = type;
+    }
 }

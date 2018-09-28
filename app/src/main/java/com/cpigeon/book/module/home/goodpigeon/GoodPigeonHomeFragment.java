@@ -101,6 +101,7 @@ public class GoodPigeonHomeFragment extends BaseBookFragment {
 
         composite.add(RxUtils.delayed(500, aLong -> {
             mTabView.setTitles(mTitles);
+            mTabView.setSelect(0);
             mTabView.setOnSelectListener(position -> {
                 FragmentUtils.showHide(position, mFragments);
             });

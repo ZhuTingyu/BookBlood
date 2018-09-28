@@ -514,6 +514,8 @@
     <string name="text_cancel_share">取消共享</string>
     <string name="text_is_cancel_share">是否确定取消分享该种鸽？</string>
     <string name="text_is_share_pigeon">您是否共享该种鸽？</string>
+    <string name="text_apply_add_good_pigeon">申请加入铭鸽库</string>
+    <string name="text_pleas_choose_pigeon">请您选择要加入铭鸽库的鸽子！</string>
 
     <string-array name="array_foot_ring_type">
         <item>特比环</item>

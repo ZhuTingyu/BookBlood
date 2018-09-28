@@ -78,9 +78,11 @@ public class GoodPigeonListFragment extends BaseBookFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(GoodPigeonEvent event){
-        mAdapter.cleanList();
-        mViewModel.pi = 1;
-        mViewModel.getPigeon();
+        if(event.type == mViewModel.type){
+            mAdapter.cleanList();
+            mViewModel.pi = 1;
+            mViewModel.getPigeon();
+        }
     }
 
     @Override

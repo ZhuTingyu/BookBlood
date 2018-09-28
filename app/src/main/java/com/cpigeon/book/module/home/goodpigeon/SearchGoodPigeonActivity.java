@@ -75,6 +75,12 @@ public class SearchGoodPigeonActivity extends BaseSearchActivity {
             mViewModel.getPigeon();
         }, mRecyclerView.getRecyclerView());
 
+        mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
+            setProgressVisible(true);
+            mViewModel.foodNumber = mSearchHistoryAdapter.getItem(position).searchTitle;
+            mViewModel.getPigeon();
+        });
+
         mViewModel.mDataGoodPigeon.observe(this, pigeonEntities -> {
             setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, pigeonEntities);

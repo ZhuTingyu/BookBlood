@@ -1,7 +1,8 @@
-package com.cpigeon.book.module.home.sharehall;
+package com.cpigeon.book.module.select;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
+import com.base.util.utility.StringUtil;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -18,7 +20,7 @@ import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
-import com.cpigeon.book.module.home.sharehall.adpter.SearchPigeonToShareAdapter;
+import com.cpigeon.book.module.select.adpter.SelectPigeonAdapter;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -28,23 +30,31 @@ import org.greenrobot.eventbus.ThreadMode;
  * Created by Zhu TingYu on 2018/9/26.
  */
 
-public class SearchPigeonFragment extends BaseBookFragment {
+public class SelectPigeonFragment extends BaseBookFragment {
+
+    public static String REQUEST_CODE = "REQUEST_CODE";
+    public static String TYPE_SHARE_PIGEON = "TYPE_SHARE_PIGEON";
+    public static int CODE_SEARCH = 0x321;
 
     XRecyclerView mRecyclerView;
-    SearchPigeonToShareAdapter mAdapter;
+    SelectPigeonAdapter mAdapter;
     BreedPigeonListModel mViewModel;
     SearchFragmentParentActivity mActivity;
-    int requestCode;
+    int mRequestCode;
+    String mType;
 
-    public static void start(Activity activity, int code){
+    public static void start(Activity activity, int code) {
         Bundle bundle = new Bundle();
-        bundle.putInt(IntentBuilder.KEY_TYPE, code);
-        SearchFragmentParentActivity.start(activity, SearchPigeonFragment.class, code , false, bundle);
+        bundle.putInt(REQUEST_CODE, code);
+        SearchFragmentParentActivity.start(activity, SelectPigeonFragment.class, code, false, bundle);
     }
 
-    public static void start(Activity activity){
-        SearchFragmentParentActivity.start(activity, SearchPigeonFragment.class , false, null);
+    public static void start(Activity activity, @NonNull String type) {
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_TYPE, type);
+        SearchFragmentParentActivity.start(activity, SelectPigeonFragment.class, false, bundle);
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -52,6 +62,7 @@ public class SearchPigeonFragment extends BaseBookFragment {
         mViewModel = new BreedPigeonListModel();
         initViewModel(mViewModel);
         mActivity = (SearchFragmentParentActivity) context;
+        mViewModel.typeid = StringUtil.emptyString();
     }
 
     @Nullable
@@ -63,10 +74,19 @@ public class SearchPigeonFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        requestCode = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TYPE, 0);
+        mRequestCode = getBaseActivity().getIntent().getIntExtra(REQUEST_CODE, 0);
+        mType = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
+        mActivity.setSearchClickListener(v -> {
+            if (mRequestCode == 0) {
+                SearchPigeonActivity.start(getBaseActivity(), mType);
+            } else {
+                SearchPigeonActivity.start(getBaseActivity(), mType, mRequestCode);
+            }
+        });
         mRecyclerView = findViewById(R.id.list);
-        mAdapter = new SearchPigeonToShareAdapter();
+        mRecyclerView.addItemDecorationLine();
+        mAdapter = new SelectPigeonAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setRefreshListener(() -> {
@@ -83,20 +103,27 @@ public class SearchPigeonFragment extends BaseBookFragment {
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
             PigeonEntity pigeonEntity = mAdapter.getItem(position);
-            if(requestCode == 0){
+            if (mRequestCode != 0) {
                 IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, pigeonEntity).finish(getBaseActivity());
-            }else {
-                BreedPigeonDetailsFragment.start(getBaseActivity(),pigeonEntity.getPigeonID()
-                        , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+                        .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
+                        .finishForResult(getBaseActivity());
+            } else {
+                if (TYPE_SHARE_PIGEON.equals(mType)) {
+                    BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
+                            , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+                }
             }
         });
 
         setProgressVisible(true);
-        mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
+
+        //搜索鸽子去共享
+        if (TYPE_SHARE_PIGEON.equals(mType)) {
+            mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
+        }
+
+
         mViewModel.getPigeonList();
-
-
     }
 
 
@@ -109,9 +136,20 @@ public class SearchPigeonFragment extends BaseBookFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnEvent(ShareHallEvent event){
+    public void OnEvent(ShareHallEvent event) {
         mAdapter.cleanList();
         mViewModel.pi = 1;
         mViewModel.getPigeonList();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (Activity.RESULT_OK != resultCode) return;
+        PigeonEntity pigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
+                .finishForResult(getBaseActivity());
+
     }
 }

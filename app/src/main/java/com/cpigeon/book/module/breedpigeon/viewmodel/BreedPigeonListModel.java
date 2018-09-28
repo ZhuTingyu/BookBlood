@@ -45,38 +45,25 @@ public class BreedPigeonListModel extends BaseViewModel {
 
     //获取  种鸽列表
     public void getPigeonList() {
-        if (isSearch) {
-            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_SearchBreed(String.valueOf(pi),
-                    String.valueOf(ps),
-                    searchStr,
-                    typeid,
-                    bitmatch
+        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_SelectAll(String.valueOf(pi), String.valueOf(ps),
+                typeid,
+                bloodid,
+                sexid,
+                year,
+                stateid,
+                bitmatch,
+                bitbreed,//是否有父母（1存在，2.不存在，其他全查）
+                pigeonidStr,// ：在列表中排除的鸽子
+                bitshare,// ：是否是在共享厅（1：存在，2，不存在，其他全查）
+                bitMotto,
+                searchStr), r -> {
 
-            ), r -> {
-                if (r.isOk()) {
-                    listEmptyMessage.setValue(r.msg);
-                    mPigeonListData.setValue(r.data);
-                } else throw new HttpErrorException(r);
-            });
-        } else {
-            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_SelectAll(String.valueOf(pi), String.valueOf(ps),
-                    typeid,
-                    bloodid,
-                    sexid,
-                    year,
-                    stateid,
-                    bitmatch,
-                    bitbreed,//是否有父母（1存在，2.不存在，其他全查）
-                    pigeonidStr,// ：在列表中排除的鸽子
-                    bitshare,// ：是否是在共享厅（1：存在，2，不存在，其他全查）
-                    bitMotto), r -> {
+            if (r.isOk()) {
+                listEmptyMessage.setValue(r.msg);
+                mPigeonListData.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
 
-                if (r.isOk()) {
-                    listEmptyMessage.setValue(r.msg);
-                    mPigeonListData.setValue(r.data);
-                } else throw new HttpErrorException(r);
-            });
-        }
     }
 
     //获取统计数据
