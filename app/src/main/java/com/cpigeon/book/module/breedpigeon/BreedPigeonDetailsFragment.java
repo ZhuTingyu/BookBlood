@@ -2,6 +2,7 @@ package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,6 +28,8 @@ import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.AssEntity;
+import com.cpigeon.book.model.entity.LoftEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -197,7 +200,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             }
         });
 
-        if(!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())){
+        if (!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) {
             mFamilyTreeView.setShowInfoModel(true);
         }
 
@@ -227,12 +230,12 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 tvRight.setOnClickListener(v -> {
                     List<String> way = Lists.newArrayList(getResources().getStringArray(R.array.array_contact_way));
                     BottomSheetAdapter.createBottomSheet(getBaseActivity(), way, p -> {
-                        if(p == 0){
+                        if (p == 0) {
                             //打电话
-                            PhoneUtils.dial(getBaseActivity(),mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
-                        }else {
+                            PhoneUtils.dial(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
+                        } else {
                             //发短信
-                            PhoneUtils.sms(getBaseActivity(),mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
+                            PhoneUtils.sms(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
                         }
                     });
                 });
@@ -332,7 +335,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                     .load(datas.getCoverPhotoUrl())
                     .placeholder(R.drawable.ic_img_default)
                     .into(img_pigeon);//鸽子照片
-            if (TYPE_HIS_SHARE.equals(mType)){
+            if (TYPE_HIS_SHARE.equals(mType)) {
                 tvLeft.setText(mBreedPigeonDetailsViewModel.mPigeonEntity.getUserName());
             }
         });
@@ -397,7 +400,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             , R.id.img_play_import, R.id.img_play_add})
     public void onViewClicked(View view) {
 
-        if(!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) return;
+        if (!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) return;
 
         switch (view.getId()) {
 
@@ -592,10 +595,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.img_play_import:
                 //赛绩导入
-
-//                ImportPlayDialog mImportPlayDialog = new ImportPlayDialog(getBaseActivity());
-//                mImportPlayDialog.show();
-
                 mAddPlayDialog.show(getBaseActivity().getFragmentManager(), "");
                 break;
             case R.id.img_play_add:
@@ -612,6 +611,27 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                     e.printStackTrace();
                 }
                 break;
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != Activity.RESULT_OK) return;
+        if (requestCode == CODE_ORGANIZE) {
+
+            //选择协会回调
+            AssEntity organize = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            mAddPlayDialog.setllUnitName(organize.getISOCName());
+
+        } else if (requestCode == CODE_LOFT) {
+
+            //选择公棚回调
+            LoftEntity organize = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            mAddPlayDialog.setllUnitName(organize.getGpname());
+
         }
     }
 

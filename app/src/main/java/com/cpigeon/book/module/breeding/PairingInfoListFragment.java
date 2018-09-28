@@ -14,8 +14,8 @@ import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingInfoListAdapter;
@@ -23,7 +23,6 @@ import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
 import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 /**
@@ -59,14 +58,14 @@ public class PairingInfoListFragment extends BaseListFragment {
         tvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);
 
-        setTitle("配对信息");
+        setTitle(getString(R.string.str_pairing_info));
 
         String[] chooseWays = getResources().getStringArray(R.array.text_breeding_info);
         setToolbarRightImage(R.drawable.svg_filtrate, item -> {
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
                 if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_add))) {
                     //添加配对
-                    PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity,null);
+                    PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, null);
                 } else if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_recommend))) {
                     //推荐配对
                     PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
@@ -168,7 +167,7 @@ public class PairingInfoListFragment extends BaseListFragment {
             try {
 
                 PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-                PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity,item);
+                PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, item);
             } catch (Exception e) {
                 e.printStackTrace();
             }

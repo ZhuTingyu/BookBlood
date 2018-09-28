@@ -11,40 +11,39 @@ import com.base.util.db.DbEntity;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.module.select.adpter.SearchAssAdapter;
+import com.cpigeon.book.module.select.adpter.SearchLoftAdapter;
 import com.cpigeon.book.module.select.viewmodel.SelectAssViewModel;
 import com.cpigeon.book.widget.SearchTextView;
 
 import java.util.List;
 
 /**
- * 选择协会
+ * 搜索公棚
  */
 
-public class SearchAssActivity extends BaseSearchActivity {
+public class SearchLoftActivity extends BaseSearchActivity {
 
 
     SelectAssViewModel mViewModel;
 
-    SearchAssAdapter mSearchAssAdapter;
+    SearchLoftAdapter mSearchAssAdapter;
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mSearchAssAdapter = new SearchAssAdapter();
+        mSearchAssAdapter = new SearchLoftAdapter();
         return mSearchAssAdapter;
     }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setSearchHint(R.string.text_input_ass_and_search);
+        setSearchHint(R.string.text_input_loft_and_search);
 
         mViewModel = new SelectAssViewModel();
         initViewModel(mViewModel);
 
-        mViewModel.liveAss.observe(this, assEntities -> {
+        mViewModel.liveLoft.observe(this, assEntities -> {
             mSearchAssAdapter.setNewData(assEntities);
             saveHistory(mViewModel.getKey(), AppDatabase.TYPE_SEARCH_ASS_HISTORY);
             mRlHistory.setVisibility(View.GONE);
@@ -58,15 +57,14 @@ public class SearchAssActivity extends BaseSearchActivity {
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
             mViewModel.setKey(mSearchHistoryAdapter.getData().get(position).searchTitle);
-            mViewModel.getAssList();
+            mViewModel.getLoftList();
         });
-
 
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
             public void search(String key) {
                 mViewModel.setKey(key);
-                mViewModel.getAssList();
+                mViewModel.getLoftList();
             }
 
             @Override

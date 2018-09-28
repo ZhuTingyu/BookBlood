@@ -91,6 +91,7 @@
 
         <!--注销用户-->
         <com.cpigeon.book.widget.LineInputView
+            android:visibility="gone"
             android:id="@+id/ll_write_off"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

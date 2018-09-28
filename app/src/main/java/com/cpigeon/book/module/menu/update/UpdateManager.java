@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.menu.update;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,13 +13,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.base.util.RxUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.system.AppManager;
 import com.base.util.utility.PhoneUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.UpdateInfo;
 import com.cpigeon.book.util.CpigeonConfig;
+import com.cpigeon.book.util.MathUtil;
 import com.cpigeon.book.util.SharedPreferencesTool;
 import com.cpigeon.book.widget.mydialog.CustomAlertDialog4;
 
@@ -33,8 +34,6 @@ import java.net.URL;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
 /**
@@ -124,12 +123,13 @@ public class UpdateManager {
 
 
         String strCode = mContext.getString(R.string.str_new_code);
+        strCode = strCode.replace("%1%", updateInfo.getVerName());
         tv_title.setText(strCode);
 
         tv_content.setText(updateInfo.getUpdateExplain());
 
 
-//        getFileSize(_url, tv_num);
+        getFileSize(_url, tv_num);
 //        tv_num.setText() + "M");
 
 
@@ -204,6 +204,7 @@ public class UpdateManager {
         updateAlertDialog.setContentView(mDialogLayout);
         //调用这个方法时，按对话框以外的地方不起作用。按返回键还起作用
         updateAlertDialog.setCanceledOnTouchOutside(false);
+        updateAlertDialog.setCancelable(true);
         updateAlertDialog.show();
     }
 
@@ -352,38 +353,45 @@ public class UpdateManager {
 
         String url = urlString;
 
-        RxUtils.runOnNewThread(o -> {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-            double lenght = 0;
-            URL mUrl = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection) mUrl.openConnection();
-            conn.setConnectTimeout(5 * 1000);
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept-Encoding", "identity");
-            conn.setRequestProperty("Referer", url);
-            //conn.setRequestProperty("Referer", urlString);
-            conn.setRequestProperty("Charset", "UTF-8");
-            conn.setRequestProperty("Connection", "Keep-Alive");
-            conn.connect();
-            int responseCode = conn.getResponseCode();
-
-            // 判断请求是否成功处理
-            if (responseCode == 200) {
-                lenght = conn.getContentLength();
-            }
-
-            double finalLenght = lenght;
-            Observable.create(e -> {
-            }).observeOn(AndroidSchedulers.mainThread()).subscribe(o1 -> {
+                double lenght = 0;
                 try {
+                    lenght = 0;
+                    URL mUrl = new URL(url);
+                    HttpURLConnection conn = (HttpURLConnection) mUrl.openConnection();
+                    conn.setConnectTimeout(5 * 1000);
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Accept-Encoding", "identity");
+                    conn.setRequestProperty("Referer", url);
+                    //conn.setRequestProperty("Referer", urlString);
+                    conn.setRequestProperty("Charset", "UTF-8");
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.connect();
+                    int responseCode = conn.getResponseCode();
 
-                    tv.setText(String.valueOf(finalLenght / 1024 + "M"));
+                    // 判断请求是否成功处理
+                    if (responseCode == 200) {
+                        lenght = conn.getContentLength();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    tv.setText(String.valueOf(0 + "M"));
                 }
-            });
-        });
-    }
 
+                double finalLenght = lenght;
+                ((Activity) mContext).runOnUiThread(new Runnable() {
+                    public void run() {
+                        try {
+                            tv.setText(String.valueOf(MathUtil.doubleformat(finalLenght / 1024 / 1024, 2) + "M"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            tv.setText(String.valueOf(0 + "M"));
+                        }
+                    }
+                });
+            }
+        }).start();
+    }
 }

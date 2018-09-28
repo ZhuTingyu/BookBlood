@@ -6,11 +6,14 @@ import android.widget.TextView;
 
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
+import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.play.PlayInportFragment;
+import com.cpigeon.book.module.select.PlayOrgLoftFragment;
 import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.widget.LineInputView;
 
@@ -25,7 +28,7 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
     private TextView btn_sure;
     private LineInputView ll_foot;
     private LineInputView ll_org;
-    private LineInputView ll_unit_name;
+    private LineInputView unitName;
 
     @Override
     public int setContentView() {
@@ -45,7 +48,13 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
         btn_sure = dialog.findViewById(R.id.btn_sure);
 
         btn_sure.setOnClickListener(v -> {
+            if (!StringUtil.isStringValid(unitName.getContent())) {
+                ToastUtils.showLong(dialog.getContext(), "请选择组织");
+                return;
+            }
+
             this.dismiss();
+            //导入赛绩
             PlayInportFragment.start(getActivity());
         });
 
@@ -60,17 +69,27 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
                 String way = chooseWays[p];
                 if (Utils.getString(R.string.title_select_ass).equals(way)) {
                     //选择协会
-                    SearchFragmentParentActivity.start(getActivity(), SelectAssFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE,null);
+                    SearchFragmentParentActivity.start(getActivity(), SelectAssFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE, null);
                     ll_org.getEditText().setText("协会");
                 } else if (Utils.getString(R.string.title_select_loft).equals(way)) {
                     //选择公棚
-                    SearchFragmentParentActivity.start(getActivity(), SelectAssFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE,null);
+                    SearchFragmentParentActivity.start(getActivity(), PlayOrgLoftFragment.class, BreedPigeonDetailsFragment.CODE_LOFT, null);
                     ll_org.getEditText().setText("公棚");
                 }
             });
         });
 
         //单位名称
-        ll_unit_name = dialog.findViewById(R.id.ll_unit_name);
+        unitName = dialog.findViewById(R.id.ll_unit_name);
     }
+
+    public void setFoot(String foot) {
+        ll_foot.setContent(foot);
+    }
+
+    public void setllUnitName(String ll_unit_name) {
+        unitName.setContent(ll_unit_name);
+    }
+
+
 }

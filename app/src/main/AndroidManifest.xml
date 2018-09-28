@@ -130,6 +130,11 @@
         <activity
             android:name=".module.select.SearchAssActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".module.select.SearchLoftActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".module.foot.SearchFootActivity"
             android:screenOrientation="portrait" />
@@ -186,9 +191,10 @@
             android:name=".module.pigeonleague.SearchPigeonToLeagueActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".module.home.goodpigeon.SearchGoodPigeonActivity"
+        <activity
+            android:name=".module.home.goodpigeon.SearchGoodPigeonActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".module.breeding.SearchBreedingFootActivity"
@@ -199,9 +205,10 @@
             android:name=".module.breeding.OffspringSearchActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".module.home.sharehall.SearchSharePigeonActivity"
+        <activity
+            android:name=".module.home.sharehall.SearchSharePigeonActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>

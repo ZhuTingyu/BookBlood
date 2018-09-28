@@ -17,22 +17,23 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
-import com.cpigeon.book.model.entity.AssEntity;
-import com.cpigeon.book.module.select.adpter.SelectAssAdapter;
+import com.cpigeon.book.model.entity.LoftEntity;
+import com.cpigeon.book.module.select.adpter.SearchLoftAdapter;
 import com.cpigeon.book.module.select.viewmodel.SelectAssViewModel;
 import com.gjiazhe.wavesidebar.WaveSideBar;
 
 /**
- * 详情选择协会
+ * 选择公棚
+ * Created by Administrator on 2018/9/5.
  */
 
-public class SelectAssFragment extends BaseFragment {
+public class PlayOrgLoftFragment extends BaseFragment {
 
-    SelectAssAdapter mAdapter;
+    SearchLoftAdapter mAdapter;
 
     XRecyclerView mRecyclerView;
     WaveSideBar mWaveSideBar;
-    LetterSortModel<AssEntity> mModel = new LetterSortModel<>();
+    LetterSortModel<LoftEntity> mModel = new LetterSortModel<>();
     SelectAssViewModel mViewModel;
 
     @Override
@@ -52,12 +53,10 @@ public class SelectAssFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         mRecyclerView = findViewById(R.id.list);
         mWaveSideBar = findViewById(R.id.side_bar);
 
-
-        mAdapter = new SelectAssAdapter();
+        mAdapter = new SearchLoftAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
@@ -68,18 +67,19 @@ public class SelectAssFragment extends BaseFragment {
         });
 
         setProgressVisible(true);
-        mViewModel.getAssList();
+        mViewModel.getLoftList();
 
         SearchFragmentParentActivity activity = (SearchFragmentParentActivity) getBaseActivity();
-        activity.setSearchHint(R.string.text_search_ass);
+        activity.setSearchHint(R.string.text_search_loft);
         activity.setSearchClickListener(v -> {
-            SearchAssActivity.start(getBaseActivity(), SearchAssActivity.class, null);
+            SearchLoftActivity.start(getBaseActivity(), SearchLoftActivity.class, null);
         });
+
     }
 
     @Override
     protected void initObserve() {
-        mViewModel.liveAss.observe(this, assEntities -> {
+        mViewModel.liveLoft.observe(this, assEntities -> {
             setProgressVisible(false);
             mModel.setData(assEntities);
             mAdapter.initWave(mModel, mWaveSideBar);
@@ -94,7 +94,7 @@ public class SelectAssFragment extends BaseFragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == BaseSearchActivity.CODE_SEARCH) {
                 IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, (AssEntity) data.getParcelableExtra(IntentBuilder.KEY_DATA))
+                        .putExtra(IntentBuilder.KEY_DATA, (LoftEntity) data.getParcelableExtra(IntentBuilder.KEY_DATA))
                         .finishForResult(getBaseActivity());
             }
         }

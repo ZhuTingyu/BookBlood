@@ -9,28 +9,34 @@ public class GrowthReportEntity {
 
 
     /**
-     * FootRingNum : 2018-01-6433161
+     * FootRingNum : 2018-01-3636633
      * LayNum : 0
-     * TypeName : 繁育
-     * UseTime : 2018-09-21 00:00:00
+     * TypeName : 配对
+     * TypeID : 4
+     * UseTime : 2018-09-27 00:00:00
      * Name :
      * MatchCount : 0
      * MatchNumber : 0
      * Fraction : 0
+     * Weather : null
+     * Temperature : null
      * Bodytemper :
-     * PigeonPlumeName : 红（绛）
-     * PigeonBloodName : 詹森
+     * PigeonPlumeName : 雷米
+     * PigeonBloodName : 科技
      * Info : 多云
      */
 
     private String FootRingNum;
     private int LayNum;
     private String TypeName;
+    private int TypeID;
     private String UseTime;
     private String Name;
     private int MatchCount;
     private int MatchNumber;
     private int Fraction;
+    private Object Weather;
+    private Object Temperature;
     private String Bodytemper;
     private String PigeonPlumeName;
     private String PigeonBloodName;
@@ -58,6 +64,14 @@ public class GrowthReportEntity {
 
     public void setTypeName(String TypeName) {
         this.TypeName = TypeName;
+    }
+
+    public int getTypeID() {
+        return TypeID;
+    }
+
+    public void setTypeID(int TypeID) {
+        this.TypeID = TypeID;
     }
 
     public String getUseTime() {
@@ -98,6 +112,22 @@ public class GrowthReportEntity {
 
     public void setFraction(int Fraction) {
         this.Fraction = Fraction;
+    }
+
+    public Object getWeather() {
+        return Weather;
+    }
+
+    public void setWeather(Object Weather) {
+        this.Weather = Weather;
+    }
+
+    public Object getTemperature() {
+        return Temperature;
+    }
+
+    public void setTemperature(Object Temperature) {
+        this.Temperature = Temperature;
     }
 
     public String getBodytemper() {

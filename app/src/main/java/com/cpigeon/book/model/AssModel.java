@@ -4,6 +4,7 @@ import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.AssEntity;
+import com.cpigeon.book.model.entity.LoftEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -23,4 +24,15 @@ public class AssModel {
                 .addBody("key", key)
                 .request();
     }
+
+
+    public static Observable<ApiResponse<List<LoftEntity>>> getLoftList(String key) {
+        return RequestData.<ApiResponse<List<LoftEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<LoftEntity>>>() {
+                }.getType())
+                .url(R.string.get_loft_list)
+                .addBody("key", key)
+                .request();
+    }
+
 }

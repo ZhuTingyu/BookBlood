@@ -25,7 +25,7 @@ import com.cpigeon.book.module.menu.AboutAsFragment;
 import com.cpigeon.book.module.menu.LogbookFragment;
 import com.cpigeon.book.module.menu.SettingFragment;
 import com.cpigeon.book.module.menu.account_security.ReviseLoginPsdFragment;
-import com.cpigeon.book.module.menu.balance.AccountBalanceFragment;
+import com.cpigeon.book.module.order.balance.AccountBalanceFragment;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
 import com.cpigeon.book.module.menu.service.RenewalFragment;
 import com.cpigeon.book.module.menu.update.UpdateManager;
@@ -52,7 +52,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 
 public class UserInfoFragment extends BaseBookFragment {
-
 
     private ShareDialogFragment dialogFragment;
 
@@ -209,7 +208,7 @@ public class UserInfoFragment extends BaseBookFragment {
 
         mUpdateViewModel = new UpdateViewModel();
         //更新检查
-        mUpdateManager = new UpdateManager(getActivity());
+        mUpdateManager = new UpdateManager(getBaseActivity());
 
         onCheckUpdateInfoListener = new UpdateManager.OnCheckUpdateInfoListener() {
             @Override
@@ -247,7 +246,7 @@ public class UserInfoFragment extends BaseBookFragment {
             }
         };
 
-//        checkUpdates(mUpdateManager);
+        checkUpdates(mUpdateManager);
     }
 
     /**
@@ -257,6 +256,7 @@ public class UserInfoFragment extends BaseBookFragment {
     private UpdateViewModel mUpdateViewModel;
 
     public void checkUpdates(UpdateManager mUpdateManager) {
+
         if (onCheckUpdateInfoListener != null) {
             onCheckUpdateInfoListener.onGetUpdateInfoStart();
         }
@@ -279,7 +279,6 @@ public class UserInfoFragment extends BaseBookFragment {
                         .build());
                 mUpdateManager.checkUpdate(mDatas);
 
-
 //                if (onCheckUpdateInfoListener != null) {
 //                    new Handler(Looper.getMainLooper())
 //                            .postDelayed(new Runnable() {
@@ -300,6 +299,7 @@ public class UserInfoFragment extends BaseBookFragment {
                 }
                 throw new HttpErrorException(data);
             }
+
         });
     }
 }

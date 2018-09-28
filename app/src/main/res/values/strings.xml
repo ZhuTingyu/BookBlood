@@ -220,6 +220,7 @@
     <string name="text_match_pigeon_input">赛鸽录入</string>
     <string name="text_match_pigeon_tool">赛鸽工具</string>
     <string name="text_search_ass">点击搜索协会</string>
+    <string name="text_search_loft">点击搜索公棚</string>
     <string name="text_add_foot_number">添加足环号码</string>
     <string name="text_input_foot_number_search">请输入足环号码进行搜索</string>
     <string name="text_remark">备注</string>
@@ -251,6 +252,7 @@
     <string name="text_foots_details">足环号段详情</string>
     <string name="text_is_delete_foot_numbers">是否删除该足环号段，删除过后号段里的所有足环将全部删除？</string>
     <string name="text_input_ass_and_search">请输入协会名字搜索</string>
+    <string name="text_input_loft_and_search">请输入公棚名字搜索</string>
     <string name="text_operate_log">操作日志</string>
     <string name="text_feed_back">意见反馈</string>
     <string name="text_feed_back_content">反馈内容</string>
@@ -530,6 +532,10 @@
         <item>打电话</item>
         <item>发短信</item>
     </string-array>
+
+    <string name="str_pairing_info">配对信息</string>
+    <string name="str_input_play_hint1">我们正在</string>
+    <string name="str_input_play_hint2">快马加鞭导入赛绩</string>
 
 
 </resources>

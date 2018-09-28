@@ -87,7 +87,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="21dp"
-                android:text="20M"
+                android:text="0M"
                 android:textColor="#FFE1C8" />
         </RelativeLayout>
 

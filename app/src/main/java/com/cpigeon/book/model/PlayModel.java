@@ -5,6 +5,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.model.entity.PlayAdditionalInfoEntity;
+import com.cpigeon.book.model.entity.PlayInportListEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -192,4 +193,31 @@ public class PlayModel {
                 .addBody("ps", ps)
                 .request();
     }
+
+    //获取中鸽直播赛绩
+    public static Observable<ApiResponse<List<PlayInportListEntity>>> getLivePlay(String pi,
+                                                                                  String ps,
+                                                                                  String orgid) {
+        return RequestData.<ApiResponse<List<PlayInportListEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PlayInportListEntity>>>() {
+                }.getType())
+                .url(R.string.live_play_list)
+                .addBody("pi", pi)
+                .addBody("ps", ps)
+                .addBody("orgid", orgid)
+                .request();
+    }
+
+
+    //导入中鸽直播赛绩
+    public static Observable<ApiResponse<Object>> getLivePlayInput(String orgid) {
+        return RequestData.<ApiResponse<Object>>build()
+                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+                }.getType())
+                .url(R.string.live_play_list)
+                .addBody("orgid", orgid)
+                .request();
+    }
+
+
 }
