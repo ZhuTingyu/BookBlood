@@ -62,7 +62,11 @@
 
     <!--获取服务开通续费纪录-->
     <string name="get_server_record">TXGP_GetServiceList</string>
+    <!--充值明细-->
+    <string name="account_balance_details">TXGP_ChongZhi_List</string>
 
+    <!--更新-->
+    <string name="update_info">TXGP_GongGao_GetList</string>
 
     <!--公告通知-->
     <string name="get_announcement_notice_list">TXGP_GongGao_GetList</string>
@@ -77,9 +81,9 @@
     <!--鸽友消息 统计-->
     <string name="pigeon_friend_msg_count">TXGP_Msg_Count</string>
 
+
     <!--获取用户服务、帐户余额、鸽币-->
     <string name="get_user_info">TXGP_GetUserInfo</string>
-
 
     <!--签到规则-->
     <string name="sign_rule">ZGW_Users_SignGuiZe</string>
@@ -87,6 +91,7 @@
     <string name="sign_click">ZGW_Users_SignIn</string>
     <!--签到信息-->
     <string name="sign_info">ZGW_Users_SignInfo</string>
+
 
     <!--获取分享邀请码-->
     <string name="share_invite_code">TXGP_FenXiang</string>
@@ -97,7 +102,13 @@
 
     <!--启动页  图片-->
     <string name="launch_img">TXGP_Get_StartUpAd</string>
+
+
+    <!--协会列表-->
     <string name="get_ass_list">TXGP_PigeonISCO_GetList</string>
+    <!--公棚列表-->
+    <string name="get_loft_list">ZGW_GetGongPengList</string>
+
 
     <!--鸽币兑换 列表-->
     <string name="pigeon_currency_exchange_list">TXGP_GeBi_DuiHuan_List</string>
@@ -105,6 +116,7 @@
     <string name="pigeon_currency_details_list">TXGP_GeBi_List</string>
     <!--获取鸽币-->
     <string name="get_my_gebi">TXGP_Account_GeBi</string>
+
 
     <!--添加单个足环-->
     <string name="foot_add_single">TXGP_FootRing_Add</string>
@@ -120,6 +132,7 @@
     <string name="foot_list_all">TXGP_FootRing_SelectAll</string>
     <string name="delete_foots">TXGP_FootRing_DeleteSection</string>
     <string name="get_foot_stat">TXGP_FootRing_SelectCount</string>
+
 
     <!--获取各个类型的足环数-->
     <string name="foot_num_type">TXGP_FootRing_SelectType</string>
@@ -176,6 +189,8 @@
     <string name="feed_pigeon_list">TXGP_Pigeon_SelectRecord</string>
     <!--养鸽记录统计-->
     <string name="feed_pigeon_statistical">TXGP_Pigeon_SelectIDCount</string>
+    <!--成长记录  列表-->
+    <string name="pigeon_growth_record">TXGP_Pigeon_SelectGrowAll</string>
 
 
     <!--上传图片  一张-->
@@ -241,6 +256,7 @@
     <!--信鸽评分推荐-->
     <string name="pairing_recommend_sorce">TXGP_PigeonTrain_RecomSorce</string>
 
+
     <!--赛绩录入-->
     <string name="pigeon_play_entry">TXGP_PigeonMatch_Add</string>
     <!--赛绩修改-->
@@ -251,6 +267,11 @@
     <string name="pigeon_play_del">TXGP_PigeonMatch_Delete</string>
     <!--赛绩详情-->
     <string name="pigeon_play_details">TXGP_PigeonMatch_Select</string>
+    <!--导入 中鸽网直播数据  列表-->
+    <string name="live_play_list">TXGP_Race_GetResult</string>
+    <!--导入 直播数据-->
+    <string name="live_play_input">TXGP_Race_GetResult</string>
+
 
     <!--添加赛绩附加信息-->
     <string name="pigeon_play_additional_info_add">TXGP_PigeonInfoList_AddInfo</string>

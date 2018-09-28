@@ -6,6 +6,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.AssModel;
 import com.cpigeon.book.model.entity.AssEntity;
+import com.cpigeon.book.model.entity.LoftEntity;
 
 import java.util.List;
 
@@ -17,17 +18,33 @@ public class SelectAssViewModel extends BaseViewModel {
 
     private String key;
 
+    //协会
     public MutableLiveData<List<AssEntity>> liveAss = new MutableLiveData<>();
-    public MutableLiveData<List<AssEntity>> liveHistory = new MutableLiveData<>();
 
-    public void getAssList(){
+    //公棚
+    public MutableLiveData<List<LoftEntity>> liveLoft = new MutableLiveData<>();
+
+    //协会数据
+    public void getAssList() {
         submitRequestThrowError(AssModel.getAssList(key), r -> {
-            if(r.isOk()){
+            if (r.isOk()) {
                 liveAss.setValue(r.data);
                 listEmptyMessage.setValue(r.msg);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
+
+
+    //公棚列表数据
+    public void getLoftList() {
+        submitRequestThrowError(AssModel.getLoftList(key), r -> {
+            if (r.isOk()) {
+                liveLoft.setValue(r.data);
+                listEmptyMessage.setValue(r.msg);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
 
     public void setKey(String key) {
         this.key = key;

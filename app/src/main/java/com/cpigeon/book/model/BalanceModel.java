@@ -21,7 +21,7 @@ public class BalanceModel {
         return RequestData.<ApiResponse<List<AccountBalanceListEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<AccountBalanceListEntity>>>() {
                 }.getType())
-                .url(R.string.user_log_book)
+                .url(R.string.account_balance_details)
                 .addBody("pi", String.valueOf(pi))
                 .addBody("ps", String.valueOf(ps))
                 .request();

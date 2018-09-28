@@ -110,6 +110,8 @@ public class SignFragment extends BaseBookFragment {
         rv_guize.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_guize.setAdapter(mSignRuleAdapter);
 
+        setProgressVisible(true);
+
         //获取签到规则
         mSignViewModel.getZGW_Users_SignGuiZeData();
 
@@ -155,17 +157,20 @@ public class SignFragment extends BaseBookFragment {
 
         //签到规则
         mSignViewModel.pigeonFriendMsgListData.observe(this, signRuleListEntities -> {
+            setProgressVisible(false);
             mSignRuleAdapter.setNewData(signRuleListEntities);
             mSignRuleAdapter.notifyDataSetChanged();
         });
 
         //获取签到信息
         mSignViewModel.mSignInfoEntity.observe(this, mSignInfoEntity -> {
+            setProgressVisible(false);
             initView(mSignInfoEntity);
         });
 
         //签到返回
         mSignViewModel.mSignClickData.observe(this, signClickEntity -> {
+            setProgressVisible(false);
             RxUtils.delayed(2000, aLong -> {
                 try {
                     myYAnimation.reset();
@@ -514,7 +519,6 @@ public class SignFragment extends BaseBookFragment {
         } else {
             calendar.setSchemeColor(Color.parseColor("#FFFFFF"));
         }
-
 
         calendar.addScheme(type, -1, "", "");
 

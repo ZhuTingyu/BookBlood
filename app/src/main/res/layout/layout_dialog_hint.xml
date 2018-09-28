@@ -13,6 +13,7 @@
         android:paddingBottom="16dp"
         android:paddingLeft="@dimen/spacing_left_reight"
         android:paddingRight="@dimen/spacing_left_reight"
+        android:text=""
         android:paddingTop="16dp"
         android:textColor="@color/color_000000"
         android:textSize="@dimen/medium_text_size" />

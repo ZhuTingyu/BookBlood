@@ -2,16 +2,9 @@ package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.base.base.FragmentAdapter;
 import com.base.util.IntentBuilder;
@@ -22,8 +15,6 @@ import com.base.util.picker.PickerUtil;
 import com.base.util.utility.PhoneUtils;
 import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
-import com.base.widget.CustomViewPager;
-import com.base.widget.magicindicator.MagicIndicator;
 import com.base.widget.magicindicator.ViewPagerHelper;
 import com.base.widget.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.base.widget.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -33,11 +24,12 @@ import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePage
 import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
-import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.AssEntity;
+import com.cpigeon.book.model.entity.LoftEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -46,6 +38,7 @@ import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonModifyViewModel;
+import com.cpigeon.book.module.feedpigeon.GrowthReportFragment;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
@@ -65,11 +58,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.qqtheme.framework.picker.OptionPicker;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 种鸽详情
@@ -148,7 +138,10 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
         setTitle("详情");
 
         setToolbarRight("成长记录", item -> {
-            GrowthReportFragment.start(getBaseActivity(), "");
+            if (mBreedPigeonModifyViewModel.mPigeonEntity == null) {
+                return true;
+            }
+            GrowthReportFragment.start(getBaseActivity(), mBreedPigeonModifyViewModel.mPigeonEntity);
             return true;
         });
 
@@ -207,7 +200,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             }
         });
 
-        if(!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())){
+        if (!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) {
             mFamilyTreeView.setShowInfoModel(true);
         }
 
@@ -237,12 +230,12 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 tvRight.setOnClickListener(v -> {
                     List<String> way = Lists.newArrayList(getResources().getStringArray(R.array.array_contact_way));
                     BottomSheetAdapter.createBottomSheet(getBaseActivity(), way, p -> {
-                        if(p == 0){
+                        if (p == 0) {
                             //打电话
-                            PhoneUtils.dial(getBaseActivity(),mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
-                        }else {
+                            PhoneUtils.dial(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
+                        } else {
                             //发短信
-                            PhoneUtils.sms(getBaseActivity(),mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
+                            PhoneUtils.sms(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
                         }
                     });
                 });
@@ -342,7 +335,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                     .load(datas.getCoverPhotoUrl())
                     .placeholder(R.drawable.ic_img_default)
                     .into(img_pigeon);//鸽子照片
-            if (TYPE_HIS_SHARE.equals(mType)){
+            if (TYPE_HIS_SHARE.equals(mType)) {
                 tvLeft.setText(mBreedPigeonDetailsViewModel.mPigeonEntity.getUserName());
             }
         });
@@ -407,7 +400,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             , R.id.img_play_import, R.id.img_play_add})
     public void onViewClicked(View view) {
 
-        if(!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) return;
+        if (!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) return;
 
         switch (view.getId()) {
 
@@ -602,10 +595,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.img_play_import:
                 //赛绩导入
-
-//                ImportPlayDialog mImportPlayDialog = new ImportPlayDialog(getBaseActivity());
-//                mImportPlayDialog.show();
-
                 mAddPlayDialog.show(getBaseActivity().getFragmentManager(), "");
                 break;
             case R.id.img_play_add:
@@ -622,6 +611,27 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                     e.printStackTrace();
                 }
                 break;
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != Activity.RESULT_OK) return;
+        if (requestCode == CODE_ORGANIZE) {
+
+            //选择协会回调
+            AssEntity organize = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            mAddPlayDialog.setllUnitName(organize.getISOCName());
+
+        } else if (requestCode == CODE_LOFT) {
+
+            //选择公棚回调
+            LoftEntity organize = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            mAddPlayDialog.setllUnitName(organize.getGpname());
+
         }
     }
 

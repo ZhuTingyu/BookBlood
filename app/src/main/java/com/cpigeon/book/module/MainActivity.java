@@ -17,23 +17,29 @@ import com.base.util.Lists;
 import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.RxUtils;
+import com.base.util.Utils;
 import com.base.util.db.AppDatabase;
 import com.base.util.system.AppManager;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
+import com.base.widget.BottomSheetAdapter;
 import com.base.widget.CustomViewPager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonEntryFragment;
+import com.cpigeon.book.module.foot.FootAdminAddMultipleFragment;
+import com.cpigeon.book.module.foot.FootAdminSingleFragment;
 import com.cpigeon.book.module.home.UserInfoFragment;
 import com.cpigeon.book.module.home.goodpigeon.GoodPigeonHomeFragment;
 import com.cpigeon.book.module.home.home.HomeFragment;
 import com.cpigeon.book.module.home.sharehall.ShareHallFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.module.menu.smalltools.SmallToolsHomeFragment;
+import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
+import com.cpigeon.book.module.trainpigeon.NewTrainPigeonFragment;
 import com.cpigeon.book.widget.BottomAddTabView;
 import com.cpigeon.book.widget.SimpleTitleView;
 
@@ -143,11 +149,28 @@ public class MainActivity extends BaseBookActivity {
         }
 
         ImageView close = view.findViewById(R.id.imgClose);
+        SimpleTitleView simpleText1 = view.findViewById(R.id.simpleText1);
         SimpleTitleView simpleText2 = view.findViewById(R.id.simpleText2);
         SimpleTitleView simpleText3 = view.findViewById(R.id.simpleText3);
+        SimpleTitleView simpleText4 = view.findViewById(R.id.simpleText4);
+        SimpleTitleView simpleText5 = view.findViewById(R.id.simpleText5);
         SimpleTitleView simpleText6 = view.findViewById(R.id.simpleText6);
         close.setOnClickListener(v -> {
             mPopupWindow.dismiss();
+        });
+
+
+        String[] chooseWays = getResources().getStringArray(R.array.array_choose_input_foot_number);
+        simpleText1.setOnClickListener(v -> {
+            //足环录入
+            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
+                if (chooseWays[p].equals(Utils.getString(R.string.text_one_foot_input))) {
+                    FootAdminSingleFragment.start(getBaseActivity());
+                } else {
+                    FootAdminAddMultipleFragment.start(getBaseActivity());
+                }
+                mPopupWindow.dismiss();
+            });
         });
 
         simpleText2.setOnClickListener(v -> {
@@ -160,6 +183,18 @@ public class MainActivity extends BaseBookActivity {
             //赛鸽录入
             mPopupWindow.dismiss();
             RacingPigeonEntryFragment.start(getBaseActivity());
+        });
+
+        simpleText4.setOnClickListener(v -> {
+            //赛鸽路训
+            mPopupWindow.dismiss();
+            NewTrainPigeonFragment.start(getBaseActivity());
+        });
+
+        simpleText5.setOnClickListener(v -> {
+            //爱鸽拍照
+            mPopupWindow.dismiss();
+            SelectFootToPhotoFragment.start(getBaseActivity());
         });
 
         simpleText6.setOnClickListener(v -> {

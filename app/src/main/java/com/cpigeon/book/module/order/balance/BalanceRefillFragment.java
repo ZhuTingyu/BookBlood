@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.menu.balance;
+package com.cpigeon.book.module.order.balance;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +19,7 @@ import com.base.util.RxUtils;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.menu.viewmodel.BalanceViewModel;
+import com.cpigeon.book.module.order.viewmodel.BalanceViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 
 import butterknife.BindView;

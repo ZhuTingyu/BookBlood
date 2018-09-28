@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,7 +120,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         mPublicViewModel.getSelectType();
 
         lvCity.setOnRightClickListener(v -> {
-            SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, CODE_SELECT_COUNTY,null);
+            SearchFragmentParentActivity.start(getBaseActivity(), SelectCountyFragment.class, CODE_SELECT_COUNTY, null);
         });
 
         lvFoot.setOnClickListener(v -> {

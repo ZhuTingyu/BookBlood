@@ -6,14 +6,11 @@ import android.view.View;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.model.entity.AssEntity;
-import com.cpigeon.book.model.entity.SearchHistoryEntity;
 import com.cpigeon.book.module.select.adpter.SearchAssAdapter;
 import com.cpigeon.book.module.select.viewmodel.SelectAssViewModel;
 import com.cpigeon.book.widget.SearchTextView;
@@ -21,7 +18,7 @@ import com.cpigeon.book.widget.SearchTextView;
 import java.util.List;
 
 /**
- * Created by Zhu TingYu on 2018/8/6.
+ * 选择协会
  */
 
 public class SearchAssActivity extends BaseSearchActivity {
@@ -55,7 +52,7 @@ public class SearchAssActivity extends BaseSearchActivity {
 
         mSearchAssAdapter.setOnItemClickListener((adapter, view, position) -> {
             IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mSearchAssAdapter.getData().get(position).getISOCName())
+                    .putExtra(IntentBuilder.KEY_DATA, mSearchAssAdapter.getData().get(position))
                     .finishForResult(getBaseActivity());
         });
 

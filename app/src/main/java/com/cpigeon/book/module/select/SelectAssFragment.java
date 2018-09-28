@@ -23,7 +23,7 @@ import com.cpigeon.book.module.select.viewmodel.SelectAssViewModel;
 import com.gjiazhe.wavesidebar.WaveSideBar;
 
 /**
- * Created by Zhu TingYu on 2018/8/3.
+ * 详情选择协会
  */
 
 public class SelectAssFragment extends BaseFragment {
@@ -57,12 +57,12 @@ public class SelectAssFragment extends BaseFragment {
         mWaveSideBar = findViewById(R.id.side_bar);
 
 
-        mAdapter  = new SelectAssAdapter();
+        mAdapter = new SelectAssAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             Intent intent = new Intent();
-            intent.putExtra(IntentBuilder.KEY_DATA, mAdapter.getData().get(position).getISOCName());
+            intent.putExtra(IntentBuilder.KEY_DATA, mAdapter.getData().get(position));
             getBaseActivity().setResult(Activity.RESULT_OK, intent);
             finish();
         });
@@ -73,9 +73,8 @@ public class SelectAssFragment extends BaseFragment {
         SearchFragmentParentActivity activity = (SearchFragmentParentActivity) getBaseActivity();
         activity.setSearchHint(R.string.text_search_ass);
         activity.setSearchClickListener(v -> {
-            SearchAssActivity.start(getBaseActivity(), SearchAssActivity.class,null);
+            SearchAssActivity.start(getBaseActivity(), SearchAssActivity.class, null);
         });
-
     }
 
     @Override
@@ -92,10 +91,10 @@ public class SelectAssFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK){
-            if(requestCode == BaseSearchActivity.CODE_SEARCH){
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == BaseSearchActivity.CODE_SEARCH) {
                 IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, data.getStringExtra(IntentBuilder.KEY_DATA))
+                        .putExtra(IntentBuilder.KEY_DATA, (AssEntity) data.getParcelableExtra(IntentBuilder.KEY_DATA))
                         .finishForResult(getBaseActivity());
             }
         }
