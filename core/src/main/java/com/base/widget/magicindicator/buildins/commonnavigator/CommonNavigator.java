@@ -35,7 +35,7 @@ public class CommonNavigator extends FrameLayout implements IPagerNavigator, Nav
     private IPagerIndicator mIndicator;
 
     private CommonNavigatorAdapter mAdapter;
-    private NavigatorHelper mNavigatorHelper;
+    public NavigatorHelper mNavigatorHelper;
 
     /**
      * 提供给外部的参数配置

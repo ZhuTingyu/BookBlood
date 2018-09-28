@@ -26,6 +26,8 @@ public class BreedPigeonDetailsViewModel extends BaseViewModel {
     public String pigeonId;
     public String pUid = UserModel.getInstance().getUserId();
 
+    public PigeonEntity mPigeonEntity;
+
     public BreedPigeonDetailsViewModel(Activity activity) {
         footId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
         pigeonId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
@@ -39,7 +41,8 @@ public class BreedPigeonDetailsViewModel extends BaseViewModel {
     public void getPigeonDetails() {
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(pigeonId, pUid), r -> {
             if (r.isOk()) {
-                mBreedPigeonData.setValue(r.data);
+                mPigeonEntity = r.data;
+                mBreedPigeonData.setValue(mPigeonEntity);
             } else throw new HttpErrorException(r);
         });
 

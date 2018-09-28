@@ -9,14 +9,17 @@ import android.widget.RelativeLayout;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 
 /**
  * Created by Zhu TingYu on 2018/9/14.
  */
 
-public class GoodPigeonListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class GoodPigeonListAdapter extends BaseQuickAdapter<PigeonEntity, BaseViewHolder> {
 
     int margin_5;
     int margin_10;
@@ -30,20 +33,24 @@ public class GoodPigeonListAdapter extends BaseQuickAdapter<String, BaseViewHold
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, PigeonEntity item) {
 
-        int i = (int) (Math.random() * 10);
         int h = 0;
         int imgH = 0;
         int margin = 0;
-        if (i < 5) {
+
+        ImageView imgSex = helper.getView(R.id.imgSex);
+
+        if (item.getPigeonSexName().equals(Utils.getString(R.string.text_male_a))) {
             h = ScreenTool.dip2px(288);
             imgH = ScreenTool.dip2px(155);
             margin = margin_30;
+            imgSex.setImageResource(R.mipmap.ic_good_pigeon_male);
         } else {
             h = ScreenTool.dip2px(216);
             imgH = ScreenTool.dip2px(124);
             margin = margin_10;
+            imgSex.setImageResource(R.mipmap.ic_good_pigeon_female);
         }
         ImageView img = helper.getView(R.id.img);
         RelativeLayout.LayoutParams imgP = new RelativeLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, imgH);
@@ -53,5 +60,14 @@ public class GoodPigeonListAdapter extends BaseQuickAdapter<String, BaseViewHold
         RecyclerView.LayoutParams itemP = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h);
         itemP.setMargins(margin_5, margin_5, margin_5, margin_5);
         helper.itemView.setLayoutParams(itemP);
+
+        helper.setGlideImageView(mContext, R.id.img, item.getCoverPhotoUrl());
+        helper.setText(R.id.tvFootNumber, item.getFootRingNum());
+        helper.setText(R.id.tvBlood, item.getPigeonBloodName());
+
+        helper.itemView.setOnClickListener(v -> {
+            BreedPigeonDetailsFragment.startGoodPigeon(getBaseActivity()
+                    ,item.getPigeonID(), item.getFootRingID(), item.getUserID());
+        });
     }
 }

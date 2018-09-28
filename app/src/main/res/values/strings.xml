@@ -526,4 +526,10 @@
 
     <string name="str_new_code">发现新版本 v%1%来啦</string>
 
+    <string-array name="array_contact_way">
+        <item>打电话</item>
+        <item>发短信</item>
+    </string-array>
+
+
 </resources>

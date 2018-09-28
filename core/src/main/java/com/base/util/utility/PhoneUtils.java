@@ -21,6 +21,7 @@ import com.base.http.BuildConfig;
 import com.base.util.EncryptionTool;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
+import com.base.util.regex.RegexUtils;
 
 import java.io.File;
 import java.net.NetworkInterface;
@@ -30,7 +31,6 @@ import java.util.List;
 import static android.Manifest.permission.CALL_PHONE;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.SEND_SMS;
-import static com.base.util.file.FileUtils.deleteFile;
 
 /**
  * <pre>
@@ -453,7 +453,6 @@ public final class PhoneUtils {
         }
     }
 
-
     /**
      * 跳转到设置-允许安装未知来源-页面
      */
@@ -465,8 +464,15 @@ public final class PhoneUtils {
         mContext.startActivity(intent);
     }
 
-
-
-
-
+    /**
+     * Send sms.
+     *
+     * @param phoneNumber The phone number.
+     */
+    public static void sms(Activity activity, String phoneNumber) {
+        if(RegexUtils.isMobileExact(phoneNumber)){
+            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+phoneNumber));
+            activity.startActivity(intent);
+        }
+    }
 }

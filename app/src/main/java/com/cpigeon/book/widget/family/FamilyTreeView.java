@@ -441,6 +441,14 @@ public class FamilyTreeView extends LinearLayout {
         return (y + 1) % 2 == 1;
     }
 
+    public void setPrintModel(boolean isPrintModel) {
+        this.isPrintModel = isPrintModel;
+    }
+
+    public void setShowInfoModel(boolean showInfoModel) {
+        isShowInfoModel = showInfoModel;
+    }
+
     /**
      * @param generation 代数真实位置
      * @param whichOne

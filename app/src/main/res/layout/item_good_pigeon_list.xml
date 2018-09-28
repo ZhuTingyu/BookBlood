@@ -18,12 +18,12 @@
         app:srcCompat="@mipmap/about_logo" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/imgSex"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        app:srcCompat="@mipmap/ic_good_pigeon_female" />
+        app:srcCompat="@mipmap/ic_good_pigeon_male" />
 
     <TextView
         android:layout_below="@+id/img"

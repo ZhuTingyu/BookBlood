@@ -21,6 +21,9 @@ public class PigeonEntity implements Serializable {
     public static final String BIT_MATCH = "0"; //是否返回赛绩（0，不返回）
     public static final String BIT_MATCH_NO = "1"; //是否返回赛绩（1，返回）
 
+    public static final String STATUS_OPEN_SERVICE = "1"; //已经开通服务
+    public static final String STATUS_NOT_OPEN_SERVICE = "0"; //没开通服务
+
     /**
      * CoverPhotoUrl :
      * PigeonPlume : 16
@@ -88,11 +91,38 @@ public class PigeonEntity implements Serializable {
     private String CoverPhotoTypeID;// 图片typeId
     private String CoverPhotoTypeName;// 图片typeName
     private String MatchCount;// 参赛次数
-
+    //共享厅
     private String ShareTime;
     private String Province;
     private String City;
     private String UserID;
+    private String UserName;
+    private String UserService;//0 未开通 1 已开通
+    private String PigeonHomePhone;
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+
+    public String getUserService() {
+        return UserService;
+    }
+
+    public void setUserService(String userService) {
+        UserService = userService;
+    }
+
+    public String getPigeonHomePhone() {
+        return PigeonHomePhone;
+    }
+
+    public void setPigeonHomePhone(String pigeonHomePhone) {
+        PigeonHomePhone = pigeonHomePhone;
+    }
 
     public String getMatchCount() {
         return MatchCount;

@@ -20,11 +20,11 @@ import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 
 public class ShareHallHomeAdapter extends BaseQuickAdapter<PigeonEntity, BaseViewHolder> {
 
-    boolean isMyShare;
+    boolean isHaveDelete;
 
-    public ShareHallHomeAdapter(boolean isMyShare) {
+    public ShareHallHomeAdapter(boolean isHaveDelete) {
         super(R.layout.item_share_hall_home, null);
-        this.isMyShare = isMyShare;
+        this.isHaveDelete = isHaveDelete;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ShareHallHomeAdapter extends BaseQuickAdapter<PigeonEntity, BaseVie
         mLlDelete = helper.getView(R.id.llDelete);
         mImgTagMy = helper.getView(R.id.imgTagMy);
 
-        if (isMyShare) {
+        if (isHaveDelete) {
             mLlDelete.setVisibility(View.VISIBLE);
             mTvLocation.setVisibility(View.GONE);
             mLlDelete.setOnClickListener(v -> {
@@ -63,7 +63,7 @@ public class ShareHallHomeAdapter extends BaseQuickAdapter<PigeonEntity, BaseVie
         mTvLocation.setVisibility(View.VISIBLE);
 
         if (UserModel.getInstance().getUserId().equals(item.getUserID())) {
-            if (!isMyShare) {
+            if (!isHaveDelete) {
                 mImgTagMy.setVisibility(View.VISIBLE);
             }
             helper.itemView.setOnClickListener(v -> {

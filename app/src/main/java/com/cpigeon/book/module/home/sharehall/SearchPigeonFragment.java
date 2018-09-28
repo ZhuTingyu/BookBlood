@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -27,15 +28,22 @@ import org.greenrobot.eventbus.ThreadMode;
  * Created by Zhu TingYu on 2018/9/26.
  */
 
-public class SearchPigeonToShareFragment extends BaseBookFragment {
+public class SearchPigeonFragment extends BaseBookFragment {
 
     XRecyclerView mRecyclerView;
     SearchPigeonToShareAdapter mAdapter;
     BreedPigeonListModel mViewModel;
     SearchFragmentParentActivity mActivity;
+    int requestCode;
+
+    public static void start(Activity activity, int code){
+        Bundle bundle = new Bundle();
+        bundle.putInt(IntentBuilder.KEY_TYPE, code);
+        SearchFragmentParentActivity.start(activity, SearchPigeonFragment.class, code , false, bundle);
+    }
 
     public static void start(Activity activity){
-        SearchFragmentParentActivity.start(activity, SearchPigeonToShareFragment.class, false, null);
+        SearchFragmentParentActivity.start(activity, SearchPigeonFragment.class , false, null);
     }
 
     @Override
@@ -55,6 +63,7 @@ public class SearchPigeonToShareFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        requestCode = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TYPE, 0);
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mRecyclerView = findViewById(R.id.list);
         mAdapter = new SearchPigeonToShareAdapter();
@@ -72,9 +81,15 @@ public class SearchPigeonToShareFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+
             PigeonEntity pigeonEntity = mAdapter.getItem(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(),pigeonEntity.getPigeonID()
-                    , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+            if(requestCode == 0){
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, pigeonEntity).finish(getBaseActivity());
+            }else {
+                BreedPigeonDetailsFragment.start(getBaseActivity(),pigeonEntity.getPigeonID()
+                        , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+            }
         });
 
         setProgressVisible(true);

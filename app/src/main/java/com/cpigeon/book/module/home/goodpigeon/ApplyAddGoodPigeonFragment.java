@@ -49,7 +49,7 @@ public class ApplyAddGoodPigeonFragment extends BaseBookFragment {
         mTvOk = findViewById(R.id.tvOk);
 
         mLvFoot.setOnRightClickListener(lineInputView -> {
-           // SearchFootRingActivity.start(getBaseActivity(), CODE_FOOT);
+           //SearchFootRingActivity.start(getBaseActivity(), CODE_FOOT);
         });
 
         SpannableStringBuilder sb = new SpannableStringBuilder();

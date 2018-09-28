@@ -32,7 +32,7 @@ public class SearchSharePigeonActivity extends BaseSearchActivity {
     public static void start(Activity activity, boolean isMyShare) {
         Bundle bundle = new Bundle();
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isMyShare);
-        BaseSearchActivity.start(activity, SearchSharePigeonActivity.class);
+        BaseSearchActivity.start(activity, SearchSharePigeonActivity.class, bundle);
     }
 
     @Override
@@ -85,6 +85,11 @@ public class SearchSharePigeonActivity extends BaseSearchActivity {
 
     @Override
     protected void initObserve() {
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
         mViewModel.mDataSharePigeon.observe(this, sharePigeonEntities -> {
             setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, sharePigeonEntities);

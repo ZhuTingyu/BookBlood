@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.base.application.BaseApplication;
+import com.base.util.Utils;
 
 /**
  * Created by Antony on 2016/10/19.
@@ -164,8 +165,8 @@ public class ScreenTool {
      * @param spValue
      * @return
      */
-    public static int sp2px(Context context, float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+    public static int sp2px(float spValue) {
+        final float fontScale = Utils.getApp().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
