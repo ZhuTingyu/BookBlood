@@ -227,6 +227,8 @@
     <string name="text_remark_explain">备注说明</string>
     <string name="text_edit_lenth_hint">500字内</string>
     <string name="text_yuan">%1$s元</string>
+    <string name="text_weixing_charge">(微信手续费%1$s元)</string>
+    <string name="text_RMB">元</string>
     <string name="text_foot_details">足环详情</string>
     <string name="text_delete">删除</string>
     <string name="text_delete_warning_hint">确定删除该条数据吗？</string>
@@ -266,6 +268,8 @@
     <string name="text_currency_details">鸽币明细</string>
     <string name="text_my_currency">我的鸽币</string>
     <string name="text_way_of_get_currency">鸽币获取方法</string>
+    <string name="text_pigeon_score">鸽币</string>
+    <string name="text_pigeon_score_content">%1$s鸽币</string>
     <string name="text_finished">已完成</string>
     <string name="text_go_finish">去完成</string>
     <string name="text_unpaid">待支付</string>
@@ -538,6 +542,12 @@
     <string name="str_pairing_info">配对信息</string>
     <string name="str_input_play_hint1">我们正在</string>
     <string name="str_input_play_hint2">快马加鞭导入赛绩</string>
+    <string name="text_service_book">天下鸽谱开通</string>
+    <string name="text_service_down_load_league">导入赛绩开通</string>
+    <string name="text_service_print_blood_book">打印血统书开通</string>
+    <string name="text_service_share_pigeon">共享种鸽开通</string>
+    <string name="text_no_open_service">您还没没有开通任务服务哦...</string>
+    <string name="text_input_pay_password">请输入支付密码</string>
 
 
     <!--鸽币-->

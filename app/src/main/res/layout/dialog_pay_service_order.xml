@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/text_input_pay_password"
+        android:textColor="@color/black"
+        android:textSize="@dimen/large_text_size" />
+
+
+    <include layout="@layout/include_line_view_layout" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorButton_YZM_disable"
+        android:textSize="28sp"
+        tools:text="99.00" />
+
+    <com.cpigeon.book.widget.gridpasswordview.GridPasswordView
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="@dimen/normal_safe_distance"
+        android:layout_marginRight="@dimen/normal_safe_distance"
+        app:gpvIsPassWord="true"
+        app:gpvLineColor="@color/gray"
+        android:layout_marginBottom="16dp"
+        app:gpvLineWidth="1dp"
+        app:gpvPasswordLength="6"
+        app:gpvTextColor="@color/black"
+        app:gpvTextSize="25sp" />
+
+</LinearLayout>
