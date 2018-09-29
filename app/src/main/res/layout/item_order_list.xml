@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="143dp">
+    android:layout_height="143dp"
+    android:layout_marginTop="10dp">
 
     <TextView
         android:id="@+id/tvTime"
@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:textSize="@dimen/medium_text_size"
-        android:textColor="@color/black"
         android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTime" />
 
@@ -36,9 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:textSize="@dimen/medium_text_size"
-        android:textColor="@color/black"
         android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="@dimen/medium_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOrderContent" />
 
@@ -49,8 +49,8 @@
         android:layout_marginBottom="16dp"
         android:layout_marginStart="20dp"
         android:text="TextView"
-        android:textSize="@dimen/medium_text_size"
         android:textColor="@color/color_text_red"
+        android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

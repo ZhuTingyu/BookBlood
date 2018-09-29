@@ -47,7 +47,7 @@ public class RacingPigeonEntryViewModel extends BasePigeonViewModel {
 
 
     public void isCanCommit() {
-        isCanCommit(foot, sourceId, sexId, featherColor, eyeSandId, theirShellsDate, lineage, llHangingRingDate);
+        isCanCommit(foot);
     }
 
 }

@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="天下鸽谱"
+            android:text=""
             android:textColor="@color/general_text_color"
             android:textSize="@dimen/medium_text_size" />
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="180000鸽币/1年"
+            android:text=""
             android:textColor="@color/general_text_color"
             android:textSize="@dimen/medium_text_size" />
 

@@ -15,5 +15,8 @@ public class EventBusService {
     public static final String BREED_PIGEON_LIST_REFRESH = "PAIRING_NEST_REFRESH";//种鸽列表  刷新
 
     public static final String PIGEON_PHOTO_REFRESH = "PIGEON_PHOTO_REFRESH";//相册  刷新
-    public static final String PIGEON_PHOTO_DEL_REFRESH = "PIGEON_PHOTO_REFRESH";//相册 删除图片后  刷新
+
+    public static final String PIGEON_PLAY_LIST_REFRESH = "PIGEON_PLAY_LIST_REFRESH";//赛绩列表  刷新
+
+    public static final String PIGEON_PLAY_ADDITIONAL_INFO_LIST_REFRESH = "PIGEON_PLAY_LIST_REFRESH";//赛绩附加信息列表  刷新
 }

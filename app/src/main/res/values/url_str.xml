@@ -64,6 +64,8 @@
     <string name="get_server_record">TXGP_GetServiceList</string>
     <!--充值明细-->
     <string name="account_balance_details">TXGP_ChongZhi_List</string>
+    <!--我的订单   列表-->
+    <string name="my_order_list">TXGP_GetOrderList</string>
 
     <!--更新-->
     <string name="update_info">TXGP_GongGao_GetList</string>
@@ -116,7 +118,6 @@
     <string name="pigeon_currency_details_list">TXGP_GeBi_List</string>
     <!--获取鸽币-->
     <string name="get_my_gebi">TXGP_Account_GeBi</string>
-
 
     <!--添加单个足环-->
     <string name="foot_add_single">TXGP_FootRing_Add</string>

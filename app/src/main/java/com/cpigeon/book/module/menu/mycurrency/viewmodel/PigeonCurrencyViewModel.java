@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PigeonCurrencyModel;
+import com.cpigeon.book.model.entity.CurrencyExchangeEntity;
 import com.cpigeon.book.model.entity.PigeonCurrencyEntity;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class PigeonCurrencyViewModel extends BaseViewModel {
     //鸽币明细
     public MutableLiveData<List<PigeonCurrencyEntity>> mPigeonCurrencyDetailsData = new MutableLiveData<>();
     //鸽币兑换回调
-    public MutableLiveData<List<PigeonCurrencyEntity>> mPigeonCurrencyExchangeData = new MutableLiveData<>();
+    public MutableLiveData<List<CurrencyExchangeEntity>> mPigeonCurrencyExchangeData = new MutableLiveData<>();
     //我的鸽币
     public MutableLiveData<PigeonCurrencyEntity> mGeBi = new MutableLiveData<>();
 

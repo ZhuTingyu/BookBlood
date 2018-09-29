@@ -126,6 +126,7 @@ public class PlayAddFragment extends BaseBookFragment {
             mPigeonEntryEntity = (PigeonEntryEntity) getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA);
             mPlayViewModel.pigeonid = mPigeonEntryEntity.getPigeonID();
             mPlayViewModel.footid = mPigeonEntryEntity.getFootRingID();
+            foot = mPigeonEntryEntity.getFootRingNum();
             llFoot.setContent(mPigeonEntryEntity.getFootRingNum());
 
             if (type == 1) {
@@ -225,7 +226,9 @@ public class PlayAddFragment extends BaseBookFragment {
             getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), "您已成功录入赛绩，是否继续录入", sweetAlertDialog -> {
                 //确定
                 sweetAlertDialog.dismiss();
-                initView(new PigeonPlayEntity.Builder().build());
+                initView(new PigeonPlayEntity.Builder()
+                        .FootRingNum(foot)
+                        .build());
                 mPlayViewModel.isCanCommit();
             }, sweetAlertDialog -> {
                 //取消
@@ -240,12 +243,18 @@ public class PlayAddFragment extends BaseBookFragment {
 
         mPlayViewModel.getPigeonPlayDatails.observe(this, pigeonPlayEntity -> {
             setProgressVisible(false);//加载框
+            foot = pigeonPlayEntity.getFootRingNum();
             initView(pigeonPlayEntity);
         });
 
     }
 
+    private String  foot = "";
+
     private void initView(PigeonPlayEntity mPigeonPlayEntity) {
+
+        //足环号、
+        llFoot.setContent(mPigeonPlayEntity.getFootRingNum());
         //组织名称
         mPlayViewModel.playOrg = mPigeonPlayEntity.getMatchISOCName();
         llPlayOrg.setRightText(mPigeonPlayEntity.getMatchISOCName());

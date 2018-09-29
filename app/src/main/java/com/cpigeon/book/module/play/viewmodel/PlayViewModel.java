@@ -10,6 +10,9 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.model.PlayModel;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.service.EventBusService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -131,6 +134,8 @@ public class PlayViewModel extends BaseViewModel {
                         playTime,
                         ""), r -> {
                     if (r.isOk()) {
+
+                        EventBus.getDefault().post(EventBusService.PIGEON_PLAY_LIST_REFRESH);
                         addPigeonPlayData.setValue(r.data);
                     } else throw new HttpErrorException(r);
                 });
@@ -147,7 +152,7 @@ public class PlayViewModel extends BaseViewModel {
                         playTime,
                         ""), r -> {
                     if (r.isOk()) {
-//                        modifyPigeonPlayData.setValue(r.data);
+                        EventBus.getDefault().post(EventBusService.PIGEON_PLAY_LIST_REFRESH);
                         hintDialog(r.msg);
                     } else throw new HttpErrorException(r);
                 });
@@ -166,6 +171,7 @@ public class PlayViewModel extends BaseViewModel {
                         footid,
                         playAdditionalInfo), r -> {
                     if (r.isOk()) {
+                        EventBus.getDefault().post(EventBusService.PIGEON_PLAY_ADDITIONAL_INFO_LIST_REFRESH);
                         addPigeonPlayData.setValue(r.data);
                     } else throw new HttpErrorException(r);
                 });
@@ -175,6 +181,7 @@ public class PlayViewModel extends BaseViewModel {
                         footid,
                         playAdditionalInfo), r -> {
                     if (r.isOk()) {
+                        EventBus.getDefault().post(EventBusService.PIGEON_PLAY_ADDITIONAL_INFO_LIST_REFRESH);
                         hintDialog(r.msg);
                     } else throw new HttpErrorException(r);
                 });
@@ -188,6 +195,7 @@ public class PlayViewModel extends BaseViewModel {
                 footid,
                 matchid), r -> {
             if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.PIGEON_PLAY_LIST_REFRESH);
                 showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).isClosePage(true).cancelable(false).build());
             } else throw new HttpErrorException(r);
         });
@@ -212,6 +220,7 @@ public class PlayViewModel extends BaseViewModel {
                 footid,
                 infoid), r -> {
             if (r.isOk()) {
+                EventBus.getDefault().post(EventBusService.PIGEON_PLAY_ADDITIONAL_INFO_LIST_REFRESH);
                 showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).isClosePage(true).cancelable(false).build());
             } else throw new HttpErrorException(r);
         });

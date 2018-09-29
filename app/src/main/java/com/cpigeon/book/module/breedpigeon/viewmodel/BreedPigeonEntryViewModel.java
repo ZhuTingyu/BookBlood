@@ -103,7 +103,7 @@ public class BreedPigeonEntryViewModel extends BasePigeonViewModel {
 
 
     public void isCanCommit() {
-        isCanCommit(foot, sourceId, sexId, featherColor, eyeSandId, theirShellsDate, lineage, stateId);
+        isCanCommit(foot);
     }
 
     public boolean isHavePigeonInfo(){

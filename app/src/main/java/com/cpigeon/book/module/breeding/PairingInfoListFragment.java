@@ -108,6 +108,14 @@ public class PairingInfoListFragment extends BaseListFragment {
 
         mPairingInfoListViewModel.mPairingInfoListData.observe(this, breedPigeonEntities -> {
             setProgressVisible(false);
+
+            if (breedPigeonEntities.isEmpty() || breedPigeonEntities.size() == 0) {
+            } else {
+                if (mPairingInfoListAdapter.getHeaderViewsCount() == 0) {
+                    initHeadView();
+                }
+            }
+
             RecyclerViewUtils.setLoadMoreCallBack(list, mPairingInfoListAdapter, breedPigeonEntities);
         });
 

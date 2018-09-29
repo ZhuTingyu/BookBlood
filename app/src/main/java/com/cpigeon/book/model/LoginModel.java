@@ -51,7 +51,7 @@ public class LoginModel {
                 }.getType())
                 .url(R.string.user_one_start_app)
 //                .addBody("uid", UserModel.getInstance().getUserId())//登录用户ID
-                .addBody("ly", "安卓")//来源，值等于安卓或苹果
+                .addBody("ly", "1")//来源，值等于安卓或苹果
                 .addBody("sb", PhoneUtils.getModel())//设备信息
                 .addBody("t", "1")//设备信息
                 .request();

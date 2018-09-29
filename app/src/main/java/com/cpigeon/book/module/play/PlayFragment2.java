@@ -17,7 +17,10 @@ import com.cpigeon.book.model.entity.PlayAdditionalInfoEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.play.adapter.PlayAddInfoAdapter;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 
@@ -82,9 +85,7 @@ public class PlayFragment2 extends BaseBookFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         mRecyclerView.setRefreshListener(() -> {
-            mAdapter.getData().clear();
-            mPlayListViewModel.pi = 1;
-            mPlayListViewModel.getPlayAdditionalInfoList();
+            dataRefresh();
         });
 
 
@@ -110,5 +111,19 @@ public class PlayFragment2 extends BaseBookFragment {
         mPlayListViewModel.getPlayAdditionalInfoList();
     }
 
+
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.PIGEON_PLAY_ADDITIONAL_INFO_LIST_REFRESH)) {
+            dataRefresh();
+        }
+    }
+
+    private void dataRefresh() {
+        mAdapter.getData().clear();
+        mAdapter.notifyDataSetChanged();
+        mPlayListViewModel.pi = 1;
+        mPlayListViewModel.getPlayAdditionalInfoList();
+    }
 
 }

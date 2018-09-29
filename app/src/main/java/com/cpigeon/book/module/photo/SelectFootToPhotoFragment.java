@@ -25,10 +25,8 @@ import com.cpigeon.book.service.EventBusService;
 import org.greenrobot.eventbus.Subscribe;
 
 /**
- * 信鸽赛绩   足环列表
- * Created by Zhu TingYu on 2018/9/11.
+ * 信鸽相册   足环列表
  */
-
 public class SelectFootToPhotoFragment extends BaseFootListFragment {
 
 
@@ -67,7 +65,6 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
 
             PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
             PigeonPhotoHomeActivity.start(getBaseActivity(), mPigeonEntity);
-
         });
 
         mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
@@ -79,14 +76,17 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         super.initObserve();
         //统计数据
         mViewModel.mPigeonPhotoCount.observe(this, datas -> {
+
             mAdapter.removeAllHeaderView();
+            mAdapter.notifyDataSetChanged();
+
             mAdapter.addHeaderView(initHead(datas));
         });
     }
 
     @Subscribe //订阅事件FirstEvent
     public void onEventMainThread(String info) {
-        if (info.equals(EventBusService.PIGEON_PHOTO_DEL_REFRESH)) {
+        if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
             mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
         }
     }

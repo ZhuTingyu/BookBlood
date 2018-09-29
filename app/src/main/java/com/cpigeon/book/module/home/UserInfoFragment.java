@@ -99,7 +99,7 @@ public class UserInfoFragment extends BaseBookFragment {
         setToolbarNotBack();
         setTitle("我的");
 
-        checkNewVersion(1);//版本更新检查
+//        checkNewVersion(1);//版本更新检查
 
         dialogFragment = new ShareDialogFragment();
 

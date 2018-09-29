@@ -25,7 +25,7 @@ import com.cpigeon.book.base.BaseTabActivity;
 
 public class OrderListActivity extends BaseTabActivity {
 
-    public static void start(Activity activity){
+    public static void start(Activity activity) {
         IntentBuilder.Builder(activity, OrderListActivity.class).startActivity();
     }
 
@@ -63,7 +63,7 @@ public class OrderListActivity extends BaseTabActivity {
 
             @Override
             public float getTitleWeight(Context context, int index) {
-                    return 1.0f;
+                return 1.0f;
             }
         });
         mIndicator.setNavigator(commonNavigator);
@@ -73,8 +73,25 @@ public class OrderListActivity extends BaseTabActivity {
 
     @Override
     protected void initFragments() {
-        for (String title : mTitles) {
+
+        for (int i = 0; i < mTitles.size(); i++) {
             OrderListFragment orderListFragment = new OrderListFragment();
+            Bundle bundle = new Bundle();
+            switch (i){
+                case 0:
+                    bundle.putString(IntentBuilder.KEY_TYPE, OrderListFragment.TYPE_ALL);
+                    break;
+                case 1:
+                    bundle.putString(IntentBuilder.KEY_TYPE, OrderListFragment.TYPE_UNPAID);
+                    break;
+                case 2:
+                    bundle.putString(IntentBuilder.KEY_TYPE, OrderListFragment.TYPE_FINISH);
+                    break;
+                case 3:
+                    bundle.putString(IntentBuilder.KEY_TYPE, OrderListFragment.TYPE_OUT_OF_DATE);
+                    break;
+            }
+            orderListFragment.setArguments(bundle);
             mFragments.add(orderListFragment);
         }
     }

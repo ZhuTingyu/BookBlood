@@ -34,9 +34,9 @@ public class GrowthReportEntity {
     private String Name;
     private int MatchCount;
     private int MatchNumber;
-    private int Fraction;
-    private Object Weather;
-    private Object Temperature;
+    private String Fraction;
+    private String Weather;
+    private String Temperature = "0";
     private String Bodytemper;
     private String PigeonPlumeName;
     private String PigeonBloodName;
@@ -46,119 +46,119 @@ public class GrowthReportEntity {
         return FootRingNum;
     }
 
-    public void setFootRingNum(String FootRingNum) {
-        this.FootRingNum = FootRingNum;
+    public void setFootRingNum(String footRingNum) {
+        FootRingNum = footRingNum;
     }
 
     public int getLayNum() {
         return LayNum;
     }
 
-    public void setLayNum(int LayNum) {
-        this.LayNum = LayNum;
+    public void setLayNum(int layNum) {
+        LayNum = layNum;
     }
 
     public String getTypeName() {
         return TypeName;
     }
 
-    public void setTypeName(String TypeName) {
-        this.TypeName = TypeName;
+    public void setTypeName(String typeName) {
+        TypeName = typeName;
     }
 
     public int getTypeID() {
         return TypeID;
     }
 
-    public void setTypeID(int TypeID) {
-        this.TypeID = TypeID;
+    public void setTypeID(int typeID) {
+        TypeID = typeID;
     }
 
     public String getUseTime() {
         return UseTime;
     }
 
-    public void setUseTime(String UseTime) {
-        this.UseTime = UseTime;
+    public void setUseTime(String useTime) {
+        UseTime = useTime;
     }
 
     public String getName() {
         return Name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        Name = name;
     }
 
     public int getMatchCount() {
         return MatchCount;
     }
 
-    public void setMatchCount(int MatchCount) {
-        this.MatchCount = MatchCount;
+    public void setMatchCount(int matchCount) {
+        MatchCount = matchCount;
     }
 
     public int getMatchNumber() {
         return MatchNumber;
     }
 
-    public void setMatchNumber(int MatchNumber) {
-        this.MatchNumber = MatchNumber;
+    public void setMatchNumber(int matchNumber) {
+        MatchNumber = matchNumber;
     }
 
-    public int getFraction() {
+    public String getFraction() {
         return Fraction;
     }
 
-    public void setFraction(int Fraction) {
-        this.Fraction = Fraction;
+    public void setFraction(String fraction) {
+        Fraction = fraction;
     }
 
-    public Object getWeather() {
+    public String getWeather() {
         return Weather;
     }
 
-    public void setWeather(Object Weather) {
-        this.Weather = Weather;
+    public void setWeather(String weather) {
+        Weather = weather;
     }
 
-    public Object getTemperature() {
+    public String getTemperature() {
         return Temperature;
     }
 
-    public void setTemperature(Object Temperature) {
-        this.Temperature = Temperature;
+    public void setTemperature(String temperature) {
+        Temperature = temperature;
     }
 
     public String getBodytemper() {
         return Bodytemper;
     }
 
-    public void setBodytemper(String Bodytemper) {
-        this.Bodytemper = Bodytemper;
+    public void setBodytemper(String bodytemper) {
+        Bodytemper = bodytemper;
     }
 
     public String getPigeonPlumeName() {
         return PigeonPlumeName;
     }
 
-    public void setPigeonPlumeName(String PigeonPlumeName) {
-        this.PigeonPlumeName = PigeonPlumeName;
+    public void setPigeonPlumeName(String pigeonPlumeName) {
+        PigeonPlumeName = pigeonPlumeName;
     }
 
     public String getPigeonBloodName() {
         return PigeonBloodName;
     }
 
-    public void setPigeonBloodName(String PigeonBloodName) {
-        this.PigeonBloodName = PigeonBloodName;
+    public void setPigeonBloodName(String pigeonBloodName) {
+        PigeonBloodName = pigeonBloodName;
     }
 
     public String getInfo() {
         return Info;
     }
 
-    public void setInfo(String Info) {
-        this.Info = Info;
+    public void setInfo(String info) {
+        Info = info;
     }
 }

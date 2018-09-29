@@ -17,7 +17,10 @@ import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.play.adapter.PlayListAdapter;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 
@@ -85,6 +88,7 @@ public class PlayFragment1 extends BaseBookFragment {
         mPlayListAdapter.setOnItemClickListener((adapter, view, position) -> {
             PigeonPlayEntity mPigeonPlayEntity = (PigeonPlayEntity) adapter.getData().get(position);
             PlayAddFragment.start(getBaseActivity(), new PigeonEntryEntity.Builder()
+                    .FootRingNum(mPigeonPlayEntity.getFootRingNum())
                     .PigeonID(String.valueOf(mPigeonPlayEntity.getPigeonID()))
                     .FootRingID(String.valueOf(mPigeonPlayEntity.getFootRingID()))
                     .PigeonMatchID(String.valueOf(mPigeonPlayEntity.getPigeonMatchID()))
@@ -92,9 +96,7 @@ public class PlayFragment1 extends BaseBookFragment {
         });
 
         mRecyclerView.setRefreshListener(() -> {
-            mPlayListAdapter.getData().clear();
-            mPlayListViewModel.pi = 1;
-            mPlayListViewModel.getZGW_Users_GetLogData();
+            dataRefresh();
         });
 
         mPlayListAdapter.setOnLoadMoreListener(() -> {
@@ -107,4 +109,18 @@ public class PlayFragment1 extends BaseBookFragment {
         mPlayListViewModel.getZGW_Users_GetLogData();
     }
 
+
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.PIGEON_PLAY_LIST_REFRESH)) {
+            dataRefresh();
+        }
+    }
+
+    private void dataRefresh() {
+        mPlayListAdapter.getData().clear();
+        mPlayListAdapter.notifyDataSetChanged();
+        mPlayListViewModel.pi = 1;
+        mPlayListViewModel.getZGW_Users_GetLogData();
+    }
 }

@@ -18,6 +18,7 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
+import com.cpigeon.book.module.racing.BreedPigeonEntryFragment2;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -69,7 +70,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
 
                 if(x == mFamilyTreeView.getStartGeneration()){
 
-                    BreedPigeonEntryFragment.start(getBaseActivity()
+                    BreedPigeonEntryFragment2.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
@@ -83,18 +84,18 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                     }
 
 
-                    BreedPigeonEntryFragment.start(getBaseActivity()
+                    BreedPigeonEntryFragment2.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment.TYPE_SEX_MALE : BreedPigeonEntryFragment.TYPE_SEX_FEMALE
+                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment2.TYPE_SEX_MALE : BreedPigeonEntryFragment2.TYPE_SEX_FEMALE
                             , CODE_ADD_PIGEON);
                 }
             }
 
             @Override
             public void showInfo(PigeonEntity breedPigeonEntity) {
-                BreedPigeonEntryFragment.start(getBaseActivity()
+                BreedPigeonEntryFragment2.start(getBaseActivity()
                         , breedPigeonEntity != null ? breedPigeonEntity.getPigeonID() : StringUtil.emptyString()
                         , StringUtil.emptyString()
                         , StringUtil.emptyString()

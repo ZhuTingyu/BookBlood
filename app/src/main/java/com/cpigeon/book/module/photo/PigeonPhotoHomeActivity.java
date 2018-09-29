@@ -259,17 +259,21 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PictureMimeType.ofImage()) {
-            List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+        try {
+            if (requestCode == PictureMimeType.ofImage()) {
+                List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 
-            BaseImgUploadFragment.start(getBaseActivity(),
-                    SnapshotImgUploadFragment.class,
-                    new ImgTypeEntity.Builder()
-                            .imgPath(selectList.get(0).getCompressPath())
-                            .pigeonId(mViewModel.mPigeonEntity.getPigeonID())
-                            .foootId(mViewModel.mPigeonEntity.getFootRingID())
-                            .build(),
-                    ImgUploadFragment.CODE_SELECT_COUNTY);
+                BaseImgUploadFragment.start(getBaseActivity(),
+                        SnapshotImgUploadFragment.class,
+                        new ImgTypeEntity.Builder()
+                                .imgPath(selectList.get(0).getCompressPath())
+                                .pigeonId(mViewModel.mPigeonEntity.getPigeonID())
+                                .foootId(mViewModel.mPigeonEntity.getFootRingID())
+                                .build(),
+                        ImgUploadFragment.CODE_SELECT_COUNTY);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

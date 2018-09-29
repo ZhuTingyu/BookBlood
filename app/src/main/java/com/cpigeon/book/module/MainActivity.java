@@ -28,7 +28,6 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.module.breedpigeon.BreedPigeonEntryFragment;
 import com.cpigeon.book.module.foot.FootAdminAddMultipleFragment;
 import com.cpigeon.book.module.foot.FootAdminSingleFragment;
 import com.cpigeon.book.module.home.UserInfoFragment;
@@ -38,6 +37,7 @@ import com.cpigeon.book.module.home.sharehall.ShareHallFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.module.menu.smalltools.SmallToolsHomeFragment;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
+import com.cpigeon.book.module.racing.BreedPigeonEntryFragment2;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 import com.cpigeon.book.module.trainpigeon.NewTrainPigeonFragment;
 import com.cpigeon.book.widget.BottomAddTabView;
@@ -176,7 +176,8 @@ public class MainActivity extends BaseBookActivity {
         simpleText2.setOnClickListener(v -> {
             //种鸽录入
             mPopupWindow.dismiss();
-            BreedPigeonEntryFragment.start(getBaseActivity());
+//            BreedPigeonEntryFragment.start(getBaseActivity());
+            BreedPigeonEntryFragment2.start(getBaseActivity());
         });
 
         simpleText3.setOnClickListener(v -> {

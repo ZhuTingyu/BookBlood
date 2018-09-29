@@ -59,7 +59,7 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
         switch (item.getTypeID()) {
 
             case 1://出壳
-                helper.setText(R.id.tv1, MathUtil.toChinese("第" + String.valueOf(item.getLayNum() + 1)) + "窝    " +
+                helper.setText(R.id.tv1, "第" + MathUtil.toChinese(String.valueOf(item.getLayNum() + 1)) + "窝    " +
                         item.getWeather() + "    " +
                         item.getTemperature() + "℃   " +
                         item.getWeather());
@@ -86,7 +86,7 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
 
             case 2://挂环
 
-                helper.setText(R.id.tv1, MathUtil.toChinese("第" + String.valueOf(item.getLayNum() + 1)) + "窝    " +
+                helper.setText(R.id.tv1, "第" + MathUtil.toChinese(String.valueOf(item.getLayNum() + 1)) + "窝    " +
                         item.getWeather() + "    " +
                         item.getTemperature() + "℃   " +
                         item.getWeather());

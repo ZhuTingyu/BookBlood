@@ -83,7 +83,7 @@
             app:lineInputView_Hint="请选择"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
+            app:lineInputView_IsNotNull="false"
             app:lineInputView_LeftString="来源" />
 
 
@@ -143,7 +143,7 @@
             app:lineInputView_Hint="雄"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
+            app:lineInputView_IsNotNull="false"
             app:lineInputView_LeftString="性别" />
 
 
@@ -158,7 +158,7 @@
             app:lineInputView_Hint="雨点"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
+            app:lineInputView_IsNotNull="false"
             app:lineInputView_LeftString="羽色" />
 
 
@@ -173,7 +173,7 @@
             app:lineInputView_Hint="黄眼"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
+            app:lineInputView_IsNotNull="false"
             app:lineInputView_LeftString="眼砂" />
 
 
@@ -188,7 +188,7 @@
             app:lineInputView_Hint="请选择"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
+            app:lineInputView_IsNotNull="false"
             app:lineInputView_LeftString="出壳日期" />
 
 
@@ -204,7 +204,7 @@
             app:lineInputView_Hint="请选择"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
+            app:lineInputView_IsNotNull="false"
             app:lineInputView_LeftString="挂环日期" />
 
         <!--血统-->
@@ -218,7 +218,7 @@
             app:lineInputView_Hint="请输入血统"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
+            app:lineInputView_IsNotNull="false"
             app:lineInputView_LeftString="血统" />
 
 
@@ -233,7 +233,7 @@
             app:lineInputView_Hint="在棚"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="true"
+            app:lineInputView_IsNotNull="false"
             app:lineInputView_LeftString="状态"
             app:lineInputView_isShowLineDivisions="gone" />
 
@@ -284,7 +284,7 @@
                 app:lineInputView_Hint="请填写"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
-                app:lineInputView_IsNotNull="true"
+                app:lineInputView_IsNotNull="false"
                 app:lineInputView_LeftString="数据交易价格"
                 app:lineInputView_isShowLineDivisions="gone" />
         </LinearLayout>

@@ -1,12 +1,9 @@
 package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.base.base.FragmentAdapter;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
@@ -15,40 +12,23 @@ import com.base.util.picker.PickerUtil;
 import com.base.util.utility.PhoneUtils;
 import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
-import com.base.widget.magicindicator.ViewPagerHelper;
-import com.base.widget.magicindicator.buildins.commonnavigator.CommonNavigator;
-import com.base.widget.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
-import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
-import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.model.entity.AssEntity;
-import com.cpigeon.book.model.entity.LoftEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.basepigeon.BasePigeonDetailsFragment;
 import com.cpigeon.book.module.breeding.PairingInfoListFragment;
-import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
-import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
-import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonModifyViewModel;
 import com.cpigeon.book.module.feedpigeon.GrowthReportFragment;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
-import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.makebloodbook.PreviewsBookFragment;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
-import com.cpigeon.book.module.play.PlayFragment1;
-import com.cpigeon.book.module.play.PlayFragment2;
-import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
-import com.cpigeon.book.util.PigeonPublicUtil;
+import com.cpigeon.book.module.racing.BreedPigeonEntryFragment2;
 import com.cpigeon.book.widget.family.FamilyTreeView;
-import com.cpigeon.book.widget.mydialog.AddPlayDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -68,23 +48,6 @@ import cn.qqtheme.framework.picker.OptionPicker;
 
 public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
-    private BreedPigeonDetailsViewModel mBreedPigeonDetailsViewModel;
-
-    private BreedPigeonModifyViewModel mBreedPigeonModifyViewModel;//种鸽修改ViewModel
-    private SelectTypeViewModel mSelectTypeViewModel;
-    private PlayListViewModel mPlayListViewModel;
-    private BookViewModel mBookViewModel;
-
-    private AddPlayDialog mAddPlayDialog;
-
-    public static final int CODE_ORGANIZE = 0x123;
-    public static final int CODE_LOFT = 0x234;
-    public static final String TYPE_MY_SHARE = "TYPE_MY_SHARE";
-    public static final String TYPE_HIS_SHARE = "TYPE_HIS_SHARE";
-    public static final String TYPE_SHARE_PIGEON = "TYPE_SHARE_PIGEON";
-
-
-    private String mType;
 
     public static void start(Activity activity, String pigeonId, String footId) {
         IntentBuilder.Builder()
@@ -118,18 +81,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mBreedPigeonDetailsViewModel = new BreedPigeonDetailsViewModel(getBaseActivity());
-        mPlayListViewModel = new PlayListViewModel();
-        mSelectTypeViewModel = new SelectTypeViewModel();
-        mBreedPigeonModifyViewModel = new BreedPigeonModifyViewModel();
-        mBookViewModel = new BookViewModel(getBaseActivity());
-        initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel
-                , mSelectTypeViewModel, mBreedPigeonModifyViewModel, mBookViewModel);
-    }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -145,36 +96,16 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             return true;
         });
 
-        initInputPlayDialog();
-        setProgressVisible(true);
-        mBreedPigeonDetailsViewModel.getPigeonDetails();//获取 鸽子  详情
-
-        mPlayListViewModel.footid = mBreedPigeonDetailsViewModel.footId;
-        mPlayListViewModel.pigeonid = mBreedPigeonDetailsViewModel.pigeonId;
-
-        mBookViewModel.foodId = mBreedPigeonDetailsViewModel.footId;
-        mBookViewModel.pigeonId = mBreedPigeonDetailsViewModel.pigeonId;
-
-        initViewPager();
-
-        mSelectTypeViewModel.getSelectType_Sex();
-        mSelectTypeViewModel.getSelectType_FeatherColor();
-        mSelectTypeViewModel.getSelectType_eyeSand();
-        mSelectTypeViewModel.getSelectType_lineage();
-        mSelectTypeViewModel.getSelectType_State();
-        mSelectTypeViewModel.getSelectType_PigeonSource();
-
-
         mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
             @Override
             public void add(int x, int y) {
 
                 if (x == mFamilyTreeView.getStartGeneration()) {
-                    BreedPigeonEntryFragment.start(getBaseActivity()
+                    BreedPigeonEntryFragment2.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , mBookViewModel.foodId
                             , mBookViewModel.pigeonId
-                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment.TYPE_SEX_MALE : BreedPigeonEntryFragment.TYPE_SEX_FEMALE
+                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment2.TYPE_SEX_MALE : BreedPigeonEntryFragment2.TYPE_SEX_FEMALE
                             , 0);
                 } else {
 
@@ -183,11 +114,11 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
 
-                    BreedPigeonEntryFragment.start(getBaseActivity()
+                    BreedPigeonEntryFragment2.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment.TYPE_SEX_MALE : BreedPigeonEntryFragment.TYPE_SEX_FEMALE
+                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment2.TYPE_SEX_MALE : BreedPigeonEntryFragment2.TYPE_SEX_FEMALE
                             , 0);
 
                 }
@@ -242,103 +173,20 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             }
         }
 
-        mBookViewModel.getBloodBook();// //获取 血统书  四代
 
+
+        if (!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) {
+            //当前为查看数据
+            img_play_import.setVisibility(View.GONE);
+            img_play_add.setVisibility(View.GONE);
+            ll_details_other.setVisibility(View.GONE);
+        }
     }
 
-    private void initViewPager() {
-
-        PlayFragment1 mPlayFragment1 = new PlayFragment1();
-        mFragments.add(mPlayFragment1);
-
-        PlayFragment2 mPlayFragment2 = new PlayFragment2();
-        mFragments.add(mPlayFragment2);
-
-        String[] titles = {"赛绩", "附加信息"};
-        mTitles = Lists.newArrayList(titles);
-
-        FragmentAdapter adapter = new FragmentAdapter(getBaseActivity().getSupportFragmentManager()
-                , mFragments, mTitles);
-
-        mViewPager.setAdapter(adapter);
-        mViewPager.setOffscreenPageLimit(5);
-
-        CommonNavigator commonNavigator = new CommonNavigator(getContext());
-        commonNavigator.setAdjustMode(false);
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-            @Override
-            public int getCount() {
-                return mTitles == null ? 0 : mTitles.size();
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
-                simplePagerTitleView.setText(mTitles.get(index));
-                simplePagerTitleView.setTextSize(18);
-                simplePagerTitleView.setNormalColor(getBaseActivity().getResources().getColor(R.color.color_4c4c4c));
-                simplePagerTitleView.setSelectedColor(getBaseActivity().getResources().getColor(R.color.colorPrimary));
-                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mViewPager.setCurrentItem(index);
-                    }
-                });
-                return simplePagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                return null;
-            }
-
-            @Override
-            public float getTitleWeight(Context context, int index) {
-                return 1.0f;
-            }
-        });
-        mIndicator.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(mIndicator, mViewPager);
-
-    }
-
-
-    private void initInputPlayDialog() {
-        mAddPlayDialog = new AddPlayDialog();
-    }
 
     @Override
     protected void initObserve() {
         super.initObserve();
-
-        mBreedPigeonDetailsViewModel.mBreedPigeonData.observe(this, datas -> {
-            setProgressVisible(false);
-            mBreedPigeonModifyViewModel.mPigeonEntity = datas;
-
-            tvFoot.setText(datas.getFootRingNum());//足环号
-
-            //设置性别
-            PigeonPublicUtil.setPigeonSexImg(datas.getPigeonSexName(), imgSex);
-
-            tvFootVice.setText(datas.getFootRingIDToNum());//副足环
-            tvLineage.setText(datas.getPigeonBloodName());//血统
-            tvState.setText(datas.getStateName());//状态
-            tvEyeSand.setText(datas.getPigeonEyeName());//眼砂d
-
-            tvFeatherColor.setText(datas.getPigeonPlumeName());//羽色
-            tvTheirShellsDate.setText(datas.getOutShellTime());//出壳日期
-            tvFootSource.setText(datas.getSourceName());//来源
-
-            tvScore.setText(datas.getPigeonScore());//评分
-
-            Glide.with(this)
-                    .load(datas.getCoverPhotoUrl())
-                    .placeholder(R.drawable.ic_img_default)
-                    .into(img_pigeon);//鸽子照片
-            if (TYPE_HIS_SHARE.equals(mType)) {
-                tvLeft.setText(mBreedPigeonDetailsViewModel.mPigeonEntity.getUserName());
-            }
-        });
 
         mBreedPigeonDetailsViewModel.mDataAddApplyR.observe(this, s -> {
             DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
@@ -354,40 +202,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 finish();
                 EventBus.getDefault().post(new ShareHallEvent());
             });
-        });
-
-        mBreedPigeonModifyViewModel.mBreedPigeonData.observe(this, pigeonEntryEntity -> {
-
-        });
-
-        mBookViewModel.mBookLiveData.observe(this, bloodBookEntity -> {
-            mFamilyTreeView.setData(bloodBookEntity);
-        });
-
-        mSelectTypeViewModel.mSelectType_Sex.observe(this, selectTypeEntities -> {
-            mBreedPigeonModifyViewModel.mSelectTypes_Sex = selectTypeEntities;
-        });
-
-        mSelectTypeViewModel.mSelectType_FeatherColor.observe(this, selectTypeEntities -> {
-            mBreedPigeonModifyViewModel.mSelectTypes_FeatherColor = selectTypeEntities;
-        });
-
-        mSelectTypeViewModel.mSelectType_EyeSand.observe(this, selectTypeEntities -> {
-            mBreedPigeonModifyViewModel.mSelectTypes_EyeSand = selectTypeEntities;
-        });
-
-
-        mSelectTypeViewModel.mSelectType_Lineage.observe(this, selectTypeEntities -> {
-            mBreedPigeonModifyViewModel.mSelectTypes_Lineage = selectTypeEntities;
-        });
-
-        mSelectTypeViewModel.mSelectType_State.observe(this, selectTypeEntities -> {
-            mBreedPigeonModifyViewModel.mSelectTypes_State = selectTypeEntities;
-        });
-
-        mSelectTypeViewModel.mSelectType_Pigeon_Source.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
-            mBreedPigeonModifyViewModel.mSelectTypes_Source = selectTypeEntities;
         });
 
     }
@@ -577,7 +391,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
             case R.id.tv_make_book:
                 //血统书制作
-
+                PreviewsBookFragment.start(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity);
                 break;
 
             case R.id.tv_lineage_analysis:
@@ -595,7 +409,10 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.img_play_import:
                 //赛绩导入
+                mAddPlayDialog.setFoot(mBreedPigeonDetailsViewModel.mPigeonEntity.getFootRingNum());
                 mAddPlayDialog.show(getBaseActivity().getFragmentManager(), "");
+                //                LineInputView ll_foot = mAddPlayDialog.getDialog().findViewById(R.id.ll_foot);
+//                ll_foot.setContent(mBreedPigeonDetailsViewModel.mPigeonEntity.getFootRingNum());
                 break;
             case R.id.img_play_add:
                 //手动添加赛绩
@@ -614,26 +431,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
         }
     }
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode != Activity.RESULT_OK) return;
-        if (requestCode == CODE_ORGANIZE) {
-
-            //选择协会回调
-            AssEntity organize = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-            mAddPlayDialog.setllUnitName(organize.getISOCName());
-
-        } else if (requestCode == CODE_LOFT) {
-
-            //选择公棚回调
-            LoftEntity organize = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-            mAddPlayDialog.setllUnitName(organize.getGpname());
-
-        }
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(PigeonAddEvent event) {

@@ -59,7 +59,6 @@ public class PigeonPhotoDetailsViewModel extends BaseViewModel {
                 photoid), r -> {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_REFRESH);
-                EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_DEL_REFRESH);
                 imgDelCallBack.setValue(r.msg);
                 showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).cancelable(false).isClosePage(false).build());
             } else throw new HttpErrorException(r);

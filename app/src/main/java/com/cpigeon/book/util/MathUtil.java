@@ -25,21 +25,26 @@ public class MathUtil {
 
         String result = "";
 
-        int n = string.length();
-        for (int i = 0; i < n; i++) {
+        try {
+            int n = string.length();
+            for (int i = 0; i < n; i++) {
 
-            int num = string.charAt(i) - '0';
+                int num = string.charAt(i) - '0';
 
-            if (i != n - 1 && num != 0) {
-                result += s1[num] + s2[n - 2 - i];
-            } else {
-                result += s1[num];
+                if (i != n - 1 && num != 0) {
+                    result += s1[num] + s2[n - 2 - i];
+                } else {
+                    result += s1[num];
+                }
+                System.out.println("  "+result);
             }
-            System.out.println("  "+result);
-        }
 
-        System.out.println("----------------");
-        System.out.println(result);
+            System.out.println("----------------");
+            System.out.println(result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return result;
 
     }

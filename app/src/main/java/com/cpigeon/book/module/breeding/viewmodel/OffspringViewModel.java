@@ -78,10 +78,10 @@ public class OffspringViewModel extends BasePigeonViewModel {
 
         if (pigeonType == 1) {
             //种鸽录入
-            isCanCommit(foot, sourceId, sexId, featherColor, eyeSandId, theirShellsDate, lineage, stateId);
+            isCanCommit(foot);
         } else {
             //赛鸽录入
-            isCanCommit(foot, sourceId, sexId, featherColor, eyeSandId, theirShellsDate, lineage, llHangingRingDate);
+            isCanCommit(foot);
         }
     }
 

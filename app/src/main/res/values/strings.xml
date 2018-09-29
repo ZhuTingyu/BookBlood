@@ -540,4 +540,13 @@
     <string name="str_input_play_hint2">快马加鞭导入赛绩</string>
 
 
+    <!--鸽币-->
+    <string name="str_gb_sign">今日签到</string>
+    <string name="str_gb_entry_foot">录入足环</string>
+    <string name="str_gb_entry_breed_pigeon">录入种鸽</string>
+    <string name="str_gb_entry_racing_pigeon">录入赛鸽</string>
+    <string name="str_gb_feed_pigeon">养鸽记录</string>
+    <string name="str_gb_photo_pigeon">信鸽拍照</string>
+
+
 </resources>

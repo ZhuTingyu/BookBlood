@@ -30,6 +30,8 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
     private LineInputView ll_org;
     private LineInputView unitName;
 
+    private String  foot = "";
+
     @Override
     public int setContentView() {
         return R.layout.dialog_impot_play;
@@ -60,6 +62,7 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
 
         //足环号
         ll_foot = dialog.findViewById(R.id.ll_foot);
+        ll_foot.setContent(foot);
         //组织类型
         ll_org = dialog.findViewById(R.id.ll_org);
 
@@ -84,7 +87,7 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
     }
 
     public void setFoot(String foot) {
-        ll_foot.setContent(foot);
+     this.foot = foot;
     }
 
     public void setllUnitName(String ll_unit_name) {

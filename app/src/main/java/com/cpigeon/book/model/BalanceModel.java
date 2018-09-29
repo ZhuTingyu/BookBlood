@@ -16,7 +16,7 @@ import io.reactivex.Observable;
 
 public class BalanceModel {
 
-    //hl 获取操作日志列表
+    //hl 充值明细 列表
     public static Observable<ApiResponse<List<AccountBalanceListEntity>>> getAccountBalanceList(int pi, int ps) {
         return RequestData.<ApiResponse<List<AccountBalanceListEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<AccountBalanceListEntity>>>() {

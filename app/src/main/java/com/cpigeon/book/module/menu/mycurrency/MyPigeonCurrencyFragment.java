@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.entity.PigeonCurrencyEntity;
 import com.cpigeon.book.module.menu.mycurrency.adapter.MyPigeonCurrencyAdapter;
 import com.cpigeon.book.module.menu.mycurrency.viewmodel.PigeonCurrencyViewModel;
 import com.cpigeon.book.widget.SimpleTitleView;
@@ -43,7 +43,6 @@ public class MyPigeonCurrencyFragment extends BaseBookFragment {
         mPigeonCurrencyViewModel = new PigeonCurrencyViewModel();
         initViewModels(mPigeonCurrencyViewModel);
     }
-
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
@@ -79,16 +78,22 @@ public class MyPigeonCurrencyFragment extends BaseBookFragment {
         });
 
         mAdapter = new MyPigeonCurrencyAdapter();
-        mList.setAdapter(mAdapter);
 
-        mAdapter.setNewData(Lists.newTestArrayList());
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            PigeonCurrencyEntity.GetgbBean item = (PigeonCurrencyEntity.GetgbBean) adapter.getData().get(position);
+
+        });
+
+        mList.setAdapter(mAdapter);
     }
 
     @Override
     protected void initObserve() {
         super.initObserve();
         mPigeonCurrencyViewModel.mGeBi.observe(this, data -> {
+            setProgressVisible(false);
             mTvCount.setText(data.getGb());
+            mAdapter.setNewData(data.getGetgb());
         });
     }
 
@@ -96,6 +101,7 @@ public class MyPigeonCurrencyFragment extends BaseBookFragment {
     @Override
     public void onResume() {
         super.onResume();
+        setProgressVisible(true);
         mPigeonCurrencyViewModel.getTXGP_Account_GeBi();//获取我的鸽币数量
     }
 }

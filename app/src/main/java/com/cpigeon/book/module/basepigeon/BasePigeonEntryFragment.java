@@ -67,9 +67,9 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     @BindView(R.id.ll_pigeon_type)
     protected LineInputView llPigeonType;//鸽子类型  ：种鸽 赛鸽
     @BindView(R.id.ll_countries)
-    LineInputView llCountries;
+    protected LineInputView llCountries;
     @BindView(R.id.ll_foot)
-    LineInputView llFoot;
+    protected LineInputView llFoot;
     @BindView(R.id.ll_foot_vice)
     LineInputView llFootVice;
     @BindView(R.id.ll_foot_source)
@@ -81,7 +81,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     @BindView(R.id.ll_pigeon_name)
     LineInputView llPigeonName;
     @BindView(R.id.ll_sex)
-    LineInputView llSex;
+    protected LineInputView llSex;
     @BindView(R.id.ll_feather_color)
     LineInputView llFeatherColor;
     @BindView(R.id.ll_eye_sand)
@@ -188,10 +188,6 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
         if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == PictureMimeType.ofImage()) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-
-//            IntentBuilder.Builder().putExtra(IntentBuilder.KEY_TYPE, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath()).build())
-//                    .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
-
             BaseImgUploadFragment.start(getBaseActivity(),
                     ImgUploadFragment.class,
                     new ImgTypeEntity.Builder()

@@ -81,7 +81,6 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
     @BindView(R.id.list)
     RecyclerView list;
 
-    //    FootAddMultiViewModel mViewModel;
     SelectTypeViewModel mSelectTypeViewModel;
     BreedPigeonEntryViewModel mBreedPigeonEntryViewModel;
 
@@ -139,10 +138,8 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        mViewModel = new FootAddMultiViewModel(getBaseActivity());
         mSelectTypeViewModel = new SelectTypeViewModel();
         mBreedPigeonEntryViewModel = new BreedPigeonEntryViewModel();
-//        initViewModels(mViewModel, mPublicViewModel, mBreedPigeonEntryViewModel);
         initViewModels(mSelectTypeViewModel, mBreedPigeonEntryViewModel);
     }
 
@@ -351,7 +348,6 @@ public class BreedPigeonEntryFragment extends BaseBookFragment {
 
 //            IntentBuilder.Builder().putExtra(IntentBuilder.KEY_DATA, new ImgTypeEntity.Builder().imgPath(selectList.get(0).getCompressPath()).build())
 //                    .startParentActivity(getBaseActivity(), ImgUploadFragment.class, ImgUploadFragment.CODE_SELECT_COUNTY);
-
 
             BaseImgUploadFragment.start(getBaseActivity(),
                     ImgUploadFragment.class,

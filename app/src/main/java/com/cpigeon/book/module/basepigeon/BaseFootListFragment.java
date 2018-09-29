@@ -1,6 +1,5 @@
 package com.cpigeon.book.module.basepigeon;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -47,10 +46,7 @@ public class BaseFootListFragment extends BaseBookFragment {
     @BindView(R.id.view_placeholder)
     protected View view_placeholder;
 
-
     protected BasePigeonListAdapter mAdapter;
-
-
     protected SelectTypeViewModel mSelectTypeViewModel;
 
     protected BreedPigeonListModel mBreedPigeonListModel;

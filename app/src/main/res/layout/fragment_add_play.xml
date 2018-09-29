@@ -119,7 +119,7 @@
                 android:background="@color/color_white"
                 android:paddingLeft="@dimen/spacing_left_reight"
                 android:paddingRight="@dimen/spacing_left_reight"
-                app:lineInputView_Hint="请输入空距（米）"
+                app:lineInputView_Hint="@string/tv_fly_ullage"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
