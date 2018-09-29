@@ -10,11 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.module.menu.service.adpter.OpenServiceAdapter;
+import com.cpigeon.book.module.menu.service.adpter.OpenServiceReportAdapter;
 import com.cpigeon.book.module.menu.service.viewmodel.ServerReportViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
@@ -26,7 +25,7 @@ import com.cpigeon.book.util.RecyclerViewUtils;
 public class OpenServiceReportFragment extends BaseBookFragment {
 
     XRecyclerView mRecyclerView;
-    OpenServiceAdapter mAdapter;
+    OpenServiceReportAdapter mAdapter;
     private ServerReportViewModel mViewModel;
 
     public static void start(Activity activity) {
@@ -54,7 +53,7 @@ public class OpenServiceReportFragment extends BaseBookFragment {
         setTitle(R.string.text_open_report);
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
-        mAdapter = new OpenServiceAdapter();
+        mAdapter = new OpenServiceReportAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
 

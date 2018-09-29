@@ -59,6 +59,7 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
     private ImeDelBugFixedEditText mInputView;
     private OnPasswordChangedListener mListener;
     private PasswordTransformationMethod mTransformationMethod;
+    private boolean isPassWord;
 
     public GridPasswordView(Context context) {
         super(context);
@@ -113,6 +114,7 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
 
 
         mPasswordType = ta.getInt(R.styleable.gridPasswordView_gpvPasswordType, 0);
+        isPassWord = ta.getBoolean(R.styleable.gridPasswordView_gpvIsPassWord, false);
 
         ta.recycle();
 
@@ -181,7 +183,9 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
                 break;
         }
         view.setInputType(inputType);
-        //view.setTransformationMethod(mTransformationMethod);
+        if(isPassWord){
+            view.setTransformationMethod(mTransformationMethod);
+        }
     }
 
     private OnClickListener mOnClickListener = new OnClickListener() {

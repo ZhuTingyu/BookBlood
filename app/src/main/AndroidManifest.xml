@@ -227,7 +227,6 @@
         <activity
             android:name="com.base.util.hipermission.PermissionActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
             android:theme="@style/Permission_Dialog" />
 
     </application>

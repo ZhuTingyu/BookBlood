@@ -130,6 +130,7 @@
         <attr name="gpvLineWidth" format="dimension" />
         <attr name="gpvPasswordLength" format="integer" />
         <attr name="gpvPasswordTransformation" format="string" />
+        <attr name="gpvIsPassWord" format="boolean" />
         <attr name="gpvPasswordType" format="enum">
             <enum name="numberPassword" value="0" />
             <enum name="textPassword" value="1" />

@@ -138,7 +138,10 @@ public class FootAdminListFragment extends BaseBookFragment {
             mAdapter.cleanList();
             mDrawerLayout.closeDrawer(Gravity.RIGHT);
             mViewModel.pi = 1;
+            mFiltrate.resetData();
+            mViewModel.resetData();
             mViewModel.getFoodList();
+            mViewModel.getFootRingStat();
         });
 
         setProgressVisible(true);

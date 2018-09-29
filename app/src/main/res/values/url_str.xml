@@ -332,6 +332,9 @@
     <string name="get_good_pigeon">TXGP_PigeonMotto_PigeonAll</string>
     <string name="get_good_pigeon_count">TXGP_PigeonMotto_PigeonCount</string>
     <string name="apply_add_good_pigeon">TXGP_PigeonMotto_PigeonAdd</string>
+    <string name="get_service_info">TXGP_GetUserInfo</string>
+    <string name="pay_service_order">TXGP_OpenService</string>
+    <string name="pay_renewal_service_order">TXGP_RenewService</string>
 
 
 </resources>

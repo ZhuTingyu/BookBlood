@@ -107,7 +107,7 @@ public class ShareHallFragment extends BaseBookFragment {
 
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.cleanList();
-            mViewModel.pi = 0;
+            mViewModel.pi = 1;
             mViewModel.getSharePigeons();
         });
 

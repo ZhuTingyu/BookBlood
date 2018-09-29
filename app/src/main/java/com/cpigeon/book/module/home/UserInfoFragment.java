@@ -27,7 +27,7 @@ import com.cpigeon.book.module.menu.SettingFragment;
 import com.cpigeon.book.module.menu.account_security.ReviseLoginPsdFragment;
 import com.cpigeon.book.module.order.balance.AccountBalanceFragment;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
-import com.cpigeon.book.module.menu.service.RenewalFragment;
+import com.cpigeon.book.module.menu.service.OpenServiceFragment;
 import com.cpigeon.book.module.menu.update.UpdateManager;
 import com.cpigeon.book.module.menu.update.viewmodel.UpdateViewModel;
 import com.cpigeon.book.module.menu.viewmodel.ShareViewModel;
@@ -174,7 +174,7 @@ public class UserInfoFragment extends BaseBookFragment {
                 break;
             case R.id.ll_renewal:
                 //续费
-                RenewalFragment.start(getBaseActivity());
+                OpenServiceFragment.start(getBaseActivity());
                 break;
             case R.id.ll_account_balance:
                 //账户余额
