@@ -90,6 +90,8 @@ public class FootsInfoDialog extends BaseDialogFragment {
             }
         });
 
+        mGpSFoot.forceInputViewGetFocus();
+
     }
 
     @Override

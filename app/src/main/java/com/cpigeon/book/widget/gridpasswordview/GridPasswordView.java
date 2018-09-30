@@ -202,7 +202,7 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
         return drawable;
     }
 
-    private void forceInputViewGetFocus() {
+    public void forceInputViewGetFocus() {
         mInputView.setFocusable(true);
         mInputView.setFocusableInTouchMode(true);
         mInputView.requestFocus();

@@ -46,7 +46,7 @@ public class FootAdminListAdapter extends BaseQuickAdapter<FootEntity, BaseViewH
 
             helper.itemView.setOnClickListener(v -> {
                 FootAdminDetailsMultipleFragment.start(getBaseActivity()
-                        , String.valueOf(getItem(helper.getAdapterPosition()).getFootRingID()));
+                        , String.valueOf(getItem(helper.getAdapterPosition() - getHeaderLayoutCount()).getFootRingID()));
             });
             status.setVisibility(View.GONE);
         } else {

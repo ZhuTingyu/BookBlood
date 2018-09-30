@@ -102,7 +102,7 @@ public class XRecyclerView extends FrameLayout {
     }
 
     private void initRecyclerView(View view) {
-        View mRecyclerView = view.findViewById(android.R.id.list);
+        View mRecyclerView = view.findViewById(R.id.inList);
         if(mRecyclerView instanceof RecyclerView){
             this.recyclerView = (RecyclerView) mRecyclerView;
         }else throw new IllegalArgumentException("SuperRecyclerView works with a RecyclerView!");

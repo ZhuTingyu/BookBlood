@@ -1,6 +1,7 @@
 package com.cpigeon.book.base;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -17,6 +18,7 @@ import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.KeyboardUtils;
 import com.cpigeon.book.R;
 
 /**
@@ -31,6 +33,7 @@ public class BaseInputDialog extends BaseDialogFragment {
     private EditText mEdContent;
     private TextView mTvChoose;
     private int mEditInputType;
+    private boolean mIsOpen;
 
     @Override
     protected int getLayoutRes() {
@@ -39,7 +42,9 @@ public class BaseInputDialog extends BaseDialogFragment {
 
     @Override
     protected void initView(Dialog dialog) {
-
+        KeyboardUtils.registerSoftInputChangedListener(getActivity(),isOpen -> {
+            mIsOpen = isOpen;
+        });
         mImgClose = dialog.findViewById(R.id.imgClose);
         mTvTitle = dialog.findViewById(R.id.tvTitle);
         mTvFinish = dialog.findViewById(R.id.tvFinish);
@@ -70,8 +75,15 @@ public class BaseInputDialog extends BaseDialogFragment {
             mTvChoose.setVisibility(View.VISIBLE);
             mTvChoose.setOnClickListener(v -> {
                 mOnChooseListener.choose();
+                if(mIsOpen){
+                    KeyboardUtils.toggleSoftInput();
+                }
+                dismiss();
             });
         }
+
+        mEdContent.requestFocus();
+        KeyboardUtils.showSoftInput(getActivity());
 
     }
 
@@ -80,7 +92,7 @@ public class BaseInputDialog extends BaseDialogFragment {
         window.setWindowAnimations(R.style.AnimBottomDialog);
         lp.gravity = Gravity.BOTTOM;
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = (ScreenTool.getScreenHeight() / 5) * 3;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
     }
 
@@ -128,5 +140,13 @@ public class BaseInputDialog extends BaseDialogFragment {
         dialog.setOnChooseClickListener(onChooseClickListener);
         dialog.show(fragmentManager);
         return dialog;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if(mIsOpen){
+            KeyboardUtils.toggleSoftInput();
+        }
     }
 }
