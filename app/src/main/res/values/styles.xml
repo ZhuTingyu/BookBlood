@@ -205,4 +205,11 @@
         <item name="android:layout_alignParentRight">true</item>
 
     </style>
+
+    <declare-styleable name="FocusImageView">
+        <attr name="focus_focusing_id" format="integer" />
+        <attr name="focus_success_id" format="integer" />
+        <attr name="focus_fail_id" format="integer" />
+    </declare-styleable>
+
 </resources>

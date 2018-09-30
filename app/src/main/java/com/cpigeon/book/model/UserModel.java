@@ -66,6 +66,15 @@ public class UserModel {
         return "";
     }
 
+    public String getProvince() {
+        try {
+            return userEntity != null ? userEntity.province : "";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
     public String getUserToken() {
         try {
             return userEntity != null ? userEntity.token : "";
@@ -111,8 +120,8 @@ public class UserModel {
         mUserLiveData.setValue(userEntity);
     }
 
-    public synchronized void setUserHeadUrl(String headUrl){
-        if(!StringUtil.isStringValid(headUrl)){
+    public synchronized void setUserHeadUrl(String headUrl) {
+        if (!StringUtil.isStringValid(headUrl)) {
             return;
         }
         userEntity.touxiangurl = headUrl;
@@ -120,8 +129,8 @@ public class UserModel {
     }
 
     public void setIsHaveHouseInfo(boolean isHaveHouseInfo) {
-         getInstance().getUserData().basicinfo = String.valueOf(isHaveHouseInfo ? 1 : 0);
-         save();
+        getInstance().getUserData().basicinfo = String.valueOf(isHaveHouseInfo ? 1 : 0);
+        save();
     }
 
     public void setPigeonHouseInfo(PigeonHouseEntity entity) {

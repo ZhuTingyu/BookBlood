@@ -3,7 +3,6 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.GrowthReportEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -22,7 +21,8 @@ public class GrowthReportModel {
     public static Observable<ApiResponse<List<GrowthReportEntity>>> getTXGP_Pigeon_SelectGrowAll(String pi,
                                                                                                  String ps,
                                                                                                  String footid,
-                                                                                                 String pigeonid) {
+                                                                                                 String pigeonid,
+                                                                                                 String puid) {
         return RequestData.<ApiResponse<List<GrowthReportEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<GrowthReportEntity>>>() {
                 }.getType())
@@ -31,6 +31,7 @@ public class GrowthReportModel {
                 .addBody("ps", ps)//
                 .addBody("footid", footid)//
                 .addBody("pigeonid", pigeonid)//
+                .addBody("puid", puid)
                 .request();
     }
 

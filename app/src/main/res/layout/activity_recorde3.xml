@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!--中间水印图片-->
+        <ImageView
+            android:id="@+id/watermark_center_img"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:alpha="0.4"
+            android:src="@mipmap/watermark"
+            android:visibility="invisible" />
+
+
+        <com.cpigeon.book.video.widget.CameraView
+            android:id="@+id/camera_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.cpigeon.book.video.widget.FocusImageView
+            android:id="@+id/focusImageView"
+            android:layout_width="75dip"
+            android:layout_height="75dip"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:visibility="invisible"
+            app:focus_fail_id="@drawable/focus_focus_failed"
+            app:focus_focusing_id="@drawable/focus_focusing"
+            app:focus_success_id="@drawable/focus_focused" />
+
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/btn_flash_lamp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:padding="6dp"
+                android:src="@drawable/btn_camera_flash_on" />
+
+            <!--视频录制完成按钮-->
+            <ImageButton
+                android:id="@+id/video_wc"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_next_step_a"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+
+        <!--    android:visibility="invisible"-->
+        <!--水印-->
+        <RelativeLayout
+            android:visibility="invisible"
+            android:id="@+id/layout_water_z"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/water_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="17dp"
+                android:layout_marginTop="17dp"
+                android:textColor="@color/white" />
+
+            <RelativeLayout
+                android:id="@+id/watermark_llz"
+                android:layout_width="match_parent"
+                android:layout_height="76dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingLeft="8dp">
+
+                    <!--logo-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/water_lcon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="中鸽助手"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!--鸽主-->
+                        <TextView
+                            android:id="@+id/watermark_gezhu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:text="是是是"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/water_img_tv_size"
+                            android:visibility="gone" />
+
+
+                        <!--时间-->
+                        <TextView
+                            android:id="@+id/watermark_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:text="11111ssssssssssssss111111111111111111111111111111111111"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/water_img_tv_size" />
+
+                        <!--地址-->
+                        <TextView
+                            android:id="@+id/watermark_dz"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/water_img_tv_size" />
+
+                        <!--天气情况-->
+                        <!--<TextView-->
+                        <!--android:id="@+id/watermark_weather"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="@dimen/water_img_tv_size" />-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <!--经纬度-->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <!--经度-->
+                                <TextView
+                                    android:id="@+id/watermark_lo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="E:000'00'000 "
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/water_img_tv_size" />
+
+                                <!--纬度-->
+                                <TextView
+                                    android:id="@+id/watermark_la"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:text="E:000'00'000 "
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/water_img_tv_size" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="6dp"
+                                android:layout_marginRight="2dp"
+                                android:background="@color/white" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/water_mountain" />
+
+                                <!--海拔-->
+                                <TextView
+                                    android:id="@+id/watermark_hb"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/water_img_tv_size" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Black4"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/imgbtn_false"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:background="@null"
+                android:src="@drawable/shoot_false"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+
+            <FrameLayout
+                android:id="@+id/btn_paizhao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.cpigeon.book.video.widget.CircularProgressView
+                    android:id="@+id/mCapture"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bt_capture"
+                    android:clickable="true" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="按住拍"
+                    android:textColor="@color/white" />
+
+            </FrameLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/imgbtn_ture"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:background="@null"
+                android:src="@drawable/shoot_true"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

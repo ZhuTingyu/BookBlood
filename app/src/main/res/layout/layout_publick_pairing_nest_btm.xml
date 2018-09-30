@@ -52,7 +52,7 @@
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
-            app:lineInputView_LeftString="&#160;&#160;&#8210;&#160;&#160;&#8210;时间" />
+            app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;&#160;&#160;&#8201;&#8201;时间" />
 
         <!--产蛋 受精蛋-->
         <com.cpigeon.book.widget.LineInputView
@@ -65,7 +65,7 @@
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
-            app:lineInputView_LeftString="&#160;&#160;&#8210;受精蛋" />
+            app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;受精蛋" />
 
         <!--产蛋 无精蛋-->
         <com.cpigeon.book.widget.LineInputView
@@ -78,7 +78,7 @@
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
-            app:lineInputView_LeftString="&#160;&#160;&#8210;无精蛋" />
+            app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;无精蛋" />
 
         <!--出壳信息-->
         <com.cpigeon.book.widget.LineInputView
@@ -107,7 +107,7 @@
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
-            app:lineInputView_LeftString="&#160;&#160;&#8201;&#160;&#160;&#8201;时间" />
+            app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;&#160;&#160;&#8201;&#8201;时间" />
 
 
         <!--出壳个数-->

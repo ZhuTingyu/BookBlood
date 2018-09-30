@@ -18,6 +18,7 @@ import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
 
 import java.util.Collections;
@@ -64,18 +65,28 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         getAreas();
 
         mTvYear.setText(years.get(0));
+
+        String[] address = getResources().getStringArray(R.array.srt_arr_address);
+
+        //初始化显示省份
         mTvArea.setText(area.get(0));
+        for (int i = 1; i <= address.length; i++) {
+            if (UserModel.getInstance().getProvince().contains(address[i - 1])) {
+                mTvArea.setText(String.valueOf(i));
+                break;
+            }
+        }
 
         if (foots.size() == 3) {
             isStandard = true;
-            if(!Lists.isEmpty(foots)){
+            if (!Lists.isEmpty(foots)) {
                 mTvYear.setText(foots.get(0));
                 mTvArea.setText(foots.get(1));
                 mGpFoot.setPassword(foots.get(2));
             }
-        }else if(foots.size() == 1 && StringUtil.isStringValid(foots.get(0))){
+        } else if (foots.size() == 1 && StringUtil.isStringValid(foots.get(0))) {
             isStandard = false;
-            if(!Lists.isEmpty(foots)){
+            if (!Lists.isEmpty(foots)) {
                 mEdFoot.setText(foots.get(0));
             }
         }
@@ -146,7 +157,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             hide();
         });
 
-        if(!isHaveStandard){
+        if (!isHaveStandard) {
             mTvSwitch.setVisibility(View.GONE);
         }
 

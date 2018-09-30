@@ -16,6 +16,7 @@ import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.menu.smalltools.lineweather.view.activity.LineWeatherFragment;
+import com.cpigeon.book.module.menu.smalltools.shootvideo.ShootVideoSettingFragment;
 import com.cpigeon.book.module.menu.smalltools.ullage.UllageToolFragment;
 
 import butterknife.OnClick;
@@ -47,7 +48,7 @@ public class SmallToolsHomeFragment extends BaseBookFragment {
         setTitle("小工具");
     }
 
-    @OnClick({R.id.ll_line_water, R.id.ll_ullage_calculation, R.id.ll_cpigeon, R.id.ll_cpigeonhelp})
+    @OnClick({R.id.ll_line_water, R.id.ll_ullage_calculation, R.id.ll_cpigeon, R.id.ll_cpigeonhelp, R.id.ll_shoot_video})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_line_water:
@@ -65,6 +66,10 @@ public class SmallToolsHomeFragment extends BaseBookFragment {
             case R.id.ll_cpigeonhelp:
                 //中鸽助手
                 startApp(getString(R.string.package_cpigeonhelp), getString(R.string.app_share_zgzs));
+                break;
+            case R.id.ll_shoot_video:
+                //拍摄视频
+                ShootVideoSettingFragment.start(getBaseActivity());
                 break;
         }
     }

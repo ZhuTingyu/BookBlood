@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.os.Handler;
 import android.support.annotation.AttrRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -32,7 +31,6 @@ import com.cpigeon.book.widget.mzbanner.holder.MZHolderCreator;
 import com.cpigeon.book.widget.mzbanner.holder.MZViewHolder;
 import com.cpigeon.book.widget.mzbanner.transformer.CoverModeTransformer;
 import com.cpigeon.book.widget.mzbanner.transformer.ScaleYTransformer;
-
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -429,7 +427,8 @@ public class MZBannerView<T> extends RelativeLayout {
         mAdapter.setPageClickListener(mBannerPageClickListener);
 
 
-        mViewPager.clearOnPageChangeListeners();
+//        mViewPager.clearOnPageChangeListeners();
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
