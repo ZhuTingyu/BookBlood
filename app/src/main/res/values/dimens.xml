@@ -70,4 +70,8 @@
     <dimen name="line_weather_item_h">40dp</dimen>
 
 
+    <dimen name="water_img_tv_size">12sp</dimen>
+    <dimen name="water_img_sgt_tv_size">7sp</dimen>
+
+
 </resources>

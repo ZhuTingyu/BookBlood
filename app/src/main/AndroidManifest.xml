@@ -21,6 +21,9 @@
 
     <uses-permission android:name="android.permission.READ_LOGS" />
 
+    <!-- 录音权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <uses-sdk android:minSdkVersion="8"></uses-sdk>
 
     <application
@@ -208,11 +211,15 @@
         <activity
             android:name=".module.home.sharehall.SearchSharePigeonActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.select.SearchPigeonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.select.SearchPigeonActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
+
+        <activity android:name=".module.menu.smalltools.shootvideo.RecordedActivity" />
+        <activity android:name=".module.menu.smalltools.shootvideo.RecordedActivity3" />
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>
         <!--极光推送-->

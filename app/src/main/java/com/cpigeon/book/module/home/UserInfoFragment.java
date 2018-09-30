@@ -25,7 +25,6 @@ import com.cpigeon.book.module.menu.AboutAsFragment;
 import com.cpigeon.book.module.menu.LogbookFragment;
 import com.cpigeon.book.module.menu.SettingFragment;
 import com.cpigeon.book.module.menu.account_security.ReviseLoginPsdFragment;
-import com.cpigeon.book.module.order.balance.AccountBalanceFragment;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
 import com.cpigeon.book.module.menu.service.OpenServiceFragment;
 import com.cpigeon.book.module.menu.update.UpdateManager;
@@ -33,6 +32,7 @@ import com.cpigeon.book.module.menu.update.viewmodel.UpdateViewModel;
 import com.cpigeon.book.module.menu.viewmodel.ShareViewModel;
 import com.cpigeon.book.module.menu.viewmodel.UserInfoViewModel;
 import com.cpigeon.book.module.order.OrderListActivity;
+import com.cpigeon.book.module.order.balance.AccountBalanceFragment;
 import com.cpigeon.book.module.pigeonhouse.PigeonHouseInfoFragment;
 import com.cpigeon.book.util.CpigeonConfig;
 import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
@@ -190,6 +190,7 @@ public class UserInfoFragment extends BaseBookFragment {
 
                 checkNewVersion(2);
                 break;
+
         }
     }
 

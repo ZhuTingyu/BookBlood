@@ -23,9 +23,7 @@ import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.TimeUtil;
-import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
-import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
@@ -109,7 +107,8 @@ public class PairingNestAddFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle("添加窝次");
+
+        setTitle(getString(R.string.str_pairing_nest_add));
 
         mPairingNestAddViewModel.mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         mPairingNestAddViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA_2);
@@ -274,7 +273,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_offspring_info:
                 //子代信息
-                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode,mPairingNestAddViewModel.mPairingInfoEntity);
+                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingNestAddViewModel.mPairingInfoEntity);
                 break;
             case R.id.tv_next_step:
                 //立即添加

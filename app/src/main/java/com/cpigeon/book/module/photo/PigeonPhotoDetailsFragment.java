@@ -2,22 +2,20 @@ package com.cpigeon.book.module.photo;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.PictureSelectUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
@@ -26,21 +24,17 @@ import com.base.util.picker.PickerUtil;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.viewmodel.PigeonPhotoDetailsViewModel;
-import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.widget.ClickGetFocusEditText;
 import com.cpigeon.book.widget.SimpleTitleView;
 import com.cpigeon.book.widget.mzbanner.MZBannerView;
 import com.cpigeon.book.widget.mzbanner.holder.MZViewHolder;
 import com.hitomi.cslibrary.CrazyShadow;
 import com.hitomi.cslibrary.base.CrazyShadowDirection;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +111,9 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
             return new BannerViewHolder();
         });
 
+        mBanner.getAdapter().setPageClickListener((view1, position1) -> {
+            PictureSelectUtil.showImagePhoto(getBaseActivity(), view1.findViewById(R.id.img), Lists.newArrayList(mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPhotoUrl()), 0);
+        });
 
         mBanner.getAdapter().setCurrentItem(position);
         mSTvMove.setOnClickListener(v -> {
@@ -258,6 +255,7 @@ class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
     private TextView mTvColor;
     private TextView mTvNumberAndTime;
 
+
     @Override
     public View createView(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_pigeon_photo_details, null);
@@ -286,5 +284,7 @@ class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
         mTvColor.setText(data.getTypeName());
         //时间
         mTvNumberAndTime.setText(data.getAddTime());
+
+
     }
 }

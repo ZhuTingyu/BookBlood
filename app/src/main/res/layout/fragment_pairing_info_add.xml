@@ -4,26 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    android:paddingLeft="@dimen/spacing_left_reight"
-    android:paddingRight="@dimen/spacing_left_reight"
     android:orientation="vertical">
 
+    <include layout="@layout/layout_pairing_info_head" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
         android:layout_weight="1"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/layout_pairing_info_head" />
-
-        </LinearLayout>
-
 
         <!--配偶环号-->
         <com.cpigeon.book.widget.LineInputView
@@ -31,14 +22,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
-
             app:lineInputView_Hint="请输入"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="配偶环号" />
-
-
 
 
         <!--血统-->
@@ -52,8 +40,6 @@
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="血统" />
-
-
 
 
         <!--羽色-->
@@ -82,13 +68,14 @@
             app:lineInputView_LeftString="配对时间" />
 
 
-
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_next_step"
         style="@style/bottom_style"
         android:layout_marginBottom="24dp"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
         android:layout_marginTop="44dp"
         android:text="@string/btn_sure_add" />
 

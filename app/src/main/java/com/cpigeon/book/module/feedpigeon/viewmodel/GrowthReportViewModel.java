@@ -1,11 +1,9 @@
 package com.cpigeon.book.module.feedpigeon.viewmodel;
 
-import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
-import com.base.util.IntentBuilder;
 import com.cpigeon.book.model.GrowthReportModel;
 import com.cpigeon.book.model.entity.GrowthReportEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -21,6 +19,8 @@ public class GrowthReportViewModel extends BaseViewModel {
 
     public PigeonEntity mPigeonEntity;
 
+    public String puid;
+
     public int pi = 1;
     public int ps = 15;
 
@@ -31,7 +31,8 @@ public class GrowthReportViewModel extends BaseViewModel {
         submitRequestThrowError(GrowthReportModel.getTXGP_Pigeon_SelectGrowAll(String.valueOf(pi),
                 String.valueOf(ps),
                 mPigeonEntity.getFootRingID(),
-                mPigeonEntity.getPigeonID()), r -> {
+                mPigeonEntity.getPigeonID(),
+                puid), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
                 mGrowthReportListData.setValue(r.data);

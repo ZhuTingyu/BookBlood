@@ -1,144 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="@dimen/spacing_left_reight"
-        android:layout_marginRight="@dimen/spacing_left_reight"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/shape_bg_corner_3_solid_white"
-        android:orientation="vertical"
-        android:padding="10dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="24dp"
+            android:layout_marginLeft="@dimen/spacing_left_reight"
+            android:layout_marginRight="@dimen/spacing_left_reight"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shape_bg_corner_3_solid_white"
+            android:orientation="vertical"
+            android:padding="10dp">
+
 
             <LinearLayout
-                android:id="@+id/ll_line_water"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/small_tools_item_w"
-                android:layout_weight="1"
-                android:background="@color/color_DDFBF8"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="@dimen/small_tools_img_wh"
-                    android:layout_height="@dimen/small_tools_img_wh"
-                    android:src="@mipmap/tools_line_water" />
+                <LinearLayout
+                    android:id="@+id/ll_line_water"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/small_tools_item_w"
+                    android:layout_weight="1"
+                    android:background="#EBFFFD"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_tools_tv_mt"
-                    android:text="赛线天气"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/small_text_size_2" />
+                    <ImageView
+                        android:layout_width="@dimen/small_tools_img_wh"
+                        android:layout_height="@dimen/small_tools_img_wh"
+                        android:src="@mipmap/tools_line_water" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_tools_tv_mt"
+                        android:text="赛线天气"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/small_text_size_2" />
+
+
+                </LinearLayout>
+
+                <!--空距计算-->
+                <LinearLayout
+                    android:id="@+id/ll_ullage_calculation"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/small_tools_item_w"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="#EBFFEC"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/small_tools_img_wh"
+                        android:layout_height="@dimen/small_tools_img_wh"
+                        android:src="@mipmap/tools_ullage_calculation" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_tools_tv_mt"
+                        android:text="空距计算"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/small_text_size_2" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <!--拍摄视频-->
+                <LinearLayout
+                    android:id="@+id/ll_shoot_video"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/small_tools_item_w"
+                    android:layout_weight="1"
+                    android:background="#F3F2FF"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/small_tools_img_wh"
+                        android:layout_height="@dimen/small_tools_img_wh"
+                        android:src="@mipmap/tools_shoot_video" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_tools_tv_mt"
+                        android:text="拍摄视频"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/small_text_size_2" />
+
+
+                </LinearLayout>
+
+                <!--中鸽网-->
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/ll_cpigeon"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/small_tools_item_w"
+                    android:layout_weight="1"
+                    android:background="#EBF9FF"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/small_tools_img_wh"
+                        android:layout_height="@dimen/small_tools_img_wh"
+                        android:src="@mipmap/tools_cpigeon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_tools_tv_mt"
+                        android:text="中鸽网"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/small_text_size_2" />
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
-            <!--空距计算-->
+
             <LinearLayout
-                android:id="@+id/ll_ullage_calculation"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/small_tools_item_w"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@color/color_DDFBF8"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="@dimen/small_tools_img_wh"
-                    android:layout_height="@dimen/small_tools_img_wh"
-                    android:src="@mipmap/tools_ullage_calculation" />
+                <!--中鸽助手-->
+                <LinearLayout
+                    android:id="@+id/ll_cpigeonhelp"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/small_tools_item_w"
+                    android:layout_weight="1"
+                    android:background="#EBFFFD"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_tools_tv_mt"
-                    android:text="空距计算"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/small_text_size_2" />
+                    <ImageView
+                        android:layout_width="@dimen/small_tools_img_wh"
+                        android:layout_height="@dimen/small_tools_img_wh"
+                        android:src="@mipmap/tools_cpigeonhelp" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_tools_tv_mt"
+                        android:text="中鸽助手"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/small_text_size_2" />
+
+
+                </LinearLayout>
+
+
+
+                <!---->
+                <LinearLayout
+                    android:id="@+id/ll"
+                    android:visibility="invisible"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/small_tools_item_w"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/color_DDFBF8"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/small_tools_img_wh"
+                        android:layout_height="@dimen/small_tools_img_wh"
+                        android:src="@mipmap/tools_cpigeonhelp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_tools_tv_mt"
+                        android:text="中鸽助手"
+                        android:textColor="@color/general_text_color"
+                        android:textSize="@dimen/small_text_size_2" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
+
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!--中鸽网-->
-            <LinearLayout
-                android:id="@+id/ll_cpigeon"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/small_tools_item_w"
-                android:layout_weight="1"
-                android:background="@color/color_DDFBF8"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/small_tools_img_wh"
-                    android:layout_height="@dimen/small_tools_img_wh"
-                    android:src="@mipmap/tools_cpigeon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_tools_tv_mt"
-                    android:text="中鸽网"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/small_text_size_2" />
-
-
-            </LinearLayout>
-
-            <!--中鸽助手-->
-            <LinearLayout
-                android:id="@+id/ll_cpigeonhelp"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/small_tools_item_w"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@color/color_DDFBF8"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/small_tools_img_wh"
-                    android:layout_height="@dimen/small_tools_img_wh"
-                    android:src="@mipmap/tools_cpigeonhelp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small_tools_tv_mt"
-                    android:text="中鸽助手"
-                    android:textColor="@color/general_text_color"
-                    android:textSize="@dimen/small_text_size_2" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>

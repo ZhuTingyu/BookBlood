@@ -162,6 +162,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 DialogUtils.createDialogWithLeft(getBaseActivity()
                         , Utils.getString(R.string.text_is_sure_delete_foot_number)
                         , sweetAlertDialog -> {
+                            sweetAlertDialog.dismiss();
                             setProgressVisible(true);
                             mViewModel.deleteFoot();
                         });

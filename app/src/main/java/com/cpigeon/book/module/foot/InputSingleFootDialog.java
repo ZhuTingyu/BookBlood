@@ -20,6 +20,7 @@ import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
@@ -74,7 +75,16 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         getAreas();
 
         mTvYear.setText(years.get(0));
+        String[] address = getResources().getStringArray(R.array.srt_arr_address);
+
+        //初始化显示省份
         mTvArea.setText(area.get(0));
+        for (int i = 1; i <= address.length; i++) {
+            if (UserModel.getInstance().getProvince().contains(address[i - 1])) {
+                mTvArea.setText(String.valueOf(i));
+                break;
+            }
+        }
 
         if (foots.size() == 3) {
             isStandard = true;

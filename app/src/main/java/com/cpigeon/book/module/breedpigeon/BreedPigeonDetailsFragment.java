@@ -92,7 +92,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             if (mBreedPigeonModifyViewModel.mPigeonEntity == null) {
                 return true;
             }
-            GrowthReportFragment.start(getBaseActivity(), mBreedPigeonModifyViewModel.mPigeonEntity);
+            GrowthReportFragment.start(getBaseActivity(), mBreedPigeonModifyViewModel.mPigeonEntity,mBreedPigeonDetailsViewModel.pUid);
             return true;
         });
 

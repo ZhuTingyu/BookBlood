@@ -26,9 +26,6 @@ import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breeding.childfragment.PairingLineageFragment;
-import com.cpigeon.book.module.breeding.childfragment.PairingPlayFragment;
-import com.cpigeon.book.module.breeding.childfragment.PairingScoreFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoAddViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
@@ -102,11 +99,8 @@ public class PairingInfoAddFragment extends BaseBookFragment {
             return true;
         });
 
-
-
         mPairingInfoAddViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         PriringRecommendEntity item = (PriringRecommendEntity) getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA_2);
-
 
         if (item != null) {
             //足环号
