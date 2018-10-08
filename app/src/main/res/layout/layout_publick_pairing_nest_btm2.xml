@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <!--配对时间-->
         <com.cpigeon.book.widget.LineInputView
             android:id="@+id/ll_pairing_time"

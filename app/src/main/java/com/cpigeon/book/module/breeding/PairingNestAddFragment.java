@@ -294,7 +294,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_fertilized_giving:
                 //是否赠送
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_hatches_giving_name, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_hatches_giving_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mInputDialog.hide();
                             tv_giving_name.setText(content);
                             if (StringUtil.isStringValid(content)) {
