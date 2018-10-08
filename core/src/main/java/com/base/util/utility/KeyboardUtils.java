@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.base.util.Utils;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+
 import java.lang.reflect.Field;
 
 /**
@@ -131,18 +133,9 @@ public final class KeyboardUtils {
      */
     public static void registerSoftInputChangedListener(final Activity activity,
                                                         final OnSoftInputChangedListener listener) {
-        final View contentView = activity.findViewById(android.R.id.content);
-        sContentViewInvisibleHeightPre = getContentViewInvisibleHeight(activity);
-        contentView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (listener != null) {
-                    int height = getContentViewInvisibleHeight(activity);
-                    if (sContentViewInvisibleHeightPre != height) {
-                        listener.onSoftInputChanged(height);
-                        sContentViewInvisibleHeightPre = height;
-                    }
-                }
+        KeyboardVisibilityEvent.registerEventListener(activity, isOpen -> {
+            if(listener != null){
+                listener.onSoftInputChanged(isOpen);
             }
         });
     }
@@ -220,6 +213,6 @@ public final class KeyboardUtils {
     }
 
     public interface OnSoftInputChangedListener {
-        void onSoftInputChanged(int height);
+        void onSoftInputChanged(boolean isOpen);
     }
 }

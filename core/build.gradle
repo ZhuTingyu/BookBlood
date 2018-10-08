@@ -124,6 +124,8 @@ dependencies {
     //okhtt日志
     compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
 
+    compile 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
+
 
 }
 

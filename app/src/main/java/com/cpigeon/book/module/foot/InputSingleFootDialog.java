@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.foot;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -14,12 +15,15 @@ import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.KeyboardUtils;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 
 import java.util.Collections;
 import java.util.List;
@@ -44,6 +48,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     List<String> years = Lists.newArrayList();
     List<String> area = Lists.newArrayList();
     List<String> foots;
+    private boolean mKeyboardIsOpen;
 
 
     @Override
@@ -53,6 +58,11 @@ public class InputSingleFootDialog extends BaseDialogFragment {
 
     @Override
     protected void initView(Dialog dialog) {
+
+        KeyboardUtils.registerSoftInputChangedListener(getActivity(),isOpen -> {
+            mKeyboardIsOpen = isOpen;
+        });
+
         mImgClose = dialog.findViewById(R.id.imgClose);
         mTvFinish = dialog.findViewById(R.id.tvFinish);
         mGpFoot = dialog.findViewById(R.id.gpFoot);
@@ -65,7 +75,6 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         getAreas();
 
         mTvYear.setText(years.get(0));
-
         String[] address = getResources().getStringArray(R.array.srt_arr_address);
 
         //初始化显示省份
@@ -97,13 +106,16 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             mTvArea.setVisibility(View.VISIBLE);
             mGpFoot.setVisibility(View.VISIBLE);
             mEdFoot.setVisibility(View.GONE);
+            mGpFoot.forceInputViewGetFocus();
         } else {
             mTvSwitch.setText(R.string.text_standard_foot_ring_number);
             mTvYear.setVisibility(View.GONE);
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
             mEdFoot.setVisibility(View.VISIBLE);
+            mEdFoot.requestFocus();
         }
+
 
         mTvYear.setOnClickListener(v -> {
             PickerUtil.showItemPicker(getActivity(), years, 0, new OptionPicker.OnOptionPickListener() {
@@ -161,6 +173,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             mTvSwitch.setVisibility(View.GONE);
         }
 
+        KeyboardUtils.showSoftInput(getActivity());
     }
 
     private void switchStatus() {
@@ -171,6 +184,8 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
             mEdFoot.setVisibility(View.VISIBLE);
+            mGpFoot.clearFocus();
+            mEdFoot.requestFocus();
         } else {
             isStandard = true;
             mTvSwitch.setText(R.string.text_standard_foot_ring_number);
@@ -178,6 +193,8 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             mTvArea.setVisibility(View.VISIBLE);
             mGpFoot.setVisibility(View.VISIBLE);
             mEdFoot.setVisibility(View.GONE);
+            mEdFoot.clearFocus();
+            mGpFoot.forceInputViewGetFocus();
         }
 
     }
@@ -205,7 +222,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         window.setWindowAnimations(R.style.AnimBottomDialog);
         lp.gravity = Gravity.BOTTOM;
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = (ScreenTool.getScreenHeight() / 4) * 3;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
     }
 
@@ -223,7 +240,24 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         this.foots = foots;
     }
 
+    public void setFootNumber(String footNumber) {
+        List<String> foot = Lists.newArrayList();
+        if (StringUtil.isStringValid(footNumber)) {
+            String[] foots = footNumber.split(Utils.getString(R.string.text_foots_divide));
+            foot = Lists.newArrayList(foots);
+        }
+        this.foots = foot;
+    }
+
     public void setHaveStandard(boolean haveStandard) {
         isHaveStandard = haveStandard;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if(mKeyboardIsOpen){
+            KeyboardUtils.toggleSoftInput();
+        }
     }
 }

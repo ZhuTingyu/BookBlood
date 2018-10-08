@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="map" type="id">map</item>
+    <item name="list" type="id">list</item>
+    <item name="inList" type="id">inList</item>
     <item name="btn_left" type="id" >btn_left</item>
     <item name="btn_right" type="id">btn_right</item>
 

@@ -76,6 +76,24 @@
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="金额" />
 
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lv_father_foot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsNotNull="false"
+                android:visibility="gone"
+                app:lineInputView_LeftString="父足环" />
+
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lv_mother_foot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsNotNull="false"
+                android:visibility="gone"
+                app:lineInputView_LeftString="母足环" />
+
             <com.cpigeon.book.widget.InputBoxView
                 android:id="@+id/boxViewRemark"
                 app:input_high="@dimen/view_input_height"

@@ -75,7 +75,7 @@ public class FootRingStatEntity {
     }
 
     public int getMaxCount() {
-        return tebiCount + qitaCount + tongyiCount + siCount + trueCount + falseCount;
+        return trueCount + falseCount;
     }
 
     public List<Integer> getData() {

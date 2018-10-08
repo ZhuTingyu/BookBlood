@@ -68,6 +68,8 @@ public class FootAdminSingleFragment extends BaseBookFragment {
     InputBoxView boxViewRemark;
     @BindView(R.id.lv_status)
     LineInputView lvStatus;
+    private LineInputView mLvFatherFoot;
+    private LineInputView mLvMotherFoot;
     private FootAdminSingleViewModel mViewModel;
     private SelectTypeViewModel mPublicViewModel;
     private int selectSourcePosition = 0;
@@ -110,6 +112,10 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         composite.add(RxUtils.delayed(50, aLong -> {
             llRoot.setLineInputViewState(mIsLook);
         }));
+
+        mLvFatherFoot = findViewById(R.id.lv_father_foot);
+        mLvMotherFoot = findViewById(R.id.lv_mother_foot);
+
 
         bindUi(RxUtils.textChanges(lvFoot.getEditText()), mViewModel.setFootNumber());//足环号
         bindUi(RxUtils.textChanges(lvMoney.getEditText()), mViewModel.setMoney());//金额
@@ -165,6 +171,27 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             setTitle(R.string.text_foot_details);
             tvOk.setVisibility(View.GONE);
             lvStatus.setVisibility(View.VISIBLE);
+            mLvFatherFoot.setVisibility(View.VISIBLE);
+            mLvMotherFoot.setVisibility(View.VISIBLE);
+
+            mLvFatherFoot.setOnRightClickListener(lineInputView -> {
+                InputSingleFootDialog dialog = new InputSingleFootDialog();
+                dialog.setFootNumber(mLvFatherFoot.getContent());
+                dialog.setOnFootStringFinishListener(foot -> {
+                    mLvFatherFoot.setRightText(foot);
+                });
+                dialog.show(getBaseActivity().getSupportFragmentManager());
+            });
+
+            mLvMotherFoot.setOnRightClickListener(lineInputView -> {
+                InputSingleFootDialog dialog = new InputSingleFootDialog();
+                dialog.setFootNumber(mLvMotherFoot.getContent());
+                dialog.setOnFootStringFinishListener(foot -> {
+                    mLvFatherFoot.setRightText(foot);
+                });
+                dialog.show(getBaseActivity().getSupportFragmentManager());
+            });
+
             llRoot.setOnInputViewGetFocusListener(() -> {
                 tvOk.setVisibility(View.VISIBLE);
             });
