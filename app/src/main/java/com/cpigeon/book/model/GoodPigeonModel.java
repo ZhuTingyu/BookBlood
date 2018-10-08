@@ -36,13 +36,15 @@ public class GoodPigeonModel {
                 .request();
     }
 
-    public static Observable<ApiResponse> applyAddGoodPigeon(String foodId, String pigeonId) {
+    public static Observable<ApiResponse> applyAddGoodPigeon(String foodId, String pigeonId, String breedName, String flyName) {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
                 .url(R.string.apply_add_good_pigeon)
                 .addBody("pigeonid", pigeonId)
                 .addBody("footid", foodId)
+                .addBody("breedname", breedName)
+                .addBody("flyname", flyName)
                 .request();
     }
 }

@@ -13,15 +13,17 @@ import com.cpigeon.book.model.GoodPigeonModel;
 public class ApplyAddGoodPigeonViewModel extends BaseViewModel {
     public String foodId;
     public String pigeonId;
+    public String breedName;
+    public String flyName;
 
-    public void apllyAddGoodPigeon(){
+    public void applyAddGoodPigeon(){
 
         if(!StringUtil.isStringValid(foodId)){
             error(R.string.text_pleas_choose_pigeon);
             return;
         }
 
-        submitRequestThrowError(GoodPigeonModel.applyAddGoodPigeon(foodId,pigeonId),r -> {
+        submitRequestThrowError(GoodPigeonModel.applyAddGoodPigeon(foodId,pigeonId, breedName, flyName),r -> {
             if(r.isOk()){
                 normalResult.setValue(r.msg);
             }else throw new HttpErrorException(r);

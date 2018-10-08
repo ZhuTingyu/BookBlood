@@ -106,6 +106,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             mTvArea.setVisibility(View.VISIBLE);
             mGpFoot.setVisibility(View.VISIBLE);
             mEdFoot.setVisibility(View.GONE);
+            mEdFoot.clearFocus();
             mGpFoot.forceInputViewGetFocus();
         } else {
             mTvSwitch.setText(R.string.text_standard_foot_ring_number);
@@ -113,8 +114,12 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
             mEdFoot.setVisibility(View.VISIBLE);
+            mGpFoot.clearFocus();
             mEdFoot.requestFocus();
+            KeyboardUtils.showSoftInput(getActivity());
         }
+
+        KeyboardUtils.toggleSoftInput();
 
 
         mTvYear.setOnClickListener(v -> {
@@ -172,8 +177,6 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         if (!isHaveStandard) {
             mTvSwitch.setVisibility(View.GONE);
         }
-
-        KeyboardUtils.showSoftInput(getActivity());
     }
 
     private void switchStatus() {
@@ -186,6 +189,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             mEdFoot.setVisibility(View.VISIBLE);
             mGpFoot.clearFocus();
             mEdFoot.requestFocus();
+            KeyboardUtils.showSoftInput(getActivity());
         } else {
             isStandard = true;
             mTvSwitch.setText(R.string.text_standard_foot_ring_number);

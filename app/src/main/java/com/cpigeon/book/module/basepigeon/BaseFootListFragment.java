@@ -52,8 +52,8 @@ public class BaseFootListFragment extends BaseBookFragment {
     protected BreedPigeonListModel mBreedPigeonListModel;
     protected SearchFragmentParentActivity mActivity;
 
-    private FiltrateListView mFiltrate;
-    private DrawerLayout mDrawerLayout;
+    protected FiltrateListView mFiltrate;
+    protected DrawerLayout mDrawerLayout;
 
     @Override
     public void onAttach(Context context) {
@@ -114,57 +114,8 @@ public class BaseFootListFragment extends BaseBookFragment {
             mBreedPigeonListModel.pi++;
             mBreedPigeonListModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
-
-
-        initLateralSpreadsMenu();//初始化侧滑菜单
     }
 
-    //侧滑菜单  初始化
-    private void initLateralSpreadsMenu() {
-        mDrawerLayout = mActivity.getDrawerLayout();
-        mFiltrate = mActivity.getFiltrate();
-
-        if (mDrawerLayout == null || mFiltrate == null) {
-            return;
-        }
-
-        setToolbarRightImage(R.drawable.svg_filtrate, item -> {
-            if (mDrawerLayout != null) {
-                mDrawerLayout.openDrawer(Gravity.RIGHT);
-            }
-            return false;
-        });
-
-        mFiltrate.setOnSureClickListener(selectItems -> {
-            LogUtil.print(selectItems);
-            mDrawerLayout.closeDrawer(Gravity.RIGHT);
-
-            setProgressVisible(true);
-            mBreedPigeonListModel.pi = 1;
-            mBreedPigeonListModel.isSearch = false;
-            mAdapter.cleanList();
-
-            //年份
-            List<SelectTypeEntity> mSelectTypeYear = selectItems.get(0);
-            mBreedPigeonListModel.year = SelectTypeEntity.getTypeName(mSelectTypeYear);
-
-            //性别
-            List<SelectTypeEntity> mSelectTypeSex = selectItems.get(1);
-            mBreedPigeonListModel.sexid = SelectTypeEntity.getTypeIds(mSelectTypeSex);
-
-            //状态
-            List<SelectTypeEntity> mSelectTypeStatus = selectItems.get(2);
-            mBreedPigeonListModel.stateid = SelectTypeEntity.getTypeIds(mSelectTypeStatus);
-
-            //血统
-            List<SelectTypeEntity> mSelectTypeLineage = selectItems.get(3);
-            mBreedPigeonListModel.bloodid = SelectTypeEntity.getTypeIds(mSelectTypeLineage);
-
-            mBreedPigeonListModel.getPigeonList();
-
-        });
-
-    }
 
 
     protected void initData() {

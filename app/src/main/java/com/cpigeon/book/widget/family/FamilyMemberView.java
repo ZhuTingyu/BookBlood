@@ -72,7 +72,7 @@ public class FamilyMemberView extends FamilyMember {
         int size_80 = ScreenTool.dip2px(80);
         int size_129 = ScreenTool.dip2px(129);
         int size_40 = ScreenTool.dip2px(40);
-        int size_20 = ScreenTool.dip2px(20);
+        int size_28 = ScreenTool.dip2px(28);
         int size_50 = ScreenTool.dip2px(50);
         int size_31 = ScreenTool.dip2px(31);
         int shadowSize = ScreenTool.dip2px(10);
@@ -137,7 +137,7 @@ public class FamilyMemberView extends FamilyMember {
 
             if (isMiniModel) {
                 rootW = size_80;
-                rootH = size_20;
+                rootH = size_28;
                 imgSize = size_40;
             } else {
                 rootW = size_80;
@@ -167,7 +167,7 @@ public class FamilyMemberView extends FamilyMember {
 
     public void bindData(PigeonEntity entity) {
 
-        if(!StringUtil.isStringValid(entity.getPigeonID())){
+        if (!StringUtil.isStringValid(entity.getPigeonID())) {
             imgAdd.setVisibility(VISIBLE);
             mRlInMemberInfo.setVisibility(GONE);
             return;
@@ -236,7 +236,7 @@ public class FamilyMemberView extends FamilyMember {
     public interface OnMemberClickListener {
         void add(int x, int y);
 
-        void showInfo(PigeonEntity entity);
+        void showInfo(int x, int y, PigeonEntity entity);
     }
 
     private OnMemberClickListener mOnMemberClickListener;
@@ -252,7 +252,7 @@ public class FamilyMemberView extends FamilyMember {
 
         mRlInMemberInfo.setOnClickListener(v -> {
             if (mOnMemberClickListener != null) {
-                mOnMemberClickListener.showInfo(mPigeonEntity);
+                mOnMemberClickListener.showInfo(generationPoint, generationsOrder, mPigeonEntity);
             }
         });
     }

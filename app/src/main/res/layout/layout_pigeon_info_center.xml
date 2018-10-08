@@ -94,7 +94,7 @@
         app:TreeView_isMiniModel="true"
         app:TreeView_isHaveCurrent="false"
         android:layout_width="match_parent"
-        android:layout_height="323dp">
+        android:layout_height="340dp">
 
     </com.cpigeon.book.widget.family.FamilyTreeView>
 

@@ -34,7 +34,6 @@ public class BreedPigeonEntryFragment2 extends BasePigeonEntryFragment {
     public static final String TYPE_SEX_MALE = "TYPE_SEX_MALE";
     public static final String TYPE_SEX_FEMALE = "TYPE_SEX_FEMALE";
 
-
     private BreedPigeonEntryViewModel mBreedPigeonEntryViewModel;
 
     public static void start(Activity activity) {
@@ -56,8 +55,10 @@ public class BreedPigeonEntryFragment2 extends BasePigeonEntryFragment {
         super.onAttachs();
         mBasePigeonViewModel = new BreedPigeonEntryViewModel();
         mBreedPigeonEntryViewModel = (BreedPigeonEntryViewModel) mBasePigeonViewModel;
-
         initViewModels(mSelectTypeViewModel, mBreedPigeonEntryViewModel);
+        sexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
+        mBreedPigeonEntryViewModel.sonFootId = getBaseActivity().getIntent().getStringExtra(KEY_SON_FOOT_ID);
+        mBreedPigeonEntryViewModel.sonPigeonId = getBaseActivity().getIntent().getStringExtra(KEY_SON_PIGEON_ID);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class BreedPigeonEntryFragment2 extends BasePigeonEntryFragment {
 
         bindUi(RxUtils.textChanges(llFoot.getEditText()), mBreedPigeonEntryViewModel.setFootNumber());//足环号
 
-        String sexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
+
         if (TYPE_SEX_MALE.equals(sexType)) {
             mBreedPigeonEntryViewModel.mBreedPigeonEntity.setPigeonSexID(PigeonEntity.ID_MALE);
             mBreedPigeonEntryViewModel.sexId = (PigeonEntity.ID_MALE);

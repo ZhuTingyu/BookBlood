@@ -68,7 +68,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             @Override
             public void add(int x, int y) {
 
-                if(x == mFamilyTreeView.getStartGeneration()){
+                if (x == mFamilyTreeView.getStartGeneration()) {
 
                     BreedPigeonEntryFragment2.start(getBaseActivity()
                             , StringUtil.emptyString()
@@ -77,7 +77,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                             , StringUtil.emptyString()
                             , CODE_ADD_PIGEON);
 
-                }else {
+                } else {
                     PigeonEntity breedPigeonEntity = null;
                     if (mFamilyTreeView.getSon(x, y) != null) {
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
@@ -94,7 +94,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             }
 
             @Override
-            public void showInfo(PigeonEntity breedPigeonEntity) {
+            public void showInfo(int x, int y, PigeonEntity breedPigeonEntity) {
                 BreedPigeonEntryFragment2.start(getBaseActivity()
                         , breedPigeonEntity != null ? breedPigeonEntity.getPigeonID() : StringUtil.emptyString()
                         , StringUtil.emptyString()
@@ -108,10 +108,6 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             setProgressVisible(true);
             mViewModel.getBloodBook();
         }
-        getBaseActivity().setOnActivityFinishListener(() -> {
-            EventBus.getDefault().post(new PigeonAddEvent());
-            return false;
-        });
     }
 
     @Override

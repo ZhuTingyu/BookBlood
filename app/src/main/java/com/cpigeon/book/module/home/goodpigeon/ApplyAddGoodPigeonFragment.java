@@ -37,6 +37,8 @@ public class ApplyAddGoodPigeonFragment extends BaseBookFragment {
     private static final int CODE_FOOT = 0x123;
 
     private LineInputView mLvFoot;
+    private LineInputView mLvFeedPerson;
+    private LineInputView mLvFlyPerson;
     private TextView mTvContent;
     private TextView mTvOk;
     private RelativeLayout mRlContent;
@@ -60,6 +62,8 @@ public class ApplyAddGoodPigeonFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_apply_add_good_pigeon);
         mLvFoot = findViewById(R.id.lvFoot);
+        mLvFeedPerson = findViewById(R.id.lvFeedPerson);
+        mLvFlyPerson = findViewById(R.id.lvFlyPerson);
         mTvContent = findViewById(R.id.tvContent);
         mTvOk = findViewById(R.id.tvOk);
         mRlContent = findViewById(R.id.rlContent);
@@ -70,7 +74,9 @@ public class ApplyAddGoodPigeonFragment extends BaseBookFragment {
 
         mTvOk.setOnClickListener(v -> {
             setProgressVisible(true);
-            mViewModel.apllyAddGoodPigeon();
+            mViewModel.breedName = mLvFeedPerson.getContent();
+            mViewModel.flyName = mLvFlyPerson.getContent();
+            mViewModel.applyAddGoodPigeon();
         });
     }
 

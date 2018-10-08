@@ -20,6 +20,7 @@ import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.picker.PickerUtil;
+import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
@@ -103,8 +104,9 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
 
     protected SelectImageAdapter2 mAdapter;
     protected SelectTypeViewModel mSelectTypeViewModel;
-
     protected BasePigeonViewModel mBasePigeonViewModel;
+    protected String sexType;
+
 
 
     @Nullable
@@ -162,7 +164,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
 
         llCountries.setRightText("CHN");
 
-        mSelectTypeViewModel.getSelectType_Sex();
+
         mSelectTypeViewModel.getSelectType_FeatherColor();
         mSelectTypeViewModel.getSelectType_lineage();
         mSelectTypeViewModel.getSelectType_eyeSand();
@@ -180,6 +182,12 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
         btnState();
 
         initData();
+
+        if(!StringUtil.isStringValid(sexType)){
+            mSelectTypeViewModel.getSelectType_Sex();
+
+        }
+
     }
 
 
@@ -320,9 +328,8 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
             case R.id.ll_foot:
                 //足环号
 //                List<String> foots = mViewModel.getFoots();
-                List<String> foots = new ArrayList<>();
                 InputSingleFootDialog dialog = new InputSingleFootDialog();
-                dialog.setFoots(foots);
+                dialog.setFootNumber(llFoot.getContent());
                 dialog.setOnFootStringFinishListener(foot -> {
                     llFoot.setRightText(foot);
                     mBasePigeonViewModel.foot = foot;
@@ -333,9 +340,8 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.ll_foot_vice:
                 //副环
-                List<String> foots2 = new ArrayList<>();
                 InputSingleFootDialog dialog2 = new InputSingleFootDialog();
-                dialog2.setFoots(foots2);
+                dialog2.setFootNumber(llFootVice.getContent());
                 dialog2.setOnFootStringFinishListener(foot -> {
                     llFootVice.setRightText(foot);
                     mBasePigeonViewModel.footVice = foot;
@@ -360,11 +366,8 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.ll_foot_father:
                 //父足环
-
-
-                List<String> foots3 = new ArrayList<>();
                 InputSingleFootDialog dialog3 = new InputSingleFootDialog();
-                dialog3.setFoots(foots3);
+                dialog3.setFootNumber(llFootFather.getContent());
                 dialog3.setOnFootStringFinishListener(foot -> {
                     llFootFather.setRightText(foot);
                     mBasePigeonViewModel.footFather = foot;
@@ -374,9 +377,8 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.ll_foot_mother:
                 //母足环
-                List<String> foots4 = new ArrayList<>();
                 InputSingleFootDialog dialog4 = new InputSingleFootDialog();
-                dialog4.setFoots(foots4);
+                dialog4.setFootNumber(llFootMother.getContent());
                 dialog4.setOnFootStringFinishListener(foot -> {
                     llFootMother.setRightText(foot);
                     mBasePigeonViewModel.footMother = foot;

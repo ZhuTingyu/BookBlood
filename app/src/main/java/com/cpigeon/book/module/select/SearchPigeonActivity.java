@@ -81,7 +81,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
         mRequestCode = getIntent().getIntExtra(SelectPigeonFragment.REQUEST_CODE, 0);
         mType = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
 
-        if (SelectPigeonFragment.TYPE_SHARE_PIGEON.equals(mType)) {
+        if (SelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
             mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
         }
 
@@ -97,7 +97,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
                         .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
                         .finishForResult(getBaseActivity());
             } else {
-                if (SelectPigeonFragment.TYPE_SHARE_PIGEON.equals(mType)) {
+                if (SelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
                     BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
                             , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
                 }

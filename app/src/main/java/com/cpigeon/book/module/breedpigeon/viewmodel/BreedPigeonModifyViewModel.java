@@ -3,6 +3,7 @@ package com.cpigeon.book.module.breedpigeon.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.base.http.HttpErrorException;
+import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
@@ -53,7 +54,7 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
 
                 mBreedPigeonData.setValue(r.data);
 
-                EventBus.getDefault().post(EventBusService.BREED_PIGEON_LIST_REFRESH);
+                EventBus.getDefault().post(new PigeonAddEvent());
             } else throw new HttpErrorException(r);
         });
     }

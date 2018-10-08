@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:padding="5dp">
 
@@ -19,89 +19,96 @@
 
             <ImageView
                 android:id="@+id/imgAdd"
-                android:visibility="gone"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
-                android:src="@mipmap/ic_pigeon_add_in_book" />
-            
+                android:src="@mipmap/ic_pigeon_add_in_book"
+                android:visibility="gone" />
+
             <RelativeLayout
                 android:id="@+id/rlInMemberInfo"
-                android:padding="6dp"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgHead"
-                    android:layout_centerHorizontal="true"
-                    tools:src="@drawable/ic_launcher"
-                    android:visibility="visible"
                     android:layout_width="40dp"
-                    android:layout_height="40dp" />
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="6dp"
+                    android:visibility="visible"
+                    tools:src="@drawable/ic_launcher" />
 
                 <TextView
-                    android:layout_below="@id/imgHead"
                     android:id="@+id/tvFootNumber"
-                    android:textSize="10sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="3dp"
-                    tools:text="2018-22-1234567"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgHead"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    tools:text="2018-22-1234567" />
 
                 <LinearLayout
                     android:id="@+id/llBlood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/tvFootNumber"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:visibility="visible"
-                    android:layout_height="wrap_content">
+                    android:visibility="visible">
+
                     <TextView
-                        android:textColor="@color/color_text_hint"
-                        android:text="@string/text_blood_book"
-                        android:textSize="10sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_blood_book"
+                        android:textColor="@color/color_text_hint"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/tvBlood"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="8dp"
-                        android:textSize="10sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llName"
-                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/llBlood"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:visibility="visible">
+
                     <TextView
-                        android:textColor="@color/color_text_hint"
-                        android:text="@string/text_name"
-                        android:textSize="10sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_name"
+                        android:textColor="@color/color_text_hint"
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/tvName"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="8dp"
-                        android:textSize="10sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="10sp" />
 
                 </LinearLayout>
 
-                
-            </RelativeLayout>
 
+            </RelativeLayout>
 
 
         </RelativeLayout>

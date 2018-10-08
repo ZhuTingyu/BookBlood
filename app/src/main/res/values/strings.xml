@@ -594,5 +594,9 @@
         <item>火车</item>
         <item>石油</item>
     </string-array>
+    <string name="text_breed_person">作育人</string>
+    <string name="text_fly_person">作翔人</string>
+    <string name="text_pigeon_generation_title">%1$s上%2$s代</string>
+
 
 </resources>

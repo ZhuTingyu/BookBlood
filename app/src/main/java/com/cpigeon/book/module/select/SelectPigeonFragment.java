@@ -33,7 +33,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public class SelectPigeonFragment extends BaseBookFragment {
 
     public static String REQUEST_CODE = "REQUEST_CODE";
-    public static String TYPE_SHARE_PIGEON = "TYPE_SHARE_PIGEON";
+    public static String TYPE_SHARE_PIGEON_TO_SHARE = "TYPE_SHARE_PIGEON_TO_SHARE";
     public static int CODE_SEARCH = 0x321;
 
     XRecyclerView mRecyclerView;
@@ -108,7 +108,7 @@ public class SelectPigeonFragment extends BaseBookFragment {
                         .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
                         .finishForResult(getBaseActivity());
             } else {
-                if (TYPE_SHARE_PIGEON.equals(mType)) {
+                if (TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
                     BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
                             , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
                 }
@@ -118,11 +118,9 @@ public class SelectPigeonFragment extends BaseBookFragment {
         setProgressVisible(true);
 
         //搜索鸽子去共享
-        if (TYPE_SHARE_PIGEON.equals(mType)) {
+        if (TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
             mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
         }
-
-
         mViewModel.getPigeonList();
     }
 

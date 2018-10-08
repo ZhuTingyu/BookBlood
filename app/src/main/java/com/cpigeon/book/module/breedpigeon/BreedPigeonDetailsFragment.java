@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -48,11 +49,24 @@ import cn.qqtheme.framework.picker.OptionPicker;
 
 public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
+    public static final int CODE_ADD_PIGEON = 0x123;
+
+
 
     public static void start(Activity activity, String pigeonId, String footId) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
                 .putExtra(IntentBuilder.KEY_DATA_2, footId)
+                .startParentActivity(activity, BreedPigeonDetailsFragment.class);
+    }
+
+    //血统书跳转
+    public static void start(Activity activity, String pigeonId, String footId, String footNumber, int generationCount) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, pigeonId)
+                .putExtra(IntentBuilder.KEY_DATA_2, footId)
+                .putExtra(KEY_TITLE_FOOT_NUMBER, footNumber)
+                .putExtra(IntentBuilder.KEY_TITLE, generationCount)
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
@@ -64,6 +78,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
+    //共享厅
     public static void start(Activity activity, String pigeonId, String footId, String type, String userId) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
@@ -73,6 +88,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
+    //铭鸽库
     public static void startGoodPigeon(Activity activity, String pigeonId, String footId, String userId) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
@@ -86,13 +102,11 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mType = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
-        setTitle("详情");
-
         setToolbarRight("成长记录", item -> {
             if (mBreedPigeonModifyViewModel.mPigeonEntity == null) {
                 return true;
             }
-            GrowthReportFragment.start(getBaseActivity(), mBreedPigeonModifyViewModel.mPigeonEntity,mBreedPigeonDetailsViewModel.pUid);
+            GrowthReportFragment.start(getBaseActivity(), mBreedPigeonModifyViewModel.mPigeonEntity, mBreedPigeonDetailsViewModel.pUid);
             return true;
         });
 
@@ -125,9 +139,11 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             }
 
             @Override
-            public void showInfo(PigeonEntity breedPigeonEntity) {
+            public void showInfo(int x, int y, PigeonEntity breedPigeonEntity) {
                 BreedPigeonDetailsFragment.start(getBaseActivity(), breedPigeonEntity.getPigeonID()
-                        , breedPigeonEntity.getPigeonID());
+                        , breedPigeonEntity.getFootRingID()
+                        , mFirstFootNumber
+                        , mGenerationCount + x);
             }
         });
 
@@ -172,7 +188,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 });
             }
         }
-
 
 
         if (!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) {
@@ -225,9 +240,8 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
             case R.id.tv_foot:
                 //足环号
-                List<String> foots = new ArrayList<>();
                 InputSingleFootDialog dialog = new InputSingleFootDialog();
-                dialog.setFoots(foots);
+                dialog.setFootNumber(tvFoot.getText().toString());
                 dialog.setOnFootStringFinishListener(foot -> {
                     tvFoot.setText(foot);
                     mBreedPigeonModifyViewModel.mPigeonEntity.setFootRingNum(foot);
@@ -436,4 +450,5 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
     public void OnEvent(PigeonAddEvent event) {
         mBookViewModel.getBloodBook();
     }
+
 }

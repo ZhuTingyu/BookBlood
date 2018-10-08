@@ -83,7 +83,7 @@ public class BaseInputDialog extends BaseDialogFragment {
         }
 
         mEdContent.requestFocus();
-        KeyboardUtils.showSoftInput(getActivity());
+        KeyboardUtils.toggleSoftInput();
 
     }
 

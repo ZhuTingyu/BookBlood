@@ -114,7 +114,7 @@ public class FamilyTreeView extends LinearLayout {
             if (!isDrawView) {
                 isDrawView = true;
                 initView();
-                if(!isShowInfoModel){
+                if (!isShowInfoModel) {
                     LinearLayout first = generationLinearLayouts.get(0);
                     for (int i = 0, len = first.getChildCount(); i < len; i++) {
                         FamilyMember member = (FamilyMember) first.getChildAt(i);
@@ -225,8 +225,8 @@ public class FamilyTreeView extends LinearLayout {
                     }
 
                     @Override
-                    public void showInfo(PigeonEntity entity) {
-                        mOnFamilyClickListener.showInfo(entity);
+                    public void showInfo(int x, int y, PigeonEntity entity) {
+                        mOnFamilyClickListener.showInfo(x, y, entity);
                     }
                 });
             }
@@ -538,7 +538,7 @@ public class FamilyTreeView extends LinearLayout {
     public interface OnFamilyClickListener {
         void add(int x, int y);
 
-        void showInfo(PigeonEntity entity);
+        void showInfo(int x, int y, PigeonEntity entity);
     }
 
     public OnFamilyClickListener mOnFamilyClickListener;

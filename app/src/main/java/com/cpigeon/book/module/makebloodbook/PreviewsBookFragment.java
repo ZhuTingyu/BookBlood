@@ -200,11 +200,13 @@ public class PreviewsBookFragment extends BaseBookFragment {
             bookType = type;
 
             if (bookType == SelectTemplateFragment.TYPE_H) {
-                mFamilyTreeView.setHorizontal(true);
+
                 mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
                 mFamilyTreeView.initView();
                 mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
-
+                RelativeLayout.LayoutParams treeP = new RelativeLayout.LayoutParams(2480, 3270);
+                treeP.addRule(RelativeLayout.CENTER_IN_PARENT);
+                mPrintFamilyTreeView.setLayoutParams(treeP);
                 mPrintFamilyTreeView.setHorizontal(true);
                 mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
                 mPrintFamilyTreeView.setShowLine(false);
@@ -216,11 +218,13 @@ public class PreviewsBookFragment extends BaseBookFragment {
                 mLlPrintTextV.setVisibility(View.GONE);
 
             } else if (bookType == SelectTemplateFragment.TYPE_V) {
-                mFamilyTreeView.setHorizontal(false);
                 mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
                 mFamilyTreeView.initView();
                 mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
 
+                RelativeLayout.LayoutParams treeP = new RelativeLayout.LayoutParams(2480, 2330);
+                treeP.addRule(RelativeLayout.CENTER_IN_PARENT);
+                mPrintFamilyTreeView.setLayoutParams(treeP);
                 mPrintFamilyTreeView.setHorizontal(false);
                 mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
                 mPrintFamilyTreeView.setShowLine(true);

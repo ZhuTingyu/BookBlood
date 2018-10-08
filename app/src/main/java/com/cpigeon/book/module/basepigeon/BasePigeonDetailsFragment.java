@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.base.base.FragmentAdapter;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
 import com.base.widget.CustomViewPager;
 import com.base.widget.magicindicator.MagicIndicator;
 import com.base.widget.magicindicator.ViewPagerHelper;
@@ -131,12 +133,18 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
 
     protected AddPlayDialog mAddPlayDialog;
     protected String mType;
+    protected int mGenerationCount = 0;
+    protected String mFirstFootNumber;
+
 
     public static final int CODE_ORGANIZE = 0x123;
     public static final int CODE_LOFT = 0x234;
     public static final String TYPE_MY_SHARE = "TYPE_MY_SHARE";
     public static final String TYPE_HIS_SHARE = "TYPE_HIS_SHARE";
     public static final String TYPE_SHARE_PIGEON = "TYPE_SHARE_PIGEON";
+    protected static final String KEY_TITLE_FOOT_NUMBER = "KEY_TITLE_FOOT_NUMBER";
+
+
 
 
     @Override
@@ -149,6 +157,9 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
         mBookViewModel = new BookViewModel(getBaseActivity());
         initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel
                 , mSelectTypeViewModel, mBreedPigeonModifyViewModel, mBookViewModel);
+        mGenerationCount = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TITLE, 0);
+        mFirstFootNumber = getBaseActivity().getIntent().getStringExtra(KEY_TITLE_FOOT_NUMBER);
+
     }
 
 
@@ -165,7 +176,11 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        if(mGenerationCount != 0){
+            setTitle(Utils.getString(R.string.text_pigeon_generation_title
+                    ,mFirstFootNumber,String.valueOf(mGenerationCount)));
+        }
+        mGenerationCount = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TITLE, 0);
 
         initInputPlayDialog();
         setProgressVisible(true);
@@ -201,6 +216,12 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
         super.initObserve();
 
         mBreedPigeonDetailsViewModel.mBreedPigeonData.observe(this, datas -> {
+
+            if(!StringUtil.isStringValid(mFirstFootNumber)){
+                setTitle(mBreedPigeonDetailsViewModel.mPigeonEntity.getFootRingNum());
+                mFirstFootNumber = datas.getFootRingNum();
+            }
+
             setProgressVisible(false);
             mBreedPigeonModifyViewModel.mPigeonEntity = datas;
 
