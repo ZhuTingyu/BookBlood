@@ -28,6 +28,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.module.breedpigeon.InputBreedInBookFragment;
 import com.cpigeon.book.module.foot.FootAdminAddMultipleFragment;
 import com.cpigeon.book.module.foot.FootAdminSingleFragment;
 import com.cpigeon.book.module.home.UserInfoFragment;
@@ -177,7 +178,7 @@ public class MainActivity extends BaseBookActivity {
             //种鸽录入
             mPopupWindow.dismiss();
 //            BreedPigeonEntryFragment.start(getBaseActivity());
-            BreedPigeonEntryFragment2.start(getBaseActivity());
+            InputBreedInBookFragment.start(getBaseActivity());
         });
 
         simpleText3.setOnClickListener(v -> {

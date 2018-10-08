@@ -59,6 +59,7 @@ public class BreedPigeonEntryFragment2 extends BasePigeonEntryFragment {
         sexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
         mBreedPigeonEntryViewModel.sonFootId = getBaseActivity().getIntent().getStringExtra(KEY_SON_FOOT_ID);
         mBreedPigeonEntryViewModel.sonPigeonId = getBaseActivity().getIntent().getStringExtra(KEY_SON_PIGEON_ID);
+        mBreedPigeonEntryViewModel.pigeonId = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_DATA);
     }
 
     @Override

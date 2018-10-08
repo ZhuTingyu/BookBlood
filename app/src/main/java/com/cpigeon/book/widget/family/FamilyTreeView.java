@@ -111,6 +111,7 @@ public class FamilyTreeView extends LinearLayout {
         mPath = new Path();
 
         addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+
             if (!isDrawView) {
                 isDrawView = true;
                 initView();

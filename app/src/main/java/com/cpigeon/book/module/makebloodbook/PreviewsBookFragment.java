@@ -22,12 +22,15 @@ import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.utility.ImageUtils;
+import com.base.util.utility.StringUtil;
 import com.base.widget.photoview.PhotoView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
+import com.cpigeon.book.module.racing.BreedPigeonEntryFragment2;
 import com.cpigeon.book.widget.BookRootLayout;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
@@ -38,6 +41,7 @@ import com.cpigeon.book.widget.family.FamilyTreeView;
 public class PreviewsBookFragment extends BaseBookFragment {
 
     private static final int CODE_CHOOSE_TEMPLATE = 0x123;
+    public static final int CODE_ADD_PIGEON = 0x234;
 
     private LinearLayout mLlImage;
     private ImageView mImgHead;
@@ -163,6 +167,45 @@ public class PreviewsBookFragment extends BaseBookFragment {
             initObserve();
         }));
 
+        mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
+            @Override
+            public void add(int x, int y) {
+
+                if (x == mFamilyTreeView.getStartGeneration()) {
+
+                    BreedPigeonEntryFragment2.start(getBaseActivity()
+                            , StringUtil.emptyString()
+                            , StringUtil.emptyString()
+                            , StringUtil.emptyString()
+                            , StringUtil.emptyString()
+                            , CODE_ADD_PIGEON);
+
+                } else {
+                    PigeonEntity breedPigeonEntity = null;
+                    if (mFamilyTreeView.getSon(x, y) != null) {
+                        breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
+                    }
+
+
+                    BreedPigeonEntryFragment2.start(getBaseActivity()
+                            , StringUtil.emptyString()
+                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
+                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
+                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment2.TYPE_SEX_MALE : BreedPigeonEntryFragment2.TYPE_SEX_FEMALE
+                            , CODE_ADD_PIGEON);
+                }
+            }
+
+            @Override
+            public void showInfo(int x, int y, PigeonEntity breedPigeonEntity) {
+                BreedPigeonEntryFragment2.start(getBaseActivity()
+                        , breedPigeonEntity != null ? breedPigeonEntity.getPigeonID() : StringUtil.emptyString()
+                        , StringUtil.emptyString()
+                        , StringUtil.emptyString()
+                        , StringUtil.emptyString()
+                        , CODE_ADD_PIGEON);
+            }
+        });
 
     }
 
@@ -201,40 +244,57 @@ public class PreviewsBookFragment extends BaseBookFragment {
 
             if (bookType == SelectTemplateFragment.TYPE_H) {
 
+                mFamilyTreeView.setHorizontal(true);
                 mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
                 mFamilyTreeView.initView();
                 mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+
                 RelativeLayout.LayoutParams treeP = new RelativeLayout.LayoutParams(2480, 3270);
                 treeP.addRule(RelativeLayout.CENTER_IN_PARENT);
                 mPrintFamilyTreeView.setLayoutParams(treeP);
                 mPrintFamilyTreeView.setHorizontal(true);
                 mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
                 mPrintFamilyTreeView.setShowLine(false);
-                mPrintFamilyTreeView.initView();
+                mPrintFamilyTreeView.setLayoutParams(treeP);
 
-                mPrintFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+                composite.add(RxUtils.delayed(200,aLong -> {
+                    mPrintFamilyTreeView.initView();
+                    mPrintFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+                }));
+
 
                 mLlPrintTextH.setVisibility(View.VISIBLE);
                 mLlPrintTextV.setVisibility(View.GONE);
 
             } else if (bookType == SelectTemplateFragment.TYPE_V) {
                 mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
+                mFamilyTreeView.setHorizontal(false);
                 mFamilyTreeView.initView();
                 mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
 
-                RelativeLayout.LayoutParams treeP = new RelativeLayout.LayoutParams(2480, 2330);
-                treeP.addRule(RelativeLayout.CENTER_IN_PARENT);
-                mPrintFamilyTreeView.setLayoutParams(treeP);
+
                 mPrintFamilyTreeView.setHorizontal(false);
                 mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
                 mPrintFamilyTreeView.setShowLine(true);
-                mPrintFamilyTreeView.initView();
-
-                mPrintFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+                RelativeLayout.LayoutParams treeP = new RelativeLayout.LayoutParams(2480, 2330);
+                treeP.addRule(RelativeLayout.CENTER_IN_PARENT);
+                mPrintFamilyTreeView.setLayoutParams(treeP);
+                composite.add(RxUtils.delayed(200,aLong -> {
+                    mPrintFamilyTreeView.initView();
+                    mPrintFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+                }));
 
                 mLlPrintTextH.setVisibility(View.GONE);
                 mLlPrintTextV.setVisibility(View.VISIBLE);
             }
+        } else if (requestCode == CODE_ADD_PIGEON) {
+            if (!StringUtil.isStringValid(mViewModel.foodId)) {
+                PigeonEntryEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                mViewModel.foodId = entity.getFootRingID();
+                mViewModel.pigeonId = entity.getPigeonID();
+            }
+            setProgressVisible(true);
+            mViewModel.getBloodBook();
         }
     }
 }

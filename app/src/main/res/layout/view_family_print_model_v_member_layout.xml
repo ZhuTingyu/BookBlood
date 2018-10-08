@@ -13,6 +13,7 @@
 
         <LinearLayout
             android:id="@+id/llInfo"
+            android:background="@drawable/shape_bg_family_member_black"
             android:layout_width="1000px"
             android:layout_height="452px"
             android:orientation="horizontal">

@@ -34,9 +34,8 @@
     <com.cpigeon.book.widget.family.FamilyTreeView
         android:id="@+id/printFamilyTreeView"
         android:layout_width="2480px"
-        android:layout_height="3508px"
-        android:layout_marginBottom="110px"
-        android:layout_marginTop="110px"
+        android:layout_height="3270px"
+        android:layout_centerInParent="true"
         app:TreeView_ShowGeneration="4"
         app:TreeView_isHaveCurrent="true"
         app:TreeView_isHorizontal="true"
@@ -49,8 +48,8 @@
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="126px"
-        android:layout_marginLeft="118px"
+        android:paddingBottom="126px"
+        android:paddingLeft="118px"
         android:orientation="vertical"
         android:visibility="visible">
 
@@ -75,10 +74,11 @@
     <RelativeLayout
         android:id="@+id/llPrintTextV"
         android:layout_width="2480px"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="248px"
-        android:visibility="gone">
+        android:layout_height="wrap_content"
+        android:paddingBottom="248px"
+        android:paddingLeft="118px"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/tv1"
@@ -89,11 +89,10 @@
             android:textSize="@dimen/large_text_size" />
 
         <TextView
-            android:id="@+id/tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:text="@string/text_connection_phone_m"
+            android:layout_centerHorizontal="true"
             android:textColor="@color/black"
             android:textSize="@dimen/large_text_size" />
 

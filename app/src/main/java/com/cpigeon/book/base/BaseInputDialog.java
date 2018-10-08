@@ -75,9 +75,6 @@ public class BaseInputDialog extends BaseDialogFragment {
             mTvChoose.setVisibility(View.VISIBLE);
             mTvChoose.setOnClickListener(v -> {
                 mOnChooseListener.choose();
-                if(mIsOpen){
-                    KeyboardUtils.toggleSoftInput();
-                }
                 dismiss();
             });
         }
