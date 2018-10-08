@@ -41,7 +41,6 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer,
         init();
     }
 
-
     private void init() {
         /**初始化OpenGL的相关信息*/
         setEGLContextClientVersion(2);//设置版本
@@ -57,9 +56,7 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer,
         /**初始化相机的管理类*/
         mCamera = new CameraController();
         mCamera.close();
-
     }
-
 
     public void open(int cameraId) {
         mCamera.close();
@@ -105,8 +102,6 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer,
         if (isSetParm) {
             mCameraDrawer.onDrawFrame(gl);
         }
-
-
     }
 
 

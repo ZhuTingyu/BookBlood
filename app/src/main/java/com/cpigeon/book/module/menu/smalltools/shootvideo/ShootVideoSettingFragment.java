@@ -39,7 +39,8 @@ public class ShootVideoSettingFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle("拍摄视频");
+        setTitle(getString(R.string.str_small_tools));
+
     }
 
     @OnClick({R.id.btn_shoot_video, R.id.ll_upload_logo})

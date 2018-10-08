@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
@@ -23,8 +22,6 @@ import android.widget.TextView;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
-
-import java.time.format.TextStyle;
 
 
 /**
@@ -337,6 +334,10 @@ public class LineInputView extends RelativeLayout {
         }
 
         return super.onTouchEvent(event);
+    }
+
+    public ImageView getImgRight() {
+        return mImgRight;
     }
 
     private OnClickAndHaveFocusListener mOnClickAndHaveFocusListener;

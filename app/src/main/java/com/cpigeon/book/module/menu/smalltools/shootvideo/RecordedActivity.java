@@ -1,20 +1,22 @@
 package com.cpigeon.book.module.menu.smalltools.shootvideo;
 
 
-import android.content.Intent;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.base.util.LocationFormatUtils;
 import com.base.util.map.LocationLiveData;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.TimeUtil;
@@ -25,10 +27,11 @@ import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.util.BitmapUtils;
 import com.cpigeon.book.video.Constants;
 import com.cpigeon.book.video.camera.SensorControler;
-import com.cpigeon.book.video.utils.CameraUtil;
 import com.cpigeon.book.video.widget.CameraView;
 import com.cpigeon.book.video.widget.FocusImageView;
+import com.cpigeon.book.widget.mydialog.LocalShareDialogFragment;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,7 +49,6 @@ import butterknife.Unbinder;
  */
 
 public class RecordedActivity extends BaseBookActivity implements View.OnTouchListener, SensorControler.CameraFocusListener {
-
 
     @BindView(R.id.watermark_z)
     RelativeLayout watermark_z;//谁有总布局
@@ -70,6 +72,11 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
     @BindView(R.id.imgbtn_false)
     ImageButton imgbtn_false;//拍照取消
 
+    @BindView(R.id.tv_time)
+    TextView tv_time;
+    @BindView(R.id.img_logo)
+    ImageView img_logo;
+
     private CameraView mCameraView;
     private View mCapture;
     private FocusImageView mFocus;
@@ -88,12 +95,6 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
     private String savePath;//视频保存路径
     private String type;
-
-    private Intent intent1 = null;
-    private String img_path;
-
-    //闪光灯模式 0:关闭 1: 开启 2: 自动
-    private int light_num = 0;
 
     private Timer mTimer = new Timer();
 
@@ -120,21 +121,13 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         LocationLiveData.get(true).observe(this, aMapLocation -> {
             Log.d("dingwei", "initObserve: 城市--》" + aMapLocation.getCity());
 
-            water_tv_lo.setText("经度：" + aMapLocation.getLongitude());
-            water_tv_la.setText("纬度：" + aMapLocation.getLatitude());
-            water_tv_address.setText(aMapLocation.getAddress());
+            water_tv_lo.setText("经度：" + LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(aMapLocation.getLongitude())));
+            water_tv_la.setText("纬度：" + LocationFormatUtils.strToDMS(LocationFormatUtils.GPS2AjLocation(aMapLocation.getLatitude())));
+            water_tv_address.setText(aMapLocation.getPoiName() + aMapLocation.getCity() + aMapLocation.getDistrict());
             water_tv_altitude.setText("海拔：" + aMapLocation.getAltitude() + "m");
 
             LogUtil.print(aMapLocation);
-//            WeatherLiveData.get(aMapLocation.getCity()).observe(this, localWeatherLive -> {
-//            Log.d("dingwei", "initObserve: 天气" + localWeatherLive.getWeather());
-//                mPairingNestAddViewModel.weather = localWeatherLive.getWeather();//天气
-//                mPairingNestAddViewModel.temper = localWeatherLive.getTemperature();//气温
-//                mPairingNestAddViewModel.hum = localWeatherLive.getHumidity();//湿度
-//                mPairingNestAddViewModel.dir = localWeatherLive.getWindDirection();//风向
-//            });
         });
-
     }
 
     @Override
@@ -144,6 +137,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         executorService = Executors.newSingleThreadExecutor();
         mSensorControler = SensorControler.getInstance();
         mSensorControler.setCameraFocusListener(this);
+        dialogFragment = new LocalShareDialogFragment();
         initView();
         initObserve();
     }
@@ -160,9 +154,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         mFocus = findViewById(R.id.focusImageView);
 
         mCameraView.setOnTouchListener(this);
-
         type = getIntent().getStringExtra("type");
-
         if (type.equals("photo")) {
 
         } else if (type.equals("video")) {
@@ -209,7 +201,6 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
     @Override
     protected void onDestroy() {
-
         try {
             isStop = true;
 
@@ -232,54 +223,18 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
     @OnClick({R.id.imgbtn_ture, R.id.imgbtn_false})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.imgbtn_ture://拍照确定
-
+            case R.id.imgbtn_ture://确定
                 if (type.equals("video")) {
                     recordFlag = false;
                     recordComplete(savePath);
-                } else {
-                    imgbtn_ture();
                 }
                 break;
-            case R.id.imgbtn_false://拍照取消
+            case R.id.imgbtn_false://取消
                 imgbtn_false();
                 break;
         }
     }
 
-
-    /**
-     * 拍照确定
-     */
-    private void imgbtn_ture() {
-        try {
-            recordFlag = false;
-
-            switch (light_num) {
-                case 0:
-                    //关闭
-                    CameraUtil.getInstance().turnLightOff(mCameraView.mCamera.mCamera);
-                    break;
-                case 1:
-                    CameraUtil.getInstance().turnLightOn(mCameraView.mCamera.mCamera);
-                    break;
-                case 2:
-                    //自动
-                    CameraUtil.getInstance().turnLightAuto(mCameraView.mCamera.mCamera);
-                    break;
-            }
-
-//            if (type.equals("photo")) {
-//                intent1 = new Intent(RecordedActivity3.this, PhotoEditActivity.class);
-//            }
-//            intent1.putExtra("img_path", img_path);
-//            startActivity(intent1);
-//
-//            RecordedActivity3.this.finish();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private void imgbtn_false() {
         btn_paizhao.setVisibility(View.VISIBLE);//拍照显示
@@ -311,9 +266,8 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                             @Override
                             public void run() {
                                 try {
-
                                     ToastUtils.showLong(RecordedActivity.this, "视频录制成功");
-                                    RecordedActivity.this.finish();
+                                    showShareDialog();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -323,6 +277,20 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                 }).start();
             }
         });
+    }
+
+    private LocalShareDialogFragment dialogFragment;
+
+    public void showShareDialog() {
+        if (dialogFragment != null && dialogFragment.getDialog() != null && dialogFragment.getDialog().isShowing()) {
+            dialogFragment.getDialog().dismiss();
+            dialogFragment.dismiss();
+        }
+
+        if (dialogFragment != null) {
+            dialogFragment.setLocalFilePath(savePath);
+            dialogFragment.show(getBaseActivity().getFragmentManager(), "share");
+        }
     }
 
 //-----------------------------------------------------线程相关------------------------------------------------------------------------
@@ -338,16 +306,26 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
             autoPausing = false;
             timeCount = 0;
             long time = System.currentTimeMillis();
-            savePath = Constants.getPath("record/", time + ".mp4");
+
+//            savePath = Constants.getPath("record/", time + ".mp4");
+            savePath = Constants.getPath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "record/", time + ".mp4");
 
             try {
                 mCameraView.setSavePath(savePath);
                 mCameraView.startRecord();
-                while (timeCount <= maxTime && recordFlag) {
+//                while (timeCount <= maxTime && recordFlag) {
+                while (recordFlag) {
                     if (pausing || autoPausing) {
                         continue;
                     }
                     Thread.sleep(timeStep);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tv_time.setText(TimeUtil.format(timeCount, TimeUtil.FORMAT_MMSS));
+                        }
+                    });
                     timeCount += timeStep;
                 }
                 Log.d("xiaohls", "run: 1");
@@ -357,7 +335,6 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
                             imgbtn_false();
                             Toast.makeText(RecordedActivity.this, "录像时间太短", Toast.LENGTH_SHORT).show();
                         }
@@ -369,6 +346,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                             RecordedActivity.this.imgbtn_false.setVisibility(View.VISIBLE);//取消显示
                             RecordedActivity.this.imgbtn_ture.setVisibility(View.VISIBLE);//确定显示
                             RecordedActivity.this.btn_paizhao.setVisibility(View.INVISIBLE);//拍照隐藏
+
                         }
                     });
                 }
@@ -380,10 +358,6 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
     private int cameraTag = 1;
 
-    //-----------------------------------------------------定位相关（不动）------------------------------------------------------------------------
-    private String TAG = "RecordedActivity";
-
-
 //-----------------------------------------------------视频相关（操作）------------------------------------------------------------------------
 
     /**
@@ -391,18 +365,17 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
      */
     private void videoOperation() {
 
-
         mCapture.setOnClickListener(view -> {
             try {
 //                            timeCount = 0;
                 if (!recordFlag) {//是否正在录制
-
                     imgbtn_false.setVisibility(View.INVISIBLE);//取消显示
                     imgbtn_ture.setVisibility(View.INVISIBLE);//确定显示
                     btn_paizhao.setVisibility(View.VISIBLE);//拍照隐藏
 
                     executorService.execute(recordRunnable);
                 } else {
+
                     mCameraView.resume(false);
                     pausing = false;
 
@@ -418,6 +391,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
             }
         });
     }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -460,8 +434,8 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         if (mCameraView.getCameraId() == 1) {
             return;
         }
+
         Point point = new Point(MyApp.screenWidth / 2, MyApp.screenHeight / 2);
         mCameraView.onFocus(point, callback);
     }
-
 }

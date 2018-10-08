@@ -2,9 +2,13 @@ package com.cpigeon.book.widget.mydialog;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -13,11 +17,17 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.cpigeon.book.R;
+import com.cpigeon.book.util.SendWX;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXFileObject;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+
+import java.io.File;
 
 
 /**
@@ -92,7 +102,7 @@ public class ShareDialogFragment extends DialogFragment {
                     .setCallback(umShareListener)//回调监听器
                     .share();
         } else if (shareType == 2) {
-            //分享图片
+            //分享网络图片
             UMImage image = new UMImage(getActivity(), shareUrl);//网络图片
 
             new ShareAction(getActivity())
@@ -101,7 +111,7 @@ public class ShareDialogFragment extends DialogFragment {
                     .setCallback(umShareListener)//回调监听器
                     .share();
         } else if (shareType == 3) {
-            //分享图片
+            //分享bitmap图片
             UMImage image = new UMImage(getActivity(), mBitmap);//bitmap图片
 
             new ShareAction(getActivity())
@@ -167,6 +177,47 @@ public class ShareDialogFragment extends DialogFragment {
 
     public void setShareContent(Bitmap shareBitmap) {
         this.mBitmap = shareBitmap;
+    }
+
+
+    private boolean isUM = true;
+    private String localFilePath = "";
+
+    public void setIsUM(boolean isUMShare) {
+        this.isUM = isUMShare;
+    }
+
+    public void setLocalFilePath(String localFilePath) {
+        this.localFilePath = localFilePath;
+    }
+
+    public void share2QQ() {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        ComponentName component = new ComponentName("com.tencent.mobileqq", getActivity().getClass().getName());
+        share.setComponent(component);
+        File file = new File(localFilePath);
+        System.out.println("file " + file.exists());
+        share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        share.setType("*/*");
+        getActivity().startActivity(Intent.createChooser(share, "发送"));
+    }
+
+
+    public void share2WX() {
+        Log.d("doInBackground", "doInBackground" + localFilePath);
+        WXFileObject textObject = new WXFileObject();
+        textObject.filePath = localFilePath;
+        textObject.fileData = null;
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.mediaObject = textObject;
+        msg.title = "a";
+        msg.description = "b";
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = String.valueOf(System.currentTimeMillis());
+        req.scene = SendMessageToWX.Req.WXSceneSession;
+        req.message = msg;
+        SendWX mSendWX = new SendWX(getActivity());
+        mSendWX.getWxApi().sendReq(req);
     }
 
 }
