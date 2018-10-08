@@ -17,13 +17,6 @@ import org.xutils.x;
 
 public class MyApp extends BaseApplication {
 
-
-    {
-        PlatformConfig.setWeixin("wx86455b1f11ad03d0", "f154ca061506224c4f72115c71ae05d7");
-        PlatformConfig.setQQZone("1105989530", "ztLtwrRKr7YiDLly");
-    }
-
-
     public static int screenWidth;
     public static int screenHeight;
 
@@ -31,6 +24,9 @@ public class MyApp extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        PlatformConfig.setWeixin(getString(R.string.weixin_appid), "f154ca061506224c4f72115c71ae05d7");
+        PlatformConfig.setQQZone("1105989530", "ztLtwrRKr7YiDLly");
 
         MultiDex.install(this);
 

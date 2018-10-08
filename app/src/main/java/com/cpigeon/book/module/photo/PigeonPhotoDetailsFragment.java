@@ -31,6 +31,8 @@ import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.viewmodel.PigeonPhotoDetailsViewModel;
 import com.cpigeon.book.widget.ClickGetFocusEditText;
 import com.cpigeon.book.widget.SimpleTitleView;
+import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
+import com.cpigeon.book.widget.mydialog.ViewControlShare;
 import com.cpigeon.book.widget.mzbanner.MZBannerView;
 import com.cpigeon.book.widget.mzbanner.holder.MZViewHolder;
 import com.hitomi.cslibrary.CrazyShadow;
@@ -52,6 +54,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
     private SimpleTitleView mSTvMove;
     private SimpleTitleView mSTvSetFace;//设为封面
     private SimpleTitleView mSTvDelete;
+    private SimpleTitleView sTvShare;
 
     PigeonPhotoDetailsViewModel mViewModel;
     SelectTypeViewModel mTypeViewModel;
@@ -106,6 +109,14 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         mSTvMove = findViewById(R.id.sTvMove);
         mSTvSetFace = findViewById(R.id.sTvSetFace);
         mSTvDelete = findViewById(R.id.sTvDelete);
+        sTvShare = view.findViewById(R.id.sTvShare);
+
+        sTvShare.setOnClickListener(v -> {
+            String shareUrl = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPhotoUrl();
+            showShareDialog(shareUrl);
+        });
+
+        dialogFragment = new ShareDialogFragment();
 
         mBanner.setPages(mViewModel.mPigeonPhotoData, () -> {
             return new BannerViewHolder();
@@ -170,8 +181,10 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         ImageView mImgClose;
         ClickGetFocusEditText mFEdRemark;
         TextView mTvOk;
+
         mImgClose = view.findViewById(R.id.imgClose);
         mFEdRemark = view.findViewById(R.id.fEdRemark);
+
         mTvOk = view.findViewById(R.id.tvOk);
 
         mFEdRemark.setText(mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getRemark());
@@ -192,6 +205,25 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         });
 
         return view;
+    }
+
+    private ShareDialogFragment dialogFragment;
+
+    //分享
+    private void showShareDialog(String strUrl) {
+        if (dialogFragment != null && dialogFragment.getDialog() != null && dialogFragment.getDialog().isShowing()) {
+            dialogFragment.getDialog().dismiss();
+            dialogFragment.dismiss();
+        }
+
+        if (dialogFragment != null) {
+            dialogFragment.setShareTitle("分享");
+            dialogFragment.setShareContentString("天下鸽谱图片分享");
+            dialogFragment.setShareContent(strUrl);
+            dialogFragment.setShareListener(ViewControlShare.getShareResultsDown(getBaseActivity(), dialogFragment, ""));
+            dialogFragment.setShareType(2);
+            dialogFragment.show(getBaseActivity().getFragmentManager(), "share");
+        }
     }
 
     @Override

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">天下鸽谱</string>
+
+    <string name="weixin_appid">wx86455b1f11ad03d0</string>
+
     <string name="title_home_fragment">home</string>
     <string name="title_home_fragment2">home2</string>
     <string name="title_home_fragment3">home3</string>
@@ -231,6 +234,7 @@
     <string name="text_RMB">元</string>
     <string name="text_foot_details">足环详情</string>
     <string name="text_delete">删除</string>
+    <string name="text_share">分享</string>
     <string name="text_delete_warning_hint">确定删除该条数据吗？</string>
     <string name="text_is_sure_delete_foot_number">是否确定删除该足环 ?</string>
     <string name="text_input_county_name_and_search">请输入国家名字进行搜索</string>
@@ -304,6 +308,7 @@
     <string name="tv_fertilized_egg">请输入受精蛋个数</string>
     <string name="tv_fertilized_egg_no">请输入无精蛋个数</string>
     <string name="tv_hatches_num">请输入出壳个数</string>
+    <string name="tv_hatches_giving_name">请输入赠送人的名字</string>
 
     <string name="tv_body_temperature">请输入体温</string>
     <string name="tv_vaccine_name">请输入疫苗名称</string>
@@ -558,7 +563,8 @@
     <string name="str_gb_feed_pigeon">养鸽记录</string>
     <string name="str_gb_photo_pigeon">信鸽拍照</string>
 
-    
+    <string name="str_small_tools">随行拍</string>
+
     <string-array name="srt_arr_address">
         <item>北京</item>
         <item>天津</item>

@@ -18,6 +18,7 @@ public class TimeUtil {
     public static final String FORMAT_YYYYMMDDHHMMSS = "yyyy-MM-dd HH:mm:ss";
     public static final String FORMAT_HHMMSS = "HH:mm:ss";
     public static final String FORMAT_HHMM = "HH:mm";
+    public static final String FORMAT_MMSS = "mm:ss";
     public static final String FORMAT_YYYYHHMM_CHICESEC = "yyyy年MM月dd日";
 
 

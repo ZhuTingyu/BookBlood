@@ -64,7 +64,7 @@
                 app:lineInputView_isShowRightImage="invisible" />
 
 
-            <include layout="@layout/layout_publick_pairing_nest_btm" />
+            <include layout="@layout/layout_publick_pairing_nest_btm2" />
 
         </LinearLayout>
 

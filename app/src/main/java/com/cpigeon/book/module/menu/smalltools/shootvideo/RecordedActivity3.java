@@ -127,7 +127,7 @@ public class RecordedActivity3 extends Activity implements View.OnTouchListener,
                 public void run() {
                     //时间
                     if (watermarkTime != null && watermarkLlz != null) {
-                        watermarkTime.setText(TimeUtil.format(new Date().getTime(),TimeUtil.FORMAT_YYYYMMDDHHMMSS)+ "   " + we + "  " + t + "℃" + "  " + wd + "风");
+                        watermarkTime.setText(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS) + "   " + we + "  " + t + "℃" + "  " + wd + "风");
                         mCameraView.mCameraDrawer.getBitmap.setBitmap(BitmapUtils.getViewBitmap(layout_water_z), cameraTag);
                     }
                 }

@@ -44,10 +44,10 @@
                     android:layout_height="72dp"
                     android:background="@null"
                     android:scaleType="fitXY"
-                    android:src="@drawable/shoot_false" />
+                    android:src="@drawable/shoot_false"
+                    android:visibility="invisible" />
 
             </LinearLayout>
-
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -69,6 +69,7 @@
                         android:background="@drawable/bt_capture2" />
 
                     <TextView
+                        android:id="@+id/tv_time"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -91,12 +92,12 @@
                     android:layout_height="72dp"
                     android:background="@null"
                     android:scaleType="fitXY"
-                    android:src="@drawable/shoot_true" />
+                    android:src="@drawable/shoot_true"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
         </LinearLayout>
-
 
         <RelativeLayout
             android:id="@+id/watermark_z"
@@ -114,6 +115,7 @@
                 android:src="@drawable/wartermark" />
 
             <ImageView
+                android:id="@+id/img_logo"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_above="@+id/ll_info"

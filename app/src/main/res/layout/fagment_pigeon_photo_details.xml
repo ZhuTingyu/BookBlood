@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -34,35 +34,48 @@
         android:layout_weight="3"
         android:gravity="center_vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp">
+            android:layout_marginLeft="@dimen/spacing_left_reight"
+            android:layout_marginRight="@dimen/spacing_left_reight"
+            android:orientation="horizontal">
+
+
+            <com.cpigeon.book.widget.SimpleTitleView
+                android:id="@+id/sTvShare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:simpleTitleView_image="@mipmap/ic_photo_details_delete"
+                app:simpleTitleView_text="@string/text_share" />
+
 
             <com.cpigeon.book.widget.SimpleTitleView
                 android:id="@+id/sTvMove"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 app:simpleTitleView_image="@mipmap/ic_photo_details_move"
                 app:simpleTitleView_text="@string/text_move" />
 
             <com.cpigeon.book.widget.SimpleTitleView
                 android:id="@+id/sTvSetFace"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
                 app:simpleTitleView_image="@mipmap/ic_photo_details_set_face"
                 app:simpleTitleView_text="@string/text_set_face" />
 
             <com.cpigeon.book.widget.SimpleTitleView
                 android:id="@+id/sTvDelete"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_weight="1"
                 app:simpleTitleView_image="@mipmap/ic_photo_details_delete"
                 app:simpleTitleView_text="@string/text_delete" />
-        </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
