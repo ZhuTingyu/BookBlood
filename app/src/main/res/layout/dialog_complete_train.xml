@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="放飞信息完善"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size" />
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_close" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/llChooseTime"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_height="38dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="放飞时间"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size" />
+
+        <ImageView
+            android:id="@+id/img1"
+            android:src="@mipmap/ic_arrow_right"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <TextView
+            android:id="@+id/edTime"
+            android:layout_toLeftOf="@+id/img1"
+            android:textSize="@dimen/medium_text_size"
+            android:textColor="@color/black"
+            android:hint="@string/text_pleas_choose_time"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/include_line_view_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:text="放飞经度"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+            <ImageView
+                android:id="@+id/imgLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:src="@mipmap/ic_location" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edLoDegree"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_stroke_gray"
+                android:digits="@string/text_digits_number"
+                android:hint="@string/text_degree"
+                android:inputType="number"
+                android:textSize="@dimen/medium_text_size" />
+
+            <EditText
+                android:id="@+id/edLoMinute"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_stroke_gray"
+                android:digits="@string/text_digits_number"
+                android:hint="@string/text_minute"
+                android:inputType="number"
+                android:textSize="@dimen/medium_text_size" />
+
+            <EditText
+                android:id="@+id/edLoSecond"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_stroke_gray"
+                android:digits="@string/text_digits_number_with_point"
+                android:hint="@string/text_second"
+                android:inputType="number"
+                android:textSize="@dimen/medium_text_size" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:text="放飞纬度"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edLaDegree"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_stroke_gray"
+                android:digits="@string/text_digits_number"
+                android:hint="@string/text_degree"
+                android:inputType="number"
+                android:textSize="@dimen/medium_text_size" />
+
+            <EditText
+                android:id="@+id/edLaMinute"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_stroke_gray"
+                android:digits="@string/text_digits_number"
+                android:hint="@string/text_minute"
+                android:inputType="number"
+                android:textSize="@dimen/medium_text_size" />
+
+            <EditText
+                android:id="@+id/edLaSecond"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_stroke_gray"
+                android:digits="@string/text_digits_number_with_point"
+                android:hint="@string/text_second"
+                android:inputType="number"
+                android:textSize="@dimen/medium_text_size" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/include_line_view_layout" />
+
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_height="38dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="空距"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text_size" />
+
+        <EditText
+            android:id="@+id/edDis"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/medium_text_size"
+            android:textColor="@color/black"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    
+    
+    <TextView
+        android:id="@+id/tvOk"
+        style="@style/bottom_style"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="8dp"
+        android:text="@string/text_commit"
+        android:layout_height="38dp" />
+
+</LinearLayout>

@@ -6,12 +6,14 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.event.PigeonAddEvent;
+import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BasePigeonEntryFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonEntryViewModel;
@@ -19,6 +21,8 @@ import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.util.TextViewUtil;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/29 0029.
@@ -111,6 +115,52 @@ public class BreedPigeonEntryFragment2 extends BasePigeonEntryFragment {
     @Override
     protected void initObserve() {
         super.initObserve();
+
+        mBreedPigeonEntryViewModel.mPigeonDetailsData.observe(this, breedPigeonEntity -> {
+
+            llCountries.setRightText(breedPigeonEntity.getFootCode());
+            llFoot.setRightText(breedPigeonEntity.getFootRingNum());
+            llFootVice.setRightText(breedPigeonEntity.getFootRingIDToNum());
+            llFootSource.setRightText(breedPigeonEntity.getSourceName());
+            llFootFather.setRightText(breedPigeonEntity.getMenFootRingNum());
+            llFootMother.setRightText(breedPigeonEntity.getWoFootRingNum());
+            llPigeonName.setRightText(breedPigeonEntity.getPigeonName());
+            llSex.setRightText(breedPigeonEntity.getPigeonSexName());
+            llSex.setRightImageVisible(false);
+            llFeatherColor.setRightText(breedPigeonEntity.getPigeonPlumeName());
+            llEyeSand.setRightText(breedPigeonEntity.getPigeonEyeName());
+            llTheirShellsDate.setRightText(breedPigeonEntity.getFootRingTime());
+            llLineage.setRightText(breedPigeonEntity.getPigeonBloodName());
+            llState.setRightText(breedPigeonEntity.getStateName());
+
+
+            mBreedPigeonEntryViewModel.countryId = breedPigeonEntity.getFootCodeID();
+            mBreedPigeonEntryViewModel.footVice = breedPigeonEntity.getFootRingIDToNum();
+            mBreedPigeonEntryViewModel.sourceId = breedPigeonEntity.getSourceID();
+            mBreedPigeonEntryViewModel.footFather = breedPigeonEntity.getMenFootRingNum();
+            mBreedPigeonEntryViewModel.footMother = breedPigeonEntity.getWoFootRingNum();
+            mBreedPigeonEntryViewModel.pigeonName = breedPigeonEntity.getPigeonName();
+            mBreedPigeonEntryViewModel.sexId = breedPigeonEntity.getPigeonSexID();
+            mBreedPigeonEntryViewModel.featherColor = breedPigeonEntity.getPigeonSexID();
+            mBreedPigeonEntryViewModel.eyeSandId = breedPigeonEntity.getPigeonEyeID();
+            mBreedPigeonEntryViewModel.theirShellsDate = breedPigeonEntity.getFootRingTimeTo();
+            mBreedPigeonEntryViewModel.lineage = breedPigeonEntity.getPigeonBloodID();
+            mBreedPigeonEntryViewModel.stateId = breedPigeonEntity.getStateID();
+
+            if (StringUtil.isStringValid(breedPigeonEntity.getCoverPhotoUrl())) {
+                List<ImgTypeEntity> imgs = Lists.newArrayList();
+                ImgTypeEntity entity = new ImgTypeEntity.Builder()
+                        .imgTypeId(breedPigeonEntity.getCoverPhotoTypeID())
+                        .imgType(breedPigeonEntity.getCoverPhotoTypeName())
+                        .imgPath(breedPigeonEntity.getCoverPhotoUrl())
+                        .build();
+                imgs.add(0, entity);
+                mAdapter.addImage(imgs);
+
+                mBreedPigeonEntryViewModel.phototypeid = breedPigeonEntity.getCoverPhotoID();
+                mBreedPigeonEntryViewModel.images.addAll(Lists.newArrayList(breedPigeonEntity.getCoverPhotoUrl()));
+            }
+        });
 
         mBreedPigeonEntryViewModel.isCanCommit.observe(this, aBoolean -> {
             TextViewUtil.setEnabled(tvNextStep, aBoolean);

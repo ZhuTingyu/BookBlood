@@ -34,6 +34,7 @@ public class SelectPigeonFragment extends BaseBookFragment {
 
     public static String REQUEST_CODE = "REQUEST_CODE";
     public static String TYPE_SHARE_PIGEON_TO_SHARE = "TYPE_SHARE_PIGEON_TO_SHARE";
+    public static String TYPE_SELECT_PIGEON_TO_ADD_FLY_BACK = "TYPE_SELECT_PIGEON_TO_ADD_FLY_BACK";
     public static int CODE_SEARCH = 0x321;
 
     XRecyclerView mRecyclerView;
@@ -111,6 +112,8 @@ public class SelectPigeonFragment extends BaseBookFragment {
                 if (TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
                     BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
                             , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+                }if(TYPE_SELECT_PIGEON_TO_ADD_FLY_BACK.equals(mType)){
+
                 }
             }
         });

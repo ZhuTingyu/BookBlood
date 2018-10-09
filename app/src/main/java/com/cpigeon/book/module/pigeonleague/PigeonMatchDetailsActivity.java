@@ -20,6 +20,7 @@ import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.pigeonleague.adpter.PigeonMatchDetailsAdapter;
 import com.cpigeon.book.module.pigeonleague.viewmodel.PigeonMatchDetailsViewModel;
 import com.cpigeon.book.util.KLineManager;
+import com.cpigeon.book.widget.LeagueMarkerView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -61,12 +62,14 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()
                 , LinearLayoutManager.HORIZONTAL, false));
+
         mAdapter = new PigeonMatchDetailsAdapter();
         mRecyclerView.setAdapter(mAdapter);
         setProgressVisible(true);
         mViewModel.getDetails();
         initObserve();
     }
+
 
     @Override
     protected void initObserve() {
@@ -91,7 +94,8 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
 
         mKLine = view.findViewById(R.id.kLine);
         mTvUserName = view.findViewById(R.id.tvUserName);
-
+        LeagueMarkerView mLeagueMarkerView = new LeagueMarkerView(getBaseActivity(), data);
+        mKLine.setMarker(mLeagueMarkerView);
         KLineManager kLineManager = new KLineManager(mKLine);
         kLineManager.xAxis.setDrawGridLines(false);
 

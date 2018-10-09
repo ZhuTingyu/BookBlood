@@ -97,7 +97,7 @@ public class OpenAndCloseTrainFragment extends BaseMapFragment {
         mTvOk.setOnClickListener(v -> {
             if (mViewModel.isOpen) {
                 setProgressVisible(true);
-                mViewModel.openTrain();
+//                mViewModel.openTrain();
             }
         });
 

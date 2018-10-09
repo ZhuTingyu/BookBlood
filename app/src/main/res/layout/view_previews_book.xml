@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="248px"
         android:paddingLeft="118px"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv1"

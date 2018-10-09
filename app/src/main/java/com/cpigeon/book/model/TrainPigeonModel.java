@@ -57,12 +57,6 @@ public class TrainPigeonModel {
 
     public static Observable<ApiResponse> newTrainPigeon(
             String name,
-            double fromLo,
-            double fromLa,
-            double endLo,
-            double endLa,
-            String fromLocation,
-            String dis,
             String footIds
     ) {
         return RequestData.<ApiResponse>build()
@@ -70,12 +64,6 @@ public class TrainPigeonModel {
                 }.getType())
                 .url(R.string.new_train_pigeon)
                 .addBody("name", name)
-                .addBody("fromlo", String.valueOf(fromLo))
-                .addBody("fromla", String.valueOf(fromLa))
-                .addBody("endlo", String.valueOf(endLo))
-                .addBody("endla", String.valueOf(endLa))
-                .addBody("fromplace", fromLocation)
-                .addBody("dis", dis)
                 .addBody("idstr", footIds)
                 .request();
     }
@@ -89,32 +77,37 @@ public class TrainPigeonModel {
                 .request();
     }
 
-    public static Observable<ApiResponse> openTrain(
-            String temper,//气温
+    public static Observable<ApiResponse> setTrainInfo(
+            double dis,
+            String fromTime,
+            String trainId,//训练表id
+            String countId,//训练次数表
+            double fromLo,// 放飞的东经坐标
+            double fromLa, //放飞的北纬坐标
             String windPower,//训练风力
             String weather,//比赛天气
-            String trainId,//训练表id
-            String count,//训练次数表
             String dir,// 风向
             String hum,//湿度
             String alt,//海拔
-            double fromLo,// 放飞的东经坐标
-            double fromLa //放飞的北纬坐标
+            String temper,//温度
+            String fromplace //开始地址
     ) {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
-                .url(R.string.open_train_pigeon)
-                .addBody("temper", temper)
+                .url(R.string.add_fly_train_info)
+                .addBody("dis", String.valueOf(dis))
+                .addBody("trainid", trainId)
+                .addBody("countid", countId)
+                .addBody("fromlo", String.valueOf(fromLo))
+                .addBody("fromla", String.valueOf(fromLa))
                 .addBody("windpower", windPower)
                 .addBody("weather", weather)
-                .addBody("trainid", trainId)
-                .addBody("countid", count)
                 .addBody("dir", dir)
                 .addBody("hum", hum)
                 .addBody("alt", alt)
-                .addBody("fromlo", String.valueOf(fromLo))
-                .addBody("fromla", String.valueOf(fromLa))
+                .addBody("temper", temper)
+                .addBody("fromplace", fromplace)
                 .request();
     }
 
@@ -142,7 +135,7 @@ public class TrainPigeonModel {
                 .url(R.string.get_fly_back_record)
                 .addBody("trainid", String.valueOf(trainId))
                 .addBody("countid", countid)
-                .addBody("StateID", stateId)
+                .addBody("stateID", stateId)
                 .addBody("pi", String.valueOf(1))
                 .addBody("ps", String.valueOf(100000))
                 .request();
@@ -198,6 +191,19 @@ public class TrainPigeonModel {
                 .request();
     }
 
+    public static Observable<ApiResponse<TrainEntity>> getTrainPigeon(
+            String trainId,
+            String countId
+    ) {
+        return RequestData.<ApiResponse<TrainEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<TrainEntity>>() {
+                }.getType())
+                .url(R.string.get_train_pigeon_project)
+                .addBody("trainid", trainId)
+                .addBody("countid", countId)
+                .request();
+    }
+
     public static Observable<ApiResponse<List<TrainEntity>>> getTrainCountList(
             String trainId,
             int pi
@@ -213,21 +219,13 @@ public class TrainPigeonModel {
     }
 
     public static Observable<ApiResponse> trainAgain(
-            String trainId,//训练记录id
-            double fromLo,// 放飞的东经坐标
-            double fromLa,//放飞的北纬坐标
-            String fromPlace,//开始地址
-            double dis//训练空距
+            String trainId//训练记录id
     ) {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
                 .url(R.string.train_again)
                 .addBody("trainid", trainId)
-                .addBody("fromlo", String.valueOf(fromLo))
-                .addBody("fromla", String.valueOf(fromLa))
-                .addBody("fromplace", fromPlace)
-                .addBody("dis", String.valueOf(dis))
                 .request();
     }
 

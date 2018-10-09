@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@id/inList"
+        android:id="@+id/inList"
         android:descendantFocusability="beforeDescendants"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"

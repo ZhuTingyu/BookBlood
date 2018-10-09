@@ -36,7 +36,7 @@ public class OpenAndCloseTrainViewModel extends BaseViewModel {
         mTrainEntity = activity.getIntent().getParcelableExtra(IntentBuilder.KEY_DATA);
     }
 
-    public void openTrain() {
+    /*public void openTrain() {
         submitRequestThrowError(TrainPigeonModel.openTrain(
                 temper,//气温
                 windPower,//训练风力
@@ -53,7 +53,7 @@ public class OpenAndCloseTrainViewModel extends BaseViewModel {
                 mDataOpenR.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
-    }
+    }*/
 
     public void deleteTrain(){
         submitRequestThrowError(TrainPigeonModel.deleteTrain(mTrainEntity.getPigeonTrainID()

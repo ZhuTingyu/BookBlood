@@ -1,10 +1,13 @@
 package com.cpigeon.book.model;
 
 import com.base.http.ApiResponse;
+import com.base.util.EncryptionTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.ServiceInfoEntity;
 import com.google.gson.reflect.TypeToken;
+
+import org.xutils.common.util.MD5;
 
 import io.reactivex.Observable;
 
@@ -22,7 +25,7 @@ public class ServiceModel {
     }
 
 
-    public static Observable<ApiResponse> payServiceOrder(String serviceId, String payWay) {
+    public static Observable<ApiResponse> payServiceOrder(String serviceId, String payWay, String password) {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
@@ -30,9 +33,10 @@ public class ServiceModel {
                 .addBody("sid", serviceId)
                 .addBody("uc", "android")
                 .addBody("pm", payWay)
+                .addBody("pp", EncryptionTool.MD5(password))
                 .request();
     }
-    public static Observable<ApiResponse> renewalServiceOrder(String serviceId, String payWay) {
+    public static Observable<ApiResponse> renewalServiceOrder(String serviceId, String payWay, String password) {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
@@ -40,6 +44,7 @@ public class ServiceModel {
                 .addBody("sid", serviceId)
                 .addBody("uc", "android")
                 .addBody("pm", payWay)
+                .addBody("pp", EncryptionTool.MD5(password))
                 .request();
     }
 

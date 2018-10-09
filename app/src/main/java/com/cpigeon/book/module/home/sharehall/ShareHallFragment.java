@@ -24,6 +24,7 @@ import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.home.sharehall.adpter.ShareHallHomeAdapter;
 import com.cpigeon.book.module.home.sharehall.viewmodel.ShareHallViewModel;
+import com.cpigeon.book.module.menu.service.OpenServiceFragment;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
 
@@ -63,6 +64,9 @@ public class ShareHallFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setToolbarNotBack();
+        setToolbarLeft(R.drawable.svg_open_share_hall, v -> {
+            OpenServiceFragment.start(getBaseActivity());
+        });
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mRlSearch = findViewById(R.id.rlSearch);
         mTvSearch = findViewById(R.id.tvSearch);

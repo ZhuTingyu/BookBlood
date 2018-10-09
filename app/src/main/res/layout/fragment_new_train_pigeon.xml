@@ -28,83 +28,7 @@
                 app:lineInputView_LeftString="@string/text_project_name"
                 app:lineInputView_isShowRightImage="invisible" />
 
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvFlyLocation"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:lineInputView_Hint="@string/text_pleas_input"
-                app:lineInputView_IsCanEdit="false"
-                app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="@string/text_fly_location" />
-
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvFlyPoint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:lineInputView_Hint="E:      N:     "
-                app:lineInputView_IsCanEdit="false"
-                app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="@string/text_fly_point"
-                app:lineInputView_isShowRightImage="invisible" />
-
-
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvPigeonHousePoint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:lineInputView_IsCanEdit="false"
-                app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="@string/text_pigeon_house_location"
-                app:lineInputView_isShowRightImage="invisible" />
-
-
         </com.cpigeon.book.widget.LineInputListLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:paddingBottom="10dp"
-            android:paddingLeft="@dimen/normal_safe_distance"
-            android:paddingRight="@dimen/normal_safe_distance"
-            android:paddingTop="10dp">
-
-            <com.amap.api.maps.MapView
-                android:id="@+id/map"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/card"
-                android:layout_width="67dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp">
-
-                <TextView
-                    android:id="@+id/tvDis"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="10sp"
-                    tools:text="1000km" />
-
-            </android.support.v7.widget.CardView>
-
-            <FrameLayout
-                android:id="@+id/frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </RelativeLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,15 +84,7 @@
                 android:text="@string/text_save"
                 android:textSize="@dimen/large_text_size" />
         </LinearLayout>
-
-
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/rlMap"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
 </RelativeLayout>
 
 

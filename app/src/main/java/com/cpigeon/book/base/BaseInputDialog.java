@@ -80,7 +80,7 @@ public class BaseInputDialog extends BaseDialogFragment {
         }
 
         mEdContent.requestFocus();
-        KeyboardUtils.toggleSoftInput();
+        KeyboardUtils.showSoftInput(mEdContent);
 
     }
 
@@ -142,8 +142,6 @@ public class BaseInputDialog extends BaseDialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        if(mIsOpen){
-            KeyboardUtils.toggleSoftInput();
-        }
+        KeyboardUtils.hideSoftInput(getActivity());
     }
 }
