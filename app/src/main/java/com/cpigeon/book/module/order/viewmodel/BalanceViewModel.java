@@ -28,7 +28,7 @@ public class BalanceViewModel extends BaseViewModel {
 
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
 
     public MutableLiveData<List<AccountBalanceListEntity>> mAccountBalanceListData = new MutableLiveData<>();
 

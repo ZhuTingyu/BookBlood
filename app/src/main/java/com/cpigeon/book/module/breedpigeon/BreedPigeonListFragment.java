@@ -2,28 +2,23 @@ package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
-import com.base.util.utility.LogUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonSexCountEntity;
-import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
-import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
-import com.cpigeon.book.service.EventBusService;
+import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
 import com.cpigeon.book.widget.stats.StatView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.List;
 
 
 /**
@@ -64,54 +59,8 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
                     mBreedPigeonEntity.getFootRingID());
         });
 
-        mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.STATE_STATE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
-        mSelectTypeViewModel.getSelectTypes();
-
         mBreedPigeonListModel.getPigeonCount();
 
-        mDrawerLayout = mActivity.getDrawerLayout();
-        mFiltrate = mActivity.getFiltrate();
-
-        if (mDrawerLayout == null || mFiltrate == null) {
-            return;
-        }
-
-        setToolbarRightImage(R.drawable.svg_filtrate, item -> {
-            if (mDrawerLayout != null) {
-                mDrawerLayout.openDrawer(Gravity.RIGHT);
-            }
-            return false;
-        });
-
-        mFiltrate.setOnSureClickListener(selectItems -> {
-            LogUtil.print(selectItems);
-            mDrawerLayout.closeDrawer(Gravity.RIGHT);
-
-            setProgressVisible(true);
-            mBreedPigeonListModel.pi = 1;
-            mBreedPigeonListModel.isSearch = false;
-            mAdapter.cleanList();
-
-            //年份
-            List<SelectTypeEntity> mSelectTypeYear = selectItems.get(0);
-            mBreedPigeonListModel.year = SelectTypeEntity.getTypeName(mSelectTypeYear);
-
-            //性别
-            List<SelectTypeEntity> mSelectTypeSex = selectItems.get(1);
-            mBreedPigeonListModel.sexid = SelectTypeEntity.getTypeIds(mSelectTypeSex);
-
-            //状态
-            List<SelectTypeEntity> mSelectTypeStatus = selectItems.get(2);
-            mBreedPigeonListModel.stateid = SelectTypeEntity.getTypeIds(mSelectTypeStatus);
-
-            //血统
-            List<SelectTypeEntity> mSelectTypeLineage = selectItems.get(3);
-            mBreedPigeonListModel.bloodid = SelectTypeEntity.getTypeIds(mSelectTypeLineage);
-
-            mBreedPigeonListModel.getPigeonList();
-            mBreedPigeonListModel.getPigeonCount();
-
-        });
     }
 
 
@@ -129,15 +78,21 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
         StatView mStat1;
         StatView mStat2;
         StatView mStat3;
+        CardView cv_all_pigeon;
 
         mStat1 = view.findViewById(R.id.stat1);
         mStat2 = view.findViewById(R.id.stat2);
         mStat3 = view.findViewById(R.id.stat3);
+        cv_all_pigeon = view.findViewById(R.id.cv_all_pigeon);
 
-        mStat1.bindData(countEntity.xiongCount + countEntity.ciCount
-                , countEntity.xiongCount + countEntity.ciCount);
-        mStat2.bindData(countEntity.xiongCount, countEntity.allCount);
-        mStat3.bindData(countEntity.ciCount, countEntity.allCount);
+        mStat1.bindData(countEntity.ZCount
+                , countEntity.ZCount);
+        mStat2.bindData(countEntity.ZxiongCount, countEntity.allCount);
+        mStat3.bindData(countEntity.ZciCount, countEntity.ZCount);
+
+        cv_all_pigeon.setOnClickListener(v -> {
+            MyHomingPigeonFragment.start(getBaseActivity());
+        });
 
         return view;
     }
@@ -148,10 +103,10 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
     }
 
     private void dataRefresh() {
+        mBreedPigeonListModel.getPigeonCount();
+
         mAdapter.cleanList();
         mBreedPigeonListModel.pi = 1;
         mBreedPigeonListModel.getPigeonList();
     }
-
-
 }

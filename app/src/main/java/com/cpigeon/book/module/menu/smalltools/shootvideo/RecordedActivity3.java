@@ -634,6 +634,7 @@ public class RecordedActivity3 extends Activity implements View.OnTouchListener,
                                     img_path = getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() + File.separator + System.currentTimeMillis() + ".jpeg";
                                     //图片保存
                                     BitmapUtils.saveJPGE_After(RecordedActivity3.this, BitmapUtils.createBitmapCenter(BitmapUtils.createBitmapLowerLeft(BitmapUtils.rotaingImageView(90, BitmapFactory.decodeByteArray(data, 0, data.length)), BitmapUtils.convertViewToBitmap(watermarkLlz)), BitmapUtils.convertViewToBitmap(waterCenImg)), img_path, 85);
+
                                 }
                             });
                         }

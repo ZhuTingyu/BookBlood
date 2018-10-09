@@ -15,7 +15,7 @@ import java.util.List;
 
 public class FeedbackListViewModel extends BaseViewModel {
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
     public MutableLiveData<List<FeedbackListEntity>> feedbackListData = new MutableLiveData<>();
 
     //获取  意见反馈列表

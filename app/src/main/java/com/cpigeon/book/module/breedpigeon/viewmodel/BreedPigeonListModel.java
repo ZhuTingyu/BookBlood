@@ -20,7 +20,7 @@ public class BreedPigeonListModel extends BaseViewModel {
     public static final String CODE_IN_NOT_SHARE_HALL = "2";
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
 
     public boolean isSearch = false;//true  搜索   false  删选
 

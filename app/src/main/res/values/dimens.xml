@@ -39,6 +39,8 @@
     <dimen name="item_view_height">44dp</dimen>
     <dimen name="item_view_height2">22dp</dimen>
 
+    <dimen name="img_w_h">24dp</dimen>
+
     <!--信鸽详情-->
     <dimen name="item_line_mlr">9dp</dimen>
 

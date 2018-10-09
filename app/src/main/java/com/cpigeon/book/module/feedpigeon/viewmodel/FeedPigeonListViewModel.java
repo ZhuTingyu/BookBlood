@@ -24,7 +24,7 @@ public class FeedPigeonListViewModel extends BaseViewModel {
     public PigeonEntity mPigeonEntity;
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
 
     public MutableLiveData<List<FeedPigeonEntity>> mFeedPigeonListData = new MutableLiveData<>();
     public MutableLiveData<FeedPigeonStatistical> mFeedPigeonStatistical = new MutableLiveData<>();

@@ -8,6 +8,8 @@ package com.cpigeon.book.util;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.util.Base64;
 
 import com.base.base.BaseActivity;
@@ -18,6 +20,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public class SendWX {
     public String APP_ID = "";
@@ -151,4 +154,21 @@ public class SendWX {
                 });
         builder.create().show();
     }
+
+
+    // 判断手机内是否安装了微信APP
+    public static boolean isWeixinAvilible(Context context) {
+        PackageManager packageManager = context.getPackageManager();// 获取packagemanager
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);// 获取所有已安装程序的包信息
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (pn.equals("com.tencent.mm")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

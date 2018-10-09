@@ -286,6 +286,7 @@
     <string name="text_go_choose">去选择</string>
     <string name="text_foot_input_price">足环金额录入</string>
     <string name="text_pigeon_name">请输入鸽子名称</string>
+    <string name="text_pigeon_loft_name">请输入鸽舍名称</string>
 
     <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_feather_color">羽色</string>
@@ -603,6 +604,8 @@
     <string name="text_breed_person">作育人</string>
     <string name="text_fly_person">作翔人</string>
     <string name="text_pigeon_generation_title">%1$s上%2$s代</string>
+
+    <string name="str_name_homing_pigeon">点击此处查看我的全部信鸽</string>
 
 
 </resources>

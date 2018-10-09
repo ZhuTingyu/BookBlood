@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ComponentName;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -18,10 +20,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
+import com.cpigeon.book.util.SendWX;
 import com.umeng.socialize.UMShareListener;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 
 /**
@@ -39,29 +44,30 @@ public class LocalShareDialogFragment extends DialogFragment {
 
     public UMShareListener umShareListener;
 
-
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.imgbtn_wx:
                     //微信分享
+
                     share2WX();
 
+                    LocalShareDialogFragment.this.dismiss();
                     break;
                 case R.id.imgbtn_pyq:
                     //微信朋友圈
-                    share2WX_pyq();
+//                    share2WX_pyq();
+//                    LocalShareDialogFragment.this.dismiss();
                     break;
                 case R.id.imgbtn_qq:
                     //QQ
                     share2QQ();
+                    LocalShareDialogFragment.this.dismiss();
                     break;
-
                 case R.id.imgbtn_qqz:
                     //QQ空间
 //                    share2QQ_Z();
-
                     break;
                 case R.id.btn_cancel:
                     dismiss();
@@ -119,6 +125,12 @@ public class LocalShareDialogFragment extends DialogFragment {
     //本地分享
     private boolean isUM = true;
     private String localFilePath = "";
+    private String fileType = "video";
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
 
     public void setIsUM(boolean isUMShare) {
         this.isUM = isUMShare;
@@ -135,63 +147,91 @@ public class LocalShareDialogFragment extends DialogFragment {
             qqIntent.setPackage("com.tencent.mobileqq");
             qqIntent.setClassName("com.tencent.mobileqq", "com.tencent.mobileqq.activity.JumpActivity");
             File file = new File(localFilePath);
-            System.out.println("file " + file.exists());
-            qqIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
-            qqIntent.setType("*/*");
-            startActivity(qqIntent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
+//            qqIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
 
-    public void share2QQ_Z() {
-        try {
-            Intent qqIntent = new Intent(Intent.ACTION_SEND);
-            qqIntent.setPackage("com.tencent.mobileqq");
-            ComponentName comp = new ComponentName("com.qzone", "com.qzonex.module.maxvideo.activity.QzonePublishVideoActivity");
-            qqIntent.setComponent(comp);
-            File file = new File(localFilePath);
-            System.out.println("file " + file.exists());
-            qqIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
-            qqIntent.setType("*/*");
-            startActivity(qqIntent);
+            qqIntent.putExtra(Intent.EXTRA_STREAM, insertImageToSystem(getActivity(), localFilePath));
+
+            if (fileType.equals("video")) {
+                qqIntent.setType("*/*");
+                startActivity(qqIntent);
+            } else {
+                qqIntent.setType("image/jpeg");
+                startActivity(Intent.createChooser(qqIntent, "图片分享"));
+            }
+
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d(TAG, "share2WX: " + e.getLocalizedMessage());
         }
     }
 
 
     public void share2WX() {
         try {
-            ComponentName comp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
-            Intent shareIntent = new Intent();
-            shareIntent.setComponent(comp);
-            shareIntent.setAction(Intent.ACTION_SEND);
-            File file = new File(localFilePath);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
-            shareIntent.setType("*/*");
-            startActivity(Intent.createChooser(shareIntent, "分享"));
+            if (SendWX.isWeixinAvilible(getActivity())) {
+                ComponentName comp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
+                Intent shareIntent = new Intent();
+                shareIntent.setComponent(comp);
+                shareIntent.setAction(Intent.ACTION_SEND);
+                File file = new File(localFilePath);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, insertImageToSystem(getActivity(), localFilePath));
+
+                shareIntent.setType("*/*");
+
+                startActivity(Intent.createChooser(shareIntent, "分享"));
+            } else {
+                ToastUtils.showLong(getActivity(), "请先安装微信APP");
+            }
+
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d(TAG, "share2WX: " + e.getLocalizedMessage());
         }
 
     }
 
-    public void share2WX_pyq() {
+    private static String insertImageToSystem(Context context, String imagePath) {
+        String url = "";
         try {
-            ComponentName comp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareToTimeLineUI");
-            Intent shareIntent = new Intent();
-            shareIntent.setComponent(comp);
-            shareIntent.setAction(Intent.ACTION_SEND);
-            File file = new File(localFilePath);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
-            shareIntent.setType("*/*");
-            startActivity(Intent.createChooser(shareIntent, "分享"));
-        } catch (Exception e) {
+            url = MediaStore.Images.Media.insertImage(context.getContentResolver(), imagePath, "ic", "你对图片的描述");
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return url;
     }
+
+
+//    public void share2QQ_Z() {
+//        try {
+//            Intent qqIntent = new Intent(Intent.ACTION_SEND);
+//            qqIntent.setPackage("com.tencent.mobileqq");
+//            ComponentName comp = new ComponentName("com.qzone", "com.qzonex.module.maxvideo.activity.QzonePublishVideoActivity");
+//            qqIntent.setComponent(comp);
+//            File file = new File(localFilePath);
+//            System.out.println("file " + file.exists());
+//            qqIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
+//            qqIntent.setType("*/*");
+//            startActivity(qqIntent);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//
+//
+//    public void share2WX_pyq() {
+//        try {
+//            ComponentName comp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareToTimeLineUI");
+//            Intent shareIntent = new Intent();
+//            shareIntent.setComponent(comp);
+//            shareIntent.setAction(Intent.ACTION_SEND);
+//            File file = new File(localFilePath);
+//            shareIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
+//            shareIntent.setType("*/*");
+//            startActivity(Intent.createChooser(shareIntent, "分享"));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * 转换 content:// uri

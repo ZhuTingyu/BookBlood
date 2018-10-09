@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.menu.smalltools.shootvideo;
 
 
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -63,11 +64,20 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
     @BindView(R.id.water_tv_altitude)
     TextView water_tv_altitude;//海拔
 
-    @BindView(R.id.btn_paizhao)
-    FrameLayout btn_paizhao;//拍照
+    @BindView(R.id.btn_video_record)
+    FrameLayout btn_video_record;//视频录制
 
     @BindView(R.id.imgbtn_ture)
-    ImageButton imgbtn_ture;//拍照确定
+    ImageButton imgbtn_ture;//拍照确定]
+    @BindView(R.id.btn_click_start)
+    ImageView btn_click_start;//
+    @BindView(R.id.btn_type_video)
+    TextView btn_type_video;//
+    @BindView(R.id.btn_type_photo)
+    TextView btn_type_photo;
+
+    @BindView(R.id.btn_cen)
+    RelativeLayout btn_cen;
 
     @BindView(R.id.imgbtn_false)
     ImageButton imgbtn_false;//拍照取消
@@ -94,7 +104,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
     private Unbinder mUnbinder;
 
     private String savePath;//视频保存路径
-    private String type;
+    private String type = "video";
 
     private Timer mTimer = new Timer();
 
@@ -154,12 +164,6 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         mFocus = findViewById(R.id.focusImageView);
 
         mCameraView.setOnTouchListener(this);
-        type = getIntent().getStringExtra("type");
-        if (type.equals("photo")) {
-
-        } else if (type.equals("video")) {
-            videoOperation();//拍摄视频
-        }
 
         mTimer.schedule(mTimerTask, 0, 1000);
     }
@@ -203,7 +207,6 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
     protected void onDestroy() {
         try {
             isStop = true;
-
             mTimer.cancel();
 
             if (mCameraView.mCamera != null) {
@@ -220,31 +223,80 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
     //-----------------------------------------------------事件处理（操作）------------------------------------------------------------------------
 
-    @OnClick({R.id.imgbtn_ture, R.id.imgbtn_false})
+    @OnClick({R.id.imgbtn_ture, R.id.imgbtn_false, R.id.btn_cen, R.id.btn_type_video, R.id.btn_type_photo})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_ture://确定
+
                 if (type.equals("video")) {
                     recordFlag = false;
                     recordComplete(savePath);
+                } else {
+                    showShareDialog();
                 }
                 break;
             case R.id.imgbtn_false://取消
-                imgbtn_false();
+                initBtn();
+                break;
+
+            case R.id.btn_cen:
+                switch (type) {
+                    case "video":
+                        //拍摄视频
+                        videoOperation();
+                        break;
+                    case "photo":
+                        photoOperation();
+                        break;
+                    default:
+
+                }
+                break;
+            case R.id.btn_type_video:
+                //拍摄视频
+
+                if (recordFlag) {
+                    ToastUtils.showLong(getBaseActivity(), "当前正在录制！请结束后继续");
+                    return;
+                }
+
+                type = "video";
+                btn_type_video.setTextColor(getResources().getColor(R.color.colorPrimary));
+                btn_type_photo.setTextColor(getResources().getColor(R.color.color_text_cancel));
+
+                initBtn();
+
+                break;
+            case R.id.btn_type_photo:
+                //拍摄照片
+                if (recordFlag) {
+                    ToastUtils.showLong(getBaseActivity(), "当前正在录制！请结束后继续");
+                    return;
+                }
+
+                type = "photo";
+                btn_type_video.setTextColor(getResources().getColor(R.color.color_text_cancel));
+                btn_type_photo.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                initBtn();
+
                 break;
         }
     }
 
-
-    private void imgbtn_false() {
-        btn_paizhao.setVisibility(View.VISIBLE);//拍照显示
+    private void initBtn() {
+        btn_click_start.setVisibility(View.VISIBLE);//开始按钮显示
+        btn_video_record.setVisibility(View.GONE);//录像隐藏
         imgbtn_false.setVisibility(View.GONE);//取消按钮隐藏
         imgbtn_ture.setVisibility(View.GONE);//确定按钮隐藏
 
+        btn_cen.setVisibility(View.VISIBLE);
+        isShootComplete = false;
         mCameraView.onResume();
         mCameraView.resume(true);
         cameraTag = 1;
     }
+
 
     //视频录制成功返回
     private void recordComplete(final String path) {
@@ -289,9 +341,48 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
         if (dialogFragment != null) {
             dialogFragment.setLocalFilePath(savePath);
+            dialogFragment.setFileType(type);
             dialogFragment.show(getBaseActivity().getFragmentManager(), "share");
         }
     }
+
+
+    /**
+     * 当前页面用于拍照
+     */
+    private boolean isShootComplete = false;
+
+    private void photoOperation() {
+        btn_cen.setVisibility(View.INVISIBLE);
+        mCameraView.mCamera.mCamera.takePicture(null, null, new Camera.PictureCallback() {
+            @Override
+            public void onPictureTaken(byte[] data, Camera camera) {
+
+                //将data 转换为位图 或者你也可以直接保存为文件使用 FileOutputStream
+                //这里我相信大部分都有其他用处把 比如加个水印 后续再讲解
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        cameraTag = 2;
+                        isShootComplete = true;
+
+                        btn_click_start.setVisibility(View.GONE);//开始按钮
+                        btn_video_record.setVisibility(View.GONE);//录像
+                        imgbtn_false.setVisibility(View.VISIBLE);//取消按钮
+                        imgbtn_ture.setVisibility(View.VISIBLE);//确定按钮
+
+                        savePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() + File.separator + System.currentTimeMillis() + ".jpeg";
+
+                        //图片保存
+                        BitmapUtils.saveJPGE_After(RecordedActivity.this, BitmapFactory.decodeByteArray(data, 0, data.length), savePath, 100);
+
+                    }
+                });
+            }
+        });
+
+    }
+
 
 //-----------------------------------------------------线程相关------------------------------------------------------------------------
 
@@ -335,7 +426,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            imgbtn_false();
+                            initBtn();
                             Toast.makeText(RecordedActivity.this, "录像时间太短", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -343,9 +434,10 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            RecordedActivity.this.imgbtn_false.setVisibility(View.VISIBLE);//取消显示
-                            RecordedActivity.this.imgbtn_ture.setVisibility(View.VISIBLE);//确定显示
-                            RecordedActivity.this.btn_paizhao.setVisibility(View.INVISIBLE);//拍照隐藏
+                            btn_click_start.setVisibility(View.GONE);//开始按钮
+                            btn_video_record.setVisibility(View.GONE);//录像
+                            imgbtn_false.setVisibility(View.VISIBLE);//取消按钮
+                            imgbtn_ture.setVisibility(View.VISIBLE);//确定按钮
 
                         }
                     });
@@ -365,31 +457,29 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
      */
     private void videoOperation() {
 
-        mCapture.setOnClickListener(view -> {
-            try {
-//                            timeCount = 0;
-                if (!recordFlag) {//是否正在录制
-                    imgbtn_false.setVisibility(View.INVISIBLE);//取消显示
-                    imgbtn_ture.setVisibility(View.INVISIBLE);//确定显示
-                    btn_paizhao.setVisibility(View.VISIBLE);//拍照隐藏
+        try {
+            if (recordFlag) {//是否正在录制
 
-                    executorService.execute(recordRunnable);
-                } else {
+                mCameraView.resume(false);
+                pausing = false;
+                recordFlag = false;
 
-                    mCameraView.resume(false);
-                    pausing = false;
+                btn_click_start.setVisibility(View.GONE);//开始按钮
+                btn_video_record.setVisibility(View.GONE);//录像
+                imgbtn_false.setVisibility(View.VISIBLE);//取消按钮
+                imgbtn_ture.setVisibility(View.VISIBLE);//确定按钮
 
-                    imgbtn_false.setVisibility(View.VISIBLE);//取消显示
-                    imgbtn_ture.setVisibility(View.VISIBLE);//确定显示
-                    btn_paizhao.setVisibility(View.INVISIBLE);//拍照隐藏
+            } else {
+                btn_click_start.setVisibility(View.GONE);//开始按钮
+                btn_video_record.setVisibility(View.VISIBLE);//录像
+                imgbtn_false.setVisibility(View.GONE);//取消按钮
+                imgbtn_ture.setVisibility(View.GONE);//确定按钮
 
-//                        mCameraView.stopRecord();//停止记录
-                    recordFlag = false;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+                executorService.execute(recordRunnable);
             }
-        });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

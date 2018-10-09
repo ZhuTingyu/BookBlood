@@ -49,16 +49,18 @@
 
             </LinearLayout>
 
-            <FrameLayout
+            <RelativeLayout
+                android:id="@+id/btn_cen"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center">
 
                 <FrameLayout
-                    android:id="@+id/btn_paizhao"
+                    android:id="@+id/btn_video_record"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
 
                     <View
                         android:id="@+id/mCapture"
@@ -78,7 +80,16 @@
 
                 </FrameLayout>
 
-            </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/btn_click_start"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/btn_start" />
+
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -189,5 +200,37 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/black"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/btn_type_video"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:text="视频"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/small_text_size_2" />
+
+
+        <TextView
+            android:id="@+id/btn_type_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="17dp"
+            android:gravity="center"
+            android:paddingRight="@dimen/spacing_left_reight"
+            android:text="照片"
+            android:textColor="@color/color_text_cancel"
+            android:textSize="@dimen/small_text_size_2" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

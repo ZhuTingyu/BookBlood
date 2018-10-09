@@ -21,7 +21,7 @@ public class PairingNestInfoListViewModel extends BaseViewModel {
 
     public PairingInfoEntity mPairingInfoEntity;
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
 
     public MutableLiveData<List<PairingNestInfoEntity>> mPairingNestInfoData = new MutableLiveData<>();
 

@@ -171,6 +171,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".module.homingpigeon.SearchMyHomingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".module.feedpigeon.SearchFeedPigeonRecordActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />

@@ -47,6 +47,7 @@ public class PigeonEntity implements Serializable {
     private String PigeonSexName;
     private String PigeonID;
     private String FootRingNum;
+
     /**
      * PigeonEye : 27
      * FootRingIDToNum :

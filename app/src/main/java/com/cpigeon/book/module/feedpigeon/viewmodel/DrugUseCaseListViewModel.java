@@ -22,7 +22,7 @@ public class DrugUseCaseListViewModel extends BaseViewModel {
     public PigeonEntity mPigeonEntity;
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
 
     public MutableLiveData<List<StatusIllnessRecordEntity>> mStatusIllnessRecordData = new MutableLiveData<>();
 

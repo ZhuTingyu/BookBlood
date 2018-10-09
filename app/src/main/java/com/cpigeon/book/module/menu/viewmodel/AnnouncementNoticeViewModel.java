@@ -19,7 +19,7 @@ public class AnnouncementNoticeViewModel extends BaseViewModel {
 
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
 
     public int changePosition;
 

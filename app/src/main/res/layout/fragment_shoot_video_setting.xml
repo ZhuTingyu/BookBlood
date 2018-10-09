@@ -64,6 +64,53 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_name"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shape_bg_corner_3_solid_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="9dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="鸽舍名称"
+            android:textColor="@color/color_4c4c4c"
+            android:textSize="@dimen/small_text_size_2" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical">
+
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入"
+                android:textColor="#010101"
+                android:textSize="@dimen/medium_text_size" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/img_right_lay_eggs"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="16dp"
+            android:src="@mipmap/ic_arrow_right" />
+
+
+    </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"

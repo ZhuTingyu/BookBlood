@@ -103,10 +103,9 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         mAdapter = new BreedPigeonListAdapter();
 
-        mRecyclerView.addItemDecorationLine(20);
-
         initData();
 
+        mRecyclerView.addItemDecorationLine(20);
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnLoadMoreListener(() -> {
@@ -114,8 +113,56 @@ public class BaseFootListFragment extends BaseBookFragment {
             mBreedPigeonListModel.pi++;
             mBreedPigeonListModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
-    }
 
+
+        mDrawerLayout = mActivity.getDrawerLayout();
+        mFiltrate = mActivity.getFiltrate();
+
+        if (mDrawerLayout == null || mFiltrate == null) {
+            return;
+        }
+
+        setToolbarRightImage(R.drawable.svg_filtrate, item -> {
+            if (mDrawerLayout != null) {
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
+            }
+            return false;
+        });
+
+        mFiltrate.setOnSureClickListener(selectItems -> {
+            LogUtil.print(selectItems);
+            mDrawerLayout.closeDrawer(Gravity.RIGHT);
+
+            setProgressVisible(true);
+            mBreedPigeonListModel.pi = 1;
+            mBreedPigeonListModel.isSearch = false;
+            mAdapter.cleanList();
+
+            //年份
+            List<SelectTypeEntity> mSelectTypeYear = selectItems.get(0);
+            mBreedPigeonListModel.year = SelectTypeEntity.getTypeName(mSelectTypeYear);
+
+            //性别
+            List<SelectTypeEntity> mSelectTypeSex = selectItems.get(1);
+            mBreedPigeonListModel.sexid = SelectTypeEntity.getTypeIds(mSelectTypeSex);
+
+            //状态
+            List<SelectTypeEntity> mSelectTypeStatus = selectItems.get(2);
+            mBreedPigeonListModel.stateid = SelectTypeEntity.getTypeIds(mSelectTypeStatus);
+
+            //血统
+            List<SelectTypeEntity> mSelectTypeLineage = selectItems.get(3);
+            mBreedPigeonListModel.bloodid = SelectTypeEntity.getTypeIds(mSelectTypeLineage);
+
+            mBreedPigeonListModel.getPigeonList();
+            mBreedPigeonListModel.getPigeonCount();
+
+        });
+
+        mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.STATE_STATE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
+        mSelectTypeViewModel.getSelectTypes();
+
+    }
 
 
     protected void initData() {
@@ -136,12 +183,23 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         mBreedPigeonListModel.mPigeonListData.observe(this, datas -> {
             setProgressVisible(false);
+
+            if (datas.isEmpty() || datas.size() == 0) {
+
+            } else {
+                if (mAdapter.getHeaderViewsCount() == 0) {
+                    initHeadView();
+                }
+            }
+
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 
         mBreedPigeonListModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
         });
+    }
 
+    protected void initHeadView() {
     }
 }

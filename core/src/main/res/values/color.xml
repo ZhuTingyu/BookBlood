@@ -144,6 +144,9 @@
 
     <color name="color_333333">#333333</color>
     <color name="color_999999">#999999</color>
+    <color name="color_6B994D">#6B994D</color>
+    <color name="color_808080">#808080</color>
+    <color name="color_F280FF">#F280FF</color>
 
     <color name="color_white_transparent_85">#d5ffffff</color>
     <color name="color_white_transparent_80">#ccffffff</color>

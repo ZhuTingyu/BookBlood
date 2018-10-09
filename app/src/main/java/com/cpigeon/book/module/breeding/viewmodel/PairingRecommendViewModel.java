@@ -22,7 +22,7 @@ public class PairingRecommendViewModel extends BaseViewModel {
     public PigeonEntity mBreedPigeonEntity;
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
     public String sex;
     public String blood;
     public String pigeonid;

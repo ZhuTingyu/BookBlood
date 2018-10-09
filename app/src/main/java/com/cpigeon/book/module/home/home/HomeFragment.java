@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 
 import com.base.base.BaseWebViewActivity;
 import com.base.util.BarUtils;
-import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.bumptech.glide.Glide;
@@ -197,6 +196,4 @@ public class HomeFragment extends BaseBookFragment {
             UserModel.getInstance().setPigeonHouseInfo(pigeonHouseEntity);
         });
     }
-
-
 }

@@ -11,7 +11,6 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
-import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.play.adapter.PlayFootListAdapter;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 
@@ -57,8 +56,6 @@ public class PlayFootListFragment extends BaseFootListFragment {
                     mBreedPigeonEntity.getFootRingID());
         });
 
-        mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.STATE_STATE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
-        mSelectTypeViewModel.getSelectTypes();
     }
 
 

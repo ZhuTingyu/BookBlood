@@ -25,7 +25,7 @@ public class PlayListViewModel extends BaseViewModel {
     public String footid;
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
 
     public MutableLiveData<List<PigeonPlayEntity>> mPigeonPlayListData = new MutableLiveData<>();
 
@@ -45,7 +45,7 @@ public class PlayListViewModel extends BaseViewModel {
 
 
     public int infoPi = 1;
-    public int infoPs = 15;
+    public int infoPs = 50;
 
     //获取  赛绩 附加信息 列表
     public void getPlayAdditionalInfoList() {

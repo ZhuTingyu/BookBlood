@@ -16,7 +16,7 @@ import java.util.List;
 public class LogbookViewModel extends BaseViewModel {
 
     public int pi = 1;
-    public int ps = 15;
+    public int ps = 50;
 
     public MutableLiveData<List<LogbookEntity>> logbookData = new MutableLiveData<>();
 
