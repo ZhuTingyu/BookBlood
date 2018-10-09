@@ -6,6 +6,7 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PlayModel;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.LeagueDetailsEntity;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.model.entity.PlayAdditionalInfoEntity;
 
@@ -28,6 +29,7 @@ public class PlayListViewModel extends BaseViewModel {
     public int ps = 15;
 
     public MutableLiveData<List<PigeonPlayEntity>> mPigeonPlayListData = new MutableLiveData<>();
+    public MutableLiveData<List<LeagueDetailsEntity>> mDataFristLeague = new MutableLiveData<>();
 
 
     //获取  赛绩列表
@@ -54,6 +56,14 @@ public class PlayListViewModel extends BaseViewModel {
                 listEmptyMessage.setValue(r.msg);
                 mPlayAdditionalInfoListData.setValue(r.data);
             } else throw new HttpErrorException(r);
+        });
+    }
+
+    public void getFirstLeague(){
+        submitRequestThrowError(PlayModel.getFirstLeague(), r -> {
+            if(r.isOk()){
+                mDataFristLeague.setValue(r.data);
+            }else throw new HttpErrorException(r);
         });
     }
 

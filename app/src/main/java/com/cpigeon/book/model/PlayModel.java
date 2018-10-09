@@ -3,6 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
+import com.cpigeon.book.model.entity.LeagueDetailsEntity;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.model.entity.PlayAdditionalInfoEntity;
 import com.cpigeon.book.model.entity.PlayInportListEntity;
@@ -216,6 +217,14 @@ public class PlayModel {
                 }.getType())
                 .url(R.string.live_play_list)
                 .addBody("orgid", orgid)
+                .request();
+    }
+
+    public static Observable<ApiResponse<List<LeagueDetailsEntity>>> getFirstLeague() {
+        return RequestData.<ApiResponse<List<LeagueDetailsEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<LeagueDetailsEntity>>>() {
+                }.getType())
+                .url(R.string.get_first_pigeon_match_league)
                 .request();
     }
 

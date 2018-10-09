@@ -79,6 +79,7 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
             public void onInputFinish(String psw) {
                 if (psw.length() == 6) {
                     mBaseActivity.setProgressVisible(true);
+                    mViewModel.mPassword = psw;
                     if(mIsOpen){
                         mViewModel.payOder();
                     }else {
@@ -113,6 +114,10 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
 
             DialogUtils.createErrorDialog(mBaseActivity, error);
         });
+
+        dialog.setOnShowListener(dialog1 -> {
+            mPassword.forceInputViewGetFocus();
+        });
     }
 
     @Override
@@ -140,5 +145,7 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
             ChoosePayWayDialog.show(mServiceEntity, mIsOpen, getFragmentManager());
         }
         super.onDismiss(dialog);
+
     }
+
 }

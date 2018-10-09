@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="111dp"
+    android:background="@drawable/background_stroke_gray_corner_4"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+    <com.base.widget.MarqueeTextView
+        android:id="@+id/tvProjectName"
+        style="@style/Marquee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/small_text_size"
+        tools:text="项目名称1231131313131" />
+
+    <com.base.widget.MarqueeTextView
+        android:id="@+id/tvRank"
+        style="@style/Marquee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/small_text_size"
+        tools:text="项目名称1231131313131" />
+
+    <com.base.widget.MarqueeTextView
+        android:id="@+id/tvSpeed"
+        style="@style/Marquee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/small_text_size"
+        tools:text="项目名称1231131313131" />
+
+    <com.base.widget.MarqueeTextView
+        android:id="@+id/tvFirstSpeed"
+        style="@style/Marquee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/small_text_size"
+        tools:text="项目名称1231131313131" />
+
+</LinearLayout>
+
+
+

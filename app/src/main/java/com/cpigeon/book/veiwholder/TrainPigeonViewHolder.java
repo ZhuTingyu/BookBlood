@@ -49,14 +49,7 @@ public class TrainPigeonViewHolder extends BaseViewHolder {
         }
 
         itemView.setOnClickListener(v -> {
-
-            if (trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_start_not))) {
-                if (trainEntity.getTrainCount() == 0) {
-                    OpenAndCloseTrainFragment.start(getActivity(), true, trainEntity);
-                }else {
-                    TrainProjectInListFragment.start(getActivity(), trainEntity);
-                }
-            }else if(trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_training))){
+           if(trainEntity.getTrainStateName().equals(Utils.getString(R.string.text_training))){
                 if (trainEntity.getTrainCount() == 0) {
                     FlyBackRecordFragment.start(getActivity(), trainEntity, false);
                 }else {

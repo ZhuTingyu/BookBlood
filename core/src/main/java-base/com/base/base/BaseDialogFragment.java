@@ -62,4 +62,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
        this.dismiss();
     }
 
+    public BaseActivity getBaseActivity(){
+        BaseActivity activity = null;
+        if(getActivity() instanceof BaseActivity){
+            activity = (BaseActivity) getActivity();
+        }
+        return activity;
+    }
+
 }

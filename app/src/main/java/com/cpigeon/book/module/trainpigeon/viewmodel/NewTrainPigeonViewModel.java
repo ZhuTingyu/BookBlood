@@ -19,12 +19,6 @@ import java.util.List;
 
 public class NewTrainPigeonViewModel extends BaseViewModel {
     public String name;
-    public double fromLo;
-    public double fromLa;
-    public double endLo;
-    public double endLa;
-    public String fromLocation;
-    public double dis;
     public List<PigeonEntity> mPigeonEntities;
     public MutableLiveData<TrainEntity> mDataTrain = new MutableLiveData<>();
 
@@ -44,8 +38,7 @@ public class NewTrainPigeonViewModel extends BaseViewModel {
     }
 
     public void newTrainPigeon() {
-        submitRequestThrowError(TrainPigeonModel.newTrainPigeon(name, fromLo, fromLa, endLo, endLa
-                , fromLocation, String.valueOf(dis), getFootIds()), r -> {
+        submitRequestThrowError(TrainPigeonModel.newTrainPigeon(name, getFootIds()), r -> {
             if (r.isOk()) {
                 normalResult.setValue(r.msg);
             } else throw new HttpErrorException(r);
@@ -53,8 +46,7 @@ public class NewTrainPigeonViewModel extends BaseViewModel {
     }
 
     public void trainAgain() {
-        submitRequestThrowError(TrainPigeonModel.trainAgain(mTrainEntity.getPigeonTrainID()
-                , fromLo, fromLa, fromLocation, dis), r -> {
+        submitRequestThrowError(TrainPigeonModel.trainAgain(mTrainEntity.getPigeonTrainID()), r -> {
             if (r.isOk()) {
                 normalResult.setValue(r.msg);
             } else throw new HttpErrorException(r);

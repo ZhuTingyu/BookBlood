@@ -72,27 +72,27 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     @BindView(R.id.ll_foot)
     protected LineInputView llFoot;
     @BindView(R.id.ll_foot_vice)
-    LineInputView llFootVice;
+    protected LineInputView llFootVice;
     @BindView(R.id.ll_foot_source)
-    LineInputView llFootSource;
+    protected LineInputView llFootSource;
     @BindView(R.id.ll_foot_father)
     protected LineInputView llFootFather;
     @BindView(R.id.ll_foot_mother)
     protected LineInputView llFootMother;
     @BindView(R.id.ll_pigeon_name)
-    LineInputView llPigeonName;
+    protected LineInputView llPigeonName;
     @BindView(R.id.ll_sex)
     protected LineInputView llSex;
     @BindView(R.id.ll_feather_color)
-    LineInputView llFeatherColor;
+    protected LineInputView llFeatherColor;
     @BindView(R.id.ll_eye_sand)
-    LineInputView llEyeSand;
+    protected LineInputView llEyeSand;
     @BindView(R.id.ll_their_shells_date)
-    LineInputView llTheirShellsDate;//出壳日期
+    protected LineInputView llTheirShellsDate;//出壳日期
     @BindView(R.id.ll_hanging_ring_date)
     protected LineInputView llHangingRingDate;//挂环日期
     @BindView(R.id.ll_lineage)
-    LineInputView llLineage;
+    protected LineInputView llLineage;
     @BindView(R.id.ll_state)
     protected LineInputView llState;//状态
     @BindView(R.id.sb_dont_disturb)

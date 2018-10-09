@@ -199,7 +199,6 @@ public class LocationFormatUtils {
 
     public static String getDMS(String degree, String minute, String second){
         StringBuilder sb = new StringBuilder();
-
         sb.append(degree);
         sb.append(".");
 
