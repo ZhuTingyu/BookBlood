@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.base.base.BaseDialogFragment;
 import com.base.util.Lists;
+import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
@@ -81,9 +82,19 @@ public class SelectTimeHaveHMSDialog extends BaseDialogFragment {
 
         mTvSure.setOnClickListener(v -> {
             if (mOnTimeSelectListener != null) {
-                mOnTimeSelectListener.time(mH.get(mWheelH.getSelectedIndex())
-                        , mM.get(mWheelM.getSelectedIndex())
-                        , mS.get(mWheelS.getSelectedIndex()));
+
+                String hours = mH.get(mWheelH.getSelectedIndex());
+                String minute = mM.get(mWheelM.getSelectedIndex());
+                String second = mS.get(mWheelS.getSelectedIndex());
+                String times = null;
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(TimeUtil.format(System.currentTimeMillis(), TimeUtil.FORMAT_YYYYMMDD));
+                sb.append(" ");
+                sb.append(Utils.getString(R.string.text_time_h_m_s, hours, minute, second));
+                times = sb.toString();
+
+                mOnTimeSelectListener.time(hours, minute, second, times);
                 dismiss();
             }
         });
@@ -137,7 +148,7 @@ public class SelectTimeHaveHMSDialog extends BaseDialogFragment {
     }
 
     public interface OnTimeSelectListener {
-        void time(String hours, String minute, String second);
+        void time(String hours, String minute, String second, String time);
     }
 
     private OnTimeSelectListener mOnTimeSelectListener;

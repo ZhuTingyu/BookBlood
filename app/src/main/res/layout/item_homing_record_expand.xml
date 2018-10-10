@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/shape_bg_corner_3_solid_b_color"
     android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/normal_safe_distance"
+    android:layout_marginRight="@dimen/normal_safe_distance"
     android:layout_height="77dp">
 
     <TextView

@@ -57,6 +57,20 @@
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="足环号码" />
 
+        <!--血统-->
+        <com.cpigeon.book.widget.LineInputView
+            android:id="@+id/ll_lineage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:paddingLeft="@dimen/spacing_left_reight"
+            android:paddingRight="@dimen/spacing_left_reight"
+            app:lineInputView_Hint="请输入血统"
+            app:lineInputView_IsCanEdit="false"
+            app:lineInputView_IsLookState="true"
+            app:lineInputView_IsNotNull="false"
+            app:lineInputView_LeftString="血统" />
+
 
         <!--副环-->
         <com.cpigeon.book.widget.LineInputView
@@ -178,48 +192,36 @@
 
 
         <!--出壳日期-->
-        <com.cpigeon.book.widget.LineInputView
-            android:id="@+id/ll_their_shells_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_white"
-            android:paddingLeft="@dimen/spacing_left_reight"
-            android:paddingRight="@dimen/spacing_left_reight"
-            app:lineInputView_Hint="请选择"
-            app:lineInputView_IsCanEdit="false"
-            app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="false"
-            app:lineInputView_LeftString="出壳日期" />
+        <!--<com.cpigeon.book.widget.LineInputView-->
+            <!--android:id="@+id/ll_their_shells_date"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/color_white"-->
+            <!--android:paddingLeft="@dimen/spacing_left_reight"-->
+            <!--android:paddingRight="@dimen/spacing_left_reight"-->
+            <!--app:lineInputView_Hint="请选择"-->
+            <!--app:lineInputView_IsCanEdit="false"-->
+            <!--app:lineInputView_IsLookState="true"-->
+            <!--app:lineInputView_IsNotNull="false"-->
+            <!--app:lineInputView_LeftString="出壳日期" />-->
 
 
-        <!--挂环日期-->
-        <com.cpigeon.book.widget.LineInputView
-            android:id="@+id/ll_hanging_ring_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_white"
-            android:paddingLeft="@dimen/spacing_left_reight"
-            android:paddingRight="@dimen/spacing_left_reight"
-            android:visibility="gone"
-            app:lineInputView_Hint="请选择"
-            app:lineInputView_IsCanEdit="false"
-            app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="false"
-            app:lineInputView_LeftString="挂环日期" />
+        <!--&lt;!&ndash;挂环日期&ndash;&gt;-->
+        <!--<com.cpigeon.book.widget.LineInputView-->
+            <!--android:id="@+id/ll_hanging_ring_date"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/color_white"-->
+            <!--android:paddingLeft="@dimen/spacing_left_reight"-->
+            <!--android:paddingRight="@dimen/spacing_left_reight"-->
+            <!--android:visibility="gone"-->
+            <!--app:lineInputView_Hint="请选择"-->
+            <!--app:lineInputView_IsCanEdit="false"-->
+            <!--app:lineInputView_IsLookState="true"-->
+            <!--app:lineInputView_IsNotNull="false"-->
+            <!--app:lineInputView_LeftString="挂环日期" />-->
 
-        <!--血统-->
-        <com.cpigeon.book.widget.LineInputView
-            android:id="@+id/ll_lineage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_white"
-            android:paddingLeft="@dimen/spacing_left_reight"
-            android:paddingRight="@dimen/spacing_left_reight"
-            app:lineInputView_Hint="请输入血统"
-            app:lineInputView_IsCanEdit="false"
-            app:lineInputView_IsLookState="true"
-            app:lineInputView_IsNotNull="false"
-            app:lineInputView_LeftString="血统" />
+
 
 
         <!--状态-->

@@ -4,14 +4,17 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.base.http.R;
 import com.base.util.system.ScreenTool;
+import com.base.widget.LoadingView;
 
 /**
  * Created by Zhu TingYu on 2018/8/6.
@@ -19,11 +22,17 @@ import com.base.util.system.ScreenTool;
 
 public abstract class BaseDialogFragment extends DialogFragment {
 
+
+    protected LoadingView progressView;
+
+
     public BaseDialogFragment(){}
+
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         //Dialog dialog = new Dialog(getActivity(), R.style.BottomDialog);
         Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定

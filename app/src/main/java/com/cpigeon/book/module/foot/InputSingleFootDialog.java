@@ -80,7 +80,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         //初始化显示省份
         mTvArea.setText(area.get(0));
         for (int i = 1; i <= address.length; i++) {
-            if (UserModel.getInstance().getProvince().contains(address[i - 1])) {
+            if (address[i - 1].contains(UserModel.getInstance().getProvince())) {
                 mTvArea.setText(String.valueOf(i));
                 break;
             }

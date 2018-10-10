@@ -55,7 +55,6 @@ public class AddFlyBackRecordFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mViewModel = new AddFlyBackRecordViewModel(getBaseActivity());
         initViewModel(mViewModel);
     }
 
@@ -79,7 +78,6 @@ public class AddFlyBackRecordFragment extends BaseBookFragment {
             mLlRoot.setLineInputViewState(false);
         }));
 
-        bindUi(RxUtils.textChanges(mLvFoot.getEditText()), mViewModel.setFootNumber());
         bindUi(RxUtils.textChanges(mLvTime.getEditText()), s -> {
 
             if(!StringUtil.isStringValid(s)){
@@ -111,12 +109,12 @@ public class AddFlyBackRecordFragment extends BaseBookFragment {
         });
 
         mLvFoot.setOnClickListener(v -> {
-            SearchInTrainPigeonActivity.start(getBaseActivity(), mViewModel.mTrainEntity, CODE_FOOT_NUMBER);
+            SearchPigeonToFlyBackActivity.start(getBaseActivity(), mViewModel.mTrainEntity);
         });
 
         mLvTime.setOnClickListener(v -> {
             SelectTimeHaveHMSDialog dialog = new SelectTimeHaveHMSDialog();
-            dialog.setOnTimeSelectListener((hours, minute, second) -> {
+            dialog.setOnTimeSelectListener((hours, minute, second, time) -> {
                 mLvTime.setRightText(Utils.getString(R.string.text_time_h_m_s, hours, minute, second));
             });
             dialog.show(getBaseActivity().getSupportFragmentManager());

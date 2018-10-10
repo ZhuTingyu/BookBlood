@@ -128,13 +128,13 @@ public class UllageToolFragment extends BaseBookFragment {
             case R.id.ll_xzsj1://司放地经纬度选择时间
 
 
-                mSelectTimeHaveHMSDialog.setOnTimeSelectListener((hours, minute, second) -> {
+                mSelectTimeHaveHMSDialog.setOnTimeSelectListener((hours, minute, second, time) -> {
                     tvTime1.setText(hours + "时" + minute + "分" + second + "秒");
                 });
                 mSelectTimeHaveHMSDialog.show(getBaseActivity().getSupportFragmentManager());
                 break;
             case R.id.ll_xzsj2://鸽舍经纬度选择时间
-                mSelectTimeHaveHMSDialog.setOnTimeSelectListener((hours, minute, second) -> {
+                mSelectTimeHaveHMSDialog.setOnTimeSelectListener((hours, minute, second, time) -> {
                     tvTime2.setText(hours + "时" + minute + "分" + second + "秒");
                 });
                 mSelectTimeHaveHMSDialog.show(getBaseActivity().getSupportFragmentManager());

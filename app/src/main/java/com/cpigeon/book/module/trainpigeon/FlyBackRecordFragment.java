@@ -24,7 +24,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.FlyBackAddRecordEvent;
 import com.cpigeon.book.event.UpdateTrainEvent;
 import com.cpigeon.book.model.entity.TrainEntity;
-import com.cpigeon.book.module.select.SelectPigeonFragment;
 import com.cpigeon.book.module.trainpigeon.adpter.FlyBackRecordAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.FlyBackRecordViewModel;
 import com.cpigeon.book.util.TextViewUtil;
@@ -81,7 +80,7 @@ public class FlyBackRecordFragment extends BaseBookFragment {
         isEnd = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         mRecyclerView = findViewById(R.id.list);
         mTvOk = findViewById(R.id.tvOk);
-        mAdapter = new FlyBackRecordAdapter();
+        mAdapter = new FlyBackRecordAdapter(isEnd);
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setRefreshListener(() -> {
@@ -95,7 +94,7 @@ public class FlyBackRecordFragment extends BaseBookFragment {
 
                 if (mViewModel.mTrainEntity.getDistance() != 0) {
                     if (mViewModel.isHaveNotBack()) {
-
+                        SelectPigeonToFlyBackFragment.start(getBaseActivity(), mViewModel.mTrainEntity);
                     } else {
                         DialogUtils.createHintDialog(getBaseActivity(), Utils.getString(R.string.text_all_pigeon_back_yet));
                     }
@@ -171,6 +170,8 @@ public class FlyBackRecordFragment extends BaseBookFragment {
 
         mViewModel.mDataTrain.observe(this, trainEntity -> {
             mViewModel.mTrainEntity.setDistance(trainEntity.getDistance());
+            mViewModel.mTrainEntity.setFromFlyTime(trainEntity.getFromFlyTime());
+            mAdapter.setTrainEntity(mViewModel.mTrainEntity);
         });
 
         mViewModel.mDataFlyBack.observe(this, flyBackRecordEntities -> {
@@ -199,6 +200,7 @@ public class FlyBackRecordFragment extends BaseBookFragment {
             setProgressVisible(false);
             DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
+                mCompleteTrainDialog.dismiss();
             });
         });
     }

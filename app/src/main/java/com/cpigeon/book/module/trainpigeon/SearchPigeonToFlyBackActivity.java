@@ -6,33 +6,37 @@ import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
+import com.cpigeon.book.event.FlyBackAddRecordEvent;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.cpigeon.book.module.trainpigeon.adpter.SearchFootRingAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.SearchFootRingViewModel;
 import com.cpigeon.book.widget.SearchTextView;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/9/6.
  */
-public class SearchInTrainPigeonActivity extends BaseSearchActivity {
+public class SearchPigeonToFlyBackActivity extends BaseSearchActivity {
 
     SearchFootRingAdapter mAdapter;
 
     SearchFootRingViewModel mViewModel;
 
-    public static void start(Activity activity, TrainEntity trainEntity, int code) {
-        IntentBuilder.Builder(activity, SearchInTrainPigeonActivity.class)
+    public static void start(Activity activity, TrainEntity trainEntity) {
+        IntentBuilder.Builder(activity, SearchPigeonToFlyBackActivity.class)
                 .putExtra(IntentBuilder.KEY_DATA, trainEntity)
-                .startActivity(code);
+                .startActivity();
     }
+
 
     @Override
     protected List<DbEntity> getHistory() {
@@ -42,22 +46,17 @@ public class SearchInTrainPigeonActivity extends BaseSearchActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new SearchFootRingAdapter();
+        mAdapter = new SearchFootRingAdapter(mViewModel.mTrainEntity);
         return mAdapter;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mViewModel = new SearchFootRingViewModel(getBaseActivity());
         initViewModel(mViewModel);
+        super.onCreate(savedInstanceState);
+        mRecyclerView.addItemDecorationLine();
         setSearchHint(R.string.text_input_foot_number_search);
-
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mAdapter.getItem(position))
-                    .finishForResult(getBaseActivity());
-        });
 
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
@@ -88,5 +87,10 @@ public class SearchInTrainPigeonActivity extends BaseSearchActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.anim_left_in, R.anim.anim_right_out);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(FlyBackAddRecordEvent event){
+        mViewModel.getFootRingToFlyBack();
     }
 }

@@ -90,13 +90,14 @@ public class TrainPigeonModel {
             String hum,//湿度
             String alt,//海拔
             String temper,//温度
-            String fromplace //开始地址
+            String fromPlace //开始地址
     ) {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
                 .url(R.string.add_fly_train_info)
                 .addBody("dis", String.valueOf(dis))
+                .addBody("formfly", fromTime)
                 .addBody("trainid", trainId)
                 .addBody("countid", countId)
                 .addBody("fromlo", String.valueOf(fromLo))
@@ -107,7 +108,7 @@ public class TrainPigeonModel {
                 .addBody("hum", hum)
                 .addBody("alt", alt)
                 .addBody("temper", temper)
-                .addBody("fromplace", fromplace)
+                .addBody("fromplace", fromPlace)
                 .request();
     }
 
