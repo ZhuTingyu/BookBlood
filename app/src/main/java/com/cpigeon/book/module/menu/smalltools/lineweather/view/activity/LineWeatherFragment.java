@@ -3,7 +3,6 @@ package com.cpigeon.book.module.menu.smalltools.lineweather.view.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,11 +15,9 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
@@ -57,14 +54,12 @@ import com.amap.api.services.weather.LocalWeatherLive;
 import com.base.util.IntentBuilder;
 import com.base.util.LocationFormatUtils;
 import com.base.util.RxUtils;
-import com.base.util.dialog.DialogUtils;
 import com.base.util.http.GsonUtil;
 import com.base.util.map.MapMarkerManager;
 import com.base.util.map.WeatherManager;
 import com.base.util.utility.ImageUtils;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.StringUtil;
-import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.guideview.Component;
 import com.base.widget.guideview.GuideBuilder;
@@ -74,10 +69,8 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.menu.smalltools.lineweather.model.bean.ContactModel;
 import com.cpigeon.book.module.menu.smalltools.lineweather.presenter.LineWeatherPresenter;
 import com.cpigeon.book.module.menu.smalltools.ullage.UlageToolPresenter;
-import com.cpigeon.book.module.menu.smalltools.ullage.UllageToolDetailsFragment;
 import com.cpigeon.book.util.BitmapUtils;
 import com.cpigeon.book.util.MapUtil;
-import com.cpigeon.book.util.MathUtil;
 import com.cpigeon.book.util.SharedPreferencesTool;
 import com.cpigeon.book.widget.mydialog.CustomAlertDialog;
 import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
@@ -204,15 +197,16 @@ public class LineWeatherFragment extends BaseBookFragment {
         Log.d("aaas", "initView: 111333----ss");
 
 
-        setToolbarRightImage(R.drawable.ic_share_line_weather,item -> {
+//        setToolbarRightImage(R.drawable.ic_share_line_weather, item -> {
+        setToolbarRight("分享", item -> {
             showLoading();
             getImageByMap();
             return true;
         });
 
-        setTitle("赛线天气");
-        toolbar.setNavigationOnClickListener(v -> finish());
+        setTitle(getString(R.string.str_line_weather));
 
+        toolbar.setNavigationOnClickListener(v -> finish());
         mMapView.onCreate(savedInstanceState);
 
         if (aMap == null) {
@@ -241,6 +235,22 @@ public class LineWeatherFragment extends BaseBookFragment {
 
                     //输入司放地确定
                     startGeocodeSearch(et_input_sfd.getText().toString(), 1);
+                }
+                return false;
+            }
+        });
+
+        et_input_gcd.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                    InputMethodManager imm = (InputMethodManager) getActivity()
+                            .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
+                    //输入归巢地确定
+                    startGeocodeSearch(et_input_gcd.getText().toString(), 2);
                 }
                 return false;
             }
@@ -370,11 +380,10 @@ public class LineWeatherFragment extends BaseBookFragment {
         });
     }
 
-
     @OnClick({R.id.llz_sfd, R.id.llz_gcd, R.id.tv_sure, R.id.img_close1, R.id.img_close2,
-            R.id.input_sfd_sure, R.id.input_sfd_coordinate_sure, R.id.ll_select_shed, R.id.tv_input_gcd,
+            R.id.input_sfd_sure, R.id.input_sfd_coordinate_sure, R.id.ll_select_shed,
             R.id.tv_coordinate_gcd, R.id.ll_click_sfd_sure, R.id.ll_click_gcd_sure, R.id.tv_locate_current_position_gcd,
-            R.id.ll_select_sfd, R.id.ll_arrow, R.id.img_locate})
+            R.id.ll_select_sfd, R.id.ll_arrow, R.id.img_locate, R.id.tv_locate_current_position_sfd})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.llz_sfd:
@@ -403,6 +412,7 @@ public class LineWeatherFragment extends BaseBookFragment {
                     ToastUtils.showLong(getBaseActivity(), "请选择司放地点");
                     return;
                 }
+
                 if (sureGcdLa == -1 || sureGcdLo == -1) {
                     ToastUtils.showLong(getBaseActivity(), "请选择归巢地点");
                     return;
@@ -457,10 +467,10 @@ public class LineWeatherFragment extends BaseBookFragment {
                 //选择公棚
                 SelectShedFragment.start(getBaseActivity());
                 break;
-            case R.id.tv_input_gcd:
-                //输入归巢地
-                startGeocodeSearch(et_input_gcd.getText().toString(), 2);
-                break;
+//            case R.id.tv_input_gcd:
+//                //输入归巢地
+//                startGeocodeSearch(et_input_gcd.getText().toString(), 2);
+//                break;
             case R.id.tv_coordinate_gcd:
                 //输入归巢地坐标，确定定位
                 startCoordinateLocate(etGcdLo1, etGcdLo2, etGcdLo3, etGcdLa1, etGcdLa2, etGcdLa3, 2);
@@ -495,6 +505,10 @@ public class LineWeatherFragment extends BaseBookFragment {
                 break;
             case R.id.img_locate:
                 dialog.show();
+                break;
+
+            case R.id.tv_locate_current_position_sfd:
+                presentLocate(1);//定位当前位置 司放地
                 break;
         }
     }
@@ -1039,7 +1053,7 @@ public class LineWeatherFragment extends BaseBookFragment {
                 for (int i = 0; i < siez; i++) {
                     if (markerList.get(i).getPosition().latitude == marker.getPosition().latitude &&
                             markerList.get(i).getPosition().longitude == marker.getPosition().longitude) {
-                        AWeekWeatherFragment.start(getBaseActivity(),markerList.get(i).getPosition());
+                        AWeekWeatherFragment.start(getBaseActivity(), markerList.get(i).getPosition());
                         return true;
                     }
                 }
@@ -1265,7 +1279,6 @@ public class LineWeatherFragment extends BaseBookFragment {
                         String preLo = LocationFormatUtils.GPS2AjLocation(amapLocation.getLongitude());
                         String preLa = LocationFormatUtils.GPS2AjLocation(amapLocation.getLatitude());
 
-
                         presentLo.setText("经度：" + LocationFormatUtils.strToD(preLo) + "度" + LocationFormatUtils.strToM(preLo) + "分" + LocationFormatUtils.strToS(preLo) + "秒");
                         presentLa.setText("纬度：" + LocationFormatUtils.strToD(preLa) + "度" + LocationFormatUtils.strToM(preLa) + "分" + LocationFormatUtils.strToS(preLa) + "秒");
 
@@ -1278,6 +1291,7 @@ public class LineWeatherFragment extends BaseBookFragment {
                 }
             }
         });
+
         //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
         //设置定位参数

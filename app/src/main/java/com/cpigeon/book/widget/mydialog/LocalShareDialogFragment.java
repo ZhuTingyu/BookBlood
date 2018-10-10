@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,10 +19,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.base.util.Lists;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.util.SendWX;
-import com.umeng.socialize.UMShareListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,10 +39,6 @@ public class LocalShareDialogFragment extends DialogFragment {
     private ImageButton imgbtn_wx, imgbtn_pyq, imgbtn_qq, imgbtn_qqz;//分享按钮
     private Button btn_cancel;//取消
 
-    private Bitmap mBitmap;
-
-    public UMShareListener umShareListener;
-
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -57,8 +52,7 @@ public class LocalShareDialogFragment extends DialogFragment {
                     break;
                 case R.id.imgbtn_pyq:
                     //微信朋友圈
-//                    share2WX_pyq();
-//                    LocalShareDialogFragment.this.dismiss();
+
                     break;
                 case R.id.imgbtn_qq:
                     //QQ
@@ -67,7 +61,7 @@ public class LocalShareDialogFragment extends DialogFragment {
                     break;
                 case R.id.imgbtn_qqz:
                     //QQ空间
-//                    share2QQ_Z();
+
                     break;
                 case R.id.btn_cancel:
                     dismiss();
@@ -76,11 +70,7 @@ public class LocalShareDialogFragment extends DialogFragment {
         }
     };
 
-    private String shareTitle = "中鸽助手";
-    private String shareContent = "中鸽助手分享";
-
     private String TAG = "ShareDialogFragment";
-
 
     @NonNull
     @Override
@@ -150,13 +140,14 @@ public class LocalShareDialogFragment extends DialogFragment {
 
 //            qqIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
 
-            qqIntent.putExtra(Intent.EXTRA_STREAM, insertImageToSystem(getActivity(), localFilePath));
 
             if (fileType.equals("video")) {
+                qqIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
                 qqIntent.setType("*/*");
                 startActivity(qqIntent);
             } else {
-                qqIntent.setType("image/jpeg");
+                qqIntent.putExtra(Intent.EXTRA_STREAM, insertImageToSystem(getActivity(), localFilePath));
+                qqIntent.setType("image/*");
                 startActivity(Intent.createChooser(qqIntent, "图片分享"));
             }
 
@@ -172,11 +163,19 @@ public class LocalShareDialogFragment extends DialogFragment {
                 ComponentName comp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
                 Intent shareIntent = new Intent();
                 shareIntent.setComponent(comp);
-                shareIntent.setAction(Intent.ACTION_SEND);
-                File file = new File(localFilePath);
-                shareIntent.putExtra(Intent.EXTRA_STREAM, insertImageToSystem(getActivity(), localFilePath));
+                shareIntent.putExtra("Kdescription", "11");
 
-                shareIntent.setType("*/*");
+                File file = new File(localFilePath);
+
+                if (fileType.equals("video")) {
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
+                    shareIntent.setType("*/*");
+                } else {
+                    shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, Lists.newArrayList(Uri.parse(insertImageToSystem(getActivity(), localFilePath))));
+                    shareIntent.setType("image/*");
+                }
 
                 startActivity(Intent.createChooser(shareIntent, "分享"));
             } else {

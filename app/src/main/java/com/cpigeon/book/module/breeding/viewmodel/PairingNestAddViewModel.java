@@ -48,6 +48,8 @@ public class PairingNestAddViewModel extends BaseViewModel {
     //子代信息
     public String offspringInfo;
 
+    public String giveprson;
+
 
     //子代鸽子id
     public String pigeonidstr;
@@ -84,6 +86,7 @@ public class PairingNestAddViewModel extends BaseViewModel {
                 temper,
                 hum,
                 dir,
+                giveprson,
                 ""), r -> {
             if (r.isOk()) {
                 hintDialog(r.msg);

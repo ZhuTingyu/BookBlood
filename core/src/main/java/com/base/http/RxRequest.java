@@ -2,11 +2,10 @@ package com.base.http;
 
 import com.base.util.Utils;
 import com.base.util.utility.LogUtil;
+import com.base.util.utility.StringUtil;
 
 import java.io.File;
-import java.io.InterruptedIOException;
 import java.net.SocketTimeoutException;
-
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -35,12 +34,21 @@ public class RxRequest {
             }
 
             for (String key : imageBody.keySet()) {
+
+                if (!StringUtil.isStringValid(imageBody.get(key))) {
+                    break;
+                }
                 File imgF = new File(imageBody.get(key));
                 builder.addPart(MultipartBody.Part.createFormData(key, imgF.getName(),
                         RequestBody.create(MediaType.parse("image/*"), imgF)));
             }
 
             for (String key : videoBody.keySet()) {
+
+                if (!StringUtil.isStringValid(videoBody.get(key))) {
+                    break;
+                }
+
                 File videoF = new File(videoBody.get(key));
                 builder.addPart(MultipartBody.Part.createFormData("video", videoF.getName(),
                         RequestBody.create(MediaType.parse("video/*"), videoF)));
@@ -76,7 +84,7 @@ public class RxRequest {
                 }
             } catch (Exception e) {
 
-                if(e instanceof SocketTimeoutException){
+                if (e instanceof SocketTimeoutException) {
                     ApiResponse apiResponse = new ApiResponse();
                     apiResponse.errorCode = -1;
                     apiResponse.msg = Utils.getString(R.string.message_net_error);

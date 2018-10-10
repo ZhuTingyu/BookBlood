@@ -17,14 +17,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.base.util.IntentBuilder;
 import com.base.util.LocationFormatUtils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
 import com.base.util.utility.LogUtil;
+import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.cpigeon.book.MyApp;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
+import com.cpigeon.book.model.entity.ShootInfoEntity;
 import com.cpigeon.book.util.BitmapUtils;
 import com.cpigeon.book.video.Constants;
 import com.cpigeon.book.video.camera.SensorControler;
@@ -43,6 +48,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by cj on 2017/7/25.
@@ -52,7 +58,9 @@ import butterknife.Unbinder;
 public class RecordedActivity extends BaseBookActivity implements View.OnTouchListener, SensorControler.CameraFocusListener {
 
     @BindView(R.id.watermark_z)
-    RelativeLayout watermark_z;//谁有总布局
+    RelativeLayout watermark_z;//水印总布局
+    @BindView(R.id.water_tv_name)
+    TextView water_tv_name;
     @BindView(R.id.water_tv_time)
     TextView watermarkTime;//水印时间
     @BindView(R.id.water_tv_lo)
@@ -148,6 +156,24 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         mSensorControler = SensorControler.getInstance();
         mSensorControler.setCameraFocusListener(this);
         dialogFragment = new LocalShareDialogFragment();
+
+        ShootInfoEntity mShootInfoEntity = getIntent().getParcelableExtra(IntentBuilder.KEY_DATA);
+
+
+        if (StringUtil.isStringValid(mShootInfoEntity.getImgurl())) {
+            img_logo.setVisibility(View.VISIBLE);
+            Glide.with(getBaseActivity()).load(mShootInfoEntity.getImgurl()).into(img_logo);
+        } else {
+            img_logo.setVisibility(View.GONE);
+        }
+
+        if (StringUtil.isStringValid(mShootInfoEntity.getGsname())) {
+            water_tv_name.setVisibility(View.VISIBLE);
+            water_tv_name.setText("鸽舍：" + mShootInfoEntity.getGsname());
+        } else {
+            water_tv_name.setVisibility(View.GONE);
+        }
+
         initView();
         initObserve();
     }
@@ -232,7 +258,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                     recordFlag = false;
                     recordComplete(savePath);
                 } else {
-                    showShareDialog();
+                    showShareDialog(2);
                 }
                 break;
             case R.id.imgbtn_false://取消
@@ -319,7 +345,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                             public void run() {
                                 try {
                                     ToastUtils.showLong(RecordedActivity.this, "视频录制成功");
-                                    showShareDialog();
+                                    showShareDialog(1);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -333,16 +359,36 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
     private LocalShareDialogFragment dialogFragment;
 
-    public void showShareDialog() {
+    public void showShareDialog(int tag) {
         if (dialogFragment != null && dialogFragment.getDialog() != null && dialogFragment.getDialog().isShowing()) {
             dialogFragment.getDialog().dismiss();
             dialogFragment.dismiss();
         }
 
-        if (dialogFragment != null) {
-            dialogFragment.setLocalFilePath(savePath);
-            dialogFragment.setFileType(type);
-            dialogFragment.show(getBaseActivity().getFragmentManager(), "share");
+        String error = "";
+        if (tag == 1) {
+            //视频分享
+            error = "是否将该视频分享给鸽友";
+        } else if (tag == 2) {
+            //图片分享
+            error = "是否将该图片分享给鸽友";
+        }
+
+        //保证界面只有一个错误提示
+        if (getBaseActivity().errorDialog == null || !getBaseActivity().errorDialog.isShowing()) {
+            getBaseActivity().errorDialog = DialogUtils.createHintDialog2(this, error, SweetAlertDialog.NORMAL_TYPE, false, dialog -> {
+                dialog.dismiss();
+                initBtn();
+
+                if (dialogFragment != null) {
+                    dialogFragment.setLocalFilePath(savePath);
+                    dialogFragment.setFileType(type);
+                    dialogFragment.show(getBaseActivity().getFragmentManager(), "share");
+                }
+            }, sweetAlertDialog -> {
+                initBtn();
+                sweetAlertDialog.dismiss();
+            });
         }
     }
 
@@ -374,8 +420,11 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                         savePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() + File.separator + System.currentTimeMillis() + ".jpeg";
 
                         //图片保存
-                        BitmapUtils.saveJPGE_After(RecordedActivity.this, BitmapFactory.decodeByteArray(data, 0, data.length), savePath, 100);
-
+                        BitmapUtils.saveJPGE_After(RecordedActivity.this,
+                                BitmapUtils.createBitmapCenter2(
+                                        BitmapUtils.rotaingImageView(90, BitmapFactory.decodeByteArray(data, 0, data.length)),
+                                        BitmapUtils.getViewBitmap(watermark_z))
+                                , savePath, 100);
                     }
                 });
             }

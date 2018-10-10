@@ -297,6 +297,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                         , R.string.tv_hatches_giving_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mInputDialog.hide();
                             tv_giving_name.setText(content);
+                            mPairingNestAddViewModel.giveprson = content;
                             if (StringUtil.isStringValid(content)) {
                                 img_giving.setImageResource(R.mipmap.giving_yes);
                             } else {

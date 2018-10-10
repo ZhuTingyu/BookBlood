@@ -147,7 +147,8 @@
         android:layout_marginRight="15dp"
         android:clickable="true"
         android:orientation="vertical"
-        android:paddingBottom="40dp">
+        android:paddingBottom="40dp"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -303,6 +304,28 @@
                 android:text="司放地"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_locate_current_position_sfd"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/line_weather_lr2"
+                android:layout_marginRight="@dimen/line_weather_lr2"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_line_weather4"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="定位当前位置"
+                android:textColor="@color/colorWhite"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/bg_line_weather2" />
+
 
             <!--舍弃-->
             <LinearLayout
@@ -584,8 +607,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:visibility="gone">
+        android:clickable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -625,6 +647,56 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/bg_line_weather2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="@dimen/line_weather_lr"
+                android:layout_marginRight="@dimen/line_weather_lr"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="搜索地方地地名"
+                    android:textColor="@color/bg_line_weather3_tv"
+                    android:textSize="@dimen/line_weather_tv_size" />
+
+                <!--舍弃-->
+                <TextView
+                    android:id="@+id/input_sfd_sure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="定位"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_input_gcd"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/line_weather_lr"
+                android:layout_marginRight="@dimen/line_weather_lr"
+                android:background="@drawable/background_stroke_gray_corner_3"
+                android:gravity="center"
+                android:hint="请输入归巢地，确定搜索"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textColor="@color/color_line_weather3_et"
+                android:textColorHint="@color/color_line_weather3_et_hint"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/bg_line_weather2" />
+
 
             <!--舍弃-->
             <LinearLayout
@@ -668,59 +740,60 @@
                 android:background="#e6e6e6"
                 android:visibility="gone" />
 
-            <!--舍弃-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginLeft="@dimen/line_weather_lr"
-                android:layout_marginRight="@dimen/line_weather_lr"
-                android:gravity="center_vertical"
-                android:visibility="gone">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="输入归巢地"
-                    android:textColor="#808080"
-                    android:textSize="13sp" />
+            <!--&lt;!&ndash;舍弃&ndash;&gt;-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:layout_marginLeft="@dimen/line_weather_lr"-->
+            <!--android:layout_marginRight="@dimen/line_weather_lr"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:visibility="gone">-->
 
-                <TextView
-                    android:id="@+id/tv_input_gcd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="确定定位"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="13sp" />
+            <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="输入归巢地"-->
+            <!--android:textColor="#808080"-->
+            <!--android:textSize="13sp" />-->
 
-            </LinearLayout>
+            <!--<TextView-->
+            <!--android:id="@+id/tv_input_gcd"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="确定定位"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:textSize="13sp" />-->
 
-            <!--舍弃-->
-            <EditText
-                android:id="@+id/et_input_gcd"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_weather_item_h"
-                android:layout_marginLeft="@dimen/line_weather_lr"
-                android:layout_marginRight="@dimen/line_weather_lr"
-                android:background="@drawable/background_stroke_gray_corner_3"
-                android:gravity="center"
-                android:hint="请输入归巢地，确定搜索"
-                android:singleLine="true"
-                android:textColor="@color/color_line_weather3_et"
-                android:textColorHint="@color/color_line_weather3_et_hint"
-                android:textSize="11sp"
-                android:visibility="gone" />
+            <!--</LinearLayout>-->
 
-            <!--舍弃-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="@dimen/line_weather_lr"
-                android:layout_marginRight="@dimen/line_weather_lr"
-                android:layout_marginTop="20dp"
-                android:background="#e6e6e6"
-                android:visibility="gone" />
+            <!--&lt;!&ndash;舍弃&ndash;&gt;-->
+            <!--<EditText-->
+            <!--android:id="@+id/et_input_gcd"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/line_weather_item_h"-->
+            <!--android:layout_marginLeft="@dimen/line_weather_lr"-->
+            <!--android:layout_marginRight="@dimen/line_weather_lr"-->
+            <!--android:background="@drawable/background_stroke_gray_corner_3"-->
+            <!--android:gravity="center"-->
+            <!--android:hint="请输入归巢地，确定搜索"-->
+            <!--android:singleLine="true"-->
+            <!--android:textColor="@color/color_line_weather3_et"-->
+            <!--android:textColorHint="@color/color_line_weather3_et_hint"-->
+            <!--android:textSize="11sp"-->
+            <!--android:visibility="gone" />-->
+
+            <!--&lt;!&ndash;舍弃&ndash;&gt;-->
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginLeft="@dimen/line_weather_lr"-->
+            <!--android:layout_marginRight="@dimen/line_weather_lr"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:background="#e6e6e6"-->
+            <!--android:visibility="gone" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -3,9 +3,12 @@ package com.cpigeon.book.module.racing.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.base.http.HttpErrorException;
+import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.RacingPigeonModel;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BasePigeonViewModel;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Administrator on 2018/9/8.
@@ -39,6 +42,8 @@ public class RacingPigeonEntryViewModel extends BasePigeonViewModel {
             if (r.isOk()) {
 
                 mEntryData.setValue(r.data);
+
+                EventBus.getDefault().post(new PigeonAddEvent());
 
 //                hintDialog(r.msg);
             } else throw new HttpErrorException(r);

@@ -7,62 +7,77 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
-        android:id="@+id/ll_upload_logo"
+    <RelativeLayout
+        android:id="@+id/rl_upload_logo"
         android:layout_width="match_parent"
         android:layout_height="168dp"
         android:layout_marginLeft="@dimen/spacing_left_reight"
         android:layout_marginRight="@dimen/spacing_left_reight"
         android:layout_marginTop="24dp"
         android:background="@drawable/shape_bg_corner_3_solid_white"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@mipmap/ic_photo_add" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:text="请点击此处上传您的LOGO"
-            android:textColor="#4D4D4D"
-            android:textSize="18sp" />
+        android:gravity="center">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:id="@+id/ll_upload_logo"
+            android:layout_width="match_parent"
+            android:layout_height="168dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/ic_photo_add" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="("
+                android:layout_marginTop="17dp"
+                android:text="请点击此处上传您的LOGO"
                 android:textColor="#4D4D4D"
-                android:textSize="13sp" />
+                android:textSize="18sp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2M之内的png格式图片"
-                android:textColor="#F12F2F"
-                android:textSize="13sp" />
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=")"
-                android:textColor="#4D4D4D"
-                android:textSize="13sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="("
+                    android:textColor="#4D4D4D"
+                    android:textSize="13sp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2M之内的png格式图片"
+                    android:textColor="#F12F2F"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=")"
+                    android:textColor="#4D4D4D"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="match_parent"
+            android:scaleType="centerInside"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/ll_name"

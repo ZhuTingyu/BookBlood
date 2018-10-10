@@ -4,6 +4,7 @@ package com.cpigeon.book.module.play;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -11,10 +12,12 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.LeagueDetailsEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
+import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
 import com.cpigeon.book.module.play.adapter.PlayFootListAdapter;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
@@ -23,6 +26,9 @@ import com.cpigeon.book.widget.LeagueMarkerView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -57,13 +63,25 @@ public class PlayFootListFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView.addItemDecorationLine();
         initHeadViews();
+    }
+
+    @Override
+    protected void initHeadView() {
+        super.initHeadView();
         mAdapter.addHeaderView(mHeadView);
     }
 
     private void initHeadViews() {
         mHeadView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_play_foot_list_head, null);
+
+        //全部信鸽
+        CardView cv_all_pigeon;
+        cv_all_pigeon = mHeadView.findViewById(R.id.cv_all_pigeon);
+        cv_all_pigeon.setOnClickListener(v -> {
+            MyHomingPigeonFragment.start(getBaseActivity());
+        });
+
         mLine = mHeadView.findViewById(R.id.line);
         mKLineManager = new KLineManager(mLine);
     }
@@ -86,7 +104,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
                     mBreedPigeonEntity.getFootRingID());
         });
 
-        mViewModel.getFirstLeague();
+        mViewModel.getFirstLeague();//获取第一名赛绩
     }
 
 
@@ -94,6 +112,9 @@ public class PlayFootListFragment extends BaseFootListFragment {
     protected void initObserve() {
         super.initObserve();
         mViewModel.mDataFristLeague.observe(this, data -> {
+
+            mAdapter.addHeaderView(mHeadView);
+
             mLeagueMarkerView = new LeagueMarkerView(getBaseActivity(), data);
             mLine.setMarker(mLeagueMarkerView);
             mKLineManager.xAxis.setDrawGridLines(false);
@@ -138,7 +159,20 @@ public class PlayFootListFragment extends BaseFootListFragment {
             mKLineManager.setAnimate();
             mKLineManager.setDataToChart();
         });
-
-
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(PigeonAddEvent event) {
+        dataRefresh();
+    }
+
+    private void dataRefresh() {
+        mViewModel.getFirstLeague();//获取第一名赛绩
+
+        mAdapter.cleanList();
+        mBreedPigeonListModel.pi = 1;
+        mBreedPigeonListModel.getPigeonList();
+    }
+
 }

@@ -635,9 +635,10 @@ public class BitmapUtils {
         }
         int w = src.getWidth();
         int h = src.getHeight();
-        int ww = watermark.getWidth();
-        int wh = watermark.getHeight();
+//        int ww = watermark.getWidth();
+//        int wh = watermark.getHeight();
 
+        watermark = createBitmapBySize(watermark, w, h);
         // create the new blank bitmap
 //        Bitmap newb = Bitmap.createBitmap(w, h, Config.ARGB_8888);// 创建一个新的和SRC长度宽度一样的位图
         Bitmap newb = Bitmap.createBitmap(w, h, Config.RGB_565);// 创建一个新的和SRC长度宽度一样的位图
@@ -646,7 +647,7 @@ public class BitmapUtils {
         cv.drawBitmap(src, 0, 0, null);// 在 0，0坐标开始画入src
         // draw watermark into
 //        cv.drawBitmap(watermark, w - ww + 5, h - wh + 5, null);// 在src的右下角画入水印
-        cv.drawBitmap(watermark, 0, 0 , null);// 在src的左下角下角画入水印
+        cv.drawBitmap(watermark, 0, 0, null);// 在src的左下角下角画入水印
         // save all clip
 //        cv.save(Canvas.ALL_SAVE_FLAG);// 保存
         cv.save(Canvas.CLIP_SAVE_FLAG);// 保存
@@ -726,7 +727,7 @@ public class BitmapUtils {
 
         cv.drawBitmap(src, 0, 0, null);// 在 0，0坐标开始画入src
 
-        cv.drawBitmap(watermark3, 0, h-watermark3.getHeight()-25, null);//底部
+        cv.drawBitmap(watermark3, 0, h - watermark3.getHeight() - 25, null);//底部
 
         cv.save(Canvas.CLIP_SAVE_FLAG);// 保存
 
@@ -1034,8 +1035,6 @@ public class BitmapUtils {
     }
 
 
-
-
     public static Bitmap saveViewBitmap(View view) {
 // get current view bitmap
         view.setDrawingCacheEnabled(true);
@@ -1094,7 +1093,7 @@ public class BitmapUtils {
         int maxWidth = MyApplication.getInstance().getScreenWidth() - SystemUtils.dp2px(context, 20);
         int maxHeight = maxWidth * 4 / 3;*/
 
-        int reqWidth = screenWidth - ScreenTool.dip2px( 20);
+        int reqWidth = screenWidth - ScreenTool.dip2px(20);
         int reqHeight = reqWidth * 4 / 3;
 
         bmp = createBitmap(bitmap, reqWidth, reqHeight);

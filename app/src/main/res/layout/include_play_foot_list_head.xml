@@ -6,7 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <include layout="@layout/include_btn_my_homing" />
+
+
     <android.support.v7.widget.CardView
+        android:layout_marginTop="@dimen/normal_safe_distance"
         android:layout_width="match_parent"
         android:layout_height="161dp"
         app:cardCornerRadius="3dp"

@@ -87,7 +87,7 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
         mStat1.bindData(countEntity.ZCount
                 , countEntity.ZCount);
-        mStat2.bindData(countEntity.ZxiongCount, countEntity.allCount);
+        mStat2.bindData(countEntity.ZxiongCount, countEntity.ZCount);
         mStat3.bindData(countEntity.ZciCount, countEntity.ZCount);
 
         cv_all_pigeon.setOnClickListener(v -> {

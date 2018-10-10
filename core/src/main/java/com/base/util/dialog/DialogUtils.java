@@ -144,6 +144,39 @@ public class DialogUtils {
         return dialogPrompt;
     }
 
+
+    /**
+     * 显示成功或错误弹框
+     *
+     * @param context
+     * @param message
+     * @return
+     */
+    public static SweetAlertDialog createHintDialog2(Context context, String message, int alerType, boolean cancelable,
+                                                     SweetAlertDialog.OnSweetClickListener mConfirmClick,
+                                                     SweetAlertDialog.OnSweetClickListener mCancelClick) {
+        SweetAlertDialog dialogPrompt;
+        dialogPrompt = new SweetAlertDialog(context, alerType);
+
+
+        if (alerType == SweetAlertDialog.SUCCESS_TYPE) {
+            dialogPrompt.setTitleText("成功");
+        } else if (alerType == SweetAlertDialog.ERROR_TYPE) {
+            dialogPrompt.setTitleText("失败");
+        }
+
+        dialogPrompt.setContentText(message);
+        dialogPrompt.setConfirmText("确定");
+        dialogPrompt.setCancelText("取消");
+
+        dialogPrompt.setConfirmClickListener(mConfirmClick);
+        dialogPrompt.setCancelClickListener(mCancelClick);
+        dialogPrompt.setCancelable(cancelable);
+        dialogPrompt.show();
+        return dialogPrompt;
+    }
+
+
     /**
      * 显示成功弹框
      *
@@ -175,11 +208,11 @@ public class DialogUtils {
             dialogPrompt.setCancelText(left);
         }
         dialogPrompt.setCancelClickListener(leftListener);
-        if(rightListener == null){
+        if (rightListener == null) {
             dialogPrompt.setConfirmClickListener(sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
             });
-        }else {
+        } else {
             dialogPrompt.setConfirmClickListener(rightListener);
         }
         dialogPrompt.setContentText(content);
