@@ -133,8 +133,10 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         });
 
         mTvAllChoose.setOnClickListener(v -> {
-            mViewModel.setSelectAll(mAdapter.getNotSelectAll());
-            mAdapter.notifyDataSetChanged();
+            if(!Lists.isEmpty(mAdapter.getNotSelectAll())){
+                mViewModel.setSelectAll(mAdapter.getNotSelectAll());
+                mAdapter.notifyDataSetChanged();
+            }
         });
 
         mTvAddAtOnce.setOnClickListener(v -> {

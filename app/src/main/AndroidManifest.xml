@@ -167,7 +167,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.trainpigeon.SearchInTrainPigeonActivity"
+            android:name=".module.trainpigeon.SearchPigeonToFlyBackActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 
 
@@ -289,7 +290,7 @@ public class LineInputView extends RelativeLayout {
     }
 
     public void setRightText(String rightText) {
-        mEditText.setText(rightText);
+        mEditText.setText(StringUtil.isStringValid(rightText) ? rightText : StringUtil.emptyString());
     }
 
     public void setEditState(boolean isCanEdit) {

@@ -25,6 +25,7 @@ import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
+import com.cpigeon.book.util.MathUtil;
 
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class CompleteTrainDialog extends BaseDialogFragment {
     String mTime;
     float mDis;
     String mLocation;
+    LatLng mFlyLocation;
 
     @Override
     protected int getLayoutRes() {
@@ -100,6 +102,11 @@ public class CompleteTrainDialog extends BaseDialogFragment {
                     } else if (id == mEdLaSecond.getId()) {
                         textMax(editText, 60.00f, null);
                     }
+
+                    if(isDataNotNull()){
+                        getDis();
+                    }
+
                 }
             });
         }
@@ -110,12 +117,8 @@ public class CompleteTrainDialog extends BaseDialogFragment {
 
         mLlChooseTime.setOnClickListener(v -> {
             SelectTimeHaveHMSDialog selectTimeHaveHMSDialog = new SelectTimeHaveHMSDialog();
-            selectTimeHaveHMSDialog.setOnTimeSelectListener((hours, minute, second) -> {
-                StringBuilder sb = new StringBuilder();
-                sb.append(TimeUtil.format(System.currentTimeMillis(), TimeUtil.FORMAT_YYYYMMDD));
-                sb.append(" ");
-                sb.append(Utils.getString(R.string.text_time_h_m_s, hours, minute, second));
-                mTime = sb.toString();
+            selectTimeHaveHMSDialog.setOnTimeSelectListener((hours, minute, second, time) -> {
+                mTime = time;
                 mEdTime.setText(mTime);
             });
             selectTimeHaveHMSDialog.show(getActivity().getSupportFragmentManager());
@@ -131,19 +134,7 @@ public class CompleteTrainDialog extends BaseDialogFragment {
                     getBaseActivity().error(Utils.getString(R.string.text_pleas_complete_train_info));
                     return;
                 }
-
-                String lo = LocationFormatUtils.getDMS(getString(mEdLoDegree), getString(mEdLoMinute), getString(mEdLoSecond));
-                String la = LocationFormatUtils.getDMS(getString(mEdLaDegree), getString(mEdLaMinute), getString(mEdLaSecond));
-
-                LatLng latLng = new LatLng(LocationFormatUtils.Aj2GPSLocation(Double.valueOf(la))
-                        , LocationFormatUtils.Aj2GPSLocation(Double.valueOf(lo)));
-
-                LatLng houseP = new LatLng(UserModel.getInstance().getUserData().pigeonHouseEntity.getLatitude()
-                        , UserModel.getInstance().getUserData().pigeonHouseEntity.getLongitude());
-
-                mDis = AMapUtils.calculateLineDistance(latLng, houseP);
-
-                mOnSureClickListener.click(mTime, latLng, mDis, mLocation);
+                mOnSureClickListener.click(mTime, mFlyLocation, mDis, mLocation);
             });
         }
     }
@@ -156,6 +147,21 @@ public class CompleteTrainDialog extends BaseDialogFragment {
                 && StringUtil.isStringValid(getString(mEdLaMinute))
                 && StringUtil.isStringValid(getString(mEdLaSecond))
                 && StringUtil.isStringValid(mTime);
+    }
+
+    private void getDis(){
+        String lo = LocationFormatUtils.getDMS(getString(mEdLoDegree), getString(mEdLoMinute), getString(mEdLoSecond));
+        String la = LocationFormatUtils.getDMS(getString(mEdLaDegree), getString(mEdLaMinute), getString(mEdLaSecond));
+
+        mFlyLocation = new LatLng(LocationFormatUtils.Aj2GPSLocation(Double.valueOf(la))
+                , LocationFormatUtils.Aj2GPSLocation(Double.valueOf(lo)));
+
+        LatLng houseP = new LatLng(UserModel.getInstance().getUserData().pigeonHouseEntity.getLatitude()
+                , UserModel.getInstance().getUserData().pigeonHouseEntity.getLongitude());
+
+        mDis = AMapUtils.calculateLineDistance(mFlyLocation, houseP);
+
+        mEdDis.setText(Utils.getString(R.string.text_KM, MathUtil.doubleformat(mDis / 1000,2)));
     }
 
     private void textMax(EditText editText, int maxNumber, EditText nextEd) {
@@ -236,6 +242,8 @@ public class CompleteTrainDialog extends BaseDialogFragment {
             mEdLaMinute.setText(LocationFormatUtils.strToM(laStr));
             mEdLaSecond.setText(LocationFormatUtils.strToS(laStr));
             mLocation = address.getProvince() + address.getCity() + address.getDistrict();
+
+            getDis();
         }
     }
 }

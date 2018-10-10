@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="64dp"
+    android:layout_marginLeft="@dimen/normal_safe_distance"
+    android:layout_marginRight="@dimen/normal_safe_distance"
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.constraint.ConstraintLayout

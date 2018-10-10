@@ -99,7 +99,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                         , breedPigeonEntity != null ? breedPigeonEntity.getPigeonID() : StringUtil.emptyString()
                         , StringUtil.emptyString()
                         , StringUtil.emptyString()
-                        , StringUtil.emptyString()
+                        , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment2.TYPE_SEX_MALE : BreedPigeonEntryFragment2.TYPE_SEX_FEMALE
                         , CODE_ADD_PIGEON);
             }
         });

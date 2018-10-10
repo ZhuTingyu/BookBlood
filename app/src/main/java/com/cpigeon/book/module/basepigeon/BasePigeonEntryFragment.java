@@ -397,6 +397,8 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
 
                 break;
             case R.id.ll_sex:
+
+                if(StringUtil.isStringValid(sexType)) return;
                 //性别
                 if (!Lists.isEmpty(mBasePigeonViewModel.mSelectTypes_Sex)) {
                     BottomSheetAdapter.createBottomSheet(getBaseActivity()

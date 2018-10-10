@@ -18,7 +18,7 @@ import java.util.List;
 
 public class SearchFootRingViewModel extends BaseViewModel {
 
-    TrainEntity mTrainEntity;
+    public TrainEntity mTrainEntity;
     public MutableLiveData<List<PigeonEntity>> mDataPigeon = new MutableLiveData<>();
 
     public SearchFootRingViewModel(Activity activity){

@@ -21,11 +21,7 @@ public class AddFlyBackRecordViewModel extends BaseViewModel {
     public String pigeonId;//足环id
     public String endTime; //结束时间
     public String speed;
-    String footNumber;
-
-    public AddFlyBackRecordViewModel(Activity activity) {
-        mTrainEntity = activity.getIntent().getParcelableExtra(IntentBuilder.KEY_DATA);
-    }
+    public String footNumber;
 
     public void addFlyBackRecord() {
         submitRequestThrowError(TrainPigeonModel.addFlyBackRecord(mTrainEntity.getPigeonTrainID()
@@ -36,14 +32,4 @@ public class AddFlyBackRecordViewModel extends BaseViewModel {
         });
     }
 
-    public Consumer<String> setFootNumber() {
-        return s -> {
-            footNumber = s;
-            isCanCommit();
-        };
-    }
-
-    public void isCanCommit() {
-        isCanCommit(footNumber, speed);
-    }
 }
