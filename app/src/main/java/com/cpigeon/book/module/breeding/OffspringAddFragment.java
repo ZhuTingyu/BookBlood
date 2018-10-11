@@ -47,7 +47,7 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
         super.initData();
         setTitle(getString(R.string.str_offspring_add));
 
-        llHangingRingDate.setVisibility(View.GONE);
+//        llHangingRingDate.setVisibility(View.GONE);
         //选择子代类型
         llPigeonType.setVisibility(View.VISIBLE);
         llPigeonType.setOnClickListener(v -> {
@@ -57,13 +57,13 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
                 if (Utils.getString(R.string.text_breed_pigeon).equals(way)) {
                     //种鸽
                     llPigeonType.setContent(R.string.text_breed_pigeon);
-                    llHangingRingDate.setVisibility(View.GONE);
+//                    llHangingRingDate.setVisibility(View.GONE);
                     mViewModel.pigeonType = 1;
 
                 } else if (Utils.getString(R.string.text_racing_pigeon).equals(way)) {
                     //赛鸽
                     llPigeonType.setContent(R.string.text_racing_pigeon);
-                    llHangingRingDate.setVisibility(View.VISIBLE);
+//                    llHangingRingDate.setVisibility(View.VISIBLE);
                     mViewModel.pigeonType = 2;
                 }
             });

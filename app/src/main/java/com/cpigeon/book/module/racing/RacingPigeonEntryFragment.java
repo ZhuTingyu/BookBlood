@@ -1,12 +1,10 @@
 package com.cpigeon.book.module.racing;
 
 import android.app.Activity;
-import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.base.util.dialog.DialogUtils;
 import com.cpigeon.book.module.basepigeon.BasePigeonEntryFragment;
-import com.cpigeon.book.module.breedpigeon.viewmodel.BasePigeonViewModel;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.racing.viewmodel.RacingPigeonEntryViewModel;
 import com.cpigeon.book.util.TextViewUtil;
@@ -38,7 +36,7 @@ public class RacingPigeonEntryFragment extends BasePigeonEntryFragment {
     protected void initData() {
         super.initData();
         setTitle("赛鸽录入");
-        llHangingRingDate.setVisibility(View.VISIBLE);
+//        llHangingRingDate.setVisibility(View.VISIBLE);
 //        llState.setVisibility(View.GONE);
 
         mRacingPigeonEntryViewModel.isCanCommit();

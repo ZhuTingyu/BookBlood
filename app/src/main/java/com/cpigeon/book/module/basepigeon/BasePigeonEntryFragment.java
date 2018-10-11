@@ -45,7 +45,6 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,8 +88,8 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     protected LineInputView llEyeSand;
     @BindView(R.id.ll_their_shells_date)
     protected LineInputView llTheirShellsDate;//出壳日期
-    @BindView(R.id.ll_hanging_ring_date)
-    protected LineInputView llHangingRingDate;//挂环日期
+    //    @BindView(R.id.ll_hanging_ring_date)
+//    protected LineInputView llHangingRingDate;//挂环日期
     @BindView(R.id.ll_lineage)
     protected LineInputView llLineage;
     @BindView(R.id.ll_state)
@@ -106,7 +105,6 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     protected SelectTypeViewModel mSelectTypeViewModel;
     protected BasePigeonViewModel mBasePigeonViewModel;
     protected String sexType;
-
 
 
     @Nullable
@@ -177,13 +175,13 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
         mBasePigeonViewModel.theirShellsDate = TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD);
 
         //初始化 挂环日期
-        llHangingRingDate.setContent(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD));
+//        llHangingRingDate.setContent(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD));
         mBasePigeonViewModel.llHangingRingDate = TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD);
         btnState();
 
         initData();
 
-        if(!StringUtil.isStringValid(sexType)){
+        if (!StringUtil.isStringValid(sexType)) {
             mSelectTypeViewModel.getSelectType_Sex();
 
         }
@@ -318,7 +316,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     private BaseInputDialog mDialogLineage;
     private BaseInputDialog mDialogMoney;
 
-    @OnClick({R.id.ll_countries, R.id.ll_foot, R.id.ll_foot_vice, R.id.ll_foot_source, R.id.ll_foot_father, R.id.ll_foot_mother, R.id.ll_pigeon_name, R.id.ll_sex, R.id.ll_feather_color, R.id.ll_eye_sand, R.id.ll_their_shells_date, R.id.ll_hanging_ring_date, R.id.ll_lineage, R.id.ll_state, R.id.sb_dont_disturb, R.id.ll_deal_price, R.id.tv_next_step, R.id.llz})
+    @OnClick({R.id.ll_countries, R.id.ll_foot, R.id.ll_foot_vice, R.id.ll_foot_source, R.id.ll_foot_father, R.id.ll_foot_mother, R.id.ll_pigeon_name, R.id.ll_sex, R.id.ll_feather_color, R.id.ll_eye_sand, R.id.ll_their_shells_date, R.id.ll_lineage, R.id.ll_state, R.id.sb_dont_disturb, R.id.ll_deal_price, R.id.tv_next_step, R.id.llz})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_countries:
@@ -398,7 +396,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
                 break;
             case R.id.ll_sex:
 
-                if(StringUtil.isStringValid(sexType)) return;
+                if (StringUtil.isStringValid(sexType)) return;
                 //性别
                 if (!Lists.isEmpty(mBasePigeonViewModel.mSelectTypes_Sex)) {
                     BottomSheetAdapter.createBottomSheet(getBaseActivity()
@@ -462,14 +460,14 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
                 });
                 break;
 
-            case R.id.ll_hanging_ring_date:
-                //挂环日期
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
-                    llHangingRingDate.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                    mBasePigeonViewModel.llHangingRingDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                    btnState();
-                });
-                break;
+//            case R.id.ll_hanging_ring_date:
+//                //挂环日期
+//                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+//                    llHangingRingDate.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+//                    mBasePigeonViewModel.llHangingRingDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+//                    btnState();
+//                });
+//                break;
             case R.id.ll_lineage:
                 //血统
                 mDialogLineage = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()

@@ -3,7 +3,6 @@ package com.cpigeon.book.module.racing;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
@@ -70,7 +69,7 @@ public class BreedPigeonEntryFragment2 extends BasePigeonEntryFragment {
     protected void initData() {
         super.initData();
         setTitle("种鸽录入");
-        llHangingRingDate.setVisibility(View.VISIBLE);
+//        llHangingRingDate.setVisibility(View.VISIBLE);
 
         mBreedPigeonEntryViewModel.isCanCommit();
 
