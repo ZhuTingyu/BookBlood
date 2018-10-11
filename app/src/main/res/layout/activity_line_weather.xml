@@ -599,6 +599,7 @@
             android:layout_centerHorizontal="true"
             android:clickable="true"
             android:src="@drawable/line_we_close" />
+
     </RelativeLayout>
 
     <!--归巢地   -->

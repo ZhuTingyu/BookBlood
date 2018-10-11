@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +17,9 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
-import com.base.widget.magicindicator.MagicIndicator;
-import com.base.widget.magicindicator.ViewPagerHelper;
-import com.base.widget.magicindicator.buildins.commonnavigator.CommonNavigator;
-import com.base.widget.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
-import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
-import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
-import com.cpigeon.book.base.BaseTabFragment;
-import com.cpigeon.book.module.home.goodpigeon.adpter.GoodPigeonListAdapter;
 import com.cpigeon.book.module.home.goodpigeon.viewmodel.GoodPigeonHomeViewModel;
 import com.cpigeon.book.widget.FragmentTabView;
 import com.cpigeon.book.widget.stats.StatView;
@@ -39,11 +27,11 @@ import com.cpigeon.book.widget.stats.StatView;
 import java.util.List;
 
 /**
+ * 铭鸽库
  * Created by Zhu TingYu on 2018/9/14.
  */
 
 public class GoodPigeonHomeFragment extends BaseBookFragment {
-
 
     protected List<String> mTitles = Lists.newArrayList();
     protected List<Fragment> mFragments = Lists.newArrayList();
@@ -57,8 +45,6 @@ public class GoodPigeonHomeFragment extends BaseBookFragment {
     private StatView mStat1;
     private StatView mStat2;
     private StatView mStat3;
-
-
 
     @Override
     public void onAttach(Context context) {
