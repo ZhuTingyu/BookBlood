@@ -15,12 +15,10 @@ import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
-import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.event.OpenServiceEvent;
 import com.cpigeon.book.model.entity.ServiceEntity;
-import com.cpigeon.book.module.menu.service.viewmodel.OpenServiceViewModel;
 import com.cpigeon.book.module.menu.service.viewmodel.PayServiceOrderViewModel;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
 
@@ -80,9 +78,9 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
                 if (psw.length() == 6) {
                     mBaseActivity.setProgressVisible(true);
                     mViewModel.mPassword = psw;
-                    if(mIsOpen){
+                    if (mIsOpen) {
                         mViewModel.payOder();
-                    }else {
+                    } else {
                         mViewModel.renewalPayOder();
                     }
                 }
@@ -99,20 +97,7 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
 
         mViewModel.getError().observe(this, restErrorInfo -> {
             mBaseActivity.setProgressVisible(false);
-            String error = null;
-            if (restErrorInfo.code == 999) {
-                error = "已开通此服务";
-            } else if (restErrorInfo.code == 1001) {
-                error = "订单不存在";
-            } else if (restErrorInfo.code == 1002) {
-                error = "余额不足";
-            } else if (restErrorInfo.code == 1003) {
-                error = "余额扣除失败";
-            } else if (restErrorInfo.code == 1004) {
-                error = "订单回调失败";
-            }
-
-            DialogUtils.createErrorDialog(mBaseActivity, error);
+            DialogUtils.createErrorDialog(mBaseActivity, restErrorInfo.message);
         });
 
         dialog.setOnShowListener(dialog1 -> {
