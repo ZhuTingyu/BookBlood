@@ -86,7 +86,7 @@ public class FlyBackRecordAdapter extends BaseExpandAdapter {
         double score = (double) expandEntity.order / (double) expandEntity.getFlyCount();
         helper.setText(R.id.tvScore, Utils.getString(R.string.text_score, MathUtil.doubleformat(score, 3)));
         helper.setText(R.id.tvColor, Utils.getString(R.string.text_feather, expandEntity.getPigeonPlumeName()));
-        helper.setText(R.id.tvBlood, Utils.getString(R.string.text_blood, expandEntity.getPigeonBloodName()));
+        helper.setText(R.id.tvBlood, Utils.getString(R.string.text_blood_content, expandEntity.getPigeonBloodName()));
         helper.itemView.setOnClickListener(v -> {
             if(!mIsEnd){
                 PigeonEntity pigeonEntity = new PigeonEntity();

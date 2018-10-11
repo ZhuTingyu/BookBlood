@@ -22,13 +22,13 @@ import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.basepigeon.BasePigeonDetailsFragment;
+import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.feedpigeon.GrowthReportFragment;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.makebloodbook.PreviewsBookFragment;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
-import com.cpigeon.book.module.racing.BreedPigeonEntryFragment2;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -115,11 +115,11 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             public void add(int x, int y) {
 
                 if (x == mFamilyTreeView.getStartGeneration()) {
-                    BreedPigeonEntryFragment2.start(getBaseActivity()
+                    InputPigeonFragment.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , mBookViewModel.foodId
                             , mBookViewModel.pigeonId
-                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment2.TYPE_SEX_MALE : BreedPigeonEntryFragment2.TYPE_SEX_FEMALE
+                            , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
                             , 0);
                 } else {
 
@@ -128,11 +128,11 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
 
-                    BreedPigeonEntryFragment2.start(getBaseActivity()
+                    InputPigeonFragment.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment2.TYPE_SEX_MALE : BreedPigeonEntryFragment2.TYPE_SEX_FEMALE
+                            , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
                             , 0);
 
                 }
@@ -391,6 +391,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                                 tvFootSource.setText(mBreedPigeonModifyViewModel.mSelectTypes_Source.get(p).getTypeName());
 
                                 mBreedPigeonModifyViewModel.mPigeonEntity.setSourceID(mBreedPigeonModifyViewModel.mSelectTypes_Source.get(p).getTypeID());
+
                                 mBreedPigeonModifyViewModel.mPigeonEntity.setSourceName(mBreedPigeonModifyViewModel.mSelectTypes_Source.get(p).getTypeName());
                                 mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                             });

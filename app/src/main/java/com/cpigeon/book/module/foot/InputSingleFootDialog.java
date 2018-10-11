@@ -25,6 +25,7 @@ import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.module.select.SelectPigeonFragment;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
@@ -46,6 +47,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     private TextView mTvYear;
     private TextView mTvArea;
     private TextView mTvSwitch;
+    private TextView mTvChoose;
     private EditText mEdFoot;
     private boolean isStandard = true;
     private boolean isHaveStandard = true;
@@ -54,6 +56,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     List<String> foots;
     private boolean mKeyboardIsOpen;
     private boolean isChina = true;
+    private boolean isCanChoose = true;
 
 
     @Override
@@ -63,13 +66,11 @@ public class InputSingleFootDialog extends BaseDialogFragment {
 
     @Override
     protected void initView(Dialog dialog) {
-
-        if(getArguments() != null){
-            isChina = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN, true);
-        }
+        isChina = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN, true);
+        isCanChoose = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN_2, true);
 
 
-        KeyboardUtils.registerSoftInputChangedListener(getActivity(),isOpen -> {
+        KeyboardUtils.registerSoftInputChangedListener(getActivity(), isOpen -> {
             mKeyboardIsOpen = isOpen;
         });
 
@@ -79,6 +80,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         mTvYear = dialog.findViewById(R.id.tvYear);
         mTvArea = dialog.findViewById(R.id.tvArea);
         mTvSwitch = dialog.findViewById(R.id.tvSwitch);
+        mTvChoose = dialog.findViewById(R.id.tvChoose);
         mEdFoot = dialog.findViewById(R.id.edFoot);
 
         getYears();
@@ -96,7 +98,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             }
         }
 
-        if(isChina){
+        if (isChina) {
             if (foots.size() == 3) {
                 isStandard = true;
                 if (!Lists.isEmpty(foots)) {
@@ -110,16 +112,16 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                     mEdFoot.setText(foots.get(0));
                 }
             }
-        }else {
+        } else {
             isStandard = false;
-            if (!Lists.isEmpty(foots)){
+            if (!Lists.isEmpty(foots)) {
                 mTvYear.setText(foots.get(0));
                 mEdFoot.setText(foots.get(1));
             }
         }
 
 
-        if(isChina){
+        if (isChina) {
             if (isStandard) {
                 mTvSwitch.setText(R.string.text_custom_foot_ring_number);
                 mTvYear.setVisibility(View.VISIBLE);
@@ -137,7 +139,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                 mGpFoot.clearFocus();
                 mEdFoot.requestFocus();
             }
-        }else {
+        } else {
             mTvSwitch.setVisibility(View.GONE);
             mTvYear.setVisibility(View.VISIBLE);
             mTvArea.setVisibility(View.GONE);
@@ -184,14 +186,14 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                         ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
                     }
                 } else {
-                    if(isChina){
+                    if (isChina) {
                         if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
                             mOnFootStringFinishListener.foots(mEdFoot.getText().toString());
                             hide();
                         } else {
                             ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
                         }
-                    }else {
+                    } else {
                         if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
                             mOnFootStringFinishListener.foots(Utils.getString(R.string.text_standard_foot_2
                                     , mTvYear.getText().toString()
@@ -207,6 +209,13 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             }
 
         });
+
+        if (isCanChoose) {
+            mTvChoose.setVisibility(View.VISIBLE);
+            mTvChoose.setOnClickListener(v -> {
+                SelectPigeonFragment.start(getBaseActivity(), SelectPigeonFragment.CODE_SELECT);
+            });
+        }
 
         mImgClose.setOnClickListener(v -> {
             hide();
@@ -268,16 +277,6 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         window.setAttributes(lp);
     }
 
-    public interface OnFootStringFinishListener {
-        void foots(String foot);
-    }
-
-    private OnFootStringFinishListener mOnFootStringFinishListener;
-
-    public void setOnFootStringFinishListener(OnFootStringFinishListener onFootStringFinishListener) {
-        mOnFootStringFinishListener = onFootStringFinishListener;
-    }
-
     public void setFoots(List<String> foots) {
         this.foots = foots;
     }
@@ -298,14 +297,15 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        if(mKeyboardIsOpen){
+        if (mKeyboardIsOpen) {
             KeyboardUtils.toggleSoftInput();
         }
     }
 
-    public static void show(FragmentManager fragmentManager, String footNumber, boolean isChina ,OnFootStringFinishListener onFootStringFinishListener){
+    public static void show(FragmentManager fragmentManager, String footNumber, boolean isChina, boolean isCanChoose, OnFootStringFinishListener onFootStringFinishListener) {
         Bundle bundle = new Bundle();
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isChina);
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN_2, isCanChoose);
         InputSingleFootDialog inputSingleFootDialog = new InputSingleFootDialog();
         inputSingleFootDialog.setArguments(bundle);
         inputSingleFootDialog.setFootNumber(footNumber);
@@ -313,7 +313,19 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         inputSingleFootDialog.show(fragmentManager);
     }
 
-    public static void show(FragmentManager fragmentManager, String footNumber,OnFootStringFinishListener onFootStringFinishListener){
-        show(fragmentManager, footNumber, true, onFootStringFinishListener);
+    public static void show(FragmentManager fragmentManager, String footNumber, OnFootStringFinishListener onFootStringFinishListener) {
+        show(fragmentManager, footNumber, true, true, onFootStringFinishListener);
     }
+
+    public interface OnFootStringFinishListener {
+        void foots(String foot);
+    }
+
+    private OnFootStringFinishListener mOnFootStringFinishListener;
+
+    public void setOnFootStringFinishListener(OnFootStringFinishListener onFootStringFinishListener) {
+        mOnFootStringFinishListener = onFootStringFinishListener;
+    }
+
+
 }

@@ -10,12 +10,13 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.MyApp;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonCurrencyEntity;
+import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
+import com.cpigeon.book.module.breedpigeon.InputBreedInBookFragment;
 import com.cpigeon.book.module.feedpigeon.FeedPigeonRecordListFragment;
 import com.cpigeon.book.module.foot.FootAdminAddMultipleFragment;
 import com.cpigeon.book.module.foot.FootAdminSingleFragment;
 import com.cpigeon.book.module.menu.SignFragment;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
-import com.cpigeon.book.module.racing.BreedPigeonEntryFragment2;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 
 /**
@@ -57,7 +58,7 @@ public class MyPigeonCurrencyAdapter extends BaseQuickAdapter<PigeonCurrencyEnti
                 } else if (item.getSname().equals(mContext.getString(R.string.str_gb_entry_breed_pigeon))) {
                     //录入种鸽
 //                    BreedPigeonEntryFragment.start(getBaseActivity());
-                    BreedPigeonEntryFragment2.start(getBaseActivity());
+                    InputBreedInBookFragment.start(getBaseActivity());
 
                 } else if (item.getSname().equals(mContext.getString(R.string.str_gb_entry_racing_pigeon))) {
                     //录入赛鸽

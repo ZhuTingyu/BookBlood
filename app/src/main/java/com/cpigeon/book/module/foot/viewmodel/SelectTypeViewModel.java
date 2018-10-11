@@ -21,17 +21,21 @@ public class SelectTypeViewModel extends BaseViewModel {
     public static final String TYPE_EYE = "1";//眼砂
     public static final String TYPE_FOOT_RING = "2";//足环类型
     public static final String TYPE_PIGEON = "3";//信鸽类型
-    public static final String TYPE_COLOR_FEATHER = "4";//信鸽羽色
-    public static final String TYPE_PIGEON_BLOOD = "5";//信鸽血统
-    public static final String TYPE_SEX = "6";//信鸽性别
-    public static final String TYPE_PIGEON_IMG = "7";//信鸽图片类型
-    public static final String TYPE_FOOT_SOURCE = "8";//足环来源
-    public static final String TYPE_PIGEON_SOURCE = "9";//信鸽来源
-    public static final String STATE_FOOT_RING = "10";//足环状态
-    public static final String STATE_STATE = "11";//信鸽状态
-    public static final String STATE_MEDICATE = "12";//用药后状态
-    public static final String STATE_TRAIN = "13";//训鸽状态
+    public static final String TYPE_SEX = "4";//信鸽性别
+    public static final String TYPE_PIGEON_IMG = "5";//信鸽图片类型
+    public static final String TYPE_FOOT_SOURCE = "6";//足环来源
+    public static final String TYPE_PIGEON_SOURCE = "7";//信鸽来源
+    public static final String STATE_FOOT_RING = "8";//足环状态
+    public static final String STATE_STATE = "9";//信鸽状态
+    public static final String STATE_MEDICATE = "10";//用药后状态
+    public static final String STATE_TRAIN = "11";//训鸽状态
+    public static final String VACCINE_NAME = "12";//疫苗名称
+    public static final String VACCINE_REASON = "13";//疫苗注射原因
     public static final String STATE_PLAY_ORG = "14";//赛事组织
+    public static final String TYPE_COLOR_FEATHER = "15";//信鸽羽色
+    public static final String TYPE_PIGEON_BLOOD = "16";//信鸽血统
+    public static final String LINESS_NAME = "17";//信鸽血统
+    public static final String DRUG_NAME = "18";//信鸽血统
 
 
     public String selectType;
@@ -50,6 +54,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_State = new MutableLiveData<>();//信鸽状态
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Medicate = new MutableLiveData<>();//用药后的状态
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_ImgType = new MutableLiveData<>();//图片类型
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_PigeonType = new MutableLiveData<>();//信鸽类型
 
 
     public void setSelectType(String type) {
@@ -162,6 +167,15 @@ public class SelectTypeViewModel extends BaseViewModel {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_MEDICATE), r -> {
             if (r.isOk()) {
                 mSelectType_Medicate.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取 信鸽类型
+    public void getPigeonType() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON), r -> {
+            if (r.isOk()) {
+                mSelectType_PigeonType.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

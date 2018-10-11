@@ -387,7 +387,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
             case R.id.ll_pigeon_name:
                 //鸽名
                 mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.text_pleas_input_pigeon_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mBasePigeonViewModel.pigeonName = content;
                             llPigeonName.setRightText(content);
                             mDialogMoney.hide();

@@ -170,6 +170,8 @@
     <string name="pigeon_breed_add">TXGP_Pigeon_AddBreed</string>
     <!--修改种鸽信息-->
     <string name="pigeon_breed_modify">TXGP_Pigeon_EditBreed</string>
+    <!--修改赛鸽信息-->
+    <string name="pigeon_racing_modify">TXGP_Pigeon_EditPigeon</string>
 
     <!--种鸽列表，搜索-->
     <string name="pigeon_breed_search">TXGP_FootRing_SelectAll</string>

@@ -286,7 +286,8 @@
     <string name="text_add_play_pigeon">添加赛鸽</string>
     <string name="text_go_choose">去选择</string>
     <string name="text_foot_input_price">足环金额录入</string>
-    <string name="text_pigeon_name">请输入鸽子名称</string>
+    <string name="text_pleas_input_pigeon_name">请输入鸽子名称</string>
+    <string name="text_pigeon_name">鸽名</string>
     <string name="text_pigeon_loft_name">请输入鸽舍名称</string>
 
     <string name="text_pigeon_lineage">血统添加</string>
@@ -295,6 +296,7 @@
     <string name="text_feather">羽色:%1$s</string>
     <string name="text_feather_count">羽数</string>
     <string name="text_foot_source">录入足环来源</string>
+    <string name="text_source">来源</string>
     <string name="text_all_photo">全部照片</string>
 
 
@@ -395,7 +397,8 @@
     <string name="text_score">积分:%1$s</string>
     <string name="text_all_score">总积分:%1$s</string>
     <string name="text_all_speed">总分速:%1$s m/min</string>
-    <string name="text_blood">血统:%1$s</string>
+    <string name="text_blood_content">血统:%1$s</string>
+    <string name="text_blood">血统</string>
     <string name="text_foot_number">足环号码</string>
     <string name="text_input_please">请输入</string>
     <string name="text_input_select">请选择</string>
@@ -613,6 +616,15 @@
     <string name="str_line_weather">中鸽网赛线天气</string>
     <string name="text_ring_unit">个</string>
     <string name="text_pigeon_unit">羽</string>
+    <string name="text_base_info">基础信息</string>
+    <string name="text_addition_info">附加信息</string>
+    <string name="text_pigeon_type">信鸽类型</string>
+    <string name="text_pleas_input_blood">请输入血统</string>
+    <string name="text_father_ring_number">父环号</string>
+    <string name="text_mother_ring_number">母足环</string>
+    <string name="text_birth_time">出壳日期</string>
+    <string name="text_set_ring_time">挂环日期</string>
+    <string name="text_pigeon_input">信鸽录入</string>
 
 
 </resources>

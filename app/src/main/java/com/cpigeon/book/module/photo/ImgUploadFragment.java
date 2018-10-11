@@ -1,40 +1,19 @@
 package com.cpigeon.book.module.photo;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
-import com.base.util.RxUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
-import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
-import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonEntryViewModel;
-import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
-import com.cpigeon.book.module.photo.viewmodel.ImgUploadViewModel;
-import com.cpigeon.book.util.TextViewUtil;
-import com.cpigeon.book.widget.InputBoxView;
-import com.cpigeon.book.widget.LineInputListLayout;
-import com.cpigeon.book.widget.LineInputView;
 
-import java.util.List;
-
-import butterknife.BindView;
 import butterknife.OnClick;
 import cn.qqtheme.framework.picker.OptionPicker;
 

@@ -38,7 +38,6 @@ import com.cpigeon.book.module.home.sharehall.ShareHallFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.module.menu.smalltools.SmallToolsHomeFragment;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
-import com.cpigeon.book.module.racing.BreedPigeonEntryFragment2;
 import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 import com.cpigeon.book.module.trainpigeon.NewTrainPigeonFragment;
 import com.cpigeon.book.widget.BottomAddTabView;

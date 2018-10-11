@@ -29,8 +29,8 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
+import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
-import com.cpigeon.book.module.racing.BreedPigeonEntryFragment2;
 import com.cpigeon.book.widget.BookRootLayout;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
@@ -173,7 +173,7 @@ public class PreviewsBookFragment extends BaseBookFragment {
 
                 if (x == mFamilyTreeView.getStartGeneration()) {
 
-                    BreedPigeonEntryFragment2.start(getBaseActivity()
+                    InputPigeonFragment.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
@@ -187,18 +187,18 @@ public class PreviewsBookFragment extends BaseBookFragment {
                     }
 
 
-                    BreedPigeonEntryFragment2.start(getBaseActivity()
+                    InputPigeonFragment.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                            , FamilyTreeView.isMale(y) ? BreedPigeonEntryFragment2.TYPE_SEX_MALE : BreedPigeonEntryFragment2.TYPE_SEX_FEMALE
+                            , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
                             , CODE_ADD_PIGEON);
                 }
             }
 
             @Override
             public void showInfo(int x, int y, PigeonEntity breedPigeonEntity) {
-                BreedPigeonEntryFragment2.start(getBaseActivity()
+                InputPigeonFragment.start(getBaseActivity()
                         , breedPigeonEntity != null ? breedPigeonEntity.getPigeonID() : StringUtil.emptyString()
                         , StringUtil.emptyString()
                         , StringUtil.emptyString()
