@@ -13,8 +13,11 @@ import com.base.BaseFragment;
 import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.CurrencyExchangeEntity;
+import com.cpigeon.book.model.entity.ServiceEntity;
 import com.cpigeon.book.module.menu.mycurrency.adapter.PigeonCurrencyExchangeAdapter;
 import com.cpigeon.book.module.menu.mycurrency.viewmodel.PigeonCurrencyViewModel;
+import com.cpigeon.book.module.menu.service.ChoosePayWayDialog;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
@@ -62,6 +65,22 @@ public class PigeonCurrencyExchangeFragment extends BaseFragment {
             mAdapter.getData().clear();
             mPigeonCurrencyViewModel.ecchangePi = 1;
             mPigeonCurrencyViewModel.getTXGP_GeBi_DuiHuan_ListData();
+        });
+
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+
+
+            CurrencyExchangeEntity mCurrencyExchangeEntity = (CurrencyExchangeEntity) adapter.getItem(position);
+
+            ServiceEntity item = new ServiceEntity.Builder()
+                    .sid(mCurrencyExchangeEntity.getSid())
+                    .danwei(mCurrencyExchangeEntity.getDanwei())
+                    .score(mCurrencyExchangeEntity.getGb())
+                    .num(mCurrencyExchangeEntity.getNumber())
+                    .sname(mCurrencyExchangeEntity.getSname())
+                    .build();
+            ChoosePayWayDialog.show(item, false, getBaseActivity().getSupportFragmentManager());
+
         });
 
 //        mAdapter.setOnLoadMoreListener(() -> {

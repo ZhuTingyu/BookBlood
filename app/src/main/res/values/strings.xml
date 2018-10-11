@@ -613,6 +613,10 @@
     <string name="str_line_weather">中鸽网赛线天气</string>
     <string name="text_ring_unit">个</string>
     <string name="text_pigeon_unit">羽</string>
+    <string name="str_msg">消息</string>
+
+    <string name="str_recycle_bin">回收站</string>
+    <string name="str_recycle_bin_empty">清空</string>
 
 
 </resources>

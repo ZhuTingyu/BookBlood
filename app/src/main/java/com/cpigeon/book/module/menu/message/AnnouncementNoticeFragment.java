@@ -55,11 +55,12 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = findViewById(R.id.list);
 
-        setTitle("公告通知");
-        setToolbarRight("统计", item -> {
-            mViewModel.getTXGP_GongGao_CountData();
-            return true;
-        });
+        setTitle(getString(R.string.test_announcement_notice));
+
+//        setToolbarRight("统计", item -> {
+//            mViewModel.getTXGP_GongGao_CountData();
+//            return true;
+//        });
 
         mAdapter = new AnnouncementNoticeAdapter(null);
 
@@ -82,9 +83,10 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
             mViewModel.getTXGP_GetGongGaoData();
         }, mRecyclerView.getRecyclerView());
 
+        setProgressVisible(true);
         mViewModel.getTXGP_GetGongGaoData();
 
-        mViewModel.getTXGP_GongGao_CountData();
+//        mViewModel.getTXGP_GongGao_CountData();
     }
 
 
@@ -92,10 +94,12 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.announcementNoticeData.observe(this, datas -> {
+            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {
+            setProgressVisible(false);
             mAdapter.setEmptyText(s);
         });
 
@@ -103,7 +107,7 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
             mAdapter.getData().get(mViewModel.changePosition).setIsread("1");
             mAdapter.notifyItemChanged(mViewModel.changePosition);
 
-            mViewModel.getTXGP_GongGao_CountData();
+//            mViewModel.getTXGP_GongGao_CountData();
         });
 
         mViewModel.mMsgCountData.observe(this, msgCountEntity -> {

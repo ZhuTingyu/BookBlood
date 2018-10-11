@@ -54,12 +54,12 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle("鸽友消息");
+        setTitle(getString(R.string.test_pigeon_friend_msg));
 
-        setToolbarRight("统计", item -> {
-            mViewModel.getTXGP_Msg_CountData();
-            return true;
-        });
+//        setToolbarRight("统计", item -> {
+//            mViewModel.getTXGP_Msg_CountData();
+//            return true;
+//        });
 
         mRecyclerView = findViewById(R.id.list);
 
@@ -77,6 +77,7 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
             mViewModel.getTXGP_GetMsgListData();
         }, mRecyclerView.getRecyclerView());
 
+        setProgressVisible(true);
         mViewModel.getTXGP_GetMsgListData();
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
@@ -86,17 +87,19 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
             mViewModel.getTXGP_Msg_DetailData(mPigeonFriendMsgListEntity.getId());
         });
 
-        mViewModel.getTXGP_Msg_CountData();
+//        mViewModel.getTXGP_Msg_CountData();
     }
 
     @Override
     protected void initObserve() {
 
         mViewModel.pigeonFriendMsgListData.observe(this, datas -> {
+            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {
+            setProgressVisible(false);
             mAdapter.setEmptyText(s);
         });
 
@@ -104,7 +107,7 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
             mAdapter.getData().get(mViewModel.changePosition).setIsread("1");
             mAdapter.notifyItemChanged(mViewModel.changePosition);
 
-            mViewModel.getTXGP_Msg_CountData();
+//            mViewModel.getTXGP_Msg_CountData();
         });
 
         mViewModel.mMsgCountData.observe(this, msgCountEntity -> {

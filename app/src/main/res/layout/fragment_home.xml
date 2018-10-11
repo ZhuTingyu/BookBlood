@@ -78,24 +78,26 @@
 
 
                 <com.cpigeon.book.widget.SimpleTitleView
-                    android:id="@+id/sTvFeedPigeonRecord"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
-                    app:simpleTitleView_image="@mipmap/ic_feed_pigeon_record"
-                    app:simpleTitleView_image_size="40dp"
-                    app:simpleTitleView_text="@string/text_feed_pigeon_record" />
-
-                <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvTrainRecord"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentLeft="true"
+
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_train_record"
                     app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_text="@string/text_train_record" />
+
+
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvFeedPigeonRecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
+                    app:simpleTitleView_image="@mipmap/ic_feed_pigeon_record"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_feed_pigeon_record" />
 
 
                 <com.cpigeon.book.widget.SimpleTitleView

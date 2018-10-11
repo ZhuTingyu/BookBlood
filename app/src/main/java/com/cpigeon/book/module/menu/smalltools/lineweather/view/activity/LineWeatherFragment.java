@@ -418,6 +418,7 @@ public class LineWeatherFragment extends BaseBookFragment {
                     return;
                 }
 
+                setProgressVisible(true);
                 hintLine();
 
                 String sfdLo = LocationFormatUtils.GPS2AjLocation(sureSfdLo);

@@ -1,9 +1,7 @@
 package com.cpigeon.book.module.menu.adapter;
 
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
@@ -32,8 +30,8 @@ public class AnnouncementNoticeAdapter extends BaseQuickAdapter<AnnouncementNoti
     @Override
     protected void convert(BaseViewHolder helper, AnnouncementNoticeEntity item) {
 
-        TextView tv_circle = helper.getView(R.id.tv_circle);
-        tv_circle.setVisibility(View.GONE);
+//        TextView tv_circle = helper.getView(R.id.tv_circle);
+//        tv_circle.setVisibility(View.GONE);
 
         helper.setTextView(R.id.tv_title, item.getTitle());
         helper.setTextView(R.id.tv_time, item.getDate());
@@ -41,17 +39,17 @@ public class AnnouncementNoticeAdapter extends BaseQuickAdapter<AnnouncementNoti
 
 
 
-        TextView tv_title = helper.getView(R.id.tv_title);
-
-        if (item.getIsread().equals("1")) {
-            //消息已读
-            tv_circle.setVisibility(View.GONE);
-            tv_title.setTextColor(mContext.getResources().getColor(R.color.color_999999));
-        } else {
-            //消息未读
-            tv_circle.setVisibility(View.VISIBLE);
-            tv_title.setTextColor(mContext.getResources().getColor(R.color.color_010101));
-        }
+//        TextView tv_title = helper.getView(R.id.tv_title);
+//
+//        if (item.getIsread().equals("1")) {
+//            //消息已读
+//            tv_circle.setVisibility(View.GONE);
+//            tv_title.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+//        } else {
+//            //消息未读
+//            tv_circle.setVisibility(View.VISIBLE);
+//            tv_title.setTextColor(mContext.getResources().getColor(R.color.color_010101));
+//        }
 
         mWebView = ((WebView) helper.getView(R.id.it_webview));
         mWebView.setOnClickListener(null);
