@@ -36,6 +36,7 @@ public class SelectPigeonFragment extends BaseBookFragment {
     public static String TYPE_SHARE_PIGEON_TO_SHARE = "TYPE_SHARE_PIGEON_TO_SHARE";
     public static String TYPE_SELECT_PIGEON_TO_ADD_FLY_BACK = "TYPE_SELECT_PIGEON_TO_ADD_FLY_BACK";
     public static int CODE_SEARCH = 0x321;
+    public static int CODE_SELECT = 0x123;
 
     XRecyclerView mRecyclerView;
     SelectPigeonAdapter mAdapter;

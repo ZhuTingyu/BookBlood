@@ -65,6 +65,10 @@ public class BasePigeonViewModel extends BaseViewModel {
     //状态
     public List<SelectTypeEntity> mSelectTypes_State;
     public String stateId = "";
+    //信鸽类型
+    public List<SelectTypeEntity> mSelectTypes_PigeonType;
+    public String pigeonType;
+
 
     //图片类型
     public List<SelectTypeEntity> mSelectTypes_ImgType;

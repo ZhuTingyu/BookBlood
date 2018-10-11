@@ -130,7 +130,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         lvFoot.setOnClickListener(v -> {
-            InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), lvFoot.getContent(), mViewModel.isChina(), foot -> {
+            InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), lvFoot.getContent(), mViewModel.isChina(),false, foot -> {
                 lvFoot.setRightText(foot);
             });
         });
