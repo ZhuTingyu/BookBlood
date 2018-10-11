@@ -9,10 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -80,7 +78,8 @@ public class AWeekWeatherFragment extends BaseBookFragment {
 
         dialogFragment = new ShareDialogFragment();
 
-        setToolbarRightImage(R.drawable.ic_share_line_weather, item -> {
+//        setToolbarRightImage(R.drawable.ic_share_line_weather, item -> {
+        setToolbarRight("分享", item -> {
             showLoading();
             getImageByMap();
 

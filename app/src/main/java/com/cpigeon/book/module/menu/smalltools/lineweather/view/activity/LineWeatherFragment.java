@@ -418,6 +418,7 @@ public class LineWeatherFragment extends BaseBookFragment {
                     return;
                 }
 
+                setProgressVisible(true);
                 hintLine();
 
                 String sfdLo = LocationFormatUtils.GPS2AjLocation(sureSfdLo);
@@ -592,7 +593,6 @@ public class LineWeatherFragment extends BaseBookFragment {
             }
         }
     }
-
 
     //选择定位点
     private void selectAnchorPoint(int tag) {
@@ -792,7 +792,16 @@ public class LineWeatherFragment extends BaseBookFragment {
                     double la = geocodeResult.getGeocodeAddressList().get(0).getLatLonPoint().getLatitude();
                     double lo = geocodeResult.getGeocodeAddressList().get(0).getLatLonPoint().getLongitude();
 
-                    z_et_fly_place.setText(geocodeResult.getGeocodeQuery().getLocationName());
+                    switch (tag) {
+                        case 1:
+                            z_et_fly_place.setText(geocodeResult.getGeocodeQuery().getLocationName());
+                            break;
+                        case 2:
+                            z_et_homing_place.setText(geocodeResult.getGeocodeQuery().getLocationName());
+                            break;
+                    }
+
+
                     initStartStop(new LatLng(la, lo), tag, true, true);
 
                 } catch (Exception e) {

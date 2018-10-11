@@ -189,10 +189,10 @@
     <string name="text_yet_auth">已认证</string>
     <string name="title_id_card">身份证认证</string>
     <string name="text_foot_manger">足环管理</string>
-    <string name="text_breed_pigeon_manger">种鸽管理</string>
-    <string name="text_train_record">训鸽记录</string>
-    <string name="text_match_pigeon_manger">赛鸽管理</string>
-    <string name="text_feed_pigeon_record">养鸽记录</string>
+    <string name="text_breed_pigeon_manger">我的种鸽</string>
+    <string name="text_train_record">赛鸽训练</string>
+    <string name="text_match_pigeon_manger">我的赛鸽</string>
+    <string name="text_feed_pigeon_record">爱鸽管理</string>
     <string name="text_ai_pigeon_house">智能鸽舍</string>
     <string name="text_skip">跳过</string>
     <string name="text_launch_sikp">跳过 %d</string>
@@ -446,7 +446,7 @@
     <string name="text_current_wind_angle">当前风向</string>
     <string name="text_current_humidity">当前湿度</string>
     <string name="text_current_body_temp">体温</string>
-    <string name="text_ill_time">生病日期</string>
+    <string name="text_ill_time">患病日期</string>
     <string name="text_user_time">使用时期</string>
     <string name="text_user_result">使用效果</string>
     <string name="text_record_time">记录日期</string>
@@ -625,6 +625,9 @@
     <string name="text_birth_time">出壳日期</string>
     <string name="text_set_ring_time">挂环日期</string>
     <string name="text_pigeon_input">信鸽录入</string>
+    <string name="str_msg">消息</string>
+    <string name="str_recycle_bin">回收站</string>
+    <string name="str_recycle_bin_empty">清空</string>
 
 
 </resources>

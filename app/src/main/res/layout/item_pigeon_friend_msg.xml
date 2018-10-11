@@ -22,11 +22,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="这是标题标题图"
-            android:textColor="@color/color_999999"
+            android:textColor="@color/color_010101"
             android:textSize="@dimen/medium_text_size" />
 
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_circle"
             android:layout_width="8dp"
             android:background="@drawable/bg_circle"

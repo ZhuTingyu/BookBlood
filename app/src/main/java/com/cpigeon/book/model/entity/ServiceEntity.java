@@ -29,6 +29,18 @@ public class ServiceEntity implements Parcelable {
     private String sintro;
     private String imgurl;
 
+    private ServiceEntity(Builder builder) {
+        setScore(builder.score);
+        setNum(builder.num);
+        setSname(builder.sname);
+        setDanwei(builder.danwei);
+        setSid(builder.sid);
+        setPrice(builder.price);
+        setSintro(builder.sintro);
+        setImgurl(builder.imgurl);
+    }
+
+
     public String getImgurl() {
         return imgurl;
     }
@@ -135,4 +147,62 @@ public class ServiceEntity implements Parcelable {
             return new ServiceEntity[size];
         }
     };
+
+    public static final class Builder {
+        private String score;
+        private String num;
+        private String sname;
+        private String danwei;
+        private String sid;
+        private String price;
+        private String sintro;
+        private String imgurl;
+
+        public Builder() {
+        }
+
+        public Builder score(String val) {
+            score = val;
+            return this;
+        }
+
+        public Builder num(String val) {
+            num = val;
+            return this;
+        }
+
+        public Builder sname(String val) {
+            sname = val;
+            return this;
+        }
+
+        public Builder danwei(String val) {
+            danwei = val;
+            return this;
+        }
+
+        public Builder sid(String val) {
+            sid = val;
+            return this;
+        }
+
+        public Builder price(String val) {
+            price = val;
+            return this;
+        }
+
+        public Builder sintro(String val) {
+            sintro = val;
+            return this;
+        }
+
+        public Builder imgurl(String val) {
+            imgurl = val;
+            return this;
+        }
+
+        public ServiceEntity build() {
+            return new ServiceEntity(this);
+        }
+    }
 }

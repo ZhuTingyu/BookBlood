@@ -29,7 +29,7 @@ import com.cpigeon.book.module.home.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.home.viewmodel.HomeViewModel;
 import com.cpigeon.book.module.makebloodbook.SelectPigeonToMakeBookFragment;
 import com.cpigeon.book.module.menu.SignFragment;
-import com.cpigeon.book.module.menu.message.MsgActivity;
+import com.cpigeon.book.module.menu.message.MsgFragment;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.pigeonleague.PigeonToLeagueFootListFragment;
@@ -92,7 +92,8 @@ public class HomeFragment extends BaseBookFragment {
 
         setToolbarRightImage(R.drawable.svg_home_message, item -> {
             //公告通知 ，鸽友消息
-            MsgActivity.start(getBaseActivity());
+//            MsgActivity.start(getBaseActivity());
+            MsgFragment.start(getBaseActivity());
             return false;
         });
 

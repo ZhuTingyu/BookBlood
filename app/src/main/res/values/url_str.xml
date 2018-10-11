@@ -39,6 +39,15 @@
     <!--修改密码 需要验证码-->
     <string name="user_modify_psd_need">ZGW_Users_UpdatePWD</string>
 
+
+    <!--回收站 列表-->
+    <string name="recycle_bin_list">TXGP_RecycleAllData</string>
+    <!--回收站  清空-->
+    <string name="recycle_bin_empty">TXGP_EmptyData</string>
+    <!--回收站  恢复-->
+    <string name="recycle_bin_restore">TXGP_RecoveryData</string>
+
+
     <!--修改支付密码  需要验证码-->
     <string name="user_modify_psd_play">ZGW_Users_SetUserPayPwd</string>
     <!--用户登录-->
@@ -82,6 +91,8 @@
     <string name="pigeon_friend_msg_detail">TXGP_Msg_Detail</string>
     <!--鸽友消息 统计-->
     <string name="pigeon_friend_msg_count">TXGP_Msg_Count</string>
+    <!--获取公告通知和鸽友消息-->
+    <string name="notice_msg_info">TXGP_GetMSGInfo</string>
 
 
     <!--获取用户服务、帐户余额、鸽币-->

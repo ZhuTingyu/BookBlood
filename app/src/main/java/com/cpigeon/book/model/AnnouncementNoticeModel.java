@@ -3,8 +3,9 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.MsgCountEntity;
 import com.cpigeon.book.model.entity.AnnouncementNoticeEntity;
+import com.cpigeon.book.model.entity.MsgCountEntity;
+import com.cpigeon.book.model.entity.NoticeMsgInfoEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -47,6 +48,15 @@ public class AnnouncementNoticeModel {
                 }.getType())
                 .url(R.string.get_announcement_notice_detail)
                 .addBody("id", id)
+                .request();
+    }
+
+    //hl 获取公告通知和鸽友消息
+    public static Observable<ApiResponse<List<NoticeMsgInfoEntity>>> getTXGP_GetMSGInfo() {
+        return RequestData.<ApiResponse<List<NoticeMsgInfoEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<NoticeMsgInfoEntity>>>() {
+                }.getType())
+                .url(R.string.notice_msg_info)
                 .request();
     }
 }

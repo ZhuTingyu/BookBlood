@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/spacing_left_reight"
+    android:paddingRight="@dimen/spacing_left_reight">
+
+    <LinearLayout
+        android:id="@+id/ll_notice"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_ggtz" />
+
+            <ImageView
+                android:id="@+id/img_notice"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/shape_bg_corner_20_solid_red"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/test_announcement_notice"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/medium_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_time_notice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/color_4c4c4c"
+                    android:textSize="@dimen/small_text_size_2" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_notice_content"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <include layout="@layout/include_line_view_layout" />
+
+    <LinearLayout
+        android:id="@+id/ll_msg"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_gyxx" />
+
+            <ImageView
+                android:id="@+id/img_msg"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/shape_bg_corner_20_solid_red"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/test_pigeon_friend_msg"
+                    android:textColor="@color/general_text_color"
+                    android:textSize="@dimen/medium_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_time_msg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="@color/color_4c4c4c"
+                    android:textSize="@dimen/small_text_size_2" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_msg_content"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
