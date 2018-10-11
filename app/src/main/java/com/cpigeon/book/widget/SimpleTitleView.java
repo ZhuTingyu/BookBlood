@@ -58,8 +58,7 @@ public class SimpleTitleView extends LinearLayout{
             return;
         }
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.SimpleTitleView);
-        normalTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_DefaultTextColor
-                , Utils.getColor(R.color.color_text_hint));
+        normalTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_DefaultTextColor, Color.BLACK);
         pressTextColor = array.getColor(R.styleable.SimpleTitleView_simpleTitleView_PressTextColor, Color.BLACK);
         image = array.getDrawable(R.styleable.SimpleTitleView_simpleTitleView_image);
         pressImage = array.getDrawable(R.styleable.SimpleTitleView_simpleTitleView_press_image);

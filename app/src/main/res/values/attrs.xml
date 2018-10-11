@@ -164,6 +164,7 @@
         <attr name="statView_data_color" format="color"/>
         <attr name="statView_other_color" format="color"/>
         <attr name="statView_stat_w" format="dimension"/>
+        <attr name="statView_unit" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="FragmentTabView">

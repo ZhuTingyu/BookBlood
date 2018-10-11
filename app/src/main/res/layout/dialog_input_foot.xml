@@ -18,18 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imgClose"
-        style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
         android:layout_width="24dp"
-        android:layout_height="0dp"
+        android:layout_height="24dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_home_pop_close" />
+        app:srcCompat="@mipmap/ic_intput_close" />
 
     <TextView
         android:id="@+id/textView3"
@@ -78,6 +77,7 @@
         app:gpvPasswordLength="7"
         app:gpvTextColor="@color/black"
         app:gpvTextSize="25sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvYear" />
@@ -128,16 +128,18 @@
         android:id="@+id/edFoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="92dp"
+        android:maxLength="10"
         android:background="@drawable/shape_bg_edit_text_view"
+        android:hint="@string/text_pleas_input_foot_number"
+        android:textColorHint="@color/black"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
 </android.support.constraint.ConstraintLayout>

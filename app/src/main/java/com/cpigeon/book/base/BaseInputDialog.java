@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.base.BaseDialogFragment;
@@ -27,7 +28,7 @@ import com.cpigeon.book.R;
 
 public class BaseInputDialog extends BaseDialogFragment {
 
-    private ImageButton mImgClose;
+    private ImageView mImgClose;
     private TextView mTvTitle;
     protected TextView mTvFinish;
     private EditText mEdContent;
@@ -80,7 +81,7 @@ public class BaseInputDialog extends BaseDialogFragment {
         }
 
         mEdContent.requestFocus();
-        KeyboardUtils.showSoftInput(mEdContent);
+        KeyboardUtils.toggleSoftInput();
 
     }
 
@@ -142,6 +143,8 @@ public class BaseInputDialog extends BaseDialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        KeyboardUtils.hideSoftInput(getActivity());
+        if(mIsOpen){
+            KeyboardUtils.toggleSoftInput();
+        }
     }
 }

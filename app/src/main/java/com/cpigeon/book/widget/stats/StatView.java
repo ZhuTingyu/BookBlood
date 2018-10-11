@@ -26,6 +26,7 @@ public class StatView extends LinearLayout {
 
     private CircleView mCircle;
     private TextView mTvTitle;
+    private TextView mTvUnit;
     private TextView mTvCount;
     private TextView mTvScale;
     RelativeLayout mRlScale;
@@ -34,6 +35,7 @@ public class StatView extends LinearLayout {
 
     private boolean isDrawView = false;
     String mTitleString;
+    String mUnitString;
     int mDataColor;
     int mOtherColor;
 
@@ -58,6 +60,7 @@ public class StatView extends LinearLayout {
         if (attrs == null) return;
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.StatView);
         mTitleString = array.getString(R.styleable.StatView_statView_title);
+        mUnitString = array.getString(R.styleable.StatView_statView_unit);
         mDataColor = array.getColor(R.styleable.StatView_statView_data_color, Color.BLACK);
         mOtherColor = array.getColor(R.styleable.StatView_statView_other_color, Color.BLACK);
         mStatW = array.getDimensionPixelSize(R.styleable.StatView_statView_stat_w, 100);
@@ -68,7 +71,10 @@ public class StatView extends LinearLayout {
         mCircle = view.findViewById(R.id.circle);
         mTvTitle = view.findViewById(R.id.tvTitle);
         mTvCount = view.findViewById(R.id.tvCount);
+        mTvUnit = view.findViewById(R.id.tvUnit);
         mTvTitle.setText(mTitleString);
+        mTvUnit.setText(mUnitString);
+
         mTvScale = findViewById(R.id.tvScale);
         mCircle.setDataColor(mDataColor);
         mCircle.setOtherColor(mOtherColor);

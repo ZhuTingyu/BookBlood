@@ -130,13 +130,9 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         lvFoot.setOnClickListener(v -> {
-            List<String> foots = mViewModel.getFoots();
-            InputSingleFootDialog dialog = new InputSingleFootDialog();
-            dialog.setFoots(foots);
-            dialog.setOnFootStringFinishListener(foot -> {
+            InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), lvFoot.getContent(), mViewModel.isChina(), foot -> {
                 lvFoot.setRightText(foot);
             });
-            dialog.show(getBaseActivity().getSupportFragmentManager());
         });
 
         lvSource.setOnRightClickListener(lineInputView -> {
@@ -175,21 +171,15 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             mLvMotherFoot.setVisibility(View.VISIBLE);
 
             mLvFatherFoot.setOnRightClickListener(lineInputView -> {
-                InputSingleFootDialog dialog = new InputSingleFootDialog();
-                dialog.setFootNumber(mLvFatherFoot.getContent());
-                dialog.setOnFootStringFinishListener(foot -> {
+                InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvFatherFoot.getContent(), foot -> {
                     mLvFatherFoot.setRightText(foot);
                 });
-                dialog.show(getBaseActivity().getSupportFragmentManager());
             });
 
             mLvMotherFoot.setOnRightClickListener(lineInputView -> {
-                InputSingleFootDialog dialog = new InputSingleFootDialog();
-                dialog.setFootNumber(mLvMotherFoot.getContent());
-                dialog.setOnFootStringFinishListener(foot -> {
-                    mLvFatherFoot.setRightText(foot);
+                InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvMotherFoot.getContent(), foot -> {
+                    mLvMotherFoot.setRightText(foot);
                 });
-                dialog.show(getBaseActivity().getSupportFragmentManager());
             });
 
             llRoot.setOnInputViewGetFocusListener(() -> {

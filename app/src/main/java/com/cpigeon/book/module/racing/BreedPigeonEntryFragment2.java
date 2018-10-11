@@ -128,7 +128,7 @@ public class BreedPigeonEntryFragment2 extends BasePigeonEntryFragment {
             llSex.setRightImageVisible(false);
             llFeatherColor.setRightText(breedPigeonEntity.getPigeonPlumeName());
             llEyeSand.setRightText(breedPigeonEntity.getPigeonEyeName());
-            llTheirShellsDate.setRightText(breedPigeonEntity.getFootRingTime());
+            //llTheirShellsDate.setRightText(breedPigeonEntity.getFootRingTime());
             llLineage.setRightText(breedPigeonEntity.getPigeonBloodName());
             llState.setRightText(breedPigeonEntity.getStateName());
 
