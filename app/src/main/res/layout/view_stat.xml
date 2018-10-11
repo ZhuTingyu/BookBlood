@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -37,7 +38,7 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,22 +49,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="种鸽"
+                tools:text="种鸽"
                 android:textColor="@color/color_text_title"
                 android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/tv1"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tvTitle"
-                android:gravity="center"
-                android:text="--"
-                android:textColor="@color/color_text_title"
-                android:textSize="13sp" />
-
             <TextView
                 android:id="@+id/tvCount"
                 android:layout_width="wrap_content"
@@ -71,10 +59,21 @@
                 android:layout_toRightOf="@id/tv1"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="200"
+                tools:text="200"
                 android:textColor="@color/color_text_title"
                 android:textSize="13sp" />
-        </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv1"
+                android:layout_weight="1"
+                android:gravity="right"
+                tools:text="个"
+                android:textColor="@color/color_text_title"
+                android:textSize="13sp" />
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

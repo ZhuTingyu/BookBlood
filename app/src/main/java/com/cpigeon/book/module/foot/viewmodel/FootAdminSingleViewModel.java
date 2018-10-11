@@ -139,4 +139,8 @@ public class FootAdminSingleViewModel extends BaseViewModel {
         return foot;
     }
 
+    public boolean isChina(){
+        return countryId.equals("2");
+    }
+
 }

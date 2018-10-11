@@ -59,6 +59,14 @@ public final class KeyboardUtils {
         imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
     }
 
+    public static void show(final View view){
+        view.setFocusable(true);
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+    }
+
     /**
      * Hide the soft input.
      *

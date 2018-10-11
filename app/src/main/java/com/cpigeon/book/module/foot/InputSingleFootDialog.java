@@ -2,15 +2,19 @@ package com.cpigeon.book.module.foot;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.base.BaseDialogFragment;
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.picker.PickerUtil;
@@ -36,7 +40,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
 
 public class InputSingleFootDialog extends BaseDialogFragment {
 
-    private ImageButton mImgClose;
+    private ImageView mImgClose;
     private TextView mTvFinish;
     private GridPasswordView mGpFoot;
     private TextView mTvYear;
@@ -49,6 +53,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     List<String> area = Lists.newArrayList();
     List<String> foots;
     private boolean mKeyboardIsOpen;
+    private boolean isChina = true;
 
 
     @Override
@@ -58,6 +63,11 @@ public class InputSingleFootDialog extends BaseDialogFragment {
 
     @Override
     protected void initView(Dialog dialog) {
+
+        if(getArguments() != null){
+            isChina = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN, true);
+        }
+
 
         KeyboardUtils.registerSoftInputChangedListener(getActivity(),isOpen -> {
             mKeyboardIsOpen = isOpen;
@@ -80,44 +90,61 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         //初始化显示省份
         mTvArea.setText(area.get(0));
         for (int i = 1; i <= address.length; i++) {
-            if (address[i - 1].contains(UserModel.getInstance().getProvince())) {
+            if (UserModel.getInstance().getProvince().contains(address[i - 1])) {
                 mTvArea.setText(String.valueOf(i));
                 break;
             }
         }
 
-        if (foots.size() == 3) {
-            isStandard = true;
-            if (!Lists.isEmpty(foots)) {
-                mTvYear.setText(foots.get(0));
-                mTvArea.setText(foots.get(1));
-                mGpFoot.setPassword(foots.get(2));
+        if(isChina){
+            if (foots.size() == 3) {
+                isStandard = true;
+                if (!Lists.isEmpty(foots)) {
+                    mTvYear.setText(foots.get(0));
+                    mTvArea.setText(foots.get(1));
+                    mGpFoot.setPassword(foots.get(2));
+                }
+            } else if (foots.size() == 1 && StringUtil.isStringValid(foots.get(0))) {
+                isStandard = false;
+                if (!Lists.isEmpty(foots)) {
+                    mEdFoot.setText(foots.get(0));
+                }
             }
-        } else if (foots.size() == 1 && StringUtil.isStringValid(foots.get(0))) {
+        }else {
             isStandard = false;
-            if (!Lists.isEmpty(foots)) {
-                mEdFoot.setText(foots.get(0));
+            if (!Lists.isEmpty(foots)){
+                mTvYear.setText(foots.get(0));
+                mEdFoot.setText(foots.get(1));
             }
         }
 
-        if (isStandard) {
-            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
+
+        if(isChina){
+            if (isStandard) {
+                mTvSwitch.setText(R.string.text_custom_foot_ring_number);
+                mTvYear.setVisibility(View.VISIBLE);
+                mTvArea.setVisibility(View.VISIBLE);
+                mGpFoot.setVisibility(View.VISIBLE);
+                mEdFoot.setVisibility(View.GONE);
+                mEdFoot.clearFocus();
+                mGpFoot.forceInputViewGetFocus();
+            } else {
+                mTvSwitch.setText(R.string.text_standard_foot_ring_number);
+                mTvYear.setVisibility(View.GONE);
+                mTvArea.setVisibility(View.GONE);
+                mGpFoot.setVisibility(View.GONE);
+                mEdFoot.setVisibility(View.VISIBLE);
+                mGpFoot.clearFocus();
+                mEdFoot.requestFocus();
+            }
+        }else {
+            mTvSwitch.setVisibility(View.GONE);
             mTvYear.setVisibility(View.VISIBLE);
-            mTvArea.setVisibility(View.VISIBLE);
-            mGpFoot.setVisibility(View.VISIBLE);
-            mEdFoot.setVisibility(View.GONE);
-            mEdFoot.clearFocus();
-            mGpFoot.forceInputViewGetFocus();
-        } else {
-            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
-            mTvYear.setVisibility(View.GONE);
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
             mEdFoot.setVisibility(View.VISIBLE);
-            mGpFoot.clearFocus();
-            mEdFoot.requestFocus();
-            KeyboardUtils.showSoftInput(getActivity());
         }
+
 
         KeyboardUtils.toggleSoftInput();
 
@@ -157,15 +184,26 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                         ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
                     }
                 } else {
-
-                    if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
-                        mOnFootStringFinishListener.foots(mEdFoot.getText().toString());
-                        hide();
-                    } else {
-                        ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                    if(isChina){
+                        if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
+                            mOnFootStringFinishListener.foots(mEdFoot.getText().toString());
+                            hide();
+                        } else {
+                            ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                        }
+                    }else {
+                        if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
+                            mOnFootStringFinishListener.foots(Utils.getString(R.string.text_standard_foot_2
+                                    , mTvYear.getText().toString()
+                                    , mEdFoot.getText().toString()));
+                            hide();
+                        } else {
+                            ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                        }
                     }
 
                 }
+
             }
 
         });
@@ -263,5 +301,19 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         if(mKeyboardIsOpen){
             KeyboardUtils.toggleSoftInput();
         }
+    }
+
+    public static void show(FragmentManager fragmentManager, String footNumber, boolean isChina ,OnFootStringFinishListener onFootStringFinishListener){
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isChina);
+        InputSingleFootDialog inputSingleFootDialog = new InputSingleFootDialog();
+        inputSingleFootDialog.setArguments(bundle);
+        inputSingleFootDialog.setFootNumber(footNumber);
+        inputSingleFootDialog.setOnFootStringFinishListener(onFootStringFinishListener);
+        inputSingleFootDialog.show(fragmentManager);
+    }
+
+    public static void show(FragmentManager fragmentManager, String footNumber,OnFootStringFinishListener onFootStringFinishListener){
+        show(fragmentManager, footNumber, true, onFootStringFinishListener);
     }
 }

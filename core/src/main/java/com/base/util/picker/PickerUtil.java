@@ -21,12 +21,13 @@ public class PickerUtil {
 
     /**
      * 时间选择器 返回年月日
+     *
      * @param activity
-     * @param time 默认显示时间
+     * @param time     默认显示时间
      * @param listener
      */
 
-    public static void   showTimePicker(Activity activity,long time ,DatePickerDialog.OnDateSetListener listener){
+    public static void showTimePicker(Activity activity, long time, DatePickerDialog.OnDateSetListener listener) {
         Calendar now = Calendar.getInstance();
         now.setTime(new Date(time));
         DatePickerDialog dpd = DatePickerDialog.newInstance(
@@ -39,24 +40,59 @@ public class PickerUtil {
     }
 
     /**
-     * 时间选择器 返回年月日时分秒
+     * 时间选择器 返回年月日
+     *
      * @param activity
-     * @param startTimeStamp 选择的上限
-     * @param endTimeStamp 选择的的下限
-     * @param isShowEndTime 是否默认显示结束时间
+     * @param time     默认显示时间
+     * @param listener
      */
 
-    public static void showTimePickerHaveMS(Activity activity, long startTimeStamp, long endTimeStamp,boolean isShowEndTime,DateTimePicker.OnYearMonthDayTimePickListener listener){
+    public static void showTimeYMD(Activity activity, long startTimeStamp, DateTimePicker.OnYearMonthDayTimePickListener listener) {
+        DateTimePicker picker = new DateTimePicker(activity, DateTimePicker.YEAR_MONTH_DAY);
+        Date startTime = new Date(startTimeStamp);
+
+
+        Calendar startCalendar = Calendar.getInstance();
+
+        startCalendar.setTime(startTime);
+
+        Calendar endCalendar = Calendar.getInstance();
+
+        endCalendar.setTime(startTime);
+        endCalendar.add(Calendar.YEAR, -3);
+
+        picker.setDateRangeStart(startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH) + 1, startCalendar.get(Calendar.DAY_OF_MONTH));
+        picker.setDateRangeEnd(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH));
+        picker.setTimeRangeStart(0, 0);
+        picker.setTimeRangeEnd(23, 59);
+        picker.setSelectedItem(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH), 0);
+        picker.setTopLineColor(activity.getResources().getColor(R.color.colorPrimary));
+        picker.setLabelTextColor(activity.getResources().getColor(R.color.colorPrimary));
+        picker.setDividerColor(activity.getResources().getColor(R.color.colorPrimary));
+        picker.setOnDateTimePickListener(listener);
+        picker.show();
+    }
+
+    /**
+     * 时间选择器 返回年月日时分秒
+     *
+     * @param activity
+     * @param startTimeStamp 选择的上限
+     * @param endTimeStamp   选择的的下限
+     * @param isShowEndTime  是否默认显示结束时间
+     */
+
+    public static void showTimePickerHaveMS(Activity activity, long startTimeStamp, long endTimeStamp, boolean isShowEndTime, DateTimePicker.OnYearMonthDayTimePickListener listener) {
         DateTimePicker picker = new DateTimePicker(activity, DateTimePicker.HOUR_24);
         Date startTime = new Date(startTimeStamp);
         Date endTime = new Date(endTimeStamp);
 
 
-        Calendar startCalendar=Calendar.getInstance();
+        Calendar startCalendar = Calendar.getInstance();
 
         startCalendar.setTime(startTime);
 
-        Calendar endCalendar=Calendar.getInstance();
+        Calendar endCalendar = Calendar.getInstance();
 
         endCalendar.setTime(endTime);
 
@@ -64,7 +100,7 @@ public class PickerUtil {
         picker.setDateRangeEnd(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH));
         picker.setTimeRangeStart(0, 0);
         picker.setTimeRangeEnd(23, 59);
-        if(isShowEndTime){
+        if (isShowEndTime) {
             picker.setSelectedItem(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH), 0, 0);
         }
         picker.setTopLineColor(activity.getResources().getColor(R.color.colorPrimary));
@@ -76,13 +112,14 @@ public class PickerUtil {
 
     /**
      * 单项选择器
+     *
      * @param activity
      * @param data
      * @param defaultPosition 默认显示选项
      * @param listener
      */
 
-    public static void showItemPicker(Activity activity, List<String> data, int defaultPosition, OptionPicker.OnOptionPickListener listener){
+    public static void showItemPicker(Activity activity, List<String> data, int defaultPosition, OptionPicker.OnOptionPickListener listener) {
         OptionPicker picker = new OptionPicker(activity, data);
         picker.setCanceledOnTouchOutside(false);
         picker.setDividerRatio(WheelView.DividerConfig.FILL);
@@ -95,6 +132,7 @@ public class PickerUtil {
 
     /**
      * 地址选择器
+     *
      * @param activity
      * @param callback
      */

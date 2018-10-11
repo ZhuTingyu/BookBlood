@@ -254,6 +254,7 @@
     <string name="text_input_foot_numbers">足环号段录入</string>
     <string name="text_foots">%1$s ···· %2$s</string>
     <string name="text_standard_foot">%1$s-%2$s-%3$s</string>
+    <string name="text_standard_foot_2">%1$s-%2$s</string>
     <string name="text_foots_divide">-</string>
     <string name="text_foots_details">足环号段详情</string>
     <string name="text_is_delete_foot_numbers">是否删除该足环号段，删除过后号段里的所有足环将全部删除？</string>
@@ -534,7 +535,7 @@
         <item>统一足环</item>
         <item>其他足环</item>
         <item>私环</item>
-        <item>挂环中</item>
+        <item>已挂环</item>
         <item>未挂环</item>
     </string-array>
 
@@ -610,6 +611,8 @@
     <string name="str_name_homing_pigeon">点击此处查看我的全部信鸽</string>
 
     <string name="str_line_weather">中鸽网赛线天气</string>
+    <string name="text_ring_unit">个</string>
+    <string name="text_pigeon_unit">羽</string>
 
 
 </resources>

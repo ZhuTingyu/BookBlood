@@ -86,8 +86,8 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     protected LineInputView llFeatherColor;
     @BindView(R.id.ll_eye_sand)
     protected LineInputView llEyeSand;
-    @BindView(R.id.ll_their_shells_date)
-    protected LineInputView llTheirShellsDate;//出壳日期
+//    @BindView(R.id.ll_their_shells_date)
+//    protected LineInputView llTheirShellsDate;//出壳日期
     //    @BindView(R.id.ll_hanging_ring_date)
 //    protected LineInputView llHangingRingDate;//挂环日期
     @BindView(R.id.ll_lineage)
@@ -171,7 +171,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
 
 
         // 初始化出壳日期
-        llTheirShellsDate.setContent(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD));
+        //llTheirShellsDate.setContent(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD));
         mBasePigeonViewModel.theirShellsDate = TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD);
 
         //初始化 挂环日期
@@ -316,7 +316,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     private BaseInputDialog mDialogLineage;
     private BaseInputDialog mDialogMoney;
 
-    @OnClick({R.id.ll_countries, R.id.ll_foot, R.id.ll_foot_vice, R.id.ll_foot_source, R.id.ll_foot_father, R.id.ll_foot_mother, R.id.ll_pigeon_name, R.id.ll_sex, R.id.ll_feather_color, R.id.ll_eye_sand, R.id.ll_their_shells_date, R.id.ll_lineage, R.id.ll_state, R.id.sb_dont_disturb, R.id.ll_deal_price, R.id.tv_next_step, R.id.llz})
+    @OnClick({R.id.ll_countries, R.id.ll_foot, R.id.ll_foot_vice, R.id.ll_foot_source, R.id.ll_foot_father, R.id.ll_foot_mother, R.id.ll_pigeon_name, R.id.ll_sex, R.id.ll_feather_color, R.id.ll_eye_sand, R.id.ll_lineage, R.id.ll_state, R.id.sb_dont_disturb, R.id.ll_deal_price, R.id.tv_next_step, R.id.llz})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_countries:
@@ -451,14 +451,14 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
                     mSelectTypeViewModel.getSelectType_eyeSand();
                 }
                 break;
-            case R.id.ll_their_shells_date:
-                //出壳日期
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
-                    llTheirShellsDate.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
-                    mBasePigeonViewModel.theirShellsDate = year + "-" + monthOfYear + "-" + dayOfMonth;
-                    btnState();
-                });
-                break;
+//            case R.id.ll_their_shells_date:
+//                //出壳日期
+//                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+//                    //llTheirShellsDate.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
+//                    mBasePigeonViewModel.theirShellsDate = year + "-" + monthOfYear + "-" + dayOfMonth;
+//                    btnState();
+//                });
+//                break;
 
 //            case R.id.ll_hanging_ring_date:
 //                //挂环日期

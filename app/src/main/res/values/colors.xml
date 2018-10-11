@@ -5,7 +5,7 @@
 
     <color name="colorPrimaryDark">@color/gray</color>
     <color name="colorAccent">@color/gray_low</color>
-    <color name="main_home_pop_bg">#edffffff</color>
+    <color name="main_home_pop_bg">#baffffff</color>
     <color name="color_white_80">#ccffffff</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_black_30">#84000000</color>

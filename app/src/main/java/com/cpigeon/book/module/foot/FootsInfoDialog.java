@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.base.BaseDialogFragment;
@@ -27,7 +28,7 @@ import java.util.List;
 
 public class FootsInfoDialog extends BaseDialogFragment {
 
-    private ImageButton mImgClose;
+    private ImageView mImgClose;
     private TextView mTvFinish;
     private TextView mTvYear;
     private TextView mTvArea;
