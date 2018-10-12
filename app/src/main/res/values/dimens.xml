@@ -16,7 +16,6 @@
     <dimen name="spacing_info_details_line">53dp</dimen>
 
 
-
     <dimen name="item_h">60dp</dimen>
     <dimen name="split_line_width">1px</dimen>
     <dimen name="activity_about_copyright_textsize">14sp</dimen>

@@ -197,7 +197,6 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
     //-----------------------------------------------------生命周期（不动）------------------------------------------------------------------------
     @Override
     protected void onResume() {
-        super.onResume();
         try {
             mCameraView.onResume();
             cameraTag = 1;
@@ -209,11 +208,12 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         try {
             cameraTag = 2;
 
@@ -225,6 +225,8 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        super.onPause();
     }
 
     private boolean isStop = false;

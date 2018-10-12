@@ -10,9 +10,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <!--配对时间-->
         <com.cpigeon.book.widget.LineInputView
+            app:lineInputView_RightTextSize="@dimen/medium_text_size"
+            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
+            app:lineInputView_isLeftBold="true"
             android:id="@+id/ll_pairing_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,6 +54,7 @@
 
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="产蛋信息"
@@ -86,6 +89,8 @@
         </LinearLayout>
 
 
+        <include layout="@layout/include_line_view_layout" />
+
         <!--产蛋信息   详情-->
         <LinearLayout
             android:id="@+id/ll_lay_eggs_z"
@@ -112,7 +117,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"
-
                 app:lineInputView_Hint="0枚"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
@@ -170,19 +174,18 @@
                         android:layout_height="14dp"
                         android:src="@mipmap/giving_no" />
 
-
                 </LinearLayout>
-
 
             </LinearLayout>
 
-
         </LinearLayout>
-
 
         <!--出壳信息-->
         <com.cpigeon.book.widget.LineInputView
             android:id="@+id/ll_hatches_info"
+            app:lineInputView_RightTextSize="@dimen/medium_text_size"
+            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
+            app:lineInputView_isLeftBold="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
@@ -192,7 +195,7 @@
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="出壳信息"
             app:lineInputView_LeftTextColor="@color/general_text_color"
-            app:lineInputView_RightString="@string/string_hatches_info_no"
+            app:lineInputView_RightString=""
             app:rightTextBold="true" />
 
         <LinearLayout
@@ -231,6 +234,9 @@
 
         <!--子代信息-->
         <com.cpigeon.book.widget.LineInputView
+            app:lineInputView_RightTextSize="@dimen/medium_text_size"
+            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
+            app:lineInputView_isLeftBold="true"
             android:id="@+id/ll_offspring_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

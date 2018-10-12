@@ -19,6 +19,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+
             <!--窝次-->
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/ll_nest_num"
@@ -31,6 +33,9 @@
                 app:lineInputView_LeftString="窝次"
                 app:lineInputView_LeftTextColor="@color/general_text_color"
                 app:lineInputView_RightString="1"
+                app:lineInputView_RightTextSize="@dimen/medium_text_size"
+                app:lineInputView_LeftTextSize="@dimen/medium_text_size"
+                app:lineInputView_isLeftBold="true"
                 app:lineInputView_isShowRightImage="invisible" />
 
             <!--父足环号码-->
@@ -42,6 +47,9 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
+                app:lineInputView_RightTextSize="@dimen/medium_text_size"
+                app:lineInputView_LeftTextSize="@dimen/medium_text_size"
+                app:lineInputView_isLeftBold="true"
                 app:lineInputView_LeftString="父环号码"
                 app:lineInputView_LeftTextColor="@color/general_text_color"
                 app:lineInputView_RightString="0000-00-0000000"
@@ -59,15 +67,16 @@
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="母环号码"
                 app:lineInputView_LeftTextColor="@color/general_text_color"
+                app:lineInputView_RightTextSize="@dimen/medium_text_size"
+                app:lineInputView_LeftTextSize="@dimen/medium_text_size"
+                app:lineInputView_isLeftBold="true"
                 app:lineInputView_RightString="0000-00-0000000"
                 app:lineInputView_RightTextColor="#DC1AFF"
                 app:lineInputView_isShowRightImage="invisible" />
 
-
             <include layout="@layout/layout_publick_pairing_nest_btm2" />
 
         </LinearLayout>
-
 
     </ScrollView>
 

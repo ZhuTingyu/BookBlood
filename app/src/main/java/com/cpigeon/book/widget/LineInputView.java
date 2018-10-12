@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
@@ -31,8 +32,8 @@ import com.cpigeon.book.R;
 
 public class LineInputView extends RelativeLayout {
 
-    private static final int LEFT_TEXT_SIZE = 13;
-    private static final int RIGHT_TEXT_SIZE = 14;
+    private static final int LEFT_TEXT_SIZE = 39;//  13 sp
+    private static final int RIGHT_TEXT_SIZE = 42;//  24sp
 
     int mWeight;
     int mLeftColor;
@@ -44,6 +45,7 @@ public class LineInputView extends RelativeLayout {
     String mRightString;
     String mEtHintStr;
     boolean mIsLookState;
+    boolean isLeftBold;//左侧字体是否加粗
     Drawable mDrawableRight;
     Drawable mDrawableLeft;
     boolean mIsNotNull;
@@ -102,17 +104,19 @@ public class LineInputView extends RelativeLayout {
         if (attrs == null) {
             return;
         }
+
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.LineInputView);
         mWeight = array.getInteger(R.styleable.LineInputView_lineInputView_Weight, 4);
         mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, Utils.getColor(R.color.color_4c4c4c));
         mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, Utils.getColor(R.color.color_000000));
         mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, Color.parseColor("#FFFFFF"));
-        mLeftTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
-        mRightTextSize = array.getDimension(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
+        mLeftTextSize = array.getDimensionPixelSize(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
+        mRightTextSize = array.getDimensionPixelSize(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);
         mRightString = array.getString(R.styleable.LineInputView_lineInputView_RightString);
         mEtHintStr = array.getString(R.styleable.LineInputView_lineInputView_Hint);
         mIsLookState = array.getBoolean(R.styleable.LineInputView_lineInputView_IsLookState, false);
+        isLeftBold = array.getBoolean(R.styleable.LineInputView_lineInputView_isLeftBold, false);
         mDrawableRight = array.getDrawable(R.styleable.LineInputView_lineInputView_DrawableRight);
         mDrawableLeft = array.getDrawable(R.styleable.LineInputView_lineInputView_DrawableLeft);
         mIsNotNull = array.getBoolean(R.styleable.LineInputView_lineInputView_IsNotNull, false);
@@ -156,7 +160,7 @@ public class LineInputView extends RelativeLayout {
 
         mTextView.setText(mLeftString);
         mTextView.setTextColor(mLeftColor);
-        mTextView.setTextSize(mLeftTextSize);
+        mTextView.setTextSize(ScreenTool.px2sp(mLeftTextSize));
 
         if (left_gravity) {
             mTextView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
@@ -164,6 +168,13 @@ public class LineInputView extends RelativeLayout {
             mTextView.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         }
 
+
+        if (isLeftBold) {
+            Typeface font = Typeface.create(Typeface.MONOSPACE , Typeface.BOLD);
+            mTextView.setTypeface(font);
+        } else {
+
+        }
 
 //        if (leftTextBold){
 //            mTextView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
@@ -176,7 +187,7 @@ public class LineInputView extends RelativeLayout {
         mEditText.setText(mRightString);
         mEditText.setHint(mEtHintStr);
         mEditText.setTextColor(mRightColor);
-        mEditText.setTextSize(mRightTextSize);
+        mEditText.setTextSize(ScreenTool.px2sp(mRightTextSize));
         if (mInputType != 0) {
             mEditText.setInputType(mInputType);
         }

@@ -26,6 +26,7 @@ import com.base.util.picker.PickerUtil;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
@@ -66,7 +67,6 @@ public class PairingNestAddFragment extends BaseBookFragment {
     ImageView img_flashlight;
     @BindView(R.id.img_right_lay_eggs)
     ImageView img_right_lay_eggs;
-
 
     @BindView(R.id.ll_lay_eggs_time)
     LineInputView llLayEggsTime;
@@ -118,7 +118,6 @@ public class PairingNestAddFragment extends BaseBookFragment {
         initViewModels(mPairingNestAddViewModel);
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -159,8 +158,6 @@ public class PairingNestAddFragment extends BaseBookFragment {
         if (mCamera == null) {
             mCamera = Camera.open();
         }
-
-
     }
 
     @Override
@@ -211,13 +208,11 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_lay_eggs:
                 //产蛋信息
-
                 if (llLayEggsTag) {
                     //未产蛋
                     llLayEggsTag = false;
 
                     img_right_lay_eggs.setRotation(0);
-
 
                     ll_lay_eggs_z.setVisibility(View.GONE);
 
@@ -230,32 +225,11 @@ public class PairingNestAddFragment extends BaseBookFragment {
 
                     img_right_lay_eggs.setRotation(90);
 
-
                     ll_lay_eggs_z.setVisibility(View.VISIBLE);
 
                     mPairingNestAddViewModel.layEggs = Utils.getString(R.string.string_lay_eggs_yes);
                     mPairingNestAddViewModel.isCanCommit();
                 }
-//                String[] chooseWays = getResources().getStringArray(R.array.array_lay_eggs);
-//                BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
-//                    String way = chooseWays[p];
-//                    if (way.equals(Utils.getString(R.string.string_lay_eggs_yes))) {
-//                        //已产蛋
-//                        llLayEggs.setContent(way);
-//                        llLayEggsTime.setVisibility(View.VISIBLE);
-//                        llFertilizedEgg.setVisibility(View.VISIBLE);
-//                        llFertilizedEggNo.setVisibility(View.VISIBLE);
-//
-//                    } else if (way.equals(Utils.getString(R.string.string_lay_eggs_no))) {
-//                        //未产蛋
-//                        llLayEggs.setContent(way);
-//                        llLayEggsTime.setVisibility(View.GONE);
-//                        llFertilizedEgg.setVisibility(View.GONE);
-//                        llFertilizedEggNo.setVisibility(View.GONE);
-//                    }
-//                    mPairingNestAddViewModel.layEggs = way;
-//                    mPairingNestAddViewModel.isCanCommit();
-//                });
                 break;
 
             case R.id.img_flashlight:
@@ -286,6 +260,10 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                         , R.string.tv_fertilized_egg_no, InputType.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
+
+                            if (!StringUtil.isStringValid(content)) {
+                                return;
+                            }
                             llFertilizedEggNo.setContent(content + "个");
                             mPairingNestAddViewModel.fertilizedEggNo = content;
                         }, null);
@@ -304,11 +282,16 @@ public class PairingNestAddFragment extends BaseBookFragment {
                                 img_giving.setImageResource(R.mipmap.giving_no);
                             }
                         }, null);
-
-
                 break;
             case R.id.ll_hatches_info:
                 //出壳信息
+
+                String lleggstr = llFertilizedEgg.getContent().replace("个", "");
+
+                if (!StringUtil.isStringValid(lleggstr)) {
+                    ToastUtils.showLong(getBaseActivity(), "请先填写产蛋信息下的受精蛋个数！");
+                    return;
+                }
 
                 ImageView hatches_info_img = llHatchesInfo.getImgRight();
 
@@ -318,9 +301,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
 
                     hatches_info_img.setRotation(0);
 
-                    llHatchesInfo.setContent(Utils.getString(R.string.string_hatches_info_no));
                     ll_hatches_info_z.setVisibility(View.GONE);
-
 
                     mPairingNestAddViewModel.hatchesInfo = Utils.getString(R.string.string_hatches_info_no);
                     mPairingNestAddViewModel.isCanCommit();
@@ -331,31 +312,11 @@ public class PairingNestAddFragment extends BaseBookFragment {
 
                     hatches_info_img.setRotation(90);
 
-                    llHatchesInfo.setContent(Utils.getString(R.string.string_hatches_info_yes));
                     ll_hatches_info_z.setVisibility(View.VISIBLE);
 
                     mPairingNestAddViewModel.hatchesInfo = Utils.getString(R.string.string_hatches_info_yes);
                     mPairingNestAddViewModel.isCanCommit();
                 }
-
-//                String[] chooseWays2 = getResources().getStringArray(R.array.array_hatches_info);
-//                BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays2), p -> {
-//                    String way = chooseWays2[p];
-//                    if (way.equals(Utils.getString(R.string.string_hatches_info_yes))) {
-//                        //已出壳
-//                        llHatchesInfo.setContent(way);
-//                        llHatchesTime.setVisibility(View.VISIBLE);
-//                        llHatchesNum.setVisibility(View.VISIBLE);
-//                    } else if (way.equals(Utils.getString(R.string.string_hatches_info_no))) {
-//                        //未出壳
-//                        llHatchesInfo.setContent(way);
-//                        llHatchesTime.setVisibility(View.GONE);
-//                        llHatchesNum.setVisibility(View.GONE);
-//                    }
-//
-//                    mPairingNestAddViewModel.hatchesInfo = way;
-//                    mPairingNestAddViewModel.isCanCommit();
-//                });
 
                 break;
             case R.id.ll_hatches_time:
@@ -376,6 +337,14 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_offspring_info:
                 //子代信息
+
+                String hatchesNumStr = llHatchesNum.getContent().replace("个", "");
+
+                if (!StringUtil.isStringValid(hatchesNumStr)) {
+                    ToastUtils.showLong(getBaseActivity(), "请先填写出壳信息下的出壳个数！");
+                    return;
+                }
+
                 OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingNestAddViewModel.mPairingInfoEntity);
                 break;
             case R.id.tv_next_step:
