@@ -20,6 +20,7 @@ public class CountyEntity extends LetterSortEntity implements Parcelable {
     private String Country;
     private String CountryIDSort;
     private String Code;
+    private String FootCodeID;
 
     @Override
     public String getContent() {
@@ -30,9 +31,18 @@ public class CountyEntity extends LetterSortEntity implements Parcelable {
         return Country;
     }
 
+    public String getFootCodeID() {
+        return FootCodeID;
+    }
+
+    public void setFootCodeID(String footCodeID) {
+        FootCodeID = footCodeID;
+    }
+
     public void setCountry(String Country) {
         this.Country = Country;
     }
+
 
     public String getSort() {
         return CountryIDSort;
@@ -50,6 +60,9 @@ public class CountyEntity extends LetterSortEntity implements Parcelable {
         this.Code = Code;
     }
 
+    public CountyEntity() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -60,18 +73,17 @@ public class CountyEntity extends LetterSortEntity implements Parcelable {
         dest.writeString(this.Country);
         dest.writeString(this.CountryIDSort);
         dest.writeString(this.Code);
-    }
-
-    public CountyEntity() {
+        dest.writeString(this.FootCodeID);
     }
 
     protected CountyEntity(Parcel in) {
         this.Country = in.readString();
         this.CountryIDSort = in.readString();
         this.Code = in.readString();
+        this.FootCodeID = in.readString();
     }
 
-    public static final Parcelable.Creator<CountyEntity> CREATOR = new Parcelable.Creator<CountyEntity>() {
+    public static final Creator<CountyEntity> CREATOR = new Creator<CountyEntity>() {
         @Override
         public CountyEntity createFromParcel(Parcel source) {
             return new CountyEntity(source);

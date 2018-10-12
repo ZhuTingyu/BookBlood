@@ -67,28 +67,29 @@ public class BreedPigeonModel {
 
 
     //hl 添加种鸽
-    public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Add(String coodid,
-                                                                                String footnum,
-                                                                                String footnumto,
-                                                                                String sourceid,
-                                                                                String menfootnum,
-                                                                                String wofootnum,
-                                                                                String name,
-                                                                                String sex,
-                                                                                String plume,
-                                                                                String eye,
-                                                                                String outtime,
-                                                                                String blood,
-                                                                                String stateid,
-                                                                                String phototypeid,
-                                                                                String sonFootId,
-                                                                                String sonPigeonId,
-                                                                                Map<String, String> body) {
+    public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Add(
+            String coodid,
+            String footnum,
+            String footnumto,
+            String sourceid,
+            String menfootnum,
+            String wofootnum,
+            String name,
+            String sex,
+            String plume,
+            String eye,
+            String outtime,
+            String blood,
+            String stateid,
+            String phototypeid,
+            String sonFootId,
+            String sonPigeonId,
+            Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntryEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_add)
-                .addBody("typeid", String.valueOf(8))//
+                .addBody("typeid", PigeonEntity.ID_BREED_PIGEON)//
                 .addBody("coodid", coodid)// 国家Id
                 .addBody("footnum", footnum)//足环（可选可填，传足环号）
                 .addBody("footnumto", footnumto)// 副环（可选可填 ，传足环号）
@@ -152,21 +153,21 @@ public class BreedPigeonModel {
 
     //hl 种鸽信息修改
     public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Racing_Pigeon_Modify(String pigeonid,
-                                                                                   String coodid,
-                                                                                   String footnum,
-                                                                                   String footnumto,
-                                                                                   String sourceid,
-                                                                                   String menfootnum,
-                                                                                   String wofootnum,
-                                                                                   String name,
-                                                                                   String sex,
-                                                                                   String plume,
-                                                                                   String eye,
-                                                                                   String outtime,
-                                                                                   String blood,
-                                                                                   String stateid,
-                                                                                   String phototypeid,
-                                                                                   Map<String, String> body) {
+                                                                                          String coodid,
+                                                                                          String footnum,
+                                                                                          String footnumto,
+                                                                                          String sourceid,
+                                                                                          String menfootnum,
+                                                                                          String wofootnum,
+                                                                                          String name,
+                                                                                          String sex,
+                                                                                          String plume,
+                                                                                          String eye,
+                                                                                          String outtime,
+                                                                                          String blood,
+                                                                                          String stateid,
+                                                                                          String phototypeid,
+                                                                                          Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntryEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
                 }.getType())

@@ -3,6 +3,7 @@ package com.cpigeon.book.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.base.entity.LetterSortEntity;
 import com.base.util.Lists;
 import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/19.
  */
 
-public class SelectTypeEntity implements MultiItemEntity, Parcelable {
+public class SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable {
 
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_CUSTOM = 1;
@@ -39,6 +40,10 @@ public class SelectTypeEntity implements MultiItemEntity, Parcelable {
         setType(builder.type);
     }
 
+    @Override
+    public String getContent() {
+        return TypeName;
+    }
 
     public boolean isSelect() {
         return isSelect;

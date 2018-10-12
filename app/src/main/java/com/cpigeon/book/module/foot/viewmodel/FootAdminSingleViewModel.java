@@ -140,7 +140,7 @@ public class FootAdminSingleViewModel extends BaseViewModel {
     }
 
     public boolean isChina(){
-        return countryId.equals("2");
+        return Utils.getString(R.string.text_china_id).equals(countryId);
     }
 
 }

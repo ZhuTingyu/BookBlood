@@ -15,6 +15,7 @@ import com.base.base.pinyin.LetterSortModel;
 import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
+import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.AssEntity;
@@ -26,7 +27,7 @@ import com.gjiazhe.wavesidebar.WaveSideBar;
  * 详情选择协会
  */
 
-public class SelectAssFragment extends BaseFragment {
+public class SelectAssFragment extends BaseBookFragment {
 
     SelectAssAdapter mAdapter;
 
@@ -52,10 +53,8 @@ public class SelectAssFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         mRecyclerView = findViewById(R.id.list);
         mWaveSideBar = findViewById(R.id.side_bar);
-
 
         mAdapter = new SelectAssAdapter();
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());

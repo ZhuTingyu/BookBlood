@@ -3,7 +3,9 @@ package com.cpigeon.book.module.breedpigeon.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.base.http.HttpErrorException;
+import com.base.util.Utils;
 import com.base.util.utility.StringUtil;
+import com.cpigeon.book.R;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.RacingPigeonModel;
@@ -153,7 +155,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     }
 
     public void isCanCommit() {
-        isCanCommit(foot);
+        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId);
     }
 
     public boolean isHavePigeonInfo(){
@@ -165,7 +167,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     }
 
     public boolean isChina(){
-        return countryId.equals("2");
+        return Utils.getString(R.string.text_china_id).equals(countryId);
     }
 
 

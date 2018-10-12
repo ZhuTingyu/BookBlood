@@ -38,6 +38,7 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
+                app:lineInputView_RightString="@string/text_racing_pigeon"
                 app:lineInputView_LeftString="@string/text_pigeon_type" />
 
             <!--国家-->
@@ -48,6 +49,7 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
+                app:lineInputView_RightString="@string/text_china_code"
                 app:lineInputView_LeftString="国家" />
 
             <!--足环号码-->
@@ -71,7 +73,7 @@
                 app:lineInputView_Hint="@string/text_male_a"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
-                app:lineInputView_IsNotNull="false"
+                app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="@string/text_sex" />
 
             <!--血统-->
@@ -83,7 +85,7 @@
                 app:lineInputView_Hint="@string/text_pleas_input_blood"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
-                app:lineInputView_IsNotNull="false"
+                app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="@string/text_blood" />
 
             <!--羽色-->
@@ -107,7 +109,7 @@
                 app:lineInputView_Hint="在棚"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
-                app:lineInputView_IsNotNull="false"
+                app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="@string/text_status"
                 app:lineInputView_isShowLineDivisions="gone" />
 
@@ -159,7 +161,7 @@
 
             <!--副环-->
             <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/ll_foot_vice"
+                android:id="@+id/lv_foot_vice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"
@@ -171,7 +173,7 @@
 
             <!--来源-->
             <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/ll_foot_source"
+                android:id="@+id/lv_foot_source"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"
@@ -233,7 +235,7 @@
 
             <!--挂环日期-->
             <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/ll_hanging_ring_date"
+                android:id="@+id/lv_hanging_ring_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"

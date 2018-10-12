@@ -375,7 +375,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.ll_their_shells_date:
                 //出壳日期
-                PickerUtil.showTimeYMD(getActivity(), System.currentTimeMillis(),(year, month, day, hour, minute) -> {
+                PickerUtil.showTimeYMD(getActivity(), System.currentTimeMillis(),(year, month, day) -> {
                     tvTheirShellsDate.setText(year + "-" + month + "-" + day);
 
                     mBreedPigeonModifyViewModel.mPigeonEntity.setOutShellTime(year + "-" + month + "-" + day);

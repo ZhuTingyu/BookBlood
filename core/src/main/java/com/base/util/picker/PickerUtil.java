@@ -9,8 +9,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.DateTimePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
+import cn.qqtheme.framework.util.ConvertUtils;
 import cn.qqtheme.framework.widget.WheelView;
 
 /**
@@ -43,34 +45,32 @@ public class PickerUtil {
      * 时间选择器 返回年月日
      *
      * @param activity
-     * @param time     默认显示时间
      * @param listener
      */
 
-    public static void showTimeYMD(Activity activity, long startTimeStamp, DateTimePicker.OnYearMonthDayTimePickListener listener) {
-        DateTimePicker picker = new DateTimePicker(activity, DateTimePicker.YEAR_MONTH_DAY);
-        Date startTime = new Date(startTimeStamp);
+    public static void showTimeYMD(Activity activity, long startTimeStamp, DatePicker.OnYearMonthDayPickListener listener) {
 
+        try {
+            Date startTime = new Date(startTimeStamp);
+            Calendar startCalendar = Calendar.getInstance();
+            startCalendar.setTime(startTime);
 
-        Calendar startCalendar = Calendar.getInstance();
+            Calendar endCalendar = Calendar.getInstance();
+            endCalendar.setTime(startTime);
+            endCalendar.add(Calendar.YEAR, -10);
 
-        startCalendar.setTime(startTime);
-
-        Calendar endCalendar = Calendar.getInstance();
-
-        endCalendar.setTime(startTime);
-        endCalendar.add(Calendar.YEAR, -3);
-
-        picker.setDateRangeStart(startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH) + 1, startCalendar.get(Calendar.DAY_OF_MONTH));
-        picker.setDateRangeEnd(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH));
-        picker.setTimeRangeStart(0, 0);
-        picker.setTimeRangeEnd(23, 59);
-        picker.setSelectedItem(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH), 0);
-        picker.setTopLineColor(activity.getResources().getColor(R.color.colorPrimary));
-        picker.setLabelTextColor(activity.getResources().getColor(R.color.colorPrimary));
-        picker.setDividerColor(activity.getResources().getColor(R.color.colorPrimary));
-        picker.setOnDateTimePickListener(listener);
-        picker.show();
+            final DatePicker picker = new DatePicker(activity);
+            picker.setCanceledOnTouchOutside(true);
+            picker.setUseWeight(true);
+            picker.setTopPadding(ConvertUtils.toPx(activity, 10));
+            picker.setRangeStart(startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH) + 1, startCalendar.get(Calendar.DAY_OF_MONTH));
+            picker.setRangeEnd(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1 , endCalendar.get(Calendar.DAY_OF_MONTH));
+            picker.setResetWhileWheel(false);
+            picker.setOnDatePickListener(listener);
+            picker.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

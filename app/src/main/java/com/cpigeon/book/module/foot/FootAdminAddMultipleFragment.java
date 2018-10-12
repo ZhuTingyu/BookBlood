@@ -109,14 +109,9 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
         bindUi(RxUtils.textChanges(mEdRemark.getEditText()), mViewModel.setRemark());
 
         mLvFoot.setOnRightClickListener(lineInputView -> {
-            List<String> foots = mViewModel.getFoots();
-            InputSingleFootDialog dialog = new InputSingleFootDialog();
-            dialog.setHaveStandard(false);
-            dialog.setFoots(foots);
-            dialog.setOnFootStringFinishListener(foot -> {
+            InputSingleFootDialog.show(getFragmentManager(), mLvFoot.getContent(), true, false, foot -> {
                 mLvFoot.setRightText(foot);
             });
-            dialog.show(getBaseActivity().getSupportFragmentManager());
         });
 
         mLvCategory.setOnClickListener(v -> {
