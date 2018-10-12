@@ -251,6 +251,7 @@
     <string name="text_pigeon_blood">血统</string>
     <string name="text_year">年份</string>
     <string name="text_china_code">CHN</string>
+    <string name="text_china_id">2</string>
     <string name="text_input_foot_numbers">足环号段录入</string>
     <string name="text_foots">%1$s ···· %2$s</string>
     <string name="text_standard_foot">%1$s-%2$s-%3$s</string>
@@ -403,6 +404,7 @@
     <string name="text_input_please">请输入</string>
     <string name="text_input_select">请选择</string>
     <string name="text_time_y_m_d_h_m">%1$s-%2$s-%3$s %4$s:%5$s</string>
+    <string name="text_time_y_m_d">%1$s-%2$s-%3$s</string>
     <string name="text_time_h_m_s"> %1$s:%2$s:%3$s</string>
     <string name="text_add_homing_recode">添加归巢记录</string>
     <string name="text_join_train_count">参训:%1$s羽</string>
@@ -628,6 +630,7 @@
     <string name="str_msg">消息</string>
     <string name="str_recycle_bin">回收站</string>
     <string name="str_recycle_bin_empty">清空</string>
+    <string name="text_select_blood">选择血统</string>
 
 
 </resources>

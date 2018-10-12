@@ -2,6 +2,9 @@ package com.cpigeon.book.module.breedpigeon.viewmodel;
 
 import com.base.base.BaseViewModel;
 import com.base.util.Lists;
+import com.base.util.Utils;
+import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 
 import java.util.HashMap;
@@ -18,7 +21,7 @@ public class BasePigeonViewModel extends BaseViewModel {
     public String phototypeid;
 
     //国家
-    public String countryId = "2";//国家id
+    public String countryId = Utils.getString(R.string.text_china_id);//国家id
 
     //足环号
     public String foot = "";
@@ -67,7 +70,7 @@ public class BasePigeonViewModel extends BaseViewModel {
     public String stateId = "";
     //信鸽类型
     public List<SelectTypeEntity> mSelectTypes_PigeonType;
-    public String pigeonType;
+    public String pigeonType = PigeonEntity.ID_MATCH_PIGEON;
 
 
     //图片类型

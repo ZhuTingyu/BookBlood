@@ -45,7 +45,7 @@ public class SelectCountyAdapter extends BaseLetterSelectAdapter<CountyEntity, B
         helper.itemView.setOnClickListener(v -> {
             CountyEntity entity = getItem(helper.getAdapterPosition());
 
-            if(StringUtil.isStringValid(entity.getCode())){
+            if(StringUtil.isStringValid(entity.getFootCodeID())){
                 IntentBuilder.Builder()
                         .putExtra(IntentBuilder.KEY_DATA, entity)
                         .finishForResult(getBaseActivity());

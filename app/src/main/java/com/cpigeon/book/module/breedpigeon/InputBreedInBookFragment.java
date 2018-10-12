@@ -75,6 +75,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
+                            , PigeonEntity.ID_BREED_PIGEON
                             , CODE_ADD_PIGEON);
 
                 } else {
@@ -89,6 +90,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
                             , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
+                            , PigeonEntity.ID_BREED_PIGEON
                             , CODE_ADD_PIGEON);
                 }
             }
@@ -100,6 +102,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                         , StringUtil.emptyString()
                         , StringUtil.emptyString()
                         , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
+                        , PigeonEntity.ID_BREED_PIGEON
                         , CODE_ADD_PIGEON);
             }
         });
