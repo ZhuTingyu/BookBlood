@@ -127,6 +127,11 @@ public class ShareHallFragment extends BaseBookFragment {
 
     @Override
     protected void initObserve() {
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
         mSelectTypeViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
             List<String> titles = Lists.newArrayList(Utils.getString(R.string.text_pigeon_blood), Utils.getString(R.string.text_sex)
                     , Utils.getString(R.string.text_eye_sand));

@@ -198,6 +198,8 @@ public class FlyBackRecordFragment extends BaseBookFragment {
 
         mViewModel.mDataSetTrainInfoR.observe(this, s -> {
             setProgressVisible(false);
+            mViewModel.mTrainEntity.setDistance(mViewModel.dis);
+            mViewModel.mTrainEntity.setFromFlyTime(mViewModel.fromTime);
             DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
                 mCompleteTrainDialog.dismiss();

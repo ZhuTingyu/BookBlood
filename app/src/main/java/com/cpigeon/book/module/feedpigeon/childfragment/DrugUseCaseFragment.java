@@ -258,7 +258,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
                 break;
             case R.id.lvDrugUseTime:
                 //用药日期
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), ( year, monthOfYear, dayOfMonth) -> {
                     lvDrugUseTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mDrugUseCaseViewModel.drugUseTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mDrugUseCaseViewModel.isCanCommit();
@@ -266,7 +266,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
                 break;
             case R.id.lvRecordTime:
                 //记录日期
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     lvRecordTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mDrugUseCaseViewModel.recordTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mDrugUseCaseViewModel.isCanCommit();

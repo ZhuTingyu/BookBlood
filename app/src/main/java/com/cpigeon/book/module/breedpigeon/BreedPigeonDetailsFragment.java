@@ -52,7 +52,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
     public static final int CODE_ADD_PIGEON = 0x123;
 
 
-
     public static void start(Activity activity, String pigeonId, String footId) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
@@ -240,14 +239,11 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
             case R.id.tv_foot:
                 //足环号
-                InputSingleFootDialog dialog = new InputSingleFootDialog();
-                dialog.setFootNumber(tvFoot.getText().toString());
-                dialog.setOnFootStringFinishListener(foot -> {
+                InputSingleFootDialog.show(getFragmentManager(), tvFoot.getText().toString(), mBreedPigeonModifyViewModel.isChina(), null, foot -> {
                     tvFoot.setText(foot);
                     mBreedPigeonModifyViewModel.mPigeonEntity.setFootRingNum(foot);
                     mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                 });
-                dialog.show(getBaseActivity().getSupportFragmentManager());
 
                 break;
             case R.id.img_sex:
@@ -375,7 +371,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.ll_their_shells_date:
                 //出壳日期
-                PickerUtil.showTimeYMD(getActivity(), System.currentTimeMillis(),(year, month, day) -> {
+                PickerUtil.showTimeYMD(getActivity(), System.currentTimeMillis(), (year, month, day) -> {
                     tvTheirShellsDate.setText(year + "-" + month + "-" + day);
 
                     mBreedPigeonModifyViewModel.mPigeonEntity.setOutShellTime(year + "-" + month + "-" + day);

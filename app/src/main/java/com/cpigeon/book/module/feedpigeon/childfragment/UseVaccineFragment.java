@@ -199,7 +199,7 @@ public class UseVaccineFragment extends BaseBookFragment {
                 break;
             case R.id.lvTime:
                 //注射日期
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     lvTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mUseVaccineViewModel.injectionTiem = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mUseVaccineViewModel.isCanCommit();

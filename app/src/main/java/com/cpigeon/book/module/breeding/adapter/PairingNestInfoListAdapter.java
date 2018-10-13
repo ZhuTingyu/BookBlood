@@ -283,7 +283,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
                 break;
             case R.id.ll_pairing_time:
                 //配对时间
-                PickerUtil.showTimePicker(getBaseActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getBaseActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     mPairingNestViewModel.mPairingNestInfoEntity.setPigeonBreedTime(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();
                 });
@@ -294,7 +294,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
                 break;
             case R.id.ll_lay_eggs_time:
                 //产蛋时间
-                PickerUtil.showTimePicker(getBaseActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getBaseActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     mPairingNestViewModel.mPairingNestInfoEntity.setLayEggTime(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();
                 });
@@ -327,7 +327,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
                 break;
             case R.id.ll_hatches_time:
                 //出壳时间
-                PickerUtil.showTimePicker(getBaseActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getBaseActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     mPairingNestViewModel.mPairingNestInfoEntity.setOutShellTime(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();
                 });

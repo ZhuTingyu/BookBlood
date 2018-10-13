@@ -148,6 +148,7 @@
     <string name="foot_list_all">TXGP_FootRing_SelectAll</string>
     <string name="delete_foots">TXGP_FootRing_DeleteSection</string>
     <string name="get_foot_stat">TXGP_FootRing_SelectCount</string>
+    <string name="get_foot_list">TXGP_FootRing_SearchAll</string>
 
 
     <!--获取各个类型的足环数-->

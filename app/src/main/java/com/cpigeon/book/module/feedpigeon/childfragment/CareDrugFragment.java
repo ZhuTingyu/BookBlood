@@ -263,7 +263,7 @@ public class CareDrugFragment extends BaseBookFragment {
                 break;
             case R.id.lvUserTime:
                 //使用时间
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), ( year, monthOfYear, dayOfMonth) -> {
                     lvUserTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mCareDrugViewModel.useTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mCareDrugViewModel.isCanCommit();
@@ -272,7 +272,7 @@ public class CareDrugFragment extends BaseBookFragment {
 
             case R.id.lvRecordTime:
                 //记录时间
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), ( year, monthOfYear, dayOfMonth) -> {
                     lvRecordTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mCareDrugViewModel.recordTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mCareDrugViewModel.isCanCommit();

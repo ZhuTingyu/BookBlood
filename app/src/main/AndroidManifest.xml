@@ -239,6 +239,9 @@
             android:name="com.base.util.hipermission.PermissionActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/Permission_Dialog" />
+        <activity android:name=".module.select.SearchFootRingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
     </application>
 

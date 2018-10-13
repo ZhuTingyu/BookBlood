@@ -25,9 +25,11 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminSingleViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.select.SelectPigeonFragment;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
@@ -49,6 +51,8 @@ import cn.qqtheme.framework.picker.OptionPicker;
 public class FootAdminSingleFragment extends BaseBookFragment {
 
     public static final int CODE_SELECT_COUNTY = 0x123;
+    public static final int CODE_SELECT_FATHER = 0x234;
+    public static final int CODE_SELECT_MATHER = 0x345;
 
     @BindView(R.id.lv_city)
     LineInputView lvCity;
@@ -130,7 +134,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         lvFoot.setOnClickListener(v -> {
-            InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), lvFoot.getContent(), mViewModel.isChina(),false, foot -> {
+            InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), lvFoot.getContent(), mViewModel.isChina(),null, foot -> {
                 lvFoot.setRightText(foot);
             });
         });
@@ -171,13 +175,17 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             mLvMotherFoot.setVisibility(View.VISIBLE);
 
             mLvFatherFoot.setOnRightClickListener(lineInputView -> {
-                InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvFatherFoot.getContent(), foot -> {
+                InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvFatherFoot.getContent(), mViewModel.isChina(), dialog -> {
+                    SelectPigeonFragment.start(getBaseActivity(), CODE_SELECT_FATHER);
+                }, foot -> {
                     mLvFatherFoot.setRightText(foot);
                 });
             });
 
             mLvMotherFoot.setOnRightClickListener(lineInputView -> {
-                InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvMotherFoot.getContent(), foot -> {
+                InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvMotherFoot.getContent(), mViewModel.isChina(), dialog -> {
+                    SelectPigeonFragment.start(getBaseActivity(), CODE_SELECT_MATHER);
+                }, foot -> {
                     mLvMotherFoot.setRightText(foot);
                 });
             });
@@ -293,6 +301,12 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     mViewModel.countryId = entity.getFootCodeID();
                     lvCity.setRightText(entity.getCode());
                 }
+            } else if (CODE_SELECT_FATHER == requestCode) {
+                PigeonEntity pigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
+                mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
+            } else if (CODE_SELECT_MATHER == requestCode) {
+                PigeonEntity pigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
+                mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
             }
         }
 

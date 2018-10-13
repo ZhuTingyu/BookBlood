@@ -97,7 +97,7 @@
                 app:lineInputView_Hint="雨点"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
-                app:lineInputView_IsNotNull="false"
+                app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="@string/text_feather_color" />
 
             <!--状态-->

@@ -163,4 +163,23 @@ public class FootAdminModel {
                 .request();
     }
 
+    public static Observable<ApiResponse<List<FootEntity>>> getFootList(
+            int pi,
+            int ps,
+            String footNumber,
+            String sexId,
+            String staterId
+    ) {
+        return RequestData.<ApiResponse<List<FootEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<FootEntity>>>() {
+                }.getType())
+                .url(R.string.get_foot_list)
+                .addBody("pi", String.valueOf(pi))
+                .addBody("ps", String.valueOf(20))
+                .addBody("footnum", footNumber)
+                .addBody("sexid", sexId)
+                .addBody("stateid", staterId)
+                .request();
+    }
+
 }

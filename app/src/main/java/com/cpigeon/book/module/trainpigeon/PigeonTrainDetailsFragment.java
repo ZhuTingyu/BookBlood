@@ -30,6 +30,7 @@ public class PigeonTrainDetailsFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mViewModel = new PigeonTrainDetailsViewModel(getBaseActivity());
+        initViewModel(mViewModel);
     }
 
     @Nullable

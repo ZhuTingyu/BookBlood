@@ -86,5 +86,9 @@ public class BasePigeonViewModel extends BaseViewModel {
         return map;
     }
 
+    public boolean isChina(){
+        return Utils.getString(R.string.text_china_id).equals(countryId);
+    }
+
 
 }

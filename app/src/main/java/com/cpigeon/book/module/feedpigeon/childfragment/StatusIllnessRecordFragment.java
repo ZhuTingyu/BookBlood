@@ -209,7 +209,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
                 break;
             case R.id.lvIllTime:
                 //生病日期
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     lvIllTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mStatusIllnessRecordAddViewModel.illnessTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mStatusIllnessRecordAddViewModel.isCanCommit();
