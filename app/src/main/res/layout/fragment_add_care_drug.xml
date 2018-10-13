@@ -39,13 +39,13 @@
 
 
             <com.cpigeon.book.widget.LineInputView
-            android:id="@+id/lvUserTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:lineInputView_Hint="@string/text_pleas_choose"
-            app:lineInputView_IsCanEdit="false"
-            app:lineInputView_IsNotNull="true"
-            app:lineInputView_LeftString="@string/text_user_time" />
+                android:id="@+id/lvUserTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lineInputView_Hint="@string/text_pleas_choose"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="@string/text_user_time" />
 
 
             <com.cpigeon.book.widget.LineInputView
@@ -61,6 +61,7 @@
                 android:id="@+id/lvUserResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:lineInputView_Hint="@string/text_pleas_choose"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
@@ -70,6 +71,7 @@
                 android:id="@+id/lvAfterResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:lineInputView_Hint="@string/text_pleas_choose"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="true"
@@ -79,11 +81,11 @@
                 android:id="@+id/lvBodyTemp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:lineInputView_Hint="@string/text_pleas_input"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="false"
                 app:lineInputView_LeftString="@string/text_current_body_temp" />
-
 
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lvWeather"

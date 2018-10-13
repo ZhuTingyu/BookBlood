@@ -44,7 +44,7 @@
         <TextView
             android:id="@+id/tvSure"
             android:background="@drawable/selector_btn_rect"
-            android:textColor="@color/color_text_cancel"
+            android:textColor="@color/color_white"
             android:text="@string/text_sure"
             android:gravity="center"
             android:layout_width="0dp"

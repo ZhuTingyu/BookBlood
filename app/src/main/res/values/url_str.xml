@@ -47,7 +47,6 @@
     <!--回收站  恢复-->
     <string name="recycle_bin_restore">TXGP_RecoveryData</string>
 
-
     <!--修改支付密码  需要验证码-->
     <string name="user_modify_psd_play">ZGW_Users_SetUserPayPwd</string>
     <!--用户登录-->

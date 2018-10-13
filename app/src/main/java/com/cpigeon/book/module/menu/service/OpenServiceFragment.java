@@ -2,18 +2,11 @@ package com.cpigeon.book.module.menu.service;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +19,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.OpenServiceEvent;
 import com.cpigeon.book.module.menu.service.adpter.OpenServiceAdapter;
 import com.cpigeon.book.module.menu.service.viewmodel.OpenServiceViewModel;
-import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.veiwholder.ServiceViewHolder;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -68,10 +60,11 @@ public class OpenServiceFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_open_service);
-        setToolbarRight(R.string.text_open_report, item -> {
-            OpenServiceReportFragment.start(getBaseActivity());
-            return false;
-        });
+
+//        setToolbarRight(R.string.text_open_report, item -> {
+//            OpenServiceReportFragment.start(getBaseActivity());
+//            return false;
+//        });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
         mAdapter = new OpenServiceAdapter(ServiceViewHolder.TYPE_OPEN, true);
@@ -84,7 +77,7 @@ public class OpenServiceFragment extends BaseBookFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnEvent(OpenServiceEvent event){
+    public void OnEvent(OpenServiceEvent event) {
         mViewModel.getServiceInfo();
     }
 
@@ -101,7 +94,7 @@ public class OpenServiceFragment extends BaseBookFragment {
         });
     }
 
-    private void  initHeadView() {
+    private void initHeadView() {
         mHeadView = LayoutInflater.from(getContext()).inflate(R.layout.include_renew_head, null);
         mRenewalAdapter = new OpenServiceAdapter(ServiceViewHolder.TYPE_RENEW, false);
         mRenewalAdapter.setEmptyText(Utils.getString(R.string.text_no_open_service));

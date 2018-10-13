@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.base.http.R;
 import com.base.util.DrawableUtils;
 import com.base.util.system.ScreenTool;
@@ -187,6 +186,7 @@ public class BaseViewHolder extends com.chad.library.adapter.base.BaseViewHolder
     public void setGlideImageView(Context context, @IdRes int resId , String string){
 
         Glide.with(context).load(string)
+                .placeholder(context.getResources().getDrawable(R.drawable.ic_img_default))
                 .into((ImageView) getView(resId));
     }
 

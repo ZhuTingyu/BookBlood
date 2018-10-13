@@ -33,7 +33,7 @@
                 app:lineInputView_LeftString="@string/text_illness_symptom"
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_IsCanEdit="false"
-                app:lineInputView_Hint="@string/text_pleas_choose"
+                app:lineInputView_Hint="@string/text_pleas_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -51,7 +51,7 @@
                 app:lineInputView_LeftString="@string/text_current_body_temp"
                 app:lineInputView_IsNotNull="false"
                 app:lineInputView_IsCanEdit="false"
-                app:lineInputView_Hint="@string/text_pleas_choose"
+                app:lineInputView_Hint="@string/text_pleas_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

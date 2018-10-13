@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
@@ -23,7 +24,9 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.feedpigeon.viewmodel.UseVaccineViewModel;
+import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
@@ -33,6 +36,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * 疫苗注射
@@ -54,9 +58,11 @@ public class UseVaccineFragment extends BaseBookFragment {
     @BindView(R.id.lvHumidity)
     LineInputView lvHumidity;
     @BindView(R.id.lvBodyTemp)
-    LineInputView lvBodyTemp;
-    @BindView(R.id.inputVaccineReason)
-    InputBoxView inputVaccineReason;
+    LineInputView lvBodyTemp;//体温（舍弃）
+    @BindView(R.id.lvVaccineReason)
+    LineInputView lvVaccineReason;//注射原因
+    //    @BindView(R.id.inputVaccineReason)
+//    InputBoxView inputVaccineReason;
     @BindView(R.id.inputRemark)
     InputBoxView inputRemark;
     @BindView(R.id.llRoot)
@@ -67,6 +73,7 @@ public class UseVaccineFragment extends BaseBookFragment {
     TextView tvOk;
 
     private UseVaccineViewModel mUseVaccineViewModel;
+    private SelectTypeViewModel mSelectTypeViewModel;
 
 
     @Override
@@ -74,7 +81,8 @@ public class UseVaccineFragment extends BaseBookFragment {
         super.onAttach(context);
         mUseVaccineViewModel = new UseVaccineViewModel();
         mUseVaccineViewModel.setmBaseFragment(this);
-        initViewModels(mUseVaccineViewModel);
+        mSelectTypeViewModel = new SelectTypeViewModel();
+        initViewModels(mUseVaccineViewModel, mSelectTypeViewModel);
     }
 
 
@@ -126,8 +134,11 @@ public class UseVaccineFragment extends BaseBookFragment {
             });
         }
 
-        inputVaccineReason.getEditText().setCanEdit(false);//不可编辑
+//        inputVaccineReason.getEditText().setCanEdit(false);//不可编辑
         inputRemark.getEditText().setCanEdit(false);//不可编辑
+
+        mSelectTypeViewModel.getVaccineReason();//疫苗注射原因
+        mSelectTypeViewModel.getVaccineName();//疫苗名称
 
     }
 
@@ -161,6 +172,7 @@ public class UseVaccineFragment extends BaseBookFragment {
         mUseVaccineViewModel.mUseVaccineDetails.observe(this, datas -> {
             setProgressVisible(false);
             mUseVaccineViewModel.vaccineName = datas.getPigeonViccineName();//疫苗名称
+            mUseVaccineViewModel.vaccineNameId = datas.getViccineNameID();//疫苗名称id
             mUseVaccineViewModel.injectionTiem = datas.getUseViccineTime();//注射日期
             mUseVaccineViewModel.bodyTemperature = datas.getBodyTemper();//体温
             mUseVaccineViewModel.injectionWhy = datas.getReason();//注射原因
@@ -169,7 +181,7 @@ public class UseVaccineFragment extends BaseBookFragment {
             lvVaccine.setRightText(mUseVaccineViewModel.vaccineName);
             lvTime.setContent(mUseVaccineViewModel.injectionTiem);
             lvBodyTemp.setRightText(mUseVaccineViewModel.bodyTemperature);
-            inputVaccineReason.setText(mUseVaccineViewModel.injectionWhy);
+//            inputVaccineReason.setText(mUseVaccineViewModel.injectionWhy);
             inputRemark.setText(mUseVaccineViewModel.remark);
 
             mUseVaccineViewModel.weather = datas.getWeather();//天气
@@ -179,22 +191,48 @@ public class UseVaccineFragment extends BaseBookFragment {
 
         });
 
+        mSelectTypeViewModel.mVaccineReason.observe(this, datas -> {
+            //疫苗注射原因
+            mUseVaccineViewModel.mVaccineReasonSelect = datas;
+        });
+
+        mSelectTypeViewModel.mVaccineName.observe(this, datas -> {
+            //疫苗名称
+            mUseVaccineViewModel.mVaccineNameSelect = datas;
+        });
+
     }
 
     private BaseInputDialog mInputDialog;
 
-    @OnClick({R.id.lvVaccine, R.id.lvTime, R.id.lvWeather, R.id.lvTemp, R.id.lvWindAngle, R.id.lvHumidity, R.id.lvBodyTemp, R.id.inputVaccineReason, R.id.inputRemark, R.id.llRoot, R.id.scrollView, R.id.tvOk})
+    @OnClick({R.id.lvVaccine, R.id.lvTime, R.id.lvWeather, R.id.lvTemp, R.id.lvWindAngle, R.id.lvHumidity, R.id.lvBodyTemp, R.id.lvVaccineReason, R.id.inputRemark, R.id.llRoot, R.id.scrollView, R.id.tvOk})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lvVaccine:
                 //疫苗名称
-                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_vaccine_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
-                            mUseVaccineViewModel.vaccineName = content;
-                            lvVaccine.setRightText(content);
-                            mInputDialog.hide();
+                if (!Lists.isEmpty(mUseVaccineViewModel.mVaccineNameSelect)) {
+                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mUseVaccineViewModel.mVaccineNameSelect), 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            mUseVaccineViewModel.vaccineName = mUseVaccineViewModel.mVaccineNameSelect.get(index).getTypeName();
+                            mUseVaccineViewModel.vaccineNameId = mUseVaccineViewModel.mVaccineNameSelect.get(index).getTypeID();
+                            lvVaccine.setContent(mUseVaccineViewModel.mVaccineNameSelect.get(index).getTypeName());
+
                             mUseVaccineViewModel.isCanCommit();
-                        }, null);
+
+                        }
+                    });
+                } else {
+                    mSelectTypeViewModel.getVaccineName();
+                }
+
+//                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                        , R.string.tv_vaccine_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+//                            mUseVaccineViewModel.vaccineName = content;
+//                            lvVaccine.setRightText(content);
+//                            mInputDialog.hide();
+//                            mUseVaccineViewModel.isCanCommit();
+//                        }, null);
 
                 break;
             case R.id.lvTime:
@@ -217,7 +255,7 @@ public class UseVaccineFragment extends BaseBookFragment {
             case R.id.lvBodyTemp:
                 //体温
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_body_temperature, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_body_temperature, lvBodyTemp.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
                             mUseVaccineViewModel.bodyTemperature = content;
                             lvBodyTemp.setRightText(content);
                             mInputDialog.hide();
@@ -225,15 +263,31 @@ public class UseVaccineFragment extends BaseBookFragment {
                         }, null);
 
                 break;
-            case R.id.inputVaccineReason:
+            case R.id.lvVaccineReason:
                 //注射原因
-                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_input_vaccine_reason, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
-                            mUseVaccineViewModel.injectionWhy = content;
-                            inputVaccineReason.getEditText().setText(content);
-                            mInputDialog.hide();
+                if (!Lists.isEmpty(mUseVaccineViewModel.mVaccineReasonSelect)) {
+                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mUseVaccineViewModel.mVaccineReasonSelect), 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            mUseVaccineViewModel.injectionWhy = mUseVaccineViewModel.mVaccineReasonSelect.get(index).getTypeName();
+                            mUseVaccineViewModel.injectionWhyId = mUseVaccineViewModel.mVaccineReasonSelect.get(index).getTypeID();
+                            lvVaccineReason.setContent(mUseVaccineViewModel.mVaccineReasonSelect.get(index).getTypeName());
+
                             mUseVaccineViewModel.isCanCommit();
-                        }, null);
+
+                        }
+                    });
+                } else {
+                    mSelectTypeViewModel.getVaccineReason();
+                }
+
+//                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                        , R.string.tv_input_vaccine_reason, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+//                            mUseVaccineViewModel.injectionWhy = content;
+//                            inputVaccineReason.getEditText().setText(content);
+//                            mInputDialog.hide();
+//                            mUseVaccineViewModel.isCanCommit();
+//                        }, null);
 
                 break;
             case R.id.inputRemark:

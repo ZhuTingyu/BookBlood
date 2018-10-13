@@ -35,7 +35,6 @@
             app:simpleTitleView_text="冠军" />
 
 
-
         <com.cpigeon.book.widget.SimpleTitleView
             android:id="@+id/sTvMatchThird"
             android:layout_width="wrap_content"
@@ -49,12 +48,12 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
         android:paddingBottom="16dp"
-        android:orientation="horizontal">
+        android:paddingTop="16dp">
 
         <com.cpigeon.book.widget.stats.StatView
             android:id="@+id/stat1"
@@ -64,7 +63,8 @@
             app:statView_data_color="@color/color_scale_yellow_data"
             app:statView_other_color="@color/color_scale_yellow_other"
             app:statView_stat_w="64dp"
-            app:statView_title="10名" />
+            app:statView_title="10名"
+            app:statView_unit="@string/text_pigeon_unit" />
 
         <com.cpigeon.book.widget.stats.StatView
             android:id="@+id/stat2"
@@ -74,7 +74,8 @@
             app:statView_data_color="@color/color_scale_blue_data"
             app:statView_other_color="@color/color_scale_blue_other"
             app:statView_stat_w="64dp"
-            app:statView_title="20名" />
+            app:statView_title="20名"
+            app:statView_unit="@string/text_pigeon_unit" />
 
         <com.cpigeon.book.widget.stats.StatView
             android:id="@+id/stat3"
@@ -84,7 +85,8 @@
             app:statView_data_color="@color/color_scale_red_data"
             app:statView_other_color="@color/color_scale_red_other"
             app:statView_stat_w="64dp"
-            app:statView_title="50名" />
+            app:statView_title="50名"
+            app:statView_unit="@string/text_pigeon_unit" />
 
 
     </LinearLayout>
@@ -92,46 +94,45 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/color_bg_window"
-        />
+        android:background="@color/color_bg_window" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:paddingLeft="@dimen/normal_safe_distance"
-        android:paddingRight="@dimen/normal_safe_distance"
         android:background="@color/color_line"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/normal_safe_distance"
+        android:paddingRight="@dimen/normal_safe_distance">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:paddingLeft="30dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:layout_weight="2"
             android:gravity="left"
+            android:paddingLeft="30dp"
             android:text="@string/text_foot_number"
+            android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size" />
 
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="@string/text_feather_color"
+            android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size" />
 
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1.5"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:text="@string/text_join_match_count"
+            android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size" />
 
     </LinearLayout>

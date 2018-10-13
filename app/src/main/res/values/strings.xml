@@ -360,7 +360,7 @@
     <string name="text_renew_at_once">立即续费</string>
     <string name="text_open_service">开通服务</string>
     <string name="text_opened_service">已开通服务</string>
-    <string name="text_all_service">所有服务</string>
+    <string name="text_all_service">未开通服务</string>
     <string name="text_open_report">开通记录</string>
     <string name="text_trained">已训</string>
     <string name="text_status">状态</string>
@@ -429,7 +429,7 @@
     <string name="text_care">保健</string>
     <string name="text_care_drug">保健品</string>
     <string name="text_care_drug_name">保健药名称</string>
-    <string name="text_care_drug_function">保健药功能</string>
+    <string name="text_care_drug_function">保健功效</string>
     <string name="text_function">功能</string>
     <string name="text_drug_use_effect">用药效果</string>
     <string name="text_vaccine">疫苗</string>
@@ -438,10 +438,10 @@
     <string name="text_use_vaccine">注射疫苗</string>
     <string name="text_state_illness">病情</string>
     <string name="text_state_illness_record">病情记录</string>
-    <string name="text_illness_symptom">症状</string>
+    <string name="text_illness_symptom">病状特征</string>
     <string name="text_illness_name">疾病名称</string>
     <string name="text_is_user_drug">是否用药</string>
-    <string name="text_add_feed_pigeon_record">添加养鸽记录</string>
+    <string name="text_add_feed_pigeon_record">添加爱鸽管理</string>
     <string name="text_sure_add">确认添加</string>
     <string name="text_pleas_choose">请选择</string>
     <string name="text_current_temp">当前温度</string>
@@ -449,9 +449,9 @@
     <string name="text_current_humidity">当前湿度</string>
     <string name="text_current_body_temp">体温</string>
     <string name="text_ill_time">患病日期</string>
-    <string name="text_user_time">使用时期</string>
+    <string name="text_user_time">开始时间</string>
     <string name="text_user_result">使用效果</string>
-    <string name="text_record_time">记录日期</string>
+    <string name="text_record_time">结束时间</string>
     <string name="text_is_have_after_result">是否有副作用</string>
 
 

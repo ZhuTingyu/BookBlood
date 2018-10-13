@@ -249,7 +249,7 @@ public class PlayAddFragment extends BaseBookFragment {
 
     }
 
-    private String  foot = "";
+    private String foot = "";
 
     private void initView(PigeonPlayEntity mPigeonPlayEntity) {
 
@@ -293,7 +293,7 @@ public class PlayAddFragment extends BaseBookFragment {
             case R.id.ll_play_org:
                 //赛事组织
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_play_org, 0, content -> {
+                        , R.string.tv_play_org, llPlayOrg.getContent(), 0, content -> {
                             mPlayViewModel.playOrg = content;
                             llPlayOrg.setRightText(content);
                             mInputDialog.hide();
@@ -320,7 +320,7 @@ public class PlayAddFragment extends BaseBookFragment {
             case R.id.ll_project_name:
                 //项目名称
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_project_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_project_name, llProjectName.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mPlayViewModel.projectName = content;
                             llProjectName.setRightText(content);
                             mInputDialog.hide();
@@ -332,7 +332,7 @@ public class PlayAddFragment extends BaseBookFragment {
             case R.id.ll_paly_scale:
                 //比赛规模
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_paly_scale, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_paly_scale, llPalyScale.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
                             mPlayViewModel.palyScale = content;
                             llPalyScale.setRightText(content);
                             mInputDialog.hide();
@@ -342,7 +342,7 @@ public class PlayAddFragment extends BaseBookFragment {
             case R.id.ll_paly_rank:
                 //比赛名次
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_paly_rank, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_paly_rank, llPalyRank.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
                             mPlayViewModel.palyRank = content;
                             llPalyRank.setRightText(content);
                             mInputDialog.hide();
@@ -352,7 +352,7 @@ public class PlayAddFragment extends BaseBookFragment {
             case R.id.ll_fly_place:
                 //司放地点
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_fly_place, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_fly_place, llFlyPlace.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mPlayViewModel.plyPlace = content;
                             llFlyPlace.setRightText(content);
                             mInputDialog.hide();
@@ -363,7 +363,7 @@ public class PlayAddFragment extends BaseBookFragment {
             case R.id.ll_fly_ullage:
                 //司放空距
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_fly_ullage, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_fly_ullage, llFlyUllage.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
                             mPlayViewModel.plyUllage = content;
                             llFlyUllage.setRightText(content);
                             mInputDialog.hide();

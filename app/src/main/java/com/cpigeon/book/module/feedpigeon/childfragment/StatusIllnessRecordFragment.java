@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
@@ -23,7 +24,9 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.feedpigeon.viewmodel.StatusIllnessRecordAddViewModel;
+import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
@@ -33,6 +36,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * 病情记录
@@ -40,7 +44,6 @@ import butterknife.OnClick;
  */
 
 public class StatusIllnessRecordFragment extends BaseBookFragment {
-
 
     @BindView(R.id.lvIllnessName)
     LineInputView lvIllnessName;
@@ -68,12 +71,15 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
     TextView tvOk;
 
     private StatusIllnessRecordAddViewModel mStatusIllnessRecordAddViewModel;
+    private SelectTypeViewModel mSelectTypeViewModel;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mStatusIllnessRecordAddViewModel = new StatusIllnessRecordAddViewModel();
-        initViewModels(mStatusIllnessRecordAddViewModel);
+        mSelectTypeViewModel = new SelectTypeViewModel();
+
+        initViewModels(mStatusIllnessRecordAddViewModel, mSelectTypeViewModel);
         mStatusIllnessRecordAddViewModel.setmBaseFragment(this);
     }
 
@@ -128,6 +134,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
 
         inputRemark.getEditText().setCanEdit(false);//不可编辑
 
+        mSelectTypeViewModel.getLiness_Name();
     }
 
     @Override
@@ -174,9 +181,14 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
             mStatusIllnessRecordAddViewModel.temper = datas.getTemperature();//气温
             mStatusIllnessRecordAddViewModel.hum = datas.getHumidity();//湿度
             mStatusIllnessRecordAddViewModel.dir = datas.getDirection();//风向
-
-
         });
+
+
+        mSelectTypeViewModel.mLinessName.observe(this, datas -> {
+            //疾病名称
+            mStatusIllnessRecordAddViewModel.mIllnessNameData = datas;
+        });
+
     }
 
 
@@ -188,12 +200,35 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
             case R.id.lvIllnessName:
                 //疾病名称
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_illness_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_illness_name, 0, content -> {
                             mStatusIllnessRecordAddViewModel.illnessName = content;
                             lvIllnessName.setRightText(content);
-                            mInputDialog.hide();
                             mStatusIllnessRecordAddViewModel.isCanCommit();
-                        }, null);
+                            mInputDialog.hide();
+                        }, () -> {
+                            if (!Lists.isEmpty(mStatusIllnessRecordAddViewModel.mIllnessNameData)) {
+                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mStatusIllnessRecordAddViewModel.mIllnessNameData), 0, new OptionPicker.OnOptionPickListener() {
+                                    @Override
+                                    public void onOptionPicked(int index, String item) {
+                                        mStatusIllnessRecordAddViewModel.illnessName = mStatusIllnessRecordAddViewModel.mIllnessNameData.get(index).getTypeName();
+                                        lvIllnessName.setRightText(mStatusIllnessRecordAddViewModel.mIllnessNameData.get(index).getTypeName());
+                                        mStatusIllnessRecordAddViewModel.isCanCommit();
+                                        mInputDialog.hide();
+                                    }
+                                });
+                            } else {
+                                mSelectTypeViewModel.getLiness_Name();
+                            }
+                        });
+
+
+//                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                        , R.string.tv_illness_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+//                            mStatusIllnessRecordAddViewModel.illnessName = content;
+//                            lvIllnessName.setRightText(content);
+//                            mInputDialog.hide();
+//                            mStatusIllnessRecordAddViewModel.isCanCommit();
+//                        }, null);
 
                 break;
             case R.id.lvIllnessSymptom:

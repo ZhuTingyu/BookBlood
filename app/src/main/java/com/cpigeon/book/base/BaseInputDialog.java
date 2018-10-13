@@ -11,15 +11,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
-import com.base.util.system.ScreenTool;
 import com.base.util.utility.KeyboardUtils;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 
 /**
@@ -34,6 +33,7 @@ public class BaseInputDialog extends BaseDialogFragment {
     private EditText mEdContent;
     private TextView mTvChoose;
     private int mEditInputType;
+    private String mContent;
     private boolean mIsOpen;
 
     @Override
@@ -43,7 +43,7 @@ public class BaseInputDialog extends BaseDialogFragment {
 
     @Override
     protected void initView(Dialog dialog) {
-        KeyboardUtils.registerSoftInputChangedListener(getActivity(),isOpen -> {
+        KeyboardUtils.registerSoftInputChangedListener(getActivity(), isOpen -> {
             mIsOpen = isOpen;
         });
         mImgClose = dialog.findViewById(R.id.imgClose);
@@ -55,6 +55,10 @@ public class BaseInputDialog extends BaseDialogFragment {
         if (getArguments() != null) {
             String title = getArguments().getString(IntentBuilder.KEY_TITLE);
             mEditInputType = getArguments().getInt(IntentBuilder.KEY_TYPE);
+            mContent = getArguments().getString(IntentBuilder.KEY_DATA);
+
+            mEdContent.setText(mContent);
+
             mTvTitle.setText(title);
             if (mEditInputType != 0) {
                 mEdContent.setInputType(mEditInputType);
@@ -110,6 +114,10 @@ public class BaseInputDialog extends BaseDialogFragment {
         void choose();
     }
 
+    public EditText getEditText() {
+        return mEdContent;
+    }
+
     private OnFinishListener mOnFinishListener;
     private OnChooseClickListener mOnChooseListener;
 
@@ -126,13 +134,21 @@ public class BaseInputDialog extends BaseDialogFragment {
     }
 
     public static BaseInputDialog show(FragmentManager fragmentManager
-            , @StringRes int resId, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
+            , @StringRes int resId, String content, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
         BaseInputDialog dialog = new BaseInputDialog();
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(resId));
         if (editInputType != 0) {
             bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
         }
+
+        if (StringUtil.isStringValid(content)) {
+            bundle.putString(IntentBuilder.KEY_DATA, content);
+        } else {
+            bundle.putString(IntentBuilder.KEY_DATA, "");
+        }
+
+
         dialog.setArguments(bundle);
         dialog.setOnFinishListener(onFinishListener);
         dialog.setOnChooseClickListener(onChooseClickListener);
@@ -140,10 +156,30 @@ public class BaseInputDialog extends BaseDialogFragment {
         return dialog;
     }
 
+
+    public static BaseInputDialog show(FragmentManager fragmentManager
+            , @StringRes int resId, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
+        BaseInputDialog dialog = new BaseInputDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(resId));
+        if (editInputType != 0) {
+            bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
+        }
+
+        dialog.setArguments(bundle);
+        dialog.setOnFinishListener(onFinishListener);
+        dialog.setOnChooseClickListener(onChooseClickListener);
+        dialog.show(fragmentManager);
+
+
+        return dialog;
+    }
+
+
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        if(mIsOpen){
+        if (mIsOpen) {
             KeyboardUtils.toggleSoftInput();
         }
     }
