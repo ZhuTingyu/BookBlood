@@ -5,30 +5,25 @@ import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
-import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
-import com.base.widget.BottomSheetAdapter;
-import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseInputDialog;
-import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PairingNestInfoEntity;
 import com.cpigeon.book.module.breeding.OffspringChooseFragment;
 import com.cpigeon.book.module.breeding.PairingNestAddFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingNestViewModel;
 import com.cpigeon.book.util.MathUtil;
-import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
 
-import java.time.format.TextStyle;
 import java.util.Date;
 
 /**
@@ -37,21 +32,7 @@ import java.util.Date;
 
 public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfoEntity, BaseViewHolder> {
 
-
-//    private LineInputView ll_nest_num;//窝次
-//    private LineInputView ll_pairing_time;//配对时间
-//    private LineInputView ll_lay_eggs;//产蛋信息
-//    private LineInputView ll_lay_eggs_time;//产蛋时间
-//    private LineInputView ll_fertilized_egg;//受精蛋
-//    private LineInputView ll_fertilized_egg_no;//无精蛋
-//    private LineInputView ll_hatches_info;//出壳信息
-//    private LineInputView ll_hatches_time;//出壳时间
-//    private LineInputView ll_hatches_num;//出壳个数
-//    private LineInputView ll_offspring_info;//子代信息
-//    private RecyclerView rv_offspring_info;//子代信息 列表
-
     private PairingNestViewModel mPairingNestViewModel;
-
 
     public int addChildPosition = 0;
 
@@ -62,24 +43,39 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
 
     @Override
     protected void convert(BaseViewHolder helper, PairingNestInfoEntity item) {
+        boolean llHatchesInfoTag = false;
+        boolean llLayEggsTag = false;
 
         LineInputView ll_nest_num = helper.getView(R.id.ll_nest_num);
-//        ll_nest_num.setTitle("第" + MathUtil.toChinese(String.valueOf(Integer.valueOf(item.getLayNum()) + 1)) + "窝");
         ll_nest_num.setTitle("第" + MathUtil.toChinese(String.valueOf(helper.getPosition() + 1)) + "窝");
 
         LineInputView ll_pairing_time = helper.getView(R.id.ll_pairing_time);
         ll_pairing_time.setContent(item.getPigeonBreedTime());
 
-        LineInputView ll_lay_eggs = helper.getView(R.id.ll_lay_eggs);//产蛋信息
+        LinearLayout ll_lay_eggs = helper.getView(R.id.ll_lay_eggs);//产蛋信息
         LineInputView ll_lay_eggs_time = helper.getView(R.id.ll_lay_eggs_time);//产蛋时间
         LineInputView ll_fertilized_egg = helper.getView(R.id.ll_fertilized_egg);//受精蛋
         LineInputView ll_fertilized_egg_no = helper.getView(R.id.ll_fertilized_egg_no);//无精蛋
+        LineInputView ll_hatches_info = helper.getView(R.id.ll_hatches_info);//出壳信息
+
+
+        ImageView img_right_lay_eggs = helper.getView(R.id.img_right_lay_eggs);
+        ImageView img_giving = helper.getView(R.id.img_giving);
+        LinearLayout ll_lay_eggs_z = helper.getView(R.id.ll_lay_eggs_z);//
+        LinearLayout ll_fertilized_giving = helper.getView(R.id.ll_fertilized_giving);//
+        LinearLayout ll_hatches_info_z = helper.getView(R.id.ll_hatches_info_z);//
+
+        LineInputView ll_hatches_time = helper.getView(R.id.ll_hatches_time);//出壳时间
+        LineInputView ll_hatches_num = helper.getView(R.id.ll_hatches_num);//出壳个数
+        TextView tv_giving_name = helper.getView(R.id.tv_giving_name);
+
+
+        ImageView hatches_info_img = ll_hatches_info.getImgRight();
 
 
         ll_lay_eggs_time.setContent("");
         ll_fertilized_egg.setContent("");
         ll_fertilized_egg_no.setContent("");
-
 
         if (!StringUtil.isStringValid(item.getLayEggTime()) || item.getLayEggTime().equals(mContext.getString(R.string.text_default))) {
             ll_lay_eggs_time.setContent("");
@@ -103,25 +99,28 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
 
                 ) {
             //未产蛋
-            ll_lay_eggs.setContent(mContext.getString(R.string.string_lay_eggs_no));
+            img_right_lay_eggs.setRotation(0);
+            ll_lay_eggs_z.setVisibility(View.GONE);
 
-            ll_lay_eggs_time.setVisibility(View.GONE);
-            ll_fertilized_egg.setVisibility(View.GONE);
-            ll_fertilized_egg_no.setVisibility(View.GONE);
+            llLayEggsTag = false;
 
         } else {
             //已产蛋
-            ll_lay_eggs.setContent(mContext.getString(R.string.string_lay_eggs_yes));
 
-            ll_lay_eggs_time.setVisibility(View.VISIBLE);
-            ll_fertilized_egg.setVisibility(View.VISIBLE);
-            ll_fertilized_egg_no.setVisibility(View.VISIBLE);
+            img_right_lay_eggs.setRotation(90);
+            ll_lay_eggs_z.setVisibility(View.VISIBLE);
+
+            llLayEggsTag = true;
         }
 
-
-        LineInputView ll_hatches_info = helper.getView(R.id.ll_hatches_info);//出壳信息
-        LineInputView ll_hatches_time = helper.getView(R.id.ll_hatches_time);//出壳时间
-        LineInputView ll_hatches_num = helper.getView(R.id.ll_hatches_num);//出壳个数
+        //是否赠送
+        if (StringUtil.isStringValid(item.getGivePrson())) {
+            img_giving.setImageResource(R.mipmap.giving_yes);
+            tv_giving_name.setText(item.getGivePrson());
+        } else {
+            tv_giving_name.setText("");
+            img_giving.setImageResource(R.mipmap.giving_no);
+        }
 
         if (!StringUtil.isStringValid(item.getOutShellTime()) || item.getOutShellTime().equals(mContext.getString(R.string.text_default))) {
             ll_hatches_time.setContent("");
@@ -133,16 +132,16 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
         if ((StringUtil.isStringValid(item.getOutShellTime()) && !item.getOutShellTime().equals(mContext.getString(R.string.text_default)))
                 || Integer.valueOf(item.getOutShellCount()) > 0) {
             // 已出壳
-            ll_hatches_info.setContent(mContext.getString(R.string.string_hatches_info_yes));
+            llHatchesInfoTag = true;
 
-            ll_hatches_time.setVisibility(View.VISIBLE);
-            ll_hatches_num.setVisibility(View.VISIBLE);
+            hatches_info_img.setRotation(90);
+            ll_hatches_info_z.setVisibility(View.VISIBLE);
         } else {
             // 未出壳
-            ll_hatches_info.setContent(mContext.getString(R.string.string_hatches_info_no));
+            llHatchesInfoTag = false;
 
-            ll_hatches_time.setVisibility(View.GONE);
-            ll_hatches_num.setVisibility(View.GONE);
+            hatches_info_img.setRotation(0);
+            ll_hatches_info_z.setVisibility(View.GONE);
         }
 
         LineInputView ll_offspring_info = helper.getView(R.id.ll_offspring_info);//子代信息
@@ -157,7 +156,6 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
         mOffspringInfoAdapter.bindToRecyclerView(rv_offspring_info);
         mOffspringInfoAdapter.setNewData(item.getPigeonList());
 
-
         ll_nest_num.setOnClickListener(v -> {
             setOnClick(ll_nest_num, item, mOffspringInfoAdapter);//删除
         });
@@ -166,37 +164,33 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             setOnClick(ll_pairing_time, item, mOffspringInfoAdapter);//配对时间
         });
 
-        ll_lay_eggs.setOnClickListener(v -> {
-//            setOnClick(ll_lay_eggs, item, mOffspringInfoAdapter);
+        boolean finalLlLayEggsTag = llLayEggsTag;
+        ll_lay_eggs.setOnClickListener(new View.OnClickListener() {
 
-            // 产蛋信息
-            String[] chooseWays = getBaseActivity().getResources().getStringArray(R.array.array_lay_eggs);
-            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
-                String way = chooseWays[p];
-                if (way.equals(Utils.getString(R.string.string_lay_eggs_yes))) {
-                    //已产蛋
-                    ll_lay_eggs.setContent(mContext.getString(R.string.string_lay_eggs_yes));
+            boolean llLayEggsTags = finalLlLayEggsTag;
 
-                    ll_lay_eggs_time.setVisibility(View.VISIBLE);
-                    ll_fertilized_egg.setVisibility(View.VISIBLE);
-                    ll_fertilized_egg_no.setVisibility(View.VISIBLE);
-
-                } else if (way.equals(Utils.getString(R.string.string_lay_eggs_no))) {
+            @Override
+            public void onClick(View v) {
+                if (llLayEggsTags) {
                     //未产蛋
-                    ll_lay_eggs.setContent(mContext.getString(R.string.string_lay_eggs_no));
+                    llLayEggsTags = false;
 
-                    ll_lay_eggs_time.setVisibility(View.GONE);
-                    ll_fertilized_egg.setVisibility(View.GONE);
-                    ll_fertilized_egg_no.setVisibility(View.GONE);
+                    img_right_lay_eggs.setRotation(0);
+                    ll_lay_eggs_z.setVisibility(View.GONE);
+
+                } else {
+                    //已产蛋
+                    llLayEggsTags = true;
+
+                    img_right_lay_eggs.setRotation(90);
+                    ll_lay_eggs_z.setVisibility(View.VISIBLE);
                 }
-            });
-
+            }
         });
 
         ll_lay_eggs_time.setOnClickListener(v -> {
             setOnClick(ll_lay_eggs_time, item, mOffspringInfoAdapter);//产蛋时间
         });
-
 
         ll_fertilized_egg.setOnClickListener(v -> {
             setOnClick(ll_fertilized_egg, item, mOffspringInfoAdapter);//产蛋 受精蛋
@@ -206,30 +200,50 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             setOnClick(ll_fertilized_egg_no, item, mOffspringInfoAdapter);//产蛋 无精蛋
         });
 
-        ll_hatches_info.setOnClickListener(v -> {
-//            setOnClick(ll_hatches_info, item, mOffspringInfoAdapter);//出壳信息
-            //出壳信息
-            String[] chooseWays2 = getBaseActivity().getResources().getStringArray(R.array.array_hatches_info);
-            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays2), p -> {
-                String way = chooseWays2[p];
-                if (way.equals(Utils.getString(R.string.string_hatches_info_yes))) {
-                    //已出壳
-                    ll_hatches_info.setContent(mContext.getString(R.string.string_hatches_info_yes));
+        //给送给别人
+        ll_fertilized_giving.setOnClickListener(v -> {
+            mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+                    , R.string.tv_hatches_giving_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        mInputDialog.hide();
+                        tv_giving_name.setText(content);
 
-                    ll_hatches_time.setVisibility(View.VISIBLE);
-                    ll_hatches_num.setVisibility(View.VISIBLE);
-                } else if (way.equals(Utils.getString(R.string.string_hatches_info_no))) {
-                    //未出壳
-                    ll_hatches_info.setContent(mContext.getString(R.string.string_hatches_info_no));
+                        if (StringUtil.isStringValid(content)) {
+                            img_giving.setImageResource(R.mipmap.giving_yes);
+                        } else {
+                            img_giving.setImageResource(R.mipmap.giving_no);
+                        }
+                        mPairingNestViewModel.mPairingNestInfoEntity = item;
 
-                    ll_hatches_time.setVisibility(View.GONE);
-                    ll_hatches_num.setVisibility(View.GONE);
-                }
-            });
+                        mPairingNestViewModel.mPairingNestInfoEntity.setGivePrson(content);
+                        mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();
 
-
+                    }, null);
         });
 
+        boolean finalLlHatchesInfoTag = llHatchesInfoTag;
+        ll_hatches_info.setOnClickListener(new View.OnClickListener() {
+
+            boolean llHatchesInfoTags = finalLlHatchesInfoTag;
+
+            @Override
+            public void onClick(View v) {
+                //出壳信息
+                if (llHatchesInfoTags) {
+                    //未出壳
+                    llHatchesInfoTags = false;
+
+                    hatches_info_img.setRotation(0);
+                    ll_hatches_info_z.setVisibility(View.GONE);
+
+                } else {
+                    //已出壳
+                    llHatchesInfoTags = true;
+                    hatches_info_img.setRotation(90);
+                    ll_hatches_info_z.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
 
         ll_hatches_time.setOnClickListener(v -> {
             setOnClick(ll_hatches_time, item, mOffspringInfoAdapter);//出壳时间
@@ -259,7 +273,6 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             });
         });
     }
-
 
     private BaseInputDialog mInputDialog;
 
@@ -344,7 +357,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
                 break;
             case R.id.ll_offspring_info:
                 //子代信息
-                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode,mPairingNestViewModel.mPairingInfoEntity);
+                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingNestViewModel.mPairingInfoEntity);
                 break;
         }
     }

@@ -156,6 +156,7 @@ public class PairingModel {
                                                                                                   String outtemper,
                                                                                                   String outhum,
                                                                                                   String outdir,
+                                                                                                  String giveprson,
                                                                                                   String reamrk) {
         return RequestData.<ApiResponse<List<PairingInfoEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PairingInfoEntity>>>() {
@@ -181,6 +182,7 @@ public class PairingModel {
                 .addBody("outtemper", outtemper)//
                 .addBody("outhum", outhum)//
                 .addBody("outdir", outdir)//
+                .addBody("giveprson", giveprson)//
                 .addBody("reamrk", reamrk)//
                 .request();
     }

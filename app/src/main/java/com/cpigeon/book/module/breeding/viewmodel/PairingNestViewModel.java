@@ -44,6 +44,8 @@ public class PairingNestViewModel extends BaseViewModel {
     }
 
 
+
+
     //窝次信息 修改
     public void getTXGP_PigeonBreedNest_UpdateData() {
         setIdStr(mOffspringInfoAdapter);
@@ -66,6 +68,7 @@ public class PairingNestViewModel extends BaseViewModel {
                 mPairingNestInfoEntity.getOutTemperature(),
                 mPairingNestInfoEntity.getOutHumidity(),
                 mPairingNestInfoEntity.getOutDirection(),
+                mPairingNestInfoEntity.getGivePrson(),
                 ""
         ), r -> {
             if (r.isOk()) {

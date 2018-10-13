@@ -127,7 +127,7 @@ public class SignFragment extends BaseBookFragment {
                 try {
                     if (isClick) {
                         if (Arrays.asList(wGift).contains(String.valueOf(calendar.getDay()))) {
-                            ToastUtils.showLong(getBaseActivity(),"暂未达到领取条件，请再接再厉！");
+                            ToastUtils.showLong(getBaseActivity(), "暂未达到领取条件，请再接再厉！");
                         }
                     }
                 } catch (Exception e) {
@@ -364,9 +364,9 @@ public class SignFragment extends BaseBookFragment {
                                         if (Integer.valueOf(ySgin[ySgin.length - 2]) + 1 == Integer.valueOf(ySgin[ySgin.length - 1])) {
                                             //签到 跟前一天连在一起
 
-                                            if (Arrays.asList(yGift).contains(ySgin[ySgin.length - 2]) || Arrays.asList(wGift).contains(ySgin[ySgin.length - 2])){
+                                            if (Arrays.asList(yGift).contains(ySgin[ySgin.length - 2]) || Arrays.asList(wGift).contains(ySgin[ySgin.length - 2])) {
                                                 schemes.add(getSchemeCalendar(x, 0));
-                                            }else {
+                                            } else {
                                                 schemes.add(getSchemeCalendar(x, 1));
                                             }
 

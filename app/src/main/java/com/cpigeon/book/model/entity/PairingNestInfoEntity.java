@@ -1,12 +1,16 @@
 package com.cpigeon.book.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/15 0015.
  */
 
-public class PairingNestInfoEntity {
+public class PairingNestInfoEntity implements Parcelable {
 
 
     /**
@@ -47,6 +51,7 @@ public class PairingNestInfoEntity {
     private String OutShellTime;
     private String OutShellCount;
     private String OutDirection;
+    private String GivePrson;
     private List<PigeonListBean> PigeonList;
 
     private PairingNestInfoEntity(Builder builder) {
@@ -67,9 +72,17 @@ public class PairingNestInfoEntity {
         setOutShellTime(builder.OutShellTime);
         setOutShellCount(builder.OutShellCount);
         setOutDirection(builder.OutDirection);
+        GivePrson = builder.GivePrson;
         setPigeonList(builder.PigeonList);
     }
 
+    public String getGivePrson() {
+        return GivePrson;
+    }
+
+    public void setGivePrson(String givePrson) {
+        GivePrson = givePrson;
+    }
 
     public String getPigeonBreedNestID() {
         return PigeonBreedNestID;
@@ -338,6 +351,7 @@ public class PairingNestInfoEntity {
         private String OutShellTime;
         private String OutShellCount;
         private String OutDirection;
+        private String GivePrson;
         private List<PigeonListBean> PigeonList;
 
         public Builder() {
@@ -428,6 +442,11 @@ public class PairingNestInfoEntity {
             return this;
         }
 
+        public Builder GivePrson(String val) {
+            GivePrson = val;
+            return this;
+        }
+
         public Builder PigeonList(List<PigeonListBean> val) {
             PigeonList = val;
             return this;
@@ -437,4 +456,67 @@ public class PairingNestInfoEntity {
             return new PairingNestInfoEntity(this);
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.PigeonBreedNestID);
+        dest.writeString(this.OutWeather);
+        dest.writeString(this.LayNum);
+        dest.writeString(this.LayEggTime);
+        dest.writeString(this.PigeonBreedID);
+        dest.writeString(this.OutHumidity);
+        dest.writeString(this.EggDirection);
+        dest.writeString(this.EggTemperature);
+        dest.writeString(this.FertEggCount);
+        dest.writeString(this.EggHumidity);
+        dest.writeString(this.EggWeather);
+        dest.writeString(this.PigeonBreedTime);
+        dest.writeString(this.OutTemperature);
+        dest.writeString(this.InseEggCount);
+        dest.writeString(this.OutShellTime);
+        dest.writeString(this.OutShellCount);
+        dest.writeString(this.OutDirection);
+        dest.writeString(this.GivePrson);
+        dest.writeList(this.PigeonList);
+    }
+
+    protected PairingNestInfoEntity(Parcel in) {
+        this.PigeonBreedNestID = in.readString();
+        this.OutWeather = in.readString();
+        this.LayNum = in.readString();
+        this.LayEggTime = in.readString();
+        this.PigeonBreedID = in.readString();
+        this.OutHumidity = in.readString();
+        this.EggDirection = in.readString();
+        this.EggTemperature = in.readString();
+        this.FertEggCount = in.readString();
+        this.EggHumidity = in.readString();
+        this.EggWeather = in.readString();
+        this.PigeonBreedTime = in.readString();
+        this.OutTemperature = in.readString();
+        this.InseEggCount = in.readString();
+        this.OutShellTime = in.readString();
+        this.OutShellCount = in.readString();
+        this.OutDirection = in.readString();
+        this.GivePrson = in.readString();
+        this.PigeonList = new ArrayList<PigeonListBean>();
+        in.readList(this.PigeonList, PigeonListBean.class.getClassLoader());
+    }
+
+    public static final Creator<PairingNestInfoEntity> CREATOR = new Creator<PairingNestInfoEntity>() {
+        @Override
+        public PairingNestInfoEntity createFromParcel(Parcel source) {
+            return new PairingNestInfoEntity(source);
+        }
+
+        @Override
+        public PairingNestInfoEntity[] newArray(int size) {
+            return new PairingNestInfoEntity[size];
+        }
+    };
 }

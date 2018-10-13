@@ -20,7 +20,6 @@ import com.cpigeon.book.module.breeding.viewmodel.PairingNestViewModel;
 import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 /**
@@ -73,7 +72,6 @@ public class PairingNestInfoListFragment extends BaseListFragment {
 
         mAdapter = new PairingNestInfoListAdapter(mPairingNestViewModel);
         list.setAdapter(mAdapter);
-
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 

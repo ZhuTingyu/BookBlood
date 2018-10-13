@@ -35,11 +35,12 @@
         <attr name="lineInputView_LeftTextColor" format="color" />
         <attr name="lineInputView_RightTextColor" format="color" />
         <attr name="lineInputView_ContentColor" format="color" />
-        <attr name="lineInputView_LeftTextSize" format="float" />
-        <attr name="lineInputView_RightTextSize" format="float" />
+        <attr name="lineInputView_LeftTextSize" format="dimension" />
+        <attr name="lineInputView_RightTextSize" format="dimension" />
         <attr name="lineInputView_LeftString" format="string" />
         <attr name="lineInputView_RightString" format="string" />
         <attr name="lineInputView_IsLookState" format="boolean" />
+        <attr name="lineInputView_isLeftBold" format="boolean" />
         <attr name="lineInputView_DrawableRight" format="reference" />
         <attr name="lineInputView_DrawableLeft" format="reference" />
         <attr name="lineInputView_IsNotNull" format="boolean" />

@@ -132,8 +132,8 @@ public class ScreenTool {
      * @param pxValue
      * @return
      */
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
+    public static int px2dip( float pxValue) {
+        final float scale = Utils.getApp().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
@@ -169,5 +169,6 @@ public class ScreenTool {
         final float fontScale = Utils.getApp().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
+
 
 }
