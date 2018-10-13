@@ -28,6 +28,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.InputBreedInBookFragment;
 import com.cpigeon.book.module.foot.FootAdminAddMultipleFragment;
 import com.cpigeon.book.module.foot.FootAdminSingleFragment;
@@ -97,7 +98,7 @@ public class MainActivity extends BaseBookActivity {
                 , Lists.newArrayList(homeFragment, goodPigeonListFragment, shareHallHomeFragment, mUserInfoFragment));
 
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(5);
+        viewPager.setOffscreenPageLimit(4);
         viewPager.setScanScroll(false);
 
         bottomAddTabView.bindViewPager(viewPager);
@@ -183,7 +184,7 @@ public class MainActivity extends BaseBookActivity {
         simpleText3.setOnClickListener(v -> {
             //赛鸽录入
             mPopupWindow.dismiss();
-            RacingPigeonEntryFragment.start(getBaseActivity());
+            InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);
         });
 
         simpleText4.setOnClickListener(v -> {

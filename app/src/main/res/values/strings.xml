@@ -631,6 +631,7 @@
     <string name="str_recycle_bin">回收站</string>
     <string name="str_recycle_bin_empty">清空</string>
     <string name="text_select_blood">选择血统</string>
+    <string name="text_reinput">重新输入</string>
 
 
 </resources>

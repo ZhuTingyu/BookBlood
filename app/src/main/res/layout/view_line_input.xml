@@ -43,7 +43,6 @@
             android:layout_width="1dp"
             android:layout_height="44dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_toRightOf="@id/rlLeft" />
 
         <LinearLayout
@@ -60,15 +59,15 @@
                 android:id="@+id/etRight"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:paddingLeft="2dp"
+                android:privateImeOptions="2dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:paddingBottom="8dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingTop="8dp"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:textColorHint="@color/gray_m"

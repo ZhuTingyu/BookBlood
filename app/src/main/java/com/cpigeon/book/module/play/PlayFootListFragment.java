@@ -16,6 +16,7 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.LeagueDetailsEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
 import com.cpigeon.book.module.play.adapter.PlayFootListAdapter;
@@ -66,12 +67,6 @@ public class PlayFootListFragment extends BaseFootListFragment {
         initHeadViews();
     }
 
-    @Override
-    protected void initHeadView() {
-        super.initHeadView();
-        mAdapter.addHeaderView(mHeadView);
-    }
-
     private void initHeadViews() {
         mHeadView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_play_foot_list_head, null);
 
@@ -93,7 +88,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
         mTvOk.setText(R.string.text_add_play_pigeon);
         mTvOk.setOnClickListener(v -> {
             //赛鸽录入
-            RacingPigeonEntryFragment.start(getBaseActivity());
+            InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);
         });
 
         mAdapter = new PlayFootListAdapter();
@@ -112,7 +107,6 @@ public class PlayFootListFragment extends BaseFootListFragment {
     protected void initObserve() {
         super.initObserve();
         mViewModel.mDataFristLeague.observe(this, data -> {
-
             mAdapter.addHeaderView(mHeadView);
 
             mLeagueMarkerView = new LeagueMarkerView(getBaseActivity(), data);
@@ -168,11 +162,10 @@ public class PlayFootListFragment extends BaseFootListFragment {
     }
 
     private void dataRefresh() {
-        mViewModel.getFirstLeague();//获取第一名赛绩
-
         mAdapter.cleanList();
         mBreedPigeonListModel.pi = 1;
         mBreedPigeonListModel.getPigeonList();
+        mViewModel.getFirstLeague();//获取第一名赛绩
     }
 
 }

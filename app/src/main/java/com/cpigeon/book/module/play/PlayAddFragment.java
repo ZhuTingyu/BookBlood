@@ -373,7 +373,7 @@ public class PlayAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_play_time:
                 //比赛日期
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     llPlayTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mPlayViewModel.playTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mPlayViewModel.isCanCommit();

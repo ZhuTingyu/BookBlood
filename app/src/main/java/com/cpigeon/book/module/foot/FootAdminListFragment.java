@@ -193,7 +193,7 @@ public class FootAdminListFragment extends BaseBookFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(FootUpdateEvent event) {
-        mAdapter.getData().clear();
+        mAdapter.cleanList();
         mViewModel.pi = 1;
         mViewModel.getFoodList();
         mViewModel.getFootRingStat();

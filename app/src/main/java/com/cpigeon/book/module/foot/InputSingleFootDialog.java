@@ -24,6 +24,7 @@ import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
+import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.select.SelectPigeonFragment;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
@@ -56,7 +57,6 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     List<String> foots;
     private boolean mKeyboardIsOpen;
     private boolean isChina = true;
-    private boolean isCanChoose = true;
 
 
     @Override
@@ -67,7 +67,6 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     @Override
     protected void initView(Dialog dialog) {
         isChina = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN, true);
-        isCanChoose = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN_2, true);
 
 
         KeyboardUtils.registerSoftInputChangedListener(getActivity(), isOpen -> {
@@ -210,10 +209,11 @@ public class InputSingleFootDialog extends BaseDialogFragment {
 
         });
 
-        if (isCanChoose) {
+        if (mOnChooseListener != null) {
             mTvChoose.setVisibility(View.VISIBLE);
             mTvChoose.setOnClickListener(v -> {
-                SelectPigeonFragment.start(getBaseActivity(), SelectPigeonFragment.CODE_SELECT);
+                mOnChooseListener.choose(InputSingleFootDialog.this);
+                dialog.dismiss();
             });
         }
 
@@ -302,30 +302,33 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         }
     }
 
-    public static void show(FragmentManager fragmentManager, String footNumber, boolean isChina, boolean isCanChoose, OnFootStringFinishListener onFootStringFinishListener) {
+    public static void show(FragmentManager fragmentManager, String footNumber, boolean isChina, OnChooseListener onChooseListener, OnFootStringFinishListener onFootStringFinishListener) {
         Bundle bundle = new Bundle();
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isChina);
-        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN_2, isCanChoose);
         InputSingleFootDialog inputSingleFootDialog = new InputSingleFootDialog();
         inputSingleFootDialog.setArguments(bundle);
         inputSingleFootDialog.setFootNumber(footNumber);
         inputSingleFootDialog.setOnFootStringFinishListener(onFootStringFinishListener);
+        inputSingleFootDialog.setOnChooseListener(onChooseListener);
         inputSingleFootDialog.show(fragmentManager);
-    }
-
-    public static void show(FragmentManager fragmentManager, String footNumber, OnFootStringFinishListener onFootStringFinishListener) {
-        show(fragmentManager, footNumber, true, true, onFootStringFinishListener);
     }
 
     public interface OnFootStringFinishListener {
         void foots(String foot);
     }
 
+    public interface OnChooseListener {
+        void choose(InputSingleFootDialog dialog);
+    }
+
     private OnFootStringFinishListener mOnFootStringFinishListener;
+    private OnChooseListener mOnChooseListener;
 
     public void setOnFootStringFinishListener(OnFootStringFinishListener onFootStringFinishListener) {
         mOnFootStringFinishListener = onFootStringFinishListener;
     }
 
-
+    public void setOnChooseListener(OnChooseListener onChooseListener) {
+        mOnChooseListener = onChooseListener;
+    }
 }

@@ -211,7 +211,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_pairing_time:
                 //配对时间
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     llPairingTime.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     mPairingInfoAddViewModel.pairingTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                     mPairingInfoAddViewModel.isCanCommit();

@@ -38,8 +38,8 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
                 mPigeonEntity.getFootRingNum(),//足环（可选可填，传足环号）
                 mPigeonEntity.getFootRingIDToNum(),//副足环
                 mPigeonEntity.getSourceID(),//信鸽来源ID
-                mPigeonEntity.getMenFootRingNum(),// 母足环号码
-                mPigeonEntity.getWoFootRingNum(),// 父足环号码
+                mPigeonEntity.getMenFootRingNum(),// 父足环号码
+                mPigeonEntity.getWoFootRingNum(),// 母足环号码
                 mPigeonEntity.getPigeonName(),// 信鸽名称
                 mPigeonEntity.getPigeonSexID(),//  性别（传ID）
                 mPigeonEntity.getPigeonPlumeName(),//  羽色（可选可填，传羽色名称）

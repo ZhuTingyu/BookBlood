@@ -19,6 +19,7 @@ import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.event.OpenServiceEvent;
 import com.cpigeon.book.model.entity.ServiceEntity;
+import com.cpigeon.book.module.menu.account_security.ReviseLoginPsdFragment;
 import com.cpigeon.book.module.menu.service.viewmodel.PayServiceOrderViewModel;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
 
@@ -96,7 +97,25 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
         });
 
         mViewModel.getError().observe(this, restErrorInfo -> {
+
             mBaseActivity.setProgressVisible(false);
+            if (restErrorInfo.code == 1099) {
+                DialogUtils.createDialog(getBaseActivity(), Utils.getString(R.string.text_error), restErrorInfo.message
+                        , Utils.getString(R.string.text_forget_password)
+                        , Utils.getString(R.string.text_reinput)
+                        , sweetAlertDialog -> {
+                            sweetAlertDialog.dismiss();
+                            IntentBuilder.Builder()
+                                    .putExtra(IntentBuilder.KEY_DATA, 2)
+                                    .startParentActivity(getBaseActivity(), ReviseLoginPsdFragment.class);
+                            mPassword.clearPassword();
+                        }
+                        , sweetAlertDialog -> {
+                            sweetAlertDialog.dismiss();
+                            mPassword.clearPassword();
+                        });
+                return;
+            }
             DialogUtils.createErrorDialog(mBaseActivity, restErrorInfo.message);
         });
 

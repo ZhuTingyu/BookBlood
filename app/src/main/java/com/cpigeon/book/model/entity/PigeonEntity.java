@@ -12,8 +12,8 @@ import java.io.Serializable;
 
 public class PigeonEntity implements Serializable {
 
-    public static final String ID_MALE = "25";//雄
-    public static final String ID_FEMALE = "24";//雌
+    public static final String ID_FEMALE = "13";//雌
+    public static final String ID_MALE = "14";//雄
     public static final String ID_BREED_PIGEON = "9";//种鸽
     public static final String ID_MATCH_PIGEON = "10";//赛鸽
     public static final String ID_YOUNG_PIGEON = "10";

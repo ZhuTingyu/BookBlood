@@ -100,8 +100,8 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                     foot,//足环（可选可填，传足环号）
                     footVice,//副足环
                     sourceId,//信鸽来源ID
-                    footMother,// 母足环号码
                     footFather,// 父足环号码
+                    footMother,// 母足环号码
                     pigeonName,// 信鸽名称
                     sexId,//  性别（传ID）
                     featherColor,//  羽色（可选可填，传羽色名称）
@@ -165,10 +165,5 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     public boolean isHaveSex(){
         return mBreedPigeonEntity != null && StringUtil.isStringValid(mBreedPigeonEntity.getPigeonSexID());
     }
-
-    public boolean isChina(){
-        return Utils.getString(R.string.text_china_id).equals(countryId);
-    }
-
 
 }

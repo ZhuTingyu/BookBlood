@@ -200,7 +200,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_pairing_time:
                 //配对时间
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     llPairingTime.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     mPairingNestAddViewModel.pairingTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                     mPairingNestAddViewModel.isCanCommit();
@@ -238,7 +238,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_lay_eggs_time:
                 //产蛋时间
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     llLayEggsTime.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     mPairingNestAddViewModel.layEggsTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                 });
@@ -321,7 +321,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_hatches_time:
                 //出壳时间
-                PickerUtil.showTimePicker(getActivity(), new Date().getTime(), (view1, year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     llHatchesTime.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                     mPairingNestAddViewModel.hatchesTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
                 });

@@ -25,6 +25,7 @@
     <string name="text_input_password_again">请再次输入密码</string>
     <string name="message_net_error">网络不给力，请稍后重试！</string>
     <string name="text_net_error">未能连接到服务器\n请检查连接</string>
+    <string name="text_error">错误</string>
 
     <string name="permission_storage">存储空间</string>
     <string name="permission_location">位置信息</string>

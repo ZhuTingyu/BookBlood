@@ -38,7 +38,7 @@ public class NewTrainPigeonViewModel extends BaseViewModel {
     }
 
     public void newTrainPigeon() {
-        submitRequestThrowError(TrainPigeonModel.newTrainPigeon(name, getFootIds()), r -> {
+        submitRequestThrowError(TrainPigeonModel.newTrainPigeon(name, getFootIds(), getPigeonIds()), r -> {
             if (r.isOk()) {
                 normalResult.setValue(r.msg);
             } else throw new HttpErrorException(r);
@@ -59,6 +59,18 @@ public class NewTrainPigeonViewModel extends BaseViewModel {
         try {
             for (PigeonEntity pigeonEntity : mPigeonEntities) {
                 footId.add(pigeonEntity.getFootRingID());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Lists.appendStringByList(footId);
+    }
+
+    public String getPigeonIds() {
+        List<String> footId = Lists.newArrayList();
+        try {
+            for (PigeonEntity pigeonEntity : mPigeonEntities) {
+                footId.add(pigeonEntity.getPigeonID());
             }
         } catch (Exception e) {
             e.printStackTrace();

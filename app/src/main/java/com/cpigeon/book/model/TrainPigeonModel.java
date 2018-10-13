@@ -57,14 +57,16 @@ public class TrainPigeonModel {
 
     public static Observable<ApiResponse> newTrainPigeon(
             String name,
-            String footIds
+            String footIds,
+            String pigeonIds
     ) {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
                 .url(R.string.new_train_pigeon)
                 .addBody("name", name)
-                .addBody("idstr", footIds)
+                .addBody("footidstr", footIds)
+                .addBody("pigeonidstr", pigeonIds)
                 .request();
     }
 
