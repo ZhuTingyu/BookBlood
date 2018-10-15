@@ -3,16 +3,21 @@ package com.cpigeon.book.module.breedpigeon;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Lists;
+import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonSexCountEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
 import com.cpigeon.book.widget.stats.StatView;
@@ -75,21 +80,17 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
     private View initHeadView(PigeonSexCountEntity countEntity) {
         View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_stat_list_head, null);
-        StatView mStat1;
-        StatView mStat2;
-        StatView mStat3;
-        CardView cv_all_pigeon;
 
-        mStat1 = view.findViewById(R.id.stat1);
-        mStat2 = view.findViewById(R.id.stat2);
-        mStat3 = view.findViewById(R.id.stat3);
-        cv_all_pigeon = view.findViewById(R.id.cv_all_pigeon);
+        RecyclerView recyclerView = view.findViewById(R.id.statList);
+        CardView cv_all_pigeon = view.findViewById(R.id.cv_all_pigeon);
 
-        mStat1.bindData(countEntity.ZCount
-                , countEntity.ZCount);
-        mStat2.bindData(countEntity.ZxiongCount, countEntity.ZCount);
-        mStat3.bindData(countEntity.ZciCount, countEntity.ZCount);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        StateListAdapter stateListAdapter = new StateListAdapter(Lists.newArrayList(getResources()
+                .getStringArray(R.array.array_breed_pigeon_type)));
+        recyclerView.setAdapter(stateListAdapter);
+        stateListAdapter.setUnitString(Utils.getString(R.string.text_pigeon_unit));
+        stateListAdapter.setMaxCount(countEntity.ZCount);
+        stateListAdapter.setNewData(countEntity.getBreedPigeonStat());
         cv_all_pigeon.setOnClickListener(v -> {
             MyHomingPigeonFragment.start(getBaseActivity());
         });

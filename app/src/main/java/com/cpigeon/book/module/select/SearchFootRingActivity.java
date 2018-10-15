@@ -1,9 +1,11 @@
 package com.cpigeon.book.module.select;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.IntentBuilder;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.cpigeon.book.R;
@@ -24,6 +26,14 @@ public class SearchFootRingActivity extends BaseSearchActivity {
 
     SelectFootRingAdapter mAdapter;
     SelectFootRingViewModel mViewModel;
+    boolean mIsCanSetDeath = false;
+
+    public static void start(Activity activity, boolean isCanSetDeath) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isCanSetDeath);
+        BaseSearchActivity.start(activity, SearchFootRingActivity.class, bundle);
+
+    }
 
     @Override
     protected List<DbEntity> getHistory() {
@@ -33,14 +43,14 @@ public class SearchFootRingActivity extends BaseSearchActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new SelectFootRingAdapter();
+        mAdapter = new SelectFootRingAdapter(mIsCanSetDeath);
         return mAdapter;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mIsCanSetDeath = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         super.onCreate(savedInstanceState);
-
         mViewModel = new SelectFootRingViewModel();
         initViewModel(mViewModel);
         mRecyclerView.addItemDecorationLine();

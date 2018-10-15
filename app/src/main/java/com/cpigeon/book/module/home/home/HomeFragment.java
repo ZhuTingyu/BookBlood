@@ -126,7 +126,6 @@ public class HomeFragment extends BaseBookFragment {
         mTopList.setLayoutManager(manager);
         mAdapter = new HomeTopAdapter();
         mTopList.setAdapter(mAdapter);
-        mAdapter.setNewData(Lists.newArrayList("", ""));
 
         mSTvFootManager.setOnClickListener(v -> {
             //足环管理
@@ -176,6 +175,7 @@ public class HomeFragment extends BaseBookFragment {
 
         mViewModel.getHomeAd();
         mPigeonHouseViewModel.getPigeonHouse();
+        mViewModel.getHomeTop();
 
     }
 
@@ -195,6 +195,10 @@ public class HomeFragment extends BaseBookFragment {
 
         mPigeonHouseViewModel.mHouseEntityInfo.observe(this, pigeonHouseEntity -> {
             UserModel.getInstance().setPigeonHouseInfo(pigeonHouseEntity);
+        });
+
+        mViewModel.mDataHomeTop.observe(this, homeTopEntities -> {
+            mAdapter.setNewData(homeTopEntities);
         });
     }
 }

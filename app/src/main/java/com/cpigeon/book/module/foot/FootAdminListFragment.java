@@ -2,7 +2,6 @@ package com.cpigeon.book.module.foot;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,14 +26,12 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.adapter.FootAdminListAdapter;
-import com.cpigeon.book.module.foot.adapter.FootListHeadAdapter;
+import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminListViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
-import com.cpigeon.book.widget.stats.StatView;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -57,7 +54,7 @@ public class FootAdminListFragment extends BaseBookFragment {
     private TextView mTvOk;
     SearchFragmentParentActivity mActivity;
     RecyclerView mRvHeadView;
-    FootListHeadAdapter mHeadAdapter;
+    StateListAdapter mHeadAdapter;
 
 
     @Override
@@ -159,7 +156,7 @@ public class FootAdminListFragment extends BaseBookFragment {
         params.setMargins(0, ScreenTool.dip2px(20), 0, ScreenTool.dip2px(20));
         mRvHeadView.setLayoutParams(params);
         mRvHeadView.setLayoutManager(new LinearLayoutManager(getBaseActivity(), LinearLayoutManager.HORIZONTAL, false));
-        mHeadAdapter = new FootListHeadAdapter();
+        mHeadAdapter = new StateListAdapter(Lists.newArrayList(Utils.getApp().getResources().getStringArray(R.array.array_foot_ring_type)));
         mRvHeadView.setAdapter(mHeadAdapter);
     }
 

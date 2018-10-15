@@ -305,6 +305,7 @@
     <string name="pigeon_select_all_type">TXGP_Type_Select</string>
 
     <string name="pigeon_select_filtrate_type">TXGP_Type_SelectMushType</string>
+    <string name="modify_pigeon_statue">TXGP_Pigeon_UpdateState</string>
 
     <string name="set_pigeon_house">TXGP_PigeonHome_AddEdit</string>
     <string name="get_pigeon_house">TXGP_PigeonHome_GetInfo</string>
@@ -356,6 +357,7 @@
     <string name="pay_service_order">TXGP_OpenService</string>
     <string name="pay_renewal_service_order">TXGP_RenewService</string>
     <string name="get_first_pigeon_match_league">TXGP_PigeonMatch_NewAnalysis</string>
+    <string name="get_home_count">TXGP_HomeTop_SelectCount</string>
 
 
 </resources>

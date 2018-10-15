@@ -38,15 +38,23 @@ public class SelectFootRingFragment extends BaseBookFragment {
     SelectFootRingAdapter mAdapter;
     SelectFootRingViewModel mViewModel;
     SearchFragmentParentActivity mActivity;
+    boolean mIsCanSetDeath = false;
 
     public static void start(Activity activity) {
         SearchFragmentParentActivity.start(activity, SelectFootRingFragment.class, CODE_SELECT_FOOT, false, null);
     }
 
-    public static void start(Activity activity, String... sexId) {
+    public static void start(Activity activity, boolean isCanSetDeath) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isCanSetDeath);
+        SearchFragmentParentActivity.start(activity, SelectFootRingFragment.class, CODE_SELECT_FOOT, false, bundle);
+    }
+
+    public static void start(Activity activity, boolean isCanSetDeath, String... sexId) {
         List<String> sexIds = Lists.newArrayList(sexId);
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_DATA, Lists.appendStringByList(sexIds));
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isCanSetDeath);
         SearchFragmentParentActivity.start(activity, SelectFootRingFragment.class, CODE_SELECT_FOOT, false, bundle);
     }
 
@@ -69,18 +77,17 @@ public class SelectFootRingFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(getArguments() != null){
-            String sex = getArguments().getString(IntentBuilder.KEY_DATA);
-            mViewModel.sexId = sex;
-        }
+        String sex = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
+        mViewModel.sexId = sex;
+        mIsCanSetDeath = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
 
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getBaseActivity(), SearchFootRingActivity.class);
+            SearchFootRingActivity.start(getBaseActivity(), mIsCanSetDeath);
         });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
-        mAdapter = new SelectFootRingAdapter();
+        mAdapter = new SelectFootRingAdapter(mIsCanSetDeath);
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnLoadMoreListener(() -> {

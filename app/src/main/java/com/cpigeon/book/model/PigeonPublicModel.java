@@ -24,6 +24,7 @@ public class PigeonPublicModel {
                 .addBody("whichid", selectType)
                 .request();
     }
+
     public static Observable<ApiResponse<List<SelectTypeEntity>>> getSelectMushType(String selectTypes) {
         return RequestData.<ApiResponse<List<SelectTypeEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<SelectTypeEntity>>>() {
@@ -32,5 +33,22 @@ public class PigeonPublicModel {
                 .addBody("whichidstr", selectTypes)
                 .request();
     }
+
+    public static Observable<ApiResponse> modifyPigeonStatue(
+            String pigeonId,
+            int footId,
+            String stateID,
+            String deathId) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.modify_pigeon_statue)
+                .addBody("pigeonid", pigeonId)
+                .addBody("footid", String.valueOf(footId))
+                .addBody("stateid", "37")
+                .addBody("deathid", deathId)
+                .request();
+    }
+
 
 }

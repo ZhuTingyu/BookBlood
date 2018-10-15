@@ -245,7 +245,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         //足环
         mLvRing.setOnRightClickListener(lineInputView -> {
             InputSingleFootDialog.show(getFragmentManager(), mLvRing.getContent(), mViewModel.isChina(), dialog -> {
-                SelectFootRingFragment.start(getBaseActivity());
+                SelectFootRingFragment.start(getBaseActivity(), true);
             }, foot -> {
                 mLvRing.setRightText(foot);
                 mViewModel.foot = foot;
@@ -455,6 +455,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
             mViewModel.pigeonType = breedPigeonEntity.getTypeID();
             mViewModel.countryId = breedPigeonEntity.getFootCodeID();
+            mViewModel.foot = breedPigeonEntity.getFootRingNum();
             mViewModel.footVice = breedPigeonEntity.getFootRingIDToNum();
             mViewModel.sourceId = breedPigeonEntity.getSourceID();
             mViewModel.footFather = breedPigeonEntity.getMenFootRingNum();
@@ -480,6 +481,8 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mViewModel.phototypeid = breedPigeonEntity.getCoverPhotoID();
                 mViewModel.images.addAll(Lists.newArrayList(breedPigeonEntity.getCoverPhotoUrl()));
             }
+
+            mViewModel.isCanCommit();
         });
 
         //种鸽录入、修改
@@ -614,7 +617,6 @@ public class InputPigeonFragment extends BaseBookFragment {
             SelectTypeEntity blood = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mViewModel.lineage = blood.getTypeID();
             mLvBlood.setRightText(blood.getTypeName());
-
         } else if (CODE_SELECT_FATHER == requestCode) {
             PigeonEntity pigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
@@ -628,6 +630,8 @@ public class InputPigeonFragment extends BaseBookFragment {
             mLvRing.setRightText(entity.getFootRingNum());
             mViewModel.foot = entity.getFootRingNum();
         }
+        mViewModel.isCanCommit();
+
 
 //        switch (requestCode) {
 //
