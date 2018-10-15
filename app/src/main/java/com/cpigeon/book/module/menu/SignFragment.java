@@ -127,7 +127,7 @@ public class SignFragment extends BaseBookFragment {
                 try {
                     if (isClick) {
                         if (Arrays.asList(wGift).contains(String.valueOf(calendar.getDay()))) {
-                            ToastUtils.showLong(getBaseActivity(), "暂未达到领取条件，请再接再厉！");
+                            ToastUtils.showLong(getBaseActivity(), "签到天数不足，请加油哟！");
                         }
                     }
                 } catch (Exception e) {

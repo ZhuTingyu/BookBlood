@@ -77,7 +77,9 @@
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="@string/text_current_humidity" />
 
+            <!--体温-->
             <com.cpigeon.book.widget.LineInputView
+                android:visibility="gone"
                 android:id="@+id/lvBodyTemp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,13 +88,24 @@
                 app:lineInputView_IsNotNull="false"
                 app:lineInputView_LeftString="@string/text_current_body_temp" />
 
-            <com.cpigeon.book.widget.InputBoxView
-                android:id="@+id/inputVaccineReason"
+
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lvVaccineReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:inputBoxView_tittle="@string/text_use_vaccine_reason"
-                app:is_mandatory="true"
-                app:text_hint="@string/text_edit_lenth_hint" />
+                app:lineInputView_Hint="@string/text_pleas_choose"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="@string/text_use_vaccine_reason" />
+
+
+            <!--<com.cpigeon.book.widget.InputBoxView-->
+                <!--android:id="@+id/inputVaccineReason"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:inputBoxView_tittle="@string/text_use_vaccine_reason"-->
+                <!--app:is_mandatory="true"-->
+                <!--app:text_hint="@string/text_edit_lenth_hint" />-->
 
             <com.cpigeon.book.widget.InputBoxView
                 android:id="@+id/inputRemark"

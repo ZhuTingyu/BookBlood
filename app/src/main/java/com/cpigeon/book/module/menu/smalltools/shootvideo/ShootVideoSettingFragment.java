@@ -129,7 +129,7 @@ public class ShootVideoSettingFragment extends BaseBookFragment {
             case R.id.ll_name:
                 //鸽舍名称
                 mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_loft_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.text_pigeon_loft_name,tv_name.getText().toString(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             tv_name.setText(content);
                             mDialogMoney.hide();
                             mShootViewModel.mShootInfoEntity.setGsname(content);

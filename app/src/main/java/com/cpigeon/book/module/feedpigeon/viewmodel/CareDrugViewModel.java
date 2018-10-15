@@ -7,14 +7,15 @@ import com.base.base.BaseViewModel;
 import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.CareDrugModel;
-import com.cpigeon.book.model.DrugUseCaseModel;
 import com.cpigeon.book.model.entity.CareDrugEntity;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.UseVaccineEntity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.service.EventBusService;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/18 0018.
@@ -28,7 +29,9 @@ public class CareDrugViewModel extends BaseViewModel {
     public int typePag = 0; //0添加    1   编辑
 
     //保健品名称
+    public List<SelectTypeEntity> mCareDrugNameSelect;
     public String careDrugName;
+    public String careDrugNameId;
     //保健品功能
     public String careDrugFunction;
     //使用效果
@@ -60,7 +63,7 @@ public class CareDrugViewModel extends BaseViewModel {
         submitRequestThrowError(CareDrugModel.getTXGP_PigeonHealth_Add(
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
-                careDrugName,
+                careDrugNameId,
                 careDrugFunction,
 
                 useEffect,
@@ -90,7 +93,7 @@ public class CareDrugViewModel extends BaseViewModel {
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
                 mFeedPigeonEntity.getViewID(),
-                careDrugName,
+                careDrugNameId,
                 careDrugFunction,
 
                 useEffect,
@@ -143,20 +146,20 @@ public class CareDrugViewModel extends BaseViewModel {
         });
     }
 
-
     private BaseFragment mBaseFragment;
 
     public void setmBaseFragment(BaseFragment mBaseFragment) {
         this.mBaseFragment = mBaseFragment;
     }
+
     public void isCanCommit() {
 
         if (typePag == 1) {
             //编辑
             mBaseFragment.setProgressVisible(true);//加载框
             getTXGP_PigeonHealth_UpdateData();
-        }else {
-            isCanCommit(careDrugName, careDrugFunction, useEffect, recordTime, useTime, isHaveAfterResult);
+        } else {
+            isCanCommit(careDrugName, careDrugFunction, recordTime, useTime);
         }
     }
 }

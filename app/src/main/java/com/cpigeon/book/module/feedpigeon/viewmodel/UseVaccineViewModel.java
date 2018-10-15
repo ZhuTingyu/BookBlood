@@ -6,14 +6,16 @@ import com.base.BaseFragment;
 import com.base.base.BaseViewModel;
 import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
-import com.cpigeon.book.model.FeedPigeonModel;
 import com.cpigeon.book.model.UseVaccineModel;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.model.entity.UseVaccineEntity;
 import com.cpigeon.book.service.EventBusService;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/17 0017.
@@ -27,13 +29,18 @@ public class UseVaccineViewModel extends BaseViewModel {
     public int typePag = 0; //0添加    1   编辑
 
     //疫苗名称
+    public List<SelectTypeEntity> mVaccineNameSelect;
     public String vaccineName;
+    public String vaccineNameId;
     //注射日期
     public String injectionTiem;
     //体温
     public String bodyTemperature;
+
     //注射原因
+    public List<SelectTypeEntity> mVaccineReasonSelect;
     public String injectionWhy;
+    public String injectionWhyId;
 
     //配对天气
     public String weather;
@@ -52,10 +59,10 @@ public class UseVaccineViewModel extends BaseViewModel {
         submitRequestThrowError(UseVaccineModel.getTXGP_PigeonVaccine_Add(
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
-                vaccineName,
+                vaccineNameId,
                 bodyTemperature,
                 injectionTiem,
-                injectionWhy,
+                injectionWhyId,
                 weather,
                 temper,
                 hum,
@@ -75,7 +82,7 @@ public class UseVaccineViewModel extends BaseViewModel {
                 mFeedPigeonEntity.getViewID(),
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
-                vaccineName,
+                vaccineNameId,
                 weather,
                 temper,
                 bodyTemperature,
@@ -121,11 +128,9 @@ public class UseVaccineViewModel extends BaseViewModel {
             getTXGP_PigeonVaccine_UpdateData();
         } else {
             //添加
-            isCanCommit(vaccineName, injectionTiem, bodyTemperature, injectionWhy);
+            isCanCommit(vaccineName, injectionTiem, injectionWhy);
         }
-
     }
-
 
     // 疫苗注射 删除
     public void getTXGP_PigeonVaccine_DeleteData() {

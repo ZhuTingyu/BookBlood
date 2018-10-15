@@ -203,7 +203,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
         //给送给别人
         ll_fertilized_giving.setOnClickListener(v -> {
             mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.tv_hatches_giving_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                    , R.string.tv_hatches_giving_name,tv_giving_name.getText().toString(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                         mInputDialog.hide();
                         tv_giving_name.setText(content);
 

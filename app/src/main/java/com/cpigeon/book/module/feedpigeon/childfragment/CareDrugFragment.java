@@ -26,7 +26,9 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.feedpigeon.viewmodel.CareDrugViewModel;
+import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
@@ -36,6 +38,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * 保健品
@@ -91,13 +94,15 @@ public class CareDrugFragment extends BaseBookFragment {
 
 
     private CareDrugViewModel mCareDrugViewModel;
+    private SelectTypeViewModel mSelectTypeViewModel;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
         mCareDrugViewModel = new CareDrugViewModel();
-        initViewModels(mCareDrugViewModel);
+        mSelectTypeViewModel = new SelectTypeViewModel();
+        initViewModels(mCareDrugViewModel, mSelectTypeViewModel);
         mCareDrugViewModel.setmBaseFragment(this);
     }
 
@@ -168,6 +173,8 @@ public class CareDrugFragment extends BaseBookFragment {
         }
 
         inputRemark.getEditText().setCanEdit(false);//不可编辑
+
+        mSelectTypeViewModel.getCareDrugName();//获取保健品名称
     }
 
     @Override
@@ -200,6 +207,7 @@ public class CareDrugFragment extends BaseBookFragment {
             setProgressVisible(false);
 
             mCareDrugViewModel.careDrugName = datas.getPigeonHealthName();//保健品名称
+            mCareDrugViewModel.careDrugNameId = datas.getPigeonHealthID();//保健品名称
             mCareDrugViewModel.careDrugFunction = datas.getPigeonHealthType();//保健品功能
             mCareDrugViewModel.useTime = datas.getUseHealthTime();//使用时间
             mCareDrugViewModel.recordTime = datas.getRecordTime();//记录时间
@@ -213,17 +221,17 @@ public class CareDrugFragment extends BaseBookFragment {
             lvUserTime.setContent(mCareDrugViewModel.useTime);//使用时间
             lvRecordTime.setContent(mCareDrugViewModel.recordTime);//记录时间
 
-            if (mCareDrugViewModel.useEffect.equals("1")) {
-                lvUserResult.setContent(Utils.getString(R.string.text_use_effect_y));//有效果
-            } else {
-                lvUserResult.setContent(Utils.getString(R.string.text_use_effect_n));//无效果
-            }
-
-            if (mCareDrugViewModel.isHaveAfterResult.equals("1")) {
-                lvAfterResult.setContent(Utils.getString(R.string.text_side_effects_y));//有副作用
-            } else {
-                lvAfterResult.setContent(Utils.getString(R.string.text_side_effects_n));//无副作用
-            }
+//            if (mCareDrugViewModel.useEffect.equals("1")) {
+//                lvUserResult.setContent(Utils.getString(R.string.text_use_effect_y));//有效果
+//            } else {
+//                lvUserResult.setContent(Utils.getString(R.string.text_use_effect_n));//无效果
+//            }
+//
+//            if (mCareDrugViewModel.isHaveAfterResult.equals("1")) {
+//                lvAfterResult.setContent(Utils.getString(R.string.text_side_effects_y));//有副作用
+//            } else {
+//                lvAfterResult.setContent(Utils.getString(R.string.text_side_effects_n));//无副作用
+//            }
 
             lvBodyTemp.setRightText(mCareDrugViewModel.bodyTemp);//体温
 
@@ -231,6 +239,11 @@ public class CareDrugFragment extends BaseBookFragment {
             mCareDrugViewModel.temper = datas.getTemperature();//气温
             mCareDrugViewModel.hum = datas.getHumidity();//湿度
             mCareDrugViewModel.dir = datas.getDirection();//风向
+        });
+
+        //保健品名称
+        mSelectTypeViewModel.mCareDrugName.observe(this, datas -> {
+            mCareDrugViewModel.mCareDrugNameSelect = datas;
         });
 
     }
@@ -242,18 +255,57 @@ public class CareDrugFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.lvCareDrugName:
                 //保健品名称
-                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_care_drug_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
-                            mCareDrugViewModel.careDrugName = content;
-                            lvCareDrugName.setRightText(content);
-                            mInputDialog.hide();
+                if (!Lists.isEmpty(mCareDrugViewModel.mCareDrugNameSelect)) {
+                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mCareDrugViewModel.mCareDrugNameSelect), 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            mCareDrugViewModel.careDrugName = mCareDrugViewModel.mCareDrugNameSelect.get(index).getTypeName();
+                            mCareDrugViewModel.careDrugNameId = mCareDrugViewModel.mCareDrugNameSelect.get(index).getTypeID();
+                            lvCareDrugName.setRightText(mCareDrugViewModel.mCareDrugNameSelect.get(index).getTypeName());
                             mCareDrugViewModel.isCanCommit();
-                        }, null);
+                        }
+                    });
+                } else {
+                    mSelectTypeViewModel.getCareDrugName();
+                }
+
+//                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                        , R.string.tv_illness_name, 0, content -> {
+//                            mCareDrugViewModel.careDrugName = content;
+//                            lvCareDrugName.setRightText(content);
+//                            mInputDialog.hide();
+//                            mCareDrugViewModel.isCanCommit();
+//                            mInputDialog.hide();
+//                        }, () -> {
+//                            if (!Lists.isEmpty(mCareDrugViewModel.mCareDrugNameSelect)) {
+//                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mCareDrugViewModel.mCareDrugNameSelect), 0, new OptionPicker.OnOptionPickListener() {
+//                                    @Override
+//                                    public void onOptionPicked(int index, String item) {
+//                                        mCareDrugViewModel.careDrugName = mCareDrugViewModel.mCareDrugNameSelect.get(index).getTypeName();
+//                                        lvCareDrugName.setRightText(mCareDrugViewModel.mCareDrugNameSelect.get(index).getTypeName());
+//
+//                                        mCareDrugViewModel.isCanCommit();
+//                                        mInputDialog.hide();
+//                                    }
+//                                });
+//                            } else {
+//                                mSelectTypeViewModel.getCareDrugName();
+//                            }
+//                        });
+
+//                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                        , R.string.tv_care_drug_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+//                            mCareDrugViewModel.careDrugName = content;
+//                            lvCareDrugName.setRightText(content);
+//                            mInputDialog.hide();
+//                            mCareDrugViewModel.isCanCommit();
+//                        }, null);
+
                 break;
             case R.id.lvCareDrugFunction:
                 //保健品功能
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_care_drug_function, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_care_drug_function, lvCareDrugFunction.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mCareDrugViewModel.careDrugFunction = content;
                             lvCareDrugFunction.setRightText(content);
                             mCareDrugViewModel.isCanCommit();
@@ -263,7 +315,7 @@ public class CareDrugFragment extends BaseBookFragment {
                 break;
             case R.id.lvUserTime:
                 //使用时间
-                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), ( year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     lvUserTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mCareDrugViewModel.useTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mCareDrugViewModel.isCanCommit();
@@ -272,7 +324,7 @@ public class CareDrugFragment extends BaseBookFragment {
 
             case R.id.lvRecordTime:
                 //记录时间
-                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), ( year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     lvRecordTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mCareDrugViewModel.recordTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mCareDrugViewModel.isCanCommit();
@@ -316,7 +368,7 @@ public class CareDrugFragment extends BaseBookFragment {
             case R.id.lvBodyTemp:
                 //体温
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_body_temperature, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_body_temperature, lvBodyTemp.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
                             mCareDrugViewModel.bodyTemp = content;
                             lvBodyTemp.setRightText(content);
                             mInputDialog.hide();
@@ -336,9 +388,9 @@ public class CareDrugFragment extends BaseBookFragment {
             case R.id.inputRemark:
                 //备注
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_input_remark, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_input_remark, inputRemark.getText(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mCareDrugViewModel.remark = content;
-                            inputRemark.getEditText().setText(content);
+                            inputRemark.setText(content);
                             mInputDialog.hide();
                             mCareDrugViewModel.isCanCommit();
                         }, null);

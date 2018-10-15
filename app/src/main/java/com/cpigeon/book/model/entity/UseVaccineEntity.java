@@ -38,6 +38,15 @@ public class UseVaccineEntity {
     private int UserID;
     private String Weather;
     private String PigeonViccineName;
+    private String ViccineNameID;
+
+    public String getViccineNameID() {
+        return ViccineNameID;
+    }
+
+    public void setViccineNameID(String viccineNameID) {
+        ViccineNameID = viccineNameID;
+    }
 
     public int getFootRingID() {
         return FootRingID;

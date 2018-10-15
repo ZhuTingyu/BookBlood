@@ -34,8 +34,9 @@ public class SelectTypeViewModel extends BaseViewModel {
     public static final String STATE_PLAY_ORG = "14";//赛事组织
     public static final String TYPE_COLOR_FEATHER = "15";//信鸽羽色
     public static final String TYPE_PIGEON_BLOOD = "16";//信鸽血统
-    public static final String LINESS_NAME = "17";//信鸽血统
-    public static final String DRUG_NAME = "18";//信鸽血统
+    public static final String LINESS_NAME = "17";//病症名称
+    public static final String DRUG_NAME = "18";//药品名称
+    public static final String CARE_DRUG_NAME = "19";//保健品名称
 
 
     public String selectType;
@@ -55,6 +56,10 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Medicate = new MutableLiveData<>();//用药后的状态
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_ImgType = new MutableLiveData<>();//图片类型
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_PigeonType = new MutableLiveData<>();//信鸽类型
+    public MutableLiveData<List<SelectTypeEntity>> mVaccineReason = new MutableLiveData<>();//疫苗注射原因
+    public MutableLiveData<List<SelectTypeEntity>> mVaccineName = new MutableLiveData<>();//疫苗名称
+    public MutableLiveData<List<SelectTypeEntity>> mLinessName = new MutableLiveData<>();//疾病名称
+    public MutableLiveData<List<SelectTypeEntity>> mCareDrugName = new MutableLiveData<>();//保健品名称
 
 
     public void setSelectType(String type) {
@@ -176,6 +181,42 @@ public class SelectTypeViewModel extends BaseViewModel {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON), r -> {
             if (r.isOk()) {
                 mSelectType_PigeonType.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取 疫苗注射原因
+    public void getVaccineReason() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.VACCINE_REASON), r -> {
+            if (r.isOk()) {
+                mVaccineReason.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取 疫苗名称
+    public void getVaccineName() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.VACCINE_NAME), r -> {
+            if (r.isOk()) {
+                mVaccineName.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取 病症名称
+    public void getLiness_Name() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.LINESS_NAME), r -> {
+            if (r.isOk()) {
+                mLinessName.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取 保健品名称
+    public void getCareDrugName() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.CARE_DRUG_NAME), r -> {
+            if (r.isOk()) {
+                mCareDrugName.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

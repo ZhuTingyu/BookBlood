@@ -1,7 +1,6 @@
 package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,7 +35,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.OnClick;
@@ -280,7 +278,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             case R.id.ll_lineage:
                 //血统
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_lineage, 0, content -> {
+                        , R.string.text_pigeon_lineage, tvLineage.getText().toString(), 0, content -> {
                             mInputDialog.hide();
                             tvLineage.setText(content);
                             mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID("");
@@ -342,7 +340,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             case R.id.ll_feather_color:
                 //羽色
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_feather_color, 0, content -> {
+                        , R.string.text_feather_color, tvFeatherColor.getText().toString(), 0, content -> {
                             mInputDialog.hide();
                             tvFeatherColor.setText(content);
 

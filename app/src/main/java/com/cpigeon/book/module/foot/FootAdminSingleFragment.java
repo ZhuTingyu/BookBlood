@@ -37,8 +37,6 @@ import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -134,14 +132,14 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         });
 
         lvFoot.setOnClickListener(v -> {
-            InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), lvFoot.getContent(), mViewModel.isChina(),null, foot -> {
+            InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), lvFoot.getContent(), mViewModel.isChina(), null, foot -> {
                 lvFoot.setRightText(foot);
             });
         });
 
         lvSource.setOnRightClickListener(lineInputView -> {
             mDialogSource = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.text_foot_source, 0, content -> {
+                    , R.string.text_foot_source, lvSource.getContent(), 0, content -> {
                         lvSource.setRightText(content);
                     }, () -> {
                         setProgressVisible(true);

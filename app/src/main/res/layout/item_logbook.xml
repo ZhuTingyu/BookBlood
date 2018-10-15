@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="TextView"
-        android:textColor="@color/black"
+        android:textColor="@color/color_text_title"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

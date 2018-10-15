@@ -47,7 +47,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:simpleTitleView_image="@mipmap/ic_photo_details_delete"
+                app:simpleTitleView_image="@mipmap/ic_photo_details_share"
                 app:simpleTitleView_text="@string/text_share" />
 
 

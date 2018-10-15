@@ -29,26 +29,26 @@ public class FeedbackDetailsAdapter extends BaseMultiItemQuickAdapter<FeedbackDe
         helper.setText(R.id.tvTime, item.getDatetime());
         helper.setGlideImageView(mContext, R.id.imgHead, UserModel.getInstance().getUserData().touxiangurl);
 
-        switch (helper.getItemViewType()){
+        switch (helper.getItemViewType()) {
             case FeedbackDetailEntity.TYPE_FEEDBACK:
                 helper.setText(R.id.tvContent, item.getContent());
                 RecyclerView imgs = helper.getView(R.id.imgList);
-                if(!Lists.isEmpty(item.getImglist())){
+                if (!Lists.isEmpty(item.getImglist())) {
                     imgs.setVisibility(View.VISIBLE);
-                    imgs.setLayoutManager(new GridLayoutManager(mContext, 4){
+                    imgs.setLayoutManager(new GridLayoutManager(mContext, 4) {
                         @Override
                         public boolean canScrollVertically() {
                             return false;
                         }
                     });
                     FeedbackDetailsImageAdapter adapter = (FeedbackDetailsImageAdapter) imgs.getAdapter();
-                    if(adapter == null){
+                    if (adapter == null) {
                         adapter = new FeedbackDetailsImageAdapter(imgs);
                     }
                     imgs.setAdapter(adapter);
                     adapter.setNewData(item.getImglist());
                     imgs.setFocusableInTouchMode(false);
-                }else {
+                } else {
                     imgs.setVisibility(View.GONE);
                 }
 

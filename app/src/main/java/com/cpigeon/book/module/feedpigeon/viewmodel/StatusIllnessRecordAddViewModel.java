@@ -7,13 +7,15 @@ import com.base.base.BaseViewModel;
 import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.StatusIllnessRecordAddModel;
-import com.cpigeon.book.model.UseVaccineModel;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
 import com.cpigeon.book.service.EventBusService;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/17 0017.
@@ -29,6 +31,7 @@ public class StatusIllnessRecordAddViewModel extends BaseViewModel {
     public int typePag = 0; //0添加    1   编辑
 
     //疾病名称
+    public  List<SelectTypeEntity>  mIllnessNameData;
     public String illnessName;
     //症状
     public String illnessSymptom;

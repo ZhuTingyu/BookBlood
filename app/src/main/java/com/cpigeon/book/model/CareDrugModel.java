@@ -47,7 +47,7 @@ public class CareDrugModel {
                 .addBody("biteffect", biteffect)// 是否有副作用
 
                 .addBody("healthtime", healthtime)//使用时间
-                .addBody("recordtime", recordtime)//记录时间
+                .addBody("endtime", recordtime)//记录时间
 
                 .addBody("bodytemper", bodytemper)//体温
 
@@ -94,7 +94,7 @@ public class CareDrugModel {
                 .addBody("biteffect", biteffect)// 是否有副作用
 
                 .addBody("healthtime", healthtime)//使用时间
-                .addBody("recordtime", recordtime)//记录时间
+                .addBody("endtime", recordtime)//记录时间
 
                 .addBody("bodytemper", bodytemper)//体温
 

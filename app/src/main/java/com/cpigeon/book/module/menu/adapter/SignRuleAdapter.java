@@ -20,6 +20,6 @@ public class SignRuleAdapter extends BaseQuickAdapter<SignRuleListEntity, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, SignRuleListEntity item) {
-        helper.setText(R.id.tv_content, (helper.getPosition() + 1) + ":" + item.getGbgz());
+        helper.setText(R.id.tv_content, (helper.getPosition() + 1) + "." + item.getGbgz());
     }
 }

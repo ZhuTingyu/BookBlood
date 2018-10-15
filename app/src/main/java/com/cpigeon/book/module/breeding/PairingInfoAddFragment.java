@@ -220,7 +220,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
             case R.id.ll_feather_color:
                 //羽色
                 mDialogInput = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_feather_color, 0, content -> {
+                        , R.string.text_feather_color,llFeatherColor.getContent(), 0, content -> {
                             mDialogInput.hide();
                             mPairingInfoAddViewModel.featherColor = content;
                             llFeatherColor.setContent(content);
@@ -247,7 +247,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
             case R.id.ll_lineage:
                 //血统
                 mDialogInput = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_lineage, 0, content -> {
+                        , R.string.text_pigeon_lineage, llLineage.getContent(),0, content -> {
                             mDialogInput.hide();
                             mPairingInfoAddViewModel.lineage = content;
                             llLineage.setRightText(content);
