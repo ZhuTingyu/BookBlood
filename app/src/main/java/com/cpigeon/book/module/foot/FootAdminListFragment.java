@@ -167,8 +167,8 @@ public class FootAdminListFragment extends BaseBookFragment {
         });
 
         mViewModel.footAdminListData.observe(this, logbookEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, logbookEntities);
+            setProgressVisible(false);
         });
 
         mViewModel.mDataFootStat.observe(this, footRingStatEntity -> {

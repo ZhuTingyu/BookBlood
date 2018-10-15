@@ -160,7 +160,11 @@ public class PlayInportFragment extends BaseBookFragment {
         mAdapter.setChooseVisible(true);
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            mAdapter.setMultiSelectItem(position);
+            try {
+                mAdapter.setMultiSelectItem(position);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 

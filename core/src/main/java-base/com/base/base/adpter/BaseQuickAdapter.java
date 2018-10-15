@@ -4,6 +4,8 @@ package com.base.base.adpter;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -141,7 +143,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
                 layoutParams.setMargins(0, marginT, 0, 0);
             } else if (holder.getAdapterPosition() - getHeaderLayoutCount() == getData().size() - 1) {
                 layoutParams.setMargins(0, 0, 0, marginT);
-            }else {
+            } else {
                 layoutParams.setMargins(0, 0, 0, 0);
             }
         }
@@ -150,5 +152,16 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
 
     }
 
+
+    @NonNull
+    @Override
+    public List<T> getData() {
+        return super.getData();
+    }
+
+    @Override
+    public void setOnItemClickListener(@Nullable OnItemClickListener listener) {
+        super.setOnItemClickListener(listener);
+    }
 }
 

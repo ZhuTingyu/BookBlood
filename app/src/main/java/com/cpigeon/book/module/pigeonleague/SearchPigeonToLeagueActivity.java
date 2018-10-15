@@ -4,17 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
-import com.base.util.Lists;
-import com.base.util.db.AppDatabase;
-import com.base.util.db.DbEntity;
-import com.cpigeon.book.base.BaseSearchActivity;
-import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.pigeonleague.adpter.SelectPigeonToLeagueAdapter;
-import com.cpigeon.book.widget.SearchTextView;
-
-import java.util.List;
 
 /**
  * 信鸽赛绩  搜索足环列表
@@ -28,8 +20,12 @@ public class SearchPigeonToLeagueActivity extends BaseSearchPigeonActivity {
         mAdapter = new SelectPigeonToLeagueAdapter();
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         return mAdapter;

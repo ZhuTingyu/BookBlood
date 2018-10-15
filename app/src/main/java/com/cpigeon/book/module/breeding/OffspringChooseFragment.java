@@ -1,7 +1,6 @@
 package com.cpigeon.book.module.breeding;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,11 +54,15 @@ public class OffspringChooseFragment extends BaseFootListFragment {
         });
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            Intent intent = new Intent();
-            intent.putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity);
-            getBaseActivity().setResult(PairingNestAddFragment.requestCode, intent);
-            getBaseActivity().finish();
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                Intent intent = new Intent();
+                intent.putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity);
+                getBaseActivity().setResult(PairingNestAddFragment.requestCode, intent);
+                getBaseActivity().finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         setToolbarRight("添加", item -> {

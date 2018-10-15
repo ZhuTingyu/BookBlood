@@ -69,8 +69,8 @@ public class PlayFragment1 extends BaseBookFragment {
         super.initObserve();
 
         mPlayListViewModel.mPigeonPlayListData.observe(this, pigeonPlayEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPlayListAdapter, pigeonPlayEntities);
+            setProgressVisible(false);
         });
 
         mPlayListViewModel.listEmptyMessage.observe(this, s -> {
@@ -86,13 +86,17 @@ public class PlayFragment1 extends BaseBookFragment {
 
 
         mPlayListAdapter.setOnItemClickListener((adapter, view, position) -> {
-            PigeonPlayEntity mPigeonPlayEntity = (PigeonPlayEntity) adapter.getData().get(position);
-            PlayAddFragment.start(getBaseActivity(), new PigeonEntryEntity.Builder()
-                    .FootRingNum(mPigeonPlayEntity.getFootRingNum())
-                    .PigeonID(String.valueOf(mPigeonPlayEntity.getPigeonID()))
-                    .FootRingID(String.valueOf(mPigeonPlayEntity.getFootRingID()))
-                    .PigeonMatchID(String.valueOf(mPigeonPlayEntity.getPigeonMatchID()))
-                    .build(), 1);
+            try {
+                PigeonPlayEntity mPigeonPlayEntity = (PigeonPlayEntity) adapter.getData().get(position);
+                PlayAddFragment.start(getBaseActivity(), new PigeonEntryEntity.Builder()
+                        .FootRingNum(mPigeonPlayEntity.getFootRingNum())
+                        .PigeonID(String.valueOf(mPigeonPlayEntity.getPigeonID()))
+                        .FootRingID(String.valueOf(mPigeonPlayEntity.getFootRingID()))
+                        .PigeonMatchID(String.valueOf(mPigeonPlayEntity.getPigeonMatchID()))
+                        .build(), 1);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mRecyclerView.setRefreshListener(() -> {

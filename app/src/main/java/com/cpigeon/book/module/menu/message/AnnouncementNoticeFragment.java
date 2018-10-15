@@ -65,10 +65,14 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
         mAdapter = new AnnouncementNoticeAdapter(null);
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            mViewModel.changePosition = position;
+            try {
+                mViewModel.changePosition = position;
 
-            AnnouncementNoticeEntity mAnnouncementNoticeEntity = (AnnouncementNoticeEntity) adapter.getData().get(position);
-            mViewModel.getTXGP_GongGao_DetailData(mAnnouncementNoticeEntity.getId());
+                AnnouncementNoticeEntity mAnnouncementNoticeEntity = (AnnouncementNoticeEntity) adapter.getData().get(position);
+                mViewModel.getTXGP_GongGao_DetailData(mAnnouncementNoticeEntity.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mRecyclerView.setRefreshListener(() -> {
@@ -94,13 +98,13 @@ public class AnnouncementNoticeFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.announcementNoticeData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {
-            setProgressVisible(false);
             mAdapter.setEmptyText(s);
+            setProgressVisible(false);
         });
 
         mViewModel.mDetailData.observe(this, msgCountEntity -> {

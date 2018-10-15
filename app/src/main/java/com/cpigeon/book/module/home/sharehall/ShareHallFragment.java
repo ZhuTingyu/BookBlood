@@ -18,7 +18,6 @@ import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
@@ -142,8 +141,8 @@ public class ShareHallFragment extends BaseBookFragment {
         });
 
         mViewModel.mDataSharePigeon.observe(this, sharePigeonEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, sharePigeonEntities);
+            setProgressVisible(false);
         });
     }
 }

@@ -41,9 +41,9 @@ public class SearchFootActivity extends BaseSearchActivity {
         initViewModel(mViewModel);
 
         mViewModel.footAdminListData.observe(this, footEntities -> {
-            setProgressVisible(false);
             goneHistroy();
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, footEntities);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {
@@ -67,9 +67,13 @@ public class SearchFootActivity extends BaseSearchActivity {
         });
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
-            setProgressVisible(true);
-            mViewModel.key = mSearchHistoryAdapter.getItem(position).searchTitle;
-            mViewModel.getFoodList();
+            try {
+                setProgressVisible(true);
+                mViewModel.key = mSearchHistoryAdapter.getItem(position).searchTitle;
+                mViewModel.getFoodList();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
     }

@@ -66,11 +66,9 @@ public class GrowthReportFragment extends BaseBookFragment {
 
         mAdapter = new GrowthReportAdapter();
 
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-
-        });
 
         mAdapter.setOnLoadMoreListener(() -> {
+            setProgressVisible(true);
             mViewModel.pi++;
             mViewModel.getTXGP_Pigeon_SelectGrowAllData();
         }, mRecyclerView.getRecyclerView());
@@ -78,12 +76,14 @@ public class GrowthReportFragment extends BaseBookFragment {
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setRefreshListener(() -> {
+            setProgressVisible(true);
             mAdapter.getData().clear();
             mViewModel.pi = 1;
             mViewModel.getTXGP_Pigeon_SelectGrowAllData();
         });
 
         //
+        setProgressVisible(true);
         mViewModel.getTXGP_Pigeon_SelectGrowAllData();
     }
 
@@ -93,6 +93,7 @@ public class GrowthReportFragment extends BaseBookFragment {
 
         mViewModel.mGrowthReportListData.observe(this, datas -> {
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

@@ -73,9 +73,6 @@ public class PairingNestInfoListFragment extends BaseListFragment {
         mAdapter = new PairingNestInfoListAdapter(mPairingNestViewModel);
         list.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-
-        });
 
         list.setRefreshListener(() -> {
             initData();
@@ -97,8 +94,8 @@ public class PairingNestInfoListFragment extends BaseListFragment {
         super.initObserve();
 
         mPairingNestInfoListViewModel.mPairingNestInfoData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(list, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mPairingNestInfoListViewModel.listEmptyMessage.observe(this, s -> {

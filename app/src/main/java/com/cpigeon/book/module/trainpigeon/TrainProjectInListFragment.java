@@ -24,7 +24,6 @@ import com.cpigeon.book.module.trainpigeon.adpter.TrainProjectListAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.TrainProjectInListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -116,11 +115,10 @@ public class TrainProjectInListFragment extends BaseBookFragment {
         });
 
         mViewModel.mDataCountList.observe(this, trainEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, trainEntities);
 
             if(Lists.isEmpty(mAdapter.getData())){
-               return;
+                return;
             }
 
             if(mAdapter.getData().get(0).getTrainStateName()
@@ -131,6 +129,8 @@ public class TrainProjectInListFragment extends BaseBookFragment {
                 mTvOk.setVisibility(View.GONE);
                 findViewById(R.id.view1).setVisibility(View.GONE);
             }
+
+            setProgressVisible(false);
         });
     }
 

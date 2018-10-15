@@ -72,8 +72,12 @@ public class SearchFootRingActivity extends BaseSearchActivity {
         });
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
-            mViewModel.footNumber = mSearchHistoryAdapter.getItem(position).searchTitle;
-            mViewModel.getFootList();
+            try {
+                mViewModel.footNumber = mSearchHistoryAdapter.getItem(position).searchTitle;
+                mViewModel.getFootList();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mAdapter.setOnLoadMoreListener(() -> {
@@ -87,8 +91,8 @@ public class SearchFootRingActivity extends BaseSearchActivity {
     @Override
     protected void initObserve() {
         mViewModel.mDataFootList.observe(this, footEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, footEntities);
+            setProgressVisible(false);
         });
     }
 }

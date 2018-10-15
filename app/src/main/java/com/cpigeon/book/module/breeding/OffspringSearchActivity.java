@@ -19,11 +19,15 @@ public class OffspringSearchActivity extends BaseSearchPigeonActivity {
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new BreedPigeonListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            Intent intent = new Intent();
-            intent.putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity);
-            getBaseActivity().setResult(PairingNestAddFragment.requestCode, intent);
-            getBaseActivity().finish();
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                Intent intent = new Intent();
+                intent.putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity);
+                getBaseActivity().setResult(PairingNestAddFragment.requestCode, intent);
+                getBaseActivity().finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
         return mAdapter;
     }

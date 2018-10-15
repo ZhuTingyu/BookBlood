@@ -13,7 +13,7 @@
 
         <RelativeLayout
             android:id="@+id/rlLeft"
-            android:layout_width="100dp"
+            android:layout_width="94dp"
             android:layout_height="44dp">
 
             <ImageView
@@ -70,7 +70,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:textColorHint="@color/gray_m"
+                android:textColorHint="@color/color_text_hint"
                 android:textSize="@dimen/medium_text_size"
                 tools:text="123333334444444444444444444444333333" />
 

@@ -56,7 +56,7 @@ public class PigeonCurrencyExchangeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_currency_exchange);
         mRecyclerView = findViewById(R.id.list);
-        mRecyclerView.addItemDecorationLine();
+        mRecyclerView.addItemDecorationLine2();
         mAdapter = new PigeonCurrencyExchangeAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -69,17 +69,20 @@ public class PigeonCurrencyExchangeFragment extends BaseFragment {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
+            try {
+                CurrencyExchangeEntity mCurrencyExchangeEntity = (CurrencyExchangeEntity) adapter.getItem(position);
 
-            CurrencyExchangeEntity mCurrencyExchangeEntity = (CurrencyExchangeEntity) adapter.getItem(position);
-
-            ServiceEntity item = new ServiceEntity.Builder()
-                    .sid(mCurrencyExchangeEntity.getSid())
-                    .danwei(mCurrencyExchangeEntity.getDanwei())
-                    .score(mCurrencyExchangeEntity.getGb())
-                    .num(mCurrencyExchangeEntity.getNumber())
-                    .sname(mCurrencyExchangeEntity.getSname())
-                    .build();
-            ChoosePayWayDialog.show(item, false, getBaseActivity().getSupportFragmentManager());
+                ServiceEntity item = new ServiceEntity.Builder()
+                        .sid(mCurrencyExchangeEntity.getSid())
+                        .danwei(mCurrencyExchangeEntity.getDanwei())
+                        .score(mCurrencyExchangeEntity.getGb())
+                        .num(mCurrencyExchangeEntity.getNumber())
+                        .sname(mCurrencyExchangeEntity.getSname())
+                        .build();
+                ChoosePayWayDialog.show(item, false, getBaseActivity().getSupportFragmentManager());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         });
 
@@ -96,8 +99,8 @@ public class PigeonCurrencyExchangeFragment extends BaseFragment {
         super.initObserve();
 
         mPigeonCurrencyViewModel.mPigeonCurrencyExchangeData.observe(this, data -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, data);
+            setProgressVisible(false);
         });
 
         mPigeonCurrencyViewModel.listEmptyMessage.observe(this, s -> {

@@ -43,7 +43,6 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView.addItemDecorationLine();
 
     }
 
@@ -58,10 +57,14 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
         mAdapter = new BreedPigeonListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(),
-                    mBreedPigeonEntity.getPigeonID(),
-                    mBreedPigeonEntity.getFootRingID());
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                BreedPigeonDetailsFragment.start(getBaseActivity(),
+                        mBreedPigeonEntity.getPigeonID(),
+                        mBreedPigeonEntity.getFootRingID());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mBreedPigeonListModel.getPigeonCount();

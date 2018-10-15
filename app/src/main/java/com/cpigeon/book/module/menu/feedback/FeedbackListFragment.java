@@ -19,7 +19,6 @@ import com.cpigeon.book.module.menu.feedback.adpter.FeedbackAdapter;
 import com.cpigeon.book.module.menu.feedback.viewmodel.FeedbackListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -87,19 +86,23 @@ public class FeedbackListFragment extends BaseBookFragment {
         });
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            FeedbackListEntity mFeedbackListEntity = (FeedbackListEntity) adapter.getData().get(position);
+            try {
+                FeedbackListEntity mFeedbackListEntity = (FeedbackListEntity) adapter.getData().get(position);
 
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mFeedbackListEntity.getId())
-                    .startParentActivity(getActivity(), FeedbackDetailsFragment.class);
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mFeedbackListEntity.getId())
+                        .startParentActivity(getActivity(), FeedbackDetailsFragment.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 
     @Override
     protected void initObserve() {
         mViewModel.feedbackListData.observe(this, logbookEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, logbookEntities);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

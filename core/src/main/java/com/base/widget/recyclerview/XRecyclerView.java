@@ -65,7 +65,7 @@ public class XRecyclerView extends FrameLayout {
 
     private void initAttrs(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.superrecyclerview);
-        try{
+        try {
             mXRecyclerViewMainLayout = array.getResourceId(R.styleable.superrecyclerview_mainLayoutId, R.layout.layout_progress_recyclerview);
             mClipToPadding = array.getBoolean(R.styleable.superrecyclerview_recyclerClipToPadding, false);
             mPadding = (int) array.getDimension(R.styleable.superrecyclerview_recyclerPadding, -1.0f);
@@ -76,13 +76,13 @@ public class XRecyclerView extends FrameLayout {
             mScrollbarStyle = array.getInt(R.styleable.superrecyclerview_scrollbarStyle, 0);
             mEmptyId = array.getResourceId(R.styleable.superrecyclerview_layout_empty, R.layout.layout_more_progress);
             mProgressId = array.getResourceId(R.styleable.superrecyclerview_layout_progress, R.layout.recyclerview_loading_layout);
-        }finally {
+        } finally {
             array.recycle();
         }
     }
 
     private void initView() {
-        if(isInEditMode()){
+        if (isInEditMode()) {
             return;
         }
         View v = LayoutInflater.from(getContext()).inflate(mXRecyclerViewMainLayout, this);
@@ -90,11 +90,11 @@ public class XRecyclerView extends FrameLayout {
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setColorSchemeResources(R.color.green_light, R.color.orange_light,
                 R.color.blue_light, R.color.red_light);
-        if(mProgressId != 0){
+        if (mProgressId != 0) {
             progressView = inflate(getContext(), mProgressId, null);
         }
 
-        if(mEmptyId != 0){
+        if (mEmptyId != 0) {
             emptyView = inflate(getContext(), mEmptyId, null);
         }
 
@@ -103,16 +103,16 @@ public class XRecyclerView extends FrameLayout {
 
     private void initRecyclerView(View view) {
         View mRecyclerView = view.findViewWithTag("list");
-        if(mRecyclerView instanceof RecyclerView){
+        if (mRecyclerView instanceof RecyclerView) {
             this.recyclerView = (RecyclerView) mRecyclerView;
-        }else throw new IllegalArgumentException("SuperRecyclerView works with a RecyclerView!");
+        } else throw new IllegalArgumentException("SuperRecyclerView works with a RecyclerView!");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ((DefaultItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mInternalOnScrollListener = new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if(mExternalOnScrollListener != null){
+                if (mExternalOnScrollListener != null) {
                     mExternalOnScrollListener.onScrollStateChanged(recyclerView, newState);
                 }
             }
@@ -120,7 +120,7 @@ public class XRecyclerView extends FrameLayout {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(mExternalOnScrollListener != null){
+                if (mExternalOnScrollListener != null) {
                     mExternalOnScrollListener.onScrolled(recyclerView, dx, dy);
                 }
             }
@@ -138,12 +138,12 @@ public class XRecyclerView extends FrameLayout {
     }
 
     private void setAdapterInternal(RecyclerView.Adapter adapter, boolean compatibleWithPrevious
-            ,boolean removeAndRecycleExistingViews){
-        if(compatibleWithPrevious){
+            , boolean removeAndRecycleExistingViews) {
+        if (compatibleWithPrevious) {
             recyclerView.swapAdapter(adapter, removeAndRecycleExistingViews);
-        }else recyclerView.setAdapter(adapter);
+        } else recyclerView.setAdapter(adapter);
 
-        if(adapter instanceof BaseQuickAdapter){
+        if (adapter instanceof BaseQuickAdapter) {
             BaseQuickAdapter quickAdapter = (BaseQuickAdapter) adapter;
             quickAdapter.setEnableLoadMore(false);
             //quickAdapter.setEmptyView(progressView);
@@ -161,7 +161,7 @@ public class XRecyclerView extends FrameLayout {
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    public void setLayoutManager(RecyclerView.LayoutManager layoutManager){
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -191,7 +191,6 @@ public class XRecyclerView extends FrameLayout {
     }
 
 
-
     public void setOnScrollListener(RecyclerView.OnScrollListener mExternalOnScrollListener) {
         this.mExternalOnScrollListener = mExternalOnScrollListener;
     }
@@ -207,15 +206,26 @@ public class XRecyclerView extends FrameLayout {
      * recyclerView add line
      */
 
-    public void addItemDecorationLine(){
+    public void addItemDecorationLine() {
         addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f), 0);
     }
 
-    public void addItemDecorationLine(int margin){
+    public void addItemDecorationLine2() {
+
+        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(recyclerView.getContext())
+                .margin(ScreenTool.dip2px(0))
+                .showLastDivider()
+                .colorResId(R.color.color_line).size(ScreenTool.dip2px(0.5f)).build());
+
+
+    }
+
+
+    public void addItemDecorationLine(int margin) {
         addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f), margin);
     }
 
-    protected void addItemDecorationLine( @ColorRes int color, int size, int margin){
+    protected void addItemDecorationLine(@ColorRes int color, int size, int margin) {
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(recyclerView.getContext())
                 .margin(ScreenTool.dip2px(margin))
                 .colorResId(color).size(size).build());
@@ -234,7 +244,7 @@ public class XRecyclerView extends FrameLayout {
         return recyclerView;
     }
 
-    public void setListPadding(float left, float top, float right, float bottom){
-        recyclerView.setPadding(ScreenTool.dip2px(left), ScreenTool.dip2px(top),ScreenTool.dip2px(right),ScreenTool.dip2px(bottom));
+    public void setListPadding(float left, float top, float right, float bottom) {
+        recyclerView.setPadding(ScreenTool.dip2px(left), ScreenTool.dip2px(top), ScreenTool.dip2px(right), ScreenTool.dip2px(bottom));
     }
 }

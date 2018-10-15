@@ -97,13 +97,13 @@ public class MySharePigeonFragment extends BaseBookFragment {
         });
 
         mViewModel.mDataSharePigeon.observe(this, sharePigeonEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, sharePigeonEntities);
+            setProgressVisible(false);
         });
 
         mViewModel.mDataCancelShareR.observe(this, s -> {
-            setProgressVisible(false);
             mAdapter.remove(delectPosition);
+            setProgressVisible(false);
         });
     }
 

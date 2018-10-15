@@ -81,20 +81,24 @@ public class RecycleBinFragment extends BaseListFragment {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
-            //getTXGP_RecoveryData()
+            try {
+                //getTXGP_RecoveryData()
 
-            RecycleBinEntity mRecycleBinEntity = (RecycleBinEntity) adapter.getItem(position);
-            getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), "确定恢复本条数据吗？", sweetAlertDialog -> {
-                //确定
-                sweetAlertDialog.dismiss();
+                RecycleBinEntity mRecycleBinEntity = (RecycleBinEntity) adapter.getItem(position);
+                getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), "确定恢复本条数据吗？", sweetAlertDialog -> {
+                    //确定
+                    sweetAlertDialog.dismiss();
 
-                mRecycleBinViewModel.recyid = mRecycleBinEntity.getRecycleID();
-                mRecycleBinViewModel.getTXGP_RecoveryData();
+                    mRecycleBinViewModel.recyid = mRecycleBinEntity.getRecycleID();
+                    mRecycleBinViewModel.getTXGP_RecoveryData();
 
-            }, sweetAlertDialog -> {
-                //取消
-                sweetAlertDialog.dismiss();
-            });
+                }, sweetAlertDialog -> {
+                    //取消
+                    sweetAlertDialog.dismiss();
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         setProgressVisible(true);
@@ -106,8 +110,8 @@ public class RecycleBinFragment extends BaseListFragment {
     protected void initObserve() {
 
         mRecycleBinViewModel.mRecycleBinData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(list, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mRecycleBinViewModel.listEmptyMessage.observe(this, s -> {

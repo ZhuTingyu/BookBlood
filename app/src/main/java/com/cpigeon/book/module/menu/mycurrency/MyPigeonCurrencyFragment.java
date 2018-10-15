@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.entity.PigeonCurrencyEntity;
 import com.cpigeon.book.module.menu.mycurrency.adapter.MyPigeonCurrencyAdapter;
 import com.cpigeon.book.module.menu.mycurrency.viewmodel.PigeonCurrencyViewModel;
 import com.cpigeon.book.widget.SimpleTitleView;
@@ -79,10 +78,10 @@ public class MyPigeonCurrencyFragment extends BaseBookFragment {
 
         mAdapter = new MyPigeonCurrencyAdapter();
 
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonCurrencyEntity.GetgbBean item = (PigeonCurrencyEntity.GetgbBean) adapter.getData().get(position);
-
-        });
+//        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+//            PigeonCurrencyEntity.GetgbBean item = (PigeonCurrencyEntity.GetgbBean) adapter.getData().get(position);
+//
+//        });
 
         mList.setAdapter(mAdapter);
     }

@@ -82,8 +82,12 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
         });
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
     }

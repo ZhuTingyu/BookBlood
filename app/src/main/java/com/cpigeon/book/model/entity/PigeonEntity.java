@@ -67,7 +67,7 @@ public class PigeonEntity implements Serializable {
      * PigeonEyeName : 幼鸽未知
      */
     private String FootRingIDToNum;
-    private String TypeID;
+    private String TypeID = "";
     private String FootRingTimeTo;
     private String SourceID;
     private String PigeonName;

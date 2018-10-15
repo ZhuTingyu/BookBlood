@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.breedpigeon;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -22,19 +23,20 @@ import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.basepigeon.BasePigeonDetailsFragment;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
+import com.cpigeon.book.module.basepigeon.SelectBloodFragment;
 import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.feedpigeon.GrowthReportFragment;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.makebloodbook.PreviewsBookFragment;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
+import com.cpigeon.book.module.score.ScoreFragment;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.OnClick;
@@ -265,7 +267,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.ll_foot_vice:
                 //副环
-                InputSingleFootDialog.show(getFragmentManager(), tvFootVice.getText().toString(), true, null,foot -> {
+                InputSingleFootDialog.show(getFragmentManager(), tvFootVice.getText().toString(), true, null, foot -> {
                     tvFootVice.setText(foot);
                     mBreedPigeonModifyViewModel.mPigeonEntity.setFootRingIDToNum(foot);
                     mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
@@ -273,30 +275,42 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.ll_lineage:
                 //血统
-                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_lineage, tvLineage.getText().toString(), 0, content -> {
-                            mInputDialog.hide();
-                            tvLineage.setText(content);
-                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID("");
-                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodName(content);
-                            mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
-                        }, () -> {
-                            mInputDialog.hide();
-                            if (!Lists.isEmpty(mBreedPigeonModifyViewModel.mSelectTypes_Lineage)) {
-                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonModifyViewModel.mSelectTypes_Lineage), 0, new OptionPicker.OnOptionPickListener() {
-                                    @Override
-                                    public void onOptionPicked(int index, String item) {
-                                        tvLineage.setText(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeName());
-                                        mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeID());
-                                        mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodName(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeName());
-                                        mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
 
-                                    }
-                                });
-                            } else {
-                                mSelectTypeViewModel.getSelectType_lineage();
-                            }
-                        });
+
+                BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
+                    tvLineage.setText(content);
+                    mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID("");
+                    mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodName(content);
+                    mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
+                }, () -> {
+                    SelectBloodFragment.start(getBaseActivity());
+                });
+
+
+//                mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                        , R.string.text_pigeon_lineage, tvLineage.getText().toString(), 0, content -> {
+//                            mInputDialog.hide();
+//                            tvLineage.setText(content);
+//                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID("");
+//                            mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodName(content);
+//                            mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
+//                        }, () -> {
+//                            mInputDialog.hide();
+//                            if (!Lists.isEmpty(mBreedPigeonModifyViewModel.mSelectTypes_Lineage)) {
+//                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mBreedPigeonModifyViewModel.mSelectTypes_Lineage), 0, new OptionPicker.OnOptionPickListener() {
+//                                    @Override
+//                                    public void onOptionPicked(int index, String item) {
+//                                        tvLineage.setText(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeName());
+//                                        mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeID());
+//                                        mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodName(mBreedPigeonModifyViewModel.mSelectTypes_Lineage.get(index).getTypeName());
+//                                        mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
+//
+//                                    }
+//                                });
+//                            } else {
+//                                mSelectTypeViewModel.getSelectType_lineage();
+//                            }
+//                        });
                 break;
             case R.id.ll_state:
                 //状态
@@ -392,7 +406,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.ll_score:
                 //评分
-
+                ScoreFragment.start(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity);
                 break;
 
             case R.id.tv_make_book:
@@ -437,6 +451,25 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (resultCode != Activity.RESULT_OK) return;
+
+            if (requestCode == SelectBloodFragment.CODE_SELECT_BLOOD) {
+                SelectTypeEntity blood = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+
+                tvLineage.setText(blood.getTypeName());
+                mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodID(blood.getTypeID());
+                mBreedPigeonModifyViewModel.mPigeonEntity.setPigeonBloodName(blood.getTypeName());
+                mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(PigeonAddEvent event) {

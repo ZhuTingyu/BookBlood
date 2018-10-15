@@ -1,14 +1,10 @@
 package com.cpigeon.book.module.home.goodpigeon;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.AttributeSet;
-import android.view.View;
 
 import com.base.base.adpter.BaseQuickAdapter;
-import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
 import com.cpigeon.book.R;
@@ -76,9 +72,13 @@ public class SearchGoodPigeonActivity extends BaseSearchActivity {
         }, mRecyclerView.getRecyclerView());
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
-            setProgressVisible(true);
-            mViewModel.foodNumber = mSearchHistoryAdapter.getItem(position).searchTitle;
-            mViewModel.getPigeon();
+            try {
+                setProgressVisible(true);
+                mViewModel.foodNumber = mSearchHistoryAdapter.getItem(position).searchTitle;
+                mViewModel.getPigeon();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mViewModel.mDataGoodPigeon.observe(this, pigeonEntities -> {

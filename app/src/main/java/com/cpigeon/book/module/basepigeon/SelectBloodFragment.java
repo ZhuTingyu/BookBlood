@@ -16,15 +16,9 @@ import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.entity.AssEntity;
-import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
-import com.cpigeon.book.module.select.adpter.SelectAssAdapter;
-import com.cpigeon.book.module.select.viewmodel.SelectAssViewModel;
 import com.gjiazhe.wavesidebar.WaveSideBar;
-
-import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/10/12.
@@ -66,9 +60,13 @@ public class SelectBloodFragment extends BaseBookFragment {
 
         mAdapter = new SelectBloodAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mAdapter.getItem(position))
-                    .finishForResult(getBaseActivity());
+            try {
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mAdapter.getItem(position))
+                        .finishForResult(getBaseActivity());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 

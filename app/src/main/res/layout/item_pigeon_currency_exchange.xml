@@ -39,8 +39,9 @@
 
             <TextView
                 android:id="@+id/tv_exchange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="72dp"
+                android:gravity="center"
+                android:layout_height="24dp"
                 android:background="@drawable/shape_bg_corner_3_solid_deep_orange2"
                 android:text="兑换"
                 android:textColor="@color/color_white"
@@ -49,7 +50,5 @@
 
 
     </LinearLayout>
-
-    <include layout="@layout/include_line_view_layout" />
 
 </LinearLayout>

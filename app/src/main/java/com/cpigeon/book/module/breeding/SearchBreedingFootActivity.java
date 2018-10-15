@@ -18,11 +18,15 @@ public class SearchBreedingFootActivity extends BaseSearchPigeonActivity {
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new BreedPigeonListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(),
-                    mBreedPigeonEntity.getPigeonID(),
-                    mBreedPigeonEntity.getFootRingID());
-            getBaseActivity().finish();
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                BreedPigeonDetailsFragment.start(getBaseActivity(),
+                        mBreedPigeonEntity.getPigeonID(),
+                        mBreedPigeonEntity.getFootRingID());
+                getBaseActivity().finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
         return mAdapter;
     }

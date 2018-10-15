@@ -39,8 +39,12 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         });
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            PairingInfoListFragment.start(getBaseActivity(), mBreedPigeonEntity);
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                PairingInfoListFragment.start(getBaseActivity(), mBreedPigeonEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 }

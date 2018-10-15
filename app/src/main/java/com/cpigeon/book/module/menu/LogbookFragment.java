@@ -82,8 +82,8 @@ public class LogbookFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.logbookData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

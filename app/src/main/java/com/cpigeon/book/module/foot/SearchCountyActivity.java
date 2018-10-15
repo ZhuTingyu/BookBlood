@@ -67,10 +67,14 @@ public class SearchCountyActivity extends BaseSearchActivity {
         });
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
-            goneHistroy();
-            setProgressVisible(true);
-            mViewModel.key = mSearchHistoryAdapter.getItem(position).searchTitle;
-            mViewModel.getCountyList();
+            try {
+                goneHistroy();
+                setProgressVisible(true);
+                mViewModel.key = mSearchHistoryAdapter.getItem(position).searchTitle;
+                mViewModel.getCountyList();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 

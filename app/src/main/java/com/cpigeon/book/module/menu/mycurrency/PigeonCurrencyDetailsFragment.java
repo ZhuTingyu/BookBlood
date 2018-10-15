@@ -78,8 +78,8 @@ public class PigeonCurrencyDetailsFragment extends BaseFragment {
         super.initObserve();
 
         mPigeonCurrencyViewModel.mPigeonCurrencyDetailsData.observe(this, data -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, data);
+            setProgressVisible(false);
         });
 
         mPigeonCurrencyViewModel.listEmptyMessage.observe(this, s -> {
