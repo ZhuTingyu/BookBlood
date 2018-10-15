@@ -25,7 +25,6 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
-import com.cpigeon.book.model.entity.DrugUseCaseEntity;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -249,7 +248,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
             case R.id.lvDrugName:
                 //药品名称
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_drug_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_drug_name, lvDrugName.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mDrugUseCaseViewModel.drugName = content;
                             lvDrugName.setRightText(content);
                             mDrugUseCaseViewModel.isCanCommit();
@@ -258,7 +257,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
                 break;
             case R.id.lvDrugUseTime:
                 //用药日期
-                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), ( year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     lvDrugUseTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mDrugUseCaseViewModel.drugUseTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mDrugUseCaseViewModel.isCanCommit();
@@ -309,7 +308,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
             case R.id.lvBodyTemp:
                 //体温
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_body_temperature, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_body_temperature, lvBodyTemp.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
                             mDrugUseCaseViewModel.bodyTemp = content;
                             lvBodyTemp.setRightText(content);
                             mInputDialog.hide();
@@ -328,7 +327,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
             case R.id.inputRemark:
                 //备注
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_input_remark, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_input_remark, inputRemark.getText(),InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mDrugUseCaseViewModel.remark = content;
                             inputRemark.getEditText().setText(content);
                             mInputDialog.hide();

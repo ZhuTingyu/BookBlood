@@ -27,7 +27,6 @@ import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.StringUtil;
-import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -268,7 +267,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mLvBlood.setOnRightClickListener(lineInputView -> {
-            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, 0, content -> {
+            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, mLvBlood.getContent(), 0, content -> {
                 mViewModel.lineage = content;
                 mLvBlood.setRightText(content);
             }, () -> {
@@ -279,7 +278,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         mLvFeatherColor.setOnRightClickListener(lineInputView -> {
             mBaseInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.text_feather_color, 0, content -> {
+                    , R.string.text_feather_color, mLvFeatherColor.getContent(), 0, content -> {
                         mBaseInputDialog.hide();
                         mViewModel.featherColor = content;
                         mLvFeatherColor.setRightText(content);
@@ -313,7 +312,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         mLvPigeonName.setOnRightClickListener(lineInputView -> {
             mBaseInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.text_pleas_input_pigeon_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                    , R.string.text_pleas_input_pigeon_name, mLvPigeonName.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                         mViewModel.pigeonName = content;
                         mLvPigeonName.setRightText(content);
                         mBaseInputDialog.hide();
@@ -615,15 +614,15 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.lineage = blood.getTypeID();
             mLvBlood.setRightText(blood.getTypeName());
 
-        }else if (CODE_SELECT_FATHER == requestCode) {
+        } else if (CODE_SELECT_FATHER == requestCode) {
             PigeonEntity pigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
-            mViewModel.footFather= pigeonEntity.getFootRingNum();
+            mViewModel.footFather = pigeonEntity.getFootRingNum();
         } else if (CODE_SELECT_MATHER == requestCode) {
             PigeonEntity pigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
             mViewModel.footMother = pigeonEntity.getFootRingNum();
-        }else if(SelectFootRingFragment.CODE_SELECT_FOOT == requestCode){
+        } else if (SelectFootRingFragment.CODE_SELECT_FOOT == requestCode) {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvRing.setRightText(entity.getFootRingNum());
             mViewModel.foot = entity.getFootRingNum();

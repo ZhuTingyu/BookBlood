@@ -293,7 +293,7 @@ public class UseVaccineFragment extends BaseBookFragment {
             case R.id.inputRemark:
                 //备注
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_input_remark, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_input_remark,inputRemark.getText(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mUseVaccineViewModel.remark = content;
                             inputRemark.getEditText().setText(content);
                             mInputDialog.hide();

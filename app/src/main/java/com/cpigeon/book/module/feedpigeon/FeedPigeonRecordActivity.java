@@ -135,6 +135,7 @@ public class FeedPigeonRecordActivity extends BaseBookActivity {
         if (isSelect) {
             view.setBackgroundResource(R.drawable.shape_bg_add_feed_pigeon_record_select);
             view.setTextColor(Utils.getColor(R.color.colorPrimary));
+
 //            new CrazyShadow.Builder()
 //                    .setContext(getBaseActivity())
 //                    .setBaseShadowColor(Utils.getColor(R.color.colorPrimary))

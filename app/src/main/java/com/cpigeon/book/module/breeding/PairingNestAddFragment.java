@@ -246,7 +246,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_fertilized_egg:
                 //产蛋 受精蛋
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_fertilized_egg, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_fertilized_egg, llFertilizedEgg.getContent().replace("个",""),InputType.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
 
                             llFertilizedEgg.setContent(content + "个");
@@ -258,7 +258,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_fertilized_egg_no:
                 //产蛋 无精蛋
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_fertilized_egg_no, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_fertilized_egg_no, llFertilizedEggNo.getContent().replace("个",""), InputType.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
 
                             if (!StringUtil.isStringValid(content)) {
@@ -272,7 +272,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_fertilized_giving:
                 //是否赠送
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_hatches_giving_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_hatches_giving_name,tv_giving_name.getText().toString(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mInputDialog.hide();
                             tv_giving_name.setText(content);
                             mPairingNestAddViewModel.giveprson = content;
@@ -329,7 +329,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_hatches_num:
                 //出壳个数
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_hatches_num, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_hatches_num,llHatchesNum.getContent().replace("个",""), InputType.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
                             llHatchesNum.setContent(content + "个");
                             mPairingNestAddViewModel.hatchesNum = content;

@@ -156,7 +156,6 @@ public class BaseInputDialog extends BaseDialogFragment {
         return dialog;
     }
 
-
     public static BaseInputDialog show(FragmentManager fragmentManager
             , @StringRes int resId, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
         BaseInputDialog dialog = new BaseInputDialog();

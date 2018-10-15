@@ -305,7 +305,7 @@ public class CareDrugFragment extends BaseBookFragment {
             case R.id.lvCareDrugFunction:
                 //保健品功能
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_care_drug_function, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_care_drug_function, lvCareDrugFunction.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mCareDrugViewModel.careDrugFunction = content;
                             lvCareDrugFunction.setRightText(content);
                             mCareDrugViewModel.isCanCommit();
@@ -315,7 +315,7 @@ public class CareDrugFragment extends BaseBookFragment {
                 break;
             case R.id.lvUserTime:
                 //使用时间
-                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), ( year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     lvUserTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mCareDrugViewModel.useTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mCareDrugViewModel.isCanCommit();
@@ -324,7 +324,7 @@ public class CareDrugFragment extends BaseBookFragment {
 
             case R.id.lvRecordTime:
                 //记录时间
-                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), ( year, monthOfYear, dayOfMonth) -> {
+                PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
                     lvRecordTime.setContent(year + "-" + monthOfYear + "-" + dayOfMonth);
                     mCareDrugViewModel.recordTime = year + "-" + monthOfYear + "-" + dayOfMonth;
                     mCareDrugViewModel.isCanCommit();
@@ -368,7 +368,7 @@ public class CareDrugFragment extends BaseBookFragment {
             case R.id.lvBodyTemp:
                 //体温
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_body_temperature, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_body_temperature, lvBodyTemp.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
                             mCareDrugViewModel.bodyTemp = content;
                             lvBodyTemp.setRightText(content);
                             mInputDialog.hide();
@@ -388,9 +388,9 @@ public class CareDrugFragment extends BaseBookFragment {
             case R.id.inputRemark:
                 //备注
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_input_remark, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_input_remark, inputRemark.getText(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mCareDrugViewModel.remark = content;
-                            inputRemark.getEditText().setText(content);
+                            inputRemark.setText(content);
                             mInputDialog.hide();
                             mCareDrugViewModel.isCanCommit();
                         }, null);

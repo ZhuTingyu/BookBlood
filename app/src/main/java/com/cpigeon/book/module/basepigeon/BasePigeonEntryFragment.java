@@ -86,7 +86,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
     protected LineInputView llFeatherColor;
     @BindView(R.id.ll_eye_sand)
     protected LineInputView llEyeSand;
-//    @BindView(R.id.ll_their_shells_date)
+    //    @BindView(R.id.ll_their_shells_date)
 //    protected LineInputView llTheirShellsDate;//出壳日期
     //    @BindView(R.id.ll_hanging_ring_date)
 //    protected LineInputView llHangingRingDate;//挂环日期
@@ -387,7 +387,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
             case R.id.ll_pigeon_name:
                 //鸽名
                 mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pleas_input_pigeon_name, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.text_pleas_input_pigeon_name, llPigeonName.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mBasePigeonViewModel.pigeonName = content;
                             llPigeonName.setRightText(content);
                             mDialogMoney.hide();
@@ -413,7 +413,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
             case R.id.ll_feather_color:
                 //羽色
                 mDialogLineage = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_feather_color, 0, content -> {
+                        , R.string.text_feather_color, llFeatherColor.getContent(),0, content -> {
                             mDialogLineage.hide();
                             mBasePigeonViewModel.featherColor = content;
                             llFeatherColor.setContent(content);
@@ -471,7 +471,7 @@ public class BasePigeonEntryFragment extends BaseBookFragment {
             case R.id.ll_lineage:
                 //血统
                 mDialogLineage = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_lineage, 0, content -> {
+                        , R.string.text_pigeon_lineage,llLineage.getContent(), 0, content -> {
                             mDialogLineage.hide();
                             mBasePigeonViewModel.lineage = content;
                             llLineage.setRightText(content);

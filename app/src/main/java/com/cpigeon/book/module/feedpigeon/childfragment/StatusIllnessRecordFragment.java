@@ -200,7 +200,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
             case R.id.lvIllnessName:
                 //疾病名称
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_illness_name, 0, content -> {
+                        , R.string.tv_illness_name, lvIllnessName.getContent(), 0, content -> {
                             mStatusIllnessRecordAddViewModel.illnessName = content;
                             lvIllnessName.setRightText(content);
                             mStatusIllnessRecordAddViewModel.isCanCommit();
@@ -234,7 +234,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
             case R.id.lvIllnessSymptom:
                 //症状
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_illness_symptom, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_illness_symptom, lvIllnessSymptom.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mStatusIllnessRecordAddViewModel.illnessSymptom = content;
                             lvIllnessSymptom.setRightText(content);
                             mInputDialog.hide();
@@ -254,7 +254,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
             case R.id.lvBodyTemp:
                 //体温
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_body_temperature, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_body_temperature, lvBodyTemp.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
                             mStatusIllnessRecordAddViewModel.bodyTemperature = content;
                             lvBodyTemp.setRightText(content);
                             mInputDialog.hide();
@@ -272,7 +272,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
                 break;
             case R.id.inputRemark:
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_input_remark, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_input_remark, inputRemark.getText(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mStatusIllnessRecordAddViewModel.remark = content;
                             inputRemark.getEditText().setText(content);
                             mInputDialog.hide();

@@ -10,6 +10,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,8 +33,8 @@ import com.cpigeon.book.R;
 
 public class LineInputView extends RelativeLayout {
 
-    private static final int LEFT_TEXT_SIZE = 39;//  13 sp
-    private static final int RIGHT_TEXT_SIZE = 42;//  24sp
+    private static final int LEFT_TEXT_SIZE = 13;//  13 sp
+    private static final int RIGHT_TEXT_SIZE = 14;//  14sp
 
     int mWeight;
     int mLeftColor;
@@ -110,8 +111,8 @@ public class LineInputView extends RelativeLayout {
         mLeftColor = array.getColor(R.styleable.LineInputView_lineInputView_LeftTextColor, Utils.getColor(R.color.color_4c4c4c));
         mRightColor = array.getColor(R.styleable.LineInputView_lineInputView_RightTextColor, Utils.getColor(R.color.color_000000));
         mContentColor = array.getColor(R.styleable.LineInputView_lineInputView_ContentColor, Color.parseColor("#FFFFFF"));
-        mLeftTextSize = array.getDimensionPixelSize(R.styleable.LineInputView_lineInputView_LeftTextSize, LEFT_TEXT_SIZE);
-        mRightTextSize = array.getDimensionPixelSize(R.styleable.LineInputView_lineInputView_RightTextSize, RIGHT_TEXT_SIZE);
+        mLeftTextSize = array.getDimensionPixelSize(R.styleable.LineInputView_lineInputView_LeftTextSize, ScreenTool.sp2px(LEFT_TEXT_SIZE));
+        mRightTextSize = array.getDimensionPixelSize(R.styleable.LineInputView_lineInputView_RightTextSize, ScreenTool.sp2px(RIGHT_TEXT_SIZE));
         mLeftString = array.getString(R.styleable.LineInputView_lineInputView_LeftString);
         mRightString = array.getString(R.styleable.LineInputView_lineInputView_RightString);
         mEtHintStr = array.getString(R.styleable.LineInputView_lineInputView_Hint);
@@ -160,7 +161,7 @@ public class LineInputView extends RelativeLayout {
 
         mTextView.setText(mLeftString);
         mTextView.setTextColor(mLeftColor);
-        mTextView.setTextSize(ScreenTool.px2sp(mLeftTextSize));
+        mTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, mLeftTextSize);
 
         if (left_gravity) {
             mTextView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
@@ -170,7 +171,7 @@ public class LineInputView extends RelativeLayout {
 
 
         if (isLeftBold) {
-            Typeface font = Typeface.create(Typeface.MONOSPACE , Typeface.BOLD);
+            Typeface font = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD);
             mTextView.setTypeface(font);
         } else {
 
@@ -187,7 +188,8 @@ public class LineInputView extends RelativeLayout {
         mEditText.setText(mRightString);
         mEditText.setHint(mEtHintStr);
         mEditText.setTextColor(mRightColor);
-        mEditText.setTextSize(ScreenTool.px2sp(mRightTextSize));
+//        mEditText.setTextSize(ScreenTool.px2sp(mRightTextSize));
+        mEditText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
         if (mInputType != 0) {
             mEditText.setInputType(mInputType);
         }
@@ -239,7 +241,7 @@ public class LineInputView extends RelativeLayout {
                 setNotNullDrawable(hasFocus && mIsNotNull);
                 if (mIsHaveEditBoard && hasFocus) {
                     mEditText.setBackgroundResource(R.drawable.shape_bg_edit_text_view);
-                }else {
+                } else {
                     mEditText.setBackgroundColor(Utils.getColor(R.color.transparent));
                 }
             });

@@ -409,7 +409,7 @@ public class MZBannerView<T> extends RelativeLayout {
         //增加一个逻辑：由于魅族模式会在一个页面展示前后页面的部分，因此，数据集合的长度至少为3,否则，自动为普通Banner模式
         //不管配置的:open_mz_mode 属性的值是否为true
 
-        if (datas.size() < 1) {
+        if (datas.size() < 0) {
             mIsOpenMZEffect = false;
             MarginLayoutParams layoutParams = (MarginLayoutParams) mViewPager.getLayoutParams();
             layoutParams.setMargins(0, 0, 0, 0);
