@@ -33,7 +33,6 @@ import com.cpigeon.book.module.feedpigeon.childfragment.StatusIllnessRecordFragm
 import com.cpigeon.book.module.feedpigeon.childfragment.UseVaccineFragment;
 import com.cpigeon.book.module.feedpigeon.viewmodel.FeedPigeonListViewModel;
 import com.cpigeon.book.module.photo.BaseImgUploadFragment;
-import com.cpigeon.book.module.photo.ImgUploadFragment;
 import com.cpigeon.book.module.photo.PigeonPhotoDetailsFragment;
 import com.cpigeon.book.module.photo.SnapshotImgUploadFragment;
 import com.cpigeon.book.service.EventBusService;
@@ -42,7 +41,6 @@ import com.cpigeon.book.util.RecyclerViewUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.entity.LocalMedia;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
@@ -87,7 +85,7 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         super.initObserve();
 
         mFeedPigeonListViewModel.mFeedPigeonListData.observe(this, datas -> {
-            setProgressVisible(false);
+
             if (datas.isEmpty() || datas.size() == 0) {
 
             } else {
@@ -97,6 +95,8 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
                 }
             }
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+
+            setProgressVisible(false);
         });
 
         mFeedPigeonListViewModel.listEmptyMessage.observe(this, s -> {
@@ -178,30 +178,34 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
-            FeedPigeonEntity item = mAdapter.getData().get(position);
+            try {
+                FeedPigeonEntity item = mAdapter.getData().get(position);
 
-            if (item.getTypeID() == 5) { //随拍
-//                PigeonPhotoDetailsFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity.getFootRingNum(), 0);
+                if (item.getTypeID() == 5) { //随拍
+    //                PigeonPhotoDetailsFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity.getFootRingNum(), 0);
 
-                PigeonPhotoDetailsFragment.start(getBaseActivity(),
-                        mFeedPigeonListViewModel.mPigeonEntity,
-                        Lists.newArrayList(new PigeonPhotoEntity.Builder()
-                                .FootRingID(item.getFootRingID())
-                                .PigeonPhotoID(item.getViewID())
-                                .PhotoUrl(item.getName())
-                                .TypeName(getString(R.string.text_nef))
-                                .AddTime(item.getUseTime())
-                                .Remark(item.getListInfo())
-                                .build()),
-                        0);
-            } else if (item.getTypeID() == 3) {//用药
-                DrugUseCaseFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
-            } else if (item.getTypeID() == 1) {//保健
-                CareDrugFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
-            } else if (item.getTypeID() == 2) {//疫苗
-                UseVaccineFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
-            } else if (item.getTypeID() == 4) {//病情
-                StatusIllnessRecordFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+                    PigeonPhotoDetailsFragment.start(getBaseActivity(),
+                            mFeedPigeonListViewModel.mPigeonEntity,
+                            Lists.newArrayList(new PigeonPhotoEntity.Builder()
+                                    .FootRingID(item.getFootRingID())
+                                    .PigeonPhotoID(item.getViewID())
+                                    .PhotoUrl(item.getName())
+                                    .TypeName(getString(R.string.text_nef))
+                                    .AddTime(item.getUseTime())
+                                    .Remark(item.getListInfo())
+                                    .build()),
+                            0);
+                } else if (item.getTypeID() == 3) {//用药
+                    DrugUseCaseFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+                } else if (item.getTypeID() == 1) {//保健
+                    CareDrugFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+                } else if (item.getTypeID() == 2) {//疫苗
+                    UseVaccineFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+                } else if (item.getTypeID() == 4) {//病情
+                    StatusIllnessRecordFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity, item, 1);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 

@@ -48,7 +48,6 @@
             app:lineInputView_IsLeft="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="确定新密码"
-            app:lineInputView_isShowLineDivisions="gone"
             app:lineInputView_isShowRightImage="gone" />
 
     </com.cpigeon.book.widget.LineInputListLayout>
@@ -94,6 +93,7 @@
 
 
             <EditText
+                android:textColorHint="@color/color_text_hint"
                 android:id="@+id/et_imgVerCode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -135,6 +135,7 @@
 
 
             <EditText
+                android:textColorHint="@color/color_text_hint"
                 android:id="@+id/et_phoneVerCode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -170,7 +171,6 @@
             app:lineInputView_IsLeft="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="设置新密码"
-            app:lineInputView_isShowLineDivisions="gone"
             app:lineInputView_isShowRightImage="gone" />
 
     </com.cpigeon.book.widget.LineInputListLayout>

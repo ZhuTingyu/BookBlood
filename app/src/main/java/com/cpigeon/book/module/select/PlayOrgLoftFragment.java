@@ -60,10 +60,14 @@ public class PlayOrgLoftFragment extends BaseFragment {
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            Intent intent = new Intent();
-            intent.putExtra(IntentBuilder.KEY_DATA, mAdapter.getData().get(position));
-            getBaseActivity().setResult(Activity.RESULT_OK, intent);
-            finish();
+            try {
+                Intent intent = new Intent();
+                intent.putExtra(IntentBuilder.KEY_DATA, mAdapter.getData().get(position));
+                getBaseActivity().setResult(Activity.RESULT_OK, intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         setProgressVisible(true);

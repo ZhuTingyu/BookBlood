@@ -182,7 +182,6 @@ public class BaseFootListFragment extends BaseBookFragment {
         });
 
         mBreedPigeonListModel.mPigeonListData.observe(this, datas -> {
-            setProgressVisible(false);
 
             if (datas.isEmpty() || datas.size() == 0) {
 
@@ -193,6 +192,8 @@ public class BaseFootListFragment extends BaseBookFragment {
             }
 
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+
+            setProgressVisible(false);
         });
 
         mBreedPigeonListModel.listEmptyMessage.observe(this, s -> {

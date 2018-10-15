@@ -21,6 +21,6 @@ public class LogbookAdapter extends BaseQuickAdapter<LogbookEntity, BaseViewHold
     protected void convert(BaseViewHolder helper, LogbookEntity item) {
         helper.setTextView(R.id.tvTime,item.getUserOperateDatetime());
         helper.setTextView(R.id.tvOperate,item.getRemark());
-        helper.setTextView(R.id.tvIp,item.getUserOperateIP());
+        helper.setTextView(R.id.tvIp,"IP:"+item.getUserOperateIP());
     }
 }

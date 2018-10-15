@@ -21,7 +21,6 @@ import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
 import com.cpigeon.book.module.play.adapter.PlayFootListAdapter;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
-import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 import com.cpigeon.book.util.KLineManager;
 import com.cpigeon.book.widget.LeagueMarkerView;
 import com.github.mikephil.charting.charts.LineChart;
@@ -93,10 +92,14 @@ public class PlayFootListFragment extends BaseFootListFragment {
 
         mAdapter = new PlayFootListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(),
-                    mBreedPigeonEntity.getPigeonID(),
-                    mBreedPigeonEntity.getFootRingID());
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                BreedPigeonDetailsFragment.start(getBaseActivity(),
+                        mBreedPigeonEntity.getPigeonID(),
+                        mBreedPigeonEntity.getFootRingID());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mViewModel.getFirstLeague();//获取第一名赛绩

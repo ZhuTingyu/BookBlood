@@ -151,8 +151,12 @@ public class PairingNestAddFragment extends BaseBookFragment {
         rv_offspring_info.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
         rv_offspring_info.setAdapter(mOffspringInfoAdapter);
         mOffspringInfoAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            adapter.remove(position);
-            mPairingNestAddViewModel.setIdStr(mOffspringInfoAdapter);
+            try {
+                adapter.remove(position);
+                mPairingNestAddViewModel.setIdStr(mOffspringInfoAdapter);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         if (mCamera == null) {

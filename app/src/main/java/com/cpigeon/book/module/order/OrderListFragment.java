@@ -80,8 +80,8 @@ public class OrderListFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.mOrderListData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

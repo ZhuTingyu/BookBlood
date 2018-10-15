@@ -11,16 +11,16 @@ import com.cpigeon.book.R;
  */
 
 public class TextViewUtil {
-    public static void setEnabled(TextView textView, boolean isEnabled){
+    public static void setEnabled(TextView textView, boolean isEnabled) {
         textView.setEnabled(isEnabled);
-        if(isEnabled){
-            textView.setTextColor(Utils.getColor(R.color.color_text_can_click));
-        }else {
+        if (isEnabled) {
             textView.setTextColor(Color.WHITE);
+        } else {
+            textView.setTextColor(Utils.getColor(R.color.color_text_can_click));
         }
     }
 
-    public static void setCancle(TextView textView){
+    public static void setCancle(TextView textView) {
         textView.setBackgroundResource(R.drawable.selector_bg_cancel_btn);
     }
 }

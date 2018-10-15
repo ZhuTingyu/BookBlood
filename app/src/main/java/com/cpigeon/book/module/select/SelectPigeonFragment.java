@@ -115,18 +115,22 @@ public class SelectPigeonFragment extends BaseBookFragment {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
-            PigeonEntity pigeonEntity = mAdapter.getItem(position);
-            if (mRequestCode != 0) {
-                IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
-                        .finishForResult(getBaseActivity());
-            } else {
-                if (TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
-                    BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
-                            , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
-                }if(TYPE_SELECT_PIGEON_TO_ADD_FLY_BACK.equals(mType)){
+            try {
+                PigeonEntity pigeonEntity = mAdapter.getItem(position);
+                if (mRequestCode != 0) {
+                    IntentBuilder.Builder()
+                            .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
+                            .finishForResult(getBaseActivity());
+                } else {
+                    if (TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
+                        BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
+                                , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+                    }if(TYPE_SELECT_PIGEON_TO_ADD_FLY_BACK.equals(mType)){
 
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 

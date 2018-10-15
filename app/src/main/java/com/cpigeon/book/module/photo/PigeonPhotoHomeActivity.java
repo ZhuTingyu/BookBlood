@@ -193,7 +193,11 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
 
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             //跳转详情
-            PigeonPhotoDetailsFragment.start(getBaseActivity(), mViewModel.mPigeonEntity, mAdapter.getData(), position);
+            try {
+                PigeonPhotoDetailsFragment.start(getBaseActivity(), mViewModel.mPigeonEntity, mAdapter.getData(), position);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 
@@ -212,15 +216,15 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
         super.initObserve();
 
         mTypeViewModel.mSelectType_ImgType.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
             mViewModel.mPhotoType.addAll(selectTypeEntities);
+            setProgressVisible(false);
         });
 
         mViewModel.mPigeonPhotoData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
 
             mTvPhotoCount.setText(datas.size() + "张");
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

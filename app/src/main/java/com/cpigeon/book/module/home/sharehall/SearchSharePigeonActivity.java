@@ -75,8 +75,8 @@ public class SearchSharePigeonActivity extends BaseSearchActivity {
         });
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
-            mViewModel.footNum = mSearchHistoryAdapter.getData().get(position).searchTitle;
             setProgressVisible(true);
+            mViewModel.footNum = mSearchHistoryAdapter.getData().get(position).searchTitle;
             mViewModel.getSharePigeons();
         });
 
@@ -91,8 +91,8 @@ public class SearchSharePigeonActivity extends BaseSearchActivity {
         });
 
         mViewModel.mDataSharePigeon.observe(this, sharePigeonEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, sharePigeonEntities);
+            setProgressVisible(false);
         });
     }
 }

@@ -612,7 +612,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.images.addAll(Lists.newArrayList(mImgTypeEntity.getImgPath()));
         } else if (requestCode == SelectBloodFragment.CODE_SELECT_BLOOD) {
             SelectTypeEntity blood = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-            mViewModel.lineage = blood.getTypeID();
+            mViewModel.lineage = blood.getTypeName();
             mLvBlood.setRightText(blood.getTypeName());
 
         } else if (CODE_SELECT_FATHER == requestCode) {

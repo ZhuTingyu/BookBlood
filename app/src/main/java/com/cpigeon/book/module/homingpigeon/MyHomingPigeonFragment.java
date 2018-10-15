@@ -42,10 +42,14 @@ public class MyHomingPigeonFragment extends BaseFootListFragment {
 
         mAdapter = new MyHomingPigeonAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            BreedPigeonDetailsFragment.start(getBaseActivity(),
-                    mBreedPigeonEntity.getPigeonID(),
-                    mBreedPigeonEntity.getFootRingID());
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                BreedPigeonDetailsFragment.start(getBaseActivity(),
+                        mBreedPigeonEntity.getPigeonID(),
+                        mBreedPigeonEntity.getFootRingID());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mActivity.setSearchClickListener(v -> {

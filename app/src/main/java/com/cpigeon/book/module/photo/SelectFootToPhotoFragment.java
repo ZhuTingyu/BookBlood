@@ -63,8 +63,12 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
-            PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
-            PigeonPhotoHomeActivity.start(getBaseActivity(), mPigeonEntity);
+            try {
+                PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
+                PigeonPhotoHomeActivity.start(getBaseActivity(), mPigeonEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mViewModel.getTXGP_PigeonPhoto_CountPhotoData();

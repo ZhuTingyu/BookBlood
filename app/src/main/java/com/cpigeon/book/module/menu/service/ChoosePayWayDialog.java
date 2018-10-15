@@ -89,27 +89,31 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
     }
 
     private void setPayWay(int position) {
-        mAdapter.setSingleItem(position);
-        StringBuilder sb = new StringBuilder();
-        if (position == 0) {
-            sb.append(Utils.getString(R.string.text_pigeon_score_content, mServiceEntity.getScore()));
-            sb.append(mServiceEntity.getNum());
-            sb.append(mServiceEntity.getDanwei());
-            mPayWay = PayServiceOrderViewModel.WAY_SCORE;
-        } else if (position == 1) {
-            sb.append(Utils.getString(R.string.text_yuan, mServiceEntity.getPrice()));
-            sb.append(mServiceEntity.getNum());
-            sb.append(mServiceEntity.getDanwei());
-            mPayWay = PayServiceOrderViewModel.WAY_BALANCE;
-        } else if (position == 2) {
-            mPayWay = PayServiceOrderViewModel.WAY_WX;
-            float price = Float.valueOf(mServiceEntity.getPrice()) / 100f;
-            sb.append(Utils.getString(R.string.text_yuan, mServiceEntity.getPrice()));
-            sb.append(mServiceEntity.getNum());
-            sb.append(mServiceEntity.getDanwei());
-            sb.append(Utils.getString(R.string.text_weixing_charge, String.valueOf(MathUtil.doubleformat(price, 2))));
+        try {
+            mAdapter.setSingleItem(position);
+            StringBuilder sb = new StringBuilder();
+            if (position == 0) {
+                sb.append(Utils.getString(R.string.text_pigeon_score_content, mServiceEntity.getScore()));
+                sb.append(mServiceEntity.getNum());
+                sb.append(mServiceEntity.getDanwei());
+                mPayWay = PayServiceOrderViewModel.WAY_SCORE;
+            } else if (position == 1) {
+                sb.append(Utils.getString(R.string.text_yuan, mServiceEntity.getPrice()));
+                sb.append(mServiceEntity.getNum());
+                sb.append(mServiceEntity.getDanwei());
+                mPayWay = PayServiceOrderViewModel.WAY_BALANCE;
+            } else if (position == 2) {
+                mPayWay = PayServiceOrderViewModel.WAY_WX;
+                float price = Float.valueOf(mServiceEntity.getPrice()) / 100f;
+                sb.append(Utils.getString(R.string.text_yuan, mServiceEntity.getPrice()));
+                sb.append(mServiceEntity.getNum());
+                sb.append(mServiceEntity.getDanwei());
+                sb.append(Utils.getString(R.string.text_weixing_charge, String.valueOf(MathUtil.doubleformat(price, 2))));
+            }
+            mTvPrice.setText(sb);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
-        mTvPrice.setText(sb);
     }
 
     protected void initLayout(Window window, WindowManager.LayoutParams lp) {

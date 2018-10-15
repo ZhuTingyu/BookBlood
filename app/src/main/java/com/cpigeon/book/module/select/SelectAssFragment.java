@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.base.BaseFragment;
 import com.base.base.pinyin.LetterSortModel;
 import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
@@ -60,10 +59,14 @@ public class SelectAssFragment extends BaseBookFragment {
         mAdapter.bindToRecyclerView(mRecyclerView.getRecyclerView());
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            Intent intent = new Intent();
-            intent.putExtra(IntentBuilder.KEY_DATA, mAdapter.getData().get(position));
-            getBaseActivity().setResult(Activity.RESULT_OK, intent);
-            finish();
+            try {
+                Intent intent = new Intent();
+                intent.putExtra(IntentBuilder.KEY_DATA, mAdapter.getData().get(position));
+                getBaseActivity().setResult(Activity.RESULT_OK, intent);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         setProgressVisible(true);

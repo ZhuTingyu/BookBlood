@@ -31,18 +31,22 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
 
         TextView mPigeonType = helper.getView(R.id.tvColor);
 
-        switch (item.getTypeID()) {
-            case PigeonEntity.ID_BREED_PIGEON:
-                //种鸽
-                mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_F280FF));
-                break;
-            case PigeonEntity.ID_MATCH_PIGEON:
-                //赛鸽
-                mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_6B994D));
+        try {
+            switch (item.getTypeID()) {
+                case PigeonEntity.ID_BREED_PIGEON:
+                    //种鸽
+                    mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_F280FF));
+                    break;
+                case PigeonEntity.ID_MATCH_PIGEON:
+                    //赛鸽
+                    mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_6B994D));
 
-                break;
-            default:
-                mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_808080));
+                    break;
+                default:
+                    mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_808080));
+            }
+        } catch (Exception e) {
+            mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_808080));
         }
 
         helper.setText(R.id.tvTime, item.getFootRingNum());

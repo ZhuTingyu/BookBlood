@@ -81,10 +81,14 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
         mViewModel.getTXGP_GetMsgListData();
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            mViewModel.changePosition = position;
+            try {
+                mViewModel.changePosition = position;
 
-            PigeonFriendMsgListEntity mPigeonFriendMsgListEntity = (PigeonFriendMsgListEntity) adapter.getData().get(position);
-            mViewModel.getTXGP_Msg_DetailData(mPigeonFriendMsgListEntity.getId());
+                PigeonFriendMsgListEntity mPigeonFriendMsgListEntity = (PigeonFriendMsgListEntity) adapter.getData().get(position);
+                mViewModel.getTXGP_Msg_DetailData(mPigeonFriendMsgListEntity.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 //        mViewModel.getTXGP_Msg_CountData();
@@ -94,13 +98,13 @@ public class PigeonFriendMsgFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.pigeonFriendMsgListData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {
-            setProgressVisible(false);
             mAdapter.setEmptyText(s);
+            setProgressVisible(false);
         });
 
         mViewModel.mPigeonFriendMsgDetail.observe(this, pigeonFriendMsgListEntity -> {

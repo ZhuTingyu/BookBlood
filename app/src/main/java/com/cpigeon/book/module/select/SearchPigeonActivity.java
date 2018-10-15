@@ -91,23 +91,31 @@ public class SearchPigeonActivity extends BaseSearchActivity {
         }, mRecyclerView.getRecyclerView());
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity pigeonEntity = mAdapter.getItem(position);
-            if (mRequestCode != 0) {
-                IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
-                        .finishForResult(getBaseActivity());
-            } else {
-                if (SelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
-                    BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
-                            , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+            try {
+                PigeonEntity pigeonEntity = mAdapter.getItem(position);
+                if (mRequestCode != 0) {
+                    IntentBuilder.Builder()
+                            .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
+                            .finishForResult(getBaseActivity());
+                } else {
+                    if (SelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
+                        BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
+                                , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
-            setProgressVisible(true);
-            mViewModel.searchStr = mSearchHistoryAdapter.getItem(position).searchTitle;
-            mViewModel.getPigeonList();
+            try {
+                setProgressVisible(true);
+                mViewModel.searchStr = mSearchHistoryAdapter.getItem(position).searchTitle;
+                mViewModel.getPigeonList();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         initObserve();

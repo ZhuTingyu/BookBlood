@@ -26,6 +26,7 @@ import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.module.basepigeon.SelectBloodFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoAddViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
@@ -33,9 +34,7 @@ import com.cpigeon.book.module.select.SelectFootRingFragment;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -93,9 +92,9 @@ public class PairingInfoAddFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle("添加配对");
+        setTitle(getString(R.string.array_pairing_add));
 
-        setToolbarRight("推荐配对", item -> {
+        setToolbarRight(getString(R.string.array_pairing_recommend), item -> {
             PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoAddViewModel.mBreedPigeonEntity);
             return true;
         });
@@ -115,7 +114,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
             //雨色
             mPairingInfoAddViewModel.featherColor = item.getPigeonPlumeName();
             llFeatherColor.setContent(item.getPigeonPlumeName());
-        }else {
+        } else {
             mSelectTypeViewModel.getSelectType_FeatherColor();
             mSelectTypeViewModel.getSelectType_lineage();
 
@@ -200,9 +199,9 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.ll_pairing_foot:
                 //配偶环号
-                InputSingleFootDialog.show(getFragmentManager(), llPairingFoot.getContent(),true,dialog1 -> {
+                InputSingleFootDialog.show(getFragmentManager(), llPairingFoot.getContent(), true, dialog1 -> {
                     SelectFootRingFragment.start(getBaseActivity());
-                },foot -> {
+                }, foot -> {
                     llPairingFoot.setRightText(foot);
                     mPairingInfoAddViewModel.pairingFoot = foot;
                     mPairingInfoAddViewModel.isCanCommit();
@@ -220,7 +219,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
             case R.id.ll_feather_color:
                 //羽色
                 mDialogInput = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_feather_color,llFeatherColor.getContent(), 0, content -> {
+                        , R.string.text_feather_color, llFeatherColor.getContent(), 0, content -> {
                             mDialogInput.hide();
                             mPairingInfoAddViewModel.featherColor = content;
                             llFeatherColor.setContent(content);
@@ -246,28 +245,38 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
             case R.id.ll_lineage:
                 //血统
-                mDialogInput = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_lineage, llLineage.getContent(),0, content -> {
-                            mDialogInput.hide();
-                            mPairingInfoAddViewModel.lineage = content;
-                            llLineage.setRightText(content);
-                            mPairingInfoAddViewModel.isCanCommit();
-                        }, () -> {
-                            mDialogInput.hide();
 
-                            if (!Lists.isEmpty(mPairingInfoAddViewModel.mSelectTypes_Lineage)) {
-                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mPairingInfoAddViewModel.mSelectTypes_Lineage), 0, new OptionPicker.OnOptionPickListener() {
-                                    @Override
-                                    public void onOptionPicked(int index, String item) {
-                                        mPairingInfoAddViewModel.lineage = mPairingInfoAddViewModel.mSelectTypes_Lineage.get(index).getTypeName();
-                                        llLineage.setContent(mPairingInfoAddViewModel.mSelectTypes_Lineage.get(index).getTypeName());
-                                        mPairingInfoAddViewModel.isCanCommit();
-                                    }
-                                });
-                            } else {
-                                mSelectTypeViewModel.getSelectType_lineage();
-                            }
-                        });
+                BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
+
+                    mPairingInfoAddViewModel.lineage = content;
+                    llLineage.setRightText(content);
+                    mPairingInfoAddViewModel.isCanCommit();
+                }, () -> {
+                    SelectBloodFragment.start(getBaseActivity());
+                });
+
+//                mDialogInput = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                        , R.string.text_pigeon_lineage, llLineage.getContent(),0, content -> {
+//                            mDialogInput.hide();
+//                            mPairingInfoAddViewModel.lineage = content;
+//                            llLineage.setRightText(content);
+//                            mPairingInfoAddViewModel.isCanCommit();
+//                        }, () -> {
+//                            mDialogInput.hide();
+//
+//                            if (!Lists.isEmpty(mPairingInfoAddViewModel.mSelectTypes_Lineage)) {
+//                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mPairingInfoAddViewModel.mSelectTypes_Lineage), 0, new OptionPicker.OnOptionPickListener() {
+//                                    @Override
+//                                    public void onOptionPicked(int index, String item) {
+//                                        mPairingInfoAddViewModel.lineage = mPairingInfoAddViewModel.mSelectTypes_Lineage.get(index).getTypeName();
+//                                        llLineage.setContent(mPairingInfoAddViewModel.mSelectTypes_Lineage.get(index).getTypeName());
+//                                        mPairingInfoAddViewModel.isCanCommit();
+//                                    }
+//                                });
+//                            } else {
+//                                mSelectTypeViewModel.getSelectType_lineage();
+//                            }
+//                        });
 
                 break;
             case R.id.tv_next_step:
@@ -281,43 +290,52 @@ public class PairingInfoAddFragment extends BaseBookFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PairingInfoRecommendFragment.RECOMMEND_REQUEST) {
+        try {
+            if (requestCode == PairingInfoRecommendFragment.RECOMMEND_REQUEST) {
 
-            try {
-                PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                try {
+                    PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
 
-                //足环号
-                llPairingFoot.setContent(item.getFootRingNum());
-                mPairingInfoAddViewModel.pairingFoot = item.getFootRingNum();
+                    //足环号
+                    llPairingFoot.setContent(item.getFootRingNum());
+                    mPairingInfoAddViewModel.pairingFoot = item.getFootRingNum();
 
-                //血统
-                mPairingInfoAddViewModel.lineage = item.getPigeonBloodName();
-                llLineage.setRightText(item.getPigeonBloodName());
+                    //血统
+                    mPairingInfoAddViewModel.lineage = item.getPigeonBloodName();
+                    llLineage.setRightText(item.getPigeonBloodName());
 
-                //雨色
-                mPairingInfoAddViewModel.featherColor = item.getPigeonPlumeName();
-                llFeatherColor.setContent(item.getPigeonPlumeName());
+                    //雨色
+                    mPairingInfoAddViewModel.featherColor = item.getPigeonPlumeName();
+                    llFeatherColor.setContent(item.getPigeonPlumeName());
 
+                    mPairingInfoAddViewModel.isCanCommit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //            switch (resultCode) {
+                //                case PairingLineageFragment.resultCode:
+                //                    //血统
+                //
+                //                    break;
+                //                case PairingPlayFragment.resultCode:
+                //                    //赛绩
+                //
+                //                    break;
+                //                case PairingScoreFragment.resultCode:
+                //                    //评分
+                //
+                //                    break;
+                //            }
+
+            } else if (requestCode == SelectBloodFragment.CODE_SELECT_BLOOD) {
+                SelectTypeEntity blood = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                mPairingInfoAddViewModel.lineage = blood.getTypeName();
+                llLineage.setRightText(blood.getTypeName());
                 mPairingInfoAddViewModel.isCanCommit();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-
-//            switch (resultCode) {
-//                case PairingLineageFragment.resultCode:
-//                    //血统
-//
-//                    break;
-//                case PairingPlayFragment.resultCode:
-//                    //赛绩
-//
-//                    break;
-//                case PairingScoreFragment.resultCode:
-//                    //评分
-//
-//                    break;
-//            }
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

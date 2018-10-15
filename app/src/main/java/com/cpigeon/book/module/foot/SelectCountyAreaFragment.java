@@ -58,9 +58,13 @@ public class SelectCountyAreaFragment extends BaseFragment {
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mAdapter.getItem(position))
-                    .finishForResult(getBaseActivity());
+            try {
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mAdapter.getItem(position))
+                        .finishForResult(getBaseActivity());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         setProgressVisible(true);

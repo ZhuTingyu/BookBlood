@@ -70,8 +70,8 @@ public class PlayFragment2 extends BaseBookFragment {
         super.initObserve();
 
         mPlayListViewModel.mPlayAdditionalInfoListData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mPlayListViewModel.listEmptyMessage.observe(this, s -> {
@@ -90,14 +90,18 @@ public class PlayFragment2 extends BaseBookFragment {
 
 
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            PlayAdditionalInfoEntity mPigeonPlayEntity = (PlayAdditionalInfoEntity) adapter.getData().get(position);
+            try {
+                PlayAdditionalInfoEntity mPigeonPlayEntity = (PlayAdditionalInfoEntity) adapter.getData().get(position);
 
-            PlayAddFragment.start(getBaseActivity(), new PigeonEntryEntity.Builder()
-                    .PigeonID(String.valueOf(mPigeonPlayEntity.getPigeonID()))
-                    .FootRingID(String.valueOf(mPigeonPlayEntity.getFootRingID()))
-                    .MatchInfoID(String.valueOf(mPigeonPlayEntity.getMatchInfoID()))
-                    .MatchInfo(mPigeonPlayEntity.getMatchInfo())
-                    .build(), 2);
+                PlayAddFragment.start(getBaseActivity(), new PigeonEntryEntity.Builder()
+                        .PigeonID(String.valueOf(mPigeonPlayEntity.getPigeonID()))
+                        .FootRingID(String.valueOf(mPigeonPlayEntity.getFootRingID()))
+                        .MatchInfoID(String.valueOf(mPigeonPlayEntity.getMatchInfoID()))
+                        .MatchInfo(mPigeonPlayEntity.getMatchInfo())
+                        .build(), 2);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 

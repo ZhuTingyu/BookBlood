@@ -77,8 +77,8 @@ public class OpenServiceReportFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.mServerReportData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

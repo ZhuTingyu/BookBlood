@@ -20,7 +20,6 @@ import com.cpigeon.book.module.trainpigeon.adpter.TrainPigeonAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.TrainPigeonListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -97,8 +96,8 @@ public class TrainPigeonListFragment extends BaseBookFragment {
         });
 
         mViewModel.mTrainData.observe(this, trainEntities -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, trainEntities);
+            setProgressVisible(false);
         });
     }
 }

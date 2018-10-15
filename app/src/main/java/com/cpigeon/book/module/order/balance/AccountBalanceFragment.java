@@ -61,7 +61,7 @@ public class AccountBalanceFragment extends BaseBookFragment {
             case R.id.balance_withdraw:
                 //提现
 
-                ToastUtils.showLong(getBaseActivity(),"该功能暂未实现，敬请期待");
+                ToastUtils.showLong(getBaseActivity(), "该功能暂未实现，敬请期待");
 
                 break;
             case R.id.tv_bottom_help:

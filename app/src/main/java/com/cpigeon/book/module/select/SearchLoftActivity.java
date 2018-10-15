@@ -50,14 +50,22 @@ public class SearchLoftActivity extends BaseSearchActivity {
         });
 
         mSearchAssAdapter.setOnItemClickListener((adapter, view, position) -> {
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mSearchAssAdapter.getData().get(position))
-                    .finishForResult(getBaseActivity());
+            try {
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mSearchAssAdapter.getData().get(position))
+                        .finishForResult(getBaseActivity());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
-            mViewModel.setKey(mSearchHistoryAdapter.getData().get(position).searchTitle);
-            mViewModel.getLoftList();
+            try {
+                mViewModel.setKey(mSearchHistoryAdapter.getData().get(position).searchTitle);
+                mViewModel.getLoftList();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {

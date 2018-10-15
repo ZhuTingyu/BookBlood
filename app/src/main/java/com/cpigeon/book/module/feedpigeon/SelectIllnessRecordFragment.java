@@ -59,11 +59,15 @@ public class SelectIllnessRecordFragment extends BaseBookFragment {
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
-            StatusIllnessRecordEntity mStatusIllnessRecordEntity = (StatusIllnessRecordEntity) adapter.getData().get(position);
+            try {
+                StatusIllnessRecordEntity mStatusIllnessRecordEntity = (StatusIllnessRecordEntity) adapter.getData().get(position);
 
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mStatusIllnessRecordEntity)
-                    .finishForResult(getBaseActivity());
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mStatusIllnessRecordEntity)
+                        .finishForResult(getBaseActivity());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
 

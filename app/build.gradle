@@ -15,7 +15,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.book
@@ -116,4 +116,7 @@ dependencies {
 
     //网络请求框架
     compile 'org.xutils:xutils:3.5.0'
+
+    //评分控件
+    compile 'com.github.CB-ysx:CBRatingBar:3.0.1'
 }

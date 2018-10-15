@@ -83,8 +83,12 @@ public class PairingInfoListFragment extends BaseListFragment {
 
         list.setAdapter(mPairingInfoListAdapter);
         mPairingInfoListAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PairingInfoEntity mPairingInfoEntity = (PairingInfoEntity) adapter.getData().get(position);
-            PairingNestInfoListFragment.start(getBaseActivity(), mPairingInfoEntity, mPairingInfoListViewModel.mBreedPigeonEntity);
+            try {
+                PairingInfoEntity mPairingInfoEntity = (PairingInfoEntity) adapter.getData().get(position);
+                PairingNestInfoListFragment.start(getBaseActivity(), mPairingInfoEntity, mPairingInfoListViewModel.mBreedPigeonEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         list.setRefreshListener(() -> {
@@ -107,7 +111,7 @@ public class PairingInfoListFragment extends BaseListFragment {
         super.initObserve();
 
         mPairingInfoListViewModel.mPairingInfoListData.observe(this, breedPigeonEntities -> {
-            setProgressVisible(false);
+
 
             if (breedPigeonEntities.isEmpty() || breedPigeonEntities.size() == 0) {
             } else {
@@ -117,6 +121,8 @@ public class PairingInfoListFragment extends BaseListFragment {
             }
 
             RecyclerViewUtils.setLoadMoreCallBack(list, mPairingInfoListAdapter, breedPigeonEntities);
+
+            setProgressVisible(false);
         });
 
         mPairingInfoListViewModel.listEmptyMessage.observe(this, s -> {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <!--app:starStartColor="#0000ff"-->
+    <!--app:starStrokeColor="#0f0f0f"-->
+    <!--app:starEndColor="#00ff00"-->
+    <!--app:starFillColor="#666666"-->
+    <!--app:starCoverColor="#ff0000"-->
+
+    <com.cb.ratingbar.CBRatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:forceHasOverlappingRendering="true"
+        app:color="#0000ff"
+        app:starCanTouch="true"
+        app:starCount="7"
+        app:starCoverDir="left_to_right"
+        app:starEndColor="#0000ff"
+        app:starMaxProgress="100"
+        app:starPathData="0"
+        app:starProgress="34"
+        app:starShowStroke="true"
+        app:starSize="15dp"
+        app:starSpace="10dp"
+        app:starStartColor="#0000ff"
+        app:starStrokeColor="@color/color_feedback_not_handle"
+        app:starStrokeWidth="0.5dp"
+        app:starUseGradient="true" />
+
+    <RatingBar
+        android:id="@+id/ratint_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxHeight="12dp"
+        android:minHeight="12dp"
+        android:numStars="5"
+        android:rating="1.7"
+        android:stepSize="0.1" />
+
+
+    <!--
+
+    //最大
+     app:starMaxProgress="100"
+     //占用比例
+     app:starProgress="34"
+     //每个星星的边框
+     app:starStrokeColor="@color/color_feedback_not_handle"
+     //每个星星的大小
+     app:starSize="15dp"
+     //每个星星之间的间距
+     app:starSpace="10dp"
+     //数量
+     app:starCount="5"
+     //方向
+     app:starCoverDir="left_to_right"
+     //五角星 边框  宽度
+     app:starStrokeWidth="0dp"
+     //五角星 边框  显示
+     app:starShowStroke="true"
+
+    -->
+
+
+</LinearLayout>

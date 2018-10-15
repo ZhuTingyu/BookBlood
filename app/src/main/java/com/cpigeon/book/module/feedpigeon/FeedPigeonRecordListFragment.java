@@ -55,8 +55,12 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
 
         mAdapter = new FeedPigeonRecordListAdapter();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         mRecyclerView.setAdapter(mAdapter);

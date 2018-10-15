@@ -17,8 +17,12 @@ public class SearchFeedPigeonRecordActivity extends BaseSearchPigeonActivity {
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new FeedPigeonRecordListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-            FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
+            try {
+                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         });
         return mAdapter;

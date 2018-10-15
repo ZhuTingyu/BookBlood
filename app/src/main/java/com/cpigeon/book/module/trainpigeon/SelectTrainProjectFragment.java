@@ -11,12 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.TrainEntity;
-import com.cpigeon.book.model.entity.TrainProjectEntity;
 import com.cpigeon.book.module.trainpigeon.adpter.SelectTrainProjectAdapter;
 
 import java.util.ArrayList;
@@ -58,7 +56,11 @@ public class SelectTrainProjectFragment extends BaseBookFragment {
 
         mAdapter = new SelectTrainProjectAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            mAdapter.setMultiSelectItem(position);
+            try {
+                mAdapter.setMultiSelectItem(position);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
         mRecyclerView.setAdapter(mAdapter);
 

@@ -53,7 +53,7 @@ public class AccountBalanceDetailsFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle("余额明细");
+        setTitle("充值明细");
 
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
@@ -81,8 +81,8 @@ public class AccountBalanceDetailsFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.mAccountBalanceListData.observe(this, datas -> {
-            setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            setProgressVisible(false);
         });
 
         mViewModel.listEmptyMessage.observe(this, s -> {

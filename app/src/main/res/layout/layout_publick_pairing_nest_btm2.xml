@@ -70,8 +70,8 @@
 
                 <ImageView
                     android:id="@+id/img_flashlight"
-                    android:layout_width="42dp"
-                    android:layout_height="16dp"
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
                     android:src="@mipmap/flashlight_no" />
 
 

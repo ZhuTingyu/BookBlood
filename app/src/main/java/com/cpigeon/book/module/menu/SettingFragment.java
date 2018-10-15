@@ -83,7 +83,7 @@ public class SettingFragment extends BaseBookFragment {
 
         setTitle("设置");
 
-        ll_current_version.getEditText().setText("v " + PhoneUtils.getVersionName(getActivity()));//设置当前app的版本号
+        ll_current_version.getEditText().setText("V" + PhoneUtils.getVersionName(getActivity()));//设置当前app的版本号
 
         mFile = StorageUtils.getIndividualCacheDirectory(getActivity());
         try {
