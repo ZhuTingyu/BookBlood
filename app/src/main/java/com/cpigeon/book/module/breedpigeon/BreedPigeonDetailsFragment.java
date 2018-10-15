@@ -265,15 +265,11 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.ll_foot_vice:
                 //副环
-                List<String> foots2 = new ArrayList<>();
-                InputSingleFootDialog dialog2 = new InputSingleFootDialog();
-                dialog2.setFoots(foots2);
-                dialog2.setOnFootStringFinishListener(foot -> {
+                InputSingleFootDialog.show(getFragmentManager(), tvFootVice.getText().toString(), true, null,foot -> {
                     tvFootVice.setText(foot);
                     mBreedPigeonModifyViewModel.mPigeonEntity.setFootRingIDToNum(foot);
                     mBreedPigeonModifyViewModel.modifyBreedPigeonEntry();
                 });
-                dialog2.show(getBaseActivity().getSupportFragmentManager());
                 break;
             case R.id.ll_lineage:
                 //血统
