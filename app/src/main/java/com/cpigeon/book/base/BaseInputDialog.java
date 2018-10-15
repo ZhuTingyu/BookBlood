@@ -20,6 +20,7 @@ import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.KeyboardUtils;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 
 /**
@@ -27,6 +28,8 @@ import com.cpigeon.book.R;
  */
 
 public class BaseInputDialog extends BaseDialogFragment {
+
+    public static final String KEY_CHOOSE_TEXT = "KEY_CHOOSE_TEXT";
 
     private ImageView mImgClose;
     private TextView mTvTitle;
@@ -55,9 +58,13 @@ public class BaseInputDialog extends BaseDialogFragment {
         if (getArguments() != null) {
             String title = getArguments().getString(IntentBuilder.KEY_TITLE);
             mEditInputType = getArguments().getInt(IntentBuilder.KEY_TYPE);
+            String chooseText = getArguments().getString(KEY_CHOOSE_TEXT);
             mTvTitle.setText(title);
             if (mEditInputType != 0) {
                 mEdContent.setInputType(mEditInputType);
+            }
+            if(StringUtil.isStringValid(chooseText)){
+                mTvChoose.setText(chooseText);
             }
         }
 
@@ -130,6 +137,22 @@ public class BaseInputDialog extends BaseDialogFragment {
         BaseInputDialog dialog = new BaseInputDialog();
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(resId));
+        if (editInputType != 0) {
+            bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
+        }
+        dialog.setArguments(bundle);
+        dialog.setOnFinishListener(onFinishListener);
+        dialog.setOnChooseClickListener(onChooseClickListener);
+        dialog.show(fragmentManager);
+        return dialog;
+    }
+
+    public static BaseInputDialog show(FragmentManager fragmentManager
+            , @StringRes int titleId, @StringRes int  chooseId, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
+        BaseInputDialog dialog = new BaseInputDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(titleId));
+        bundle.putString(KEY_CHOOSE_TEXT, Utils.getString(chooseId));
         if (editInputType != 0) {
             bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
         }

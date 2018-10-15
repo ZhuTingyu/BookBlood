@@ -51,19 +51,30 @@ public class SelectPigeonFragment extends BaseBookFragment {
         SearchFragmentParentActivity.start(activity, SelectPigeonFragment.class, code, false, bundle);
     }
 
-    public static void start(Activity activity, @NonNull String type) {
+    public static void start(Activity activity, String type, int code) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(REQUEST_CODE, code);
+        bundle.putString(IntentBuilder.KEY_TYPE, type);
+        SearchFragmentParentActivity.start(activity, SelectPigeonFragment.class, code, false, bundle);
+    }
+
+    public static void start(Activity activity, String type) {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TYPE, type);
         SearchFragmentParentActivity.start(activity, SelectPigeonFragment.class, false, bundle);
-    }
+  }
 
+      @Override
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mViewModel = new BreedPigeonListModel();
-        initViewModel(mViewModel);
-        mActivity = (SearchFragmentParentActivity) context;
+  public void onAttach(Context context) {
+
+      super.onAttach(context);
+
+      mViewModel = new BreedPigeonListModel();
+
+      initViewModel(mViewModel);
+
+      mActivity = (SearchFragmentParentActivity) context;
         mViewModel.typeid = StringUtil.emptyString();
     }
 

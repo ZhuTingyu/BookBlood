@@ -29,6 +29,7 @@ import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoAddViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.select.SelectFootRingFragment;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
 
@@ -199,15 +200,14 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.ll_pairing_foot:
                 //配偶环号
-                List<String> foots = new ArrayList<>();
-                InputSingleFootDialog dialog = new InputSingleFootDialog();
-                dialog.setFoots(foots);
-                dialog.setOnFootStringFinishListener(foot -> {
+                InputSingleFootDialog.show(getFragmentManager(), llPairingFoot.getContent(),true,dialog1 -> {
+                    SelectFootRingFragment.start(getBaseActivity());
+                },foot -> {
                     llPairingFoot.setRightText(foot);
                     mPairingInfoAddViewModel.pairingFoot = foot;
                     mPairingInfoAddViewModel.isCanCommit();
                 });
-                dialog.show(getBaseActivity().getSupportFragmentManager());
+
                 break;
             case R.id.ll_pairing_time:
                 //配对时间

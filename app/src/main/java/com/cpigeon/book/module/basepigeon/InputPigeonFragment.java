@@ -267,8 +267,9 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         });
 
+        //血统
         mLvBlood.setOnRightClickListener(lineInputView -> {
-            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, 0, content -> {
+            BaseInputDialog.show(getFragmentManager(), R.string.text_blood,R.string.text_blood_bank , 0, content -> {
                 mViewModel.lineage = content;
                 mLvBlood.setRightText(content);
             }, () -> {
