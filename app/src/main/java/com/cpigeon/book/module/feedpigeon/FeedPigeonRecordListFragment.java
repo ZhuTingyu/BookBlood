@@ -11,7 +11,6 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonRecordListAdapter;
-import com.cpigeon.book.module.pigeonleague.PigeonToLeagueFootListFragment;
 
 /**
  * 养鸽记录   足环列表
@@ -40,8 +39,6 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView.addItemDecorationLine();
-
     }
 
     @Override
@@ -63,6 +60,5 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
         });
 
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecorationLine();
     }
 }

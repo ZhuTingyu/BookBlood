@@ -553,7 +553,12 @@ public class MZBannerView<T> extends RelativeLayout {
             }
             // mDatas.add(datas.get(0));//在最后加入最前面一个
             mMZHolderCreator = MZHolderCreator;
-            this.canLoop = canLoop;
+            if (datas.size()>=2){
+                this.canLoop = canLoop;
+            }else {
+                this.canLoop = false;
+            }
+
         }
 
         public void setPageClickListener(BannerPageClickListener pageClickListener) {
