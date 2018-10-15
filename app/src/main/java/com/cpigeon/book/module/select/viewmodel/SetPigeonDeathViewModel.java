@@ -30,4 +30,8 @@ public class SetPigeonDeathViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
+
+    public void isCanCommit(){
+        isCanCommit(deathId);
+    }
 }
