@@ -35,15 +35,34 @@ public class FootEntity implements Parcelable {
     private int TypeID;
     private int StateID;
     private String SourceName;
-    private String stateName;
+    private String StateName;
     private String TypeName;
     private String FootRingNum;
     private String Remark;
     private int UseFootRingNum;
     private int Section;
+    private String PigeonTypeName;
 
     private String EndFootRingNum;
     private String EndFootRingID;
+    private String PigeonID;
+
+
+    public String getPigeonID() {
+        return PigeonID;
+    }
+
+    public void setPigeonID(String pigeonID) {
+        PigeonID = pigeonID;
+    }
+
+    public String getPigeonTypeName() {
+        return PigeonTypeName;
+    }
+
+    public void setPigeonTypeName(String pigeonTypeName) {
+        PigeonTypeName = pigeonTypeName;
+    }
 
     public int getFootRingID() {
         return FootRingID;
@@ -118,11 +137,11 @@ public class FootEntity implements Parcelable {
     }
 
     public String getStateName() {
-        return stateName;
+        return StateName;
     }
 
     public void setStateName(String stateName) {
-        this.stateName = stateName;
+        this.StateName = stateName;
     }
 
     public String getTypeName() {
@@ -191,14 +210,16 @@ public class FootEntity implements Parcelable {
         dest.writeInt(this.TypeID);
         dest.writeInt(this.StateID);
         dest.writeString(this.SourceName);
-        dest.writeString(this.stateName);
+        dest.writeString(this.StateName);
         dest.writeString(this.TypeName);
         dest.writeString(this.FootRingNum);
         dest.writeString(this.Remark);
         dest.writeInt(this.UseFootRingNum);
         dest.writeInt(this.Section);
+        dest.writeString(this.PigeonTypeName);
         dest.writeString(this.EndFootRingNum);
         dest.writeString(this.EndFootRingID);
+        dest.writeString(this.PigeonID);
     }
 
     protected FootEntity(Parcel in) {
@@ -210,14 +231,16 @@ public class FootEntity implements Parcelable {
         this.TypeID = in.readInt();
         this.StateID = in.readInt();
         this.SourceName = in.readString();
-        this.stateName = in.readString();
+        this.StateName = in.readString();
         this.TypeName = in.readString();
         this.FootRingNum = in.readString();
         this.Remark = in.readString();
         this.UseFootRingNum = in.readInt();
         this.Section = in.readInt();
+        this.PigeonTypeName = in.readString();
         this.EndFootRingNum = in.readString();
         this.EndFootRingID = in.readString();
+        this.PigeonID = in.readString();
     }
 
     public static final Creator<FootEntity> CREATOR = new Creator<FootEntity>() {

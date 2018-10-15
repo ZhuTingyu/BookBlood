@@ -1,5 +1,9 @@
 package com.cpigeon.book.model.entity;
 
+import com.base.util.Lists;
+
+import java.util.List;
+
 /**
  * Created by Zhu TingYu on 2018/9/17.
  */
@@ -22,4 +26,16 @@ public class PigeonSexCountEntity {
     public int YxiongCount; //幼鸽雄鸽数量 ，
     public int YyouCount; //幼鸽幼鸽数量 ，
     public int YCount; //幼鸽鸽子数量 }
+
+    public int XCount;//小鸽子数量,
+    public int QCount; //成年鸽数量,
+    public int LCount; //老年鸽数量，
+    public int CSount; //长寿鸽数量，
+    public int QTCount;//其他不知年龄个数量
+
+
+    public List<Integer> getBreedPigeonStat() {
+        return Lists.newArrayList(ZCount, ZxiongCount, ZciCount, XCount, QCount, LCount, CSount);
+    }
+
 }

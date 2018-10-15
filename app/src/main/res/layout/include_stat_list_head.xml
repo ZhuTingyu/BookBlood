@@ -9,11 +9,19 @@
 
     <include layout="@layout/include_btn_my_homing" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/statList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:visibility="gone"
         android:orientation="horizontal">
+
+
 
         <com.cpigeon.book.widget.stats.StatView
             android:id="@+id/stat1"

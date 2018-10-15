@@ -454,6 +454,7 @@
     <string name="text_user_result">使用效果</string>
     <string name="text_record_time">结束时间</string>
     <string name="text_is_have_after_result">是否有副作用</string>
+    <string name="text_hint">提示</string>
 
 
     <!--种鸽  //鸽子类型（8为种鸽，9为赛鸽，不传则全部查询）-->
@@ -545,7 +546,18 @@
         <item>未挂环</item>
     </string-array>
 
+    <string-array name="array_breed_pigeon_type">
+        <item>种鸽</item>
+        <item>雄</item>
+        <item>雌</item>
+        <item>幼鸽</item>
+        <item>成鸽</item>
+        <item>老龄鸽</item>
+        <item>长寿鸽</item>
+    </string-array>
+
     <string name="str_new_code">发现新版本 v%1%来啦</string>
+    <string name="text_young_pigeon">幼鸽</string>
 
     <string-array name="array_contact_way">
         <item>打电话</item>
@@ -633,6 +645,9 @@
     <string name="str_recycle_bin_empty">清空</string>
     <string name="text_select_blood">选择血统</string>
     <string name="text_reinput">重新输入</string>
+    <string name="text_bracket">(%1$s)</string>
+    <string name="text_hint_pigeon_is_death">死亡鸽才能重新挂环！是否将该鸽设置为死亡状态并重新挂环？</string>
+    <string name="text_death_reason">死亡原因</string>
 
 
 </resources>

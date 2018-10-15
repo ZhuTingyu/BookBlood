@@ -90,11 +90,15 @@ public class InputSingleFootDialog extends BaseDialogFragment {
 
         //初始化显示省份
         mTvArea.setText(area.get(0));
-        for (int i = 1; i <= address.length; i++) {
-            if (UserModel.getInstance().getProvince().contains(address[i - 1])) {
-                mTvArea.setText(String.valueOf(i));
-                break;
+        try {
+            for (int i = 1; i <= address.length; i++) {
+                if (UserModel.getInstance().getProvince().contains(address[i - 1])) {
+                    mTvArea.setText(String.valueOf(i));
+                    break;
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         if (isChina) {

@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/xrecyclerview_layout"/>
+        <include layout="@layout/xrecyclerview_layout_not_white"/>
     </LinearLayout>
 
     <com.gjiazhe.wavesidebar.WaveSideBar
@@ -23,11 +23,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:paddingRight="8dp"
+        android:visibility="visible"
         app:sidebar_lazy_respond="false"
         app:sidebar_max_offset="80dp"
         app:sidebar_position="right"
         app:sidebar_text_alignment="center"
-        app:sidebar_text_color="#8D6E63"
+        app:sidebar_text_color="@color/color_text_hint"
         app:sidebar_text_size="14sp" />
 
 </RelativeLayout>

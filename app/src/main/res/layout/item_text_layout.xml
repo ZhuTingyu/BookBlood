@@ -6,5 +6,7 @@
     android:layout_height="48dp"
     android:gravity="start|center_vertical"
     android:textSize="@dimen/medium_text_size"
+    android:paddingLeft="5dp"
+    android:background="@color/white"
     tools:text="1232412323412314" />
 

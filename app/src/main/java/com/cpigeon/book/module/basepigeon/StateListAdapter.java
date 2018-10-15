@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.foot.adapter;
+package com.cpigeon.book.module.basepigeon;
 
 import android.support.annotation.ColorRes;
 import android.support.v7.widget.RecyclerView;
@@ -21,28 +21,33 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/25.
  */
 
-public class FootListHeadAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> {
+public class StateListAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> {
 
     int mRootW;
     int mCircleW;
-    List<String> titles;
-    int maxCount;
+    List<String> mTitles;
+    int mMaxCount;
+    String mUnitString;
 
-    public FootListHeadAdapter() {
+    public StateListAdapter(List<String> titles) {
         super(R.layout.item_stat, null);
         mRootW = (int) ((ScreenTool.getScreenWidth() - ScreenTool.dip2px(80)) / 4.5f);
         mCircleW = mRootW;
-        titles = Lists.newArrayList(Utils.getApp().getResources().getStringArray(R.array.array_foot_ring_type));
-
+        this.mTitles = titles;
     }
 
     @Override
     protected void convert(BaseViewHolder helper, Integer item) {
         StatView statView = (StatView) helper.itemView;
         statView.setStatW(mCircleW);
-        statView.setTitle(titles.get(helper.getAdapterPosition()));
+        statView.setTitle(mTitles.get(helper.getAdapterPosition()));
         statView.setColor(getDataColor(helper.getAdapterPosition()), getOtherColor(helper.getAdapterPosition()));
-        statView.bindData(item, maxCount);
+        statView.setUnitString(mUnitString);
+        statView.bindData(item, mMaxCount);
+    }
+
+    public void setUnitString(String unitString) {
+        mUnitString = unitString;
     }
 
     @ColorRes
@@ -64,6 +69,6 @@ public class FootListHeadAdapter extends BaseQuickAdapter<Integer, BaseViewHolde
     }
 
     public void setMaxCount(int maxCount) {
-        this.maxCount = maxCount;
+        this.mMaxCount = maxCount;
     }
 }

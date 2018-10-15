@@ -26,5 +26,6 @@ public class SelectAssAdapter extends BaseLetterSelectAdapter<AssEntity, BaseVie
         TextView view = (TextView) helper.itemView;
         view.setTextColor(Utils.getColor(R.color.color_text_color_gray));
         view.setText(item.getContent());
+
     }
 }

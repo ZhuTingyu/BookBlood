@@ -88,6 +88,10 @@ public class StatView extends LinearLayout {
         mTvTitle.setText(title);
     }
 
+    public void setUnitString(String unitString) {
+        mUnitString = unitString;
+    }
+
     public void setStatW(int w){
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(w, w);
         mRlScale.setLayoutParams(params);

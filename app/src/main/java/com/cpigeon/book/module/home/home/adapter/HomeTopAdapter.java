@@ -8,12 +8,13 @@ import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
+import com.cpigeon.book.model.entity.HomeTopEntity;
 
 /**
  * Created by Zhu TingYu on 2018/8/10.
  */
 
-public class HomeTopAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+public class HomeTopAdapter extends BaseQuickAdapter<HomeTopEntity, BaseViewHolder> {
 
     int width;
     int height;
@@ -29,7 +30,7 @@ public class HomeTopAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, HomeTopEntity item) {
         View view = helper.itemView;
         view.setPadding(paddingLeft,0, paddingLeft, paddingBttom);
         ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(width, height);
@@ -43,5 +44,13 @@ public class HomeTopAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
             view.setBackgroundResource(R.mipmap.ic_home_top_bg_yellow);
         }
         view.setLayoutParams(layoutParams);
+
+        helper.setText(R.id.tvTitle, item.CountName);
+        helper.setText(R.id.tvLeftTitle, item.LeftName);
+        helper.setText(R.id.tvRightTitle, item.RightName);
+        helper.setText(R.id.tVCount, item.Count);
+        helper.setText(R.id.tVCount, item.Count);
+        helper.setText(R.id.tvLeftCount, item.Left);
+        helper.setText(R.id.tvRightCount, item.Right);
     }
 }

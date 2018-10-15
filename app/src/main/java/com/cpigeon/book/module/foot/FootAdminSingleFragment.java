@@ -292,7 +292,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             if (requestCode == CODE_SELECT_COUNTY) {
                 try {
                     CountyEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-                    mViewModel.countryId = entity.getSort();
+                    mViewModel.countryId = entity.getFootCodeID();
                     lvCity.setRightText(entity.getCode());
                 } catch (Exception e) {
                     CountyAreaEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);

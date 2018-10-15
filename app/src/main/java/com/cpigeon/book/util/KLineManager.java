@@ -47,6 +47,7 @@ public class KLineManager {
         Description description = new Description();
         description.setText("");
         chart.setDescription(description);
+        chart.setScaleEnabled(false);
         xAxis = chart.getXAxis();
         yRight = chart.getAxisRight();
         yLeft = chart.getAxisLeft();
@@ -56,6 +57,23 @@ public class KLineManager {
         yLeft.setTextColor(Utils.getColor(R.color.black));
         iLineDataSets = Lists.newArrayList();
         chart.getLegend().setEnabled(false);
+
+
+        yLeft.setValueFormatter((v, axisBase) -> {
+            if (v == 0) {
+                return "0";
+            } else {
+                return String.valueOf(-(int) v);
+            }
+        });
+
+        yRight.setValueFormatter((v, axisBase) -> {
+            if (v == 0) {
+                return "0";
+            } else {
+                return String.valueOf((int) v);
+            }
+        });
     }
 
     public void setAnimate(){

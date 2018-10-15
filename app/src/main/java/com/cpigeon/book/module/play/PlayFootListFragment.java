@@ -128,14 +128,6 @@ public class PlayFootListFragment extends BaseFootListFragment {
                 }
             });
 
-            mKLineManager.yLeft.setValueFormatter((v, axisBase) -> {
-                if (v == 0) {
-                    return "0";
-                } else {
-                    return String.valueOf(-v);
-                }
-            });
-
             List<Entry> rank = Lists.newArrayList();
             List<Entry> speed = Lists.newArrayList();
             List<Entry> firstSpeed = Lists.newArrayList();

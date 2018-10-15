@@ -37,6 +37,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public static final String LINESS_NAME = "17";//病症名称
     public static final String DRUG_NAME = "18";//药品名称
     public static final String CARE_DRUG_NAME = "19";//保健品名称
+    public static final String TYPE_DEATH_REASON = "20";//死亡原因
 
 
     public String selectType;
@@ -60,6 +61,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mVaccineName = new MutableLiveData<>();//疫苗名称
     public MutableLiveData<List<SelectTypeEntity>> mLinessName = new MutableLiveData<>();//疾病名称
     public MutableLiveData<List<SelectTypeEntity>> mCareDrugName = new MutableLiveData<>();//保健品名称
+    public MutableLiveData<List<SelectTypeEntity>> mDeathReason = new MutableLiveData<>();//死亡原因
 
 
     public void setSelectType(String type) {
@@ -217,6 +219,15 @@ public class SelectTypeViewModel extends BaseViewModel {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.CARE_DRUG_NAME), r -> {
             if (r.isOk()) {
                 mCareDrugName.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取 死亡原因
+    public void getDeathReason() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_DEATH_REASON), r -> {
+            if (r.isOk()) {
+                mDeathReason.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }
