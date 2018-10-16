@@ -2,10 +2,9 @@ package com.cpigeon.book.module.breedpigeon.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.base.http.ApiResponse;
 import com.base.http.HttpErrorException;
-import com.base.util.Utils;
 import com.base.util.utility.StringUtil;
-import com.cpigeon.book.R;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.RacingPigeonModel;
@@ -15,8 +14,6 @@ import com.cpigeon.book.model.entity.PigeonEntryEntity;
 
 import org.greenrobot.eventbus.EventBus;
 
-import io.reactivex.functions.Consumer;
-
 /**
  * 种鸽录入
  * Created by Administrator on 2018/8/28.
@@ -25,7 +22,7 @@ import io.reactivex.functions.Consumer;
 public class InputPigeonViewModel extends BasePigeonViewModel {
 
 
-    public MutableLiveData<PigeonEntryEntity> mDataPigeon = new MutableLiveData<>();
+    public MutableLiveData<ApiResponse<PigeonEntryEntity>> mDataPigeon = new MutableLiveData<>();
     public MutableLiveData<PigeonEntity> mDataPigeonDetails = new MutableLiveData<>();
     public String pigeonId;
     public String sonFootId;
@@ -36,7 +33,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     //种鸽录入
     public void addPigeon() {
 
-        if(pigeonType.equals(PigeonEntity.ID_BREED_PIGEON)){
+        if (pigeonType.equals(PigeonEntity.ID_BREED_PIGEON)) {
             submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Add(countryId,
                     foot,
                     footVice,
@@ -56,10 +53,11 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                     setImageMap()), r -> {
 
                 if (r.isOk()) {
-                    mDataPigeon.setValue(r.data);
+                    mDataPigeon.setValue(r);
+                    EventBus.getDefault().post(new PigeonAddEvent());
                 } else throw new HttpErrorException(r);
             });
-        }else {
+        } else {
             submitRequestThrowError(RacingPigeonModel.getTXGP_Pigeon_Racing_Add(countryId,
                     foot,
                     footVice,
@@ -79,7 +77,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
 
                 if (r.isOk()) {
 
-                    mDataPigeon.setValue(r.data);
+                    mDataPigeon.setValue(r);
 
                     EventBus.getDefault().post(new PigeonAddEvent());
 
@@ -91,9 +89,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     }
 
     public void modifyBreedPigeonEntry() {
-
-
-        if(pigeonType.equals(PigeonEntity.ID_BREED_PIGEON)){
+        if (pigeonType.equals(PigeonEntity.ID_BREED_PIGEON)) {
             submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
                     mBreedPigeonEntity.getPigeonID(),// 鸽子id
                     countryId,// 国家Id
@@ -113,11 +109,11 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                     setImageMap()), r -> {
                 if (r.isOk()) {
 
-                    mDataPigeon.setValue(r.data);
-
+                    mDataPigeon.setValue(r);
+                    EventBus.getDefault().post(new PigeonAddEvent());
                 } else throw new HttpErrorException(r);
             });
-        }else {
+        } else {
             submitRequestThrowError(BreedPigeonModel.getTXGP_Racing_Pigeon_Modify(
                     mBreedPigeonEntity.getPigeonID(),// 鸽子id
                     countryId,// 国家Id
@@ -137,8 +133,8 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                     setImageMap()), r -> {
                 if (r.isOk()) {
 
-                    mDataPigeon.setValue(r.data);
-
+                    mDataPigeon.setValue(r);
+                    EventBus.getDefault().post(new PigeonAddEvent());
                 } else throw new HttpErrorException(r);
             });
         }
@@ -158,11 +154,11 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
         isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId);
     }
 
-    public boolean isHavePigeonInfo(){
+    public boolean isHavePigeonInfo() {
         return mBreedPigeonEntity != null && StringUtil.isStringValid(mBreedPigeonEntity.getPigeonID());
     }
 
-    public boolean isHaveSex(){
+    public boolean isHaveSex() {
         return mBreedPigeonEntity != null && StringUtil.isStringValid(mBreedPigeonEntity.getPigeonSexID());
     }
 

@@ -16,6 +16,7 @@ import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.ServiceEntity;
 import com.cpigeon.book.module.menu.service.adpter.PayOpenServiceAdapter;
@@ -79,10 +80,10 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            if(mPayWay.equals(PayServiceOrderViewModel.WAY_WX)){
+            if (mPayWay.equals(PayServiceOrderViewModel.WAY_WX)) {
 
-            }else {
-                PayServiceOrderDialog.show(getFragmentManager(), mServiceEntity, mPayWay,mIsOpen);
+            } else {
+                PayServiceOrderDialog.show(getFragmentManager(), mServiceEntity, mPayWay, mIsOpen);
                 dismiss();
             }
         });
@@ -93,22 +94,34 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
             mAdapter.setSingleItem(position);
             StringBuilder sb = new StringBuilder();
             if (position == 0) {
-                sb.append(Utils.getString(R.string.text_pigeon_score_content, mServiceEntity.getScore()));
-                sb.append(mServiceEntity.getNum());
-                sb.append(mServiceEntity.getDanwei());
-                mPayWay = PayServiceOrderViewModel.WAY_SCORE;
+                try {
+                    sb.append(Utils.getString(R.string.text_pigeon_score_content, mServiceEntity.getScore()));
+                    sb.append(mServiceEntity.getNum());
+                    sb.append(mServiceEntity.getDanwei());
+                    mPayWay = PayServiceOrderViewModel.WAY_SCORE;
+                } catch (Exception e) {
+                    ToastUtils.showLong(getBaseActivity(), "当前鸽币订单生成有误，请稍后再试！");
+                }
             } else if (position == 1) {
-                sb.append(Utils.getString(R.string.text_yuan, mServiceEntity.getPrice()));
-                sb.append(mServiceEntity.getNum());
-                sb.append(mServiceEntity.getDanwei());
-                mPayWay = PayServiceOrderViewModel.WAY_BALANCE;
+                try {
+                    sb.append(Utils.getString(R.string.text_yuan, mServiceEntity.getPrice()));
+                    sb.append(mServiceEntity.getNum());
+                    sb.append(mServiceEntity.getDanwei());
+                    mPayWay = PayServiceOrderViewModel.WAY_BALANCE;
+                } catch (Exception e) {
+                    ToastUtils.showLong(getBaseActivity(), "当前余额订单生成有误，请稍后再试！");
+                }
             } else if (position == 2) {
-                mPayWay = PayServiceOrderViewModel.WAY_WX;
-                float price = Float.valueOf(mServiceEntity.getPrice()) / 100f;
-                sb.append(Utils.getString(R.string.text_yuan, mServiceEntity.getPrice()));
-                sb.append(mServiceEntity.getNum());
-                sb.append(mServiceEntity.getDanwei());
-                sb.append(Utils.getString(R.string.text_weixing_charge, String.valueOf(MathUtil.doubleformat(price, 2))));
+                try {
+                    mPayWay = PayServiceOrderViewModel.WAY_WX;
+                    float price = Float.valueOf(mServiceEntity.getPrice()) / 100f;
+                    sb.append(Utils.getString(R.string.text_yuan, mServiceEntity.getPrice()));
+                    sb.append(mServiceEntity.getNum());
+                    sb.append(mServiceEntity.getDanwei());
+                    sb.append(Utils.getString(R.string.text_weixing_charge, String.valueOf(MathUtil.doubleformat(price, 2))));
+                } catch (Exception e) {
+                    ToastUtils.showLong(getBaseActivity(), "当前微信订单生成有误，请稍后再试！");
+                }
             }
             mTvPrice.setText(sb);
         } catch (NumberFormatException e) {
@@ -125,7 +138,7 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
 
 
     //传入订单实体类
-    public static void show(ServiceEntity s, boolean isOpen ,FragmentManager fragmentManager) {
+    public static void show(ServiceEntity s, boolean isOpen, FragmentManager fragmentManager) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(IntentBuilder.KEY_DATA, s);
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isOpen);

@@ -134,17 +134,16 @@
                 app:inputBoxView_tittle="@string/text_remark_explain"
                 app:text_hint="500字以内" />
 
+            <TextView
+                android:id="@+id/tvOk"
+                style="@style/bottom_style"
+                android:layout_marginTop="@dimen/spacing_left_reight"
+                android:text="@string/text_sure_add"
+                android:textSize="18dp" />
+
+
         </com.cpigeon.book.widget.LineInputListLayout>
 
-
     </android.support.v4.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/tvOk"
-        style="@style/bottom_style"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:text="@string/text_sure_add"
-        android:textSize="18dp" />
 
 </RelativeLayout>

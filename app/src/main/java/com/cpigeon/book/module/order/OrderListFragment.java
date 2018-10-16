@@ -56,7 +56,6 @@ public class OrderListFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = findViewById(R.id.list);
-        mRecyclerView.addItemDecorationLine();
 
         mAdapter = new OrderListAdapter();
 

@@ -152,7 +152,7 @@ public class BreedPigeonModel {
                 .request();
     }
 
-    //hl 种鸽信息修改
+    //hl 赛鸽信息修改
     public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Racing_Pigeon_Modify(String pigeonid,
                                                                                           String coodid,
                                                                                           String footnum,

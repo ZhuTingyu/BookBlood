@@ -27,6 +27,7 @@ public class UseVaccineEntity {
     private int FootRingID;
     private String Direction;
     private String Reason;
+    private String ReasonID;
     private String UseViccineTime;
     private String BodyTemper;
     private String Temperature;
@@ -39,6 +40,14 @@ public class UseVaccineEntity {
     private String Weather;
     private String PigeonViccineName;
     private String ViccineNameID;
+
+    public String getReasonID() {
+        return ReasonID;
+    }
+
+    public void setReasonID(String reasonID) {
+        ReasonID = reasonID;
+    }
 
     public String getViccineNameID() {
         return ViccineNameID;

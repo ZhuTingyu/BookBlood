@@ -134,7 +134,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
 
         inputRemark.getEditText().setCanEdit(false);//不可编辑
 
-        mSelectTypeViewModel.getLiness_Name();
+        mSelectTypeViewModel.getLiness_Name();//病症名称
     }
 
     @Override
@@ -278,12 +278,12 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
                             mInputDialog.hide();
                             mStatusIllnessRecordAddViewModel.isCanCommit();
                         }, null);
-
-
+                
                 break;
             case R.id.llRoot:
                 break;
             case R.id.tvOk:
+                setProgressVisible(true);
                 mStatusIllnessRecordAddViewModel.getTXGP_PigeonVaccine_AddData();
                 break;
         }

@@ -6,10 +6,13 @@ import android.view.View;
 
 import com.base.base.BaseViewHolder;
 import com.base.util.Lists;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.FeedbackDetailEntity;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Zhu TingYu on 2018/8/23.
@@ -27,7 +30,11 @@ public class FeedbackDetailsAdapter extends BaseMultiItemQuickAdapter<FeedbackDe
     protected void convert(BaseViewHolder helper, FeedbackDetailEntity item) {
 
         helper.setText(R.id.tvTime, item.getDatetime());
-        helper.setGlideImageView(mContext, R.id.imgHead, UserModel.getInstance().getUserData().touxiangurl);
+
+        Glide.with(mContext)
+                .load(UserModel.getInstance().getUserData().touxiangurl)
+                .placeholder(mContext.getResources().getDrawable(R.mipmap.ic_system_head))
+                .into((CircleImageView) helper.getView(R.id.imgHead));
 
         switch (helper.getItemViewType()) {
             case FeedbackDetailEntity.TYPE_FEEDBACK:

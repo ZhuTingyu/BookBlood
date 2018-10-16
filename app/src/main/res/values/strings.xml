@@ -426,7 +426,7 @@
     <string name="text_drug_use_time">用药日期</string>
     <string name="text_drug_after_result">用药副作用</string>
     <string name="text_after_result">副作用</string>
-    <string name="text_drug_after_status">用药后状态</string>
+    <string name="text_drug_after_status">用药效果</string>
     <string name="text_care">保健</string>
     <string name="text_care_drug">保健品</string>
     <string name="text_care_drug_name">保健药名称</string>
@@ -640,6 +640,7 @@
     <string name="text_birth_time">出壳日期</string>
     <string name="text_set_ring_time">挂环日期</string>
     <string name="text_pigeon_input">信鸽录入</string>
+    <string name="text_pigeon_edit">信鸽修改</string>
     <string name="str_msg">消息</string>
     <string name="str_recycle_bin">回收站</string>
     <string name="str_recycle_bin_empty">清空</string>
@@ -648,6 +649,7 @@
     <string name="text_bracket">(%1$s)</string>
     <string name="text_hint_pigeon_is_death">死亡鸽才能重新挂环！是否将该鸽设置为死亡状态并重新挂环？</string>
     <string name="text_death_reason">死亡原因</string>
+    <string name="text_use_arm_prompt">温馨提示:注射疫苗时必须保证信鸽处于健康状态，体温正常（添加正常度数），食欲正常，排便正常，并检查口腔处于粉白状态，无粘液，正常体温为42℃，注射完毕后须给信鸽电解质或者甘精，以防应急反应。</string>
 
 
 </resources>

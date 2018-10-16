@@ -16,6 +16,7 @@ import com.base.event.ShowImagePositionEvent;
 import com.base.util.Lists;
 import com.base.util.PictureSelectUtil;
 import com.base.util.system.ScreenTool;
+import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.ImageEntity;
 
@@ -25,6 +26,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.Map;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Zhu TingYu on 2018/8/24.
@@ -45,13 +48,20 @@ public class FeedbackDetailsImageAdapter extends BaseQuickAdapter<ImageEntity, B
 
     @Override
     protected void convert(BaseViewHolder helper, ImageEntity item) {
-        helper.setGlideImageViewHaveRound(mContext, R.id.img, item.getImgurl());
+//        helper.setGlideImageViewHaveRound(mContext, R.id.img, item.getImgurl());
+
+        Glide.with(mContext)
+                .load(item.getImgurl())
+                .bitmapTransform(new RoundedCornersTransformation(mContext,13, 0, RoundedCornersTransformation.CornerType.ALL))
+                .placeholder(mContext.getResources().getDrawable(R.mipmap.ic_default_head))
+                .into((ImageView) helper.getView(R.id.img));
+
         RelativeLayout rlRoot = helper.getView(R.id.rlRoot);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(w, ViewGroup.LayoutParams.WRAP_CONTENT);
-        if(helper.getAdapterPosition() > 3){
-            layoutParams.setMargins(0,ScreenTool.dip2px(10), 0 ,0);
-        }else {
-            layoutParams.setMargins(0,0, 0 ,0);
+        if (helper.getAdapterPosition() > 3) {
+            layoutParams.setMargins(0, ScreenTool.dip2px(10), 0, 0);
+        } else {
+            layoutParams.setMargins(0, 0, 0, 0);
         }
         rlRoot.setLayoutParams(layoutParams);
 
@@ -68,7 +78,7 @@ public class FeedbackDetailsImageAdapter extends BaseQuickAdapter<ImageEntity, B
         setPosition(event.position);
     }
 
-    public void setBackImage(){
+    public void setBackImage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ((Activity) mContext).setExitSharedElementCallback(new SharedElementCallback() {
                 @Override

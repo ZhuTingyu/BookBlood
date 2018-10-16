@@ -7,14 +7,10 @@ import com.base.base.BaseViewModel;
 import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.DrugUseCaseModel;
-import com.cpigeon.book.model.FeedPigeonModel;
-import com.cpigeon.book.model.UseVaccineModel;
 import com.cpigeon.book.model.entity.DrugUseCaseEntity;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
-import com.cpigeon.book.model.entity.FeedPigeonStatistical;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
 import com.cpigeon.book.service.EventBusService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,19 +30,21 @@ public class DrugUseCaseViewModel extends BaseViewModel {
     public int typePag = 0; //0添加    1   编辑
 
 
-    //病情记录
-    public String illnessRecord;
+    //疾病名称
+    public List<SelectTypeEntity> mIllnessNameData;
+    public String illnessName;
     //药品名称
+    public List<SelectTypeEntity> mDrugNameData;
     public String drugName;
     //用药日期
     public String drugUseTime;
-    //记录日期
-    public String recordTime;
+    //    //记录日期
+//    public String recordTime;
     //用药后状态
     public List<SelectTypeEntity> mSelectTypes_drugAfterStatus;
     public String drugAfterStatus;
-    //是否副作用
-    public String isHaveAfterResult;
+    //    //是否副作用
+//    public String isHaveAfterResult;
     //体温
     public String bodyTemp;
     //配对天气
@@ -66,13 +64,13 @@ public class DrugUseCaseViewModel extends BaseViewModel {
         submitRequestThrowError(DrugUseCaseModel.getTXGP_PigeonDrug_Add(
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
-                illnessRecord,
+                illnessName,//
                 drugName,
                 drugAfterStatus,
-                isHaveAfterResult,
+                "",//isHaveAfterResult,
                 bodyTemp,
                 drugUseTime,
-                recordTime,
+                "",//  recordTime,
                 weather,
                 temper,
                 hum,
@@ -92,13 +90,13 @@ public class DrugUseCaseViewModel extends BaseViewModel {
                 mPigeonEntity.getFootRingID(),
                 mPigeonEntity.getPigeonID(),
                 mFeedPigeonEntity.getViewID(),
-                illnessRecord,
+                illnessName,//
                 drugName,
                 drugAfterStatus,
-                isHaveAfterResult,
+                "",//isHaveAfterResult,
                 bodyTemp,
                 drugUseTime,
-                recordTime,
+                "",//  recordTime,
                 weather,
                 temper,
                 hum,
@@ -145,20 +143,20 @@ public class DrugUseCaseViewModel extends BaseViewModel {
     }
 
 
-
     private BaseFragment mBaseFragment;
 
     public void setmBaseFragment(BaseFragment mBaseFragment) {
         this.mBaseFragment = mBaseFragment;
     }
+
     public void isCanCommit() {
 
         if (typePag == 1) {
             //编辑
             mBaseFragment.setProgressVisible(true);//加载框
             getTXGP_PigeonDrug_EditData();
-        }else {
-            isCanCommit(illnessRecord, drugName, drugUseTime, recordTime, drugAfterStatus, isHaveAfterResult);
+        } else {
+            isCanCommit(drugName, drugUseTime, drugAfterStatus);
         }
     }
 

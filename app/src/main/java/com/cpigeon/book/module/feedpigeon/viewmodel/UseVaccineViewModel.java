@@ -87,7 +87,7 @@ public class UseVaccineViewModel extends BaseViewModel {
                 temper,
                 bodyTemperature,
                 injectionTiem,
-                injectionWhy,
+                injectionWhyId,
                 remark
         ), r -> {
             if (r.isOk()) {

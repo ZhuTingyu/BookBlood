@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.home.sharehall;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,12 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.home.sharehall.adpter.ShareHallHomeAdapter;
@@ -46,6 +49,15 @@ public class ShareHallFragment extends BaseBookFragment {
     private SelectTypeViewModel mSelectTypeViewModel;
     private ShareHallViewModel mViewModel;
 
+    private boolean isShowToobar = true;
+
+    public static void start(Activity activity, PigeonEntity mBreedPigeonEntity) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
+                .putExtra(IntentBuilder.KEY_TYPE, false)
+                .startParentActivity(activity, ShareHallFragment.class);
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -62,10 +74,32 @@ public class ShareHallFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setToolbarNotBack();
-        setToolbarLeft(R.drawable.svg_open_share_hall, v -> {
-            OpenServiceFragment.start(getBaseActivity());
-        });
+
+
+        View appbar = view.findViewById(R.id.appbar);
+
+        isShowToobar = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_TYPE, true);
+
+        if (isShowToobar) {
+            appbar.setVisibility(View.VISIBLE);
+            setToolbarNotBack();
+            setToolbarLeft(R.drawable.svg_open_share_hall, v -> {
+                OpenServiceFragment.start(getBaseActivity());
+            });
+
+        } else {
+
+            appbar.setVisibility(View.GONE);
+            setToolbarNotBack();
+            setToolbarLeft(R.drawable.svg_open_share_hall, v -> {
+                getBaseActivity().finish();
+            });
+
+
+
+        }
+
+
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mRlSearch = findViewById(R.id.rlSearch);
         mTvSearch = findViewById(R.id.tvSearch);
@@ -106,7 +140,7 @@ public class ShareHallFragment extends BaseBookFragment {
         mAdapter.setOnLoadMoreListener(() -> {
             mViewModel.pi++;
             mViewModel.getSharePigeons();
-        },mRecyclerView.getRecyclerView());
+        }, mRecyclerView.getRecyclerView());
 
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.cleanList();

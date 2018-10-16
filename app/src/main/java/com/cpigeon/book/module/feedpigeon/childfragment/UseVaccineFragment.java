@@ -105,7 +105,6 @@ public class UseVaccineFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         mUseVaccineViewModel.mPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
 
         mUseVaccineViewModel.mFeedPigeonEntity = getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA_2);
@@ -154,7 +153,6 @@ public class UseVaccineFragment extends BaseBookFragment {
             TextViewUtil.setEnabled(tvOk, aBoolean);
         });
 
-
         if (mUseVaccineViewModel.typePag == 0) {
             //添加才定位
             LocationLiveData.get(true).observe(this, aMapLocation -> {
@@ -167,7 +165,6 @@ public class UseVaccineFragment extends BaseBookFragment {
             });
         }
 
-
         //详情
         mUseVaccineViewModel.mUseVaccineDetails.observe(this, datas -> {
             setProgressVisible(false);
@@ -176,12 +173,13 @@ public class UseVaccineFragment extends BaseBookFragment {
             mUseVaccineViewModel.injectionTiem = datas.getUseViccineTime();//注射日期
             mUseVaccineViewModel.bodyTemperature = datas.getBodyTemper();//体温
             mUseVaccineViewModel.injectionWhy = datas.getReason();//注射原因
+            mUseVaccineViewModel.injectionWhyId = datas.getReasonID();//注射原因id
             mUseVaccineViewModel.remark = datas.getRemark();//备注
 
             lvVaccine.setRightText(mUseVaccineViewModel.vaccineName);
             lvTime.setContent(mUseVaccineViewModel.injectionTiem);
             lvBodyTemp.setRightText(mUseVaccineViewModel.bodyTemperature);
-//            inputVaccineReason.setText(mUseVaccineViewModel.injectionWhy);
+            lvVaccineReason.setRightText(mUseVaccineViewModel.injectionWhy);
             inputRemark.setText(mUseVaccineViewModel.remark);
 
             mUseVaccineViewModel.weather = datas.getWeather();//天气
@@ -263,6 +261,7 @@ public class UseVaccineFragment extends BaseBookFragment {
                         }, null);
 
                 break;
+
             case R.id.lvVaccineReason:
                 //注射原因
                 if (!Lists.isEmpty(mUseVaccineViewModel.mVaccineReasonSelect)) {
@@ -274,7 +273,6 @@ public class UseVaccineFragment extends BaseBookFragment {
                             lvVaccineReason.setContent(mUseVaccineViewModel.mVaccineReasonSelect.get(index).getTypeName());
 
                             mUseVaccineViewModel.isCanCommit();
-
                         }
                     });
                 } else {
@@ -293,7 +291,7 @@ public class UseVaccineFragment extends BaseBookFragment {
             case R.id.inputRemark:
                 //备注
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_input_remark,inputRemark.getText(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_input_remark, inputRemark.getText(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mUseVaccineViewModel.remark = content;
                             inputRemark.getEditText().setText(content);
                             mInputDialog.hide();
@@ -306,6 +304,7 @@ public class UseVaccineFragment extends BaseBookFragment {
             case R.id.scrollView:
                 break;
             case R.id.tvOk:
+                setProgressVisible(true);
                 mUseVaccineViewModel.getTXGP_PigeonVaccine_AddData();
                 break;
         }

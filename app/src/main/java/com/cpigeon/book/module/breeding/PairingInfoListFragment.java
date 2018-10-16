@@ -20,6 +20,7 @@ import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingInfoListAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
+import com.cpigeon.book.module.home.sharehall.ShareHallFragment;
 import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
@@ -71,7 +72,7 @@ public class PairingInfoListFragment extends BaseListFragment {
                     PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
                 } else if (chooseWays[p].equals(Utils.getString(R.string.array_blind_date))) {
                     //相亲配对
-
+                    ShareHallFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
                 }
             });
             return false;

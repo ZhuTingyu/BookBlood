@@ -29,8 +29,9 @@ public class CareDrugEntity {
     private String UseHealthTime;
     private String PigeonHealthType;
     private String PigeonHealthID;
+    private String HealthNameID;
     private String PigeonHealthName;
-    private String RecordTime;
+    private String EndTime;
     private String Temperature;
     private String BitEffect;
     private String FootRingNum;
@@ -42,6 +43,21 @@ public class CareDrugEntity {
     private String Weather;
     private String Humidity;
 
+    public String getHealthNameID() {
+        return HealthNameID;
+    }
+
+    public void setHealthNameID(String healthNameID) {
+        HealthNameID = healthNameID;
+    }
+
+    public String getEndTime() {
+        return EndTime;
+    }
+
+    public void setEndTime(String endTime) {
+        EndTime = endTime;
+    }
 
     public String getFootRingID() {
         return FootRingID;
@@ -83,13 +99,6 @@ public class CareDrugEntity {
         PigeonHealthName = pigeonHealthName;
     }
 
-    public String getRecordTime() {
-        return RecordTime;
-    }
-
-    public void setRecordTime(String recordTime) {
-        RecordTime = recordTime;
-    }
 
     public String getTemperature() {
         return Temperature;

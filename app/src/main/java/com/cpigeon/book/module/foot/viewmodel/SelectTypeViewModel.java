@@ -61,6 +61,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mVaccineName = new MutableLiveData<>();//疫苗名称
     public MutableLiveData<List<SelectTypeEntity>> mLinessName = new MutableLiveData<>();//疾病名称
     public MutableLiveData<List<SelectTypeEntity>> mCareDrugName = new MutableLiveData<>();//保健品名称
+    public MutableLiveData<List<SelectTypeEntity>> mDrugNameData = new MutableLiveData<>();//药品名称
     public MutableLiveData<List<SelectTypeEntity>> mDeathReason = new MutableLiveData<>();//死亡原因
 
 
@@ -219,6 +220,15 @@ public class SelectTypeViewModel extends BaseViewModel {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.CARE_DRUG_NAME), r -> {
             if (r.isOk()) {
                 mCareDrugName.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    //获取 药品名称
+    public void getDrug_Name() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.DRUG_NAME), r -> {
+            if (r.isOk()) {
+                mDrugNameData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

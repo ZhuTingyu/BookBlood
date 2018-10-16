@@ -38,6 +38,7 @@ import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.InputPigeonViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
@@ -131,7 +132,6 @@ public class InputPigeonFragment extends BaseBookFragment {
         start(activity, pigeonId, sonFootId, sonPigeonId, sex, null, requestCode);
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -154,7 +154,13 @@ public class InputPigeonFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(R.string.text_pigeon_input);
+
+        if (StringUtil.isStringValid(mViewModel.pigeonId)) {
+            setTitle(R.string.text_pigeon_edit);
+        } else {
+            setTitle(R.string.text_pigeon_input);
+        }
+
         findView();
         composite.add(RxUtils.delayed(200, aLong -> {
             if (StringUtil.isStringValid(mViewModel.pigeonId)) {
@@ -197,7 +203,6 @@ public class InputPigeonFragment extends BaseBookFragment {
             mLvSex.setRightText(Utils.getString(R.string.text_female_a));
             mLvSex.setRightImageVisible(false);
         }
-
 
         if (StringUtil.isStringValid(mViewModel.pigeonId)) {
             setProgressVisible(true);
@@ -268,7 +273,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //血统
         mLvBlood.setOnRightClickListener(lineInputView -> {
-            BaseInputDialog.show(getFragmentManager(), R.string.text_blood,R.string.text_blood_bank , 0, content -> {
+            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
                 mViewModel.lineage = content;
                 mLvBlood.setRightText(content);
             }, () -> {
@@ -486,7 +491,9 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         //种鸽录入、修改
-        mViewModel.mDataPigeon.observe(this, o -> {
+        mViewModel.mDataPigeon.observe(this, datas -> {
+
+            PigeonEntryEntity o = datas.data;
 
             EventBus.getDefault().post(new PigeonAddEvent());
 
@@ -495,7 +502,9 @@ public class InputPigeonFragment extends BaseBookFragment {
             if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
                 getBaseActivity().errorDialog.dismiss();
             }
-            String hintStr = "种鸽录入成功，";
+
+            String hintStr = datas.getMsg();
+
             if (o != null) {
                 if (Integer.valueOf(o.getPigeonMoney()) > 0) {
                     hintStr += "获取" + o.getPigeonMoney() + "个鸽币，";

@@ -75,6 +75,7 @@
                 tools:text="123333334444444444444444444444333333" />
 
             <ImageView
+                android:layout_marginLeft="16dp"
                 android:id="@+id/imgRight"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
