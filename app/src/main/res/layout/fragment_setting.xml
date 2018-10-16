@@ -106,6 +106,7 @@
     </LinearLayout>
 
     <TextView
+        android:textColor="@color/color_text_can_click"
         android:id="@+id/out_login"
         style="@style/bottom_style3"
         android:text="退出登录" />

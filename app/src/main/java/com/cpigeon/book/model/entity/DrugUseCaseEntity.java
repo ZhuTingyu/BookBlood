@@ -37,16 +37,34 @@ public class DrugUseCaseEntity {
     private String Bodytemper;
     private String RecordTime;
     private int PigeonDrugID;
+    private int DrugNameID;
     private String Weather;
     private String Temperature;
     private String FootRingNum;
     private String PigeonDiseaseName;
+    private String PigeonDrugName;
     private String Remark;
     private String Humidity;
     private int PigeonID;
     private String Direction;
     private int EffectStateID;
     private String EffectStateName;
+
+    public int getDrugNameID() {
+        return DrugNameID;
+    }
+
+    public void setDrugNameID(int drugNameID) {
+        DrugNameID = drugNameID;
+    }
+
+    public String getPigeonDrugName() {
+        return PigeonDrugName;
+    }
+
+    public void setPigeonDrugName(String pigeonDrugName) {
+        PigeonDrugName = pigeonDrugName;
+    }
 
     public int getFootRingID() {
         return FootRingID;

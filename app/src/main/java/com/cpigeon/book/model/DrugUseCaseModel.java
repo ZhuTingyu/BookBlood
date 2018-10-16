@@ -1,11 +1,9 @@
 package com.cpigeon.book.model;
 
 import com.base.http.ApiResponse;
-import com.base.http.HttpErrorException;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.DrugUseCaseEntity;
-import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.StatusIllnessRecordEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,7 +22,7 @@ public class DrugUseCaseModel {
     //hl 用药情况  添加
     public static Observable<ApiResponse<Object>> getTXGP_PigeonDrug_Add(String footid,
                                                                          String pigeonid,
-                                                                         String diseaseid,
+                                                                         String diseasename,
                                                                          String drugname,
                                                                          String stateid,
                                                                          String biteffect,
@@ -44,8 +42,8 @@ public class DrugUseCaseModel {
                 .url(R.string.drug_use_case_add)
                 .addBody("footid", footid)//
                 .addBody("pigeonid", pigeonid)//
-                .addBody("diseaseid", diseaseid)//
-                .addBody("drugname", drugname)//药品名称
+                .addBody("diseasename", diseasename)//疾病名称
+                .addBody("drugname", drugname)//药品名称（传入id）
                 .addBody("stateid", stateid)//用药后状态
                 .addBody("biteffect", biteffect)//是否有副作用
                 .addBody("bodytemper", bodytemper)//体温
@@ -64,7 +62,7 @@ public class DrugUseCaseModel {
     public static Observable<ApiResponse<Object>> getTXGP_PigeonDrug_Edit(String footid,
                                                                           String pigeonid,
                                                                           String drugid,
-                                                                          String diseaseid,
+                                                                          String diseasename,
                                                                           String drugname,
                                                                           String stateid,
                                                                           String biteffect,
@@ -85,7 +83,7 @@ public class DrugUseCaseModel {
                 .addBody("footid", footid)//
                 .addBody("pigeonid", pigeonid)//
                 .addBody("drugid", drugid)//
-                .addBody("diseaseid", diseaseid)//
+                .addBody("diseasename", diseasename)//
                 .addBody("drugname", drugname)//药品名称
                 .addBody("stateid", stateid)//用药后状态
                 .addBody("biteffect", biteffect)//是否有副作用
@@ -103,8 +101,8 @@ public class DrugUseCaseModel {
 
     //hl 用药情况  详情
     public static Observable<ApiResponse<DrugUseCaseEntity>> getTXGP_PigeonDrug_Select(String footid,
-                                                                            String pigeonid,
-                                                                            String drugid
+                                                                                       String pigeonid,
+                                                                                       String drugid
     ) {
         return RequestData.<ApiResponse<DrugUseCaseEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<DrugUseCaseEntity>>() {

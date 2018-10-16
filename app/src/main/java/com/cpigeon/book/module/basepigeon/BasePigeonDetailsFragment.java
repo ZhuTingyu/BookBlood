@@ -192,11 +192,8 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
         mBookViewModel.foodId = mBreedPigeonDetailsViewModel.footId;
         mBookViewModel.pigeonId = mBreedPigeonDetailsViewModel.pigeonId;
 
-
-
         mBreedPigeonDetailsViewModel.getPigeonDetails();//获取 鸽子  详情
         mBookViewModel.getBloodBook();// //获取 血统书  四代
-
 
         mSelectTypeViewModel.getSelectType_Sex();
         mSelectTypeViewModel.getSelectType_FeatherColor();
@@ -205,11 +202,9 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_State();
         mSelectTypeViewModel.getSelectType_PigeonSource();
 
-
         initViewPager();
 
     }
-
 
     @Override
     protected void initObserve() {

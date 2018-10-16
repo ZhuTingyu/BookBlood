@@ -27,6 +27,7 @@ import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
 import com.cpigeon.book.module.menu.feedback.FeedbackListFragment;
 import com.cpigeon.book.service.SingleLoginService;
 import com.cpigeon.book.widget.LineInputView;
+import com.cpigeon.book.widget.mydialog.HintDialog;
 import com.shuyu.gsyvideoplayer.utils.StorageUtils;
 
 import java.io.File;
@@ -74,7 +75,6 @@ public class SettingFragment extends BaseBookFragment {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         return view;
     }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -181,6 +181,8 @@ public class SettingFragment extends BaseBookFragment {
         GlideCacheUtil.clearImageDiskCache(getActivity());//清除Glide图片加载缓存
         GlideCacheUtil.deleteFolderFile(mFile.getPath(), false);//清除视频播放缓存
         ll_clear_cache.getEditText().setText(String.valueOf(0 + "KB"));
+
+        HintDialog.shootHintDialog(getActivity(), "缓存清除成功!");
     }
 
 }

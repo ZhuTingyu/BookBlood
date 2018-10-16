@@ -207,19 +207,21 @@ public class CareDrugFragment extends BaseBookFragment {
             setProgressVisible(false);
 
             mCareDrugViewModel.careDrugName = datas.getPigeonHealthName();//保健品名称
-            mCareDrugViewModel.careDrugNameId = datas.getPigeonHealthID();//保健品名称
+            mCareDrugViewModel.careDrugNameId = datas.getHealthNameID();//保健品名称
             mCareDrugViewModel.careDrugFunction = datas.getPigeonHealthType();//保健品功能
             mCareDrugViewModel.useTime = datas.getUseHealthTime();//使用时间
-            mCareDrugViewModel.recordTime = datas.getRecordTime();//记录时间
+            mCareDrugViewModel.recordTime = datas.getEndTime();//记录时间
             mCareDrugViewModel.useEffect = datas.getUseEffect();//使用效果id
             mCareDrugViewModel.isHaveAfterResult = datas.getBitEffect();//副作用
             mCareDrugViewModel.bodyTemp = datas.getBodytemper();//体温
+            mCareDrugViewModel.remark = datas.getRemark();//备注
 
 
             lvCareDrugName.setRightText(mCareDrugViewModel.careDrugName);//保健品名称
             lvCareDrugFunction.setRightText(mCareDrugViewModel.careDrugFunction);//保健品功能
             lvUserTime.setContent(mCareDrugViewModel.useTime);//使用时间
             lvRecordTime.setContent(mCareDrugViewModel.recordTime);//记录时间
+            inputRemark.setText(mCareDrugViewModel.remark);//备注
 
 //            if (mCareDrugViewModel.useEffect.equals("1")) {
 //                lvUserResult.setContent(Utils.getString(R.string.text_use_effect_y));//有效果
@@ -398,6 +400,7 @@ public class CareDrugFragment extends BaseBookFragment {
             case R.id.llRoot:
                 break;
             case R.id.tvOk:
+                setProgressVisible(true);
                 mCareDrugViewModel.getTXGP_PigeonHealth_AddData();
                 break;
         }

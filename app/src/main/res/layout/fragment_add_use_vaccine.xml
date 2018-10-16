@@ -79,10 +79,10 @@
 
             <!--体温-->
             <com.cpigeon.book.widget.LineInputView
-                android:visibility="gone"
                 android:id="@+id/lvBodyTemp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:lineInputView_Hint="@string/text_pleas_choose"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="false"
@@ -100,12 +100,12 @@
 
 
             <!--<com.cpigeon.book.widget.InputBoxView-->
-                <!--android:id="@+id/inputVaccineReason"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:inputBoxView_tittle="@string/text_use_vaccine_reason"-->
-                <!--app:is_mandatory="true"-->
-                <!--app:text_hint="@string/text_edit_lenth_hint" />-->
+            <!--android:id="@+id/inputVaccineReason"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:inputBoxView_tittle="@string/text_use_vaccine_reason"-->
+            <!--app:is_mandatory="true"-->
+            <!--app:text_hint="@string/text_edit_lenth_hint" />-->
 
             <com.cpigeon.book.widget.InputBoxView
                 android:id="@+id/inputRemark"
@@ -115,17 +115,31 @@
                 app:text_hint="@string/text_edit_lenth_hint" />
 
 
-        </com.cpigeon.book.widget.LineInputListLayout>
+            <TextView
+                android:id="@+id/tvOk"
+                style="@style/bottom_style"
 
+                android:layout_marginTop="@dimen/spacing_left_reight"
+                android:text="@string/text_sure_add"
+                android:textSize="18dp" />
+
+
+        </com.cpigeon.book.widget.LineInputListLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
+
     <TextView
-        android:id="@+id/tvOk"
-        style="@style/bottom_style"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingBottom="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:text="@string/text_sure_add"
-        android:textSize="18dp" />
+        android:layout_marginTop="24dp"
+        android:text="@string/text_use_arm_prompt"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/small_text_size_2" />
+
 
 </RelativeLayout>

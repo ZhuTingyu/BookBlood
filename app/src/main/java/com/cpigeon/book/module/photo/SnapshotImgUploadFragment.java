@@ -1,24 +1,23 @@
 package com.cpigeon.book.module.photo;
 
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.RxUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.util.BitmapUtils;
+
+import java.io.File;
 
 import butterknife.OnClick;
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -43,6 +42,8 @@ public class SnapshotImgUploadFragment extends BaseImgUploadFragment {
 
         mSelectTypeViewModel.mSelectType_ImgType.observe(this, datas -> {
             try {
+                setProgressVisible(false);
+
                 mImgUploadViewModel.mSelectTypes_ImgType = datas;
                 String type = mImgUploadViewModel.mImgTypeEntity.getImgTypeSpecified();
                 if (StringUtil.isStringValid(type)) {
@@ -110,7 +111,22 @@ public class SnapshotImgUploadFragment extends BaseImgUploadFragment {
                     return;
                 }
 
-                mImgUploadViewModel.getTXGP_PigeonPhoto_AddData();
+                setProgressVisible(true);
+                //设置图片水印
+                Bitmap mBitmap = BitmapFactory.decodeFile(mImgUploadViewModel.mImgTypeEntity.getImgPath());
+                String savePath = getBaseActivity().getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() + File.separator + System.currentTimeMillis() + ".jpeg";
+
+                ImageView mImageView = new ImageView(getBaseActivity());
+                mImageView.setImageResource(R.mipmap.watermark);
+
+                Bitmap wBitmap = BitmapUtils.createBitmapCenter(mBitmap, BitmapUtils.convertViewToBitmap(mImageView));
+                BitmapUtils.saveJPGE_After(getBaseActivity(), wBitmap, savePath, 100);
+
+                mImgUploadViewModel.mImgTypeEntity.setImgPath(savePath);
+
+                RxUtils.delayed(1000, aLong -> {
+                    mImgUploadViewModel.getTXGP_PigeonPhoto_AddData();
+                });
 
                 break;
         }

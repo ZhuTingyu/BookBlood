@@ -170,5 +170,14 @@ public class ScreenTool {
         return (int) (spValue * fontScale + 0.5f);
     }
 
+    /**
+     * 将dp值转换为sp值，保证文字大小不变
+     *
+     * @param spValue
+     * @return
+     */
+    public static int dp2sp(float spValue) {
+        return px2sp(dip2px(spValue));
+    }
 
 }

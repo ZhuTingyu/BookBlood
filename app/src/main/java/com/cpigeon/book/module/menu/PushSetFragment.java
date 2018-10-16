@@ -131,6 +131,7 @@ public class PushSetFragment extends BaseBookFragment {
 
 
     int startHour, startMinute, endHour, endMinute;
+    String startHourStr, startMinuteStr, endHourStr, endMinuteStr;
 
     private void showDialog() {
         //时间选择器
@@ -142,7 +143,7 @@ public class PushSetFragment extends BaseBookFragment {
                 PushSetFragment.this.endHour = endHour;
                 PushSetFragment.this.endMinute = endMin;
                 refreshPushSilence(false);
-        }
+            }
         });
 
         timePickerDialog.setStartHour(startHour);
@@ -156,8 +157,34 @@ public class PushSetFragment extends BaseBookFragment {
     private void refreshPushSilence(boolean isShowDialog) {
 
         Log.d("xiaohll", "refreshPushSilence: 1");
-        tv_time_start.setText(String.valueOf(startHour + ":" + startMinute));
-        tv_time_end.setText(String.valueOf(endHour + ":" + endMinute));
+
+        if (String.valueOf(startHour).length() == 1) {
+            startHourStr = "0" + startHour;
+        } else {
+            startHourStr = "" + startHour;
+        }
+
+        if (String.valueOf(startMinute).length() == 1) {
+            startMinuteStr = "0" + startMinute;
+        } else {
+            startMinuteStr = "" + startMinute;
+        }
+
+        if (String.valueOf(endHour).length() == 1) {
+            endHourStr = "0" + endHour;
+        } else {
+            endHourStr = "" + endHour;
+        }
+
+        if (String.valueOf(endMinute).length() == 1) {
+            endMinuteStr = "0" + endMinute;
+        } else {
+            endMinuteStr = "" + endMinute;
+        }
+
+
+        tv_time_start.setText(String.valueOf(startHourStr + ":" + startMinuteStr));
+        tv_time_end.setText(String.valueOf(endHourStr + ":" + endMinuteStr));
 
         if (startHour == 0 && startMinute == 0 && endHour == 0 && endMinute == 0) {
             sb_dont_disturb.setChecked(false);
