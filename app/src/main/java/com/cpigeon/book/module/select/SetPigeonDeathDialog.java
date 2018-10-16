@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
+import com.base.util.RxUtils;
 import com.base.util.picker.PickerUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.FootEntity;
@@ -16,6 +17,7 @@ import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.select.viewmodel.SetPigeonDeathViewModel;
+import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
 
 import java.util.ArrayList;
@@ -57,6 +59,9 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         }
 
         mLvDeathReason = dialog.findViewById(R.id.lvDeathReason);
+        RxUtils.delayed(100, aLong -> {
+            mLvDeathReason.setIsLookState(true);
+        });
         mTvCancel = dialog.findViewById(R.id.tvCancel);
         mTvOk = dialog.findViewById(R.id.tvOk);
 
@@ -67,6 +72,7 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
                         public void onOptionPicked(int index, String item) {
                             mViewModel.deathId = mViewModel.mDeathReason.get(index).getTypeID();
                             mLvDeathReason.setRightText(mViewModel.mDeathReason.get(index).getTypeName());
+                            mViewModel.isCanCommit();
                         }
                     });
         });
@@ -88,9 +94,15 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
                     .finishForResult(getBaseActivity());
         });
 
+        mViewModel.isCanCommit.observe(this, aBoolean -> {
+            TextViewUtil.setEnabled(mTvOk, aBoolean);
+        });
+
         mSelectTypeViewModel.mDeathReason.observe(this, selectTypeEntities -> {
             mViewModel.mDeathReason = selectTypeEntities;
         });
+
+        mViewModel.isCanCommit();
 
     }
 
