@@ -79,6 +79,6 @@ public class FootRingStatEntity {
     }
 
     public List<Integer> getData() {
-        return Lists.newArrayList(tebiCount, qitaCount, tongyiCount, siCount, trueCount, falseCount);
+        return Lists.newArrayList(tebiCount, tongyiCount, qitaCount, siCount, trueCount, falseCount);
     }
 }

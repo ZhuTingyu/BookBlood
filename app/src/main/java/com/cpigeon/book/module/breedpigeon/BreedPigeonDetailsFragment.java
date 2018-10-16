@@ -27,7 +27,7 @@ import com.cpigeon.book.module.basepigeon.SelectBloodFragment;
 import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.feedpigeon.GrowthReportFragment;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
-import com.cpigeon.book.module.makebloodbook.PreviewsBookFragment;
+import com.cpigeon.book.module.makebloodbook.PreviewsBookActivity;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.score.ScoreFragment;
@@ -411,7 +411,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
             case R.id.tv_make_book:
                 //血统书制作
-                PreviewsBookFragment.start(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity);
+                PreviewsBookActivity.start(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity);
                 break;
 
             case R.id.tv_lineage_analysis:

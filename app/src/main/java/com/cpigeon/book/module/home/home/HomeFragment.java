@@ -20,6 +20,9 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.event.FootUpdateEvent;
+import com.cpigeon.book.event.PigeonAddEvent;
+import com.cpigeon.book.event.PigeonUpdateEvent;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.breeding.BreedingFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonListFragment;
@@ -36,6 +39,9 @@ import com.cpigeon.book.module.pigeonleague.PigeonToLeagueFootListFragment;
 import com.cpigeon.book.module.play.PlayFootListFragment;
 import com.cpigeon.book.module.trainpigeon.TrainPigeonListFragment;
 import com.cpigeon.book.widget.SimpleTitleView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
@@ -176,7 +182,6 @@ public class HomeFragment extends BaseBookFragment {
         mViewModel.getHomeAd();
         mPigeonHouseViewModel.getPigeonHouse();
         mViewModel.getHomeTop();
-
     }
 
     @Override
@@ -201,4 +206,18 @@ public class HomeFragment extends BaseBookFragment {
             mAdapter.setNewData(homeTopEntities);
         });
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(FootUpdateEvent event){
+        mViewModel.getHomeTop();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(PigeonAddEvent event){
+        mViewModel.getHomeTop();
+    }
+    public void OnEvent(PigeonUpdateEvent event){
+        mViewModel.getHomeTop();
+    }
+
+
 }

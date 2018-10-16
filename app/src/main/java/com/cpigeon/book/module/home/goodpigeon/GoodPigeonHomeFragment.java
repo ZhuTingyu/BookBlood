@@ -20,9 +20,13 @@ import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
+import com.cpigeon.book.event.GoodPigeonEvent;
 import com.cpigeon.book.module.home.goodpigeon.viewmodel.GoodPigeonHomeViewModel;
 import com.cpigeon.book.widget.FragmentTabView;
 import com.cpigeon.book.widget.stats.StatView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 

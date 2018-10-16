@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:statView_data_color="@color/color_scale_yellow_data"
+                app:statView_other_color="@color/color_scale_yellow_other"
                 app:statView_stat_w="64dp"
                 app:statView_unit="@string/text_pigeon_unit"
                 app:statView_title="@string/text_all"/>

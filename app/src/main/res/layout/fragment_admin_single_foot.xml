@@ -83,6 +83,7 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="false"
                 android:visibility="gone"
+                app:lineInputView_Hint="@string/text_father_ring_number"
                 app:lineInputView_LeftString="父足环" />
 
             <com.cpigeon.book.widget.LineInputView
@@ -92,6 +93,7 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsNotNull="false"
                 android:visibility="gone"
+                app:lineInputView_Hint="@string/text_mother_ring_number"
                 app:lineInputView_LeftString="母足环" />
 
             <com.cpigeon.book.widget.InputBoxView

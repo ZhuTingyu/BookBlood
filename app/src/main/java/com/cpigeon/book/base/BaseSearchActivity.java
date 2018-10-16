@@ -16,6 +16,7 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
+import com.base.util.utility.KeyboardUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
@@ -120,6 +121,8 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
                 mRlHistory.setVisibility(View.GONE);
             }
         });
+
+        KeyboardUtils.showSoftInput(mSearchTextView.getEdSearch());
 
     }
 

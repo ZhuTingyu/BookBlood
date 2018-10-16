@@ -92,6 +92,10 @@ public class SearchTextView extends RelativeLayout {
         mEdSearch.setHint(resId);
     }
 
+    public EditText getEdSearch() {
+        return mEdSearch;
+    }
+
     public interface OnSearchTextClickListener{
         void search(String key);
         void cancel();

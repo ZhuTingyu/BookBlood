@@ -3,6 +3,9 @@ package com.cpigeon.book.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.base.util.Utils;
+import com.cpigeon.book.R;
+
 /**
  * Created by Administrator on 2018/8/17.
  */
@@ -46,7 +49,37 @@ public class FootEntity implements Parcelable {
     private String EndFootRingNum;
     private String EndFootRingID;
     private String PigeonID;
+    private String MenFootRingNum;
+    private String WoFootRingNum;
+    private String  PigeonSexName;
 
+    public boolean isSetRing() {
+        return Utils.getString(R.string.text_status_set_foot_ring).equals(getStateName());
+    }
+
+    public String getPigeonSexName() {
+        return PigeonSexName;
+    }
+
+    public void setPigeonSexName(String pigeonSexName) {
+        PigeonSexName = pigeonSexName;
+    }
+
+    public String getMenFootRingNum() {
+        return MenFootRingNum;
+    }
+
+    public void setMenFootRingNum(String menFootRingNum) {
+        MenFootRingNum = menFootRingNum;
+    }
+
+    public String getWoFootRingNum() {
+        return WoFootRingNum;
+    }
+
+    public void setWoFootRingNum(String woFootRingNum) {
+        WoFootRingNum = woFootRingNum;
+    }
 
     public String getPigeonID() {
         return PigeonID;

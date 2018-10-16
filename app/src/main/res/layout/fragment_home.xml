@@ -222,10 +222,14 @@
 
             </RelativeLayout>
 
-
+            <TextView
+                android:textColor="@color/gray"
+                android:text="欢迎使用天下鸽谱"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
-
 </LinearLayout>

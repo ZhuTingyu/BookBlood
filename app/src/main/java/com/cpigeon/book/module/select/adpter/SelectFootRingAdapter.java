@@ -1,5 +1,7 @@
 package com.cpigeon.book.module.select.adpter;
 
+import android.view.View;
+
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
@@ -9,6 +11,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.select.SetPigeonDeathDialog;
+import com.cpigeon.book.util.PigeonPublicUtil;
 
 import java.util.List;
 
@@ -33,11 +36,12 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<FootEntity, BaseView
             helper.setText(R.id.tvPigeonType, Utils.getString(R.string.text_bracket
                     , StringUtil.isStringValid(item.getPigeonTypeName()) ? item.getPigeonTypeName()
                             : Utils.getString(R.string.text_young_pigeon)));
-            helper.setVisible(R.id.tvPigeonType, true);
+            helper.setViewVisible(R.id.tvPigeonType, View.VISIBLE);
         } else {
-            helper.setVisible(R.id.tvPigeonType, false);
+            helper.setViewVisible(R.id.tvPigeonType, View.GONE);
         }
 
+        PigeonPublicUtil.setPigeonSexImg(item.getPigeonSexName(), helper.getView(R.id.imgSex));
 
         helper.itemView.setOnClickListener(v -> {
 

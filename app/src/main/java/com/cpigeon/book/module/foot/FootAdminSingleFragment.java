@@ -25,10 +25,12 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
+import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminSingleViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.select.SelectFootRingFragment;
 import com.cpigeon.book.module.select.SelectPigeonFragment;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
@@ -174,7 +176,8 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
             mLvFatherFoot.setOnRightClickListener(lineInputView -> {
                 InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvFatherFoot.getContent(), mViewModel.isChina(), dialog -> {
-                    SelectPigeonFragment.start(getBaseActivity(), CODE_SELECT_FATHER);
+                    SelectFootRingFragment.start(getBaseActivity(), false
+                            , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
                 }, foot -> {
                     mLvFatherFoot.setRightText(foot);
                 });
@@ -182,7 +185,8 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
             mLvMotherFoot.setOnRightClickListener(lineInputView -> {
                 InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvMotherFoot.getContent(), mViewModel.isChina(), dialog -> {
-                    SelectPigeonFragment.start(getBaseActivity(), CODE_SELECT_MATHER);
+                    SelectFootRingFragment.start(getBaseActivity(), false
+                            , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
                 }, foot -> {
                     mLvMotherFoot.setRightText(foot);
                 });
@@ -225,6 +229,12 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 lvStatus.setRightText(footEntity.getStateName());
                 mViewModel.footType = String.valueOf(footEntity.getTypeID());
                 lvMoney.setRightText(Utils.getString(R.string.text_yuan, footEntity.getFootRingMoney()));//金额
+                mLvFatherFoot.setRightText(footEntity.getMenFootRingNum());
+                mLvMotherFoot.setRightText(footEntity.getWoFootRingNum());
+                if (!footEntity.isSetRing()){
+                    mLvFatherFoot.setVisibility(View.GONE);
+                    mLvMotherFoot.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -299,12 +309,12 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     mViewModel.countryId = entity.getFootCodeID();
                     lvCity.setRightText(entity.getCode());
                 }
-            } else if (CODE_SELECT_FATHER == requestCode) {
-                PigeonEntity pigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
-                mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
-            } else if (CODE_SELECT_MATHER == requestCode) {
-                PigeonEntity pigeonEntity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
-                mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
+            } else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
+                FootEntity footEntity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                mLvFatherFoot.setRightText(footEntity.getFootRingNum());
+            } else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
+                FootEntity footEntity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                mLvMotherFoot.setRightText(footEntity.getFootRingNum());
             }
         }
 

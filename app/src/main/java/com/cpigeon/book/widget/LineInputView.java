@@ -277,6 +277,9 @@ public class LineInputView extends RelativeLayout {
         if (mIsCanEdit) {
             mImgRight.setOnClickListener(v -> {
                 mOnRightClickListener.click(this);
+                if(mOnClickAndHaveFocusListener != null){
+                    mOnClickAndHaveFocusListener.clickAndFocus();
+                }
             });
         } else {
             this.setOnClickListener(v -> {

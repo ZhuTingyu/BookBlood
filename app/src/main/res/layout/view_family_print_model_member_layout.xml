@@ -34,7 +34,7 @@
                     android:layout_centerHorizontal="true"
                     android:visibility="visible" />
 
-                <TextView
+                <com.cpigeon.book.widget.DivideTextView
                     android:id="@+id/tvFootNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

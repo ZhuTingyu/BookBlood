@@ -548,8 +548,8 @@
 
     <string-array name="array_breed_pigeon_type">
         <item>种鸽</item>
-        <item>雄</item>
-        <item>雌</item>
+        <item>雄鸽</item>
+        <item>雌鸽</item>
         <item>幼鸽</item>
         <item>成鸽</item>
         <item>老龄鸽</item>
@@ -570,6 +570,7 @@
     <string name="text_service_book">天下鸽谱开通</string>
     <string name="text_service_down_load_league">导入赛绩开通</string>
     <string name="text_service_print_blood_book">打印血统书开通</string>
+    <string name="text_blood_book_count">血统书  %1$s</string>
     <string name="text_service_share_pigeon">共享种鸽开通</string>
     <string name="text_no_open_service">您还没没有开通任务服务哦...</string>
     <string name="text_input_pay_password">请输入支付密码</string>

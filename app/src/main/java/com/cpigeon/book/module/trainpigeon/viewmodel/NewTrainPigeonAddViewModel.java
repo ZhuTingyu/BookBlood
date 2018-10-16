@@ -38,7 +38,7 @@ public class NewTrainPigeonAddViewModel extends BaseViewModel {
     }
 
     public void setSelectAll(List<PigeonEntity> notSelectAll) {
-        mSelectPigeon = notSelectAll;
+        mSelectPigeon.addAll(notSelectAll);
         mDataSelectPigeon.setValue(mSelectPigeon);
     }
 

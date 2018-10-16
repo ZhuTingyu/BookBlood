@@ -19,6 +19,7 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.home.sharehall.adpter.ShareHallHomeAdapter;
@@ -26,6 +27,9 @@ import com.cpigeon.book.module.home.sharehall.viewmodel.ShareHallViewModel;
 import com.cpigeon.book.module.menu.service.OpenServiceFragment;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -144,5 +148,12 @@ public class ShareHallFragment extends BaseBookFragment {
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, sharePigeonEntities);
             setProgressVisible(false);
         });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(ShareHallEvent event) {
+        mAdapter.cleanList();
+        mViewModel.pi = 1;
+        mViewModel.getSharePigeons();
     }
 }

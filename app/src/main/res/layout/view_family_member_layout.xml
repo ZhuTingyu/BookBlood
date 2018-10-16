@@ -40,7 +40,7 @@
                     android:visibility="visible"
                     tools:src="@drawable/ic_launcher" />
 
-                <TextView
+                <com.cpigeon.book.widget.DivideTextView
                     android:id="@+id/tvFootNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

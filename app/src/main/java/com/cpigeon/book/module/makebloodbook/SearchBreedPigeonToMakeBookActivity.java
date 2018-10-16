@@ -18,7 +18,7 @@ public class SearchBreedPigeonToMakeBookActivity extends BaseSearchPigeonActivit
         mAdapter = new BreedPigeonListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
-                PreviewsBookFragment.start(getBaseActivity(), mAdapter.getItem(position));
+                PreviewsBookActivity.start(getBaseActivity(), mAdapter.getItem(position));
             } catch (Exception e) {
                 e.printStackTrace();
             }

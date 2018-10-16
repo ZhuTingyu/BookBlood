@@ -1,10 +1,15 @@
 package com.cpigeon.book.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/4.
@@ -12,6 +17,7 @@ import java.io.Serializable;
 
 public class PigeonEntity implements Serializable {
 
+    public static final String ID_NONE_SEX = "12";//幼鸽未知
     public static final String ID_FEMALE = "13";//雌
     public static final String ID_MALE = "14";//雄
     public static final String ID_BREED_PIGEON = "9";//种鸽
@@ -101,6 +107,21 @@ public class PigeonEntity implements Serializable {
     private String UserService;//0 未开通 1 已开通
     private String PigeonHomePhone;
 
+    private List<PigeonPlayEntity> MatchInfoList;
+    private List<PigeonPlayEntity> MatchList;
+
+    public List<PigeonPlayEntity> getMatchList() {
+        return MatchList;
+    }
+
+    public void setMatchInfoList(List<PigeonPlayEntity> matchInfoList) {
+        MatchInfoList = matchInfoList;
+    }
+
+    public List<PigeonPlayEntity> getMatchInfoList() {
+        return MatchInfoList;
+    }
+
     public String getUserName() {
         return UserName;
     }
@@ -138,7 +159,6 @@ public class PigeonEntity implements Serializable {
     public PigeonEntity() {
     }
 
-    ;
 
     public boolean isEmpty() {
         if (StringUtil.isStringValid(PigeonID)) {
@@ -154,6 +174,17 @@ public class PigeonEntity implements Serializable {
 
     public boolean isMale() {
         return Utils.getString(R.string.text_male_a).equals(PigeonSexName);
+    }
+
+    public List<PigeonPlayEntity> getMatchData() {
+        List<PigeonPlayEntity> data = Lists.newArrayList();
+        data.addAll(getMatchList());
+        if (data.size() <= 3) {
+            return data;
+        }else {
+            data.addAll(getMatchInfoList());
+            return data.subList(0, 2);
+        }
     }
 
     private PigeonEntity(Builder builder) {
@@ -773,4 +804,64 @@ public class PigeonEntity implements Serializable {
             return new PigeonEntity(this);
         }
     }
+
+
+    protected PigeonEntity(Parcel in) {
+        this.CoverPhotoUrl = in.readString();
+        this.CoverPhotoID = in.readString();
+        this.FootRingID = in.readString();
+        this.StateID = in.readString();
+        this.StateName = in.readString();
+        this.PigeonPlumeName = in.readString();
+        this.PigeonSexName = in.readString();
+        this.PigeonID = in.readString();
+        this.FootRingNum = in.readString();
+        this.FootRingIDToNum = in.readString();
+        this.TypeID = in.readString();
+        this.FootRingTimeTo = in.readString();
+        this.SourceID = in.readString();
+        this.PigeonName = in.readString();
+        this.PigeonBreedID = in.readString();
+        this.TypeName = in.readString();
+        this.OutShellTime = in.readString();
+        this.PigeonScore = in.readString();
+        this.FootRingTime = in.readString();
+        this.FootRingIDTo = in.readString();
+        this.PigeonBloodName = in.readString();
+        this.SourceName = in.readString();
+        this.PigeonEyeName = in.readString();
+        this.PigeonBloodID = in.readString();
+        this.PigeonPlumeID = in.readString();
+        this.Remark = in.readString();
+        this.PigeonEyeID = in.readString();
+        this.PigeonSexID = in.readString();
+        this.MenFootRingNum = in.readString();
+        this.WoFootRingNum = in.readString();
+        this.FootCode = in.readString();
+        this.FootCodeID = in.readString();
+        this.CoverPhotoTypeID = in.readString();
+        this.CoverPhotoTypeName = in.readString();
+        this.MatchCount = in.readString();
+        this.ShareTime = in.readString();
+        this.Province = in.readString();
+        this.City = in.readString();
+        this.UserID = in.readString();
+        this.UserName = in.readString();
+        this.UserService = in.readString();
+        this.PigeonHomePhone = in.readString();
+        this.MatchInfoList = in.createTypedArrayList(PigeonPlayEntity.CREATOR);
+        this.isSelect = in.readByte() != 0;
+    }
+
+    public static final Parcelable.Creator<PigeonEntity> CREATOR = new Parcelable.Creator<PigeonEntity>() {
+        @Override
+        public PigeonEntity createFromParcel(Parcel source) {
+            return new PigeonEntity(source);
+        }
+
+        @Override
+        public PigeonEntity[] newArray(int size) {
+            return new PigeonEntity[size];
+        }
+    };
 }

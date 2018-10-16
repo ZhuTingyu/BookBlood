@@ -108,7 +108,6 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
     private void dataRefresh() {
         mBreedPigeonListModel.getPigeonCount();
-
         mAdapter.cleanList();
         mBreedPigeonListModel.pi = 1;
         mBreedPigeonListModel.getPigeonList();

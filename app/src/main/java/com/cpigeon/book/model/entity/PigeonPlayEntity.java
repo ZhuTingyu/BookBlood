@@ -1,10 +1,13 @@
 package com.cpigeon.book.model.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2018/9/4.
  */
 
-public class PigeonPlayEntity {
+public class PigeonPlayEntity implements Parcelable {
 
 
     /**
@@ -33,6 +36,7 @@ public class PigeonPlayEntity {
     private String MatchISOCID;
     private String MatchAdds;
     private String FootRingNum;
+    private String MatchInfo;
 
     private PigeonPlayEntity(Builder builder) {
         setMatchTime(builder.MatchTime);
@@ -50,6 +54,10 @@ public class PigeonPlayEntity {
         setMatchISOCID(builder.MatchISOCID);
         setMatchAdds(builder.MatchAdds);
         setFootRingNum(builder.FootRingNum);
+    }
+
+    public String getMatchInfo() {
+        return MatchInfo;
     }
 
     public String getMatchTime() {
@@ -272,4 +280,58 @@ public class PigeonPlayEntity {
             return new PigeonPlayEntity(this);
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.MatchTime);
+        dest.writeString(this.MatchName);
+        dest.writeString(this.MatchNumber);
+        dest.writeString(this.FootRingID);
+        dest.writeString(this.MatchCount);
+        dest.writeString(this.PigeonID);
+        dest.writeString(this.MatchInterval);
+        dest.writeString(this.PigeonMatchID);
+        dest.writeString(this.MatchInfoID);
+        dest.writeString(this.BitUpdate);
+        dest.writeString(this.ConnectUrl);
+        dest.writeString(this.MatchISOCName);
+        dest.writeString(this.MatchISOCID);
+        dest.writeString(this.MatchAdds);
+        dest.writeString(this.FootRingNum);
+    }
+
+    protected PigeonPlayEntity(Parcel in) {
+        this.MatchTime = in.readString();
+        this.MatchName = in.readString();
+        this.MatchNumber = in.readString();
+        this.FootRingID = in.readString();
+        this.MatchCount = in.readString();
+        this.PigeonID = in.readString();
+        this.MatchInterval = in.readString();
+        this.PigeonMatchID = in.readString();
+        this.MatchInfoID = in.readString();
+        this.BitUpdate = in.readString();
+        this.ConnectUrl = in.readString();
+        this.MatchISOCName = in.readString();
+        this.MatchISOCID = in.readString();
+        this.MatchAdds = in.readString();
+        this.FootRingNum = in.readString();
+    }
+
+    public static final Parcelable.Creator<PigeonPlayEntity> CREATOR = new Parcelable.Creator<PigeonPlayEntity>() {
+        @Override
+        public PigeonPlayEntity createFromParcel(Parcel source) {
+            return new PigeonPlayEntity(source);
+        }
+
+        @Override
+        public PigeonPlayEntity[] newArray(int size) {
+            return new PigeonPlayEntity[size];
+        }
+    };
 }

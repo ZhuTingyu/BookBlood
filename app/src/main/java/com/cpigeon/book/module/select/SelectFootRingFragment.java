@@ -34,6 +34,8 @@ import java.util.List;
 public class SelectFootRingFragment extends BaseBookFragment {
 
     public static final int CODE_SELECT_FOOT = 0x1234;
+    public static final int CODE_SELECT_MATHER_FOOT = 0x2345;
+    public static final int CODE_SELECT_FATHER_FOOT = 0x3456;
     XRecyclerView mRecyclerView;
     SelectFootRingAdapter mAdapter;
     SelectFootRingViewModel mViewModel;
@@ -50,12 +52,12 @@ public class SelectFootRingFragment extends BaseBookFragment {
         SearchFragmentParentActivity.start(activity, SelectFootRingFragment.class, CODE_SELECT_FOOT, false, bundle);
     }
 
-    public static void start(Activity activity, boolean isCanSetDeath, String... sexId) {
+    public static void start(Activity activity, boolean isCanSetDeath, int requestCode, String... sexId) {
         List<String> sexIds = Lists.newArrayList(sexId);
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_DATA, Lists.appendStringByList(sexIds));
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isCanSetDeath);
-        SearchFragmentParentActivity.start(activity, SelectFootRingFragment.class, CODE_SELECT_FOOT, false, bundle);
+        SearchFragmentParentActivity.start(activity, SelectFootRingFragment.class, requestCode, false, bundle);
     }
 
 

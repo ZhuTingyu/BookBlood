@@ -37,7 +37,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
 
             try {
                 PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
-                PreviewsBookFragment.start(getBaseActivity(), mPigeonEntity);
+                PreviewsBookActivity.start(getBaseActivity(), mPigeonEntity);
             } catch (Exception e) {
                 e.printStackTrace();
             }

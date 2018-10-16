@@ -1,150 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/view_previews_book"/>
-
-
-
-    <LinearLayout
-        android:id="@+id/llImage"
-        android:visibility="visible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/normal_safe_distance"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imgHead"
-            android:layout_width="63dp"
-            android:layout_height="63dp"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:id="@+id/tvFootNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="24dp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/medium_text_size"
-            tools:text="1233123123" />
-    </LinearLayout>
-
-    <com.cpigeon.book.widget.family.FamilyTreeView
-        android:id="@+id/familyTreeView"
+<LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/rlText"
-        android:layout_marginTop="54dp"
-        app:TreeView_isShowInfoModel="false"
-        app:TreeView_isHaveCurrent="true"
-        app:TreeView_isHorizontal="true"
-        app:TreeView_moveType="h" />
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/rlText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/rl1"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="@dimen/normal_safe_distance">
-
-        <LinearLayout
-            android:id="@+id/llTextV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_pigeon_master_sign"
-                android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv1"
-                android:text="@string/text_connection_phone_m"
-                android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size" />
-
-        </LinearLayout>
+        <include layout="@layout/layout_toolbar"/>
 
         <RelativeLayout
-            android:id="@+id/llTextH"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-            <TextView
-                android:id="@+id/tv1"
+            <include layout="@layout/view_previews_book"/>
+            <LinearLayout
+                android:id="@+id/llImage"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_pigeon_master_sign"
-                android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size" />
+                android:layout_marginLeft="@dimen/normal_safe_distance"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/imgHead"
+                    android:layout_width="63dp"
+                    android:layout_height="63dp"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/tvFootNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="24dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/medium_text_size"
+                    tools:text="1233123123" />
+            </LinearLayout>
+
+            <com.cpigeon.book.widget.family.FamilyTreeView
+                android:id="@+id/familyTreeView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/rlText"
+                android:layout_marginTop="54dp"
+                app:TreeView_isShowInfoModel="false"
+                app:TreeView_isHaveCurrent="true"
+                app:TreeView_isHorizontal="true"
+                app:TreeView_moveType="h" />
+
+            <RelativeLayout
+                android:id="@+id/rlText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/text_connection_phone_m"
-                android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size" />
+                android:layout_above="@id/rl1"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/normal_safe_distance">
+
+                <LinearLayout
+                    android:id="@+id/llTextV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_pigeon_master_sign"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv1"
+                        android:text="@string/text_connection_phone_m"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/llTextH"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_pigeon_master_sign"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size" />
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/text_connection_phone_m"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl1"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/normal_safe_distance"
+                android:layout_marginLeft="@dimen/normal_safe_distance"
+                android:layout_marginRight="@dimen/normal_safe_distance"
+                android:background="@drawable/selector_btn_rect">
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginStart="23dp"
+                    android:button="@drawable/selector_preview_book_check"
+                    android:gravity="center"
+                    android:text="显示照片"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/small_text_size" />
+
+                <TextView
+                    android:id="@+id/tvOk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="50dp"
+                    android:text="生成血统书"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/big_text_size" />
+
+            </RelativeLayout>
+
+
+
 
         </RelativeLayout>
-
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/rl1"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/normal_safe_distance"
-        android:layout_marginLeft="@dimen/normal_safe_distance"
-        android:layout_marginRight="@dimen/normal_safe_distance"
-        android:background="@drawable/selector_btn_rect">
-
-        <CheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="23dp"
-            android:layout_marginStart="23dp"
-            android:button="@drawable/selector_preview_book_check"
-            android:gravity="center"
-            android:text="显示照片"
-            android:textColor="@color/white"
-            android:textSize="@dimen/small_text_size" />
-
-        <TextView
-            android:id="@+id/tvOk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="50dp"
-            android:text="生成血统书"
-            android:textColor="@color/white"
-            android:textSize="@dimen/big_text_size" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
     <com.base.widget.photoview.PhotoView
         android:id="@+id/img"
@@ -152,6 +168,4 @@
         android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-
 </RelativeLayout>

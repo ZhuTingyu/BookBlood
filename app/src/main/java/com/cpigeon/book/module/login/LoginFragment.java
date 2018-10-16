@@ -113,6 +113,7 @@ public class LoginFragment extends BaseBookFragment {
             //MainActivity.start(getActivity());
 
             if (UserModel.getInstance().getUserData() == null) {
+                setProgressVisible(true);
                 mViewModel.login();
                 return;
             }

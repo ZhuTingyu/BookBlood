@@ -52,7 +52,9 @@ public class StateListAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> 
 
     @ColorRes
     public int getDataColor(int position){
-        if(position % 2 == 0){
+        if(position % 3 == 0){
+            return R.color.color_scale_yellow_data;
+        }else if(position % 3 == 1){
             return R.color.color_scale_blue_data;
         }else {
             return R.color.color_scale_red_data;
@@ -61,7 +63,9 @@ public class StateListAdapter extends BaseQuickAdapter<Integer, BaseViewHolder> 
 
     @ColorRes
     public int getOtherColor(int position){
-        if(position % 2 == 0){
+        if(position % 3 == 0){
+            return R.color.color_scale_yellow_other;
+        }else if(position % 3 == 1){
             return R.color.color_scale_blue_other;
         }else {
             return R.color.color_scale_red_other;

@@ -17,28 +17,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
-import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
+import com.base.util.Utils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.utility.ImageUtils;
 import com.base.util.utility.StringUtil;
 import com.base.widget.photoview.PhotoView;
 import com.cpigeon.book.R;
+import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
-import com.cpigeon.book.widget.BookRootLayout;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 /**
  * Created by Zhu TingYu on 2018/9/10.
  */
 
-public class PreviewsBookFragment extends BaseBookFragment {
+public class PreviewsBookActivity extends BaseBookActivity {
 
     private static final int CODE_CHOOSE_TEMPLATE = 0x123;
     public static final int CODE_ADD_PIGEON = 0x234;
@@ -66,29 +65,24 @@ public class PreviewsBookFragment extends BaseBookFragment {
 
 
     public static void start(Activity activity, PigeonEntity entity) {
-        IntentBuilder.Builder()
+        IntentBuilder.Builder(activity, PreviewsBookActivity.class)
                 .putExtra(IntentBuilder.KEY_DATA, entity.getFootRingID())
                 .putExtra(IntentBuilder.KEY_DATA_2, entity.getPigeonID())
                 .putExtra(IntentBuilder.KEY_TITLE, entity.getFootRingNum())
-                .startParentActivity(activity, PreviewsBookFragment.class);
+                .startActivity();
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    protected int getContentView() {
+        return R.layout.fragment_preview_book;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mViewModel = new BookViewModel(getBaseActivity());
         initViewModel(mViewModel);
-    }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_preview_book, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         String footNumber = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TITLE);
         setTitle(footNumber);
         setToolbarRight(R.string.text_choose_template, item -> {
@@ -129,7 +123,7 @@ public class PreviewsBookFragment extends BaseBookFragment {
                 mTvPrintNumber.setText(UserModel.getInstance().getUserData().pigeonHouseEntity.getXingming());
                 mImgPrintHead.setVisibility(View.VISIBLE);
             } else {
-                mTvPrintNumber.setText(footNumber);
+                mTvPrintNumber.setText(Utils.getString(R.string.text_blood_book_count, footNumber));
                 mImgPrintHead.setVisibility(View.GONE);
             }
         });
@@ -162,6 +156,7 @@ public class PreviewsBookFragment extends BaseBookFragment {
             mPrintFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
             mPrintFamilyTreeView.setShowLine(false);
             mPrintFamilyTreeView.initView();
+            mViewModel.isNeedMatch = true;
             mViewModel.getBloodBook();
 
             initObserve();
@@ -198,25 +193,34 @@ public class PreviewsBookFragment extends BaseBookFragment {
 
             @Override
             public void showInfo(int x, int y, PigeonEntity breedPigeonEntity) {
+                String sex = StringUtil.emptyString();
+                if (x != mFamilyTreeView.getStartGeneration()) {
+                    sex = FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE;
+                }
+
                 InputPigeonFragment.start(getBaseActivity()
                         , breedPigeonEntity != null ? breedPigeonEntity.getPigeonID() : StringUtil.emptyString()
                         , StringUtil.emptyString()
                         , StringUtil.emptyString()
-                        , StringUtil.emptyString()
+                        , sex
+                        , PigeonEntity.ID_BREED_PIGEON
                         , CODE_ADD_PIGEON);
             }
         });
 
+        initObserve();
     }
 
     public void getBookView() {
         try {
             RelativeLayout view = findViewById(R.id.rlImage);
+            setProgressVisible(true);
             composite.add(RxUtils.delayed(100, aLong -> {
                 Bitmap bitmap = ImageUtils.view2Bitmap(view);
                 ImageUtils.saveImageToGallery(getBaseActivity(), bitmap);
                 mImageView.setVisibility(View.VISIBLE);
                 mImageView.setImageBitmap(bitmap);
+                setProgressVisible(false);
             }));
         } catch (Exception e) {
             e.printStackTrace();

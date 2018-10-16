@@ -112,8 +112,8 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
                 .setBadgeTextSize(10, true)
                 .setBadgeText("0");
         mAdapter = new NewTrainAddPigeonAdapter();
-        mAdapter.setOnAddPigeonListener((view1, position) -> {
-            startAnim(view1, position);
+        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            startAnim(mAdapter.getViewByPosition(mRecyclerView.getRecyclerView(),position, R.id.imgAdd), position);
             mAdapter.setSelect(position, true);
             mViewModel.setSelect(position);
         });
@@ -133,10 +133,12 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
         });
 
         mTvAllChoose.setOnClickListener(v -> {
-            if(!Lists.isEmpty(mAdapter.getNotSelectAll())){
-                mViewModel.setSelectAll(mAdapter.getNotSelectAll());
-                mAdapter.notifyDataSetChanged();
+            List<PigeonEntity> notSelect =  mAdapter.getNotSelectAll();
+            if(!Lists.isEmpty(notSelect)){
+                mViewModel.setSelectAll(notSelect);
             }
+
+            mAdapter.notifyDataSetChanged();
         });
 
         mTvAddAtOnce.setOnClickListener(v -> {
@@ -228,7 +230,9 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
             mSelectAdapter.setNewData(pigeonEntities);
             mBadgeView.setBadgeText(String.valueOf(mSelectAdapter.getData().size()));
             if (mSelectAdapter.getData().size() == 0) {
-                mPopupWindow.dismiss();
+                if(mPopupWindow != null){
+                    mPopupWindow.dismiss();
+                }
             }
         });
     }

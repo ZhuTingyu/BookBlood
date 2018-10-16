@@ -268,7 +268,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //血统
         mLvBlood.setOnRightClickListener(lineInputView -> {
-            BaseInputDialog.show(getFragmentManager(), R.string.text_blood,R.string.text_blood_bank , 0, content -> {
+            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
                 mViewModel.lineage = content;
                 mLvBlood.setRightText(content);
             }, () -> {
@@ -339,7 +339,8 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         mLvFatherFoot.setOnRightClickListener(lineInputView -> {
             InputSingleFootDialog.show(getFragmentManager(), mLvFatherFoot.getContent(), mViewModel.isChina(), dialog -> {
-                SelectPigeonFragment.start(getBaseActivity(), CODE_SELECT_FATHER);
+                SelectFootRingFragment.start(getBaseActivity(), false
+                        , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 mLvFatherFoot.setRightText(foot);
                 mViewModel.footFather = foot;
@@ -348,7 +349,8 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         mLvMotherFoot.setOnRightClickListener(lineInputView -> {
             InputSingleFootDialog.show(getFragmentManager(), mLvMotherFoot.getContent(), mViewModel.isChina(), dialog -> {
-                SelectPigeonFragment.start(getBaseActivity(), CODE_SELECT_MATHER);
+                SelectFootRingFragment.start(getBaseActivity(), false
+                        , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 mLvMotherFoot.setRightText(foot);
                 mViewModel.footMother = foot;
@@ -446,7 +448,6 @@ public class InputPigeonFragment extends BaseBookFragment {
             mLvMotherFoot.setRightText(breedPigeonEntity.getWoFootRingNum());
             mLvPigeonName.setRightText(breedPigeonEntity.getPigeonName());
             mLvSex.setRightText(breedPigeonEntity.getPigeonSexName());
-            mLvSex.setRightImageVisible(false);
             mLvFeatherColor.setRightText(breedPigeonEntity.getPigeonPlumeName());
             mLvEyeSand.setRightText(breedPigeonEntity.getPigeonEyeName());
             mLvBirthTime.setRightText(breedPigeonEntity.getFootRingTime());
@@ -629,39 +630,15 @@ public class InputPigeonFragment extends BaseBookFragment {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvRing.setRightText(entity.getFootRingNum());
             mViewModel.foot = entity.getFootRingNum();
+        }else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
+            FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            mLvFatherFoot.setRightText(entity.getFootRingNum());
+            mViewModel.footFather = entity.getFootRingNum();
+        }else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
+            FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            mLvMotherFoot.setRightText(entity.getFootRingNum());
+            mViewModel.footMother = entity.getFootRingNum();
         }
         mViewModel.isCanCommit();
-
-
-//        switch (requestCode) {
-//
-//            case CODE_ADD_PLAY:
-//                break;
-//
-//            case SelectCountyFragment.CODE_SELECT_COUNTY:
-//                try {
-//                    CountyEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-//                    mViewModel.countryId = entity.getSort();
-//                    mLvCountries.setRightText(entity.getCode());
-//                } catch (Exception e) {
-//                    CountyAreaEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-//                    mViewModel.countryId = entity.getFootCodeID();
-//                    mLvCountries.setRightText(entity.getCode());
-//                }
-//
-//                break;
-//
-//            case ImgUploadFragment.CODE_SELECT_COUNTY:
-//                ImgTypeEntity mImgTypeEntity = (ImgTypeEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
-//
-//                List<ImgTypeEntity> imgs = Lists.newArrayList();
-//                imgs.add(0, mImgTypeEntity);
-//                mAdapter.addImage(imgs);
-//
-//                mViewModel.phototypeid = mImgTypeEntity.getImgTypeId();
-//                mViewModel.images.addAll(Lists.newArrayList(mImgTypeEntity.getImgPath()));
-//
-//                break;
-//        }
     }
 }

@@ -13,7 +13,7 @@ import io.reactivex.Observable;
  */
 
 public class BloodBookModel {
-    public static Observable<ApiResponse<BloodBookEntity>> getBloodBook4(String puid,String foodId, String pigeonId) {
+    public static Observable<ApiResponse<BloodBookEntity>> getBloodBook4(String puid,String foodId, String pigeonId, boolean isNeedMatch) {
         return RequestData.<ApiResponse<BloodBookEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<BloodBookEntity>>() {
                 }.getType())
@@ -21,6 +21,7 @@ public class BloodBookModel {
                 .addBody("puid", puid)
                 .addBody("footid", foodId)
                 .addBody("pigeonid", pigeonId)
+                .addBody("bitmatch",isNeedMatch ? "1" : "0")//是否要查询赛绩（1：是，其他不是）
                 .request();
     }
 }

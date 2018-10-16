@@ -89,6 +89,7 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         mSelectTypeViewModel.getDeathReason();
 
         mViewModel.normalResult.observe(this, s -> {
+            getBaseActivity().setProgressVisible(false);
             IntentBuilder.Builder()
                     .putExtra(IntentBuilder.KEY_DATA, mViewModel.mFootEntity)
                     .finishForResult(getBaseActivity());

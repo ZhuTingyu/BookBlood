@@ -17,11 +17,14 @@ import android.widget.TextView;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
+import com.base.util.Utils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
+import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.widget.ShadowRelativeLayout;
 
 /**
@@ -178,6 +181,8 @@ public class FamilyPrintModelMemberView extends FamilyMember {
             mImgHead.setVisibility(GONE);
         } else if (generationPoint == 3) {
             mImgHead.setVisibility(GONE);
+            mTvBlood.setVisibility(GONE);
+            mTvColor.setVisibility(GONE);
         }
 
     }
@@ -189,7 +194,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
         MatchAdapter matchAdapter = new MatchAdapter();
         mList.setAdapter(matchAdapter);
-        matchAdapter.setNewData(Lists.newArrayList("", ""));
+        matchAdapter.setNewData(entity.getMatchData());
 
         mTvFootNumber.setText(entity.getFootRingNum());
         mTvBlood.setText(entity.getPigeonBloodName());
@@ -231,13 +236,31 @@ public class FamilyPrintModelMemberView extends FamilyMember {
 
 }
 
-class MatchAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
+class MatchAdapter extends BaseQuickAdapter<PigeonPlayEntity, BaseViewHolder> {
     public MatchAdapter() {
         super(R.layout.item_text_in_print_book, null);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, String item) {
+    protected void convert(BaseViewHolder helper, PigeonPlayEntity item) {
         TextView textView = (TextView) helper.itemView;
+
+        if(StringUtil.isStringValid(item.getMatchInfo())){
+            textView.setText(item.getMatchInfo());
+        }else {
+            String div = "  ";
+            StringBuilder sb =  new StringBuilder();
+            if(StringUtil.isStringValid(item.getMatchTime())){
+                long time = TimeUtil.parse(item.getMatchTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS);
+                sb.append(TimeUtil.format(time, TimeUtil.FORMAT_YYYYMMDD));
+                sb.append(div);
+            }
+
+            sb.append(item.getMatchName());
+            sb.append(div);
+            sb.append(item.getMatchNumber());
+            textView.setText(sb.toString());
+        }
+
     }
 }

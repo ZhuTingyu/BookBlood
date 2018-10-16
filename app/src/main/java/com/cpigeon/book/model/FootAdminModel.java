@@ -177,7 +177,7 @@ public class FootAdminModel {
                 .addBody("pi", String.valueOf(pi))
                 .addBody("ps", String.valueOf(20))
                 .addBody("footnum", footNumber)
-                .addBody("sexid", sexId)
+                .addBody("sexidstr", sexId)
                 .addBody("stateid", staterId)
                 .request();
     }
