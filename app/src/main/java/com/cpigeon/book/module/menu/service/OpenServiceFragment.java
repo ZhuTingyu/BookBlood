@@ -59,7 +59,7 @@ public class OpenServiceFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(R.string.text_open_service);
+        setTitle(R.string.str_my_server);
 
 //        setToolbarRight(R.string.text_open_report, item -> {
 //            OpenServiceReportFragment.start(getBaseActivity());

@@ -345,6 +345,15 @@ public class IntentBuilder {
 
     }
 
+    public void startParentActivity(Activity context,boolean isHaveToolbar ,Class clz,int requestCode) {
+        intent.setClass(context, FragmentParentActivity.class);
+        intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);
+        intent.putExtra(FragmentParentActivity.KEY_HAVE_TOOL_BAR, isHaveToolbar);
+        context.startActivityForResult(intent,requestCode);
+        context.overridePendingTransition(enter, exit);
+
+    }
+
     public void startParentActivity(Activity context, Class clz,int requestCode) {
         intent.setClass(context, FragmentParentActivity.class);
         intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);

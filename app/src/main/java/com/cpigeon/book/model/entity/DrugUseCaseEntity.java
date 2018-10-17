@@ -49,6 +49,15 @@ public class DrugUseCaseEntity {
     private String Direction;
     private int EffectStateID;
     private String EffectStateName;
+    private String DiseaseName;//疾病名称
+
+    public String getDiseaseName() {
+        return DiseaseName;
+    }
+
+    public void setDiseaseName(String diseaseName) {
+        DiseaseName = diseaseName;
+    }
 
     public int getDrugNameID() {
         return DrugNameID;

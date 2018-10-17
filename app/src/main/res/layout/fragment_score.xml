@@ -13,36 +13,61 @@
     <!--app:starFillColor="#666666"-->
     <!--app:starCoverColor="#ff0000"-->
 
-    <com.cb.ratingbar.CBRatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:forceHasOverlappingRendering="true"
-        app:color="#0000ff"
-        app:starCanTouch="true"
-        app:starCount="7"
-        app:starCoverDir="left_to_right"
-        app:starEndColor="#0000ff"
-        app:starMaxProgress="100"
-        app:starPathData="0"
-        app:starProgress="34"
-        app:starShowStroke="true"
-        app:starSize="15dp"
-        app:starSpace="10dp"
-        app:starStartColor="#0000ff"
-        app:starStrokeColor="@color/color_feedback_not_handle"
-        app:starStrokeWidth="0.5dp"
-        app:starUseGradient="true" />
+    <!--<com.cb.ratingbar.CBRatingBar-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:forceHasOverlappingRendering="true"-->
+    <!--app:color="#0000ff"-->
+    <!--app:starCanTouch="true"-->
+    <!--app:starCount="7"-->
+    <!--app:starCoverDir="left_to_right"-->
+    <!--app:starEndColor="#0000ff"-->
+    <!--app:starMaxProgress="100"-->
+    <!--app:starPathData="0"-->
+    <!--app:starProgress="34"-->
+    <!--app:starShowStroke="true"-->
+    <!--app:starSize="15dp"-->
+    <!--app:starSpace="10dp"-->
+    <!--app:starStartColor="#0000ff"-->
+    <!--app:starStrokeColor="@color/color_feedback_not_handle"-->
+    <!--app:starStrokeWidth="0.5dp"-->
+    <!--app:starUseGradient="true" />-->
 
-    <RatingBar
+
+    <!--    style="?android:attr/ratingBarStyleSmall"-->
+    <android.support.v7.widget.AppCompatRatingBar
         android:id="@+id/ratint_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxHeight="12dp"
-        android:minHeight="12dp"
+        android:max="10"
         android:numStars="5"
-        android:rating="1.7"
-        android:stepSize="0.1" />
+        android:rating="2.4"
+        android:stepSize="0.5" />
 
+
+    <com.idlestar.ratingstar.RatingStarView
+        android:id="@+id/mRatingStarView"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:background="#fff"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="2dp"
+        app:cornerRadius="4dp"
+        app:drawStrokeForFullStar="false"
+        app:drawStrokeForEmptyStar="false"
+        app:drawStrokeForHalfStar="true"
+        app:enableSelectRating="true"
+        app:onlyHalfStar="true"
+        app:rating="3.3"
+        app:starBackgroundColor="#E8E8E8"
+        app:starForegroundColor="#DB6958"
+        app:starMargin="12dp"
+        app:starNum="5"
+        app:starThickness="0.5"
+        app:strokeColor="#457DD7"
+        app:strokeWidth="2px" />
 
     <!--
 

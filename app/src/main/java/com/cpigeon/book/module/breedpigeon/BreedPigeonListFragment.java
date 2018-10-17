@@ -20,7 +20,6 @@ import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
-import com.cpigeon.book.widget.stats.StatView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -87,7 +86,7 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
         RecyclerView recyclerView = view.findViewById(R.id.statList);
         CardView cv_all_pigeon = view.findViewById(R.id.cv_all_pigeon);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         StateListAdapter stateListAdapter = new StateListAdapter(Lists.newArrayList(getResources()
                 .getStringArray(R.array.array_breed_pigeon_type)));
         recyclerView.setAdapter(stateListAdapter);

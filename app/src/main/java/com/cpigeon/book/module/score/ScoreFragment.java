@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +22,16 @@ import butterknife.BindView;
  * Created by Administrator on 2018/10/15 0015.
  */
 
-public class ScoreFragment extends BaseBookFragment{
+public class ScoreFragment extends BaseBookFragment {
 
 
     @BindView(R.id.ratint_bar)
     RatingBar mRatingBar;
 
-    public static void start(Activity activity, PigeonEntity  mPigeonEntity) {
+//    @BindView(R.id.mRatingStarView)
+//    RatingStarView mRatingStarView;
+
+    public static void start(Activity activity, PigeonEntity mPigeonEntity) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
                 .startParentActivity(activity, ScoreFragment.class);
@@ -44,6 +48,17 @@ public class ScoreFragment extends BaseBookFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setTitle("评分");
+
+//        mRatingStarView.setOnRatingBarChangeListener(v -> {
+//
+//        });
+
+
+        mRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            Log.d("xiaohls", "onViewCreated: " + rating + "       " + fromUser + "      ->" + ratingBar.getRating());
+        });
 
     }
 }

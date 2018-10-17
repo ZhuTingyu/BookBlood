@@ -14,13 +14,13 @@ import com.base.util.Lists;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.StringUtil;
-import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.PairingNestInfoEntity;
 import com.cpigeon.book.module.breeding.OffspringChooseFragment;
 import com.cpigeon.book.module.breeding.PairingNestAddFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingNestViewModel;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.util.MathUtil;
 import com.cpigeon.book.widget.LineInputView;
 
@@ -203,7 +203,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
         //给送给别人
         ll_fertilized_giving.setOnClickListener(v -> {
             mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.tv_hatches_giving_name,tv_giving_name.getText().toString(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                    , R.string.tv_hatches_giving_name, tv_giving_name.getText().toString(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                         mInputDialog.hide();
                         tv_giving_name.setText(content);
 
@@ -269,7 +269,11 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             });
 
             tvContent.setOnClickListener(v -> {
-                ToastUtils.showLong(getBaseActivity(), "详情 -->" + position);
+
+                BreedPigeonDetailsFragment.start(getBaseActivity(),
+                        mOffspringInfoAdapter.getData().get(position).getPigeonID(),
+                        mOffspringInfoAdapter.getData().get(position).getFootRingID());
+                //                ToastUtils.showLong(getBaseActivity(), "详情 -->" + position);
             });
         });
     }
