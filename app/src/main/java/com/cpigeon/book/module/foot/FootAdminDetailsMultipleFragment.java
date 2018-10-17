@@ -15,9 +15,11 @@ import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.picker.PickerUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.FootAddMultiViewModel;
@@ -29,6 +31,8 @@ import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
+
+import cn.qqtheme.framework.picker.OptionPicker;
 
 
 /**
@@ -130,14 +134,29 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
         });
 
         mLvCategory.setOnClickListener(v -> {
-            if (!Lists.isEmpty(mViewModel.mSelectTypes)) {
+            if (!Lists.isEmpty(mViewModel.mSelectTypes_Foot_Ring)) {
                 BottomSheetAdapter.createBottomSheet(getBaseActivity()
-                        , SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes), p -> {
-                            mViewModel.typeId = mViewModel.mSelectTypes.get(p).getTypeID();
-                            mLvCategory.setContent(mViewModel.mSelectTypes.get(p).getTypeName());
+                        , SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Foot_Ring), p -> {
+                            mViewModel.typeId = mViewModel.mSelectTypes_Foot_Ring.get(p).getTypeID();
+                            mLvCategory.setContent(mViewModel.mSelectTypes_Foot_Ring.get(p).getTypeName());
                             mViewModel.isCanCommit();
                         });
             }
+        });
+
+        mLvSource.setOnRightClickListener(lineInputView -> {
+            BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+                    , R.string.text_foot_source, mLvSource.getContent(), 0, content -> {
+                        mLvSource.setRightText(content);
+                    }, () -> {
+                        PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Srouse)
+                                , 0, new OptionPicker.OnOptionPickListener() {
+                                    @Override
+                                    public void onOptionPicked(int index, String item) {
+                                        mLvSource.setRightText(item);
+                                    }
+                                });
+                    });
         });
 
         mTvOk.setOnClickListener(v -> {
@@ -146,8 +165,8 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
         });
 
         setProgressVisible(true);
-        mPublicViewModel.setSelectType(SelectTypeViewModel.TYPE_FOOT_RING);
-        mPublicViewModel.getSelectType();
+        mPublicViewModel.getSelectType_Source();
+        mPublicViewModel.getSelectType_Foot_Ring();
         mViewModel.getFootInfo();
 
         mLlRoot.setOnInputViewGetFocusListener(() -> {
@@ -170,8 +189,12 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
             TextViewUtil.setEnabled(mTvOk, aBoolean);
         });
 
-        mPublicViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
-            mViewModel.mSelectTypes = selectTypeEntities;
+        mPublicViewModel.mSelectType_Foot_Ring.observe(this, selectTypeEntities -> {
+            mViewModel.mSelectTypes_Foot_Ring = selectTypeEntities;
+        });
+
+        mPublicViewModel.mSelectType_Foot_Source.observe(this, selectTypeEntities -> {
+            mViewModel.mSelectTypes_Srouse = selectTypeEntities;
         });
 
         mViewModel.mFootEntityLiveData.observe(this, footEntity -> {

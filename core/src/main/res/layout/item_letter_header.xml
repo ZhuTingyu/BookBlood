@@ -8,6 +8,7 @@
     android:background="@color/color_background"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:textColor="@color/darker_gray"
-    android:textSize="12sp"
+    android:paddingLeft="5dp"
+    android:textColor="@color/black"
+    android:textSize="13sp"
     tools:text="Animals starting with A" />

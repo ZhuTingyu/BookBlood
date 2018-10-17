@@ -68,6 +68,11 @@ public class MainActivity extends BaseBookActivity {
 
 
     @Override
+    protected int getContentView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cleanCache();
@@ -126,16 +131,11 @@ public class MainActivity extends BaseBookActivity {
 
     }
 
+
     private void cleanCache() {
         AppDatabase.getInstance(getBaseActivity()).delete(AppDatabase.getInstance(getBaseActivity()).DbEntityDao()
                 .getDataByUserAndType(UserModel.getInstance().getUserId()
                         , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING));
-    }
-
-
-    @Override
-    protected int getContentView() {
-        return R.layout.activity_main;
     }
 
 

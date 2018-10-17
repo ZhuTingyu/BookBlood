@@ -133,6 +133,7 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
     @Override
     public void finish() {
         super.finish();
+        KeyboardUtils.hideSoftInput(mSearchTextView.getEdSearch());
         overridePendingTransition(R.anim.anim_no, R.anim.bottom_in);
     }
 

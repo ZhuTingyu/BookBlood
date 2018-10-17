@@ -32,7 +32,8 @@ public class FootDetailsMultiViewModel extends BaseViewModel {
     public String sFootNumber;
     public String eFootNumber;
 
-    public List<SelectTypeEntity> mSelectTypes;
+    public List<SelectTypeEntity> mSelectTypes_Foot_Ring;
+    public List<SelectTypeEntity> mSelectTypes_Srouse;
 
     public MutableLiveData<String> deleteR = new MutableLiveData<>();
     public MutableLiveData<String> modifyR = new MutableLiveData<>();

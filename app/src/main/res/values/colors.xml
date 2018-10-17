@@ -93,6 +93,10 @@
     <color name="Transparent">#00000000</color>
     <color name="short_video_red">#ff4747</color>
     <color name="Gray">#eeeeee</color>
+    <color name="color_blue_shadow">#539cff</color>
+    <color name="color_yellow_shadow">#ee8a54</color>
+    <color name="color_text_home">#e7e7e7</color>
+
 
 </resources>
 

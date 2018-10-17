@@ -73,11 +73,11 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
                 if (Utils.getString(R.string.title_select_ass).equals(way)) {
                     //选择协会
                     SearchFragmentParentActivity.start(getActivity(), SelectAssFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE, null);
-                    ll_org.getEditText().setText("协会");
+                    ll_org.setRightText("协会");
                 } else if (Utils.getString(R.string.title_select_loft).equals(way)) {
                     //选择公棚
                     SearchFragmentParentActivity.start(getActivity(), PlayOrgLoftFragment.class, BreedPigeonDetailsFragment.CODE_LOFT, null);
-                    ll_org.getEditText().setText("公棚");
+                    ll_org.setRightText("公棚");
                 }
             });
         });

@@ -83,12 +83,12 @@ public class SettingFragment extends BaseBookFragment {
 
         setTitle("设置");
 
-        ll_current_version.getEditText().setText("V" + PhoneUtils.getVersionName(getActivity()));//设置当前app的版本号
+        ll_current_version.setRightText("V" + PhoneUtils.getVersionName(getActivity()));//设置当前app的版本号
 
         mFile = StorageUtils.getIndividualCacheDirectory(getActivity());
         try {
             cacheSize = GlideCacheUtil.getInstance().getFolderSize(mFile) + GlideCacheUtil.getInstance().getFolderSize(new File(getActivity().getCacheDir() + "/" + InternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR));
-            ll_clear_cache.getEditText().setText(String.valueOf(GlideCacheUtil.getFormatSize(cacheSize)));
+            ll_clear_cache.setRightText(String.valueOf(GlideCacheUtil.getFormatSize(cacheSize)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -180,7 +180,7 @@ public class SettingFragment extends BaseBookFragment {
     private void removeCache() {
         GlideCacheUtil.clearImageDiskCache(getActivity());//清除Glide图片加载缓存
         GlideCacheUtil.deleteFolderFile(mFile.getPath(), false);//清除视频播放缓存
-        ll_clear_cache.getEditText().setText(String.valueOf(0 + "KB"));
+        ll_clear_cache.setRightText(String.valueOf(0 + "KB"));
 
         HintDialog.shootHintDialog(getActivity(), "缓存清除成功!");
     }

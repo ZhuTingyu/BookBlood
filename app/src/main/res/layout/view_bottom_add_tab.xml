@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/llTabViews"
-        android:background="@drawable/svg_main_bottom_bg"
+        android:background="@mipmap/ic_home_bg_bottom"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">

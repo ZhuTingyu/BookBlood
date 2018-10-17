@@ -572,7 +572,7 @@
     <string name="text_service_print_blood_book">打印血统书开通</string>
     <string name="text_blood_book_count">血统书  %1$s</string>
     <string name="text_service_share_pigeon">共享种鸽开通</string>
-    <string name="text_no_open_service">您还没没有开通任务服务哦...</string>
+    <string name="text_no_open_service">您还没有开通任务服务哦...</string>
     <string name="text_input_pay_password">请输入支付密码</string>
 
 
@@ -625,7 +625,7 @@
     <string name="text_fly_person">作翔人</string>
     <string name="text_pigeon_generation_title">%1$s上%2$s代</string>
     <string name="text_pleas_choose_time">请选择时间</string>
-    <string name="text_pleas_complete_train_info">请完善司放坐标和时间！、</string>
+    <string name="text_pleas_complete_train_info">请完善司放坐标和时间！</string>
 
     <string name="str_name_homing_pigeon">点击此处查看我的全部信鸽</string>
 

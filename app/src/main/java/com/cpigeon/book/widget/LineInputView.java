@@ -63,6 +63,7 @@ public class LineInputView extends RelativeLayout {
 
     TextView mTextView;
     ClickGetFocusEditText mEditText;
+    TextView mTvRight;
     ImageView mImgRight;
     ImageView imgLeft;
     LinearLayout mLlContent;
@@ -148,6 +149,7 @@ public class LineInputView extends RelativeLayout {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_line_input, this, true);
         mTextView = view.findViewById(R.id.tvLeft);
         mEditText = view.findViewById(R.id.etRight);
+        mTvRight = view.findViewById(R.id.tvRight);
 
         mImgRight = view.findViewById(R.id.imgRight);
         mLlContent = view.findViewById(R.id.llContent);
@@ -190,13 +192,21 @@ public class LineInputView extends RelativeLayout {
         mEditText.setTextColor(mRightColor);
 //        mEditText.setTextSize(ScreenTool.px2sp(mRightTextSize));
         mEditText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
+
+
+        mTvRight.setText(mRightString);
+        mTvRight.setTextColor(mRightColor);
+        mTvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
+
         if (mInputType != 0) {
             mEditText.setInputType(mInputType);
         }
         if (mIsEditLeft) {
             mEditText.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+            mTvRight.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
         } else {
             mEditText.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+            mTvRight.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         }
 
 
@@ -265,11 +275,11 @@ public class LineInputView extends RelativeLayout {
     }
 
     public void setContent(@StringRes int resId) {
-        mEditText.setText(Utils.getString(resId));
+        setRightText(Utils.getString(resId));
     }
 
     public void setContent(String content) {
-        mEditText.setText(content);
+        setRightText(content);
     }
 
     public void setOnRightClickListener(OnRightClickListener onRightClickListener) {
@@ -314,6 +324,7 @@ public class LineInputView extends RelativeLayout {
 
     public void setRightText(String rightText) {
         mEditText.setText(StringUtil.isStringValid(rightText) ? rightText : StringUtil.emptyString());
+        mTvRight.setText(StringUtil.isStringValid(rightText) ? rightText : StringUtil.emptyString());
     }
 
     public void setEditState(boolean isCanEdit) {
@@ -322,6 +333,13 @@ public class LineInputView extends RelativeLayout {
 
     public void setCanEdit(boolean canEdit) {
         mIsCanEdit = canEdit;
+        if(mIsCanEdit){
+            mEditText.setVisibility(VISIBLE);
+            mTvRight.setVisibility(GONE);
+        }else {
+            mEditText.setVisibility(GONE);
+            mTvRight.setVisibility(VISIBLE);
+        }
         setEditState(canEdit);
     }
 

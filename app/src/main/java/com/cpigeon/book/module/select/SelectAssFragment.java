@@ -81,6 +81,11 @@ public class SelectAssFragment extends BaseBookFragment {
 
     @Override
     protected void initObserve() {
+
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
         mViewModel.liveAss.observe(this, assEntities -> {
             setProgressVisible(false);
             mModel.setData(assEntities);

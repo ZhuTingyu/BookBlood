@@ -47,6 +47,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mSelectTypeLiveData = new MutableLiveData<>();
     public MutableLiveData<SelectTypeEntity> mSelectTypeList = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Sex = new MutableLiveData<>();
+    public MutableLiveData<List<SelectTypeEntity>> mSelectType_Foot_Ring = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_FeatherColor = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_EyeSand = new MutableLiveData<>();
     public MutableLiveData<List<SelectTypeEntity>> mSelectType_Foot_Source = new MutableLiveData<>();//足环来源
@@ -84,6 +85,14 @@ public class SelectTypeViewModel extends BaseViewModel {
         });
     }
 
+    //足环类型
+    public void getSelectType_Foot_Ring() {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_FOOT_RING), r -> {
+            if (r.isOk()) {
+                mSelectType_Foot_Ring.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
 
     //获取  性别
     public void getSelectType_Sex() {

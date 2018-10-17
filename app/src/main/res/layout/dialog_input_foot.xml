@@ -71,7 +71,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:gpvLineColor="@color/gray"
+        app:gpvLineColor="@color/color_edit_border"
         app:gpvLineWidth="1dp"
         app:gpvPasswordLength="7"
         app:gpvTextColor="@color/black"

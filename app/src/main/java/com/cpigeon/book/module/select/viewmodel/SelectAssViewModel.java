@@ -28,8 +28,8 @@ public class SelectAssViewModel extends BaseViewModel {
     public void getAssList() {
         submitRequestThrowError(AssModel.getAssList(key), r -> {
             if (r.isOk()) {
-                liveAss.setValue(r.data);
                 listEmptyMessage.setValue(r.msg);
+                liveAss.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
     }

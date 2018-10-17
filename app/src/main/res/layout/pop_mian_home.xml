@@ -26,8 +26,6 @@
         android:background="@color/white"
         android:layout_above="@+id/line"
         android:orientation="horizontal"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
         android:paddingBottom="24dp"
         android:paddingTop="24dp"
         android:layout_width="match_parent"
