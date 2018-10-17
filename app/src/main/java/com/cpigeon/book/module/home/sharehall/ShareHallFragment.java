@@ -59,7 +59,8 @@ public class ShareHallFragment extends BaseBookFragment {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
                 .putExtra(IntentBuilder.KEY_TYPE, false)
-                .startParentActivity(activity, ShareHallFragment.class);
+                .putExtra(IntentBuilder.KEY_BOOLEAN, false)
+                .startParentActivity(activity,false, ShareHallFragment.class);
     }
 
     @Override
@@ -85,22 +86,19 @@ public class ShareHallFragment extends BaseBookFragment {
         isShowToobar = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_TYPE, true);
 
         if (isShowToobar) {
-            appbar.setVisibility(View.VISIBLE);
+            //首页
             setToolbarNotBack();
             setToolbarLeft(R.drawable.svg_open_share_hall, v -> {
                 OpenServiceFragment.start(getBaseActivity());
             });
 
         } else {
+            //配对信息   相亲配对
 
-            appbar.setVisibility(View.GONE);
             setToolbarNotBack();
-            setToolbarLeft(R.drawable.svg_open_share_hall, v -> {
+            setToolbarLeft(R.drawable.svg_back, v -> {
                 getBaseActivity().finish();
             });
-
-
-
         }
 
 

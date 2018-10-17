@@ -18,6 +18,8 @@ import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
+import com.base.util.utility.StringUtil;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
@@ -146,9 +148,9 @@ public class PlayAddFragment extends BaseBookFragment {
             mPlayViewModel.isAdd = true;
             mPlayViewModel.isCanCommit();
             setTitle("赛绩录入");
-            setToolbarRight("附加信息", item -> {
+            setToolbarRight(getString(R.string.text_addition_info), item -> {
                 if (isStandard) {
-                    setTitle("附加信息");
+                    setTitle(getString(R.string.text_addition_info));
                     setToolbarRight("赛绩录入");
                     isStandard = false;
                     llz.setVisibility(View.GONE);
@@ -159,7 +161,7 @@ public class PlayAddFragment extends BaseBookFragment {
                 } else {
                     //需要验证码
                     setTitle("赛绩录入");
-                    setToolbarRight("附加信息");
+                    setToolbarRight(getString(R.string.text_addition_info));
                     isStandard = true;
                     llz.setVisibility(View.VISIBLE);
                     rlz_input.setVisibility(View.GONE);
@@ -341,12 +343,23 @@ public class PlayAddFragment extends BaseBookFragment {
                 break;
             case R.id.ll_paly_rank:
                 //比赛名次
+
+                if (!StringUtil.isStringValid(llPalyScale.getContent())) {
+                    ToastUtils.showLong(getBaseActivity(), "请先填写比赛规模！");
+                    return;
+                }
+
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                         , R.string.tv_paly_rank, llPalyRank.getContent(), InputType.TYPE_CLASS_NUMBER, content -> {
-                            mPlayViewModel.palyRank = content;
-                            llPalyRank.setRightText(content);
-                            mInputDialog.hide();
-                            mPlayViewModel.isCanCommit();
+
+                            if (Integer.valueOf(llPalyScale.getContent()) >= Integer.valueOf(content)) {
+                                mPlayViewModel.palyRank = content;
+                                llPalyRank.setRightText(content);
+                                mInputDialog.hide();
+                                mPlayViewModel.isCanCommit();
+                            } else {
+                                ToastUtils.showLong(getBaseActivity(), "比赛名次不能小于比赛规模！");
+                            }
                         }, null);
                 break;
             case R.id.ll_fly_place:
@@ -384,6 +397,7 @@ public class PlayAddFragment extends BaseBookFragment {
                 break;
             case R.id.tv_next_step:
                 //点击按钮添加赛绩
+                setProgressVisible(true);
                 mPlayViewModel.addPigeonPlay();
                 break;
         }

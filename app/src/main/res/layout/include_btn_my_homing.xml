@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_view_height"
     android:layout_marginLeft="@dimen/spacing_left_reight"
+    android:layout_marginTop="2dp"
     android:layout_marginRight="@dimen/spacing_left_reight">
 
     <LinearLayout

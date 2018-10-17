@@ -23,6 +23,7 @@ import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
+import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -334,6 +335,16 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                 llLineage.setRightText(blood.getTypeName());
                 mPairingInfoAddViewModel.isCanCommit();
             }
+            if (SelectFootRingFragment.CODE_SELECT_FOOT == requestCode) {
+                FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+
+                //足环号
+                llPairingFoot.setContent(entity.getFootRingNum());
+                mPairingInfoAddViewModel.pairingFoot = entity.getFootRingNum();
+
+                mPairingInfoAddViewModel.isCanCommit();
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

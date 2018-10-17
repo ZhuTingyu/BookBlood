@@ -291,7 +291,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             if (StringUtil.isStringValid(r.getXingming())) {
                 mTvAuth.setText(getString(R.string.text_yet_auth));
                 mTvAuth.setBackgroundResource(R.drawable.shape_btn_stroke_blue);
-                mTvAuth.setTextColor(Utils.getColor(R.color.colorPrimary));
+                mTvAuth.setTextColor(Utils.getColor(R.color.color_scale_blue_data));
                 mTvAuth.setOnClickListener(v -> {
                     IdCertificationFragment.start(getBaseActivity(), false, CODE_AUTH);
                 });
