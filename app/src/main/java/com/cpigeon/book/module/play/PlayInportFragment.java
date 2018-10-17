@@ -110,29 +110,6 @@ public class PlayInportFragment extends BaseBookFragment {
         tvOk.setOnClickListener(v -> {
 //            input_play_gif
 
-            mCustomAlertDialog2.show();
-            timer = new Timer();
-            RxUtils.runOnNewThread(o -> {
-                timer.schedule(new TimerTask() {
-                    int tag = 0;
-                    @Override
-                    public void run() {
-                        getBaseActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (tag >= 2000) {
-                                    //退出计时器
-                                    timer.cancel();
-                                    mCustomAlertDialog2.dismiss();
-
-                                }
-                                progressBar.setProgress(tag);
-                                tag += 10;
-                            }
-                        });
-                    }
-                }, 0, 1 * 10);
-            });
         });
 
         mAdapter = new PlayInportAdapter();
@@ -166,6 +143,34 @@ public class PlayInportFragment extends BaseBookFragment {
                 e.printStackTrace();
             }
         });
+
+
+
+
+        mCustomAlertDialog2.show();
+        timer = new Timer();
+        RxUtils.runOnNewThread(o -> {
+            timer.schedule(new TimerTask() {
+                int tag = 0;
+                @Override
+                public void run() {
+                    getBaseActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (tag >= 2000) {
+                                //退出计时器
+                                timer.cancel();
+                                mCustomAlertDialog2.dismiss();
+
+                            }
+                            progressBar.setProgress(tag);
+                            tag += 10;
+                        }
+                    });
+                }
+            }, 0, 1 * 10);
+        });
+
     }
 
 

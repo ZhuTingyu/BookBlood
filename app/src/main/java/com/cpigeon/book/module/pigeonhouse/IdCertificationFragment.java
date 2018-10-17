@@ -125,6 +125,7 @@ public class IdCertificationFragment extends BaseBookFragment {
         });
 
         if (!mIsEdit) {
+            setProgressVisible(true);
             mViewModel.getUserIdCard();
         }
     }

@@ -146,17 +146,17 @@
     </ScrollView>
 
     <RelativeLayout
-        android:visibility="gone"
+        android:id="@+id/rlz_input"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_input_height"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_corners_box1"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:id="@+id/rlz_input"
-        android:layout_marginLeft="@dimen/spacing_left_reight"
-        android:layout_marginTop="24dp"
-        android:layout_marginRight="@dimen/spacing_left_reight"
         android:padding="5dp"
-        android:background="@drawable/rounded_corners_box1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/view_input_height">
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/input_box_editText"
@@ -165,12 +165,12 @@
             android:background="@null"
             android:gravity="top|left"
             android:hint="请输入"
+            android:lines="6"
             android:textColor="@color/general_text_color"
             android:textColorHint="@color/general_text_hint_color"
             android:textSize="14sp" />
 
     </RelativeLayout>
-
 
 
     <TextView

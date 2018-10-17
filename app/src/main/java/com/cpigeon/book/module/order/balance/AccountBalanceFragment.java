@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.order.balance;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,6 +50,7 @@ public class AccountBalanceFragment extends BaseBookFragment {
             return true;
         });
 
+        tvBalance.setTypeface(Typeface.createFromAsset(getBaseActivity().getAssets(), "SF-PRO-TEXT_REGULAR.TTF"));
     }
 
     @OnClick({R.id.balance_refill, R.id.balance_withdraw, R.id.tv_bottom_help})

@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 
 import com.base.base.BaseWebViewActivity;
 import com.base.util.BarUtils;
-import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
@@ -208,14 +207,16 @@ public class HomeFragment extends BaseBookFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnEvent(FootUpdateEvent event){
+    public void OnEvent(FootUpdateEvent event) {
         mViewModel.getHomeTop();
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnEvent(PigeonAddEvent event){
+    public void OnEvent(PigeonAddEvent event) {
         mViewModel.getHomeTop();
     }
-    public void OnEvent(PigeonUpdateEvent event){
+
+    public void OnEvent(PigeonUpdateEvent event) {
         mViewModel.getHomeTop();
     }
 

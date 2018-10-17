@@ -100,7 +100,7 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
     protected CircleImageView img_pigeon;
 
     @BindView(R.id.ll_details_other)
-   protected LinearLayout ll_details_other;//血统书制作 ， 繁育信息
+    protected LinearLayout ll_details_other;//血统书制作 ， 繁育信息
     @BindView(R.id.img_play_import)
     protected ImageView img_play_import;//导入赛绩
     @BindView(R.id.img_play_add)
@@ -146,8 +146,6 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
     protected static final String KEY_TITLE_FOOT_NUMBER = "KEY_TITLE_FOOT_NUMBER";
 
 
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -164,7 +162,6 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
     }
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -177,9 +174,9 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(mGenerationCount != 0){
+        if (mGenerationCount != 0) {
             setTitle(Utils.getString(R.string.text_pigeon_generation_title
-                    ,mFirstFootNumber,String.valueOf(mGenerationCount)));
+                    , mFirstFootNumber, String.valueOf(mGenerationCount)));
         }
         mGenerationCount = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TITLE, 0);
 
@@ -213,7 +210,7 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
 
         mBreedPigeonDetailsViewModel.mBreedPigeonData.observe(this, datas -> {
 
-            if(!StringUtil.isStringValid(mFirstFootNumber)){
+            if (!StringUtil.isStringValid(mFirstFootNumber)) {
                 setTitle(mBreedPigeonDetailsViewModel.mPigeonEntity.getFootRingNum());
                 mFirstFootNumber = datas.getFootRingNum();
             }
@@ -225,16 +222,54 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
             //设置性别
             PigeonPublicUtil.setPigeonSexImg(datas.getPigeonSexName(), imgSex);
 
-            tvFootVice.setText(datas.getFootRingIDToNum());//副足环
-            tvLineage.setText(datas.getPigeonBloodName());//血统
-            tvState.setText(datas.getStateName());//状态
-            tvEyeSand.setText(datas.getPigeonEyeName());//眼砂d
 
-            tvFeatherColor.setText(datas.getPigeonPlumeName());//羽色
-            tvTheirShellsDate.setText(datas.getOutShellTime());//出壳日期
-            tvFootSource.setText(datas.getSourceName());//来源
+            if (StringUtil.isStringValid(datas.getFootRingIDToNum())) {
+                tvFootVice.setText(datas.getFootRingIDToNum());//副足环
+            } else {
+                tvFootVice.setText(getString(R.string.str_hint_no));//副足环
+            }
 
-            tvScore.setText(datas.getPigeonScore());//评分
+            if (StringUtil.isStringValid(datas.getPigeonBloodName())) {
+                tvLineage.setText(datas.getPigeonBloodName());//血统
+            } else {
+                tvLineage.setText(getString(R.string.str_hint_no));//血统
+            }
+
+            if (StringUtil.isStringValid(datas.getStateName())) {
+                tvState.setText(datas.getStateName());//状态
+            } else {
+                tvState.setText(getString(R.string.str_hint_no));//状态
+            }
+
+            if (StringUtil.isStringValid(datas.getPigeonEyeName())) {
+                tvEyeSand.setText(datas.getPigeonEyeName());//眼砂d
+            } else {
+                tvEyeSand.setText(getString(R.string.str_hint_no));//眼砂d
+            }
+
+            if (StringUtil.isStringValid(datas.getPigeonPlumeName())) {
+                tvFeatherColor.setText(datas.getPigeonPlumeName());//羽色
+            } else {
+                tvFeatherColor.setText(getString(R.string.str_hint_no));//羽色
+            }
+
+            if (StringUtil.isStringValid(datas.getOutShellTime())) {
+                tvTheirShellsDate.setText(datas.getOutShellTime());//出壳日期
+            } else {
+                tvTheirShellsDate.setText(getString(R.string.str_hint_no));//出壳日期
+            }
+
+            if (StringUtil.isStringValid(datas.getSourceName())) {
+                tvFootSource.setText(datas.getSourceName());//来源
+            } else {
+                tvFootSource.setText(getString(R.string.str_hint_no));//来源
+            }
+
+            if (StringUtil.isStringValid(datas.getPigeonScore())) {
+                tvScore.setText(datas.getPigeonScore());//评分
+            } else {
+                tvScore.setText(getString(R.string.str_hint_no));//评分
+            }
 
             Glide.with(this)
                     .load(datas.getCoverPhotoUrl())
@@ -280,8 +315,6 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
             mBreedPigeonModifyViewModel.mSelectTypes_Source = selectTypeEntities;
         });
     }
-
-
 
     private void initInputPlayDialog() {
         mAddPlayDialog = new AddPlayDialog();

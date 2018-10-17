@@ -6,17 +6,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.AnimRes;
-
 
 import com.base.BaseFragment;
 import com.base.FragmentParentActivity;
-import com.base.base.BaseActivity;
 import com.base.http.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class IntentBuilder {
@@ -338,8 +334,17 @@ public class IntentBuilder {
         intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);
         context.startActivity(intent);
         context.overridePendingTransition(enter, exit);
+    }
+
+    public void startParentActivity(Activity context,boolean isHaveToolbar ,Class clz) {
+        intent.setClass(context, FragmentParentActivity.class);
+        intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);
+        intent.putExtra(FragmentParentActivity.KEY_HAVE_TOOL_BAR, isHaveToolbar);
+        context.startActivity(intent);
+        context.overridePendingTransition(enter, exit);
 
     }
+
     public void startParentActivity(Activity context, Class clz,int requestCode) {
         intent.setClass(context, FragmentParentActivity.class);
         intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);
