@@ -234,11 +234,15 @@ public class InputPigeonFragment extends BaseBookFragment {
     private void setClick() {
         //信鸽类型
         mLvPigeonType.setOnRightClickListener(lineInputView -> {
-            BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_PigeonType), p -> {
-                mLvPigeonType.setRightText(mViewModel.mSelectTypes_PigeonType.get(p).getTypeName());
-                mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(p).getTypeID();
-                mViewModel.isCanCommit();
-            });
+            try {
+                BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_PigeonType), p -> {
+                    mLvPigeonType.setRightText(mViewModel.mSelectTypes_PigeonType.get(p).getTypeName());
+                    mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(p).getTypeID();
+                    mViewModel.isCanCommit();
+                });
+            } catch (Exception e) {
+                mSelectTypeViewModel.getPigeonType();
+            }
         });
 
         //国家
@@ -262,11 +266,15 @@ public class InputPigeonFragment extends BaseBookFragment {
         mLvSex.setOnRightClickListener(lineInputView -> {
 
             if (!StringUtil.isStringValid(mSexType)) {
-                BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Sex), p -> {
-                    mLvSex.setRightText(mViewModel.mSelectTypes_Sex.get(p).getTypeName());
-                    mViewModel.sexId = mViewModel.mSelectTypes_Sex.get(p).getTypeID();
-                    mViewModel.isCanCommit();
-                });
+                try {
+                    BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Sex), p -> {
+                        mLvSex.setRightText(mViewModel.mSelectTypes_Sex.get(p).getTypeName());
+                        mViewModel.sexId = mViewModel.mSelectTypes_Sex.get(p).getTypeID();
+                        mViewModel.isCanCommit();
+                    });
+                } catch (Exception e) {
+                    mSelectTypeViewModel.getSelectType_Sex();
+                }
             }
 
         });
@@ -306,14 +314,18 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mLvState.setOnRightClickListener(lineInputView -> {
-            PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
-                @Override
-                public void onOptionPicked(int index, String item) {
-                    mViewModel.stateId = mViewModel.mSelectTypes_State.get(index).getTypeID();
-                    mLvState.setContent(mViewModel.mSelectTypes_State.get(index).getTypeName());
-                    mViewModel.isCanCommit();
-                }
-            });
+            try {
+                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
+                    @Override
+                    public void onOptionPicked(int index, String item) {
+                        mViewModel.stateId = mViewModel.mSelectTypes_State.get(index).getTypeID();
+                        mLvState.setContent(mViewModel.mSelectTypes_State.get(index).getTypeName());
+                        mViewModel.isCanCommit();
+                    }
+                });
+            } catch (Exception e) {
+               mSelectTypeViewModel.getSelectType_State();
+            }
         });
 
         mLvPigeonName.setOnRightClickListener(lineInputView -> {
@@ -326,20 +338,22 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mLvFootVice.setOnRightClickListener(lineInputView -> {
-            InputSingleFootDialog.show(getFragmentManager(), mLvFootVice.getContent(), mViewModel.isChina(), dialog -> {
-                //todo 选择足环号码
-            }, foot -> {
+            InputSingleFootDialog.show(getFragmentManager(), mLvFootVice.getContent(), mViewModel.isChina(), null, foot -> {
                 mLvFootVice.setRightText(foot);
                 mViewModel.footVice = foot;
             });
         });
 
         mLvFootSource.setOnRightClickListener(lineInputView -> {
-            BottomSheetAdapter.createBottomSheet(getBaseActivity()
-                    , SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Source), p -> {
-                        mViewModel.sourceId = mViewModel.mSelectTypes_Source.get(p).getTypeID();
-                        mLvFootSource.setContent(mViewModel.mSelectTypes_Source.get(p).getTypeName());
-                    });
+            try {
+                BottomSheetAdapter.createBottomSheet(getBaseActivity()
+                        , SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Source), p -> {
+                            mViewModel.sourceId = mViewModel.mSelectTypes_Source.get(p).getTypeID();
+                            mLvFootSource.setContent(mViewModel.mSelectTypes_Source.get(p).getTypeName());
+                        });
+            } catch (Exception e) {
+                mSelectTypeViewModel.getSelectType_Source();
+            }
         });
 
         mLvFatherFoot.setOnRightClickListener(lineInputView -> {
@@ -363,13 +377,17 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
         //眼砂
         mLvEyeSand.setOnRightClickListener(lineInputView -> {
-            PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_EyeSand), 0, new OptionPicker.OnOptionPickListener() {
-                @Override
-                public void onOptionPicked(int index, String item) {
-                    mViewModel.eyeSandId = mViewModel.mSelectTypes_EyeSand.get(index).getTypeID();
-                    mLvEyeSand.setContent(mViewModel.mSelectTypes_EyeSand.get(index).getTypeName());
-                }
-            });
+            try {
+                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_EyeSand), 0, new OptionPicker.OnOptionPickListener() {
+                    @Override
+                    public void onOptionPicked(int index, String item) {
+                        mViewModel.eyeSandId = mViewModel.mSelectTypes_EyeSand.get(index).getTypeID();
+                        mLvEyeSand.setContent(mViewModel.mSelectTypes_EyeSand.get(index).getTypeName());
+                    }
+                });
+            } catch (Exception e) {
+                mSelectTypeViewModel.getSelectType_eyeSand();
+            }
         });
 
         mLvBirthTime.setOnRightClickListener(lineInputView -> {
@@ -592,7 +610,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         if (requestCode == CODE_ADD_PLAY) {
             IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mViewModel.mDataPigeon.getValue())
+                    .putExtra(IntentBuilder.KEY_DATA, mViewModel.mDataPigeonDetails.getValue())
                     .finishForResult(getBaseActivity());
         }
 
@@ -639,11 +657,11 @@ public class InputPigeonFragment extends BaseBookFragment {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvRing.setRightText(entity.getFootRingNum());
             mViewModel.foot = entity.getFootRingNum();
-        }else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
+        } else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvFatherFoot.setRightText(entity.getFootRingNum());
             mViewModel.footFather = entity.getFootRingNum();
-        }else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
+        } else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvMotherFoot.setRightText(entity.getFootRingNum());
             mViewModel.footMother = entity.getFootRingNum();

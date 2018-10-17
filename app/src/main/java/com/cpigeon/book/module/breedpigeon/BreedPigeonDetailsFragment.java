@@ -48,7 +48,7 @@ import butterknife.OnClick;
 public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
     public static final int CODE_ADD_PIGEON = 0x123;
-
+    private boolean mIsGoodPigeon = false;
 
     public static void start(Activity activity, String pigeonId, String footId) {
         IntentBuilder.Builder()
@@ -67,6 +67,17 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
+    //血统书跳转
+    public static void start(Activity activity, String pigeonId, String footId, String footNumber, int generationCount, String userId) {
+        IntentBuilder.Builder()
+                .putExtra(IntentBuilder.KEY_DATA, pigeonId)
+                .putExtra(IntentBuilder.KEY_DATA_2, footId)
+                .putExtra(IntentBuilder.KEY_DATA_3, userId)
+                .putExtra(KEY_TITLE_FOOT_NUMBER, footNumber)
+                .putExtra(IntentBuilder.KEY_TITLE, generationCount)
+                .startParentActivity(activity, BreedPigeonDetailsFragment.class);
+    }
+
     public static void start(Activity activity, String pigeonId, String footId, String type) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
@@ -80,17 +91,18 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
                 .putExtra(IntentBuilder.KEY_DATA_2, footId)
-                .putExtra(IntentBuilder.KEY_TYPE, type)
                 .putExtra(IntentBuilder.KEY_DATA_3, userId)
+                .putExtra(IntentBuilder.KEY_TYPE, type)
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
     //铭鸽库
-    public static void startGoodPigeon(Activity activity, String pigeonId, String footId, String userId) {
+    public static void start(Activity activity, String pigeonId, String footId, String userId, boolean isGoodPigeon) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonId)
                 .putExtra(IntentBuilder.KEY_DATA_2, footId)
                 .putExtra(IntentBuilder.KEY_DATA_3, userId)
+                .putExtra(IntentBuilder.KEY_BOOLEAN, isGoodPigeon)
                 .startParentActivity(activity, BreedPigeonDetailsFragment.class);
     }
 
@@ -99,6 +111,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mType = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
+        mIsGoodPigeon = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         setToolbarRight("成长记录", item -> {
             if (mBreedPigeonModifyViewModel.mPigeonEntity == null) {
                 return true;
@@ -140,7 +153,8 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 BreedPigeonDetailsFragment.start(getBaseActivity(), breedPigeonEntity.getPigeonID()
                         , breedPigeonEntity.getFootRingID()
                         , mFirstFootNumber
-                        , mGenerationCount + x);
+                        , mGenerationCount + x
+                        , mBreedPigeonDetailsViewModel.pUid);
             }
         });
 
@@ -186,6 +200,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             }
         }
 
+        mBookViewModel.isGoodPigeon = mIsGoodPigeon;
 
         if (!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) {
             //当前为查看数据
@@ -193,6 +208,17 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             img_play_add.setVisibility(View.GONE);
             ll_details_other.setVisibility(View.GONE);
         }
+
+        mBreedPigeonDetailsViewModel.getPigeonDetails();//获取 鸽子  详情
+        mBookViewModel.getBloodBook();// //获取 血统书  四代
+
+        mSelectTypeViewModel.getSelectType_Sex();
+        mSelectTypeViewModel.getSelectType_FeatherColor();
+        mSelectTypeViewModel.getSelectType_eyeSand();
+        mSelectTypeViewModel.getSelectType_lineage();
+        mSelectTypeViewModel.getSelectType_State();
+        mSelectTypeViewModel.getSelectType_PigeonSource();
+
     }
 
 

@@ -67,6 +67,7 @@ public class ShareHallFragment extends BaseBookFragment {
         super.onAttach(context);
         mSelectTypeViewModel = new SelectTypeViewModel();
         mViewModel = new ShareHallViewModel();
+        initViewModel(mViewModel);
     }
 
     @Nullable

@@ -51,10 +51,29 @@ public class FootEntity implements Parcelable {
     private String PigeonID;
     private String MenFootRingNum;
     private String WoFootRingNum;
-    private String  PigeonSexName;
+    private String PigeonSexName;
+
+    private String PigeonEyeName;
+    private String PigeonPlumeName;
 
     public boolean isSetRing() {
         return Utils.getString(R.string.text_status_set_foot_ring).equals(getStateName());
+    }
+
+    public String getPigeonEyeName() {
+        return PigeonEyeName;
+    }
+
+    public void setPigeonEyeName(String pigeonEyeName) {
+        PigeonEyeName = pigeonEyeName;
+    }
+
+    public String getPigeonPlumeName() {
+        return PigeonPlumeName;
+    }
+
+    public void setPigeonPlumeName(String pigeonPlumeName) {
+        PigeonPlumeName = pigeonPlumeName;
     }
 
     public String getPigeonSexName() {
@@ -253,6 +272,11 @@ public class FootEntity implements Parcelable {
         dest.writeString(this.EndFootRingNum);
         dest.writeString(this.EndFootRingID);
         dest.writeString(this.PigeonID);
+        dest.writeString(this.MenFootRingNum);
+        dest.writeString(this.WoFootRingNum);
+        dest.writeString(this.PigeonSexName);
+        dest.writeString(this.PigeonEyeName);
+        dest.writeString(this.PigeonPlumeName);
     }
 
     protected FootEntity(Parcel in) {
@@ -274,6 +298,11 @@ public class FootEntity implements Parcelable {
         this.EndFootRingNum = in.readString();
         this.EndFootRingID = in.readString();
         this.PigeonID = in.readString();
+        this.MenFootRingNum = in.readString();
+        this.WoFootRingNum = in.readString();
+        this.PigeonSexName = in.readString();
+        this.PigeonEyeName = in.readString();
+        this.PigeonPlumeName = in.readString();
     }
 
     public static final Creator<FootEntity> CREATOR = new Creator<FootEntity>() {

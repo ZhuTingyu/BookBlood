@@ -32,60 +32,32 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
 
     //种鸽录入
     public void addPigeon() {
+        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Add(
+                pigeonType.equals(PigeonEntity.ID_BREED_PIGEON) ? PigeonEntity.ID_BREED_PIGEON : PigeonEntity.ID_MATCH_PIGEON,
+                countryId,
+                foot,
+                footVice,
+                sourceId,
+                footFather,
+                footMother,
+                pigeonName,
+                sexId,
+                featherColor,
+                eyeSandId,
+                theirShellsDate,
+                lineage,
+                stateId,
+                phototypeid,
+                sonFootId,
+                sonPigeonId,
+                llHangingRingDate,
+                setImageMap()), r -> {
 
-        if (pigeonType.equals(PigeonEntity.ID_BREED_PIGEON)) {
-            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Add(countryId,
-                    foot,
-                    footVice,
-                    sourceId,
-                    footFather,
-                    footMother,
-                    pigeonName,
-                    sexId,
-                    featherColor,
-                    eyeSandId,
-                    theirShellsDate,
-                    lineage,
-                    stateId,
-                    phototypeid,
-                    sonFootId,
-                    sonPigeonId,
-                    setImageMap()), r -> {
-
-                if (r.isOk()) {
-                    mDataPigeon.setValue(r);
-                    EventBus.getDefault().post(new PigeonAddEvent());
-                } else throw new HttpErrorException(r);
-            });
-        } else {
-            submitRequestThrowError(RacingPigeonModel.getTXGP_Pigeon_Racing_Add(countryId,
-                    foot,
-                    footVice,
-                    sourceId,
-                    footFather,
-                    footMother,
-                    pigeonName,
-                    sexId,
-                    featherColor,
-                    eyeSandId,
-                    theirShellsDate,
-                    lineage,
-                    stateId,
-                    phototypeid,
-                    llHangingRingDate,
-                    setImageMap()), r -> {
-
-                if (r.isOk()) {
-
-                    mDataPigeon.setValue(r);
-
-                    EventBus.getDefault().post(new PigeonAddEvent());
-
-//                hintDialog(r.msg);
-                } else throw new HttpErrorException(r);
-            });
-        }
-
+            if (r.isOk()) {
+                mDataPigeon.setValue(r);
+                EventBus.getDefault().post(new PigeonAddEvent());
+            } else throw new HttpErrorException(r);
+        });
     }
 
     public void modifyBreedPigeonEntry() {

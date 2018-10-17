@@ -42,6 +42,8 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<FootEntity, BaseView
         }
 
         PigeonPublicUtil.setPigeonSexImg(item.getPigeonSexName(), helper.getView(R.id.imgSex));
+        helper.setText(R.id.tvColor, item.getPigeonPlumeName());
+        helper.setText(R.id.tvEye, item.getPigeonEyeName());
 
         helper.itemView.setOnClickListener(v -> {
 

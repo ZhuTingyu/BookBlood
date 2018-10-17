@@ -78,6 +78,9 @@ public class SelectTypeEntity extends LetterSortEntity implements MultiItemEntit
     }
 
     public static List<String> getTypeNames(List<SelectTypeEntity> data){
+        if(Lists.isEmpty(data)){
+            return null;
+        }
         List<String> names = Lists.newArrayList();
         for (SelectTypeEntity entity : data) {
             String typeName = entity.getTypeName();

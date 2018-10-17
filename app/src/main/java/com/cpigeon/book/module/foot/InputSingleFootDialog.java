@@ -233,7 +233,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     private void switchStatus() {
         if (isStandard) {
             isStandard = false;
-            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
+            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
             mTvYear.setVisibility(View.GONE);
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
@@ -243,7 +243,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             KeyboardUtils.showSoftInput(getActivity());
         } else {
             isStandard = true;
-            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
+            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
             mTvYear.setVisibility(View.VISIBLE);
             mTvArea.setVisibility(View.VISIBLE);
             mGpFoot.setVisibility(View.VISIBLE);

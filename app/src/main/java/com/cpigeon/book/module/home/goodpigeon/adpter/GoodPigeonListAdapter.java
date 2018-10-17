@@ -66,8 +66,8 @@ public class GoodPigeonListAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
         helper.setText(R.id.tvBlood, item.getPigeonBloodName());
 
         helper.itemView.setOnClickListener(v -> {
-            BreedPigeonDetailsFragment.startGoodPigeon(getBaseActivity()
-                    ,item.getPigeonID(), item.getFootRingID(), item.getUserID());
+            BreedPigeonDetailsFragment.start(getBaseActivity()
+                    , item.getPigeonID(), item.getFootRingID(), item.getUserID(), true);
         });
     }
 }

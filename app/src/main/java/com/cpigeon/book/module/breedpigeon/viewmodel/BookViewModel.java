@@ -20,6 +20,7 @@ public class BookViewModel extends BaseViewModel {
     public String foodId;
     public String pigeonId;
     public boolean isNeedMatch = false;
+    public boolean isGoodPigeon = false;
 
     public BloodBookEntity mBloodBookEntity;
 
@@ -30,16 +31,15 @@ public class BookViewModel extends BaseViewModel {
         foodId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
         pigeonId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
         String uid = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA_3);
-        if(StringUtil.isStringValid(uid)){
+        if (StringUtil.isStringValid(uid)) {
             pUid = uid;
         }
     }
 
 
-
     //获取 血统书  四代
     public void getBloodBook() {
-        submitRequestThrowError(BloodBookModel.getBloodBook4(pUid, foodId, pigeonId, isNeedMatch), r -> {
+        submitRequestThrowError(BloodBookModel.getBloodBook4(pUid, foodId, pigeonId, isNeedMatch, isGoodPigeon), r -> {
             if (r.isOk()) {
                 mBloodBookEntity = r.data;
                 mBookLiveData.setValue(mBloodBookEntity);

@@ -18,7 +18,7 @@ import com.cpigeon.book.util.MathUtil;
 
 public class CircleView extends View {
     private Paint mPaint;
-    private float mCircleWidth = 10;
+    private float mCircleWidth = 5;
     private RectF mRectF;
 
     private int mDataColor;

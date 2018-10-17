@@ -142,6 +142,7 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
     public static final String TYPE_MY_SHARE = "TYPE_MY_SHARE";
     public static final String TYPE_HIS_SHARE = "TYPE_HIS_SHARE";
     public static final String TYPE_SHARE_PIGEON = "TYPE_SHARE_PIGEON";
+    public static final String TYPE_GOOD_PIGEON = "TYPE_GOOD_PIGEON";
     protected static final String KEY_TITLE_FOOT_NUMBER = "KEY_TITLE_FOOT_NUMBER";
 
 
@@ -192,7 +193,7 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
         mBookViewModel.foodId = mBreedPigeonDetailsViewModel.footId;
         mBookViewModel.pigeonId = mBreedPigeonDetailsViewModel.pigeonId;
 
-        mBreedPigeonDetailsViewModel.getPigeonDetails();//获取 鸽子  详情
+/*        mBreedPigeonDetailsViewModel.getPigeonDetails();//获取 鸽子  详情
         mBookViewModel.getBloodBook();// //获取 血统书  四代
 
         mSelectTypeViewModel.getSelectType_Sex();
@@ -200,7 +201,7 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_eyeSand();
         mSelectTypeViewModel.getSelectType_lineage();
         mSelectTypeViewModel.getSelectType_State();
-        mSelectTypeViewModel.getSelectType_PigeonSource();
+        mSelectTypeViewModel.getSelectType_PigeonSource();*/
 
         initViewPager();
 

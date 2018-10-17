@@ -66,8 +66,9 @@ public class BreedPigeonModel {
     }
 
 
-    //hl 添加种鸽
+    //hl 添加鸽子
     public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Add(
+            String pigeonType,
             String coodid,
             String footnum,
             String footnumto,
@@ -84,12 +85,13 @@ public class BreedPigeonModel {
             String phototypeid,
             String sonFootId,
             String sonPigeonId,
+            String setFootTime,
             Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntryEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_add)
-                .addBody("typeid", PigeonEntity.ID_BREED_PIGEON)//
+                .addBody("typeid", pigeonType)//
                 .addBody("coodid", coodid)// 国家Id
                 .addBody("footnum", footnum)//足环（可选可填，传足环号）
                 .addBody("footnumto", footnumto)// 副环（可选可填 ，传足环号）
@@ -106,6 +108,7 @@ public class BreedPigeonModel {
                 .addBody("phototypeid", phototypeid)// 信鸽状态ID
                 .addBody("sonpigeonid", sonPigeonId)// 子类鸽子id
                 .addBody("sonfootid", sonFootId)// 子类足环id
+                .addBody("foottim", setFootTime)// 足环挂环日期
                 .addImageFileBodys(body)
                 .request();
     }
