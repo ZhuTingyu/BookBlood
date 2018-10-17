@@ -1,93 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
 
     <TextView
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="14dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/text_pigeon_house_location" />
+        android:text="@string/text_pigeon_house_location"
+        android:textColor="@color/black"
+        android:textSize="@dimen/large_text_size" />
 
-    <include layout="@layout/include_line_view_layout"/>
+    <include layout="@layout/include_line_view_layout" />
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <RelativeLayout
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="11dp">
+
             <TextView
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/medium_text_size"
-                android:textColor="@color/black"
                 android:layout_centerVertical="true"
-                android:text="@string/text_pigeon_house_lo" />
+                android:layout_gravity="center_horizontal"
+                android:text="@string/text_pigeon_house_lo"
+                android:textColor="@color/general_text_hint_color"
+                android:textSize="@dimen/small_text_size" />
 
             <ImageView
                 android:id="@+id/imgLocation"
-                android:src="@mipmap/ic_location"
-                android:layout_gravity="right"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:src="@mipmap/ic_location" />
 
         </RelativeLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/edLoDegree"
                 android:layout_width="0dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
-                android:layout_height="32dp"
-                android:textSize="@dimen/medium_text_size"
-                android:hint="@string/text_degree"
+                android:background="@drawable/shape_btn_stroke_gray"
                 android:digits="@string/text_digits_number"
+                android:hint="@string/text_degree"
                 android:inputType="number"
-                android:background="@drawable/shape_btn_stroke_gray"/>
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/medium_text_size" />
 
             <EditText
                 android:id="@+id/edLoMinute"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textSize="@dimen/medium_text_size"
-                android:hint="@string/text_minute"
+                android:layout_height="24dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_stroke_gray"
                 android:digits="@string/text_digits_number"
+                android:hint="@string/text_minute"
                 android:inputType="number"
-                android:background="@drawable/shape_btn_stroke_gray"/>
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/medium_text_size" />
 
             <EditText
                 android:id="@+id/edLoSecond"
-                android:hint="@string/text_second"
                 android:layout_width="0dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
-                android:textSize="@dimen/medium_text_size"
-                android:layout_height="32dp"
-                android:inputType="number"
+                android:background="@drawable/shape_btn_stroke_gray"
                 android:digits="@string/text_digits_number_with_point"
-                android:background="@drawable/shape_btn_stroke_gray"/>
+                android:hint="@string/text_second"
+                android:inputType="number"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/medium_text_size" />
 
 
         </LinearLayout>
@@ -95,101 +101,115 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
         <RelativeLayout
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="11dp">
+
             <TextView
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/medium_text_size"
-                android:textColor="@color/black"
                 android:layout_centerVertical="true"
-                android:text="@string/text_pigeon_house_la" />
+                android:layout_gravity="center_horizontal"
+                android:text="@string/text_pigeon_house_la"
+                android:textColor="@color/general_text_hint_color"
+                android:textSize="@dimen/small_text_size" />
 
         </RelativeLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/edLaDegree"
                 android:layout_width="0dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
-                android:layout_height="32dp"
-                android:textSize="@dimen/medium_text_size"
-                android:hint="@string/text_degree"
+                android:background="@drawable/shape_btn_stroke_gray"
                 android:digits="@string/text_digits_number"
+                android:hint="@string/text_degree"
                 android:inputType="number"
-                android:background="@drawable/shape_btn_stroke_gray"/>
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/medium_text_size" />
 
             <EditText
                 android:id="@+id/edLaMinute"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textSize="@dimen/medium_text_size"
-                android:hint="@string/text_minute"
+                android:layout_height="24dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_stroke_gray"
                 android:digits="@string/text_digits_number"
+                android:hint="@string/text_minute"
                 android:inputType="number"
-                android:background="@drawable/shape_btn_stroke_gray"/>
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/medium_text_size" />
 
             <EditText
                 android:id="@+id/edLaSecond"
-                android:hint="@string/text_second"
                 android:layout_width="0dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
-                android:textSize="@dimen/medium_text_size"
-                android:layout_height="32dp"
-                android:inputType="number"
+                android:background="@drawable/shape_btn_stroke_gray"
                 android:digits="@string/text_digits_number_with_point"
-                android:background="@drawable/shape_btn_stroke_gray"/>
+                android:hint="@string/text_second"
+                android:inputType="number"
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/medium_text_size" />
 
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <include
-        layout="@layout/include_line_view_layout"/>
+    <include layout="@layout/include_line_view_layout" />
 
     <RelativeLayout
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp">
+
+
+        <!--style="@style/bottom_style_cancel"-->
         <TextView
             android:id="@+id/tvCancel"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_btn_stroke_gray"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="@string/btn_cancel"
-            style="@style/bottom_style_cancel"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content" />
+            android:textColor="@color/color_4c4c4c" />
 
+
+        <!-- style="@style/bottom_style"-->
         <TextView
             android:id="@+id/tvSure"
-            android:text="@string/btn_confirm"
-            style="@style/bottom_style"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content" />
+            android:layout_centerVertical="true"
+            android:background="@drawable/background_line_weather4"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/btn_confirm"
+            android:textColor="@color/color_white" />
 
 
     </RelativeLayout>
-
 
 
 </LinearLayout>

@@ -218,7 +218,8 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
             setProgressVisible(false);
             mBreedPigeonModifyViewModel.mPigeonEntity = datas;
 
-            tvFoot.setText(datas.getFootRingNum());//足环号
+            tvFoot.setText(String.valueOf(datas.getFootCode() + "" + datas.getFootRingNum()));//足环号
+
             //设置性别
             PigeonPublicUtil.setPigeonSexImg(datas.getPigeonSexName(), imgSex);
 
@@ -253,7 +254,7 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
                 tvFeatherColor.setText(getString(R.string.str_hint_no));//羽色
             }
 
-            if (StringUtil.isStringValid(datas.getOutShellTime())) {
+            if (StringUtil.isStringValid(datas.getOutShellTime()) && !datas.getOutShellTime().equals("0001-01-01")) {
                 tvTheirShellsDate.setText(datas.getOutShellTime());//出壳日期
             } else {
                 tvTheirShellsDate.setText(getString(R.string.str_hint_no));//出壳日期
@@ -273,7 +274,7 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
 
             Glide.with(this)
                     .load(datas.getCoverPhotoUrl())
-                    .placeholder(R.drawable.ic_img_default)
+                    .placeholder(R.drawable.ic_img_default2)
                     .into(img_pigeon);//鸽子照片
             if (TYPE_HIS_SHARE.equals(mType)) {
                 tvLeft.setText(mBreedPigeonDetailsViewModel.mPigeonEntity.getUserName());

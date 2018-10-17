@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="@dimen/normal_safe_distance"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/spacing_left_reight">
 
     <include layout="@layout/include_btn_my_homing" />
 
 
     <android.support.v7.widget.CardView
-        android:layout_marginTop="@dimen/normal_safe_distance"
         android:layout_width="match_parent"
         android:layout_height="161dp"
+        android:layout_margin="@dimen/normal_safe_distance"
+        android:layout_marginTop="@dimen/normal_safe_distance"
         app:cardCornerRadius="3dp"
         app:cardElevation="5dp">
 
@@ -20,7 +21,7 @@
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/line"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </android.support.v7.widget.CardView>
 

@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.amap.api.services.core.LatLonPoint;
@@ -25,10 +28,8 @@ import com.base.util.LocationFormatUtils;
 import com.base.util.Utils;
 import com.base.util.map.DistrictSearchManager;
 import com.base.util.map.LocationLiveData;
-import com.base.util.map.NameToAddressManager;
 import com.base.util.map.PointToAddressManager;
 import com.cpigeon.book.R;
-import com.cpigeon.book.widget.SearchTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
 
     public static int CODE_LOCATION = 0x234;
 
-    private SearchTextView mSearchTextView;
+    private EditText mSearchTextView;
     private TextView mTvLa;
     private TextView mTvLo;
     private TextView mTvOk;
@@ -56,10 +57,9 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
     String addString = null;
 
 
-
     public static void start(Activity activity, int requestCode) {
         IntentBuilder.Builder()
-                .startParentActivity(activity, SelectLocationByMapFragment.class, requestCode);
+                .startParentActivity(activity, false, SelectLocationByMapFragment.class, requestCode);
     }
 
     @Nullable
@@ -72,7 +72,7 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(R.string.title_map_location);
+//        setTitle(R.string.title_map_location);
         mPointToAddressManager = new PointToAddressManager(getBaseActivity())
                 .setSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
                     @Override
@@ -86,7 +86,7 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
                     }
                 });
 
-        mDistrictSearchManager =  DistrictSearchManager.build(getBaseActivity()).setSearchListener(districtResult -> {
+        mDistrictSearchManager = DistrictSearchManager.build(getBaseActivity()).setSearchListener(districtResult -> {
             ArrayList<DistrictItem> data = districtResult.getDistrict();
             if (!data.isEmpty()) {
                 LatLonPoint point = districtResult.getDistrict().get(0).getCenter();
@@ -111,7 +111,7 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
             mAddress = null;
         });
 
-        mSearchTextView = findViewById(R.id.searchTextView);
+        mSearchTextView = findViewById(R.id.et_input);
         mTvLa = findViewById(R.id.tvLa);
         mTvLo = findViewById(R.id.tvLo);
         mTvOk = findViewById(R.id.tvOk);
@@ -129,17 +129,29 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
 
         });
 
-        mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
-            @Override
-            public void search(String key) {
-                mDistrictSearchManager.keyword(key).search();
-            }
+//        mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
+//            @Override
+//            public void search(String key) {
+//
+//            }
+//
+//            @Override
+//            public void cancel() {
+//
+//            }
+//        });
 
-            @Override
-            public void cancel() {
 
+        mSearchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    mDistrictSearchManager.keyword(v.getText().toString()).search();
+                }
+                return false;
             }
         });
+
 
         mTvOk.setOnClickListener(v -> {
             if (mRegeocodeResult == null) {
@@ -155,7 +167,7 @@ public class SelectLocationByMapFragment extends BaseMapFragment {
         });
     }
 
-    private void  setLocation(RegeocodeResult regeocodeResult){
+    private void setLocation(RegeocodeResult regeocodeResult) {
         if (regeocodeResult == null) {
             return;
         }

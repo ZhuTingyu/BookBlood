@@ -32,10 +32,11 @@
 
             <ImageView
                 android:id="@+id/img_sex"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="18dp"
                 android:src="@mipmap/ic_male" />
+
         </LinearLayout>
 
         <!--副环-->

@@ -1,7 +1,6 @@
 package com.cpigeon.book.module.feedpigeon.adapter;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -9,10 +8,7 @@ import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
-
-import java.util.List;
 
 /**
  * Created by Zhu TingYu on 2018/9/7.
@@ -92,8 +88,8 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mTvLeft1.setText(R.string.text_drug_name);
             mTvRight1.setText(item.getName());
 
-            mTvLeft2.setText(R.string.text_drug_after_result);
-            mTvRight2.setText(item.getBitEffect());
+            mTvLeft2.setText(R.string.text_illness_name);
+            mTvRight2.setText(item.getListInfo());
 
             mTvLeft3.setText(R.string.text_drug_after_status);
             mTvRight3.setText(item.getState());
@@ -106,13 +102,13 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mLlTextRoot.setVisibility(View.VISIBLE);
             mLlTextContent1.setVisibility(View.VISIBLE);
             mLlTextContent2.setVisibility(View.VISIBLE);
-            mLlTextContent3.setVisibility(View.VISIBLE);
-            mLlTextContent4.setVisibility(View.VISIBLE);
+            mLlTextContent3.setVisibility(View.GONE);
+            mLlTextContent4.setVisibility(View.GONE);
 
             mTvLeft1.setText(R.string.text_care_drug_name);
             mTvRight1.setText(item.getName());
 
-            mTvLeft2.setText(R.string.text_function);
+            mTvLeft2.setText(R.string.text_care_drug_function);
             mTvRight2.setText(item.getListInfo());
 
             mTvLeft3.setText(R.string.text_drug_after_result);
@@ -143,7 +139,7 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mLlTextRoot.setVisibility(View.VISIBLE);
             mLlTextContent1.setVisibility(View.VISIBLE);
             mLlTextContent2.setVisibility(View.VISIBLE);
-            mLlTextContent3.setVisibility(View.VISIBLE);
+            mLlTextContent3.setVisibility(View.GONE);
             mLlTextContent4.setVisibility(View.GONE);
 
             mTvLeft1.setText(R.string.text_illness_symptom);
@@ -152,8 +148,8 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
             mTvLeft2.setText(R.string.text_illness_name);
             mTvRight2.setText(item.getName());
 
-            mTvLeft3.setText(R.string.text_is_user_drug);
-            mTvRight3.setText(item.getState());
+//            mTvLeft3.setText(R.string.text_is_user_drug);
+//            mTvRight3.setText(item.getState());
         }
 
         addTopAndBttomMargin(helper, 16);

@@ -26,6 +26,7 @@ import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonPhotoEntity;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonDetailsAdapter;
 import com.cpigeon.book.module.feedpigeon.childfragment.CareDrugFragment;
 import com.cpigeon.book.module.feedpigeon.childfragment.DrugUseCaseFragment;
@@ -182,7 +183,7 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
                 FeedPigeonEntity item = mAdapter.getData().get(position);
 
                 if (item.getTypeID() == 5) { //随拍
-    //                PigeonPhotoDetailsFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity.getFootRingNum(), 0);
+                    //                PigeonPhotoDetailsFragment.start(getBaseActivity(), mFeedPigeonListViewModel.mPigeonEntity.getFootRingNum(), 0);
 
                     PigeonPhotoDetailsFragment.start(getBaseActivity(),
                             mFeedPigeonListViewModel.mPigeonEntity,
@@ -235,6 +236,12 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         GlideUtil.setGlideImageView(getBaseActivity(), UserModel.getInstance().getUserData().touxiangurl, mCircleImageView);
         mTvFootNumber.setText("");
 
+
+        view.setOnClickListener(v -> {
+            BreedPigeonDetailsFragment.start(getBaseActivity(),
+                    mFeedPigeonListViewModel.mPigeonEntity.getPigeonID(),
+                    mFeedPigeonListViewModel.mPigeonEntity.getFootRingID());
+        });
 
         return view;
     }

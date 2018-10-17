@@ -184,7 +184,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
             setProgressVisible(false);
 
 //            mDrugUseCaseViewModel.illnessRecord = String.valueOf(datas.getPigeonDiseaseID());//病情记录id
-            mDrugUseCaseViewModel.illnessName = datas.getPigeonDiseaseName();//疾病名称
+            mDrugUseCaseViewModel.illnessName = datas.getDiseaseName();//疾病名称
             mDrugUseCaseViewModel.drugName = String.valueOf(datas.getDrugNameID());//药品名称
             mDrugUseCaseViewModel.drugUseTime = datas.getUseDrugTime();//用药日期
 //            mDrugUseCaseViewModel.recordTime = datas.getRecordTime();//记录日期
