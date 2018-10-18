@@ -18,14 +18,12 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.basepigeon.BasePigeonDetailsFragment;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.basepigeon.SelectBloodFragment;
 import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.feedpigeon.GrowthReportFragment;
-import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.makebloodbook.PreviewsBookActivity;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
@@ -302,7 +300,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 try {
                     PigeonEntity mBreedPigeonEntity = mBreedPigeonDetailsViewModel.mBreedPigeonData.getValue();
                     PlayAddFragment.start(getBaseActivity(),
-                            new PigeonEntryEntity.Builder()
+                            new PigeonEntity.Builder()
                                     .FootRingID(mBreedPigeonEntity.getFootRingID())
                                     .FootRingNum(mBreedPigeonEntity.getFootRingNum())
                                     .PigeonID(mBreedPigeonEntity.getPigeonID())

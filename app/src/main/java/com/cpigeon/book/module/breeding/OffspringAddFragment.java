@@ -12,9 +12,8 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
-import com.cpigeon.book.module.breeding.viewmodel.OffspringViewModel;
 import com.cpigeon.book.module.basepigeon.BasePigeonEntryFragment;
+import com.cpigeon.book.module.breeding.viewmodel.OffspringViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 
 /**
@@ -126,7 +125,7 @@ public class OffspringAddFragment extends BasePigeonEntryFragment {
         });
     }
 
-    public void setRequest(PigeonEntryEntity o) {
+    public void setRequest(PigeonEntity o) {
         PigeonEntity mBreedPigeonEntity = new PigeonEntity.Builder()
                 .FootRingID(o.getFootRingID())
                 .FootRingNum(o.getFootRingNum())

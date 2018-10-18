@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PlayAdditionalInfoEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.play.adapter.PlayAddInfoAdapter;
@@ -93,7 +93,7 @@ public class PlayFragment2 extends BaseBookFragment {
             try {
                 PlayAdditionalInfoEntity mPigeonPlayEntity = (PlayAdditionalInfoEntity) adapter.getData().get(position);
 
-                PlayAddFragment.start(getBaseActivity(), new PigeonEntryEntity.Builder()
+                PlayAddFragment.start(getBaseActivity(), new PigeonEntity.Builder()
                         .PigeonID(String.valueOf(mPigeonPlayEntity.getPigeonID()))
                         .FootRingID(String.valueOf(mPigeonPlayEntity.getFootRingID()))
                         .MatchInfoID(String.valueOf(mPigeonPlayEntity.getMatchInfoID()))

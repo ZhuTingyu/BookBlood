@@ -4,7 +4,6 @@ import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.Map;
@@ -19,7 +18,7 @@ public class RacingPigeonModel {
 
 
     //hl 添加赛鸽
-    public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Racing_Add(String coodid,
+    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_Racing_Add(String coodid,
                                                                                        String footnum,
                                                                                        String footnumto,
                                                                                        String sourceid,
@@ -35,8 +34,8 @@ public class RacingPigeonModel {
                                                                                        String phototypeid,
                                                                                        String foottime,
                                                                                        Map<String, String> body) {
-        return RequestData.<ApiResponse<PigeonEntryEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
+        return RequestData.<ApiResponse<PigeonEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_racing_add)
                 .addBody("coodid", coodid)// 国家Id

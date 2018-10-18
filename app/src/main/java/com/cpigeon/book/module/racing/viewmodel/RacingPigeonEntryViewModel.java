@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.RacingPigeonModel;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BasePigeonViewModel;
 
 import org.greenrobot.eventbus.EventBus;
@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.EventBus;
 public class RacingPigeonEntryViewModel extends BasePigeonViewModel {
 
 
-    public MutableLiveData<PigeonEntryEntity> mEntryData = new MutableLiveData<>();
+    public MutableLiveData<PigeonEntity> mEntryData = new MutableLiveData<>();
 
     //赛鸽录入
     public void addRacingPigeonEntry() {

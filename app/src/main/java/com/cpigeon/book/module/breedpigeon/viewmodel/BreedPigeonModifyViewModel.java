@@ -6,8 +6,6 @@ import com.base.http.HttpErrorException;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
-import com.cpigeon.book.service.EventBusService;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,7 +21,7 @@ import io.reactivex.functions.Consumer;
 public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
 
 
-    public MutableLiveData<PigeonEntryEntity> mBreedPigeonData = new MutableLiveData<>();
+    public MutableLiveData<PigeonEntity> mBreedPigeonData = new MutableLiveData<>();
 
     //鸽子id
     public String pigeonid;

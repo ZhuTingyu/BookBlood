@@ -261,6 +261,20 @@ public class PigeonEntity implements Serializable {
         setCoverPhotoTypeID(builder.CoverPhotoTypeID);
         setCoverPhotoTypeName(builder.CoverPhotoTypeName);
         setMatchCount(builder.MatchCount);
+        setShareTime(builder.ShareTime);
+        setProvince(builder.Province);
+        setCity(builder.City);
+        setUserID(builder.UserID);
+        setUserName(builder.UserName);
+        setUserService(builder.UserService);
+        setPigeonHomePhone(builder.PigeonHomePhone);
+        setMatchInfoList(builder.MatchInfoList);
+        MatchList = builder.MatchList;
+        setPigeonMoney(builder.PigeonMoney);
+        setMatchInfoID(builder.MatchInfoID);
+        setMatchInfo(builder.MatchInfo);
+        setPigeonMatchID(builder.PigeonMatchID);
+        isSelect = builder.isSelect;
     }
 
     public String getShareTime() {
@@ -618,6 +632,20 @@ public class PigeonEntity implements Serializable {
         private String CoverPhotoTypeID;// 图片typeId
         private String CoverPhotoTypeName;// 图片typeName
         private String MatchCount;
+        private String ShareTime;
+        private String Province;
+        private String City;
+        private String UserID;
+        private String UserName;
+        private String UserService;
+        private String PigeonHomePhone;
+        private List<PigeonPlayEntity> MatchInfoList;
+        private List<PigeonPlayEntity> MatchList;
+        private String PigeonMoney;
+        private String MatchInfoID;
+        private String MatchInfo;
+        private String PigeonMatchID;
+        private boolean isSelect;
 
 
         public Builder() {
@@ -835,6 +863,76 @@ public class PigeonEntity implements Serializable {
 
         public Builder MatchCount(String val) {
             MatchCount = val;
+            return this;
+        }
+
+        public Builder ShareTime(String val) {
+            ShareTime = val;
+            return this;
+        }
+
+        public Builder Province(String val) {
+            Province = val;
+            return this;
+        }
+
+        public Builder City(String val) {
+            City = val;
+            return this;
+        }
+
+        public Builder UserID(String val) {
+            UserID = val;
+            return this;
+        }
+
+        public Builder UserName(String val) {
+            UserName = val;
+            return this;
+        }
+
+        public Builder UserService(String val) {
+            UserService = val;
+            return this;
+        }
+
+        public Builder PigeonHomePhone(String val) {
+            PigeonHomePhone = val;
+            return this;
+        }
+
+        public Builder MatchInfoList(List<PigeonPlayEntity> val) {
+            MatchInfoList = val;
+            return this;
+        }
+
+        public Builder MatchList(List<PigeonPlayEntity> val) {
+            MatchList = val;
+            return this;
+        }
+
+        public Builder PigeonMoney(String val) {
+            PigeonMoney = val;
+            return this;
+        }
+
+        public Builder MatchInfoID(String val) {
+            MatchInfoID = val;
+            return this;
+        }
+
+        public Builder MatchInfo(String val) {
+            MatchInfo = val;
+            return this;
+        }
+
+        public Builder PigeonMatchID(String val) {
+            PigeonMatchID = val;
+            return this;
+        }
+
+        public Builder isSelect(boolean val) {
+            isSelect = val;
             return this;
         }
 
