@@ -29,8 +29,14 @@ public class PlayListAdapter extends BaseQuickAdapter<PigeonPlayEntity, BaseView
         try {
             //赛事名称
             helper.setText(R.id.tv_title, item.getMatchName());
-            helper.setText(R.id.tv_ullage, "空距 | " + item.getMatchInterval() + "公里");
-            helper.setText(R.id.tv_time, "比赛日期 | " + item.getMatchTime());
+
+
+//            TextView tv_ullage = helper.getView(R.id.tv_ullage);
+//            tv_ullage.setText(KeywordUtil.matcherSearchTitle(mContext.getResources().getColor(R.color.color_feedback_handled), "空距 | " + item.getMatchInterval() + "公里", "|"));
+//            helper.setText(R.id.tv_time, KeywordUtil.matcherSearchTitle(mContext.getResources().getColor(R.color.bg_line_weather_l), "比赛日期 | " + item.getMatchTime(), "|"));
+
+            helper.setText(R.id.tv_ullage, item.getMatchInterval() + "公里");
+            helper.setText(R.id.tv_time, item.getMatchTime());
             helper.setText(R.id.tv_paly_rank, "第" + item.getMatchNumber() + "名");//比赛名次
             helper.setText(R.id.tv_paly_scale, "总" + item.getMatchCount() + "羽");//比赛名次
 

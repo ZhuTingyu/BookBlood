@@ -6,13 +6,12 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="24dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/normal_safe_distance"
         android:background="@drawable/shape_bg_btn_launch_skip"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:gravity="center"
         android:text="用药"
         android:textColor="@color/white"
         android:textSize="@dimen/medium_text_size" />
@@ -23,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ll1"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/tvTitle"
         android:background="@color/color_feed_record_line" />
 
@@ -47,12 +46,12 @@
 
     <LinearLayout
         android:id="@+id/ll1"
-        android:layout_marginRight="@dimen/normal_safe_distance"
         android:layout_width="match_parent"
-        android:paddingBottom="24dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/normal_safe_distance"
         android:layout_toRightOf="@id/v2"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
 
         <RelativeLayout
             android:id="@+id/rl1"
@@ -86,16 +85,18 @@
                     android:visibility="visible">
 
                     <ImageView
-                        android:layout_gravity="center_vertical"
                         android:id="@+id/imgIcon"
                         android:layout_width="57dp"
-                        android:layout_height="43dp" />
+                        android:layout_height="43dp"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitXY" />
 
                     <TextView
+                        android:layout_marginLeft="8dp"
                         android:id="@+id/tvImageContent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_text_title"
+                        android:textColor="@color/general_text_color"
                         android:textSize="@dimen/small_text_size_2"
                         tools:text="123333333333333333333333333333333333333333333333333333333333" />
 
@@ -103,10 +104,10 @@
 
                 <LinearLayout
                     android:id="@+id/llTextRoot"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -129,18 +130,18 @@
 
                             <View
                                 android:layout_width="1dp"
-                                android:paddingTop="2dp"
-                                android:paddingBottom="2dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:background="@color/color_line" />
+                                android:background="@color/color_line"
+                                android:paddingBottom="3dp"
+                                android:paddingTop="3dp" />
 
                             <TextView
                                 android:id="@+id/tvRight1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_text_title"
+                                android:textColor="@color/general_text_color"
                                 android:textSize="@dimen/small_text_size_2"
                                 tools:text="名称名称" />
 
@@ -148,9 +149,9 @@
 
                         <LinearLayout
                             android:id="@+id/llTextContent2"
-                            android:layout_marginTop="6dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -164,27 +165,27 @@
                             <View
                                 android:layout_width="1dp"
                                 android:layout_height="match_parent"
-                                android:paddingTop="2dp"
-                                android:paddingBottom="2dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:background="@color/color_line" />
+                                android:background="@color/color_line"
+                                android:paddingBottom="3dp"
+                                android:paddingTop="3dp" />
 
                             <TextView
                                 android:id="@+id/tvRight2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_text_title"
+                                android:textColor="@color/general_text_color"
                                 android:textSize="@dimen/small_text_size_2"
                                 tools:text="名称名称" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/llTextContent3"
-                            android:layout_marginTop="6dp"
-
                             android:layout_width="match_parent"
+
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -198,26 +199,26 @@
                             <View
                                 android:layout_width="1dp"
                                 android:layout_height="match_parent"
-                                android:paddingTop="2dp"
-                                android:paddingBottom="2dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:background="@color/color_line" />
+                                android:background="@color/color_line"
+                                android:paddingBottom="3dp"
+                                android:paddingTop="3dp" />
 
                             <TextView
                                 android:id="@+id/tvRight3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_text_title"
+                                android:textColor="@color/general_text_color"
                                 android:textSize="@dimen/small_text_size_2"
                                 tools:text="名称名称" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/llTextContent4"
-                            android:layout_marginTop="6dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -230,18 +231,18 @@
 
                             <View
                                 android:layout_width="1dp"
-                                android:paddingTop="2dp"
-                                android:paddingBottom="2dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:background="@color/color_line" />
+                                android:background="@color/color_line"
+                                android:paddingBottom="3dp"
+                                android:paddingTop="3dp" />
 
                             <TextView
                                 android:id="@+id/tvRight4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_text_title"
+                                android:textColor="@color/general_text_color"
                                 android:textSize="@dimen/small_text_size_2"
                                 tools:text="名称名称" />
 
@@ -253,7 +254,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
 
         </RelativeLayout>
 

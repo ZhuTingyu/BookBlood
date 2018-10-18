@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
     android:background="@color/color_white"
     android:orientation="vertical"
@@ -12,12 +12,12 @@
 
     <LinearLayout
         android:id="@+id/ll_details_other"
-        android:paddingLeft="@dimen/spacing_left_reight"
-        android:paddingRight="@dimen/spacing_left_reight"
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/spacing_left_reight"
+        android:paddingRight="@dimen/spacing_left_reight">
 
         <TextView
             android:id="@+id/tv_make_book"
@@ -32,22 +32,21 @@
             android:textSize="@dimen/small_text_size_2" />
 
         <View
-            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
-
+            android:layout_weight="1"
+            android:visibility="gone" />
 
         <TextView
-            android:visibility="gone"
-            android:id="@+id/tv_lineage_analysis"
+            android:id="@+id/tv_breed_info"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/shape_bg_corner_3_solid_yellow"
             android:gravity="center"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="血统分析"
+            android:text="繁育信息"
             android:textColor="@color/color_white"
             android:textSize="@dimen/small_text_size_2" />
 
@@ -58,7 +57,6 @@
             android:layout_weight="1" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_lineage_roots"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -68,7 +66,8 @@
             android:paddingRight="8dp"
             android:text="血统寻根"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/small_text_size_2" />
+            android:textSize="@dimen/small_text_size_2"
+            android:visibility="gone" />
 
         <View
             android:layout_width="0dp"
@@ -76,25 +75,27 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/tv_breed_info"
+            android:id="@+id/tv_lineage_analysis"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/shape_bg_corner_3_solid_yellow"
             android:gravity="center"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="繁育信息"
+            android:text="血统分析"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/small_text_size_2" />
+            android:textSize="@dimen/small_text_size_2"
+            android:visibility="gone" />
+
 
     </LinearLayout>
 
     <com.cpigeon.book.widget.family.FamilyTreeView
         android:id="@+id/familyTreeView"
-        app:TreeView_isMiniModel="true"
-        app:TreeView_isHaveCurrent="false"
         android:layout_width="match_parent"
-        android:layout_height="380dp">
+        android:layout_height="380dp"
+        app:TreeView_isHaveCurrent="false"
+        app:TreeView_isMiniModel="true">
 
     </com.cpigeon.book.widget.family.FamilyTreeView>
 

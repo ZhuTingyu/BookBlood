@@ -77,7 +77,7 @@
     <string name="my_order_list">TXGP_GetOrderList</string>
 
     <!--更新-->
-    <string name="update_info">TXGP_GongGao_GetList</string>
+    <string name="update_info">version</string>
 
     <!--公告通知-->
     <string name="get_announcement_notice_list">TXGP_GongGao_GetList</string>

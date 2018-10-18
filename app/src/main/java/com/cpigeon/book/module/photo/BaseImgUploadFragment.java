@@ -70,7 +70,7 @@ public class BaseImgUploadFragment extends BaseBookFragment {
         mImgUploadViewModel = new ImgUploadViewModel();
         initViewModels(mSelectTypeViewModel, mImgUploadViewModel);
 
-       mImgUploadViewModel. mImgTypeEntity = (ImgTypeEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mImgUploadViewModel.mImgTypeEntity = (ImgTypeEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
     }
 
     @Nullable
@@ -86,12 +86,12 @@ public class BaseImgUploadFragment extends BaseBookFragment {
 
         setTitle(getString(R.string.str_img_upload));
 
-
         composite.add(RxUtils.delayed(50, aLong -> {
             mLlRoot.setLineInputViewState(false);
         }));
 
         bindUi(RxUtils.textChanges(llLabel.getEditText()), mImgUploadViewModel.setImgLabel());//图片标签
+        bindUi(RxUtils.textChanges(boxViewRemark.getEditText()), mImgUploadViewModel.setImgRemark());//图片标签
 
         mSelectTypeViewModel.getSelectType_ImgType();
         initData();

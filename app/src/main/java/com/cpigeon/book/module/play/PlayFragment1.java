@@ -46,7 +46,6 @@ public class PlayFragment1 extends BaseBookFragment {
         initViewModels(mBreedPigeonDetailsViewModel, mPlayListViewModel);
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -27,7 +27,7 @@ public class PigeonHouseViewModel extends BaseViewModel {
     public String mCity;//市
     public String mProvince;//省
     public String mPigeonISOCID;
-    public String mPigeonHomeAdds;
+    public String mPigeonHomeAdds;//详细地址
     public String mPigeonMatchNum;
     public String mHeadUrl;
 
@@ -59,6 +59,7 @@ public class PigeonHouseViewModel extends BaseViewModel {
                 , mLatitude, mLongitude, mProvince, mCounty, mCity, mPigeonISOCID, mPigeonHomeAdds, mPigeonMatchNum), r -> {
             if (r.isOk()) {
                 addR.setValue(r.msg);
+                hintDialog(r.msg);
                 PigeonHouseEntity entity = new PigeonHouseEntity();
                 entity.setLongitude(Double.parseDouble(mLongitude));
                 entity.setUsePigeonHomeNum(mUsePigeonHomeNum);

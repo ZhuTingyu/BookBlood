@@ -47,7 +47,6 @@ public class SnapshotImgUploadFragment extends BaseImgUploadFragment {
                 mImgUploadViewModel.mSelectTypes_ImgType = datas;
                 String type = mImgUploadViewModel.mImgTypeEntity.getImgTypeSpecified();
                 if (StringUtil.isStringValid(type)) {
-                    llLabel.setRightImageVisible(false);
                     llLabel.setCanEdit(false);
                     llLabel.setRightImageVisible(false);
                     for (SelectTypeEntity entity : datas) {
@@ -74,6 +73,10 @@ public class SnapshotImgUploadFragment extends BaseImgUploadFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_label:
+
+                if (StringUtil.isStringValid(mImgUploadViewModel.mImgTypeEntity.getImgTypeSpecified())) {
+                    return;
+                }
 
                 if (!Lists.isEmpty(mImgUploadViewModel.mSelectTypes_ImgType)) {
 

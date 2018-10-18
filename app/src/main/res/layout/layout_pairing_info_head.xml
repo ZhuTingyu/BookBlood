@@ -8,6 +8,7 @@
     android:layout_marginTop="16dp">
 
     <LinearLayout
+        android:id="@+id/ll_head"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_view_height"
         android:gravity="center"

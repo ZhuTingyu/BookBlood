@@ -3,7 +3,6 @@ package com.cpigeon.book.service;
 import android.util.Log;
 
 import com.base.base.BaseViewModel;
-import com.base.http.HttpErrorException;
 
 import io.reactivex.functions.Consumer;
 
@@ -26,9 +25,12 @@ public class SingleLoginViewModel extends BaseViewModel {
                 return r.msg;
             } else {
                 Log.d("xiaohls", "onHandleIntent: 23");
-                throw new HttpErrorException(r);
+                return r.msg;
             }
         }), consumer);
+
+
+
     }
 
 }

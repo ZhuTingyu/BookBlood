@@ -33,6 +33,8 @@ public class OrderListFragment extends BaseBookFragment {
     private OrderListViewModel mViewModel;
     private OrderListAdapter mAdapter;
 
+    public String typeStr;
+
     public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, OrderListFragment.class);
@@ -56,6 +58,30 @@ public class OrderListFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = findViewById(R.id.list);
+
+
+        try {
+            typeStr = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
+
+            switch (typeStr) {
+                case OrderListFragment.TYPE_ALL:
+                    mViewModel.lx = "all";
+                    break;
+                case OrderListFragment.TYPE_UNPAID:
+                    mViewModel.lx = "dzf";
+                    break;
+
+                case OrderListFragment.TYPE_FINISH:
+                    mViewModel.lx = "ok";
+                    break;
+
+                case OrderListFragment.TYPE_OUT_OF_DATE:
+                    mViewModel.lx = "ygq";
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         mAdapter = new OrderListAdapter();
 

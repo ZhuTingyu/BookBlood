@@ -124,7 +124,7 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
                 }
             }
             mTvPrice.setText(sb);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

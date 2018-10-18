@@ -22,28 +22,80 @@
             android:textStyle="bold" />
 
         <!--空距-->
-        <TextView
-            android:id="@+id/tv_ullage"
+
+        <LinearLayout
+            android:gravity="center_vertical"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="空距 | 1000公里"
-            android:textColor="@color/color_4c4c4c"
-            android:textSize="@dimen/small_text_size_2" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="空距"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
 
 
-        <TextView
-            android:id="@+id/tv_time"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text=" | "
+                android:textColor="@color/general_text_hint_color"
+                android:textSize="@dimen/small_text_size_2" />
+
+
+            <TextView
+                android:id="@+id/tv_ullage"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text=""
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="比赛日期 | 2018-12-22"
-            android:textColor="@color/color_4c4c4c"
-            android:textSize="@dimen/small_text_size_2" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="比赛日期"
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text=" | "
+                android:textColor="@color/general_text_hint_color"
+                android:textSize="@dimen/small_text_size_2" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text=""
+                android:textColor="@color/color_4c4c4c"
+                android:textSize="@dimen/small_text_size_2" />
+
+        </LinearLayout>
+
+
 
 
         <TextView
             android:id="@+id/tv_source"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
+            android:layout_marginTop="4dp"
             android:text="来源于中鸽直播"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/small_text_size_2" />

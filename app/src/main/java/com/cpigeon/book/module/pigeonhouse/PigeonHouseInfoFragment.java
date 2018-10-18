@@ -35,7 +35,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.AssEntity;
-import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
@@ -238,7 +237,6 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
         }
 
-
     }
 
     protected void initObserve() {
@@ -262,7 +260,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         mViewModel.addR.observe(this, s -> {
             setProgressVisible(false);
             UserModel.getInstance().setIsHaveHouseInfo(true);
-            MainActivity.start(getBaseActivity());
+//            MainActivity.start(getBaseActivity());
         });
 
         mViewModel.mHouseEntityInfo.observe(this, r -> {
@@ -286,6 +284,10 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
             mLvCity.setContent(r.getProvince() + r.getCity() + r.getCounty());
             mLvAddress.setContent(r.getPigeonHomeAdds());
+
+            mViewModel.mProvince = r.getProvince();//省
+            mViewModel.mCity = r.getCity();//市
+            mViewModel.mCounty = r.getCounty();//县
 
 
             if (StringUtil.isStringValid(r.getXingming())) {
@@ -338,6 +340,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mTvAuth.setOnClickListener(v -> {
                 IdCertificationFragment.start(getBaseActivity(), false, CODE_AUTH);
             });
+            mViewModel.getPigeonHouse();
         }
     }
 

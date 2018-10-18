@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imgBack"
                 android:layout_gravity="center_vertical"
                 app:srcCompat="@drawable/svg_back"
