@@ -21,8 +21,8 @@ public class PigeonEntryEntity implements Parcelable {
 
     private String FootRingNum;
     private String PigeonID;
-    private String PigeonMoney;
     private String FootRingID;
+    private String PigeonMoney;
     private String MatchInfoID;
     private String MatchInfo;
     private String PigeonMatchID;

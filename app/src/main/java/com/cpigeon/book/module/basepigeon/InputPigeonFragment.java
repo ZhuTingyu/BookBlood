@@ -48,7 +48,6 @@ import com.cpigeon.book.module.photo.BaseImgUploadFragment;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.select.SelectFootRingFragment;
-import com.cpigeon.book.module.select.SelectPigeonFragment;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -512,7 +511,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         //种鸽录入、修改
         mViewModel.mDataPigeon.observe(this, datas -> {
 
-            PigeonEntryEntity o = datas.data;
+            PigeonEntity o = datas.data;
 
             EventBus.getDefault().post(new PigeonAddEvent());
 

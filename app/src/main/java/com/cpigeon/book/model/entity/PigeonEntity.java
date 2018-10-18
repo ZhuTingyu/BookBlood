@@ -110,12 +110,50 @@ public class PigeonEntity implements Serializable {
     private List<PigeonPlayEntity> MatchInfoList;
     private List<PigeonPlayEntity> MatchList;
 
+
+    private String PigeonMoney;
+    private String MatchInfoID;
+    private String MatchInfo;
+    private String PigeonMatchID;
+
     public List<PigeonPlayEntity> getMatchList() {
         return MatchList;
     }
 
     public void setMatchInfoList(List<PigeonPlayEntity> matchInfoList) {
         MatchInfoList = matchInfoList;
+    }
+
+    public String getPigeonMoney() {
+        return PigeonMoney;
+    }
+
+    public void setPigeonMoney(String pigeonMoney) {
+        PigeonMoney = pigeonMoney;
+    }
+
+    public String getMatchInfoID() {
+        return MatchInfoID;
+    }
+
+    public void setMatchInfoID(String matchInfoID) {
+        MatchInfoID = matchInfoID;
+    }
+
+    public String getMatchInfo() {
+        return MatchInfo;
+    }
+
+    public void setMatchInfo(String matchInfo) {
+        MatchInfo = matchInfo;
+    }
+
+    public String getPigeonMatchID() {
+        return PigeonMatchID;
+    }
+
+    public void setPigeonMatchID(String pigeonMatchID) {
+        PigeonMatchID = pigeonMatchID;
     }
 
     public List<PigeonPlayEntity> getMatchInfoList() {

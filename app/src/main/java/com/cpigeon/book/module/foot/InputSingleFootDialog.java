@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,18 +17,13 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.picker.PickerUtil;
-import com.base.util.system.ScreenTool;
 import com.base.util.utility.KeyboardUtils;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
-import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.module.select.SelectPigeonFragment;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
-
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 
 import java.util.Collections;
 import java.util.List;

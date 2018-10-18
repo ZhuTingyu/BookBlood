@@ -203,7 +203,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
                         , StringUtil.emptyString()
                         , StringUtil.emptyString()
                         , sex
-                        , PigeonEntity.ID_BREED_PIGEON
+                        , breedPigeonEntity.getPigeonSexID()
                         , CODE_ADD_PIGEON);
             }
         });

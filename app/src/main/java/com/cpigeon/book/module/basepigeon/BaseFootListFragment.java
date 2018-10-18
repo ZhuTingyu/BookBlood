@@ -36,7 +36,7 @@ import butterknife.BindView;
  * Created by Administrator on 2018/9/10.
  */
 
-public class BaseFootListFragment extends BaseBookFragment {
+public class  BaseFootListFragment extends BaseBookFragment {
 
 
     @BindView(R.id.list)

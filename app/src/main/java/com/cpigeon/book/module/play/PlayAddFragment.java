@@ -23,6 +23,7 @@ import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -78,16 +79,16 @@ public class PlayAddFragment extends BaseBookFragment {
 
     private SelectTypeViewModel mSelectTypeViewModel;
     private PlayViewModel mPlayViewModel;
-    private PigeonEntryEntity mPigeonEntryEntity;
+    private PigeonEntity mPigeonEntryEntity;
 
-    public static void start(Activity activity, PigeonEntryEntity mPigeonEntryEntity, int type) {
+    public static void start(Activity activity, PigeonEntity mPigeonEntryEntity, int type) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPigeonEntryEntity)
                 .putExtra(IntentBuilder.KEY_TYPE, type)//类型
                 .startParentActivity(activity, PlayAddFragment.class);
     }
 
-    public static void start(Activity activity, PigeonEntryEntity mPigeonEntryEntity, int type, int requestCode) {
+    public static void start(Activity activity, PigeonEntity mPigeonEntryEntity, int type, int requestCode) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPigeonEntryEntity)
                 .putExtra(IntentBuilder.KEY_TYPE, type)//类型
@@ -125,7 +126,7 @@ public class PlayAddFragment extends BaseBookFragment {
         type = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_TYPE, 0);
 
         try {
-            mPigeonEntryEntity = (PigeonEntryEntity) getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA);
+            mPigeonEntryEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
             mPlayViewModel.pigeonid = mPigeonEntryEntity.getPigeonID();
             mPlayViewModel.footid = mPigeonEntryEntity.getFootRingID();
             foot = mPigeonEntryEntity.getFootRingNum();

@@ -14,14 +14,12 @@ import com.base.util.IntentBuilder;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
+import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
 import com.cpigeon.book.widget.family.FamilyTreeView;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Zhu TingYu on 2018/8/29.
@@ -67,32 +65,62 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
             @Override
             public void add(int x, int y) {
-
                 if (x == mFamilyTreeView.getStartGeneration()) {
-
-                    InputPigeonFragment.start(getBaseActivity()
+                    SelectPigeonToAddBreedFragment.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
-                            , StringUtil.emptyString()
-                            , PigeonEntity.ID_BREED_PIGEON
-                            , CODE_ADD_PIGEON);
-
+                            , CODE_ADD_PIGEON
+                            , PigeonEntity.ID_FEMALE, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
                 } else {
                     PigeonEntity breedPigeonEntity = null;
                     if (mFamilyTreeView.getSon(x, y) != null) {
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
-
-
-                    InputPigeonFragment.start(getBaseActivity()
-                            , StringUtil.emptyString()
-                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
-                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                            , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
-                            , PigeonEntity.ID_BREED_PIGEON
-                            , CODE_ADD_PIGEON);
+                    boolean isMan = FamilyTreeView.isMale(y);
+                    if (isMan) {
+                        SelectPigeonToAddBreedFragment.start(getBaseActivity()
+                                , StringUtil.emptyString()
+                                , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
+                                , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
+                                , CODE_ADD_PIGEON
+                                , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
+                    }else {
+                        SelectPigeonToAddBreedFragment.start(getBaseActivity()
+                                , StringUtil.emptyString()
+                                , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
+                                , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
+                                , CODE_ADD_PIGEON
+                                , PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
+                    }
                 }
+
+
+//                if (x == mFamilyTreeView.getStartGeneration()) {
+//
+//                    InputPigeonFragment.start(getBaseActivity()
+//                            , StringUtil.emptyString()
+//                            , StringUtil.emptyString()
+//                            , StringUtil.emptyString()
+//                            , StringUtil.emptyString()
+//                            , PigeonEntity.ID_BREED_PIGEON
+//                            , CODE_ADD_PIGEON);
+//
+//                } else {
+//                    PigeonEntity breedPigeonEntity = null;
+//                    if (mFamilyTreeView.getSon(x, y) != null) {
+//                        breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
+//                    }
+//
+//
+//                    InputPigeonFragment.start(getBaseActivity()
+//                            , StringUtil.emptyString()
+//                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
+//                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
+//                            , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
+//                            , PigeonEntity.ID_BREED_PIGEON
+//                            , CODE_ADD_PIGEON);
+//                }
             }
 
             @Override
@@ -132,7 +160,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == CODE_ADD_PIGEON) {
             if (!StringUtil.isStringValid(mViewModel.foodId)) {
-                PigeonEntryEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+                PigeonEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
                 mViewModel.foodId = entity.getFootRingID();
                 mViewModel.pigeonId = entity.getPigeonID();
             }

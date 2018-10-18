@@ -25,23 +25,19 @@ import java.util.List;
 
 public class SearchPigeonActivity extends BaseSearchActivity {
 
-    int mRequestCode;
     String mType;
 
     SelectPigeonAdapter mAdapter;
     BreedPigeonListModel mViewModel;
 
-    public static void start(Activity activity, String type, int code) {
+    //
+    public static void start(Activity activity, String type, Bundle bundleOther) {
         Bundle bundle = new Bundle();
-        bundle.putString(IntentBuilder.KEY_DATA, type);
-        bundle.putInt(SelectPigeonFragment.REQUEST_CODE, code);
-        BaseSearchActivity.start(activity, SearchPigeonActivity.class, SelectPigeonFragment.CODE_SEARCH, bundle);
-    }
-
-    public static void start(Activity activity, String type) {
-        Bundle bundle = new Bundle();
-        bundle.putString(IntentBuilder.KEY_DATA, type);
-        BaseSearchActivity.start(activity, SearchPigeonActivity.class, bundle);
+        bundle.putString(IntentBuilder.KEY_TYPE, type);
+        if(bundleOther != null){
+            bundle.putAll(bundleOther);
+        }
+        BaseSearchActivity.start(activity, SearchPigeonActivity.class, BaseSelectPigeonFragment.CODE_SEARCH, bundle);
     }
 
     @Override
@@ -52,12 +48,13 @@ public class SearchPigeonActivity extends BaseSearchActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new SelectPigeonAdapter();
+        mAdapter = new SelectPigeonAdapter(mType);
         return mAdapter;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mType = getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
         super.onCreate(savedInstanceState);
         mViewModel = new BreedPigeonListModel();
         initViewModel(mViewModel);
@@ -78,11 +75,11 @@ public class SearchPigeonActivity extends BaseSearchActivity {
             }
         });
 
-        mRequestCode = getIntent().getIntExtra(SelectPigeonFragment.REQUEST_CODE, 0);
-        mType = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
 
-        if (SelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
+        if (BaseSelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
             mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
+        } else if (BaseSelectPigeonFragment.TYPE_SELECT_PIGEON_TO_ADD_BREED_PIGEON.equals(mType)) {
+
         }
 
         mAdapter.setOnLoadMoreListener(() -> {
@@ -93,16 +90,16 @@ public class SearchPigeonActivity extends BaseSearchActivity {
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity pigeonEntity = mAdapter.getItem(position);
-                if (mRequestCode != 0) {
+
+                if (BaseSelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
+                    BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
+                            , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
+                }else {
                     IntentBuilder.Builder()
                             .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
                             .finishForResult(getBaseActivity());
-                } else {
-                    if (SelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
-                        BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
-                                , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
-                    }
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

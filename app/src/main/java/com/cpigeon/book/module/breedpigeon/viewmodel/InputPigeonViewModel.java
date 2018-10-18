@@ -22,7 +22,7 @@ import org.greenrobot.eventbus.EventBus;
 public class InputPigeonViewModel extends BasePigeonViewModel {
 
 
-    public MutableLiveData<ApiResponse<PigeonEntryEntity>> mDataPigeon = new MutableLiveData<>();
+    public MutableLiveData<ApiResponse<PigeonEntity>> mDataPigeon = new MutableLiveData<>();
     public MutableLiveData<PigeonEntity> mDataPigeonDetails = new MutableLiveData<>();
     public String pigeonId;
     public String sonFootId;

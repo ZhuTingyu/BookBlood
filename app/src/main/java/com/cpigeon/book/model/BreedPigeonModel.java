@@ -67,7 +67,7 @@ public class BreedPigeonModel {
 
 
     //hl 添加鸽子
-    public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Add(
+    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_Add(
             String pigeonType,
             String coodid,
             String footnum,
@@ -87,8 +87,8 @@ public class BreedPigeonModel {
             String sonPigeonId,
             String setFootTime,
             Map<String, String> body) {
-        return RequestData.<ApiResponse<PigeonEntryEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
+        return RequestData.<ApiResponse<PigeonEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_add)
                 .addBody("typeid", pigeonType)//
@@ -114,7 +114,7 @@ public class BreedPigeonModel {
     }
 
     //hl 种鸽信息修改
-    public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Pigeon_Modify(
+    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_Modify(
             String pigeonid,
             String coodid,
             String footnum,
@@ -131,8 +131,8 @@ public class BreedPigeonModel {
             String stateid,
             String phototypeid,
             Map<String, String> body) {
-        return RequestData.<ApiResponse<PigeonEntryEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
+        return RequestData.<ApiResponse<PigeonEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_modify)
                 .addBody("typeid", PigeonEntity.ID_BREED_PIGEON)//
@@ -156,7 +156,7 @@ public class BreedPigeonModel {
     }
 
     //hl 赛鸽信息修改
-    public static Observable<ApiResponse<PigeonEntryEntity>> getTXGP_Racing_Pigeon_Modify(String pigeonid,
+    public static Observable<ApiResponse<PigeonEntity>> getTXGP_Racing_Pigeon_Modify(String pigeonid,
                                                                                           String coodid,
                                                                                           String footnum,
                                                                                           String footnumto,
@@ -172,8 +172,8 @@ public class BreedPigeonModel {
                                                                                           String stateid,
                                                                                           String phototypeid,
                                                                                           Map<String, String> body) {
-        return RequestData.<ApiResponse<PigeonEntryEntity>>build()
-                .setToJsonType(new TypeToken<ApiResponse<PigeonEntryEntity>>() {
+        return RequestData.<ApiResponse<PigeonEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_racing_modify)
                 .addBody("typeid", PigeonEntity.ID_MATCH_PIGEON)//

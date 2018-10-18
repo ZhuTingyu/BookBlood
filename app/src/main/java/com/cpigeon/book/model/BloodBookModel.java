@@ -26,4 +26,25 @@ public class BloodBookModel {
                 .addBody("motto", isGoodPigeon ? "1" : "")//是否隐藏足环号（1：是，其他不是）
                 .request();
     }
+
+    public static Observable<ApiResponse> addParent(
+            String pigeonId,//：鸽子id
+            String footId,//:足环id
+            String sexId,// ：性别ID
+            String sonFootId,// ：子代足环id
+            String sonPigeonId//：子代鸽子足环
+    ) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.add_book_parent)
+                .addBody("pigeonid", pigeonId)
+                .addBody("footid", footId)
+                .addBody("sexid", sexId)
+                .addBody("sonfootid", sonFootId)//是否要查询赛绩（1：是，其他不是）
+                .addBody("sonpigeonid", sonPigeonId)//是否隐藏足环号（1：是，其他不是）
+                .request();
+    }
+
+
 }
