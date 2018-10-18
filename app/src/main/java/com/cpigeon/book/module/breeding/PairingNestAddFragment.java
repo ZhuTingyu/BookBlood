@@ -205,8 +205,8 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_pairing_time:
                 //配对时间
                 PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    llPairingTime.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                    mPairingNestAddViewModel.pairingTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                    llPairingTime.setContent(year + "-" + (monthOfYear ) + "-" + dayOfMonth);
+                    mPairingNestAddViewModel.pairingTime = year + "-" + (monthOfYear) + "-" + dayOfMonth;
                     mPairingNestAddViewModel.isCanCommit();
                 });
                 break;
@@ -243,14 +243,14 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_lay_eggs_time:
                 //产蛋时间
                 PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    llLayEggsTime.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                    mPairingNestAddViewModel.layEggsTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                    llLayEggsTime.setContent(year + "-" + (monthOfYear ) + "-" + dayOfMonth);
+                    mPairingNestAddViewModel.layEggsTime = year + "-" + (monthOfYear ) + "-" + dayOfMonth;
                 });
                 break;
             case R.id.ll_fertilized_egg:
                 //产蛋 受精蛋
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_fertilized_egg, llFertilizedEgg.getContent().replace("个",""),InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_fertilized_egg, llFertilizedEgg.getContent().replace("个", ""), InputType.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
 
                             llFertilizedEgg.setContent(content + "个");
@@ -262,7 +262,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_fertilized_egg_no:
                 //产蛋 无精蛋
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_fertilized_egg_no, llFertilizedEggNo.getContent().replace("个",""), InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_fertilized_egg_no, llFertilizedEggNo.getContent().replace("个", ""), InputType.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
 
                             if (!StringUtil.isStringValid(content)) {
@@ -276,7 +276,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_fertilized_giving:
                 //是否赠送
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_hatches_giving_name,tv_giving_name.getText().toString(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.tv_hatches_giving_name, tv_giving_name.getText().toString(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             mInputDialog.hide();
                             tv_giving_name.setText(content);
                             mPairingNestAddViewModel.giveprson = content;
@@ -326,14 +326,14 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_hatches_time:
                 //出壳时间
                 PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    llHatchesTime.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                    mPairingNestAddViewModel.hatchesTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                    llHatchesTime.setContent(year + "-" + (monthOfYear ) + "-" + dayOfMonth);
+                    mPairingNestAddViewModel.hatchesTime = year + "-" + (monthOfYear ) + "-" + dayOfMonth;
                 });
                 break;
             case R.id.ll_hatches_num:
                 //出壳个数
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_hatches_num,llHatchesNum.getContent().replace("个",""), InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_hatches_num, llHatchesNum.getContent().replace("个", ""), InputType.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
                             llHatchesNum.setContent(content + "个");
                             mPairingNestAddViewModel.hatchesNum = content;

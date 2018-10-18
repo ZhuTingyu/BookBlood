@@ -29,6 +29,7 @@ import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.basepigeon.SelectBloodFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoAddViewModel;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.select.SelectFootRingFragment;
@@ -195,7 +196,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
     private BaseInputDialog mDialogInput;
 
-    @OnClick({R.id.ll_pairing_foot, R.id.ll_pairing_time, R.id.ll_feather_color, R.id.ll_lineage, R.id.tv_next_step})
+    @OnClick({R.id.ll_pairing_foot, R.id.ll_pairing_time, R.id.ll_feather_color, R.id.ll_lineage, R.id.tv_next_step, R.id.ll_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_pairing_foot:
@@ -212,8 +213,8 @@ public class PairingInfoAddFragment extends BaseBookFragment {
             case R.id.ll_pairing_time:
                 //配对时间
                 PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    llPairingTime.setContent(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                    mPairingInfoAddViewModel.pairingTime = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                    llPairingTime.setContent(year + "-" + (monthOfYear) + "-" + dayOfMonth);
+                    mPairingInfoAddViewModel.pairingTime = year + "-" + (monthOfYear) + "-" + dayOfMonth;
                     mPairingInfoAddViewModel.isCanCommit();
                 });
                 break;
@@ -282,6 +283,13 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                 break;
             case R.id.tv_next_step:
                 mPairingInfoAddViewModel.getTXGP_PigeonBreed_AddData();
+                break;
+
+
+            case R.id.ll_head:
+                BreedPigeonDetailsFragment.start(getBaseActivity(),
+                        mPairingInfoAddViewModel.mBreedPigeonEntity.getPigeonID(),
+                        mPairingInfoAddViewModel.mBreedPigeonEntity.getFootRingID());
                 break;
         }
     }

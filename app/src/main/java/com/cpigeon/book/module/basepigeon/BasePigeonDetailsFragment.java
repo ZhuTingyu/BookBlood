@@ -218,7 +218,7 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
             setProgressVisible(false);
             mBreedPigeonModifyViewModel.mPigeonEntity = datas;
 
-            tvFoot.setText(String.valueOf(datas.getFootCode() + "" + datas.getFootRingNum()));//足环号
+            tvFoot.setText(String.valueOf(datas.getFootCode() + "-" + datas.getFootRingNum()));//足环号
 
             //设置性别
             PigeonPublicUtil.setPigeonSexImg(datas.getPigeonSexName(), imgSex);

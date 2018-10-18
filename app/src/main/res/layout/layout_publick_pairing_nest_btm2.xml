@@ -12,9 +12,6 @@
 
         <!--配对时间-->
         <com.cpigeon.book.widget.LineInputView
-            app:lineInputView_RightTextSize="@dimen/medium_text_size"
-            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
-            app:lineInputView_isLeftBold="true"
             android:id="@+id/ll_pairing_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,6 +23,9 @@
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="配对时间"
             app:lineInputView_LeftTextColor="@color/general_text_color"
+            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
+            app:lineInputView_RightTextSize="@dimen/medium_text_size"
+            app:lineInputView_isLeftBold="true"
             app:rightTextBold="true" />
 
         <!--&lt;!&ndash;产蛋信息&ndash;&gt;-->
@@ -54,12 +54,12 @@
 
 
             <TextView
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="产蛋信息"
                 android:textColor="@color/general_text_color"
-                android:textSize="@dimen/medium_text_size" />
+                android:textSize="@dimen/medium_text_size"
+                android:textStyle="bold" />
 
 
             <LinearLayout
@@ -109,7 +109,8 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;&#160;&#160;&#8201;&#8201;时间" />
+                app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;&#160;&#160;&#8201;&#8201;时间"
+                app:lineInputView_RightTextColor="@color/color_4c4c4c" />
 
             <!--产蛋 受精蛋-->
             <com.cpigeon.book.widget.LineInputView
@@ -121,7 +122,8 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;受精蛋" />
+                app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;受精蛋"
+                app:lineInputView_RightTextColor="@color/color_4c4c4c" />
 
             <!--产蛋 无精蛋-->
             <com.cpigeon.book.widget.LineInputView
@@ -133,7 +135,8 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;无精蛋" />
+                app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;无精蛋"
+                app:lineInputView_RightTextColor="@color/color_4c4c4c" />
 
             <!--是否赠送-->
             <LinearLayout
@@ -166,7 +169,8 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical|right"
                         android:textColor="@color/general_text_color"
-                        android:textColorHint="@color/color_4c4c4c" />
+                        android:textColorHint="@color/color_4c4c4c"
+                        app:lineInputView_RightTextColor="@color/color_4c4c4c" />
 
                     <ImageView
                         android:id="@+id/img_giving"
@@ -183,9 +187,6 @@
         <!--出壳信息-->
         <com.cpigeon.book.widget.LineInputView
             android:id="@+id/ll_hatches_info"
-            app:lineInputView_RightTextSize="@dimen/medium_text_size"
-            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
-            app:lineInputView_isLeftBold="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
@@ -195,7 +196,10 @@
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="出壳信息"
             app:lineInputView_LeftTextColor="@color/general_text_color"
+            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
             app:lineInputView_RightString=""
+            app:lineInputView_RightTextSize="@dimen/medium_text_size"
+            app:lineInputView_isLeftBold="true"
             app:rightTextBold="true" />
 
         <LinearLayout
@@ -215,7 +219,8 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;&#160;&#160;&#8201;&#8201;时间" />
+                app:lineInputView_LeftString="&#160;&#160;&#8201;&#8201;&#160;&#160;&#8201;&#8201;时间"
+                app:lineInputView_RightTextColor="@color/color_4c4c4c" />
 
 
             <!--出壳个数-->
@@ -228,15 +233,13 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="出壳个数" />
+                app:lineInputView_LeftString="出壳个数"
+                app:lineInputView_RightTextColor="@color/color_4c4c4c" />
 
         </LinearLayout>
 
         <!--子代信息-->
         <com.cpigeon.book.widget.LineInputView
-            app:lineInputView_RightTextSize="@dimen/medium_text_size"
-            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
-            app:lineInputView_isLeftBold="true"
             android:id="@+id/ll_offspring_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -247,7 +250,10 @@
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="子代信息"
             app:lineInputView_LeftTextColor="@color/general_text_color"
+            app:lineInputView_LeftTextSize="@dimen/medium_text_size"
             app:lineInputView_RightString="添加"
+            app:lineInputView_RightTextSize="@dimen/medium_text_size"
+            app:lineInputView_isLeftBold="true"
             app:rightTextBold="true" />
 
 

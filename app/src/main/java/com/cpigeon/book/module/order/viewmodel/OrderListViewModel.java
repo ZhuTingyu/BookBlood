@@ -17,12 +17,13 @@ public class OrderListViewModel extends BaseViewModel {
 
     public int pi = 1;
     public int ps = 50;
+    public String lx  = "all";
 
     public MutableLiveData<List<OrderEntity>> mOrderListData = new MutableLiveData<>();
 
     //获取  充值明细列表
     public void getTXGP_GetOrderListData() {
-        submitRequestThrowError(OrderModel.getTXGP_GetOrderList(pi, ps), r -> {
+        submitRequestThrowError(OrderModel.getTXGP_GetOrderList(lx,pi, ps), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
                 mOrderListData.setValue(r.data);

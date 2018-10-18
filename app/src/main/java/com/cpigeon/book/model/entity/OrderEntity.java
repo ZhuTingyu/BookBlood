@@ -24,6 +24,15 @@ public class OrderEntity {
     private String state;
     private String rmb;
     private String datetime;
+    private String ly;
+
+    public String getLy() {
+        return ly;
+    }
+
+    public void setLy(String ly) {
+        this.ly = ly;
+    }
 
     public String getId() {
         return id;

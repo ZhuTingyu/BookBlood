@@ -44,6 +44,6 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderEntity, BaseViewHold
 
         helper.setText(R.id.tvOderPrice, item.getRmb() + "元");
 
-        helper.setText(R.id.tvOrderSource, "(" + "订单来源" + ")");//订单来源
+        helper.setText(R.id.tvOrderSource, "(" + item.getLy() + ")");//订单来源
     }
 }

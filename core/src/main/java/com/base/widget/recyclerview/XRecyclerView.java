@@ -18,6 +18,7 @@ import com.base.http.R;
 import com.base.util.utility.FloatUtil;
 import com.base.util.system.ScreenTool;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.yqritc.recyclerviewflexibledivider.FlexibleDividerDecoration;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 /**
@@ -44,6 +45,7 @@ public class XRecyclerView extends FrameLayout {
 
     protected RecyclerView.OnScrollListener mExternalOnScrollListener;
     protected RecyclerView.OnScrollListener mInternalOnScrollListener;
+    private BaseQuickAdapter quickAdapter;
 
 
     public XRecyclerView(@NonNull Context context) {
@@ -144,7 +146,7 @@ public class XRecyclerView extends FrameLayout {
         } else recyclerView.setAdapter(adapter);
 
         if (adapter instanceof BaseQuickAdapter) {
-            BaseQuickAdapter quickAdapter = (BaseQuickAdapter) adapter;
+            quickAdapter = (BaseQuickAdapter) adapter;
             quickAdapter.setEnableLoadMore(false);
             //quickAdapter.setEmptyView(progressView);
             quickAdapter.setLoadMoreView(new CustomLoadMoreView());
@@ -227,6 +229,16 @@ public class XRecyclerView extends FrameLayout {
 
     protected void addItemDecorationLine(@ColorRes int color, int size, int margin) {
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(recyclerView.getContext())
+                .visibilityProvider(new FlexibleDividerDecoration.VisibilityProvider() {
+                    @Override
+                    public boolean shouldHideDivider(int position, RecyclerView parent) {
+
+                        if (quickAdapter.getHeaderLayoutCount() >= 1 && position == 0) {
+                            return true;
+                        } else
+                            return false;
+                    }
+                })
                 .margin(ScreenTool.dip2px(margin))
                 .colorResId(color).size(size).build());
     }

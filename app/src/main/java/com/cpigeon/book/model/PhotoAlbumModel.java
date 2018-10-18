@@ -3,7 +3,6 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -21,7 +20,9 @@ public class PhotoAlbumModel {
     public static Observable<ApiResponse<Object>> getTXGP_PigeonPhoto_Add(String pigeonid,
                                                                           String footid,
                                                                           String typeid,
-                                                                          String photo) {
+                                                                          String photo,
+                                                                          String remark
+    ) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
@@ -30,6 +31,7 @@ public class PhotoAlbumModel {
                 .addBody("footid", footid)//
                 .addBody("typeid", typeid)//
                 .addImageFileBody("photo", photo)//
+                .addBody("remark", remark)//
                 .request();
     }
 

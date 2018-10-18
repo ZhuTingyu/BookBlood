@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,9 +8,9 @@
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/clRoot"
-        android:layout_above="@id/llButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/llButton"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -76,8 +75,7 @@
                     android:id="@+id/indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="45dp"
-                    android:layout_gravity="center_horizontal"
-                    android:minWidth="20dp" />
+                    android:layout_gravity="center_horizontal" />
 
                 <View
                     android:layout_width="0dp"
@@ -115,46 +113,46 @@
 
     <LinearLayout
         android:id="@+id/llButton"
-        android:visibility="gone"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <View
-            android:background="@color/color_bg_window"
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="10dp"
+            android:background="@color/color_bg_window" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="44dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvLeft"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/white"
-                android:textSize="@dimen/large_text_size"
+                android:background="@color/color_bg_yellow"
                 android:gravity="center"
                 android:text="@string/text_pigeon_master_name"
-                android:background="@color/color_bg_yellow"
-                android:layout_height="match_parent" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text_size" />
 
             <TextView
                 android:id="@+id/tvRight"
-                android:textColor="@color/white"
-                android:textSize="@dimen/large_text_size"
-                android:gravity="center"
-                android:background="@color/colorPrimary"
-                android:text="@string/text_connection_pigeon_master"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/text_connection_pigeon_master"
+                android:textColor="@color/white"
+                android:textSize="@dimen/large_text_size" />
 
         </LinearLayout>
-        
+
 
     </LinearLayout>
 

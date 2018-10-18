@@ -40,7 +40,6 @@ import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
 import com.cpigeon.book.widget.mydialog.ViewControlShare;
 import com.umeng.socialize.UMShareAPI;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.OnClick;
@@ -106,7 +105,6 @@ public class UserInfoFragment extends BaseBookFragment {
 
         mUserInfoViewModel.getTXGP_GetUserInfoData();
 
-
     }
 
     protected void initObserve() {
@@ -117,7 +115,7 @@ public class UserInfoFragment extends BaseBookFragment {
 
     @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting, R.id.ll_my_order,
             R.id.ll_my_gebi, R.id.ll_renewal, R.id.ll_account_balance, R.id.ll_share_txgp
-            , R.id.ll_test,R.id.ll_test2})
+            , R.id.ll_test, R.id.ll_test2})
     public void onViewClicked(View view) {
 
         if (AntiShake.getInstance().check()) {//防止点击过快
@@ -273,18 +271,18 @@ public class UserInfoFragment extends BaseBookFragment {
             if (data.isOk()) {
                 Log.d("xiazaidizhi", "checkUpdate: " + data.getData().get(0).getUrl());
 
-                List<UpdateInfo> mDatas = new ArrayList<>();
-                mDatas.add(new UpdateInfo.Builder()
-                        .verCode(20020)
-                        .updateTime("2018-22-22")
-                        .verName("3.4.5")
-                        .packageName("com.cpigeon.book")
-                        .appName("天下鸽谱")
-                        .updateExplain("1.新增用户个人信息中心，可进行个人信息的设置\n2.新增用户个人信息中心，可进行个人信息的设置\n3.新增用户个人信息中心，可进行个人信息的设置\n4.新增用户个人信息中心，可进行个人信息的设置\n")
-                        .url("http://www.cpigeon.com:818/APP/Download?type=androidzgzs")
-                        .force(true)
-                        .build());
-                mUpdateManager.checkUpdate(mDatas);
+//                List<UpdateInfo> mDatas = new ArrayList<>();
+//                mDatas.add(new UpdateInfo.Builder()
+//                        .verCode(20020)
+//                        .updateTime("2018-22-22")
+//                        .verName("3.4.5")
+//                        .packageName("com.cpigeon.book")
+//                        .appName("天下鸽谱")
+//                        .updateExplain("1.新增用户个人信息中心，可进行个人信息的设置\n2.新增用户个人信息中心，可进行个人信息的设置\n3.新增用户个人信息中心，可进行个人信息的设置\n4.新增用户个人信息中心，可进行个人信息的设置\n")
+//                        .url("http://www.cpigeon.com:818/APP/Download?type=androidzgzs")
+//                        .force(true)
+//                        .build());
+                mUpdateManager.checkUpdate(data.data);
 
 //                if (onCheckUpdateInfoListener != null) {
 //                    new Handler(Looper.getMainLooper())

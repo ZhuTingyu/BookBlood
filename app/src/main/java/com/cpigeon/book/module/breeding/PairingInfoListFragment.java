@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
@@ -20,6 +21,7 @@ import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.cpigeon.book.module.basepigeon.BaseListFragment;
 import com.cpigeon.book.module.breeding.adapter.PairingInfoListAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
+import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.home.sharehall.ShareHallFragment;
 import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -141,6 +143,8 @@ public class PairingInfoListFragment extends BaseListFragment {
 
             TextView tv_hint_foot = mHeadView.findViewById(R.id.tv_hint_foot);
             ImageView img_hint_sex = mHeadView.findViewById(R.id.img_hint_sex);
+            LinearLayout ll_head = mHeadView.findViewById(R.id.ll_head);
+
 
             tv_hint_foot.setText(mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingNum());
 
@@ -151,6 +155,12 @@ public class PairingInfoListFragment extends BaseListFragment {
             } else {
                 img_hint_sex.setImageResource(R.mipmap.ic_sex_no);
             }
+
+            ll_head.setOnClickListener(v -> {
+                BreedPigeonDetailsFragment.start(getBaseActivity(),
+                        mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonID(),
+                        mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingID());
+            });
 
             mPairingInfoListAdapter.addHeaderView(mHeadView);
         } catch (Exception e) {

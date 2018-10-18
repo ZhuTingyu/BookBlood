@@ -17,11 +17,12 @@ import io.reactivex.Observable;
 public class OrderModel {
 
     //hl 我的订单 列表
-    public static Observable<ApiResponse<List<OrderEntity>>> getTXGP_GetOrderList(int pi, int ps) {
+    public static Observable<ApiResponse<List<OrderEntity>>> getTXGP_GetOrderList(String lx,int pi, int ps) {
         return RequestData.<ApiResponse<List<OrderEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<OrderEntity>>>() {
                 }.getType())
                 .url(R.string.my_order_list)
+                .addBody("lx", lx)
                 .addBody("pi", String.valueOf(pi))
                 .addBody("ps", String.valueOf(ps))
                 .request();

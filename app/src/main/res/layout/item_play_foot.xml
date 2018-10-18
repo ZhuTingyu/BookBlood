@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingLeft="@dimen/spacing_left_reight"
-    android:paddingRight="@dimen/spacing_left_reight"
     android:layout_height="64dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/spacing_left_reight"
+    android:paddingRight="@dimen/spacing_left_reight">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgHead"
@@ -33,8 +33,9 @@
 
             <TextView
                 android:id="@+id/tv_foot"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="0000-00-00000000"
                 android:textColor="@color/black"
                 android:textSize="@dimen/medium_text_size"
@@ -47,6 +48,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
                 app:srcCompat="@mipmap/ic_male" />
 
         </LinearLayout>
@@ -62,13 +64,13 @@
 
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/tv_state"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="TextView"
         android:textColor="@color/black"
         android:textSize="@dimen/large_text_size"
