@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll1"
-        android:background="@color/color_bg_window"
+        android:background="@color/color_EEF8FF"
         android:padding="23dp">
 
         <TextView

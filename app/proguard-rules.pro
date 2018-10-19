@@ -21,7 +21,8 @@
 #-renamesourcefileattribute SourceFile
 
 # Application classes that will be serialized/deserialized over Gson 下面替换成自己的实体类
--keep class com.admin.app.model.entity.** { *; }
+-keep class com.cpigeon.book.model.entity.** { *; }
+-keep class cn.pedant.SweetAlert.**{*;}
 
 # 代码混淆压缩比，在0~7之间，默认为5，一般不做修改
 -optimizationpasses 5

@@ -20,8 +20,7 @@ import com.base.widget.magicindicator.buildins.commonnavigator.CommonNavigator;
 import com.base.widget.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
-import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
+import com.base.widget.magicindicator.buildins.commonnavigator.titles.NoChangeTitleView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -66,7 +65,7 @@ public class PairingInfoRecommendFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle("推荐配对");
+        setTitle(getString(R.string.array_pairing_recommend));
 
         initViewPager();
     }
@@ -102,18 +101,32 @@ public class PairingInfoRecommendFragment extends BaseBookFragment {
 
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
-                simplePagerTitleView.setText(mTitles.get(index));
-                simplePagerTitleView.setTextSize(18);
-                simplePagerTitleView.setNormalColor(getBaseActivity().getResources().getColor(R.color.color_4c4c4c));
-                simplePagerTitleView.setSelectedColor(getBaseActivity().getResources().getColor(R.color.colorPrimary));
-                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+//                SimplePagerTitleView simplePagerTitleView = new ScaleTransitionPagerTitleView(context);
+//                simplePagerTitleView.setText(mTitles.get(index));
+//                simplePagerTitleView.setTextSize(14);
+//                simplePagerTitleView.setNormalColor(getBaseActivity().getResources().getColor(R.color.color_4c4c4c));
+//                simplePagerTitleView.setSelectedColor(getBaseActivity().getResources().getColor(R.color.colorPrimary));
+//                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        mViewPager.setCurrentItem(index);
+//                    }
+//                });
+
+                NoChangeTitleView mNoChangeTitleView = new NoChangeTitleView(context);
+
+                mNoChangeTitleView.setText(mTitles.get(index));
+                mNoChangeTitleView.setTextSize(14);
+                mNoChangeTitleView.setNormalColor(getBaseActivity().getResources().getColor(R.color.color_4c4c4c));
+                mNoChangeTitleView.setSelectedColor(getBaseActivity().getResources().getColor(R.color.colorPrimary));
+                mNoChangeTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mViewPager.setCurrentItem(index);
                     }
                 });
-                return simplePagerTitleView;
+
+                return mNoChangeTitleView;
             }
 
             @Override

@@ -299,7 +299,7 @@ class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
                 .setContext(context)
                 .setBaseShadowColor(Utils.getColor(R.color.gray))
                 .setDirection(CrazyShadowDirection.RIGHT_BOTTOM_LEFT)
-                .setShadowRadius(ScreenTool.dip2px(5))
+                .setShadowRadius(ScreenTool.dip2px(7))
                 .setCorner(ScreenTool.dip2px(0))
                 .setBackground(Utils.getColor(R.color.white))
                 .setImpl(CrazyShadow.IMPL_DRAW)

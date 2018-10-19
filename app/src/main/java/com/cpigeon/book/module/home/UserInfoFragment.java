@@ -84,8 +84,8 @@ public class UserInfoFragment extends BaseBookFragment {
                 }
 
                 if (dialogFragment != null) {
-                    dialogFragment.setShareTitle("注册邀请");
-                    dialogFragment.setShareContentString("分享天下鸽谱，注册邀请得鸽币!!!");
+                    dialogFragment.setShareTitle("天下鸽谱");
+                    dialogFragment.setShareContentString("爱鸽录入简单方便，种养训赛管理强大全面。注册还能得鸽币哦~~");
                     dialogFragment.setShareContent(inviteCodeEntity.getUrl());
                     dialogFragment.setShareListener(ViewControlShare.getShareResultsDown(getBaseActivity(), dialogFragment, ""));
                     dialogFragment.setShareType(1);
@@ -99,7 +99,7 @@ public class UserInfoFragment extends BaseBookFragment {
         setToolbarNotBack();
         setTitle("我的");
 
-//        checkNewVersion(1);//版本更新检查
+        checkNewVersion(1);//版本更新检查
 
         dialogFragment = new ShareDialogFragment();
 

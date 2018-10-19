@@ -62,10 +62,10 @@
 
         </activity>
 
+        <!-- android:screenOrientation="portrait"   8.0 闪退-->
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!--微信分享-->

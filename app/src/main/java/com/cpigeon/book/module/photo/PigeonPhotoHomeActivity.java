@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * 信鸽相册   图片列表 筛选
@@ -108,6 +109,7 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
 
         initDatas();
 
+
         initRecyclerView();
 
         mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
@@ -120,7 +122,8 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
 
         Glide.with(this)
                 .load(mViewModel.mPigeonEntity.getCoverPhotoUrl())
-                .placeholder(R.drawable.ic_img_default)
+                .placeholder(R.drawable.ic_img_default2)
+                .bitmapTransform(new RoundedCornersTransformation(getBaseContext(), 13, 0))
                 .into(mImgHead);//鸽子照片
 
         mViewModel.mPhotoType = new ArrayList<>();

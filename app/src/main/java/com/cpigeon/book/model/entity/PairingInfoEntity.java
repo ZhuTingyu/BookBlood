@@ -48,6 +48,8 @@ public class PairingInfoEntity implements Serializable {
     private String MenPigeonID;
     private String PigeonBreedTime;
     private String PigeonBreedID;
+    private String PigeonBreedCount;
+
 
     private PairingInfoEntity(Builder builder) {
         setWoPigeonID(builder.WoPigeonID);
@@ -61,6 +63,16 @@ public class PairingInfoEntity implements Serializable {
         setMenPigeonID(builder.MenPigeonID);
         setPigeonBreedTime(builder.PigeonBreedTime);
         setPigeonBreedID(builder.PigeonBreedID);
+        setPigeonBreedCount(builder.PigeonBreedCount);
+    }
+
+
+    public String getPigeonBreedCount() {
+        return PigeonBreedCount;
+    }
+
+    public void setPigeonBreedCount(String pigeonBreedCount) {
+        PigeonBreedCount = pigeonBreedCount;
     }
 
     public String getWoPigeonID() {
@@ -164,6 +176,7 @@ public class PairingInfoEntity implements Serializable {
         private String MenPigeonID;
         private String PigeonBreedTime;
         private String PigeonBreedID;
+        private String PigeonBreedCount;
 
         public Builder() {
         }
@@ -220,6 +233,11 @@ public class PairingInfoEntity implements Serializable {
 
         public Builder PigeonBreedID(String val) {
             PigeonBreedID = val;
+            return this;
+        }
+
+        public Builder PigeonBreedCount(String val) {
+            PigeonBreedCount = val;
             return this;
         }
 

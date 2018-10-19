@@ -95,7 +95,6 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         }
     }
 
-
     private View initHead(PigeonPhotoEntity datas) {
         View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_select_foot_to_photo_head, null);
         ProgressBar progressBar = view.findViewById(R.id.progressPlace);
@@ -107,9 +106,9 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         tvCount.setText(datas.getPhotoCount());
 
         //相册总容量
-        SpannableStringBuilder builder = new SpannableStringBuilder(String.format(getString(R.string.text_photo_all_place), datas.getTotalCount()));
+        SpannableStringBuilder builder = new SpannableStringBuilder(String.format(getString(R.string.text_photo_all_place), datas.getTotalCount() + " "));
         ForegroundColorSpan redSpan = new ForegroundColorSpan(getBaseActivity().getResources().getColor(R.color.black));
-        builder.setSpan(redSpan, 5,
+        builder.setSpan(redSpan, 6,
                 5 + String.format("%1$s", datas.getTotalCount()).length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvAllPlace.setText(builder);
