@@ -20,7 +20,7 @@
         android:textColor="@color/white"
         android:hint="@string/text_input_phone_or_username"
         android:textColorHint="@color/white"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="190dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/login_input_bg"

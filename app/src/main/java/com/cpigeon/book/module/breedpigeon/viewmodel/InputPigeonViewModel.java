@@ -9,6 +9,7 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.RacingPigeonModel;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.FootRingStateEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 
@@ -24,6 +25,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
 
     public MutableLiveData<ApiResponse<PigeonEntity>> mDataPigeon = new MutableLiveData<>();
     public MutableLiveData<PigeonEntity> mDataPigeonDetails = new MutableLiveData<>();
+    public MutableLiveData<FootRingStateEntity> mDataFootRingState = new MutableLiveData<>();
     public String pigeonId;
     public String sonFootId;
     public String sonPigeonId;
@@ -119,6 +121,14 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                 mBreedPigeonEntity = r.data;
                 mDataPigeonDetails.setValue(mBreedPigeonEntity);
             } else throw new HttpErrorException(r);
+        });
+    }
+
+    public void getFootRingState(){
+        submitRequestThrowError(BreedPigeonModel.getFootRingState(foot), r -> {
+            if(r.isOk()){
+                mDataFootRingState.setValue(r.data);
+            }else throw new HttpErrorException(r);
         });
     }
 

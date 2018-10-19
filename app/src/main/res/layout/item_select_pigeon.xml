@@ -48,10 +48,9 @@
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/tvPigeonType"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvPigeonType" />
-
 
 
     <TextView
@@ -65,7 +64,6 @@
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/tvPigeonType"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvPigeonType" />
 
@@ -84,14 +82,10 @@
         android:id="@+id/tvBlood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:text="詹森"
         android:textColor="@color/black"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/tvPigeonType"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvPigeonType" />
 </android.support.constraint.ConstraintLayout>

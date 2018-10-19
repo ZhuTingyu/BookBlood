@@ -21,6 +21,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.select.adpter.SelectPigeonAdapter;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -37,7 +38,6 @@ import java.util.List;
 public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
 
     public static String REQUEST_CODE = "REQUEST_CODE";
-    public static String KEY_SEX = "KEY_SEX";
     //选择鸽子去共享
     public static String TYPE_SHARE_PIGEON_TO_SHARE = "TYPE_SHARE_PIGEON_TO_SHARE";
     //选择鸽子添加种鸽
@@ -115,6 +115,10 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
 
     @Override
     protected void initObserve() {
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
         mViewModel.mPigeonListData.observe(this, pigeonEntities -> {
             setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, pigeonEntities);

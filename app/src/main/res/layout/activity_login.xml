@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <VideoView
+    <com.cpigeon.book.widget.CustomVideoView
         android:id="@+id/video_player"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

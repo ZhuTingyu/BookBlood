@@ -11,6 +11,7 @@ import com.base.util.BarUtils;
 import com.base.util.FragmentUtils;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
+import com.cpigeon.book.widget.CustomVideoView;
 
 /**
  * Created by Zhu TingYu on 2018/7/26.
@@ -18,7 +19,7 @@ import com.cpigeon.book.R;
 
 public class LoginActivity extends BaseActivity {
 
-    private VideoView mVideoView;
+    private CustomVideoView mVideoView;
     private LoginFragment mLoginFragment;
     private RegisterFragment mRegisterFragment;
     private ForgetPasswordFragment mForgetPasswordFragment;
@@ -47,6 +48,7 @@ public class LoginActivity extends BaseActivity {
         mVideoView.setOnPreparedListener(mp -> {
             mp.start();
             mp.setLooping(true);
+            mp.setVolume(0f, 0f);
         });
 
         mLoginFragment = new LoginFragment();

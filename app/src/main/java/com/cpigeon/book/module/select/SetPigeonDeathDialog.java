@@ -54,7 +54,7 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
     protected void initView(Dialog dialog) {
 
         if (getArguments() != null) {
-            FootEntity footEntity =  getArguments().getParcelable(IntentBuilder.KEY_DATA);
+            FootEntity footEntity = getArguments().getParcelable(IntentBuilder.KEY_DATA);
             mViewModel.mFootEntity = footEntity;
         }
 
@@ -85,14 +85,21 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
 
         mTvCancel.setOnClickListener(v -> {
             dismiss();
+            if (mOnPigeonDeathClickListener != null) {
+                mOnPigeonDeathClickListener.cancel();
+            }
         });
         mSelectTypeViewModel.getDeathReason();
 
         mViewModel.normalResult.observe(this, s -> {
             getBaseActivity().setProgressVisible(false);
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mViewModel.mFootEntity)
-                    .finishForResult(getBaseActivity());
+            if (mOnPigeonDeathClickListener != null) {
+                mOnPigeonDeathClickListener.setDeathFinish(mViewModel.mFootEntity);
+            } else {
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mViewModel.mFootEntity)
+                        .finishForResult(getBaseActivity());
+            }
         });
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
@@ -107,6 +114,15 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
 
     }
 
+    public static void show(FragmentManager fragmentManager, FootEntity pigeonEntity, OnPigeonDeathClickListener listener) {
+        SetPigeonDeathDialog setPigeonDeathDialog = new SetPigeonDeathDialog();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(IntentBuilder.KEY_DATA, pigeonEntity);
+        setPigeonDeathDialog.setArguments(bundle);
+        setPigeonDeathDialog.setOnPigeonDeathClickListener(listener);
+        setPigeonDeathDialog.show(fragmentManager);
+    }
+
     public static void show(FragmentManager fragmentManager, FootEntity pigeonEntity) {
         SetPigeonDeathDialog setPigeonDeathDialog = new SetPigeonDeathDialog();
         Bundle bundle = new Bundle();
@@ -115,4 +131,15 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         setPigeonDeathDialog.show(fragmentManager);
     }
 
+    public interface OnPigeonDeathClickListener {
+        void cancel();
+
+        void setDeathFinish(FootEntity footEntity);
+    }
+
+    private OnPigeonDeathClickListener mOnPigeonDeathClickListener;
+
+    public void setOnPigeonDeathClickListener(OnPigeonDeathClickListener onPigeonDeathClickListener) {
+        mOnPigeonDeathClickListener = onPigeonDeathClickListener;
+    }
 }

@@ -3,6 +3,7 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
+import com.cpigeon.book.model.entity.FootRingStateEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.PigeonSexCountEntity;
@@ -247,4 +248,15 @@ public class BreedPigeonModel {
                 .addBody("footid", footId)
                 .request();
     }
+    public static Observable<ApiResponse<FootRingStateEntity>> getFootRingState(String footNumber) {
+        return RequestData.<ApiResponse<FootRingStateEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<FootRingStateEntity>>() {
+                }.getType())
+                .url(R.string.get_foot_ring_state)
+                .addBody("footnum", footNumber)
+                .request();
+    }
+
+
+
 }

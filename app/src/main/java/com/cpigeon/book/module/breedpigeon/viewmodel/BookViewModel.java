@@ -21,10 +21,15 @@ public class BookViewModel extends BaseViewModel {
     public String pigeonId;
     public boolean isNeedMatch = false;
     public boolean isGoodPigeon = false;
+    public String sexId;
+    public String sonFootId;
+    public String sonPigeonId;
+
 
     public BloodBookEntity mBloodBookEntity;
 
     public MutableLiveData<BloodBookEntity> mBookLiveData = new MutableLiveData<>();
+    public MutableLiveData<String> mDataAddParentR = new MutableLiveData<>();
     public String pUid = UserModel.getInstance().getUserId();
 
     public BookViewModel(Activity activity) {
@@ -36,6 +41,8 @@ public class BookViewModel extends BaseViewModel {
         }
     }
 
+    public BookViewModel() {}
+
 
     //获取 血统书  四代
     public void getBloodBook() {
@@ -44,6 +51,14 @@ public class BookViewModel extends BaseViewModel {
                 mBloodBookEntity = r.data;
                 mBookLiveData.setValue(mBloodBookEntity);
             } else throw new HttpErrorException(r);
+        });
+    }
+
+    public void addParent(){
+        submitRequestThrowError(BloodBookModel.addParent(pigeonId, foodId, sexId, sonFootId, sonPigeonId), r -> {
+            if(r.isOk()){
+                mDataAddParentR.setValue(r.msg);
+            }else throw new HttpErrorException(r);
         });
     }
 }

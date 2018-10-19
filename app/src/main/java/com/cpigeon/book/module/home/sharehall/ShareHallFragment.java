@@ -109,7 +109,7 @@ public class ShareHallFragment extends BaseBookFragment {
         mLlMyShare = findViewById(R.id.llMyShare);
         mMenuLayoutLeft = findViewById(R.id.menuLayoutLeft);
         mFiltrate = findViewById(R.id.filtrate);
-        mRecyclerView = findViewById(R.id.list);
+        mRecyclerView = findViewById(R.id.shareList);
         mTvSearch.setText(R.string.text_input_foot_number_search);
         mRlSearch.setOnClickListener(v -> {
             SearchSharePigeonActivity.start(getBaseActivity(), false);

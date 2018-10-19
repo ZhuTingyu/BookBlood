@@ -58,9 +58,11 @@ public class ShareHallHomeAdapter extends BaseQuickAdapter<PigeonEntity, BaseVie
                     mOnDeleteClickListener.delete(helper.getAdapterPosition(), getItem(helper.getAdapterPosition()));
                 }
             });
+        }else {
+            mTvLocation.setVisibility(View.VISIBLE);
         }
 
-        mTvLocation.setVisibility(View.VISIBLE);
+
 
         if (UserModel.getInstance().getUserId().equals(item.getUserID())) {
             if (!isHaveDelete) {
