@@ -11,7 +11,6 @@ import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.ServiceEntity;
 import com.cpigeon.book.module.menu.service.ChoosePayWayDialog;
-import com.cpigeon.book.veiwholder.ServiceViewHolder;
 
 import java.util.List;
 
