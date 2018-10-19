@@ -306,6 +306,10 @@ public class LineInputView extends RelativeLayout {
         return mEditText;
     }
 
+    public TextView getTvRight() {
+        return mTvRight;
+    }
+
     public void setLeftColor(@ColorRes int leftColor) {
         mTextView.setTextColor(Utils.getColor(leftColor));
     }

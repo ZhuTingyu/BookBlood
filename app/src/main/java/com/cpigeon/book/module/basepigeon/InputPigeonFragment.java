@@ -257,7 +257,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         //足环
         mLvRing.setOnRightClickListener(lineInputView -> {
             InputSingleFootDialog.show(getFragmentManager(), mLvRing.getContent(), mViewModel.isChina(), dialog -> {
-                SelectFootRingFragment.start(getBaseActivity(), true);
+                SelectFootRingFragment.start(getBaseActivity(), false);
             }, foot -> {
                 mLvRing.setRightText(foot);
                 mViewModel.foot = foot;
@@ -329,7 +329,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     }
                 });
             } catch (Exception e) {
-               mSelectTypeViewModel.getSelectType_State();
+                mSelectTypeViewModel.getSelectType_State();
             }
         });
 
@@ -592,27 +592,21 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         mViewModel.mDataFootRingState.observe(this, footRingStateEntity -> {
             setProgressVisible(false);
-            if(StringUtil.isStringValid(footRingStateEntity.getFootId())
-                    && StringUtil.isStringValid(footRingStateEntity.getPigeonID())){
-                FootEntity footEntity = new FootEntity();
-                footEntity.setPigeonID(footRingStateEntity.getPigeonID());
-                footEntity.setFootRingID(Integer.parseInt(footRingStateEntity.getFootId()));
-                SetPigeonDeathDialog.show(getFragmentManager(), footEntity, new SetPigeonDeathDialog.OnPigeonDeathClickListener() {
-                    @Override
-                    public void cancel() {
-                        PigeonEntity pigeonEntity = new PigeonEntity();
-                        pigeonEntity.setPigeonID(footEntity.getPigeonID());
-                        pigeonEntity.setFootRingID(String.valueOf(footEntity.getFootRingID()));
-                        IntentBuilder.Builder()
-                                .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
-                                .finishForResult(getBaseActivity());
-                    }
+            if (footRingStateEntity.getFootRingID() != 0 && footRingStateEntity.getPigeonID() != 0) {
+                SetPigeonDeathDialog.show(getFragmentManager(), String.valueOf(footRingStateEntity.getFootRingID())
+                        , String.valueOf(footRingStateEntity.getPigeonID()), new SetPigeonDeathDialog.OnPigeonDeathClickListener() {
+                            @Override
+                            public void userFootRing(PigeonEntity pigeonEntity) {
+                                IntentBuilder.Builder()
+                                        .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
+                                        .finishForResult(getBaseActivity());
+                            }
 
-                    @Override
-                    public void setDeathFinish(FootEntity footEntity) {
+                            @Override
+                            public void setDeathFinish(FootEntity footEntity) {
 
-                    }
-                });
+                            }
+                        });
             }
         });
     }
@@ -688,6 +682,8 @@ public class InputPigeonFragment extends BaseBookFragment {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvRing.setRightText(entity.getFootRingNum());
             mViewModel.foot = entity.getFootRingNum();
+            setProgressVisible(true);
+            mViewModel.getFootRingState();
         } else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvFatherFoot.setRightText(entity.getFootRingNum());
