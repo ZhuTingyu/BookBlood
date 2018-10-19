@@ -16,17 +16,12 @@ import com.base.util.FragmentUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
-import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
-import com.cpigeon.book.event.GoodPigeonEvent;
 import com.cpigeon.book.module.home.goodpigeon.viewmodel.GoodPigeonHomeViewModel;
 import com.cpigeon.book.widget.FragmentTabView;
 import com.cpigeon.book.widget.stats.StatView;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -68,7 +63,7 @@ public class GoodPigeonHomeFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setToolbarNotBack();
-        setToolbarRight(Utils.getString(R.string.text_add), item -> {
+        setToolbarRightImage(R.mipmap.ic_adds, item -> {
             IntentBuilder.Builder().startParentActivity(getBaseActivity(), ApplyAddGoodPigeonFragment.class);
             return false;
         });

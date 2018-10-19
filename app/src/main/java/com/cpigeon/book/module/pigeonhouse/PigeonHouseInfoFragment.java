@@ -35,6 +35,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.AssEntity;
+import com.cpigeon.book.module.MainActivity;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
@@ -209,7 +210,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
                 @Override
                 public void onAddressPicked(Province province, City city, County county) {
-                    mLvCity.setContent(province.getName() + city.getName());
+                    mLvCity.setContent(province.getName() + city.getName() + county.getName());
                     mViewModel.mProvince = province.getName();//省
                     mViewModel.mCity = city.getName();//市
                     mViewModel.mCounty = county.getName();//县
@@ -259,8 +260,19 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
 
         mViewModel.addR.observe(this, s -> {
             setProgressVisible(false);
+
+
+            mLlLineInput.setFocusable(true);
+            mLlLineInput.setFocusableInTouchMode(true);
+            mLlLineInput.requestFocus();
+
+            mLlLineInput.getChildViews();
+            mLlLineInput.setLineInputViewState(true);
+            mTvOk.setVisibility(View.GONE);
+            if (UserModel.getInstance().getUserData().pigeonHouseEntity == null) {
+                MainActivity.start(getBaseActivity());
+            }
             UserModel.getInstance().setIsHaveHouseInfo(true);
-//            MainActivity.start(getBaseActivity());
         });
 
         mViewModel.mHouseEntityInfo.observe(this, r -> {

@@ -117,23 +117,25 @@ public class LoginFragment extends BaseBookFragment {
                 mViewModel.login();
                 return;
             }
-            mSingleLoginViewModel.getSingleLogin(o -> {
-                setProgressVisible(true);
-                if (!o.isEmpty()) {
-                    if (dialogPrompt == null || !dialogPrompt.isShowing()) {
-                        dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o,true, dialog1 -> {
-                            dialog1.dismiss();
-                        }, dialog2 -> {
-                            dialog2.dismiss();
 
-                            SingleLoginService.stopService();
+            mSingleLoginViewModel.getSingleLogin2(o -> {
+                        setProgressVisible(true);
+                        if (!o.isEmpty()) {
+                            if (dialogPrompt == null || !dialogPrompt.isShowing()) {
+                                dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o, true, dialog1 -> {
+                                    dialog1.dismiss();
+                                }, dialog2 -> {
+                                    dialog2.dismiss();
+
+                                    SingleLoginService.stopService();
+                                    mViewModel.login();
+                                });
+                            }
+                        } else {
                             mViewModel.login();
-                        });
-                    }
-                } else {
-                    mViewModel.login();
-                }
-            });
+                        }
+                    }, edUserName.getText().toString()
+                    , edPassword.getText().toString());
 
         });
 

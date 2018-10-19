@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.NoticeMsgInfoEntity;
@@ -84,7 +85,12 @@ public class MsgFragment extends BaseBookFragment {
             }
 
             tvTimeNotice.setText(noticeInfo.getDatetime());
-            tvNoticeContent.setText(noticeInfo.getTitle());
+
+            if (StringUtil.isStringValid(noticeInfo.getTitle())) {
+                tvNoticeContent.setText(noticeInfo.getTitle());
+            } else {
+                tvNoticeContent.setText("暂无公告通知");
+            }
 
             NoticeMsgInfoEntity msgInfo = datas.get(1);
 
@@ -96,7 +102,12 @@ public class MsgFragment extends BaseBookFragment {
             }
 
             tvTimeMsg.setText(msgInfo.getDatetime());
-            tvMsgContent.setText(msgInfo.getTitle());
+
+            if (StringUtil.isStringValid(msgInfo.getTitle())) {
+                tvMsgContent.setText(msgInfo.getTitle());
+            } else {
+                tvMsgContent.setText("暂无鸽友消息");
+            }
 
         });
     }
@@ -106,10 +117,12 @@ public class MsgFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.ll_notice:
                 //公告通知
+                imgNotice.setVisibility(View.GONE);
                 AnnouncementNoticeFragment.start(getBaseActivity());
                 break;
             case R.id.ll_msg:
                 //鸽友消息
+                imgMsg.setVisibility(View.GONE);
                 PigeonFriendMsgFragment.start(getBaseActivity());
                 break;
         }

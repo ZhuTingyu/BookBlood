@@ -1,7 +1,6 @@
 package com.cpigeon.book.module.home.goodpigeon.adpter;
 
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.Guideline;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,6 +51,7 @@ public class GoodPigeonListAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
             margin = margin_10;
             imgSex.setImageResource(R.mipmap.ic_good_pigeon_female);
         }
+
         ImageView img = helper.getView(R.id.img);
         RelativeLayout.LayoutParams imgP = new RelativeLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, imgH);
         imgP.setMargins(margin_10, margin, margin_10, margin);

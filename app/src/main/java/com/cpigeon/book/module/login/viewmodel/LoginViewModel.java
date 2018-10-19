@@ -24,8 +24,8 @@ public class LoginViewModel extends BaseViewModel {
     public MutableLiveData<String> oneStartHintStr = new MutableLiveData<>();
 
     public void login() {
-        Log.d("xiaohlls", "login: "+mPhone);
-        Log.d("xiaohlls", "login: "+mPassword);
+        Log.d("xiaohlls", "login: " + mPhone);
+        Log.d("xiaohlls", "login: " + mPassword);
 
         submitRequestThrowError(LoginModel.login(mPhone, mPassword), r -> {
             if (r.isOk()) {
@@ -36,12 +36,8 @@ public class LoginViewModel extends BaseViewModel {
                 } else {
                     UserModel.getInstance().setUserInfo(r.data, mPassword);
                 }
-
-//                RxUtils.delayed(1000, aLong -> {
                 loginR.setValue(r.data);
                 normalResult.setValue(r.msg);
-//                });
-
             } else throw new HttpErrorException(r);
         });
     }

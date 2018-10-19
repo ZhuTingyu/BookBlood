@@ -186,7 +186,7 @@ public class BaseViewHolder extends com.chad.library.adapter.base.BaseViewHolder
     public void setGlideImageView(Context context, @IdRes int resId , String string){
 
         Glide.with(context).load(string)
-                .placeholder(context.getResources().getDrawable(R.drawable.ic_img_default))
+                .placeholder(context.getResources().getDrawable(R.drawable.ic_img_default2))
                 .into((ImageView) getView(resId));
     }
 

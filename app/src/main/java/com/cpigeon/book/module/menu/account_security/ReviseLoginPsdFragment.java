@@ -117,10 +117,10 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
             setTitle("修改登录密码");
 
             //不需要验证码
-            setToolbarRight("短信验证", item -> {
+            setToolbarRight("忘记旧密码？", item -> {
 
                 if (isNeedVerCode) {
-                    setToolbarRight("短信验证");
+                    setToolbarRight("忘记旧密码？");
 
                     isNeedVerCode = false;
                     ll1.setVisibility(View.VISIBLE);

@@ -1,19 +1,15 @@
 package com.cpigeon.book.module.home.goodpigeon;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
-import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -52,6 +48,7 @@ public class GoodPigeonListFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = findViewById(R.id.list);
+        mRecyclerView.setListPadding(15, 0, 15, 0);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2
                 , StaggeredGridLayoutManager.VERTICAL));
         mAdapter = new GoodPigeonListAdapter();

@@ -556,7 +556,7 @@
         <item>长寿鸽</item>
     </string-array>
 
-    <string name="str_new_code">发现新版本 v%1%来啦</string>
+    <string name="str_new_code">新版本 v%1%来啦</string>
     <string name="text_young_pigeon">幼鸽</string>
 
     <string-array name="array_contact_way">

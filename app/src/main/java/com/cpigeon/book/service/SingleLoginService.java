@@ -74,28 +74,29 @@ public class SingleLoginService extends Service {
             timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
                 public void run() {
-                    mViewModel.getSingleLogin(o -> {
-                        Log.d("xiaohls", "onHandleIntent: 2 --->" + o);
-                        if (!o.isEmpty()) {
-                            if (dialogPrompt == null || !dialogPrompt.isShowing()) {
-                                dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o, true,dialog1 -> {
-                                    //结束所有页面
-                                    UserModel.getInstance().cleanUserInfo();
+                    mViewModel.getSingleLogin2(o -> {
+                                Log.d("xiaohls", "onHandleIntent: 2 --->" + o);
+                                if (!o.isEmpty()) {
+                                    if (dialogPrompt == null || !dialogPrompt.isShowing()) {
+                                        dialogPrompt = DialogUtils.createDialogWithLeft2(AppManager.getAppManager().getTopActivity(), o, true, dialog1 -> {
+                                            //结束所有页面
+                                            UserModel.getInstance().cleanUserInfo();
 
-                                    SingleLoginService.stopService();
-                                    AppManager.getAppManager().killAllActivity();
-                                    dialog1.dismiss();
-                                }, dialog2 -> {
-                                    SingleLoginService.stopService();
-                                    UserModel.getInstance().cleanUserInfo();
-                                    //结束所有页面，跳转到登录页
-                                    dialog2.dismiss();
-                                    LoginActivity.start(AppManager.getAppManager().getTopActivity());
-                                    AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);
-                                });
-                            }
-                        }
-                    });
+                                            SingleLoginService.stopService();
+                                            AppManager.getAppManager().killAllActivity();
+                                            dialog1.dismiss();
+                                        }, dialog2 -> {
+                                            SingleLoginService.stopService();
+                                            UserModel.getInstance().cleanUserInfo();
+                                            //结束所有页面，跳转到登录页
+                                            dialog2.dismiss();
+                                            LoginActivity.start(AppManager.getAppManager().getTopActivity());
+                                            AppManager.getAppManager().killAllToLoginActivity(LoginActivity.class);
+                                        });
+                                    }
+                                }
+                            }, UserModel.getInstance().getUserData().yonghuming,
+                            UserModel.getInstance().getUserData().password);
                 }
             }, 0, 1000 * 10);// 这里设定将延时每天固定执行
         }
