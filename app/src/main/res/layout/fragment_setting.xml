@@ -91,25 +91,25 @@
 
         <!--注销用户-->
         <com.cpigeon.book.widget.LineInputView
-            android:visibility="gone"
             android:id="@+id/ll_write_off"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
+            android:visibility="gone"
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="注销用户"
-            app:lineInputView_isShowLineDivisions="gone"
-            app:lineInputView_RightString="" />
+            app:lineInputView_RightString=""
+            app:lineInputView_isShowLineDivisions="gone" />
 
     </LinearLayout>
 
     <TextView
-        android:textColor="@color/color_text_can_click"
         android:id="@+id/out_login"
-        style="@style/bottom_style3"
-        android:text="退出登录" />
+        style="@style/bottom_style"
+        android:text="退出登录"
+        android:textColor="@color/color_text_can_click" />
 
 
 </LinearLayout>
