@@ -299,7 +299,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             KeyboardUtils.toggleSoftInput();
         }
     }
-
+    //自己足环
     public static void show(FragmentManager fragmentManager, String footNumber, boolean isChina, OnChooseListener onChooseListener, OnFootStringFinishListener onFootStringFinishListener) {
         Bundle bundle = new Bundle();
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isChina);

@@ -9,31 +9,33 @@ import android.os.Parcelable;
 
 public class FootRingStateEntity implements Parcelable {
 
+
     /**
-     * PigeonID : 足环所挂环的鸽子id
-     * FootStateName : 足环状态名称
-     * FootStateID : 状态id
+     * PigeonID : 0
+     * FootStateID : 0
+     * FootStateName :
+     * FootRingID : 0
      */
 
-    private String PigeonID;
+    private int PigeonID;
+    private int FootStateID;
     private String FootStateName;
-    private String FootStateID;
-    private String FootId;
+    private int FootRingID;
 
-    public String getFootId() {
-        return FootId;
-    }
-
-    public void setFootId(String footId) {
-        FootId = footId;
-    }
-
-    public String getPigeonID() {
+    public int getPigeonID() {
         return PigeonID;
     }
 
-    public void setPigeonID(String PigeonID) {
+    public void setPigeonID(int PigeonID) {
         this.PigeonID = PigeonID;
+    }
+
+    public int getFootStateID() {
+        return FootStateID;
+    }
+
+    public void setFootStateID(int FootStateID) {
+        this.FootStateID = FootStateID;
     }
 
     public String getFootStateName() {
@@ -44,15 +46,12 @@ public class FootRingStateEntity implements Parcelable {
         this.FootStateName = FootStateName;
     }
 
-    public String getFootStateID() {
-        return FootStateID;
+    public int getFootRingID() {
+        return FootRingID;
     }
 
-    public void setFootStateID(String FootStateID) {
-        this.FootStateID = FootStateID;
-    }
-
-    public FootRingStateEntity() {
+    public void setFootRingID(int FootRingID) {
+        this.FootRingID = FootRingID;
     }
 
     @Override
@@ -62,20 +61,23 @@ public class FootRingStateEntity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.PigeonID);
+        dest.writeInt(this.PigeonID);
+        dest.writeInt(this.FootStateID);
         dest.writeString(this.FootStateName);
-        dest.writeString(this.FootStateID);
-        dest.writeString(this.FootId);
+        dest.writeInt(this.FootRingID);
+    }
+
+    public FootRingStateEntity() {
     }
 
     protected FootRingStateEntity(Parcel in) {
-        this.PigeonID = in.readString();
+        this.PigeonID = in.readInt();
+        this.FootStateID = in.readInt();
         this.FootStateName = in.readString();
-        this.FootStateID = in.readString();
-        this.FootId = in.readString();
+        this.FootRingID = in.readInt();
     }
 
-    public static final Creator<FootRingStateEntity> CREATOR = new Creator<FootRingStateEntity>() {
+    public static final Parcelable.Creator<FootRingStateEntity> CREATOR = new Parcelable.Creator<FootRingStateEntity>() {
         @Override
         public FootRingStateEntity createFromParcel(Parcel source) {
             return new FootRingStateEntity(source);

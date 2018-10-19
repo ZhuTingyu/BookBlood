@@ -34,6 +34,8 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
     private LineInputView mLvDeathReason;
     private TextView mTvCancel;
     private TextView mTvOk;
+    private TextView mTvDirectUse;
+
     SetPigeonDeathViewModel mViewModel;
     SelectTypeViewModel mSelectTypeViewModel;
 
@@ -64,6 +66,8 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         });
         mTvCancel = dialog.findViewById(R.id.tvCancel);
         mTvOk = dialog.findViewById(R.id.tvOk);
+        mTvDirectUse = dialog.findViewById(R.id.tvDirectUse);
+
 
         mLvDeathReason.setOnRightClickListener(lineInputView -> {
             PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mDeathReason)
@@ -82,17 +86,23 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
             mViewModel.setPigeonDeath();
         });
 
+        mTvDirectUse.setOnClickListener(v -> {
+            if(mOnPigeonDeathClickListener != null){
+                PigeonEntity pigeonEntity = new PigeonEntity();
+                pigeonEntity.setPigeonID(mViewModel.mFootEntity.getPigeonID());
+                pigeonEntity.setFootRingID(String.valueOf(mViewModel.mFootEntity.getFootRingID()));
+                mOnPigeonDeathClickListener.userFootRing(pigeonEntity);
+            }
+        });
 
         mTvCancel.setOnClickListener(v -> {
             dismiss();
-            if (mOnPigeonDeathClickListener != null) {
-                mOnPigeonDeathClickListener.cancel();
-            }
         });
         mSelectTypeViewModel.getDeathReason();
 
         mViewModel.normalResult.observe(this, s -> {
             getBaseActivity().setProgressVisible(false);
+            dismiss();
             if (mOnPigeonDeathClickListener != null) {
                 mOnPigeonDeathClickListener.setDeathFinish(mViewModel.mFootEntity);
             } else {
@@ -114,10 +124,13 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
 
     }
 
-    public static void show(FragmentManager fragmentManager, FootEntity pigeonEntity, OnPigeonDeathClickListener listener) {
+    public static void show(FragmentManager fragmentManager, String footId, String pigeonId, OnPigeonDeathClickListener listener) {
         SetPigeonDeathDialog setPigeonDeathDialog = new SetPigeonDeathDialog();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(IntentBuilder.KEY_DATA, pigeonEntity);
+        FootEntity footEntity = new FootEntity();
+        footEntity.setFootRingID(Integer.parseInt(footId));
+        footEntity.setPigeonID(pigeonId);
+        bundle.putParcelable(IntentBuilder.KEY_DATA, footEntity);
         setPigeonDeathDialog.setArguments(bundle);
         setPigeonDeathDialog.setOnPigeonDeathClickListener(listener);
         setPigeonDeathDialog.show(fragmentManager);
@@ -132,8 +145,8 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
     }
 
     public interface OnPigeonDeathClickListener {
-        void cancel();
 
+        void userFootRing(PigeonEntity entity);
         void setDeathFinish(FootEntity footEntity);
     }
 

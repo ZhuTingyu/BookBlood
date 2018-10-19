@@ -648,11 +648,12 @@
     <string name="text_select_blood">选择血统</string>
     <string name="text_reinput">重新输入</string>
     <string name="text_bracket">(%1$s)</string>
-    <string name="text_hint_pigeon_is_death">死亡鸽才能重新挂环！是否将该鸽设置为死亡状态并重新挂环？</string>
+    <string name="text_hint_pigeon_is_death">该足环已经挂环！是否将该鸽设置为死亡状态并重新挂环？</string>
     <string name="text_death_reason">死亡原因</string>
     <string name="text_use_arm_prompt">温馨提示:注射疫苗时必须保证信鸽处于健康状态，体温正常（添加正常度数），食欲正常，排便正常，并检查口腔处于粉白状态，无粘液，正常体温为42℃，注射完毕后须给信鸽电解质或者甘精，以防应急反应。</string>
 
     <string name="str_hint_no">暂无</string>
     <string name="str_my_server">我的服务</string>
+    <string name="text_direct_use">直接使用</string>
 
 </resources>

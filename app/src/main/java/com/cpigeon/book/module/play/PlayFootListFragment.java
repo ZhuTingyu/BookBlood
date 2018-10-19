@@ -45,6 +45,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
     PlayListViewModel mViewModel;
     LeagueMarkerView mLeagueMarkerView;
     LineChart mLine;
+    private CardView mCvLine;
 
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
@@ -77,6 +78,8 @@ public class PlayFootListFragment extends BaseFootListFragment {
         });
 
         mLine = mHeadView.findViewById(R.id.line);
+        mCvLine = mHeadView.findViewById(R.id.cvLine);
+
         mKLineManager = new KLineManager(mLine);
     }
 
@@ -114,8 +117,8 @@ public class PlayFootListFragment extends BaseFootListFragment {
 
             mAdapter.addHeaderView(mHeadView);
 
-            if(Lists.isEmpty(data)){
-                mLine.setVisibility(View.GONE);
+            if (Lists.isEmpty(data)) {
+                mCvLine.setVisibility(View.GONE);
                 return;
             }
             mLeagueMarkerView = new LeagueMarkerView(getBaseActivity(), data);

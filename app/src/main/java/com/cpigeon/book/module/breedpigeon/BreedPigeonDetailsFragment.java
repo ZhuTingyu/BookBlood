@@ -223,14 +223,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
         mBreedPigeonDetailsViewModel.getPigeonDetails();//获取 鸽子  详情
         mBookViewModel.getBloodBook();// //获取 血统书  四代
-
-        mSelectTypeViewModel.getSelectType_Sex();
-        mSelectTypeViewModel.getSelectType_FeatherColor();
-        mSelectTypeViewModel.getSelectType_eyeSand();
-        mSelectTypeViewModel.getSelectType_lineage();
-        mSelectTypeViewModel.getSelectType_State();
-        mSelectTypeViewModel.getSelectType_PigeonSource();
-
     }
 
 
