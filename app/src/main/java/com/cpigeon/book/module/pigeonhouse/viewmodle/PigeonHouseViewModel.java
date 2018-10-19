@@ -46,6 +46,17 @@ public class PigeonHouseViewModel extends BaseViewModel {
         });
     }
 
+
+    // 首页  训放  不需要 弹出错误信息
+    public void getPigeonHouseInHone() {
+        submitRequestThrowError(PigeonHouseModel.getPigeonHouse(), r -> {
+            if (r.isOk()) {
+                mHouseEntityInfo.setValue(r.data);
+            }
+        });
+    }
+
+
     public void setUserFace() {
         submitRequestThrowError(UserModel.setUserFace(mHeadUrl), r -> {
             if (r.isOk()) {

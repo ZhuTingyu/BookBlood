@@ -41,13 +41,13 @@
 
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/balance_withdraw"
                 style="@style/bottom_style2"
                 android:layout_marginLeft="@dimen/spacing_left_reight"
                 android:layout_marginRight="@dimen/spacing_left_reight"
                 android:layout_marginTop="20dp"
-                android:text="提现" />
+                android:text="提现"
+                android:visibility="gone" />
 
 
         </LinearLayout>
@@ -62,6 +62,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp"
         android:text="不知如何操作？快快点击此处!"
-        android:textColor="#85C2FF" />
+        android:textColor="#85C2FF"
+        android:visibility="gone" />
 
 </RelativeLayout>

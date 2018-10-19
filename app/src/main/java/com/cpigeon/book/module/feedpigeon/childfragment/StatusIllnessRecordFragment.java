@@ -189,6 +189,23 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
             mStatusIllnessRecordAddViewModel.mIllnessNameData = datas;
         });
 
+
+        mStatusIllnessRecordAddViewModel.mVaccineAdd.observe(this, datas -> {
+            //添加成功后回调
+
+            mStatusIllnessRecordAddViewModel.illnessName = "";//疾病名称
+            mStatusIllnessRecordAddViewModel.illnessSymptom = "";//症状
+            mStatusIllnessRecordAddViewModel.illnessTime = "";//生病日期
+            mStatusIllnessRecordAddViewModel.bodyTemperature = "";//体温
+            mStatusIllnessRecordAddViewModel.remark = "";//备注
+
+            lvIllnessName.setRightText(mStatusIllnessRecordAddViewModel.illnessName);
+            lvIllnessSymptom.setContent(mStatusIllnessRecordAddViewModel.illnessSymptom);
+            lvIllTime.setContent(mStatusIllnessRecordAddViewModel.illnessTime);
+            lvBodyTemp.setRightText(mStatusIllnessRecordAddViewModel.bodyTemperature);
+            inputRemark.setText(mStatusIllnessRecordAddViewModel.remark);
+
+        });
     }
 
 
@@ -278,7 +295,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
                             mInputDialog.hide();
                             mStatusIllnessRecordAddViewModel.isCanCommit();
                         }, null);
-                
+
                 break;
             case R.id.llRoot:
                 break;

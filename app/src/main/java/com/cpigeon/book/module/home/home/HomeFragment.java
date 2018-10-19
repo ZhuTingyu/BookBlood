@@ -179,7 +179,7 @@ public class HomeFragment extends BaseBookFragment {
         });
 
         mViewModel.getHomeAd();
-        mPigeonHouseViewModel.getPigeonHouse();
+        mPigeonHouseViewModel.getPigeonHouseInHone();
         mViewModel.getHomeTop();
     }
 

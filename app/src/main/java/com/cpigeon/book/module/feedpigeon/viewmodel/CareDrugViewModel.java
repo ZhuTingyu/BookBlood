@@ -58,6 +58,8 @@ public class CareDrugViewModel extends BaseViewModel {
     //备注
     public String remark;
 
+    public MutableLiveData<Object> mVaccineAdd = new MutableLiveData<>();
+
     // 保健品记录 添加
     public void getTXGP_PigeonHealth_AddData() {
         submitRequestThrowError(CareDrugModel.getTXGP_PigeonHealth_Add(
@@ -82,6 +84,7 @@ public class CareDrugViewModel extends BaseViewModel {
             if (r.isOk()) {
                 hintDialog(r.msg);
                 EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
+                mVaccineAdd.setValue(r);
             } else throw new HttpErrorException(r);
         });
     }

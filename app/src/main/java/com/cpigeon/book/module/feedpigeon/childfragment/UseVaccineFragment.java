@@ -199,6 +199,26 @@ public class UseVaccineFragment extends BaseBookFragment {
             mUseVaccineViewModel.mVaccineNameSelect = datas;
         });
 
+
+        mUseVaccineViewModel.mVaccineAdd.observe(this, datas -> {
+
+            //添加成功 后回调
+
+            mUseVaccineViewModel.vaccineName = "";//疫苗名称
+            mUseVaccineViewModel.vaccineNameId = "";//疫苗名称id
+            mUseVaccineViewModel.injectionTiem = "";//注射日期
+            mUseVaccineViewModel.bodyTemperature = "";//体温
+            mUseVaccineViewModel.injectionWhy = "";//注射原因
+            mUseVaccineViewModel.injectionWhyId = "";//注射原因id
+            mUseVaccineViewModel.remark = "";//备注
+
+            lvVaccine.setRightText(mUseVaccineViewModel.vaccineName);
+            lvTime.setContent(mUseVaccineViewModel.injectionTiem);
+            lvBodyTemp.setRightText(mUseVaccineViewModel.bodyTemperature);
+            lvVaccineReason.setRightText(mUseVaccineViewModel.injectionWhy);
+            inputRemark.setText(mUseVaccineViewModel.remark);
+
+        });
     }
 
     private BaseInputDialog mInputDialog;
@@ -309,4 +329,6 @@ public class UseVaccineFragment extends BaseBookFragment {
                 break;
         }
     }
+
+
 }

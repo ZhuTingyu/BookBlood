@@ -51,6 +51,8 @@ public class StatusIllnessRecordAddViewModel extends BaseViewModel {
     //备注
     public String remark;
 
+    public MutableLiveData<Object> mVaccineAdd = new MutableLiveData<>();
+
     // 病情记录 添加
     public void getTXGP_PigeonVaccine_AddData() {
         submitRequestThrowError(StatusIllnessRecordAddModel.getTXGP_PigeonDisease_Add(
@@ -69,6 +71,7 @@ public class StatusIllnessRecordAddViewModel extends BaseViewModel {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
                 hintDialog(r.msg);
+                mVaccineAdd.setValue(r);
             } else throw new HttpErrorException(r);
         });
 

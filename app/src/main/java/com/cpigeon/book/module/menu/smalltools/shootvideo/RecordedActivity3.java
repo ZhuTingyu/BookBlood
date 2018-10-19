@@ -53,7 +53,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by cj on 2017/7/25.
- * 鸽运通  训鸽通 拍照，拍摄视频
+ * 鸽运通  训鸽通 拍照，拍摄视频        舍弃（参考）
  */
 
 public class RecordedActivity3 extends Activity implements View.OnTouchListener, SensorControler.CameraFocusListener {

@@ -73,8 +73,8 @@
         <ImageView
             android:id="@+id/img_logo"
             android:layout_width="match_parent"
-            android:scaleType="centerInside"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="centerInside" />
 
     </RelativeLayout>
 
@@ -111,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入"
                 android:textColor="#010101"
+                android:textColorHint="#010101"
                 android:textSize="@dimen/medium_text_size" />
 
         </LinearLayout>

@@ -53,6 +53,8 @@ public class UseVaccineViewModel extends BaseViewModel {
     //备注
     public String remark;
 
+    public MutableLiveData<Object> mVaccineAdd = new MutableLiveData<>();
+
 
     // 疫苗注射 添加
     public void getTXGP_PigeonVaccine_AddData() {
@@ -72,6 +74,7 @@ public class UseVaccineViewModel extends BaseViewModel {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
                 hintDialog(r.msg);
+                mVaccineAdd.setValue(r);
             } else throw new HttpErrorException(r);
         });
     }

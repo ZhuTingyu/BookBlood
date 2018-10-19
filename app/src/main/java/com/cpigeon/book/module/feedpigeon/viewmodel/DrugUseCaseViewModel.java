@@ -58,6 +58,8 @@ public class DrugUseCaseViewModel extends BaseViewModel {
     //备注
     public String remark;
 
+    public MutableLiveData<Object> mVaccineAdd = new MutableLiveData<>();
+
 
     // 用药情况 添加
     public void getTXGP_PigeonDrug_AddData() {
@@ -80,6 +82,7 @@ public class DrugUseCaseViewModel extends BaseViewModel {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
                 hintDialog(r.msg);
+                mVaccineAdd.setValue(r);
             } else throw new HttpErrorException(r);
         });
     }

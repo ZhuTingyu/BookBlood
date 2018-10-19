@@ -248,6 +248,28 @@ public class CareDrugFragment extends BaseBookFragment {
             mCareDrugViewModel.mCareDrugNameSelect = datas;
         });
 
+        mCareDrugViewModel.mVaccineAdd.observe(this, datas -> {
+            //添加完成后回调
+
+            mCareDrugViewModel.careDrugName = "";//保健品名称
+            mCareDrugViewModel.careDrugNameId = "";//保健品名称
+            mCareDrugViewModel.careDrugFunction = "";//保健品功能
+            mCareDrugViewModel.useTime = "";//使用时间
+            mCareDrugViewModel.recordTime = "";//记录时间
+            mCareDrugViewModel.useEffect = "";//使用效果id
+            mCareDrugViewModel.isHaveAfterResult = "";//副作用
+            mCareDrugViewModel.bodyTemp = "";//体温
+            mCareDrugViewModel.remark = "";//备注
+
+            lvCareDrugName.setRightText(mCareDrugViewModel.careDrugName);//保健品名称
+            lvCareDrugFunction.setRightText(mCareDrugViewModel.careDrugFunction);//保健品功能
+            lvUserTime.setContent(mCareDrugViewModel.useTime);//使用时间
+            lvRecordTime.setContent(mCareDrugViewModel.recordTime);//记录时间
+            inputRemark.setText(mCareDrugViewModel.remark);//备注
+            lvBodyTemp.setRightText(mCareDrugViewModel.bodyTemp);//体温
+
+        });
+
     }
 
     private BaseInputDialog mInputDialog;

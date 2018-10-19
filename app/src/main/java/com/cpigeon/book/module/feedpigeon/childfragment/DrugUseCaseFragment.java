@@ -225,6 +225,27 @@ public class DrugUseCaseFragment extends BaseBookFragment {
             //药品名称
             mDrugUseCaseViewModel.mDrugNameData = datas;
         });
+
+        mDrugUseCaseViewModel.mVaccineAdd.observe(this, datas -> {
+
+            //添加完成
+
+            mDrugUseCaseViewModel.illnessName = "";//疾病名称
+            mDrugUseCaseViewModel.drugName = "";//药品名称
+            mDrugUseCaseViewModel.drugUseTime = "";//用药日期
+            mDrugUseCaseViewModel.drugAfterStatus = "";//用药后状态
+            mDrugUseCaseViewModel.bodyTemp = "";
+            mDrugUseCaseViewModel.remark = "";//备注
+
+
+            lvDiseaseName.setRightText("");//疾病名称
+            lvDrugName.setRightText("");//药品名称
+            lvDrugUseTime.setContent(mDrugUseCaseViewModel.drugUseTime);//用药日期
+            lvDrugAfterStatus.setContent("");//用药后状态
+            lvBodyTemp.setRightText(mDrugUseCaseViewModel.bodyTemp);//体温
+            inputRemark.setText(mDrugUseCaseViewModel.remark);//备注
+
+        });
     }
 
 

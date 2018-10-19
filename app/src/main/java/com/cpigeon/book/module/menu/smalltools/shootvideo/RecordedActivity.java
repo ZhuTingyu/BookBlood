@@ -52,7 +52,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * Created by cj on 2017/7/25.
- * 鸽运通  训鸽通 拍照，拍摄视频
+ * 随行拍
+ * type = "video"   拍摄视频
+ * type = "photo"   拍摄图片
  */
 
 public class RecordedActivity extends BaseBookActivity implements View.OnTouchListener, SensorControler.CameraFocusListener {
