@@ -114,7 +114,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
 
         if (type == 1) {
             //修改登录密码
-            setTitle("修改登录密码");
+            setTitle(getString(R.string.text_renewal_login_psd));
 
             //不需要验证码
             setToolbarRight("忘记旧密码？", item -> {
@@ -221,6 +221,11 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
 
                 break;
             case R.id.tv_ver_code:
+                //获取短信验证码
+                if (!et_imgVerCode.getText().toString().toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase())) {
+                    ToastUtils.showLong(getBaseActivity(), "输入图片验证码不符，请重新输入");
+                    return;
+                }
 
                 if (thread == null || !thread.isAlive()) {
                     thread = new Thread(VerifyCountdownUtil.getYzm(tv_ver_code, getActivity()));
