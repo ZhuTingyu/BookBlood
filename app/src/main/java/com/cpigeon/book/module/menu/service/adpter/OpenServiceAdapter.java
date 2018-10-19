@@ -1,17 +1,40 @@
 package com.cpigeon.book.module.menu.service.adpter;
 
+import android.text.SpannableStringBuilder;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
+import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.ServiceEntity;
 import com.cpigeon.book.module.menu.service.ChoosePayWayDialog;
 import com.cpigeon.book.veiwholder.ServiceViewHolder;
 
+import java.util.List;
+
 /**
  * Created by Zhu TingYu on 2018/8/31.
  */
 
-public class OpenServiceAdapter extends BaseQuickAdapter<ServiceEntity, ServiceViewHolder> {
+public class OpenServiceAdapter extends BaseQuickAdapter<ServiceEntity, BaseViewHolder> {
+
+    public static final String TYPE_OPEN = "TYPE_OPEN";
+    public static final String TYPE_RENEW = "TYPE_RENEW";
+
+    private List<Integer> icons = Lists.newArrayList(
+            R.mipmap.ic_service_book,
+            R.mipmap.ic_service_down_load_league,
+            R.mipmap.ic_service_print_blood_book,
+            R.mipmap.ic_service_share_pigeon
+    );
+
+    private ImageView mImgIcon;
+    private TextView mTvServiceName;
+    private TextView mTvOpen;
+    private TextView mTvCount;
 
    private String type;
    private boolean mIsOpen;
@@ -23,21 +46,27 @@ public class OpenServiceAdapter extends BaseQuickAdapter<ServiceEntity, ServiceV
     }
 
     @Override
-    protected void convert(ServiceViewHolder helper, ServiceEntity item) {
+    protected void convert(BaseViewHolder helper, ServiceEntity item) {
 
+        mImgIcon = helper.getView(R.id.imgIcon);
+        mTvServiceName = helper.getView(R.id.tvServiceName);
+        mTvOpen = helper.getView(R.id.tvOpen);
+        mTvCount = helper.getView(R.id.tvCount);
 
-        /*SpannableStringBuilder span = new SpannableStringBuilder("享用所有功能，不受限制，只要:");
-        SpannableString odlMoney = new SpannableString("188");
-        odlMoney.setSpan(new StrikethroughSpan(), 0, odlMoney.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        SpannableString newMoney = new SpannableString("188");
-        newMoney.setSpan(new ForegroundColorSpan(Color.RED), 0, newMoney.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        span.append(newMoney);
-        span.append("不要");
-        span.append(odlMoney);
-        */
+        SpannableStringBuilder stringBuilder = new SpannableStringBuilder(item.getSintro());
 
+        mTvServiceName.setText(item.getSname());
+        if (TYPE_OPEN.equals(type)) {
+            mTvOpen.setText(Utils.getString(R.string.text_open_at_once));
+        } else {
+            mTvOpen.setText(Utils.getString(R.string.text_renew_at_once));
+        }
 
-        helper.bindData(type, item , v -> {
+        helper.setGlideImageView(getBaseActivity(), R.id.imgIcon, item.getImgurl());
+
+        mTvCount.setText(stringBuilder);
+
+        mTvOpen.setOnClickListener(v -> {
             ChoosePayWayDialog.show(item, mIsOpen ,getBaseActivity().getSupportFragmentManager());
         });
     }

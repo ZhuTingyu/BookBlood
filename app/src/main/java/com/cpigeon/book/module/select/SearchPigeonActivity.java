@@ -79,7 +79,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
         if (BaseSelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
             mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
         } else if (BaseSelectPigeonFragment.TYPE_SELECT_PIGEON_TO_ADD_BREED_PIGEON.equals(mType)) {
-
+            mViewModel.sexid = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
         }
 
         mAdapter.setOnLoadMoreListener(() -> {

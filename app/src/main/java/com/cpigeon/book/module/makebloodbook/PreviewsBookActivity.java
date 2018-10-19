@@ -30,6 +30,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
+import com.cpigeon.book.module.breedpigeon.SelectPigeonToAddBreedFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
@@ -166,29 +167,26 @@ public class PreviewsBookActivity extends BaseBookActivity {
             @Override
             public void add(int x, int y) {
 
-                if (x == mFamilyTreeView.getStartGeneration()) {
+                PigeonEntity breedPigeonEntity = null;
+                if (mFamilyTreeView.getSon(x, y) != null) {
+                    breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
+                }
 
-                    InputPigeonFragment.start(getBaseActivity()
-                            , StringUtil.emptyString()
-                            , StringUtil.emptyString()
-                            , StringUtil.emptyString()
-                            , StringUtil.emptyString()
-                            , CODE_ADD_PIGEON);
-
-                } else {
-                    PigeonEntity breedPigeonEntity = null;
-                    if (mFamilyTreeView.getSon(x, y) != null) {
-                        breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
-                    }
-
-
-                    InputPigeonFragment.start(getBaseActivity()
-                            , StringUtil.emptyString()
+                boolean isMale = FamilyTreeView.isMale(y);
+                if (isMale) {
+                    SelectPigeonToAddBreedFragment.start(getBaseActivity()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                             , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                            , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
-                            , CODE_ADD_PIGEON);
+                            , CODE_ADD_PIGEON
+                            , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
+                } else {
+                    SelectPigeonToAddBreedFragment.start(getBaseActivity()
+                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
+                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
+                            , CODE_ADD_PIGEON
+                            , PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
                 }
+
             }
 
             @Override
@@ -261,7 +259,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
                 mPrintFamilyTreeView.setShowLine(false);
                 mPrintFamilyTreeView.setLayoutParams(treeP);
 
-                composite.add(RxUtils.delayed(200,aLong -> {
+                composite.add(RxUtils.delayed(200, aLong -> {
                     mPrintFamilyTreeView.initView();
                     mPrintFamilyTreeView.setData(mViewModel.mBloodBookEntity);
                 }));
@@ -283,7 +281,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
                 RelativeLayout.LayoutParams treeP = new RelativeLayout.LayoutParams(2480, 2330);
                 treeP.addRule(RelativeLayout.CENTER_IN_PARENT);
                 mPrintFamilyTreeView.setLayoutParams(treeP);
-                composite.add(RxUtils.delayed(200,aLong -> {
+                composite.add(RxUtils.delayed(200, aLong -> {
                     mPrintFamilyTreeView.initView();
                     mPrintFamilyTreeView.setData(mViewModel.mBloodBookEntity);
                 }));

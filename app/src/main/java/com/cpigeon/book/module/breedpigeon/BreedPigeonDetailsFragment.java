@@ -122,27 +122,41 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             @Override
             public void add(int x, int y) {
 
-                if (x == mFamilyTreeView.getStartGeneration()) {
-                    InputPigeonFragment.start(getBaseActivity()
-                            , StringUtil.emptyString()
-                            , mBookViewModel.foodId
-                            , mBookViewModel.pigeonId
-                            , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
-                            , 0);
-                } else {
+                boolean isMan = FamilyTreeView.isMale(y);
 
+                if (x == mFamilyTreeView.getStartGeneration()) {
+                    if(isMan){
+                        SelectPigeonToAddBreedFragment.start(getBaseActivity()
+                                , mBookViewModel.foodId
+                                , mBookViewModel.pigeonId
+                                ,0
+                                , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
+                    }else {
+                        SelectPigeonToAddBreedFragment.start(getBaseActivity()
+                                , mBookViewModel.foodId
+                                , mBookViewModel.pigeonId
+                                ,0
+                                , PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
+                    }
+                } else {
                     PigeonEntity breedPigeonEntity = null;
                     if (mFamilyTreeView.getSon(x, y) != null) {
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
 
-                    InputPigeonFragment.start(getBaseActivity()
-                            , StringUtil.emptyString()
-                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
-                            , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                            , FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE
-                            , 0);
-
+                    if(isMan){
+                        SelectPigeonToAddBreedFragment.start(getBaseActivity()
+                                , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
+                                , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
+                                ,0
+                                , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
+                    }else {
+                        SelectPigeonToAddBreedFragment.start(getBaseActivity()
+                                , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
+                                , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
+                                ,0
+                                , PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
+                    }
                 }
             }
 

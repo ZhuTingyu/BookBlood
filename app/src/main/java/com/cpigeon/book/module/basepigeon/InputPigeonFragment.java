@@ -40,6 +40,7 @@ import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.InputPigeonViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
@@ -48,6 +49,7 @@ import com.cpigeon.book.module.photo.BaseImgUploadFragment;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.select.SelectFootRingFragment;
+import com.cpigeon.book.module.select.SetPigeonDeathDialog;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -68,10 +70,10 @@ import cn.qqtheme.framework.picker.OptionPicker;
 
 public class InputPigeonFragment extends BaseBookFragment {
 
-    private static final String KEY_SON_FOOT_ID = "KEY_SON_FOOT_ID";
-    private static final String KEY_SON_PIGEON_ID = "KEY_SON_PIGEON_ID";
-    private static final String KEY_PIGEON_SEX_TYPE = "KEY_PIGEON_SEX_TYPE";
-    private static final String KEY_PIGEON_TYPE = "KEY_PIGEON_TYPE";
+    public static final String KEY_SON_FOOT_ID = "KEY_SON_FOOT_ID";
+    public static final String KEY_SON_PIGEON_ID = "KEY_SON_PIGEON_ID";
+    public static final String KEY_PIGEON_SEX_TYPE = "KEY_PIGEON_SEX_TYPE";
+    public static final String KEY_PIGEON_TYPE = "KEY_PIGEON_TYPE";
 
     public static final String TYPE_SEX_MALE = "TYPE_SEX_MALE";
     public static final String TYPE_SEX_FEMALE = "TYPE_SEX_FEMALE";
@@ -105,6 +107,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     private LineInputListLayout mLlAddition;
 
     InputPigeonViewModel mViewModel;
+    BookViewModel mBookViewModel;
     SelectTypeViewModel mSelectTypeViewModel;
     SelectImageAdapter2 mAdapter;
 
@@ -135,6 +138,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mViewModel = new InputPigeonViewModel();
+        mBookViewModel = new BookViewModel();
         mSelectTypeViewModel = new SelectTypeViewModel();
         mSexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
         mPigeonType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_TYPE);
@@ -258,6 +262,8 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mLvRing.setRightText(foot);
                 mViewModel.foot = foot;
                 mViewModel.isCanCommit();
+                setProgressVisible(true);
+                mViewModel.getFootRingState();
             });
         });
 
@@ -581,6 +587,32 @@ public class InputPigeonFragment extends BaseBookFragment {
             if (PigeonEntity.ID_BREED_PIGEON.equals(mPigeonType)) {
                 mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(0).getTypeID();
                 mLvPigeonType.setRightText(mViewModel.mSelectTypes_PigeonType.get(0).getTypeName());
+            }
+        });
+
+        mViewModel.mDataFootRingState.observe(this, footRingStateEntity -> {
+            setProgressVisible(false);
+            if(StringUtil.isStringValid(footRingStateEntity.getFootId())
+                    && StringUtil.isStringValid(footRingStateEntity.getPigeonID())){
+                FootEntity footEntity = new FootEntity();
+                footEntity.setPigeonID(footRingStateEntity.getPigeonID());
+                footEntity.setFootRingID(Integer.parseInt(footRingStateEntity.getFootId()));
+                SetPigeonDeathDialog.show(getFragmentManager(), footEntity, new SetPigeonDeathDialog.OnPigeonDeathClickListener() {
+                    @Override
+                    public void cancel() {
+                        PigeonEntity pigeonEntity = new PigeonEntity();
+                        pigeonEntity.setPigeonID(footEntity.getPigeonID());
+                        pigeonEntity.setFootRingID(String.valueOf(footEntity.getFootRingID()));
+                        IntentBuilder.Builder()
+                                .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
+                                .finishForResult(getBaseActivity());
+                    }
+
+                    @Override
+                    public void setDeathFinish(FootEntity footEntity) {
+
+                    }
+                });
             }
         });
     }

@@ -25,7 +25,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <include layout="@layout/xrecyclerview_no_padding_layout" />
+                <com.base.widget.recyclerview.XRecyclerView
+                    android:id="@+id/shareList"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_empty="@layout/list_empty_layout"
+                    app:layout_moreProgress="@layout/view_load_more"
+                    app:mainLayoutId="@layout/refresh_recyclerview"
+                    app:recyclerClipToPadding="false"
+                    app:recyclerPadding="0dp"
+                    app:scrollbarStyle="insideOverlay" />
 
                 <LinearLayout
                     android:id="@+id/llMyShare"
