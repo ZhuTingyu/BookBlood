@@ -19,7 +19,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.OpenServiceEvent;
 import com.cpigeon.book.module.menu.service.adpter.OpenServiceAdapter;
 import com.cpigeon.book.module.menu.service.viewmodel.OpenServiceViewModel;
-import com.cpigeon.book.veiwholder.ServiceViewHolder;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -67,7 +66,7 @@ public class OpenServiceFragment extends BaseBookFragment {
 //        });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
-        mAdapter = new OpenServiceAdapter(ServiceViewHolder.TYPE_OPEN, true);
+        mAdapter = new OpenServiceAdapter(OpenServiceAdapter.TYPE_OPEN, true);
         initHeadView();
         mAdapter.addHeaderView(mHeadView);
         mRecyclerView.setAdapter(mAdapter);
@@ -96,7 +95,7 @@ public class OpenServiceFragment extends BaseBookFragment {
 
     private void initHeadView() {
         mHeadView = LayoutInflater.from(getContext()).inflate(R.layout.include_renew_head, null);
-        mRenewalAdapter = new OpenServiceAdapter(ServiceViewHolder.TYPE_RENEW, false);
+        mRenewalAdapter = new OpenServiceAdapter(OpenServiceAdapter.TYPE_RENEW, false);
         mRenewalAdapter.setEmptyText(Utils.getString(R.string.text_no_open_service));
         RecyclerView recyclerView = mHeadView.findViewById(R.id.openList);
         addItemDecorationLine(recyclerView);

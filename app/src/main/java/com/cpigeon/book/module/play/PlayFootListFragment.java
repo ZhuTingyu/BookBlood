@@ -110,8 +110,14 @@ public class PlayFootListFragment extends BaseFootListFragment {
     protected void initObserve() {
         super.initObserve();
         mViewModel.mDataFristLeague.observe(this, data -> {
+
+
             mAdapter.addHeaderView(mHeadView);
 
+            if(Lists.isEmpty(data)){
+                mLine.setVisibility(View.GONE);
+                return;
+            }
             mLeagueMarkerView = new LeagueMarkerView(getBaseActivity(), data);
             mLine.setMarker(mLeagueMarkerView);
             mKLineManager.xAxis.setDrawGridLines(false);
