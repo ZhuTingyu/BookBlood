@@ -499,10 +499,10 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.footMother = breedPigeonEntity.getWoFootRingNum();
             mViewModel.pigeonName = breedPigeonEntity.getPigeonName();
             mViewModel.sexId = breedPigeonEntity.getPigeonSexID();
-            mViewModel.featherColor = breedPigeonEntity.getPigeonSexID();
+            mViewModel.featherColor = breedPigeonEntity.getPigeonSexName();
             mViewModel.eyeSandId = breedPigeonEntity.getPigeonEyeID();
             mViewModel.theirShellsDate = breedPigeonEntity.getFootRingTimeTo();
-            mViewModel.lineage = breedPigeonEntity.getPigeonBloodID();
+            mViewModel.lineage = breedPigeonEntity.getPigeonBloodName();
             mViewModel.stateId = breedPigeonEntity.getStateID();
 
             if (StringUtil.isStringValid(breedPigeonEntity.getCoverPhotoUrl())) {

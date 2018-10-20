@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
-import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -42,16 +41,7 @@ public class OffspringChooseFragment extends BaseFootListFragment {
     protected void initData() {
         super.initData();
         setProgressVisible(false);
-        mTvOk.setVisibility(View.GONE);
-        view_placeholder.setVisibility(View.GONE);
-
-        mActivity.setSearchClickListener(v -> {
-            //搜索
-            Bundle bundle = new Bundle();
-            bundle.putString(IntentBuilder.KEY_TYPE, "");
-            bundle.putSerializable(IntentBuilder.KEY_DATA, mPairingInfoEntity);
-            BaseSearchActivity.start(getBaseActivity(), OffspringSearchActivity.class, PairingNestAddFragment.requestCode, bundle);
-        });
+        setStartSearchActvity(OffspringSearchActivity.class);//搜索页面
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {

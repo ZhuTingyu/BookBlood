@@ -2,7 +2,6 @@ package com.cpigeon.book.module.photo;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -11,9 +10,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
-import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonPhotoEntity;
@@ -40,10 +37,8 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
     }
 
     public static void start(Activity activity) {
-        Bundle bundle = new Bundle();
-        bundle.putString(IntentBuilder.KEY_TYPE, "");
         SearchFragmentParentActivity.
-                start(activity, SelectFootToPhotoFragment.class, false, bundle);
+                start(activity, SelectFootToPhotoFragment.class, false, null);
     }
 
 
@@ -51,15 +46,9 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
     protected void initData() {
         super.initData();
 
-        mTvOk.setVisibility(View.GONE);
-        view_placeholder.setVisibility(View.GONE);
+        setStartSearchActvity(SearchFootToPhotoActivity.class);//搜索页面
 
         mAdapter = new SelectFootToPhotoAdapter();
-
-        mActivity.setSearchClickListener(v -> {
-            //搜索
-            BaseSearchActivity.start(getBaseActivity(), SearchFootToPhotoActivity.class, null);
-        });
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 

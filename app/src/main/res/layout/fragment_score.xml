@@ -45,6 +45,18 @@
         android:stepSize="0.5" />
 
 
+    <com.cpigeon.book.widget.StarRatingView
+        android:id="@+id/srv_ratable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:ratable="true"
+        app:star_padding="10dp"
+        app:stat_half="@drawable/ic_pentagrams"
+        app:stat_off="@drawable/ic_pentagrams"
+        app:stat_on="@drawable/ic_pentagrams2" />
+
+
     <com.idlestar.ratingstar.RatingStarView
         android:id="@+id/mRatingStarView"
         android:layout_width="wrap_content"
@@ -55,8 +67,8 @@
         android:paddingRight="0dp"
         android:paddingTop="2dp"
         app:cornerRadius="4dp"
-        app:drawStrokeForFullStar="false"
         app:drawStrokeForEmptyStar="false"
+        app:drawStrokeForFullStar="false"
         app:drawStrokeForHalfStar="true"
         app:enableSelectRating="true"
         app:onlyHalfStar="true"

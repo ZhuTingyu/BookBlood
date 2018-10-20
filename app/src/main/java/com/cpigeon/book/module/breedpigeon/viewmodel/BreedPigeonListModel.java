@@ -24,7 +24,7 @@ public class BreedPigeonListModel extends BaseViewModel {
 
     public boolean isSearch = false;//true  搜索   false  删选
 
-    public String typeid = PigeonEntity.ID_BREED_PIGEON;//鸽子类型（8为种鸽，9为赛鸽，不传则全部查询）
+    public String typeid ;//鸽子类型（8为种鸽，9为赛鸽，不传则全部查询）
 
     public String bitmatch = PigeonEntity.BIT_MATCH;//是否返回赛绩（1，返回）
 
@@ -32,6 +32,7 @@ public class BreedPigeonListModel extends BaseViewModel {
     public String sexid;//性别
     public String stateid;//状态
     public String bloodid;//血统id （1,2）
+    public String eyeid;//眼沙（1,2）
 
     public String bitbreed;//是否有父母（1存在，2.不存在，其他全查）
     public String pigeonidStr;// ：在列表中排除的鸽子
@@ -41,7 +42,7 @@ public class BreedPigeonListModel extends BaseViewModel {
     public MutableLiveData<List<PigeonEntity>> mPigeonListData = new MutableLiveData<>();
     public MutableLiveData<PigeonSexCountEntity> mLivePigeonSexCount = new MutableLiveData<>();
 
-    public String searchStr;
+    public String searchStr;//搜索的鸽子
 
     //获取  种鸽列表
     public void getPigeonList() {

@@ -8,7 +8,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
@@ -49,7 +48,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
 
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
-        bundle.putString(IntentBuilder.KEY_TYPE, PigeonEntity.ID_MATCH_PIGEON);
+        bundle.putString(BaseFootListFragment.TYPEID, PigeonEntity.ID_MATCH_PIGEON);
         SearchFragmentParentActivity.
                 start(activity, PlayFootListFragment.class, true, bundle);
     }
@@ -86,6 +85,11 @@ public class PlayFootListFragment extends BaseFootListFragment {
     @Override
     protected void initData() {
         super.initData();
+
+        setStartSearchActvity(PlayFootListActivity.class);//搜索页面
+
+        mTvOk.setVisibility(View.VISIBLE);
+        view_placeholder.setVisibility(View.VISIBLE);
 
         mTvOk.setText(R.string.text_add_play_pigeon);
         mTvOk.setOnClickListener(v -> {

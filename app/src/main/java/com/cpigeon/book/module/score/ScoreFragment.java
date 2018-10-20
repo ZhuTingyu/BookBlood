@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.widget.StarRatingView;
 
 import butterknife.BindView;
 
@@ -27,7 +30,7 @@ public class ScoreFragment extends BaseBookFragment {
 
     @BindView(R.id.ratint_bar)
     RatingBar mRatingBar;
-
+    private int count;
 //    @BindView(R.id.mRatingStarView)
 //    RatingStarView mRatingStarView;
 
@@ -58,6 +61,16 @@ public class ScoreFragment extends BaseBookFragment {
 
         mRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             Log.d("xiaohls", "onViewCreated: " + rating + "       " + fromUser + "      ->" + ratingBar.getRating());
+        });
+
+
+
+        StarRatingView srv_ratable = (StarRatingView) findViewById(R.id.srv_ratable);
+        srv_ratable.setOnRateChangeListener(new StarRatingView.OnRateChangeListener() {
+            @Override
+            public void onRateChange(int rate) {
+               ToastUtils.showLong(getBaseActivity(),rate+"分");
+            }
         });
 
     }

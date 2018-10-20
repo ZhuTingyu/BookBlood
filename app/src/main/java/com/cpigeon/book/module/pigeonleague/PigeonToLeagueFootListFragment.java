@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.cpigeon.book.R;
-import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
@@ -46,8 +44,8 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
     public static void start(Activity activity) {
 
         Bundle bundle = new Bundle();
-        bundle.putString(IntentBuilder.KEY_TYPE, PigeonEntity.ID_MATCH_PIGEON);
-        bundle.putString(IntentBuilder.KEY_TYPE_2, PigeonEntity.BIT_MATCH_NO);
+        bundle.putString(BaseFootListFragment.TYPEID, PigeonEntity.ID_MATCH_PIGEON);
+        bundle.putString(BaseFootListFragment.BITMATCH, PigeonEntity.BIT_MATCH_NO);
         SearchFragmentParentActivity.
                 start(activity, PigeonToLeagueFootListFragment.class, false, bundle);
     }
@@ -67,19 +65,9 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
     protected void initData() {
         super.initData();
 
-        mTvOk.setVisibility(View.GONE);
-        view_placeholder.setVisibility(View.GONE);
-
-
         mAdapter = new SelectPigeonToLeagueAdapter();
 
-        mActivity.setSearchClickListener(v -> {
-            //搜索
-            Bundle bundle = new Bundle();
-            bundle.putString(IntentBuilder.KEY_TYPE, PigeonEntity.ID_MATCH_PIGEON);
-            bundle.putString(IntentBuilder.KEY_TYPE_2, PigeonEntity.BIT_MATCH_NO);
-            BaseSearchActivity.start(getBaseActivity(), SearchPigeonToLeagueActivity.class, bundle);
-        });
+        setStartSearchActvity(SearchPigeonToLeagueActivity.class);//搜索页面
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {

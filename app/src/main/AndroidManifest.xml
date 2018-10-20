@@ -198,6 +198,14 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".module.play.PlayFootListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.basepigeon.SearchPigeonOrFootActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".module.home.goodpigeon.SearchGoodPigeonActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
