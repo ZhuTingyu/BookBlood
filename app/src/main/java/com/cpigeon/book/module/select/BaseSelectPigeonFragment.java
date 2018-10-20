@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -36,8 +37,6 @@ import java.util.List;
  */
 
 public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
-
-    public static String REQUEST_CODE = "REQUEST_CODE";
     //选择鸽子去共享
     public static String TYPE_SHARE_PIGEON_TO_SHARE = "TYPE_SHARE_PIGEON_TO_SHARE";
     //选择鸽子添加种鸽
@@ -82,7 +81,7 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
         });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
-        mAdapter = new SelectPigeonAdapter(mType);
+        mAdapter = new SelectPigeonAdapter(mType, getAdapterLayout());
         mAdapter.setOnItemClickListener(this::setAdapterClick);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setRefreshListener(() -> {
@@ -134,5 +133,10 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
                 .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
                 .finishForResult(getBaseActivity());
 
+    }
+
+    @LayoutRes
+    public int getAdapterLayout() {
+        return R.layout.item_select_pigeon;
     }
 }

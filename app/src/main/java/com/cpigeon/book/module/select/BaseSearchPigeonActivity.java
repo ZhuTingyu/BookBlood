@@ -2,12 +2,14 @@ package com.cpigeon.book.module.select;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
+import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -23,7 +25,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/28.
  */
 
-public class SearchPigeonActivity extends BaseSearchActivity {
+public class BaseSearchPigeonActivity extends BaseSearchActivity {
 
     String mType;
 
@@ -37,7 +39,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
         if(bundleOther != null){
             bundle.putAll(bundleOther);
         }
-        BaseSearchActivity.start(activity, SearchPigeonActivity.class, BaseSelectPigeonFragment.CODE_SEARCH, bundle);
+        BaseSearchActivity.start(activity, BaseSearchPigeonActivity.class, BaseSelectPigeonFragment.CODE_SEARCH, bundle);
     }
 
     @Override
@@ -48,7 +50,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new SelectPigeonAdapter(mType);
+        mAdapter = new SelectPigeonAdapter(mType, getAdapterLayout());
         return mAdapter;
     }
 
@@ -124,5 +126,10 @@ public class SearchPigeonActivity extends BaseSearchActivity {
             setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, pigeonEntities);
         });
+    }
+
+    @LayoutRes
+    public int getAdapterLayout() {
+        return R.layout.item_select_pigeon;
     }
 }

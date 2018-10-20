@@ -152,6 +152,8 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                                 , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
                     }else {
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
+
+
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
                                 ,0
