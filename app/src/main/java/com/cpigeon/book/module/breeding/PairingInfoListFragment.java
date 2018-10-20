@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -140,7 +139,7 @@ public class PairingInfoListFragment extends BaseListFragment {
         try {
 //            CardView mHeadView = (CardView) LayoutInflater.from(getContext()).inflate(R.layout.layout_pairing_info_head, list, null);
 
-            CardView mHeadView = (CardView) LayoutInflater.from(getBaseActivity()).inflate(R.layout.layout_pairing_info_head, null);
+            LinearLayout mHeadView = (LinearLayout) LayoutInflater.from(getBaseActivity()).inflate(R.layout.layout_pairing_info_head, list, false);
 
             TextView tv_hint_foot = mHeadView.findViewById(R.id.tv_hint_foot);
             ImageView img_hint_sex = mHeadView.findViewById(R.id.img_hint_sex);
@@ -196,7 +195,6 @@ public class PairingInfoListFragment extends BaseListFragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
 
 //            switch (resultCode) {
 //                case PairingLineageFragment.resultCode:

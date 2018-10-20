@@ -97,11 +97,11 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         setTitle(getString(R.string.array_pairing_add));
 
         setToolbarRight(getString(R.string.array_pairing_recommend), item -> {
-            PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoAddViewModel.mBreedPigeonEntity);
+            PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoAddViewModel.mPigeonEntity);
             return true;
         });
 
-        mPairingInfoAddViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mPairingInfoAddViewModel.mPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         PriringRecommendEntity item = (PriringRecommendEntity) getBaseActivity().getIntent().getParcelableExtra(IntentBuilder.KEY_DATA_2);
 
         if (item != null) {
@@ -126,12 +126,12 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         mPairingInfoAddViewModel.pairingTime = TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDD);
 
 
-        tvHintFoot.setText(mPairingInfoAddViewModel.mBreedPigeonEntity.getFootRingNum());
+        tvHintFoot.setText(mPairingInfoAddViewModel.mPigeonEntity.getFootRingNum());
 
-        if (mPairingInfoAddViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
+        if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雌")) {
             imgHintSex.setImageResource(R.mipmap.ic_female);
             mPairingInfoAddViewModel.sex = "雄";
-        } else if (mPairingInfoAddViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雄")) {
+        } else if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雄")) {
             imgHintSex.setImageResource(R.mipmap.ic_male);
             mPairingInfoAddViewModel.sex = "雌";
         } else {
@@ -288,8 +288,8 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
             case R.id.ll_head:
                 BreedPigeonDetailsFragment.start(getBaseActivity(),
-                        mPairingInfoAddViewModel.mBreedPigeonEntity.getPigeonID(),
-                        mPairingInfoAddViewModel.mBreedPigeonEntity.getFootRingID());
+                        mPairingInfoAddViewModel.mPigeonEntity.getPigeonID(),
+                        mPairingInfoAddViewModel.mPigeonEntity.getFootRingID());
                 break;
         }
     }

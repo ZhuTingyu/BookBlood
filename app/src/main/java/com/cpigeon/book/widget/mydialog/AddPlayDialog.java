@@ -30,7 +30,8 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
     private LineInputView ll_org;
     private LineInputView unitName;
 
-    private String  foot = "";
+    private String foot = "";
+    private String[] chooseWays;
 
     @Override
     public int setContentView() {
@@ -39,6 +40,8 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
 
     @Override
     public void initView(Dialog dialog) {
+
+        chooseWays = getResources().getStringArray(R.array.array_org);
 
         //取消
         btn_cancel = dialog.findViewById(R.id.btn_cancel);
@@ -52,6 +55,7 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
         btn_sure.setOnClickListener(v -> {
             if (!StringUtil.isStringValid(unitName.getContent())) {
                 ToastUtils.showLong(dialog.getContext(), "请选择组织");
+                showOrg();
                 return;
             }
 
@@ -67,27 +71,30 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
         ll_org = dialog.findViewById(R.id.ll_org);
 
         ll_org.setOnClickListener(v -> {
-            String[] chooseWays = getResources().getStringArray(R.array.array_org);
-            BottomSheetAdapter.createBottomSheet(getActivity(), Lists.newArrayList(chooseWays), p -> {
-                String way = chooseWays[p];
-                if (Utils.getString(R.string.title_select_ass).equals(way)) {
-                    //选择协会
-                    SearchFragmentParentActivity.start(getActivity(), SelectAssFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE, null);
-                    ll_org.setRightText("协会");
-                } else if (Utils.getString(R.string.title_select_loft).equals(way)) {
-                    //选择公棚
-                    SearchFragmentParentActivity.start(getActivity(), PlayOrgLoftFragment.class, BreedPigeonDetailsFragment.CODE_LOFT, null);
-                    ll_org.setRightText("公棚");
-                }
-            });
+            showOrg();
         });
 
         //单位名称
         unitName = dialog.findViewById(R.id.ll_unit_name);
     }
 
+    public void showOrg() {
+        BottomSheetAdapter.createBottomSheet(getActivity(), Lists.newArrayList(chooseWays), p -> {
+            String way = chooseWays[p];
+            if (Utils.getString(R.string.title_select_ass).equals(way)) {
+                //选择协会
+                SearchFragmentParentActivity.start(getActivity(), SelectAssFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE, null);
+                ll_org.setRightText("协会");
+            } else if (Utils.getString(R.string.title_select_loft).equals(way)) {
+                //选择公棚
+                SearchFragmentParentActivity.start(getActivity(), PlayOrgLoftFragment.class, BreedPigeonDetailsFragment.CODE_LOFT, null);
+                ll_org.setRightText("公棚");
+            }
+        });
+    }
+
     public void setFoot(String foot) {
-     this.foot = foot;
+        this.foot = foot;
     }
 
     public void setllUnitName(String ll_unit_name) {
