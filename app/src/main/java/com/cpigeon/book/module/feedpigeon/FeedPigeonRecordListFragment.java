@@ -5,8 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.base.util.IntentBuilder;
-import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
@@ -30,10 +28,8 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
 
     public static void start(Activity activity) {
 
-        Bundle bundle = new Bundle();
-        bundle.putString(IntentBuilder.KEY_TYPE, "");
         SearchFragmentParentActivity.
-                start(activity, FeedPigeonRecordListFragment.class, false, bundle);
+                start(activity, FeedPigeonRecordListFragment.class, false, null);
     }
 
     @Override
@@ -44,14 +40,8 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
     @Override
     protected void initData() {
         super.initData();
-        mTvOk.setVisibility(View.GONE);
-        view_placeholder.setVisibility(View.GONE);
 
-        mActivity.setSearchClickListener(v -> {
-            Bundle mBundle = new Bundle();
-            mBundle.putString(IntentBuilder.KEY_TYPE, "");
-            BaseSearchActivity.start(getBaseActivity(), SearchFeedPigeonRecordActivity.class, mBundle);
-        });
+        setStartSearchActvity(SearchFeedPigeonRecordActivity.class);//搜索页面
 
         mAdapter = new FeedPigeonRecordListAdapter();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {

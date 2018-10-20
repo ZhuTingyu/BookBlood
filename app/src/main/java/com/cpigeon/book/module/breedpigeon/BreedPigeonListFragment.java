@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.cpigeon.book.R;
@@ -26,6 +25,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 
 /**
+ * 种鸽列表
  * Created by Zhu TingYu on 2018/8/28.
  */
 
@@ -34,7 +34,7 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
-        bundle.putString(IntentBuilder.KEY_TYPE, PigeonEntity.ID_BREED_PIGEON);
+        bundle.putString(BaseFootListFragment.TYPEID, PigeonEntity.ID_BREED_PIGEON);
         SearchFragmentParentActivity.
                 start(activity, BreedPigeonListFragment.class, true, bundle);
     }
@@ -48,6 +48,11 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
     @Override
     protected void initData() {
         super.initData();
+
+
+        mTvOk.setVisibility(View.VISIBLE);
+        view_placeholder.setVisibility(View.VISIBLE);
+
         mTvOk.setText(R.string.text_add_breed_pigeon);
         mTvOk.setOnClickListener(v -> {
             //种鸽录入

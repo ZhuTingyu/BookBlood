@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
-import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
@@ -66,17 +65,8 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
         mBreedPigeonListModel = new BreedPigeonListModel();
         initViewModel(mBreedPigeonListModel);
 
-        try {
-            mBreedPigeonListModel.typeid = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        initParameter();//初始化请求的参数
 
-        try {
-            mBreedPigeonListModel.bitmatch = getIntent().getExtras().getString(IntentBuilder.KEY_TYPE_2);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         mBreedPigeonListModel.isSearch = true;
         mSearchTextView.setHint(R.string.text_input_foot_number_search);
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
@@ -117,6 +107,71 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
         initObserve();
 
     }
+
+    ////初始化请求的参数
+    private void initParameter() {
+        try {
+            mBreedPigeonListModel.typeid = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.TYPEID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.bloodid = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.BLOODID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.sexid = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.SEXID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.year = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.YEAR);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.stateid = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.STATEID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.eyeid = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.EYEID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.searchStr = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.FOOTNUM);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.bitmatch = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.BITMATCH);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.bitbreed = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.BITBREED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.pigeonidStr = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.PIGEONIDSTR);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.bitshare = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.BITSHARE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            mBreedPigeonListModel.bitMotto = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.BITMOTTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     protected void initData() {
     }

@@ -212,5 +212,18 @@
         <attr name="focus_fail_id" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="StarRatingView">
+        <!--星星点亮-->
+        <attr name="stat_on" format="reference"/>
+        <!--星星关闭-->
+        <attr name="stat_off" format="reference"/>
+        <!--半颗星星-->
+        <attr name="stat_half" format="reference"/>
+        <!--是否可以点击滑动评分-->
+        <attr name="ratable" format="boolean"/>
+        <!--星星之间间距-->
+        <attr name="star_padding" format="dimension"/>
+    </declare-styleable>
+
 
 </resources>

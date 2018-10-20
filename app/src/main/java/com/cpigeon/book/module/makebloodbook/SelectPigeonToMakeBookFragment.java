@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.cpigeon.book.R;
-import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
@@ -26,12 +25,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
     protected void initData() {
         super.initData();
 
-        mTvOk.setVisibility(View.GONE);
-        view_placeholder.setVisibility(View.GONE);
-
-        mActivity.setSearchClickListener(v -> {
-            BaseSearchActivity.start(getBaseActivity(), SearchBreedPigeonToMakeBookActivity.class, null);
-        });
+        setStartSearchActvity(SearchBreedPigeonToMakeBookActivity.class);//搜索页面
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 

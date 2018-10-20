@@ -38,7 +38,6 @@ import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.InputPigeonViewModel;
@@ -491,10 +490,10 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.footMother = breedPigeonEntity.getWoFootRingNum();
             mViewModel.pigeonName = breedPigeonEntity.getPigeonName();
             mViewModel.sexId = breedPigeonEntity.getPigeonSexID();
-            mViewModel.featherColor = breedPigeonEntity.getPigeonSexID();
+            mViewModel.featherColor = breedPigeonEntity.getPigeonSexName();
             mViewModel.eyeSandId = breedPigeonEntity.getPigeonEyeID();
             mViewModel.theirShellsDate = breedPigeonEntity.getFootRingTimeTo();
-            mViewModel.lineage = breedPigeonEntity.getPigeonBloodID();
+            mViewModel.lineage = breedPigeonEntity.getPigeonBloodName();
             mViewModel.stateId = breedPigeonEntity.getStateID();
 
             if (StringUtil.isStringValid(breedPigeonEntity.getCoverPhotoUrl())) {
