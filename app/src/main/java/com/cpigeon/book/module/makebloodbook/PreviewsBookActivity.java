@@ -22,6 +22,7 @@ import com.base.util.Utils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.utility.ImageUtils;
 import com.base.util.utility.StringUtil;
+import com.base.util.utility.ToastUtils;
 import com.base.widget.photoview.PhotoView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
@@ -219,6 +220,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
                 mImageView.setVisibility(View.VISIBLE);
                 mImageView.setImageBitmap(bitmap);
                 setProgressVisible(false);
+                ToastUtils.showLong(getBaseActivity(), R.string.text_save_blood_book_yet);
             }));
         } catch (Exception e) {
             e.printStackTrace();

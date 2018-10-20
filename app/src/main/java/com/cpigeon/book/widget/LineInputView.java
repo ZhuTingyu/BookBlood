@@ -195,6 +195,7 @@ public class LineInputView extends RelativeLayout {
 
 
         mTvRight.setText(mRightString);
+        mTvRight.setHint(mEtHintStr);
         mTvRight.setTextColor(mRightColor);
         mTvRight.setTextSize(TypedValue.COMPLEX_UNIT_PX, mRightTextSize);
 

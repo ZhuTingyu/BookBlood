@@ -42,7 +42,11 @@ public abstract class BaseDialogFragment extends DialogFragment {
         //Dialog dialog = new Dialog(getActivity(), R.style.BottomDialog);
         Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定
-        dialog.setContentView(getLayoutRes());
+        if(getLayoutView() == null){
+            dialog.setContentView(getLayoutRes());
+        }else {
+            dialog.setContentView(getLayoutView());
+        }
         dialog.setCanceledOnTouchOutside(true); // 外部点击取消
         // 设置宽度为屏宽, 靠近屏幕底部。
         final Window window = dialog.getWindow();
@@ -59,6 +63,10 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     @LayoutRes
     protected abstract int  getLayoutRes();
+
+    protected  View  getLayoutView(){
+        return null;
+    }
 
     protected abstract void initView(Dialog dialog);
 

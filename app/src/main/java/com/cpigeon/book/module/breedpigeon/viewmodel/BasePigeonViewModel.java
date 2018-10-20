@@ -36,9 +36,15 @@ public class BasePigeonViewModel extends BaseViewModel {
 
     //父足环
     public String footFather = "";
+    public String pigeonFatherId = "";
+    public String footFatherId = "";
+    public String pigeonFatherStateId = "";
 
     //母足环
     public String footMother = "";
+    public String pigeonMotherId = "";
+    public String footMotherId = "";
+    public String pigeonMotherStateId = "";
 
     //鸽名
     public String pigeonName = "";

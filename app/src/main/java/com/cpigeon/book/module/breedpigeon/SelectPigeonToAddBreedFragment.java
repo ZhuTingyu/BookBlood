@@ -17,7 +17,7 @@ import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
-import com.cpigeon.book.module.select.BaseSearchPigeonActivity;
+import com.cpigeon.book.module.select.SearchPigeonActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -102,7 +102,7 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
     public void startSearchActivity() {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_DATA, mViewModel.sexid);
-        BaseSearchPigeonActivity.start(getBaseActivity(), mType, bundle);
+        SearchPigeonActivity.start(getBaseActivity(), mType, bundle);
     }
 
     @Override

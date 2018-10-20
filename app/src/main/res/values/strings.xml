@@ -655,5 +655,8 @@
     <string name="str_hint_no">暂无</string>
     <string name="str_my_server">我的服务</string>
     <string name="text_direct_use">直接使用</string>
+    <string name="text_select_father_pigeon">请选择父鸽子</string>
+    <string name="text_select_mother_pigeon">选择母鸽子</string>
+    <string name="text_save_blood_book_yet">已经生成血统书请在相册里查看！</string>
 
 </resources>

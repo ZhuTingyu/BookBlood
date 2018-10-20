@@ -361,6 +361,7 @@
     <string name="get_first_pigeon_match_league">TXGP_PigeonMatch_NewAnalysis</string>
     <string name="get_home_count">TXGP_HomeTop_SelectCount</string>
     <string name="get_foot_ring_state">TXGP_FootRing_JudgeState</string>
+    <string name="get_pigeon_by_footNumber_and_sex">TXGP_SelectFootPigeon</string>
 
 
 </resources>

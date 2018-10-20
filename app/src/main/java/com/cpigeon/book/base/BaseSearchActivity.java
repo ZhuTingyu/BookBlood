@@ -98,6 +98,7 @@ public abstract class BaseSearchActivity extends BaseBookActivity {
             public void onChanged() {
                 super.onChanged();
                 mRlHistory.setVisibility(View.GONE);
+                KeyboardUtils.hideSoftInput(getBaseActivity());
             }
         });
         mRecyclerView.setAdapter(mAdapter);

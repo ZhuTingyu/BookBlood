@@ -38,7 +38,6 @@ import com.cpigeon.book.model.entity.CountyEntity;
 import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.InputPigeonViewModel;
@@ -49,7 +48,9 @@ import com.cpigeon.book.module.photo.BaseImgUploadFragment;
 import com.cpigeon.book.module.photo.ImgUploadFragment;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.select.SelectFootRingFragment;
+import com.cpigeon.book.module.select.SelectParentFootRingDialog;
 import com.cpigeon.book.module.select.SetPigeonDeathDialog;
+import com.cpigeon.book.module.select.viewmodel.SelectParentFootRingViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -109,6 +110,8 @@ public class InputPigeonFragment extends BaseBookFragment {
     InputPigeonViewModel mViewModel;
     BookViewModel mBookViewModel;
     SelectTypeViewModel mSelectTypeViewModel;
+    SelectParentFootRingViewModel mSelectParentFootRingViewModel;
+
     SelectImageAdapter2 mAdapter;
 
 
@@ -140,12 +143,13 @@ public class InputPigeonFragment extends BaseBookFragment {
         mViewModel = new InputPigeonViewModel();
         mBookViewModel = new BookViewModel();
         mSelectTypeViewModel = new SelectTypeViewModel();
+        mSelectParentFootRingViewModel = new SelectParentFootRingViewModel();
         mSexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
         mPigeonType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_TYPE);
         mViewModel.sonFootId = getBaseActivity().getIntent().getStringExtra(KEY_SON_FOOT_ID);
         mViewModel.sonPigeonId = getBaseActivity().getIntent().getStringExtra(KEY_SON_PIGEON_ID);
         mViewModel.pigeonId = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_DATA);
-        initViewModels(mViewModel, mSelectTypeViewModel);
+        initViewModels(mViewModel, mSelectTypeViewModel, mSelectParentFootRingViewModel);
     }
 
     @Nullable
@@ -366,8 +370,10 @@ public class InputPigeonFragment extends BaseBookFragment {
                 SelectFootRingFragment.start(getBaseActivity(), false
                         , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
-                mLvFatherFoot.setRightText(foot);
-                mViewModel.footFather = foot;
+                mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_MALE;
+                mSelectParentFootRingViewModel.mFootNumber = foot;
+                setProgressVisible(true);
+                mSelectParentFootRingViewModel.getPgieon();
             });
         });
 
@@ -376,8 +382,10 @@ public class InputPigeonFragment extends BaseBookFragment {
                 SelectFootRingFragment.start(getBaseActivity(), false
                         , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
-                mLvMotherFoot.setRightText(foot);
-                mViewModel.footMother = foot;
+                mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_FEMALE;
+                mSelectParentFootRingViewModel.mFootNumber = foot;
+                setProgressVisible(true);
+                mSelectParentFootRingViewModel.getPgieon();
             });
         });
         //眼砂
@@ -609,6 +617,39 @@ public class InputPigeonFragment extends BaseBookFragment {
                         });
             }
         });
+
+        mSelectParentFootRingViewModel.mDataPigeon.observe(this, pigeonEntities -> {
+            setProgressVisible(false);
+
+            if(Lists.isEmpty(pigeonEntities)){
+                if(PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)){
+                    mLvFatherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
+                    mViewModel.footFather = mSelectParentFootRingViewModel.mFootNumber;
+                }else {
+                    mLvMotherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
+                    mViewModel.footMother = mSelectParentFootRingViewModel.mFootNumber;
+                }
+
+                return;
+            }
+
+
+            SelectParentFootRingDialog.show(getFragmentManager(), pigeonEntities, mSelectParentFootRingViewModel.mSexId, pigeonEntity -> {
+                if(PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)){
+                    mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
+                    mViewModel.footFatherId = pigeonEntity.getFootRingID();
+                    mViewModel.footFather = pigeonEntity.getFootRingNum();
+                    mViewModel.pigeonFatherId = pigeonEntity.getPigeonID();
+                    mViewModel.pigeonFatherStateId = pigeonEntity.getStateID();
+                }else {
+                    mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
+                    mViewModel.footMotherId = pigeonEntity.getFootRingID();
+                    mViewModel.footMother = pigeonEntity.getFootRingNum();
+                    mViewModel.pigeonMotherId = pigeonEntity.getPigeonID();
+                    mViewModel.pigeonMotherStateId = pigeonEntity.getStateID();
+                }
+            });
+        });
     }
 
     private static class ViewWrapper {
@@ -687,11 +728,18 @@ public class InputPigeonFragment extends BaseBookFragment {
         } else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvFatherFoot.setRightText(entity.getFootRingNum());
+
             mViewModel.footFather = entity.getFootRingNum();
+            mViewModel.footFatherId = String.valueOf(entity.getFootRingID());
+            mViewModel.pigeonFatherId = entity.getPigeonID();
+            mViewModel.pigeonFatherStateId = String.valueOf(entity.getStateID());
         } else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvMotherFoot.setRightText(entity.getFootRingNum());
             mViewModel.footMother = entity.getFootRingNum();
+            mViewModel.footMotherId = String.valueOf(entity.getFootRingID());
+            mViewModel.pigeonMotherId = entity.getPigeonID();
+            mViewModel.pigeonMotherStateId = String.valueOf(entity.getStateID());
         }
         mViewModel.isCanCommit();
     }

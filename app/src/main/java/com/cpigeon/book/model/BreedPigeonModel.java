@@ -74,8 +74,17 @@ public class BreedPigeonModel {
             String footnum,
             String footnumto,
             String sourceid,
-            String menfootnum,
-            String wofootnum,
+
+            String manFootId,
+            String manPigeonId,// ：父鸽子id
+            String manFootnum,
+            String manPigeonStateId,
+
+            String womenFootId,
+            String womenPigeonId,// ：母鸽子id
+            String womenFootnum,
+            String womenPigeonStateId,
+
             String name,
             String sex,
             String plume,
@@ -97,8 +106,17 @@ public class BreedPigeonModel {
                 .addBody("footnum", footnum)//足环（可选可填，传足环号）
                 .addBody("footnumto", footnumto)// 副环（可选可填 ，传足环号）
                 .addBody("sourceid", sourceid)// 信鸽来源ID
-                .addBody("menfootnum", menfootnum)// 父足环号码
-                .addBody("wofootnum", wofootnum)// 母足环号码
+
+                .addBody("menfootid", manFootId)// 父足环id
+                .addBody("menfootnum", manFootnum)// 父足环号码
+                .addBody("menpigeonid", manPigeonId)// 父鸽子id
+                .addBody("menfootstate", manPigeonStateId)// 父鸽子状态
+
+                .addBody("wofootid", womenFootId)// 母足环id
+                .addBody("wofootnum", womenFootnum)// 母足环号码
+                .addBody("wopigeonid", womenPigeonId)// 母鸽子id
+                .addBody("wofootstate", womenPigeonStateId)// 母鸽子状态
+
                 .addBody("name", name)// 信鸽名称
                 .addBody("sex", sex)//  性别（传ID）
                 .addBody("plume", plume)//  羽色（可选可填，传羽色名称）
@@ -158,21 +176,21 @@ public class BreedPigeonModel {
 
     //hl 赛鸽信息修改
     public static Observable<ApiResponse<PigeonEntity>> getTXGP_Racing_Pigeon_Modify(String pigeonid,
-                                                                                          String coodid,
-                                                                                          String footnum,
-                                                                                          String footnumto,
-                                                                                          String sourceid,
-                                                                                          String menfootnum,
-                                                                                          String wofootnum,
-                                                                                          String name,
-                                                                                          String sex,
-                                                                                          String plume,
-                                                                                          String eye,
-                                                                                          String outtime,
-                                                                                          String blood,
-                                                                                          String stateid,
-                                                                                          String phototypeid,
-                                                                                          Map<String, String> body) {
+                                                                                     String coodid,
+                                                                                     String footnum,
+                                                                                     String footnumto,
+                                                                                     String sourceid,
+                                                                                     String menfootnum,
+                                                                                     String wofootnum,
+                                                                                     String name,
+                                                                                     String sex,
+                                                                                     String plume,
+                                                                                     String eye,
+                                                                                     String outtime,
+                                                                                     String blood,
+                                                                                     String stateid,
+                                                                                     String phototypeid,
+                                                                                     Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
@@ -248,6 +266,7 @@ public class BreedPigeonModel {
                 .addBody("footid", footId)
                 .request();
     }
+
     public static Observable<ApiResponse<FootRingStateEntity>> getFootRingState(String footNumber) {
         return RequestData.<ApiResponse<FootRingStateEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<FootRingStateEntity>>() {
@@ -257,6 +276,14 @@ public class BreedPigeonModel {
                 .request();
     }
 
-
+    public static Observable<ApiResponse<List<PigeonEntity>>> getPigeonByFootNumber(String footNumber, String sexId) {
+        return RequestData.<ApiResponse<List<PigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
+                }.getType())
+                .url(R.string.get_pigeon_by_footNumber_and_sex)
+                .addBody("footnum", footNumber)
+                .addBody("sexid", sexId)
+                .request();
+    }
 
 }

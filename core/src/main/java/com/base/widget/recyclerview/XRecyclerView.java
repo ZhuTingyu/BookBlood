@@ -212,6 +212,11 @@ public class XRecyclerView extends FrameLayout {
         addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f), 0);
     }
 
+    public void addItemDecorationLine(int margin) {
+        addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f), margin);
+    }
+
+
     public void addItemDecorationLine2() {
 
         recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(recyclerView.getContext())
@@ -220,11 +225,6 @@ public class XRecyclerView extends FrameLayout {
                 .colorResId(R.color.color_line).size(ScreenTool.dip2px(0.5f)).build());
 
 
-    }
-
-
-    public void addItemDecorationLine(int margin) {
-        addItemDecorationLine(R.color.color_line, ScreenTool.dip2px(0.5f), margin);
     }
 
     protected void addItemDecorationLine(@ColorRes int color, int size, int margin) {

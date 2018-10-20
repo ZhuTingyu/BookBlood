@@ -18,12 +18,15 @@ import com.cpigeon.book.util.PigeonPublicUtil;
 
 public class SelectPigeonAdapter extends BasePigeonListAdapter {
 
-    String mType;
 
-    public SelectPigeonAdapter(String type, @LayoutRes int resId) {
+    public SelectPigeonAdapter( @LayoutRes int resId) {
         super(resId, null);
-        mType = type;
     }
+
+    public SelectPigeonAdapter() {
+        super(R.layout.item_select_pigeon, null);
+    }
+
 
     @Override
     protected void convert(BaseViewHolder helper, PigeonEntity item) {

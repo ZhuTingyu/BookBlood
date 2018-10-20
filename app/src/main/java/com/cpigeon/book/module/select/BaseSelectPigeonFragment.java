@@ -81,7 +81,7 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
         });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
-        mAdapter = new SelectPigeonAdapter(mType, getAdapterLayout());
+        mAdapter = new SelectPigeonAdapter(getAdapterLayout());
         mAdapter.setOnItemClickListener(this::setAdapterClick);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setRefreshListener(() -> {

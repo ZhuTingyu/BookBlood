@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
-import com.cpigeon.book.module.select.BaseSearchPigeonActivity;
+import com.cpigeon.book.module.select.SearchPigeonActivity;
 
 /**
  * Created by Zhu TingYu on 2018/10/18.
@@ -25,6 +25,6 @@ public class SelectPigeonToGoodPigeonFragment extends BaseSelectPigeonFragment {
 
     @Override
     public void startSearchActivity() {
-        BaseSearchPigeonActivity.start(getBaseActivity(), mType, null);
+        SearchPigeonActivity.start(getBaseActivity(), mType, null);
     }
 }

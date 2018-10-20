@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/9/28.
  */
 
-public class BaseSearchPigeonActivity extends BaseSearchActivity {
+public class SearchPigeonActivity extends BaseSearchActivity {
 
     String mType;
 
@@ -39,7 +39,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
         if(bundleOther != null){
             bundle.putAll(bundleOther);
         }
-        BaseSearchActivity.start(activity, BaseSearchPigeonActivity.class, BaseSelectPigeonFragment.CODE_SEARCH, bundle);
+        BaseSearchActivity.start(activity, SearchPigeonActivity.class, BaseSelectPigeonFragment.CODE_SEARCH, bundle);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new SelectPigeonAdapter(mType, getAdapterLayout());
+        mAdapter = new SelectPigeonAdapter(getAdapterLayout());
         return mAdapter;
     }
 
@@ -77,7 +77,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
             }
         });
 
-
+        //共享厅
         if (BaseSelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
             mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
         } else if (BaseSelectPigeonFragment.TYPE_SELECT_PIGEON_TO_ADD_BREED_PIGEON.equals(mType)) {
@@ -92,7 +92,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity pigeonEntity = mAdapter.getItem(position);
-
+                //共享厅
                 if (BaseSelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
                     BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
                             , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());

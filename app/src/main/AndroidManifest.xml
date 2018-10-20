@@ -216,7 +216,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".module.select.BaseSearchPigeonActivity"
+            android:name=".module.select.SearchPigeonActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 

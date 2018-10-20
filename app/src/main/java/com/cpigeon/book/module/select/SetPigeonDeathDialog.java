@@ -145,7 +145,6 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
     }
 
     public interface OnPigeonDeathClickListener {
-
         void userFootRing(PigeonEntity entity);
         void setDeathFinish(FootEntity footEntity);
     }
