@@ -17,7 +17,7 @@ import java.util.List;
 
 public class PairingInfoAddViewModel extends BaseViewModel {
 
-    public PigeonEntity mBreedPigeonEntity;
+    public PigeonEntity mPigeonEntity;
 
     //配偶环号  配对的足环号码
     public String pairingFoot;
@@ -54,7 +54,19 @@ public class PairingInfoAddViewModel extends BaseViewModel {
 
     public void getTXGP_PigeonBreed_AddData() {
 
-        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(mBreedPigeonEntity.getFootRingID(), pairingFoot, lineage, featherColor, sex, pairingTime, weather, temper, hum, dir, bitpair, reamrk), r -> {
+        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(mPigeonEntity.getFootRingID(),
+                mPigeonEntity.getPigeonID(),
+                pairingFoot,
+                lineage,
+                featherColor,
+                sex,
+                pairingTime,
+                weather,
+                temper,
+                hum,
+                dir,
+                bitpair,
+                reamrk), r -> {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.PAIRING_INFO_REFRESH);
                 hintDialog(r.msg);

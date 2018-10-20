@@ -22,6 +22,7 @@ public class PairingModel {
 
     //hl 添加配對
     public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_PigeonBreed_Add(String footid,
+                                                                                      String pigeonid,
                                                                                       String footnum,
                                                                                       String blood,
                                                                                       String plume,
@@ -38,6 +39,7 @@ public class PairingModel {
                 }.getType())
                 .url(R.string.pairing_info_add)
                 .addBody("footid", footid)//要配对的足环id
+                .addBody("pigeonid", pigeonid)//要配对的鸽子id
                 .addBody("footnum", footnum)//配对的足环号码
                 .addBody("blood", blood)//配对的血统
                 .addBody("plume", plume)//配对的羽色
