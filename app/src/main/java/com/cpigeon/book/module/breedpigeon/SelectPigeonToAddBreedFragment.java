@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
-import com.base.util.Utils;
 import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cpigeon.book.R;
@@ -18,9 +16,8 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
-import com.cpigeon.book.module.home.sharehall.SelectPigeonToShareFragment;
 import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
-import com.cpigeon.book.module.select.SearchPigeonActivity;
+import com.cpigeon.book.module.select.BaseSearchPigeonActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -105,7 +102,7 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
     public void startSearchActivity() {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_DATA, mViewModel.sexid);
-        SearchPigeonActivity.start(getBaseActivity(), mType, bundle);
+        BaseSearchPigeonActivity.start(getBaseActivity(), mType, bundle);
     }
 
     @Override

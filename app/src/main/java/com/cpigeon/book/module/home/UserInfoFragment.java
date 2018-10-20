@@ -20,6 +20,7 @@ import com.base.util.file.FileUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.UpdateInfo;
 import com.cpigeon.book.module.menu.AboutAsFragment;
 import com.cpigeon.book.module.menu.LogbookFragment;
@@ -99,7 +100,7 @@ public class UserInfoFragment extends BaseBookFragment {
         setToolbarNotBack();
         setTitle("我的");
 
-        checkNewVersion(1);//版本更新检查
+        //checkNewVersion(1);//版本更新检查
 
         dialogFragment = new ShareDialogFragment();
 

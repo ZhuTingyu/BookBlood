@@ -22,6 +22,7 @@ import com.base.util.PermissionUtil;
 import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.map.AmapManager;
 import com.base.util.map.PointToAddressManager;
 import com.base.util.picker.AddressPickTask;
@@ -111,6 +112,22 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setTitle(R.string.title_pigeon_house_info);
+
+        setToolbarLeft(R.drawable.svg_back, v -> {
+            if (UserModel.getInstance().getUserData() != null
+                    && UserModel.getInstance().getUserData().pigeonHouseEntity != null) {
+                finish();
+
+            } else {
+                DialogUtils.createDialog(getBaseActivity(), "提示！", "请完善鸽舍信息！", Utils.getString(R.string.btn_cancel)
+                        , Utils.getString(R.string.btn_confirm), sweetAlertDialog -> {
+                            sweetAlertDialog.dismiss();
+                            finish();
+                        }, sweetAlertDialog -> {
+                            sweetAlertDialog.dismiss();
+                        });
+            }
+        });
 
         mIsLook = getBaseActivity().getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         composite.add(RxUtils.delayed(50, aLong -> {

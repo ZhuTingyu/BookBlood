@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.select.adpter;
 
+import android.support.annotation.LayoutRes;
 import android.widget.ImageView;
 
 import com.base.base.BaseViewHolder;
@@ -19,8 +20,8 @@ public class SelectPigeonAdapter extends BasePigeonListAdapter {
 
     String mType;
 
-    public SelectPigeonAdapter(String type) {
-        super(R.layout.item_select_pigeon, null);
+    public SelectPigeonAdapter(String type, @LayoutRes int resId) {
+        super(resId, null);
         mType = type;
     }
 

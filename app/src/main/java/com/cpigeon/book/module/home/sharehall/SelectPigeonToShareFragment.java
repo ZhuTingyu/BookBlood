@@ -12,7 +12,7 @@ import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
-import com.cpigeon.book.module.select.SearchPigeonActivity;
+import com.cpigeon.book.module.select.BaseSearchPigeonActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -36,7 +36,7 @@ public class SelectPigeonToShareFragment extends BaseSelectPigeonFragment {
 
     @Override
     public void startSearchActivity() {
-        SearchPigeonActivity.start(getBaseActivity(), mType, null);
+        BaseSearchPigeonActivity.start(getBaseActivity(), mType, null);
     }
 
     @Override
