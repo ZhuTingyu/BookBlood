@@ -228,6 +228,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
             e.printStackTrace();
         }
 
+
         super.onPause();
     }
 
@@ -294,7 +295,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                 btn_type_video.setTextColor(getResources().getColor(R.color.colorPrimary));
                 btn_type_photo.setTextColor(getResources().getColor(R.color.color_text_cancel));
 
-                initBtn();
+                initBtn2();
 
                 break;
             case R.id.btn_type_photo:
@@ -308,7 +309,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                 btn_type_video.setTextColor(getResources().getColor(R.color.color_text_cancel));
                 btn_type_photo.setTextColor(getResources().getColor(R.color.colorPrimary));
 
-                initBtn();
+                initBtn2();
 
                 break;
         }
@@ -324,6 +325,18 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         isShootComplete = false;
         mCameraView.onResume();
         mCameraView.resume(true);
+        cameraTag = 1;
+    }
+
+
+    private void initBtn2() {
+        btn_click_start.setVisibility(View.VISIBLE);//开始按钮显示
+        btn_video_record.setVisibility(View.GONE);//录像隐藏
+        imgbtn_false.setVisibility(View.GONE);//取消按钮隐藏
+        imgbtn_ture.setVisibility(View.GONE);//确定按钮隐藏
+
+        btn_cen.setVisibility(View.VISIBLE);
+        isShootComplete = false;
         cameraTag = 1;
     }
 
