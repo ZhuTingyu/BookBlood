@@ -7,42 +7,8 @@
     android:orientation="vertical">
 
 
-    <!--app:starStartColor="#0000ff"-->
-    <!--app:starStrokeColor="#0f0f0f"-->
-    <!--app:starEndColor="#00ff00"-->
-    <!--app:starFillColor="#666666"-->
-    <!--app:starCoverColor="#ff0000"-->
-
-    <!--<com.cb.ratingbar.CBRatingBar-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:forceHasOverlappingRendering="true"-->
-    <!--app:color="#0000ff"-->
-    <!--app:starCanTouch="true"-->
-    <!--app:starCount="7"-->
-    <!--app:starCoverDir="left_to_right"-->
-    <!--app:starEndColor="#0000ff"-->
-    <!--app:starMaxProgress="100"-->
-    <!--app:starPathData="0"-->
-    <!--app:starProgress="34"-->
-    <!--app:starShowStroke="true"-->
-    <!--app:starSize="15dp"-->
-    <!--app:starSpace="10dp"-->
-    <!--app:starStartColor="#0000ff"-->
-    <!--app:starStrokeColor="@color/color_feedback_not_handle"-->
-    <!--app:starStrokeWidth="0.5dp"-->
-    <!--app:starUseGradient="true" />-->
 
 
-    <!--    style="?android:attr/ratingBarStyleSmall"-->
-    <android.support.v7.widget.AppCompatRatingBar
-        android:id="@+id/ratint_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:max="10"
-        android:numStars="5"
-        android:rating="2.4"
-        android:stepSize="0.5" />
 
 
     <com.cpigeon.book.widget.StarRatingView
@@ -52,57 +18,10 @@
         android:layout_marginTop="20dp"
         app:ratable="true"
         app:star_padding="10dp"
-        app:stat_half="@drawable/ic_pentagrams"
+        app:stat_half="@drawable/ic_pentagrams3"
         app:stat_off="@drawable/ic_pentagrams"
         app:stat_on="@drawable/ic_pentagrams2" />
 
-
-    <com.idlestar.ratingstar.RatingStarView
-        android:id="@+id/mRatingStarView"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:background="#fff"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        android:paddingTop="2dp"
-        app:cornerRadius="4dp"
-        app:drawStrokeForEmptyStar="false"
-        app:drawStrokeForFullStar="false"
-        app:drawStrokeForHalfStar="true"
-        app:enableSelectRating="true"
-        app:onlyHalfStar="true"
-        app:rating="3.3"
-        app:starBackgroundColor="#E8E8E8"
-        app:starForegroundColor="#DB6958"
-        app:starMargin="12dp"
-        app:starNum="5"
-        app:starThickness="0.5"
-        app:strokeColor="#457DD7"
-        app:strokeWidth="2px" />
-
-    <!--
-
-    //最大
-     app:starMaxProgress="100"
-     //占用比例
-     app:starProgress="34"
-     //每个星星的边框
-     app:starStrokeColor="@color/color_feedback_not_handle"
-     //每个星星的大小
-     app:starSize="15dp"
-     //每个星星之间的间距
-     app:starSpace="10dp"
-     //数量
-     app:starCount="5"
-     //方向
-     app:starCoverDir="left_to_right"
-     //五角星 边框  宽度
-     app:starStrokeWidth="0dp"
-     //五角星 边框  显示
-     app:starShowStroke="true"
-
-    -->
 
 
 </LinearLayout>
