@@ -659,4 +659,7 @@
     <string name="text_save_blood_book_yet">已经生成血统书请在相册里查看！</string>
     <string name="text_temp_no">暂无</string>
 
+
+    <string name="str_shoot_org_hint">赛事组织可填写协会，鸽舍，比赛等组织名称</string>
+
 </resources>

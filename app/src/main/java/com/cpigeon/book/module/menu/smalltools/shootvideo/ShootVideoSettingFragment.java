@@ -41,7 +41,6 @@ import butterknife.OnClick;
 
 public class ShootVideoSettingFragment extends BaseBookFragment {
 
-
     @BindView(R.id.tv_name)
     TextView tv_name;//
     @BindView(R.id.img_logo)
@@ -128,8 +127,8 @@ public class ShootVideoSettingFragment extends BaseBookFragment {
                 break;
             case R.id.ll_name:
                 //鸽舍名称
-                mDialogMoney = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_loft_name,tv_name.getText().toString(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                mDialogMoney = BaseInputDialog.show2(getBaseActivity().getSupportFragmentManager()
+                        , R.string.text_pigeon_loft_name, tv_name.getText().toString(), 50, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             tv_name.setText(content);
                             mDialogMoney.hide();
                             mShootViewModel.mShootInfoEntity.setGsname(content);

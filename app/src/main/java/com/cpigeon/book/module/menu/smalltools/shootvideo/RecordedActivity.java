@@ -116,7 +116,10 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
     private String savePath;//视频保存路径
     private String type = "video";
 
-    private Timer mTimer = new Timer();
+    private Timer mTimer;
+
+
+    private boolean isBitmap = true;
 
     private TimerTask mTimerTask = new TimerTask() {
         @Override
@@ -125,9 +128,12 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                 @Override
                 public void run() {
                     //时间
-                    if (watermarkTime != null && watermark_z != null) {
-                        watermarkTime.setText(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS));
-                        mCameraView.mCameraDrawer.getBitmap.setBitmap(BitmapUtils.getViewBitmap(watermark_z), cameraTag);
+
+                    if (isBitmap) {
+                        if (watermarkTime != null && watermark_z != null) {
+                            watermarkTime.setText(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS));
+                            mCameraView.mCameraDrawer.getBitmap.setBitmap(BitmapUtils.getViewBitmap(watermark_z), cameraTag);
+                        }
                     }
                 }
             });
@@ -171,7 +177,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
         if (StringUtil.isStringValid(mShootInfoEntity.getGsname())) {
             water_tv_name.setVisibility(View.VISIBLE);
-            water_tv_name.setText("鸽舍：" + mShootInfoEntity.getGsname());
+            water_tv_name.setText( mShootInfoEntity.getGsname());
         } else {
             water_tv_name.setVisibility(View.GONE);
         }
@@ -193,7 +199,25 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
         mCameraView.setOnTouchListener(this);
 
-        mTimer.schedule(mTimerTask, 0, 1000);
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //时间
+
+                        if (isBitmap) {
+                            if (watermarkTime != null && watermark_z != null) {
+                                watermarkTime.setText(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS));
+                                mCameraView.mCameraDrawer.getBitmap.setBitmap(BitmapUtils.getViewBitmap(watermark_z), cameraTag);
+                            }
+                        }
+                    }
+                });
+            }
+        }, 0, 1000);
     }
 
     //-----------------------------------------------------生命周期（不动）------------------------------------------------------------------------
@@ -316,6 +340,11 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
     }
 
     private void initBtn() {
+
+        if (mTimer != null) {
+            mTimer.cancel();
+        }
+
         btn_click_start.setVisibility(View.VISIBLE);//开始按钮显示
         btn_video_record.setVisibility(View.GONE);//录像隐藏
         imgbtn_false.setVisibility(View.GONE);//取消按钮隐藏
@@ -326,6 +355,25 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
         mCameraView.onResume();
         mCameraView.resume(true);
         cameraTag = 1;
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //时间
+
+                        if (isBitmap) {
+                            if (watermarkTime != null && watermark_z != null) {
+                                watermarkTime.setText(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS));
+                                mCameraView.mCameraDrawer.getBitmap.setBitmap(BitmapUtils.getViewBitmap(watermark_z), cameraTag);
+                            }
+                        }
+                    }
+                });
+            }
+        }, 0, 1000);
     }
 
 
