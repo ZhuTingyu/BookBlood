@@ -93,7 +93,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="鸽舍名称"
+            android:text="赛事组织"
             android:textColor="@color/color_4c4c4c"
             android:textSize="@dimen/small_text_size_2" />
 
@@ -105,10 +105,15 @@
             android:gravity="right|center_vertical">
 
 
-            <TextView
+            <com.base.widget.MarqueeTextView
+                style="@style/Marquee"
+                android:singleLine="true"
+                android:lines="1"
                 android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="right"
                 android:hint="请输入"
                 android:textColor="#010101"
                 android:textColorHint="#010101"
@@ -126,6 +131,18 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_left_reight"
+        android:layout_marginRight="@dimen/spacing_left_reight"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:paddingLeft="9dp"
+        android:text="@string/str_shoot_org_hint"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/small_text_size" />
 
 
     <View

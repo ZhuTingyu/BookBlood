@@ -288,7 +288,7 @@ public class LineInputView extends RelativeLayout {
         if (mIsCanEdit) {
             mImgRight.setOnClickListener(v -> {
                 mOnRightClickListener.click(this);
-                if(mOnClickAndHaveFocusListener != null){
+                if (mOnClickAndHaveFocusListener != null) {
                     mOnClickAndHaveFocusListener.clickAndFocus();
                 }
             });
@@ -300,7 +300,11 @@ public class LineInputView extends RelativeLayout {
     }
 
     public String getContent() {
-        return mEditText.getText().toString();
+        if (StringUtil.isStringValid(mEditText.getText().toString())) {
+            return mEditText.getText().toString();
+        } else {
+            return mTvRight.getText().toString();
+        }
     }
 
     public ClickGetFocusEditText getEditText() {
@@ -338,10 +342,10 @@ public class LineInputView extends RelativeLayout {
 
     public void setCanEdit(boolean canEdit) {
         mIsCanEdit = canEdit;
-        if(mIsCanEdit){
+        if (mIsCanEdit) {
             mEditText.setVisibility(VISIBLE);
             mTvRight.setVisibility(GONE);
-        }else {
+        } else {
             mEditText.setVisibility(GONE);
             mTvRight.setVisibility(VISIBLE);
         }

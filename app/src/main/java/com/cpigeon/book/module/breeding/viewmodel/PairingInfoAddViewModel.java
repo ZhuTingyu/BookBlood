@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.breeding.viewmodel;
 
 import com.base.base.BaseViewModel;
+import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -69,7 +70,7 @@ public class PairingInfoAddViewModel extends BaseViewModel {
                 reamrk), r -> {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.PAIRING_INFO_REFRESH);
-                hintDialog(r.msg);
+                showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).isClosePage(true).cancelable(false).build());
             } else throw new HttpErrorException(r);
         });
     }

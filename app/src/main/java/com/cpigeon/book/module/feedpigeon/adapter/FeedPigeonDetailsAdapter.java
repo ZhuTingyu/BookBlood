@@ -7,8 +7,10 @@ import android.widget.TextView;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
+import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
+import com.loc.v;
 
 /**
  * Created by Zhu TingYu on 2018/9/7.
@@ -66,7 +68,7 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
         mTvLeft4 = helper.getView(R.id.tvLeft4);
         mTvRight4 = helper.getView(R.id.tvRight4);
 
-        helper.setTextView(R.id.tvTime, item.getUseTime());
+        helper.setTextView(R.id.tvTime, TimeUtil.getTimeFormat(item.getUseTime(), TimeUtil.FORMAT_YYYYMMDD));
 
         if (item.getTypeID() == 5) { //随拍
             mLlImgContent.setVisibility(View.VISIBLE);

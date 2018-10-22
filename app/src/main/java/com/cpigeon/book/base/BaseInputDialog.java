@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentManager;
+import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -38,6 +39,8 @@ public class BaseInputDialog extends BaseDialogFragment {
     private String mContent;
     private boolean mIsOpen;
 
+    private int maxLength = 10;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.dialog_base_input_fragment;
@@ -54,19 +57,29 @@ public class BaseInputDialog extends BaseDialogFragment {
         mEdContent = dialog.findViewById(R.id.edContent);
         mTvChoose = dialog.findViewById(R.id.tvChoose);
 
+
         if (getArguments() != null) {
             String title = getArguments().getString(IntentBuilder.KEY_TITLE);
             mEditInputType = getArguments().getInt(IntentBuilder.KEY_TYPE);
             String chooseText = getArguments().getString(KEY_CHOOSE_TEXT);
             mContent = getArguments().getString(IntentBuilder.KEY_DATA);
 
+
+            try {
+                maxLength = getArguments().getInt(IntentBuilder.KEY_DATA_2);//输入文字最大长度
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            mEdContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
             mEdContent.setText(mContent);
 
             mTvTitle.setText(title);
             if (mEditInputType != 0) {
                 mEdContent.setInputType(mEditInputType);
             }
-            if(StringUtil.isStringValid(chooseText)){
+            if (StringUtil.isStringValid(chooseText)) {
                 mTvChoose.setText(chooseText);
             }
         }
@@ -146,7 +159,9 @@ public class BaseInputDialog extends BaseDialogFragment {
         bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(resId));
         if (editInputType != 0) {
             bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
+
         }
+
 
         if (StringUtil.isStringValid(content)) {
             bundle.putString(IntentBuilder.KEY_DATA, content);
@@ -161,6 +176,34 @@ public class BaseInputDialog extends BaseDialogFragment {
         dialog.show(fragmentManager);
         return dialog;
     }
+
+
+    public static BaseInputDialog show2(FragmentManager fragmentManager
+            , @StringRes int resId, String content, int maxLength, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
+        BaseInputDialog dialog = new BaseInputDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(resId));
+        if (editInputType != 0) {
+            bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
+        }
+
+        bundle.putInt(IntentBuilder.KEY_DATA_2, maxLength);
+
+
+        if (StringUtil.isStringValid(content)) {
+            bundle.putString(IntentBuilder.KEY_DATA, content);
+        } else {
+            bundle.putString(IntentBuilder.KEY_DATA, "");
+        }
+
+
+        dialog.setArguments(bundle);
+        dialog.setOnFinishListener(onFinishListener);
+        dialog.setOnChooseClickListener(onChooseClickListener);
+        dialog.show(fragmentManager);
+        return dialog;
+    }
+
 
     public static BaseInputDialog show(FragmentManager fragmentManager
             , @StringRes int resId, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
@@ -181,7 +224,7 @@ public class BaseInputDialog extends BaseDialogFragment {
     }
 
     public static BaseInputDialog show(FragmentManager fragmentManager
-            , @StringRes int titleId, @StringRes int  chooseId, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
+            , @StringRes int titleId, @StringRes int chooseId, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
         BaseInputDialog dialog = new BaseInputDialog();
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(titleId));
