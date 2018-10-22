@@ -26,7 +26,7 @@ public class PlayListViewModel extends BaseViewModel {
     public String footid;
 
     public int pi = 1;
-    public int ps = 50;
+    public int ps = 99999;
 
     public MutableLiveData<List<PigeonPlayEntity>> mPigeonPlayListData = new MutableLiveData<>();
     public MutableLiveData<List<LeagueDetailsEntity>> mDataFristLeague = new MutableLiveData<>();
@@ -47,7 +47,7 @@ public class PlayListViewModel extends BaseViewModel {
 
 
     public int infoPi = 1;
-    public int infoPs = 50;
+    public int infoPs = 99999;
 
     //获取  赛绩 附加信息 列表
     public void getPlayAdditionalInfoList() {
@@ -59,11 +59,11 @@ public class PlayListViewModel extends BaseViewModel {
         });
     }
 
-    public void getFirstLeague(){
+    public void getFirstLeague() {
         submitRequestThrowError(PlayModel.getFirstLeague(), r -> {
-            if(r.isOk()){
+            if (r.isOk()) {
                 mDataFristLeague.setValue(r.data);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 

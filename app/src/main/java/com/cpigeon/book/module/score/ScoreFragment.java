@@ -1,21 +1,20 @@
 package com.cpigeon.book.module.score;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.score.viewmodel.ScoreViewModel;
 import com.cpigeon.book.widget.StarRatingView;
 
 import butterknife.BindView;
@@ -28,16 +27,24 @@ import butterknife.BindView;
 public class ScoreFragment extends BaseBookFragment {
 
 
-    @BindView(R.id.ratint_bar)
-    RatingBar mRatingBar;
-    private int count;
-//    @BindView(R.id.mRatingStarView)
-//    RatingStarView mRatingStarView;
+    @BindView(R.id.srv_ratable)
+    StarRatingView srv_ratable;
+
+    private ScoreViewModel mScoreViewModel;
+
 
     public static void start(Activity activity, PigeonEntity mPigeonEntity) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
                 .startParentActivity(activity, ScoreFragment.class);
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mScoreViewModel = new ScoreViewModel();
+        initViewModels(mScoreViewModel);
     }
 
     @Nullable
@@ -54,24 +61,20 @@ public class ScoreFragment extends BaseBookFragment {
 
         setTitle("评分");
 
-//        mRatingStarView.setOnRatingBarChangeListener(v -> {
-//
-//        });
 
+        mScoreViewModel.mPigeonEntity = (PigeonEntity) getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
 
-        mRatingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
-            Log.d("xiaohls", "onViewCreated: " + rating + "       " + fromUser + "      ->" + ratingBar.getRating());
-        });
+        srv_ratable.setRate(Integer.parseInt(mScoreViewModel.mPigeonEntity.getPigeonScore()));
 
-
-
-        StarRatingView srv_ratable = (StarRatingView) findViewById(R.id.srv_ratable);
         srv_ratable.setOnRateChangeListener(new StarRatingView.OnRateChangeListener() {
             @Override
             public void onRateChange(int rate) {
-               ToastUtils.showLong(getBaseActivity(),rate+"分");
+                ToastUtils.showLong(getBaseActivity(), rate + "分");
+                mScoreViewModel.score = String.valueOf(rate);
+                mScoreViewModel.getZGW_Users_GetLogData();
             }
         });
+
 
     }
 }

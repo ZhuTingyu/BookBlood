@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.base.base.BaseViewModel;
+import com.base.entity.RestHintInfo;
 import com.base.http.HttpErrorException;
 import com.base.util.EncryptionTool;
 import com.cpigeon.book.model.RevisePsdModel;
@@ -46,7 +47,7 @@ public class RevisePsdViewModel extends BaseViewModel {
         Log.d(TAG, "getZGW_Users_GetPlayData: 111-->" + EncryptionTool.decryptAES(EncryptionTool.encryptAES(newPsdStr)));
         submitRequestThrowError(RevisePsdModel.getRevisePlayPsd(phoneStr, phoneVerCode, newPsdStr), r -> {
             if (r.isOk()) {
-                hintDialog(r.msg);
+                showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).isClosePage(true).cancelable(false).build());
             } else throw new HttpErrorException(r);
         });
     }

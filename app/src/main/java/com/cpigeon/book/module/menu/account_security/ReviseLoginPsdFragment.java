@@ -140,7 +140,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
 
         } else if (type == 2) {
             //支付密码
-            setTitle("修改支付密码");
+            setTitle(getString(R.string.text_renewal_play_psd));
             ll1.setVisibility(View.GONE);
             ll2.setVisibility(View.VISIBLE);
             ll2_input_new_psd.getEditText().setHint("请输入6位数字");
@@ -172,8 +172,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
         mRevisePsdViewModel.isCanCommit.observe(this, aBoolean -> {
             TextViewUtil.setEnabled(tvNextStep, aBoolean);
         });
-
-
+        
         mRevisePsdViewModel.reviseLoginPsd.observe(this, s -> {
             getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), s, SweetAlertDialog.ERROR_TYPE, false, dialog -> {
                 SingleLoginService.stopService();

@@ -13,7 +13,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 
 /**
- * hl  修改支付密码
+ * hl  修改支付密码   舍弃  （与修改登录密码合一个页面）
  * Created by Administrator on 2018/8/8.
  */
 

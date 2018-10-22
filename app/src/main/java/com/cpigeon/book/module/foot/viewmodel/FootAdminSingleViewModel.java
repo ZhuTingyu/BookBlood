@@ -32,6 +32,8 @@ public class FootAdminSingleViewModel extends BaseViewModel {
     public String money;
     public String footNumber;
     public String footType;//足环类型
+
+    public List<SelectTypeEntity> mSelectType_Foot_Source;//足环来源
     public String footSource;//足环来源
     public String remark;//备注
     public List<SelectTypeEntity> mSelectTypes;

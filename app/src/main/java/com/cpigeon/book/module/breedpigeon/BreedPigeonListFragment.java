@@ -16,6 +16,7 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonSexCountEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
@@ -43,12 +44,14 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
     }
 
     @Override
     protected void initData() {
         super.initData();
 
+        setStartSearchActvity(BaseSearchPigeonActivity.class);
 
         mTvOk.setVisibility(View.VISIBLE);
         view_placeholder.setVisibility(View.VISIBLE);

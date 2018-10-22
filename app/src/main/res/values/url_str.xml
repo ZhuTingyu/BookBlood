@@ -268,6 +268,10 @@
     <string name="drug_care_drug_del">TXGP_PigeonHealth_Delete</string>
 
 
+    <!--评分 修改-->
+    <string name="pigeon_score_edit">TXGP_Pigeon_UpdateScore</string>
+
+
     <!--信鸽血统推荐-->
     <string name="pairing_recommend_lineage">TXGP_PigeonBreed_RecomBlood</string>
     <!--信鸽赛绩推荐-->

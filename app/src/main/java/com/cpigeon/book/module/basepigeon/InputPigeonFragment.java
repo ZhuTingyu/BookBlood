@@ -162,13 +162,17 @@ public class InputPigeonFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        findView();
+
         if (StringUtil.isStringValid(mViewModel.pigeonId)) {
+            //修改
             setTitle(R.string.text_pigeon_edit);
+            mLlImage.setVisibility(View.GONE);
         } else {
+            //添加
             setTitle(R.string.text_pigeon_input);
         }
 
-        findView();
         composite.add(RxUtils.delayed(200, aLong -> {
             if (StringUtil.isStringValid(mViewModel.pigeonId)) {
                 mLlBase.setLineInputViewState(true);
