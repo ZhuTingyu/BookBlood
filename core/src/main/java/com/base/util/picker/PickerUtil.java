@@ -1,6 +1,7 @@
 package com.base.util.picker;
 
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.base.http.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -39,6 +40,12 @@ public class PickerUtil {
                 now.get(Calendar.DAY_OF_MONTH)
         );
         dpd.show(activity.getFragmentManager(), "Datepickerdialog");
+    }
+
+    public static void showTimePickYMD(AppCompatActivity activity, SelectTimeHaveHMSDialog.OnTimeSelectListener onTimeSelectListener){
+        SelectTimeHaveHMSDialog selectTimeHaveHMSDialog = new SelectTimeHaveHMSDialog();
+        selectTimeHaveHMSDialog.setOnTimeSelectListener(onTimeSelectListener);
+        selectTimeHaveHMSDialog.show(activity.getSupportFragmentManager());
     }
 
 
