@@ -41,6 +41,15 @@ public class GrowthReportEntity {
     private String PigeonPlumeName;
     private String PigeonBloodName;
     private String Info;
+    private int RetureFly;
+
+    public int getRetureFly() {
+        return RetureFly;
+    }
+
+    public void setRetureFly(int retureFly) {
+        RetureFly = retureFly;
+    }
 
     public String getFootRingNum() {
         return FootRingNum;

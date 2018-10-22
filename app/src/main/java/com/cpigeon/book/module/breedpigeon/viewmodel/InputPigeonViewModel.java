@@ -70,55 +70,30 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     }
 
     public void modifyBreedPigeonEntry() {
-        if (pigeonType.equals(PigeonEntity.ID_BREED_PIGEON)) {
-            submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
-                    mPigeonEntity.getPigeonID(),// 鸽子id
-                    countryId,// 国家Id
-                    foot,//足环（可选可填，传足环号）
-                    footVice,//副足环
-                    sourceId,//信鸽来源ID
-                    footFather,// 父足环号码
-                    footMother,// 母足环号码
-                    pigeonName,// 信鸽名称
-                    sexId,//  性别（传ID）
-                    featherColor,//  羽色（可选可填，传羽色名称）
-                    eyeSandId,//  眼沙（传ID）
-                    theirShellsDate,//   出壳时间
-                    lineage,//  血统 （可选可填，传血统名称）
-                    stateId,// 信鸽状态ID
-                    phototypeid,//
-                    setImageMap()), r -> {
-                if (r.isOk()) {
-                    mPigeonEntity = r.data;
-                    mDataPigeon.setValue(r);
-                    EventBus.getDefault().post(new PigeonAddEvent());
-                } else throw new HttpErrorException(r);
-            });
-        } else {
-            submitRequestThrowError(BreedPigeonModel.getTXGP_Racing_Pigeon_Modify(
-                    mPigeonEntity.getPigeonID(),// 鸽子id
-                    countryId,// 国家Id
-                    foot,//足环（可选可填，传足环号）
-                    footVice,//副足环
-                    sourceId,//信鸽来源ID
-                    footMother,// 母足环号码
-                    footFather,// 父足环号码
-                    pigeonName,// 信鸽名称
-                    sexId,//  性别（传ID）
-                    featherColor,//  羽色（可选可填，传羽色名称）
-                    eyeSandId,//  眼沙（传ID）
-                    theirShellsDate,//   出壳时间
-                    lineage,//  血统 （可选可填，传血统名称）
-                    stateId,// 信鸽状态ID
-                    phototypeid,//
-                    setImageMap()), r -> {
-                if (r.isOk()) {
-                    mPigeonEntity = r.data;
-                    mDataPigeon.setValue(r);
-                    EventBus.getDefault().post(new PigeonAddEvent());
-                } else throw new HttpErrorException(r);
-            });
-        }
+        submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
+                pigeonType.equals(PigeonEntity.ID_BREED_PIGEON) ? PigeonEntity.ID_BREED_PIGEON : PigeonEntity.ID_MATCH_PIGEON,
+                mPigeonEntity.getPigeonID(),// 鸽子id
+                countryId,// 国家Id
+                foot,//足环（可选可填，传足环号）
+                footVice,//副足环
+                sourceId,//信鸽来源ID
+                footFather,// 父足环号码
+                footMother,// 母足环号码
+                pigeonName,// 信鸽名称
+                sexId,//  性别（传ID）
+                featherColor,//  羽色（可选可填，传羽色名称）
+                eyeSandId,//  眼沙（传ID）
+                theirShellsDate,//   出壳时间
+                lineage,//  血统 （可选可填，传血统名称）
+                stateId,// 信鸽状态ID
+                phototypeid,//
+                setImageMap()), r -> {
+            if (r.isOk()) {
+                mPigeonEntity = r.data;
+                mDataPigeon.setValue(r);
+                EventBus.getDefault().post(new PigeonAddEvent());
+            } else throw new HttpErrorException(r);
+        });
     }
 
     public void getPigeonDetails() {
@@ -131,11 +106,11 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
         });
     }
 
-    public void getFootRingState(){
+    public void getFootRingState() {
         submitRequestThrowError(BreedPigeonModel.getFootRingState(foot), r -> {
-            if(r.isOk()){
+            if (r.isOk()) {
                 mDataFootRingState.setValue(r.data);
-            }else throw new HttpErrorException(r);
+            } else throw new HttpErrorException(r);
         });
     }
 

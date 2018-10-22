@@ -133,6 +133,7 @@ public class BreedPigeonModel {
 
     //hl 种鸽信息修改
     public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_Modify(
+            String pigeonType,
             String pigeonid,
             String coodid,
             String footnum,
@@ -153,7 +154,7 @@ public class BreedPigeonModel {
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_modify)
-                .addBody("typeid", PigeonEntity.ID_BREED_PIGEON)//
+                .addBody("typeid", pigeonType)//
                 .addBody("pigeonid", pigeonid)// 鸽子id
                 .addBody("coodid", coodid)// 国家Id
                 .addBody("footnum", footnum)//足环（可选可填，传足环号）
@@ -200,7 +201,7 @@ public class BreedPigeonModel {
                 .addBody("footnum", footnum)//足环（可选可填，传足环号）
                 .addBody("footnumto", footnumto)// 副环（可选可填 ，传足环号）
                 .addBody("sourceid", sourceid)// 信鸽来源ID
-                .addBody("menfootnum", menfootnum)// 母足环号码
+                .addBody("menfootnum", menfootnum)// 足环号码
                 .addBody("wofootnum", wofootnum)// 父足环号码
                 .addBody("name", name)// 信鸽名称
                 .addBody("sex", sex)//  性别（传ID）

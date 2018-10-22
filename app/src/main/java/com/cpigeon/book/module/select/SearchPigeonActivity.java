@@ -122,6 +122,10 @@ public class SearchPigeonActivity extends BaseSearchActivity {
 
     @Override
     protected void initObserve() {
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+        });
+
         mViewModel.mPigeonListData.observe(this, pigeonEntities -> {
             setProgressVisible(false);
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, pigeonEntities);

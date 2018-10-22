@@ -1,7 +1,9 @@
 package com.cpigeon.book.module.breedpigeon.adpter;
 
+import android.media.Image;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
@@ -34,16 +36,12 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
 
         helper.setText(R.id.tvDay, String.valueOf(TimeUtil.getTimeFormat(item.getUseTime(), TimeUtil.FORMAT_dd)));
         helper.setText(R.id.tvYear, String.valueOf(TimeUtil.getTimeFormat(item.getUseTime(), TimeUtil.FORMAT_YYYYMM)));
-
         helper.setText(R.id.tvTitle, item.getTypeName());
-
-        helper.setText(R.id.tv2, item.getInfo());
-
-//        helper.setText(R.id.tvDay, "30");
-//        helper.setText(R.id.tvYear, "2018-22");
-//        helper.setText(R.id.tv1, "第一窝    晴    27℃   东南风");
-//        helper.setText(R.id.tv2, "东南风");
         icon.setImageResource(R.mipmap.ic_report_auction);
+
+        TextView tv1 = helper.getView(R.id.tv1);
+        TextView tv2 = helper.getView(R.id.tv2);
+        ImageView img = helper.getView(R.id.img);
 
 
         if (getData().size() == 1) {
@@ -59,16 +57,20 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
         switch (item.getTypeID()) {
 
             case 1://出壳
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                img.setVisibility(View.GONE);
                 helper.setText(R.id.tv1, "第" + MathUtil.toChinese(String.valueOf(item.getLayNum() + 1)) + "窝    " +
                         item.getWeather() + "    " +
                         item.getTemperature() + "℃   " +
                         item.getWeather());
-
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_hatches);
                 break;
 
             case 2://挂环
-
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                img.setVisibility(View.GONE);
                 helper.setText(R.id.tv1, "第" + MathUtil.toChinese(String.valueOf(item.getLayNum() + 1)) + "窝    " +
                         item.getWeather() + "    " +
                         item.getTemperature() + "℃   " +
@@ -79,7 +81,6 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
                 break;
 
             case 3://拍照
-
                 break;
 
             case 4://配对
@@ -125,9 +126,10 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
             case 9://训练
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_train);
 
-                helper.setText(R.id.tv1, item.getMatchNumber() + "名  " + item.getMatchCount() + "羽   归巢0羽");
+                helper.setText(R.id.tv1, item.getMatchNumber() + "名  " + item.getMatchCount()
+                        + "羽   归巢" + item.getRetureFly() + "羽");
                 helper.setText(R.id.tv2, item.getFraction());
-
+                helper.setViewVisible(R.id.img, View.GONE);
                 break;
 
             case 10://比赛
@@ -137,6 +139,10 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
                 helper.setText(R.id.tv2, item.getInfo());
 
                 break;
+            case 11://现役在棚
+                helper.setText(R.id.tv1, item.getInfo());
+                helper.setViewVisible(R.id.tv2, View.GONE);
+                helper.setViewVisible(R.id.img, View.GONE);
 
         }
         addTopAndBttomMargin(helper, 32);

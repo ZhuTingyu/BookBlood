@@ -31,6 +31,7 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
     //种鸽修改
     public void modifyBreedPigeonEntry() {
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
+                pigeonType.equals(PigeonEntity.ID_BREED_PIGEON) ? PigeonEntity.ID_BREED_PIGEON : PigeonEntity.ID_MATCH_PIGEON,
                 mPigeonEntity.getPigeonID(),// 鸽子id
                 mPigeonEntity.getFootCodeID(),// 国家Id
                 mPigeonEntity.getFootRingNum(),//足环（可选可填，传足环号）
