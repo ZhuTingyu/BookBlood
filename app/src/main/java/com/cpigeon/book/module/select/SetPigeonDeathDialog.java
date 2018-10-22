@@ -3,7 +3,6 @@ package com.cpigeon.book.module.select;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
 
@@ -19,9 +18,6 @@ import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.select.viewmodel.SetPigeonDeathViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
 
@@ -82,7 +78,7 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            getBaseActivity().setProgressVisible(true);
+            setProgressVisible(true);
             mViewModel.setPigeonDeath();
         });
 
@@ -104,7 +100,7 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         mSelectTypeViewModel.getDeathReason();
 
         mViewModel.normalResult.observe(this, s -> {
-            getBaseActivity().setProgressVisible(false);
+            setProgressVisible(false);
             dismiss();
             if (mOnPigeonDeathClickListener != null) {
                 mOnPigeonDeathClickListener.setDeathFinish(mViewModel.mFootEntity);

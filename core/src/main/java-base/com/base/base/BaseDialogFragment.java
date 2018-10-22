@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -35,16 +34,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     protected LoadingView progressView;
     ViewGroup mRootView;
 
-
     public BaseDialogFragment(){}
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mRootView = (ViewGroup) getView();
-        initProgressLayout();
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -66,6 +56,11 @@ public abstract class BaseDialogFragment extends DialogFragment {
         initLayout(window, lp);
 
         initView(dialog);
+
+
+        initProgressLayout(dialog);
+        getBaseActivity().setProgressVisible(true);
+
 
         return dialog;
     }
@@ -126,7 +121,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
         getBaseActivity().error(code, error);
     }
 
-    private void initProgressLayout() {
+    private void initProgressLayout(Dialog dialog) {
+        mRootView = (ViewGroup)dialog.getWindow().getDecorView();
         if (progressView == null) {
             progressView = new LoadingView(getContext());
         }

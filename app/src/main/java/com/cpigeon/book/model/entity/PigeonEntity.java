@@ -217,8 +217,8 @@ public class PigeonEntity implements Serializable {
     public List<PigeonPlayEntity> getMatchData() {
         List<PigeonPlayEntity> data = Lists.newArrayList();
         data.addAll(getMatchList());
-        if (data.size() <= 3) {
-            return data;
+        if (data.size() >= 3) {
+            return data.subList(0, 2);
         }else {
             data.addAll(getMatchInfoList());
             return data.subList(0, 2);

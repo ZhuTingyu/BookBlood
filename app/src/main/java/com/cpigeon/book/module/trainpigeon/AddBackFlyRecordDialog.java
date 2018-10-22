@@ -104,12 +104,12 @@ public class AddBackFlyRecordDialog extends BaseDialogFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            getBaseActivity().setProgressVisible(true);
+            setProgressVisible(true);
             mViewModel.addFlyBackRecord();
         });
 
         mViewModel.normalResult.observe(this, s -> {
-            getBaseActivity().setProgressVisible(false);
+            setProgressVisible(false);
             EventBus.getDefault().post(new FlyBackAddRecordEvent());
             dismiss();
         });

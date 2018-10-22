@@ -250,7 +250,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
 
     private void getYears() {
         int len = Integer.valueOf(TimeUtil.format(System.currentTimeMillis(), TimeUtil.FORMAT_YYYY));
-        for (int i = len - 10; i <= len; i++) {
+        for (int i = len - 60; i <= len; i++) {
             years.add(String.valueOf(i));
         }
         Collections.reverse(years);

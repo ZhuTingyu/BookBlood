@@ -2,12 +2,11 @@ package com.base.util.glide;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.annotation.IdRes;
 import android.widget.ImageView;
 
 import com.base.util.regex.RegexUtils;
+import com.base.util.utility.StringUtil;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 
 import java.io.File;
 
@@ -48,14 +47,15 @@ public class GlideUtil {
     }
 
     public static void setGlideImageViewHaveRound(Context context, String url, ImageView imageView, int radius) {
-
+        if(!StringUtil.isStringValid(url)){
+            return;
+        }
         if (RegexUtils.isURL(url)) {
             Glide.with(context).load(url)
                     .centerCrop()
                     .bitmapTransform(new RoundedCornersTransformation(context, radius, 0))
                     .into(imageView);
         } else {
-
             Glide.with(context).load(new File(url))
                     .centerCrop()
                     .bitmapTransform(new RoundedCornersTransformation(context, radius, 0))

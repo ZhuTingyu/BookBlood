@@ -16,8 +16,6 @@ import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
-import com.base.util.Lists;
-import com.base.util.Utils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;

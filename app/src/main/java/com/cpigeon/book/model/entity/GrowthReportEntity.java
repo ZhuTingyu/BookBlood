@@ -43,6 +43,8 @@ public class GrowthReportEntity {
     private String Info;
     private int RetureFly;
 
+
+
     public int getRetureFly() {
         return RetureFly;
     }

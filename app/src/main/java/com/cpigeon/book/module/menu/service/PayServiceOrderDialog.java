@@ -77,7 +77,7 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
             @Override
             public void onInputFinish(String psw) {
                 if (psw.length() == 6) {
-                    mBaseActivity.setProgressVisible(true);
+                    setProgressVisible(true);
                     mViewModel.mPassword = psw;
                     if (mIsOpen) {
                         mViewModel.payOder();
@@ -90,15 +90,14 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
 
         mViewModel.normalResult.observe(this, s -> {
             mStatusIsPay = true;
-            mBaseActivity.setProgressVisible(false);
+            setProgressVisible(false);
             ToastUtils.showLong(getActivity(), s);
             dismiss();
             EventBus.getDefault().post(new OpenServiceEvent());
         });
 
         mViewModel.getError().observe(this, restErrorInfo -> {
-
-            mBaseActivity.setProgressVisible(false);
+            setProgressVisible(false);
             if (restErrorInfo.code == 1099) {
                 DialogUtils.createDialog(getBaseActivity(), Utils.getString(R.string.text_error), restErrorInfo.message
                         , Utils.getString(R.string.text_forget_password)
