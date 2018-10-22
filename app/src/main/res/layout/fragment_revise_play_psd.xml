@@ -25,7 +25,7 @@
         app:lineInputView_IsCanEdit="false"
         app:lineInputView_IsLeft="true"
         app:lineInputView_IsNotNull="true"
-        app:lineInputView_LeftString="修改支付密码"
+        app:lineInputView_LeftString="@string/text_renewal_play_psd"
         app:lineInputView_isShowLineDivisions="gone" />
 
 </LinearLayout>

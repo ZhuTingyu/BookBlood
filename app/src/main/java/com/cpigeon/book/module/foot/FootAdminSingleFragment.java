@@ -143,8 +143,20 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     , R.string.text_foot_source, lvSource.getContent(), 0, content -> {
                         lvSource.setRightText(content);
                     }, () -> {
-                        setProgressVisible(true);
-                        mPublicViewModel.getSelectType_Source();
+
+                        if (Lists.isEmpty(mViewModel.mSelectType_Foot_Source)) {
+                            mPublicViewModel.getSelectType_Source();
+                        } else {
+                            PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectType_Foot_Source)
+                                    , selectSourcePosition, new OptionPicker.OnOptionPickListener() {
+                                        @Override
+                                        public void onOptionPicked(int index, String item) {
+                                            selectSourcePosition = index;
+                                            lvSource.setRightText(item);
+                                            mDialogSource.hide();
+                                        }
+                                    });
+                        }
                     });
         });
 
@@ -206,13 +218,17 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 mViewModel.modifyFootNumber();
             });
         } else {
-            setTitle(R.string.text_foot_number_input);
+            setTitle(R.string.text_foot);
             lvStatus.setVisibility(View.GONE);
             tvOk.setOnClickListener(v -> {
                 setProgressVisible(true);
                 mViewModel.addFoot();
             });
         }
+
+        setProgressVisible(true);
+        mPublicViewModel.getSelectType_Source();//来源
+
     }
 
     @Override
@@ -230,7 +246,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 lvMoney.setRightText(Utils.getString(R.string.text_yuan, footEntity.getFootRingMoney()));//金额
                 mLvFatherFoot.setRightText(footEntity.getMenFootRingNum());
                 mLvMotherFoot.setRightText(footEntity.getWoFootRingNum());
-                if (!footEntity.isSetRing()){
+                if (!footEntity.isSetRing()) {
                     mLvFatherFoot.setVisibility(View.GONE);
                     mLvMotherFoot.setVisibility(View.GONE);
                 }
@@ -248,19 +264,21 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
         mPublicViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
             mViewModel.mSelectTypes = selectTypeEntities;
+
+            if (!mIsLook){
+                mViewModel.footType = mViewModel.mSelectTypes.get(0).getTypeID();
+                lvCategory.setContent(mViewModel.mSelectTypes.get(0).getTypeName());
+            }
         });
 
         mPublicViewModel.mSelectType_Foot_Source.observe(this, selectTypeEntities -> {
             setProgressVisible(false);
-            PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(selectTypeEntities)
-                    , selectSourcePosition, new OptionPicker.OnOptionPickListener() {
-                        @Override
-                        public void onOptionPicked(int index, String item) {
-                            selectSourcePosition = index;
-                            lvSource.setRightText(item);
-                            mDialogSource.hide();
-                        }
-                    });
+
+            mViewModel.mSelectType_Foot_Source = selectTypeEntities;
+
+            if (!mIsLook) {
+                lvSource.setRightText(mViewModel.mSelectType_Foot_Source.get(0).getTypeName());
+            }
         });
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
@@ -288,6 +306,8 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                                 lvCategory.setContent(mViewModel.mSelectTypes.get(p).getTypeName());
                                 mViewModel.isCanCommit();
                             });
+                }else {
+
                 }
                 break;
         }

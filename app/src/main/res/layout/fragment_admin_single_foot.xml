@@ -74,6 +74,7 @@
                 app:lineInputView_IsCanEdit="true"
                 app:lineInputView_isShowRightImage="invisible"
                 app:lineInputView_IsNotNull="true"
+                app:lineInputView_RightString="0"
                 app:lineInputView_LeftString="金额" />
 
             <com.cpigeon.book.widget.LineInputView

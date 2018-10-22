@@ -4,12 +4,9 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
-import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.ScoreModel;
 import com.cpigeon.book.model.entity.LeagueDetailsEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class ScoreViewModel extends BaseViewModel {
         submitRequestThrowError(ScoreModel.getTXGP_Pigeon_UpdateScore(mPigeonEntity.getPigeonID(), mPigeonEntity.getFootRingID(), score), r -> {
             if (r.isOk()) {
 //              hintDialog(r.msg);
-                EventBus.getDefault().post(new PigeonAddEvent());
+//                EventBus.getDefault().post(new PigeonAddEvent());
             } else throw new HttpErrorException(r);
         });
     }

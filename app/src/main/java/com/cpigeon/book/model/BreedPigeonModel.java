@@ -168,8 +168,8 @@ public class BreedPigeonModel {
                 .addBody("outtime", outtime)//   出壳时间
                 .addBody("blood", blood)//  血统 （可选可填，传血统名称）
                 .addBody("stateid", stateid)// 信鸽状态ID
-                .addBody("phototypeid", phototypeid)// 图片类型
-                .addImageFileBodys(body)
+//                .addBody("phototypeid", phototypeid)// 图片类型
+//                .addImageFileBodys(body)
                 .request();
     }
 
@@ -209,8 +209,8 @@ public class BreedPigeonModel {
                 .addBody("outtime", outtime)//   出壳时间
                 .addBody("blood", blood)//  血统 （可选可填，传血统名称）
                 .addBody("stateid", stateid)// 信鸽状态ID
-                .addBody("phototypeid", phototypeid)// 图片类型
-                .addImageFileBodys(body)
+//                .addBody("phototypeid", phototypeid)// 图片类型
+//                .addImageFileBodys(body)
                 .request();
     }
 

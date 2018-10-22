@@ -162,13 +162,17 @@ public class InputPigeonFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        findView();
+
         if (StringUtil.isStringValid(mViewModel.pigeonId)) {
+            //修改
             setTitle(R.string.text_pigeon_edit);
+            mLlImage.setVisibility(View.GONE);
         } else {
+            //添加
             setTitle(R.string.text_pigeon_input);
         }
 
-        findView();
         composite.add(RxUtils.delayed(200, aLong -> {
             if (StringUtil.isStringValid(mViewModel.pigeonId)) {
                 mLlBase.setLineInputViewState(true);
@@ -621,11 +625,11 @@ public class InputPigeonFragment extends BaseBookFragment {
         mSelectParentFootRingViewModel.mDataPigeon.observe(this, pigeonEntities -> {
             setProgressVisible(false);
 
-            if(Lists.isEmpty(pigeonEntities)){
-                if(PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)){
+            if (Lists.isEmpty(pigeonEntities)) {
+                if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
                     mLvFatherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
                     mViewModel.footFather = mSelectParentFootRingViewModel.mFootNumber;
-                }else {
+                } else {
                     mLvMotherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
                     mViewModel.footMother = mSelectParentFootRingViewModel.mFootNumber;
                 }
@@ -635,13 +639,13 @@ public class InputPigeonFragment extends BaseBookFragment {
 
 
             SelectParentFootRingDialog.show(getFragmentManager(), pigeonEntities, mSelectParentFootRingViewModel.mSexId, pigeonEntity -> {
-                if(PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)){
+                if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
                     mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
                     mViewModel.footFatherId = pigeonEntity.getFootRingID();
                     mViewModel.footFather = pigeonEntity.getFootRingNum();
                     mViewModel.pigeonFatherId = pigeonEntity.getPigeonID();
                     mViewModel.pigeonFatherStateId = pigeonEntity.getStateID();
-                }else {
+                } else {
                     mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
                     mViewModel.footMotherId = pigeonEntity.getFootRingID();
                     mViewModel.footMother = pigeonEntity.getFootRingNum();

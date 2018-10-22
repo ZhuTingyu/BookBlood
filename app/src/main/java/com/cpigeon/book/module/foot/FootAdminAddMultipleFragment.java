@@ -32,8 +32,6 @@ import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.List;
-
 import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
@@ -92,7 +90,7 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
         mEdRemark = findViewById(R.id.edRemark);
         mTvOk = findViewById(R.id.tvOk);
 
-        composite.add(RxUtils.delayed(50,aLong -> {
+        composite.add(RxUtils.delayed(50, aLong -> {
             mLlRoot.setLineInputViewState(false);
         }));
 
@@ -100,9 +98,9 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
 
         bindUi(RxUtils.textChanges(mLvFoot.getEditText()), mViewModel.setStartFoot());
         bindUi(RxUtils.textChanges(mLvCount.getEditText()), s -> {
-            if(!StringUtil.isStringValid(s)) return;
+            if (!StringUtil.isStringValid(s)) return;
             int count = Integer.valueOf(s);
-            if(count > 10000){
+            if (count > 10000) {
                 s = "10000";
                 DialogUtils.createHintDialog(getBaseActivity(), Utils.getString(R.string.text_input_foot_numbers_count_limit));
             }
@@ -126,6 +124,8 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
                             mLvCategory.setContent(mViewModel.mSelectTypes_Foot_Ring.get(p).getTypeName());
                             mViewModel.isCanCommit();
                         });
+            } else {
+                mPublicViewModel.getSelectType_Foot_Ring();
             }
         });
 
@@ -134,13 +134,17 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
                     , R.string.text_foot_source, mLvSource.getContent(), 0, content -> {
                         mLvSource.setRightText(content);
                     }, () -> {
-                        PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Srouse)
-                                , 0, new OptionPicker.OnOptionPickListener() {
-                                    @Override
-                                    public void onOptionPicked(int index, String item) {
-                                        mLvSource.setRightText(item);
-                                    }
-                                });
+                        if (Lists.isEmpty(mViewModel.mSelectTypes_Srouse)) {
+                            mPublicViewModel.getSelectType_Source();
+                        } else {
+                            PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Srouse)
+                                    , 0, new OptionPicker.OnOptionPickListener() {
+                                        @Override
+                                        public void onOptionPicked(int index, String item) {
+                                            mLvSource.setRightText(item);
+                                        }
+                                    });
+                        }
                     });
         });
 
@@ -161,13 +165,19 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
         });
 
         mPublicViewModel.mSelectType_Foot_Ring.observe(this, selectTypeEntities -> {
+            //类别
             mViewModel.mSelectTypes_Foot_Ring = selectTypeEntities;
+
+            mViewModel.typeId = mViewModel.mSelectTypes_Foot_Ring.get(0).getTypeID();
+            mLvCategory.setContent(mViewModel.mSelectTypes_Foot_Ring.get(0).getTypeName());
+
         });
 
         mPublicViewModel.mSelectType_Foot_Source.observe(this, selectTypeEntities -> {
+            //来源
             mViewModel.mSelectTypes_Srouse = selectTypeEntities;
+            mLvSource.setRightText(mViewModel.mSelectTypes_Srouse.get(0).getTypeName());
         });
-
 
         mViewModel.addR.observe(this, s -> {
             DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
@@ -176,8 +186,5 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
                 finish();
             });
         });
-
     }
-
-
 }

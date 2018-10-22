@@ -69,6 +69,7 @@ public class PlayFragment1 extends BaseBookFragment {
 
         mPlayListViewModel.mPigeonPlayListData.observe(this, pigeonPlayEntities -> {
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPlayListAdapter, pigeonPlayEntities);
+            mPlayListAdapter.setLoadMore(false);
             setProgressVisible(false);
         });
 
@@ -102,10 +103,10 @@ public class PlayFragment1 extends BaseBookFragment {
             dataRefresh();
         });
 
-        mPlayListAdapter.setOnLoadMoreListener(() -> {
-            mPlayListViewModel.pi++;
-            mPlayListViewModel.getZGW_Users_GetLogData();
-        }, mRecyclerView.getRecyclerView());
+//        mPlayListAdapter.setOnLoadMoreListener(() -> {
+//            mPlayListViewModel.pi++;
+//            mPlayListViewModel.getZGW_Users_GetLogData();
+//        }, mRecyclerView.getRecyclerView());
 
         mRecyclerView.setAdapter(mPlayListAdapter);
 

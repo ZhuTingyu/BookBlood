@@ -59,9 +59,8 @@ public class OrderListFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = findViewById(R.id.list);
 
-
         try {
-            typeStr = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
+            typeStr = getArguments().getString(IntentBuilder.KEY_TYPE);
 
             switch (typeStr) {
                 case OrderListFragment.TYPE_ALL:
