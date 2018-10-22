@@ -52,13 +52,13 @@ public class PickerUtil {
     public static void showTimeYMD(Activity activity, long startTimeStamp, DatePicker.OnYearMonthDayPickListener listener) {
 
         try {
-            Date startTime = new Date(startTimeStamp);
-            Calendar startCalendar = Calendar.getInstance();
-            startCalendar.setTime(startTime);
-
+            Date endTime = new Date(startTimeStamp);
             Calendar endCalendar = Calendar.getInstance();
-            endCalendar.setTime(startTime);
-            endCalendar.add(Calendar.YEAR, -10);
+            endCalendar.setTime(endTime);
+
+            Calendar startCalendar = Calendar.getInstance();
+            startCalendar.setTime(endTime);
+            startCalendar.add(Calendar.YEAR, -10);
 
             final DatePicker picker = new DatePicker(activity);
             picker.setCanceledOnTouchOutside(true);
@@ -66,6 +66,7 @@ public class PickerUtil {
             picker.setTopPadding(ConvertUtils.toPx(activity, 10));
             picker.setRangeStart(startCalendar.get(Calendar.YEAR), startCalendar.get(Calendar.MONTH) + 1, startCalendar.get(Calendar.DAY_OF_MONTH));
             picker.setRangeEnd(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1 , endCalendar.get(Calendar.DAY_OF_MONTH));
+            picker.setSelectedItem(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH));
             picker.setResetWhileWheel(false);
             picker.setOnDatePickListener(listener);
             picker.show();

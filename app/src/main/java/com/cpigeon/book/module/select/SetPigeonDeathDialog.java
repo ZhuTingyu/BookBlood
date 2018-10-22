@@ -96,6 +96,9 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         });
 
         mTvCancel.setOnClickListener(v -> {
+            if(mOnPigeonDeathClickListener != null){
+                mOnPigeonDeathClickListener.cancel();
+            }
             dismiss();
         });
         mSelectTypeViewModel.getDeathReason();
@@ -145,6 +148,7 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
     }
 
     public interface OnPigeonDeathClickListener {
+        void cancel();
         void userFootRing(PigeonEntity entity);
         void setDeathFinish(FootEntity footEntity);
     }

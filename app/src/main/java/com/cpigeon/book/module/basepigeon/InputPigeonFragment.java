@@ -200,12 +200,12 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         if (TYPE_SEX_MALE.equals(mSexType)) {
-            mViewModel.mBreedPigeonEntity.setPigeonSexID(PigeonEntity.ID_MALE);
+            mViewModel.mPigeonEntity.setPigeonSexID(PigeonEntity.ID_MALE);
             mViewModel.sexId = (PigeonEntity.ID_MALE);
             mLvSex.setRightText(Utils.getString(R.string.text_male_a));
             mLvSex.setRightImageVisible(false);
         } else if (TYPE_SEX_FEMALE.equals(mSexType)) {
-            mViewModel.mBreedPigeonEntity.setPigeonSexID(PigeonEntity.ID_FEMALE);
+            mViewModel.mPigeonEntity.setPigeonSexID(PigeonEntity.ID_FEMALE);
             mViewModel.sexId = (PigeonEntity.ID_FEMALE);
             mLvSex.setRightText(Utils.getString(R.string.text_female_a));
             mLvSex.setRightImageVisible(false);
@@ -561,6 +561,10 @@ public class InputPigeonFragment extends BaseBookFragment {
         //性别
         mSelectTypeViewModel.mSelectType_Sex.observe(this, selectTypeEntities -> {
             mViewModel.mSelectTypes_Sex = selectTypeEntities;
+            mViewModel.mSelectTypes_Sex = selectTypeEntities;
+            if(StringUtil.isStringValid(mSexType)){
+                mViewModel.mSelectTypes_Sex.remove(0);
+            }
         });
 
         //雨色
@@ -604,6 +608,11 @@ public class InputPigeonFragment extends BaseBookFragment {
                 SetPigeonDeathDialog.show(getFragmentManager(), String.valueOf(footRingStateEntity.getFootRingID())
                         , String.valueOf(footRingStateEntity.getPigeonID()), new SetPigeonDeathDialog.OnPigeonDeathClickListener() {
                             @Override
+                            public void cancel() {
+                                mLvRing.setRightText(StringUtil.emptyString());
+                            }
+
+                            @Override
                             public void userFootRing(PigeonEntity pigeonEntity) {
                                 IntentBuilder.Builder()
                                         .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
@@ -621,11 +630,11 @@ public class InputPigeonFragment extends BaseBookFragment {
         mSelectParentFootRingViewModel.mDataPigeon.observe(this, pigeonEntities -> {
             setProgressVisible(false);
 
-            if(Lists.isEmpty(pigeonEntities)){
-                if(PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)){
+            if (Lists.isEmpty(pigeonEntities)) {
+                if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
                     mLvFatherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
                     mViewModel.footFather = mSelectParentFootRingViewModel.mFootNumber;
-                }else {
+                } else {
                     mLvMotherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
                     mViewModel.footMother = mSelectParentFootRingViewModel.mFootNumber;
                 }
@@ -635,13 +644,13 @@ public class InputPigeonFragment extends BaseBookFragment {
 
 
             SelectParentFootRingDialog.show(getFragmentManager(), pigeonEntities, mSelectParentFootRingViewModel.mSexId, pigeonEntity -> {
-                if(PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)){
+                if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
                     mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
                     mViewModel.footFatherId = pigeonEntity.getFootRingID();
                     mViewModel.footFather = pigeonEntity.getFootRingNum();
                     mViewModel.pigeonFatherId = pigeonEntity.getPigeonID();
                     mViewModel.pigeonFatherStateId = pigeonEntity.getStateID();
-                }else {
+                } else {
                     mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
                     mViewModel.footMotherId = pigeonEntity.getFootRingID();
                     mViewModel.footMother = pigeonEntity.getFootRingNum();
@@ -676,7 +685,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         if (requestCode == CODE_ADD_PLAY) {
             IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mViewModel.mDataPigeonDetails.getValue())
+                    .putExtra(IntentBuilder.KEY_DATA, mViewModel.mPigeonEntity)
                     .finishForResult(getBaseActivity());
         }
 

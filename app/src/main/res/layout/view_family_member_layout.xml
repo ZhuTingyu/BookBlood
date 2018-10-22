@@ -38,7 +38,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="6dp"
                     android:visibility="visible"
-                    tools:src="@drawable/ic_launcher" />
+                    android:src="@drawable/ic_img_default" />
 
                 <com.cpigeon.book.widget.DivideTextView
                     android:id="@+id/tvFootNumber"

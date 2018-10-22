@@ -1,5 +1,7 @@
 package com.base.base;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -10,6 +12,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -30,16 +33,22 @@ public abstract class BaseDialogFragment extends DialogFragment {
     private List<BaseViewModel> viewModels = Lists.newArrayList();
 
     protected LoadingView progressView;
+    ViewGroup mRootView;
 
 
     public BaseDialogFragment(){}
 
-
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRootView = (ViewGroup) getView();
+        initProgressLayout();
+    }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        //Dialog dialog = new Dialog(getActivity(), R.style.BottomDialog);
+        //Dialog dialog = new Dialog(getActivity(), R.style.BottomDialog);g
         Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定
         if(getLayoutView() == null){
@@ -115,6 +124,35 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     public void error(int code, String error) {
         getBaseActivity().error(code, error);
+    }
+
+    private void initProgressLayout() {
+        if (progressView == null) {
+            progressView = new LoadingView(getContext());
+        }
+        setProgressVisible(false);
+        mRootView.addView(progressView);
+    }
+
+    /**
+     * 加载框
+     *
+     * @param isVisible 是否显示
+     */
+
+    public void setProgressVisible(boolean isVisible) {
+        if (progressView != null) {
+            progressView.bringToFront();
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+            progressView.animate().setDuration(shortAnimTime).alpha(
+                    isVisible ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+                }
+            });
+        }
     }
 
 }

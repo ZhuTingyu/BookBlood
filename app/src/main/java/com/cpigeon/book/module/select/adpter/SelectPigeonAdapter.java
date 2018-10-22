@@ -37,6 +37,7 @@ public class SelectPigeonAdapter extends BasePigeonListAdapter {
         helper.setText(R.id.tvEye, item.getPigeonEyeName());
         helper.setText(R.id.tvBlood, item.getPigeonBloodName());
         helper.setText(R.id.tvStatus, item.getStateName());
+        helper.setText(R.id.tvPigeonType, item.getTypeName());
         PigeonPublicUtil.setPigeonSexImg(item.getPigeonSexName(), imgSex);
     }
 }

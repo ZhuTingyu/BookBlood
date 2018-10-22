@@ -207,6 +207,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void setProgressVisible(boolean isVisible) {
         if (progressView != null) {
+            progressView.bringToFront();
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
             progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
             progressView.animate().setDuration(shortAnimTime).alpha(
@@ -218,6 +219,32 @@ public abstract class BaseActivity extends AppCompatActivity {
             });
         }
     }
+
+//    /**
+//     * 加载框
+//     *
+//     * @param isVisible 是否显示
+//     */
+//
+//    public void setProgressVisible(boolean isVisible) {
+//
+//        if (progressView != null) {
+//            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+//            if(isVisible){
+//                rootView.addView(progressView);
+//            }
+//            progressView.animate().setDuration(shortAnimTime).alpha(
+//                    isVisible ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    if(!isVisible){
+//                        rootView.removeView(progressView);
+//                    }
+//                }
+//            });
+//        }
+//
+//    }
 
     private void setToolbar() {
         if (toolbar != null) {

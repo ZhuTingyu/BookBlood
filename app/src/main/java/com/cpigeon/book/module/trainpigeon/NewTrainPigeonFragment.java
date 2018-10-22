@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +29,13 @@ import com.base.util.Lists;
 import com.base.util.LocationFormatUtils;
 import com.base.util.Utils;
 import com.base.util.db.AppDatabase;
+import com.base.util.db.DbEntity;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.glide.GlideUtil;
+import com.base.util.http.GsonUtil;
 import com.base.util.map.MapMarkerManager;
 import com.base.util.system.AppManager;
+import com.base.util.utility.LogUtil;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
@@ -146,6 +151,8 @@ public class NewTrainPigeonFragment extends BaseBookFragment {
             mViewModel.getTrainDetails();
         } else {
             mAdapter.setOnDeleteListener(position -> {
+                PigeonEntity pigeonEntity = mAdapter.getItem(position);
+                setPigeonNotSelect(pigeonEntity);
                 mAdapter.remove(position);
             });
         }
@@ -159,6 +166,14 @@ public class NewTrainPigeonFragment extends BaseBookFragment {
             mAdapter.setNewData(pigeonEntities);
             mViewModel.mPigeonEntities = pigeonEntities;
         }
+    }
+
+    private void setPigeonNotSelect(PigeonEntity pigeonEntity) {
+        DbEntity dbEntity = AppDatabase.getInstance(getBaseActivity())
+                .DbEntityDao().getData(UserModel.getInstance().getUserId(), AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING
+                        , GsonUtil.toJson(pigeonEntity));
+        pigeonEntity.setSelecte(false);
+        dbEntity.updata(pigeonEntity);
     }
 
     @Override

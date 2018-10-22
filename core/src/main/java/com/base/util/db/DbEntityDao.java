@@ -23,6 +23,11 @@ public interface DbEntityDao {
             " AND type LIKE :type")
     List<DbEntity> getDataByUserAndType(String userId, String type);
 
+    @Query("SELECT * FROM DbEntity WHERE userId LIKE :userId" +
+            " AND type LIKE :type AND data IS :data")
+    DbEntity getData(String userId, String type, String data);
+
+
     @Query("SELECT * FROM DbEntity WHERE type LIKE :type")
     List<DbEntity> getDataByType(String type);
 

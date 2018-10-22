@@ -32,12 +32,11 @@ public class HomeTopAdapter extends BaseQuickAdapter<HomeTopEntity, BaseViewHold
         View view = helper.itemView;
         ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
         if (helper.getAdapterPosition() == 0) {
-            layoutParams.setMargins(ScreenTool.dip2px(20), 0, ScreenTool.dip2px(6)
-                    , ScreenTool.dip2px(6));
+            layoutParams.setMargins(ScreenTool.dip2px(20), 0, ScreenTool.dip2px(3)
+                    , 0);
             view.setBackgroundResource(R.mipmap.ic_home_top_blue);
         } else {
-            layoutParams.setMargins(ScreenTool.dip2px(20), 0, ScreenTool.dip2px(20)
-                    , ScreenTool.dip2px(6));
+            layoutParams.setMargins(ScreenTool.dip2px(3), 0, ScreenTool.dip2px(20), 0);
             view.setBackgroundResource(R.mipmap.ic_home_top_yellow);
         }
         view.setLayoutParams(layoutParams);

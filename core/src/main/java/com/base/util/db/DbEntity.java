@@ -6,6 +6,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 import com.alibaba.fastjson.JSON;
+import com.base.util.Utils;
 import com.base.util.http.GsonUtil;
 
 import java.lang.reflect.Type;
@@ -78,6 +79,12 @@ public class DbEntity {
         } catch (Exception e) {
             return JSON.parseObject(getData(), tClass);
         }
+    }
+
+    public <T> void updata(T data){
+        this.setData(GsonUtil.toJson(data));
+        AppDatabase.getInstance(Utils.getApp()).DbEntityDao()
+                .update(this);
     }
 }
 

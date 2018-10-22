@@ -30,7 +30,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     public String sonFootId;
     public String sonPigeonId;
 
-    public PigeonEntity mBreedPigeonEntity = new PigeonEntity();
+    public PigeonEntity mPigeonEntity = new PigeonEntity();
 
     //种鸽录入
     public void addPigeon() {
@@ -62,6 +62,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                 setImageMap()), r -> {
 
             if (r.isOk()) {
+                mPigeonEntity = r.data;
                 mDataPigeon.setValue(r);
                 EventBus.getDefault().post(new PigeonAddEvent());
             } else throw new HttpErrorException(r);
@@ -71,7 +72,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     public void modifyBreedPigeonEntry() {
         if (pigeonType.equals(PigeonEntity.ID_BREED_PIGEON)) {
             submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
-                    mBreedPigeonEntity.getPigeonID(),// 鸽子id
+                    mPigeonEntity.getPigeonID(),// 鸽子id
                     countryId,// 国家Id
                     foot,//足环（可选可填，传足环号）
                     footVice,//副足环
@@ -88,14 +89,14 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                     phototypeid,//
                     setImageMap()), r -> {
                 if (r.isOk()) {
-
+                    mPigeonEntity = r.data;
                     mDataPigeon.setValue(r);
                     EventBus.getDefault().post(new PigeonAddEvent());
                 } else throw new HttpErrorException(r);
             });
         } else {
             submitRequestThrowError(BreedPigeonModel.getTXGP_Racing_Pigeon_Modify(
-                    mBreedPigeonEntity.getPigeonID(),// 鸽子id
+                    mPigeonEntity.getPigeonID(),// 鸽子id
                     countryId,// 国家Id
                     foot,//足环（可选可填，传足环号）
                     footVice,//副足环
@@ -112,7 +113,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                     phototypeid,//
                     setImageMap()), r -> {
                 if (r.isOk()) {
-
+                    mPigeonEntity = r.data;
                     mDataPigeon.setValue(r);
                     EventBus.getDefault().post(new PigeonAddEvent());
                 } else throw new HttpErrorException(r);
@@ -124,8 +125,8 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
 
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_GetInfo(pigeonId, UserModel.getInstance().getUserId()), r -> {
             if (r.isOk()) {
-                mBreedPigeonEntity = r.data;
-                mDataPigeonDetails.setValue(mBreedPigeonEntity);
+                mPigeonEntity = r.data;
+                mDataPigeonDetails.setValue(mPigeonEntity);
             } else throw new HttpErrorException(r);
         });
     }
@@ -143,11 +144,11 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     }
 
     public boolean isHavePigeonInfo() {
-        return mBreedPigeonEntity != null && StringUtil.isStringValid(mBreedPigeonEntity.getPigeonID());
+        return mPigeonEntity != null && StringUtil.isStringValid(mPigeonEntity.getPigeonID());
     }
 
     public boolean isHaveSex() {
-        return mBreedPigeonEntity != null && StringUtil.isStringValid(mBreedPigeonEntity.getPigeonSexID());
+        return mPigeonEntity != null && StringUtil.isStringValid(mPigeonEntity.getPigeonSexID());
     }
 
 }

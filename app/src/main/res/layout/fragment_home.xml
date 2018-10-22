@@ -265,7 +265,7 @@
             <TextView
                 android:textColor="@color/color_text_home"
                 android:text="欢迎使用天下鸽谱"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="24dp"
                 android:textSize="@dimen/small_text_size"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"

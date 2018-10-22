@@ -65,23 +65,6 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
                         item.getWeather());
 
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_hatches);
-
-//                RecyclerView list = helper.getView(R.id.list);
-//
-//                if (list.getTag() == null) {
-//                    list.addItemDecoration(mItemDecoration);
-//                    list.setTag(true);
-//                }
-//
-//                list.setLayoutManager(new GridLayoutManager(mContext, 4));
-//                GrowthReportImageAdapter adapter = (GrowthReportImageAdapter) list.getAdapter();
-//                if (adapter == null) {
-//                    adapter = new GrowthReportImageAdapter(list);
-//                    list.setAdapter(adapter);
-//                }
-//
-//                adapter.setNewData(Lists.newArrayList("", "", "", ""));
-//                list.setFocusableInTouchMode(false);
                 break;
 
             case 2://挂环
@@ -156,33 +139,6 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
                 break;
 
         }
-
-//        switch (item.getTypeName()) {
-//            case "配偶"://配偶
-//                break;
-//            case "转让"://转让
-//                break;
-//            case "拍卖"://拍卖
-//                break;
-//            case "用药"://用药
-//                break;
-//            case "病情"://病情
-//                break;
-//            case "保健"://保健
-//                break;
-//            case "疫苗"://疫苗
-//                break;
-//            case "比赛"://比赛
-//                break;
-//            case "训练"://训练
-//                break;
-//            case "挂环"://挂环
-//                break;
-//            case "出壳"://出壳
-//                break;
-//            case "繁育"://繁育
-//                break;
-//        }
-
+        addTopAndBttomMargin(helper, 32);
     }
 }

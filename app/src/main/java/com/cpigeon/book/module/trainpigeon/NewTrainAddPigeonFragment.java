@@ -113,6 +113,10 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
                 .setBadgeText("0");
         mAdapter = new NewTrainAddPigeonAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            PigeonEntity pigeonEntity = mAdapter.getItem(position);
+            if(pigeonEntity.isSelect()){
+               return;
+            }
             startAnim(mAdapter.getViewByPosition(mRecyclerView.getRecyclerView(),position, R.id.imgAdd), position);
             mAdapter.setSelect(position, true);
             mViewModel.setSelect(position);
@@ -206,6 +210,11 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     }
 
     public void savePigeon() {
+
+        AppDatabase.getInstance(getBaseActivity()).delete(AppDatabase.getInstance(getBaseActivity()).DbEntityDao()
+                .getDataByUserAndType(UserModel.getInstance().getUserId()
+                        , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING));
+
         AppDatabase.getInstance(getBaseActivity())
                 .saveData(mAdapter.getData()
                         , AppDatabase.TYPE_SELECT_PIGEON_TO_TRAINING

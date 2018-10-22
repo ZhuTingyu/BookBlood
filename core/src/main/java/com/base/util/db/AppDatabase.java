@@ -81,8 +81,15 @@ public abstract class AppDatabase extends RoomDatabase {
         dbEntity.setUserId(userId);
         dbEntity.setType(type);
         dbEntity.setData(GsonUtil.toJson(data));
-        dbEntity.setTimeSample(System.currentTimeMillis());
         DbEntityDao().insert(dbEntity);
+    }
+
+    public <T> void updateData(T data, String type, String userId) {
+        DbEntity dbEntity = new DbEntity();
+        dbEntity.setUserId(userId);
+        dbEntity.setType(type);
+        dbEntity.setData(GsonUtil.toJson(data));
+        DbEntityDao().update(dbEntity);
     }
 
     public <T> void saveData(List<T> data, String type, String userId) {

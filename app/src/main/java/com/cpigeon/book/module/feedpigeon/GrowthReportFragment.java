@@ -61,7 +61,7 @@ public class GrowthReportFragment extends BaseBookFragment {
 
         mRecyclerView = findViewById(R.id.list);
         composite.add(RxUtils.delayed(50, aLong -> {
-            mRecyclerView.setListPadding(0, 32, 0, 32);
+            mRecyclerView.setListPadding(20, 0, 20, 0);
         }));
 
         mAdapter = new GrowthReportAdapter();

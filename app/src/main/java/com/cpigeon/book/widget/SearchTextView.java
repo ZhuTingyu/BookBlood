@@ -5,16 +5,20 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.StringRes;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.util.Utils;
 import com.base.util.utility.KeyboardUtils;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 
 /**
@@ -25,6 +29,7 @@ public class SearchTextView extends RelativeLayout {
 
     private EditText mEdSearch;
     private TextView mTvCancel;
+    private ImageView mImageDle;
     private OnSearchTextClickListener listener;
 
     private boolean mIsInTop;
@@ -58,6 +63,32 @@ public class SearchTextView extends RelativeLayout {
 
         mEdSearch = view.findViewById(R.id.edSearch);
         mTvCancel = view.findViewById(R.id.tvCancel);
+        mImageDle = view.findViewById(R.id.imgDel);
+
+        mEdSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(StringUtil.isStringValid(s.toString())){
+                    mImageDle.setVisibility(VISIBLE);
+                }else {
+                    mImageDle.setVisibility(GONE);
+                }
+            }
+        });
+
+        mImageDle.setOnClickListener(v -> {
+            mEdSearch.setText(StringUtil.emptyString());
+        });
 
         mEdSearch.setOnKeyListener((View v, int keyCode, KeyEvent event) -> {
             if ((keyCode == KeyEvent.KEYCODE_SEARCH || keyCode == KeyEvent.KEYCODE_ENTER)

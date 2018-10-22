@@ -1,39 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
+    android:layout_height="48dp"
     android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:layout_height="48dp">
+    android:paddingRight="16dp">
 
-    <EditText
-        android:paddingLeft="28dp"
-        android:id="@+id/edSearch"
+    <RelativeLayout
         android:layout_width="0dp"
-        android:layout_weight="1"
-        android:textSize="@dimen/medium_text_size"
-        android:maxLines="1"
-        android:drawablePadding="24dp"
-        android:singleLine="true"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        tools:text="1231312"
-        android:imeOptions="actionSearch"
-        android:background="@drawable/shape_bg_search_edit"
-        android:drawableLeft="@drawable/svg_search"
-        />
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/shape_bg_search_edit">
+
+        <EditText
+            android:id="@+id/edSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/imgDel"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/svg_search"
+            android:drawablePadding="24dp"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:paddingLeft="28dp"
+            android:singleLine="true"
+            android:textColorHint="@color/color_text_hint"
+            android:textSize="@dimen/medium_text_size" />
+
+        <ImageView
+            android:id="@+id/imgDel"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_search_history_delete"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tvCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/big_text_size"
+        android:layout_marginLeft="36dp"
         android:text="@string/btn_cancel"
-        android:layout_marginLeft="16dp"
         android:textColor="@color/white"
+        android:textSize="@dimen/big_text_size"
 
         />
 
