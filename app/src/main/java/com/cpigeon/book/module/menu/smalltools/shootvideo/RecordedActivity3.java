@@ -427,7 +427,7 @@ public class RecordedActivity3 extends Activity implements View.OnTouchListener,
     private int cameraTag = 1;
 
     //-----------------------------------------------------定位相关（不动）------------------------------------------------------------------------
-    private String TAG = "RecordedActivity";
+    private String TAG = "AtAnyTimeShootingActivity";
     //初始化定位
     AMapLocationClient mLocationClient;
     //声明定位回调监听器

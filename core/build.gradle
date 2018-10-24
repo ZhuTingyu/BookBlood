@@ -107,7 +107,7 @@ dependencies {
 
     //高德
     compile 'com.amap.api:navi-3dmap:latest.integration'
-    compile 'com.amap.api:search:latest.integration'
+    compile 'com.amap.api:search:6.1.0'
     compile 'com.amap.api:location:latest.integration'
     //下载
     compile 'com.liulishuo.filedownloader:library:1.7.2'

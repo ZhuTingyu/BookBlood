@@ -89,10 +89,15 @@ public class BaseInputDialog extends BaseDialogFragment {
         });
 
         mTvFinish.setOnClickListener(v -> {
-            if (mOnFinishListener != null) {
-                mOnFinishListener.finish(mEdContent.getText().toString());
-                hide();
+            try {
+                if (mOnFinishListener != null) {
+                    mOnFinishListener.finish(mEdContent.getText().toString());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+            hide();
         });
 
         if (mOnChooseListener != null) {

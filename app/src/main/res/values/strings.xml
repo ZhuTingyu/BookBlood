@@ -289,6 +289,7 @@
     <string name="text_pleas_input_pigeon_name">请输入鸽子名称</string>
     <string name="text_pigeon_name">鸽名</string>
     <string name="text_pigeon_loft_name">请输入鸽舍名称</string>
+    <string name="text_hint_input">请输入</string>
 
     <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_feather_color">羽色</string>

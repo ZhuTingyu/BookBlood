@@ -2,7 +2,6 @@ package com.base.util.map;
 
 import android.content.Context;
 
-import com.alibaba.idst.nls.internal.protocol.Content;
 import com.amap.api.services.district.DistrictSearch;
 import com.amap.api.services.district.DistrictSearchQuery;
 

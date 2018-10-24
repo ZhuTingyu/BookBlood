@@ -57,7 +57,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * type = "photo"   拍摄图片
  */
 
-public class RecordedActivity extends BaseBookActivity implements View.OnTouchListener, SensorControler.CameraFocusListener {
+public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.OnTouchListener, SensorControler.CameraFocusListener {
 
     @BindView(R.id.watermark_z)
     RelativeLayout watermark_z;//水印总布局
@@ -188,7 +188,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_recorde;
+        return R.layout.activity_at_any_time_shooting;
     }
 
     private void initView() {
@@ -278,7 +278,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
     //-----------------------------------------------------事件处理（操作）------------------------------------------------------------------------
 
-    @OnClick({R.id.imgbtn_ture, R.id.imgbtn_false, R.id.btn_cen, R.id.btn_type_video, R.id.btn_type_photo})
+    @OnClick({R.id.imgbtn_ture, R.id.imgbtn_false, R.id.btn_cen, R.id.btn_type_video, R.id.btn_type_photo,R.id.img_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_ture://确定
@@ -335,6 +335,10 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
 
                 initBtn2();
 
+                break;
+
+            case R.id.img_back:
+                this.finish();
                 break;
         }
     }
@@ -409,7 +413,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                             @Override
                             public void run() {
                                 try {
-                                    ToastUtils.showLong(RecordedActivity.this, "视频录制成功");
+                                    ToastUtils.showLong(AtAnyTimeShootingActivity.this, "视频录制成功");
                                     showShareDialog(1);
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -485,7 +489,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                         savePath = getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() + File.separator + System.currentTimeMillis() + ".jpeg";
 
                         //图片保存
-                        BitmapUtils.saveJPGE_After(RecordedActivity.this,
+                        BitmapUtils.saveJPGE_After(AtAnyTimeShootingActivity.this,
                                 BitmapUtils.createBitmapCenter2(
                                         BitmapUtils.rotaingImageView(90, BitmapFactory.decodeByteArray(data, 0, data.length)),
                                         BitmapUtils.getViewBitmap(watermark_z))
@@ -541,7 +545,7 @@ public class RecordedActivity extends BaseBookActivity implements View.OnTouchLi
                         @Override
                         public void run() {
                             initBtn();
-                            Toast.makeText(RecordedActivity.this, "录像时间太短", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AtAnyTimeShootingActivity.this, "录像时间太短", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {

@@ -211,6 +211,15 @@
 
         </RelativeLayout>
 
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_marginTop="30dp"
+            android:layout_width="35dp"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_back"
+            android:layout_height="35dp" />
+
     </RelativeLayout>
 
 

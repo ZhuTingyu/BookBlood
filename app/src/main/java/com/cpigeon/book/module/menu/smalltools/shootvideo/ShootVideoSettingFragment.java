@@ -108,7 +108,7 @@ public class ShootVideoSettingFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.btn_shoot_video:
                 //拍摄视频
-                Intent intent = new Intent(getBaseActivity(), RecordedActivity.class);
+                Intent intent = new Intent(getBaseActivity(), AtAnyTimeShootingActivity.class);
                 intent.putExtra(IntentBuilder.KEY_DATA, mShootViewModel.mShootInfoEntity);
                 intent.putExtra("type", "video");
                 startActivity(intent);
@@ -128,7 +128,7 @@ public class ShootVideoSettingFragment extends BaseBookFragment {
             case R.id.ll_name:
                 //鸽舍名称
                 mDialogMoney = BaseInputDialog.show2(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_pigeon_loft_name, tv_name.getText().toString(), 50, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
+                        , R.string.text_hint_input, tv_name.getText().toString(), 50, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             tv_name.setText(content);
                             mDialogMoney.hide();
                             mShootViewModel.mShootInfoEntity.setGsname(content);
@@ -142,13 +142,17 @@ public class ShootVideoSettingFragment extends BaseBookFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK) return;
-        if (requestCode == PictureMimeType.ofImage()) {
+        try {
+            if (resultCode != Activity.RESULT_OK) return;
+            if (requestCode == PictureMimeType.ofImage()) {
 
-            List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-            mShootViewModel.mShootInfoEntity.setImgurl(selectList.get(0).getCutPath());
-            setProgressVisible(true);
-            mShootViewModel.getTXGP_SetTouXiangGeSheMingChengData();
+                List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                mShootViewModel.mShootInfoEntity.setImgurl(selectList.get(0).getCutPath());
+                setProgressVisible(true);
+                mShootViewModel.getTXGP_SetTouXiangGeSheMingChengData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

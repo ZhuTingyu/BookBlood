@@ -229,7 +229,7 @@
             android:screenOrientation="portrait" />
 
 
-        <activity android:name=".module.menu.smalltools.shootvideo.RecordedActivity" />
+        <activity android:name=".module.menu.smalltools.shootvideo.AtAnyTimeShootingActivity" />
         <activity android:name=".module.menu.smalltools.shootvideo.RecordedActivity3" />
         <!--单点登录-->
         <service android:name=".service.SingleLoginService"></service>
