@@ -10,7 +10,7 @@ import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
-import com.base.util.utility.StringUtil;
+import com.base.util.picker.SelectTimeHaveHMSDialog;
 import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.event.FlyBackAddRecordEvent;

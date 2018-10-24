@@ -1,4 +1,4 @@
-package com.cpigeon.book.module.trainpigeon;
+package com.base.util.picker;
 
 import android.app.Dialog;
 import android.graphics.Typeface;
@@ -8,11 +8,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.base.base.BaseDialogFragment;
+import com.base.http.R;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.TimeUtil;
-import com.cpigeon.book.R;
 
 import java.util.List;
 

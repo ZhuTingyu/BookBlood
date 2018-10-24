@@ -60,6 +60,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
         super.onCreate(savedInstanceState);
         mViewModel = new BreedPigeonListModel();
         initViewModel(mViewModel);
+        mSearchTextView.setHint(R.string.text_input_foot_number_search);
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
             public void search(String key) {
@@ -106,6 +107,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
                 e.printStackTrace();
             }
         });
+
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
             try {

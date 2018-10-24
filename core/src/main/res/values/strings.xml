@@ -40,5 +40,7 @@
     <string name="permission_reject">拒绝</string>
     <string name="permission_btn_next">下一步</string>
     <string name="permission_go_to_setting">去设置</string>
+    <string name="text_sure">确定</string>
+    <string name="text_time_h_m_s">%1$s:%2$s:%3$s</string>
 
 </resources>

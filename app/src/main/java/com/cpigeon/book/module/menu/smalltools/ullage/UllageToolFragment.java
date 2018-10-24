@@ -2,11 +2,9 @@ package com.cpigeon.book.module.menu.smalltools.ullage;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +19,10 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.menu.smalltools.lineweather.presenter.LineWeatherPresenter;
-import com.cpigeon.book.module.menu.smalltools.lineweather.view.activity.LineWeatherFragment;
-import com.cpigeon.book.module.trainpigeon.SelectTimeHaveHMSDialog;
+import com.base.util.picker.SelectTimeHaveHMSDialog;
 import com.cpigeon.book.util.MathUtil;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
