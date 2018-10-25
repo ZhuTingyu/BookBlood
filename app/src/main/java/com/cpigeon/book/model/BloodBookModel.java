@@ -4,6 +4,7 @@ import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.BloodBookEntity;
+import com.cpigeon.book.model.entity.BloodUserCountEntity;
 import com.google.gson.reflect.TypeToken;
 
 import io.reactivex.Observable;
@@ -13,6 +14,7 @@ import io.reactivex.Observable;
  */
 
 public class BloodBookModel {
+
     public static Observable<ApiResponse<BloodBookEntity>> getBloodBook4(String puid, String foodId, String pigeonId
             , boolean isNeedMatch, boolean isGoodPigeon) {
         return RequestData.<ApiResponse<BloodBookEntity>>build()
@@ -27,6 +29,20 @@ public class BloodBookModel {
                 .request();
     }
 
+    public static Observable<ApiResponse<BloodUserCountEntity>> getBloodNum() {
+        return RequestData.<ApiResponse<BloodUserCountEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<BloodUserCountEntity>>() {
+                }.getType())
+                .url(R.string.get_blood_user_times)
+                .request();
+    }
+    public static Observable<ApiResponse<String>> addBloodNum() {
+        return RequestData.<ApiResponse<String>>build()
+                .setToJsonType(new TypeToken<ApiResponse<String>>() {
+                }.getType())
+                .url(R.string.add_blood_user_times)
+                .request();
+    }
     public static Observable<ApiResponse> addParent(
             String pigeonId,//：鸽子id
             String footId,//:足环id
