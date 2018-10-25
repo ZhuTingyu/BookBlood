@@ -122,9 +122,9 @@
     <!--公棚列表-->
     <string name="get_loft_list">ZGW_GetGongPengList</string>
     <!--设置用户头像和鸽舍名称-->
-    <string name="set_shoot_logo">TXGP_SetTouXiangGeSheMingCheng</string>
+    <string name="set_shoot_logo">SetSuiPai</string>
     <!--获取用户头像和鸽舍名称-->
-    <string name="get_shoot_logo">TXGP_GetTouXiangGeSheMingCheng</string>
+    <string name="get_shoot_logo">GetSuiPai</string>
 
 
     <!--鸽币兑换 列表-->

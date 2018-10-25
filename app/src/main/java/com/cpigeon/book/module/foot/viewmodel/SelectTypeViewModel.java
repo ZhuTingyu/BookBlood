@@ -66,6 +66,8 @@ public class SelectTypeViewModel extends BaseViewModel {
     public MutableLiveData<List<SelectTypeEntity>> mDeathReason = new MutableLiveData<>();//死亡原因
 
 
+    private String key;
+
     public void setSelectType(String type) {
         selectType = type;
     }
@@ -78,7 +80,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取  足环，种赛鸽的类型，状态，来源，羽色，血统，眼沙，性别
     public void getSelectType() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(selectType), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(selectType,key), r -> {
             if (r.isOk()) {
                 mSelectTypeLiveData.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -87,7 +89,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //足环类型
     public void getSelectType_Foot_Ring() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_FOOT_RING), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_FOOT_RING,key), r -> {
             if (r.isOk()) {
                 mSelectType_Foot_Ring.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -96,7 +98,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取  性别
     public void getSelectType_Sex() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_SEX), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_SEX,key), r -> {
             if (r.isOk()) {
                 mSelectType_Sex.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -106,7 +108,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取  羽色
     public void getSelectType_FeatherColor() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_COLOR_FEATHER), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_COLOR_FEATHER,key), r -> {
             if (r.isOk()) {
                 mSelectType_FeatherColor.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -115,7 +117,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取  眼砂
     public void getSelectType_eyeSand() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_EYE), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_EYE,key), r -> {
             if (r.isOk()) {
                 mSelectType_EyeSand.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -125,7 +127,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取  血统
     public void getSelectType_lineage() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_BLOOD), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_BLOOD,key), r -> {
             if (r.isOk()) {
                 mSelectType_Lineage.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -134,7 +136,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取  状态
     public void getSelectType_State() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_STATE), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_STATE,key), r -> {
             if (r.isOk()) {
                 mSelectType_State.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -143,7 +145,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取  信鸽图片类型
     public void getSelectType_ImgType() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_IMG), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_IMG,key), r -> {
             if (r.isOk()) {
                 mSelectType_ImgType.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -152,7 +154,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取足环来源
     public void getSelectType_Source() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_FOOT_SOURCE), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_FOOT_SOURCE,key), r -> {
             if (r.isOk()) {
                 mSelectType_Foot_Source.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -162,7 +164,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 信鸽来源
     public void getSelectType_PigeonSource() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_SOURCE), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON_SOURCE,key), r -> {
             if (r.isOk()) {
                 mSelectType_Pigeon_Source.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -172,7 +174,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 赛事组织
     public void getSelectType_PigeonPlay_Org() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_PLAY_ORG), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_PLAY_ORG,key), r -> {
             if (r.isOk()) {
                 mSelectType_Play_Org.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -181,7 +183,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 用药后的状态
     public void getSelectTypem_Medicate() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_MEDICATE), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.STATE_MEDICATE,key), r -> {
             if (r.isOk()) {
                 mSelectType_Medicate.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -190,7 +192,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 信鸽类型
     public void getPigeonType() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_PIGEON,key), r -> {
             if (r.isOk()) {
                 mSelectType_PigeonType.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -199,7 +201,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 疫苗注射原因
     public void getVaccineReason() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.VACCINE_REASON), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.VACCINE_REASON,key), r -> {
             if (r.isOk()) {
                 mVaccineReason.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -208,7 +210,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 疫苗名称
     public void getVaccineName() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.VACCINE_NAME), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.VACCINE_NAME,key), r -> {
             if (r.isOk()) {
                 mVaccineName.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -217,7 +219,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 病症名称
     public void getLiness_Name() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.LINESS_NAME), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.LINESS_NAME,key), r -> {
             if (r.isOk()) {
                 mLinessName.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -226,7 +228,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 保健品名称
     public void getCareDrugName() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.CARE_DRUG_NAME), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.CARE_DRUG_NAME,key), r -> {
             if (r.isOk()) {
                 mCareDrugName.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -235,7 +237,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 药品名称
     public void getDrug_Name() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.DRUG_NAME), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.DRUG_NAME,key), r -> {
             if (r.isOk()) {
                 mDrugNameData.setValue(r.data);
             } else throw new HttpErrorException(r);
@@ -244,7 +246,7 @@ public class SelectTypeViewModel extends BaseViewModel {
 
     //获取 死亡原因
     public void getDeathReason() {
-        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_DEATH_REASON), r -> {
+        submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_DEATH_REASON,key), r -> {
             if (r.isOk()) {
                 mDeathReason.setValue(r.data);
             } else throw new HttpErrorException(r);

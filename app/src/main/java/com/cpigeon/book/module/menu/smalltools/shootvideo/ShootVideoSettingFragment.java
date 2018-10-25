@@ -97,7 +97,7 @@ public class ShootVideoSettingFragment extends BaseBookFragment {
                 ll_upload_logo.setVisibility(View.VISIBLE);
             }
 
-            tv_name.setText(mShootViewModel.mShootInfoEntity.getGsname());
+            tv_name.setText(mShootViewModel.mShootInfoEntity.getSszz());
         });
     }
 
@@ -131,7 +131,7 @@ public class ShootVideoSettingFragment extends BaseBookFragment {
                         , R.string.text_hint_input, tv_name.getText().toString(), 50, InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
                             tv_name.setText(content);
                             mDialogMoney.hide();
-                            mShootViewModel.mShootInfoEntity.setGsname(content);
+                            mShootViewModel.mShootInfoEntity.setSszz(content);
                             setProgressVisible(true);
                             mShootViewModel.getTXGP_SetTouXiangGeSheMingChengData();
                         }, null);

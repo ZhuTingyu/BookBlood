@@ -8,7 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -133,17 +135,16 @@ public class LocalShareDialogFragment extends DialogFragment {
     public void share2QQ() {
 
         try {
+            checkFileUriExposure();
+
             Intent qqIntent = new Intent(Intent.ACTION_SEND);
             qqIntent.setPackage("com.tencent.mobileqq");
             qqIntent.setClassName("com.tencent.mobileqq", "com.tencent.mobileqq.activity.JumpActivity");
             File file = new File(localFilePath);
 
-//            qqIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
-
-
             if (fileType.equals("video")) {
-                qqIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
-                qqIntent.setType("*/*");
+                qqIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(localFilePath));
+                qqIntent.setType("video/*");
                 startActivity(qqIntent);
             } else {
                 qqIntent.putExtra(Intent.EXTRA_STREAM, insertImageToSystem(getActivity(), localFilePath));
@@ -159,6 +160,9 @@ public class LocalShareDialogFragment extends DialogFragment {
 
     public void share2WX() {
         try {
+
+            checkFileUriExposure();
+
             if (SendWX.isWeixinAvilible(getActivity())) {
                 ComponentName comp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
                 Intent shareIntent = new Intent();
@@ -169,15 +173,16 @@ public class LocalShareDialogFragment extends DialogFragment {
 
                 if (fileType.equals("video")) {
                     shareIntent.setAction(Intent.ACTION_SEND);
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, getImageContentUri(file));
-                    shareIntent.setType("*/*");
+                    shareIntent.setType("video/*");
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(localFilePath)));
+                    startActivity(Intent.createChooser(shareIntent, "分享"));
                 } else {
                     shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
                     shareIntent.putExtra(Intent.EXTRA_STREAM, Lists.newArrayList(Uri.parse(insertImageToSystem(getActivity(), localFilePath))));
                     shareIntent.setType("image/*");
+                    startActivity(Intent.createChooser(shareIntent, "分享"));
                 }
 
-                startActivity(Intent.createChooser(shareIntent, "分享"));
             } else {
                 ToastUtils.showLong(getActivity(), "请先安装微信APP");
             }
@@ -185,8 +190,20 @@ public class LocalShareDialogFragment extends DialogFragment {
         } catch (Exception e) {
             Log.d(TAG, "share2WX: " + e.getLocalizedMessage());
         }
-
     }
+
+
+    /**
+     * 分享前必须执行本代码，主要用于兼容SDK18以上的系统
+     */
+    private static void checkFileUriExposure() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+            builder.detectFileUriExposure();
+        }
+    }
+
 
     private static String insertImageToSystem(Context context, String imagePath) {
         String url = "";

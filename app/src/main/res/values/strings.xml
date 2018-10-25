@@ -584,7 +584,7 @@
     <string name="str_gb_feed_pigeon">养鸽记录</string>
     <string name="str_gb_photo_pigeon">信鸽拍照</string>
 
-    <string name="str_small_tools">随行拍</string>
+    <string name="str_small_tools">信鸽随拍</string>
 
     <string-array name="srt_arr_address">
         <item>北京</item>

@@ -16,7 +16,7 @@ public class ShootViewModel extends BaseViewModel {
 
     //我的鸽币
     public MutableLiveData<ShootInfoEntity> mShootInfo = new MutableLiveData<>();
-    public ShootInfoEntity mShootInfoEntity = new ShootInfoEntity();
+    public ShootInfoEntity mShootInfoEntity = new ShootInfoEntity.Builder().build();
     private boolean isOneTag = true;//是否第一次请求
 
     //  设置用户头像和鸽舍名称
@@ -28,7 +28,7 @@ public class ShootViewModel extends BaseViewModel {
             }
         }
 
-        submitRequestThrowError(ShootModel.getTXGP_SetTouXiangGeSheMingCheng(mShootInfoEntity.getImgurl(), mShootInfoEntity.getGsname()), r -> {
+        submitRequestThrowError(ShootModel.getTXGP_SetTouXiangGeSheMingCheng(mShootInfoEntity.getImgurl(), mShootInfoEntity.getSszz()), r -> {
             if (r.isOk()) {
                 hintDialog(r.msg);
                 getTXGP_GetTouXiangGeSheMingChengData();

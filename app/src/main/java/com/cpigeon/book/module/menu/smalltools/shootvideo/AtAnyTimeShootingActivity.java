@@ -1,12 +1,19 @@
 package com.cpigeon.book.module.menu.smalltools.shootvideo;
 
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.hardware.Camera;
+import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +26,7 @@ import android.widget.Toast;
 
 import com.base.util.IntentBuilder;
 import com.base.util.LocationFormatUtils;
+import com.base.util.RxUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
 import com.base.util.utility.LogUtil;
@@ -38,6 +46,7 @@ import com.cpigeon.book.video.widget.FocusImageView;
 import com.cpigeon.book.widget.mydialog.LocalShareDialogFragment;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -97,6 +106,9 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
     @BindView(R.id.img_logo)
     ImageView img_logo;
 
+    @BindView(R.id.water_tv_ad)
+    TextView water_tv_ad;//
+
     private CameraView mCameraView;
     private View mCapture;
     private FocusImageView mFocus;
@@ -152,9 +164,32 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
             water_tv_address.setText(aMapLocation.getPoiName() + aMapLocation.getCity() + aMapLocation.getDistrict());
             water_tv_altitude.setText("海拔：" + aMapLocation.getAltitude() + "m");
 
+            water_tv_ad.setText(aMapLocation.getCountry() + " " + aMapLocation.getCity());
+
+            //获取海拔高度
+            android.location.LocationManager GpsManager = (android.location.LocationManager) AtAnyTimeShootingActivity.this.getSystemService(Context.LOCATION_SERVICE);
+            if (ActivityCompat.checkSelfPermission(AtAnyTimeShootingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(AtAnyTimeShootingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+
+            Location location = GpsManager.getLastKnownLocation(android.location.LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                water_tv_altitude.setText("海拔 " + strTwo(location.getAltitude()) + "米");
+            } else {
+                water_tv_altitude.setText("海拔 0 米");
+            }
+
             LogUtil.print(aMapLocation);
         });
     }
+
+    /**
+     * 保留两位小数
+     */
+    public  String strTwo(double num) {
+        return new DecimalFormat("#.00").format(num);
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -175,9 +210,9 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
             img_logo.setVisibility(View.GONE);
         }
 
-        if (StringUtil.isStringValid(mShootInfoEntity.getGsname())) {
+        if (StringUtil.isStringValid(mShootInfoEntity.getSszz())) {
             water_tv_name.setVisibility(View.VISIBLE);
-            water_tv_name.setText( mShootInfoEntity.getGsname());
+            water_tv_name.setText(mShootInfoEntity.getSszz());
         } else {
             water_tv_name.setVisibility(View.GONE);
         }
@@ -278,7 +313,7 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
 
     //-----------------------------------------------------事件处理（操作）------------------------------------------------------------------------
 
-    @OnClick({R.id.imgbtn_ture, R.id.imgbtn_false, R.id.btn_cen, R.id.btn_type_video, R.id.btn_type_photo,R.id.img_back})
+    @OnClick({R.id.imgbtn_ture, R.id.imgbtn_false, R.id.btn_cen, R.id.btn_type_video, R.id.btn_type_photo, R.id.img_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.imgbtn_ture://确定
@@ -286,6 +321,8 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
                 if (type.equals("video")) {
                     recordFlag = false;
                     recordComplete(savePath);
+
+                    initBtn();
                 } else {
                     showShareDialog(2);
                 }
@@ -393,39 +430,6 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
     }
 
 
-    //视频录制成功返回
-    private void recordComplete(final String path) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        try {
-                            Thread.sleep(1600);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    ToastUtils.showLong(AtAnyTimeShootingActivity.this, "视频录制成功");
-                                    showShareDialog(1);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                    }
-                }).start();
-            }
-        });
-    }
-
     private LocalShareDialogFragment dialogFragment;
 
     public void showShareDialog(int tag) {
@@ -494,6 +498,12 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
                                         BitmapUtils.rotaingImageView(90, BitmapFactory.decodeByteArray(data, 0, data.length)),
                                         BitmapUtils.getViewBitmap(watermark_z))
                                 , savePath, 100);
+
+
+                        RxUtils.delayed(2000, aLong -> {
+                            Uri uri = Uri.fromFile(new File(savePath));
+                            AtAnyTimeShootingActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+                        });
                     }
                 });
             }
@@ -516,7 +526,6 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
             timeCount = 0;
             long time = System.currentTimeMillis();
 
-//            savePath = Constants.getPath("record/", time + ".mp4");
             savePath = Constants.getPath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "record/", time + ".mp4");
 
             try {
@@ -565,6 +574,45 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
             }
         }
     };
+
+    //视频录制成功返回
+    private void recordComplete(final String path) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            Thread.sleep(1600);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    showShareDialog(1);
+
+                                    RxUtils.delayed(2000, aLong -> {
+                                        Uri uri = Uri.fromFile(new File(savePath));
+                                        AtAnyTimeShootingActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+                                    });
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
+    }
+
 
     private int cameraTag = 1;
 

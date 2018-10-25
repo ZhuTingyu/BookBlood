@@ -15,15 +15,49 @@ public class ShootInfoEntity implements Parcelable {
      * imgurl : 图片地址
      */
 
-    private String gsname = "";
+    private String sszz = "";
     private String imgurl = "";
 
-    public String getGsname() {
-        return gsname;
+
+    protected ShootInfoEntity(Parcel in) {
+        sszz = in.readString();
+        imgurl = in.readString();
     }
 
-    public void setGsname(String gsname) {
-        this.gsname = gsname;
+    private ShootInfoEntity(Builder builder) {
+        setSszz(builder.sszz);
+        setImgurl(builder.imgurl);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(sszz);
+        dest.writeString(imgurl);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ShootInfoEntity> CREATOR = new Creator<ShootInfoEntity>() {
+        @Override
+        public ShootInfoEntity createFromParcel(Parcel in) {
+            return new ShootInfoEntity(in);
+        }
+
+        @Override
+        public ShootInfoEntity[] newArray(int size) {
+            return new ShootInfoEntity[size];
+        }
+    };
+
+    public String getSszz() {
+        return sszz;
+    }
+
+    public void setSszz(String sszz) {
+        this.sszz = sszz;
     }
 
     public String getImgurl() {
@@ -34,34 +68,26 @@ public class ShootInfoEntity implements Parcelable {
         this.imgurl = imgurl;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.gsname);
-        dest.writeString(this.imgurl);
-    }
+    public static final class Builder {
+        private String sszz;
+        private String imgurl;
 
-    public ShootInfoEntity() {
-    }
-
-    protected ShootInfoEntity(Parcel in) {
-        this.gsname = in.readString();
-        this.imgurl = in.readString();
-    }
-
-    public static final Parcelable.Creator<ShootInfoEntity> CREATOR = new Parcelable.Creator<ShootInfoEntity>() {
-        @Override
-        public ShootInfoEntity createFromParcel(Parcel source) {
-            return new ShootInfoEntity(source);
+        public Builder() {
         }
 
-        @Override
-        public ShootInfoEntity[] newArray(int size) {
-            return new ShootInfoEntity[size];
+        public Builder sszz(String val) {
+            sszz = val;
+            return this;
         }
-    };
+
+        public Builder imgurl(String val) {
+            imgurl = val;
+            return this;
+        }
+
+        public ShootInfoEntity build() {
+            return new ShootInfoEntity(this);
+        }
+    }
 }

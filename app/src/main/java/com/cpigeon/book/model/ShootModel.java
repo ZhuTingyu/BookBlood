@@ -20,8 +20,8 @@ public class ShootModel {
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.set_shoot_logo)
-                .addImageFileBody("face", face)
-                .addBody("gsname", gsname)
+                .addImageFileBody("imgfile", face)
+                .addBody("sszz", gsname)
                 .request();
     }
 

@@ -118,23 +118,21 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="22dp"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="right"
                 android:layout_marginRight="@dimen/spacing_left_reight"
-                android:layout_marginTop="42dp"
+                android:layout_marginTop="40dp"
                 android:src="@drawable/wartermark" />
 
-            <ImageView
-                android:visibility="gone"
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_logo"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_above="@+id/ll_info"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="@dimen/spacing_left_reight"
-                android:background="@color/black"
-                android:scaleType="fitXY" />
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/ll_info"
@@ -145,38 +143,19 @@
                 android:layout_marginLeft="@dimen/spacing_left_reight"
                 android:orientation="vertical">
 
+
+                <!--名称-->
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/water_tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="鸽舍："
-                    android:textColor="@color/color_white"
-                    android:textSize="13sp" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="13sp"
+                    android:visibility="gone" />
 
-
-                <TextView
-                    android:id="@+id/water_tv_lo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="4dp"
-                    android:paddingTop="4dp"
-                    android:text="经度：000.000000"
-                    android:textColor="@color/color_white"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/water_tv_la"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="4dp"
-                    android:paddingTop="4dp"
-                    android:text="纬度：000.000000"
-                    android:textColor="@color/color_white"
-                    android:textSize="13sp" />
-
+                <!--时间-->
                 <TextView
                     android:id="@+id/water_tv_time"
                     android:layout_width="wrap_content"
@@ -184,28 +163,103 @@
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
                     android:text="0000-00-00 00:00:00"
-                    android:textColor="@color/color_white"
+                    android:textColor="@color/colorWhite"
                     android:textSize="13sp" />
 
+                <!--地点-->
                 <TextView
                     android:id="@+id/water_tv_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:paddingTop="4dp"
-                    android:text="四川省绵阳市"
-                    android:textColor="@color/color_white"
+                    android:text="地点：暂无"
+                    android:textColor="@color/colorWhite"
                     android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/water_tv_altitude"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="4dp"
-                    android:paddingTop="4dp"
-                    android:text="海拔：0km"
-                    android:textColor="@color/color_white"
-                    android:textSize="13sp" />
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <!--纬度-->
+                        <TextView
+                            android:id="@+id/water_tv_la"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right|center_vertical"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp"
+                            android:text="纬度：暂无"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="13sp" />
+
+                        <!--经度-->
+                        <TextView
+                            android:id="@+id/water_tv_lo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right|center_vertical"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp"
+                            android:text="经度：暂无"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="13sp" />
+
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:background="@color/colorWhite" />
+
+                    <LinearLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!--国家省份-->
+                        <TextView
+                            android:id="@+id/water_tv_ad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp"
+                            android:text=""
+                            android:textColor="@color/colorWhite"
+                            android:textSize="13sp" />
+
+
+                        <!--海拔-->
+                        <TextView
+                            android:id="@+id/water_tv_altitude"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp"
+                            android:text="海拔：0 m"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -214,20 +268,20 @@
 
         <ImageView
             android:id="@+id/img_back"
-            android:layout_marginTop="30dp"
             android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="30dp"
             android:padding="10dp"
-            app:srcCompat="@drawable/ic_back"
-            android:layout_height="35dp" />
+            app:srcCompat="@drawable/ic_back" />
 
     </RelativeLayout>
 
 
     <LinearLayout
         android:id="@+id/llz"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/black"
         android:gravity="center">
 
