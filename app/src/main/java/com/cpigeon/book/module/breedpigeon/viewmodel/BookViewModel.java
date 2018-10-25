@@ -2,6 +2,7 @@ package com.cpigeon.book.module.breedpigeon.viewmodel;
 
 import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
@@ -53,7 +54,13 @@ public class BookViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
-
+    public void addBloodnum() {
+        submitRequestThrowError(BloodBookModel.addBloodNum(), r -> {
+            if (r.isOk()) {
+                Log.d("songshuaishuai", "接口: ");
+            } else throw new HttpErrorException(r);
+        });
+    }
     public void addParent(){
         submitRequestThrowError(BloodBookModel.addParent(pigeonId, foodId, sexId, sonFootId, sonPigeonId), r -> {
             if(r.isOk()){

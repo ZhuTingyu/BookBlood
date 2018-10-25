@@ -211,6 +211,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
     }
 
     public void getBookView() {
+        mViewModel.addBloodnum();
         try {
             RelativeLayout view = findViewById(R.id.rlImage);
             setProgressVisible(true);

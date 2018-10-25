@@ -444,7 +444,7 @@
     <string name="text_is_user_drug">是否用药</string>
     <string name="text_add_feed_pigeon_record">添加爱鸽管理</string>
     <string name="text_sure_add">确认添加</string>
-    <string name="text_pleas_choose">请选择</string>
+    <string name="text_pleas_choose">请填写</string>
     <string name="text_current_temp">当前温度</string>
     <string name="text_current_wind_angle">当前风向</string>
     <string name="text_current_humidity">当前湿度</string>
