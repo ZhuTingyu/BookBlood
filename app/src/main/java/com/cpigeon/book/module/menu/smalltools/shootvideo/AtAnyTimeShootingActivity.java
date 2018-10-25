@@ -39,7 +39,6 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.model.entity.ShootInfoEntity;
 import com.cpigeon.book.util.BitmapUtils;
-import com.cpigeon.book.video.Constants;
 import com.cpigeon.book.video.camera.SensorControler;
 import com.cpigeon.book.video.widget.CameraView;
 import com.cpigeon.book.video.widget.FocusImageView;
@@ -526,7 +525,7 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
             timeCount = 0;
             long time = System.currentTimeMillis();
 
-            savePath = Constants.getPath(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "record/", time + ".mp4");
+            savePath = Environment.getExternalStorageDirectory() + File.separator + Environment.DIRECTORY_DCIM + File.separator + "Camera" + File.separator + "/" + time + ".mp4";
 
             try {
                 mCameraView.setSavePath(savePath);
