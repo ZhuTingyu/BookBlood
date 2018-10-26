@@ -168,6 +168,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         bindUi(RxUtils.textChanges(mLvJoinMatchId.getEditText()), mViewModel.setPigeonMatchNum());
         bindUi(RxUtils.textChanges(mLvAddress.getEditText()), mViewModel.setPigeonHomeAdds());
         bindUi(RxUtils.textChanges(mLvHouseLocation.getEditText()), s -> {
+            setProgressVisible(false);
             mViewModel.isCanCommit();
         });
 

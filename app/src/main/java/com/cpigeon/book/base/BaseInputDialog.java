@@ -51,11 +51,13 @@ public class BaseInputDialog extends BaseDialogFragment {
         KeyboardUtils.registerSoftInputChangedListener(getActivity(), isOpen -> {
             mIsOpen = isOpen;
         });
+
         mImgClose = dialog.findViewById(R.id.imgClose);
         mTvTitle = dialog.findViewById(R.id.tvTitle);
         mTvFinish = dialog.findViewById(R.id.tvFinish);
         mEdContent = dialog.findViewById(R.id.edContent);
         mTvChoose = dialog.findViewById(R.id.tvChoose);
+
 
 
         if (getArguments() != null) {
@@ -74,6 +76,7 @@ public class BaseInputDialog extends BaseDialogFragment {
 
             mEdContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
             mEdContent.setText(mContent);
+            mEdContent.setHint(title);
 
             mTvTitle.setText(title);
             if (mEditInputType != 0) {

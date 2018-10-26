@@ -399,7 +399,7 @@
     <string name="text_all_score">总积分:%1$s</string>
     <string name="text_all_speed">总分速:%1$s m/min</string>
     <string name="text_blood_content">血统:%1$s</string>
-    <string name="text_blood">血统</string>
+    <string name="text_blood">血统填写</string>
     <string name="text_blood_bank">血统库</string>
     <string name="text_foot_number">足环号码</string>
     <string name="text_input_please">请输入</string>

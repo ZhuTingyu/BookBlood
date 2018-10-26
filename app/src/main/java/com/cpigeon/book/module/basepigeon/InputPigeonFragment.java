@@ -61,6 +61,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -264,14 +265,15 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //足环
         mLvRing.setOnRightClickListener(lineInputView -> {
+
             InputSingleFootDialog.show(getFragmentManager(), mLvRing.getContent(), mViewModel.isChina(), dialog -> {
                 SelectFootRingFragment.start(getBaseActivity(), false);
             }, foot -> {
                 mLvRing.setRightText(foot);
                 mViewModel.foot = foot;
                 mViewModel.isCanCommit();
-                setProgressVisible(true);
                 mViewModel.getFootRingState();
+                setProgressVisible(true);
             });
         });
 
@@ -280,6 +282,8 @@ public class InputPigeonFragment extends BaseBookFragment {
 
             if (!StringUtil.isStringValid(mSexType)) {
                 try {
+
+
                     BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Sex), p -> {
                         mLvSex.setRightText(mViewModel.mSelectTypes_Sex.get(p).getTypeName());
                         mViewModel.sexId = mViewModel.mSelectTypes_Sex.get(p).getTypeID();
@@ -435,7 +439,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mTvNextStep.setOnClickListener(v -> {
-            setProgressVisible(true);
+
             if (!StringUtil.isStringValid(mViewModel.pigeonId)) {
                 mViewModel.addPigeon();
             } else {
@@ -473,6 +477,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
+            setProgressVisible(false);
             TextViewUtil.setEnabled(mTvNextStep, aBoolean);
         });
 
@@ -534,7 +539,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             EventBus.getDefault().post(new PigeonAddEvent());
 
             //保证界面只有一个提示
-            setProgressVisible(false);
+           setProgressVisible(false);
             if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
                 getBaseActivity().errorDialog.dismiss();
             }
@@ -564,6 +569,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //性别
         mSelectTypeViewModel.mSelectType_Sex.observe(this, selectTypeEntities -> {
+           setProgressVisible(false);
             mViewModel.mSelectTypes_Sex = selectTypeEntities;
             mViewModel.mSelectTypes_Sex = selectTypeEntities;
             if(StringUtil.isStringValid(mSexType)){
@@ -573,32 +579,38 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //雨色
         mSelectTypeViewModel.mSelectType_FeatherColor.observe(this, selectTypeEntities -> {
+            setProgressVisible(false);
             mViewModel.mSelectTypes_FeatherColor = selectTypeEntities;
         });
 
         //眼沙
         mSelectTypeViewModel.mSelectType_EyeSand.observe(this, selectTypeEntities -> {
+           setProgressVisible(false);
             mViewModel.mSelectTypes_EyeSand = selectTypeEntities;
         });
 
 
         //血统
         mSelectTypeViewModel.mSelectType_Lineage.observe(this, selectTypeEntities -> {
+           setProgressVisible(false);
             mViewModel.mSelectTypes_Lineage = selectTypeEntities;
         });
 
         //状态
         mSelectTypeViewModel.mSelectType_State.observe(this, selectTypeEntities -> {
+            setProgressVisible(false);
             mViewModel.mSelectTypes_State = selectTypeEntities;
         });
 
         //来源
         mSelectTypeViewModel.mSelectType_Pigeon_Source.observe(this, selectTypeEntities -> {
+            setProgressVisible(false);
             mViewModel.mSelectTypes_Source = selectTypeEntities;
         });
 
         //信鸽类型
         mSelectTypeViewModel.mSelectType_PigeonType.observe(this, selectTypeEntities -> {
+           setProgressVisible(false);
             mViewModel.mSelectTypes_PigeonType = selectTypeEntities;
             if (PigeonEntity.ID_BREED_PIGEON.equals(mPigeonType)) {
                 mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(0).getTypeID();
@@ -632,7 +644,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mSelectParentFootRingViewModel.mDataPigeon.observe(this, pigeonEntities -> {
-            setProgressVisible(false);
+           setProgressVisible(false);
 
             if (Lists.isEmpty(pigeonEntities)) {
                 if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
@@ -648,6 +660,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
 
             SelectParentFootRingDialog.show(getFragmentManager(), pigeonEntities, mSelectParentFootRingViewModel.mSexId, pigeonEntity -> {
+                setProgressVisible(false);
                 if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
                     mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
                     mViewModel.footFatherId = pigeonEntity.getFootRingID();
@@ -686,7 +699,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        setProgressVisible(false);
         if (requestCode == CODE_ADD_PLAY) {
             IntentBuilder.Builder()
                     .putExtra(IntentBuilder.KEY_DATA, mViewModel.mPigeonEntity)
@@ -736,7 +749,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             mLvRing.setRightText(entity.getFootRingNum());
             mViewModel.foot = entity.getFootRingNum();
-            setProgressVisible(true);
+            setProgressVisible(false);
             mViewModel.getFootRingState();
         } else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
@@ -755,5 +768,28 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.pigeonMotherStateId = String.valueOf(entity.getStateID());
         }
         mViewModel.isCanCommit();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        setProgressVisible(false);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        setProgressVisible(false);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        setProgressVisible(false);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        setProgressVisible(false);
     }
 }

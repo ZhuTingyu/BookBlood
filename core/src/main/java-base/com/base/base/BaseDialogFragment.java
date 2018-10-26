@@ -57,8 +57,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
         initView(dialog);
 
-
-        initProgressLayout(dialog);
+//        initProgressLayout(dialog);
         getBaseActivity().setProgressVisible(true);
 
 
@@ -121,14 +120,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
         getBaseActivity().error(code, error);
     }
 
-    private void initProgressLayout(Dialog dialog) {
-        mRootView = (ViewGroup)dialog.getWindow().getDecorView();
-        if (progressView == null) {
-            progressView = new LoadingView(getContext());
-        }
-        setProgressVisible(false);
-        mRootView.addView(progressView);
-    }
+//    private void initProgressLayout(Dialog dialog) {
+//        mRootView = (ViewGroup)dialog.getWindow().getDecorView();
+//        if (progressView == null) {
+//            progressView = new LoadingView(getContext());
+//        }
+//        setProgressVisible(false);
+//        mRootView.addView(progressView);
+//    }
 
     /**
      * 加载框
@@ -137,17 +136,21 @@ public abstract class BaseDialogFragment extends DialogFragment {
      */
 
     public void setProgressVisible(boolean isVisible) {
-        if (progressView != null) {
-            progressView.bringToFront();
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-            progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-            progressView.animate().setDuration(shortAnimTime).alpha(
-                    isVisible ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-                }
-            });
+        try {
+            if (progressView != null) {
+                progressView.bringToFront();
+                int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+                progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+                progressView.animate().setDuration(shortAnimTime).alpha(
+                        isVisible ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+                    }
+                });
+            }
+        }catch(Exception ex){
+
         }
     }
 

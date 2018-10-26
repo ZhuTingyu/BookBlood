@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -144,7 +145,6 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             mEdFoot.setVisibility(View.VISIBLE);
         }
 
-
         KeyboardUtils.toggleSoftInput();
 
 
@@ -216,7 +216,9 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         }
 
         mImgClose.setOnClickListener(v -> {
+
             hide();
+            Log.d("songshuaishuai", "initView: xx");
         });
 
         if (!isHaveStandard) {
@@ -307,6 +309,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         inputSingleFootDialog.setArguments(bundle);
         inputSingleFootDialog.setFootNumber(footNumber);
         inputSingleFootDialog.setOnFootStringFinishListener(onFootStringFinishListener);
+
         inputSingleFootDialog.setOnChooseListener(onChooseListener);
         inputSingleFootDialog.show(fragmentManager);
     }
@@ -315,17 +318,24 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         void foots(String foot);
     }
 
+    public interface OnFootStringCancelListener {
+        void cencel();
+    }
     public interface OnChooseListener {
         void choose(InputSingleFootDialog dialog);
     }
 
     private OnFootStringFinishListener mOnFootStringFinishListener;
+    private OnFootStringCancelListener mOnFootStringCancelListene;
     private OnChooseListener mOnChooseListener;
+
 
     public void setOnFootStringFinishListener(OnFootStringFinishListener onFootStringFinishListener) {
         mOnFootStringFinishListener = onFootStringFinishListener;
     }
-
+    public void setOnFootStringCancelListener(OnFootStringCancelListener onFootStringCancelListener) {
+        mOnFootStringCancelListene = onFootStringCancelListener;
+    }
     public void setOnChooseListener(OnChooseListener onChooseListener) {
         mOnChooseListener = onChooseListener;
     }
