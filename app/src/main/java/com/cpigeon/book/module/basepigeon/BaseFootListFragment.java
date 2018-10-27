@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,6 +100,7 @@ public class BaseFootListFragment extends BaseBookFragment {
         initParameter();//初始化请求的参数
 
         mRecyclerView.setRefreshListener(() -> {
+            Log.d("songshuaishuai", "66666: ");
             setProgressVisible(true);
             mAdapter.getData().clear();
             mAdapter.notifyDataSetChanged();

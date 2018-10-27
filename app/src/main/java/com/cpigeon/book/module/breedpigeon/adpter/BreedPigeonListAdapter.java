@@ -3,7 +3,6 @@ package com.cpigeon.book.module.breedpigeon.adpter;
 import android.widget.ImageView;
 
 import com.base.base.BaseViewHolder;
-import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Utils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
@@ -32,9 +31,19 @@ public class BreedPigeonListAdapter extends BasePigeonListAdapter {
 
         ImageView imgSex = helper.getView(R.id.imgSex);
 
-        helper.setText(R.id.tvColor, item.getPigeonPlumeName());
-
+        helper.setText(R.id.tvColor, " "+item.getPigeonPlumeName()+" ");
+if (!item.getPigeonPlumeName().equals(""))
+{
+    helper.setBackgroundRes(R.id.tvColor, R.drawable.textcirclecolor);
+}
         helper.setText(R.id.tvTime, item.getFootRingNum());
+
+        helper.setText(R.id.blood," "+item.getPigeonBloodName()+" ");
+        if (!item.getPigeonPlumeName().equals(""))
+        {
+            helper.setBackgroundRes(R.id.blood, R.drawable.textcircleblood);
+        }
+        helper.setText(R.id.state,item.getStateName());
 
         Glide.with(mContext)
                 .load(item.getCoverPhotoUrl())

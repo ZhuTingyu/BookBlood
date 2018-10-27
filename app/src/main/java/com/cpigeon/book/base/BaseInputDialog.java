@@ -39,7 +39,7 @@ public class BaseInputDialog extends BaseDialogFragment {
     private String mContent;
     private boolean mIsOpen;
 
-    private int maxLength = 10;
+    private int maxLength ;
 
     @Override
     protected int getLayoutRes() {
@@ -71,12 +71,14 @@ public class BaseInputDialog extends BaseDialogFragment {
                 maxLength = getArguments().getInt(IntentBuilder.KEY_DATA_2);//输入文字最大长度
             } catch (Exception e) {
                 e.printStackTrace();
+
             }
 
 
             mEdContent.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
             mEdContent.setText(mContent);
             mEdContent.setHint(title);
+
 
             mTvTitle.setText(title);
             if (mEditInputType != 0) {
@@ -169,14 +171,13 @@ public class BaseInputDialog extends BaseDialogFragment {
             bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
 
         }
-
+        bundle.putInt(IntentBuilder.KEY_DATA_2, 15);
 
         if (StringUtil.isStringValid(content)) {
             bundle.putString(IntentBuilder.KEY_DATA, content);
         } else {
             bundle.putString(IntentBuilder.KEY_DATA, "");
         }
-
 
         dialog.setArguments(bundle);
         dialog.setOnFinishListener(onFinishListener);
@@ -199,7 +200,7 @@ public class BaseInputDialog extends BaseDialogFragment {
 
 
         if (StringUtil.isStringValid(content)) {
-            bundle.putString(IntentBuilder.KEY_DATA, content);
+            bundle.putString(IntentBuilder.KEY_DATA, content+"");
         } else {
             bundle.putString(IntentBuilder.KEY_DATA, "");
         }
@@ -237,6 +238,7 @@ public class BaseInputDialog extends BaseDialogFragment {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(titleId));
         bundle.putString(KEY_CHOOSE_TEXT, Utils.getString(chooseId));
+        bundle.putInt(IntentBuilder.KEY_DATA_2, 15);
         if (editInputType != 0) {
             bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
         }
@@ -246,7 +248,23 @@ public class BaseInputDialog extends BaseDialogFragment {
         dialog.show(fragmentManager);
         return dialog;
     }
-
+    public static BaseInputDialog show(FragmentManager fragmentManager
+            , @StringRes int titleId, @StringRes int chooseId,String Content, int editInputType, OnFinishListener onFinishListener, @Nullable OnChooseClickListener onChooseClickListener) {
+        BaseInputDialog dialog = new BaseInputDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(titleId));
+        bundle.putString(KEY_CHOOSE_TEXT, Utils.getString(chooseId));
+        bundle.putString(IntentBuilder.KEY_DATA, Content);
+        bundle.putInt(IntentBuilder.KEY_DATA_2, 15);
+        if (editInputType != 0) {
+            bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
+        }
+        dialog.setArguments(bundle);
+        dialog.setOnFinishListener(onFinishListener);
+        dialog.setOnChooseClickListener(onChooseClickListener);
+        dialog.show(fragmentManager);
+        return dialog;
+    }
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);

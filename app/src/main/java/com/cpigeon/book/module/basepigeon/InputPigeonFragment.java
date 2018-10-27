@@ -61,7 +61,6 @@ import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -93,7 +92,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     private LineInputView mLvBlood;
     private LineInputView mLvFeatherColor;
     private LineInputView mLvState;
-    private RelativeLayout mRlAddition;
+    private RelativeLayout mRlAddition,parentRlAddition;
     private LineInputView mLvPigeonName;
     private LineInputView mLvFootVice;
     private LineInputView mLvFootSource;
@@ -105,8 +104,10 @@ public class InputPigeonFragment extends BaseBookFragment {
     private LinearLayout mLlImage;
     private RecyclerView mList;
     private TextView mTvNextStep;
+    private ImageView parentImgExpand;
     private ImageView mImgExpand;
     private LineInputListLayout mLlAddition;
+    private LineInputListLayout parentLlAddition;
 
     InputPigeonViewModel mViewModel;
     BookViewModel mBookViewModel;
@@ -119,6 +120,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     ObjectAnimator mOpenAnim;
     ObjectAnimator mCloseAnim;
     boolean mIsAdditionOpen = false;
+    boolean parentIsAdditionOpen =false;
     protected String mSexType;
     protected String mPigeonType;
     private BaseInputDialog mBaseInputDialog;
@@ -236,6 +238,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
     private void setExpandAnim() {
         mLlAddition.setVisibility(View.GONE);
+        parentLlAddition.setVisibility(View.GONE);
 //        ViewWrapper viewWrapper = new ViewWrapper(mLlAddition);
 //        mOpenAnim = ObjectAnimator.ofInt(viewWrapper, "trueWidth", 0
 //                , ScreenTool.dip2px(448)).setDuration(300);
@@ -298,14 +301,27 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //血统
         mLvBlood.setOnRightClickListener(lineInputView -> {
-            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
-                mViewModel.lineage = content;
-                mLvBlood.setRightText(content);
-            }, () -> {
-                SelectBloodFragment.start(getBaseActivity());
-            });
+            if(mLvBlood.getContent().equals(""))
+            {
+                BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
+                    mViewModel.lineage = content;
+                    mLvBlood.setRightText(content);
+                }, () -> {
+                    SelectBloodFragment.start(getBaseActivity());
+                });
+            }
+            else
+            {
+                BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank,mLvBlood.getContent(), 0, content -> {
+                    mViewModel.lineage = content;
+                    mLvBlood.setRightText(content);
+                }, () -> {
+                    SelectBloodFragment.start(getBaseActivity());
+                });
+            }
 
         });
+
 
         mLvFeatherColor.setOnRightClickListener(lineInputView -> {
             mBaseInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
@@ -438,6 +454,17 @@ public class InputPigeonFragment extends BaseBookFragment {
             }
         });
 
+        parentRlAddition.setOnClickListener(v -> {
+            if (parentIsAdditionOpen) {
+                parentImgExpand.setRotation(0);
+                parentLlAddition.setVisibility(View.GONE);
+                parentIsAdditionOpen = false;
+            } else {
+                parentImgExpand.setRotation(180);
+                parentLlAddition.setVisibility(View.VISIBLE);
+                parentIsAdditionOpen = true;
+            }
+        });
         mTvNextStep.setOnClickListener(v -> {
 
             if (!StringUtil.isStringValid(mViewModel.pigeonId)) {
@@ -457,6 +484,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         mLvBlood = findViewById(R.id.lvBlood);
         mLvFeatherColor = findViewById(R.id.lvFeatherColor);
         mLvState = findViewById(R.id.lvState);
+        parentRlAddition=findViewById(R.id.rlAddition2);
         mRlAddition = findViewById(R.id.rlAddition);
         mLvPigeonName = findViewById(R.id.lvPigeonName);
         mLvFootVice = findViewById(R.id.lv_foot_vice);
@@ -470,7 +498,9 @@ public class InputPigeonFragment extends BaseBookFragment {
         mList = findViewById(R.id.list);
         mTvNextStep = findViewById(R.id.tv_next_step);
         mLlAddition = findViewById(R.id.llAddition);
+        parentLlAddition=findViewById(R.id.llAddition2);
         mImgExpand = findViewById(R.id.imgExpand);
+        parentImgExpand=findViewById(R.id.imgExpand2);
     }
 
     @Override

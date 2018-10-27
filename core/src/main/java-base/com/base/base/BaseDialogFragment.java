@@ -58,7 +58,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         initView(dialog);
 
 //        initProgressLayout(dialog);
-        getBaseActivity().setProgressVisible(true);
+//        getBaseActivity().setProgressVisible(true);
 
 
         return dialog;

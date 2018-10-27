@@ -62,7 +62,7 @@
     </string-array>
 
     <string name="text_open_gallery">打开相册</string>
-    <string name="text_open_camera">打开相机</string>
+    <string name="text_open_camera">立即拍照</string>
     <string-array name="array_choose_photo">
         <item>@string/text_open_camera</item>
         <item>@string/text_open_gallery</item>
@@ -444,7 +444,7 @@
     <string name="text_is_user_drug">是否用药</string>
     <string name="text_add_feed_pigeon_record">添加爱鸽管理</string>
     <string name="text_sure_add">确认添加</string>
-    <string name="text_pleas_choose">请填写</string>
+    <string name="text_pleas_choose">请选择</string>
     <string name="text_current_temp">当前温度</string>
     <string name="text_current_wind_angle">当前风向</string>
     <string name="text_current_humidity">当前湿度</string>
@@ -634,6 +634,7 @@
     <string name="text_pigeon_unit">羽</string>
     <string name="text_base_info">基础信息</string>
     <string name="text_addition_info">附加信息</string>
+    <string name="text_partrnt_info">父母信息</string>
     <string name="text_pigeon_type">信鸽类型</string>
     <string name="text_pleas_input_blood">请输入血统</string>
     <string name="text_father_ring_number">父环号</string>

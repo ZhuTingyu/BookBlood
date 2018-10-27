@@ -14,7 +14,8 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/19.
  */
 
-public class SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable {
+public class
+SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable {
 
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_CUSTOM = 1;
