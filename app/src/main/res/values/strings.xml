@@ -100,7 +100,7 @@
 
     <!--繁育信息-->
     <string name="array_pairing_add">添加配对</string>
-    <string name="array_pairing_recommend">推荐配对</string>
+    <string name="array_pairing_recommend">配偶推荐</string>
     <string name="array_blind_date">相亲配对</string>
     <string-array name="text_breeding_info">
         <item>@string/array_pairing_add</item>
@@ -281,6 +281,7 @@
     <string name="text_out_of_date">已过期</string>
     <string name="text_finish">完成</string>
     <string name="text_foot">足环录入</string>
+    <string name="color_blood">请输入</string>
     <string name="text_pleas_input_foot_number">请输入环号</string>
     <string name="text_add_breed_pigeon">添加种鸽</string>
     <string name="text_add_play_pigeon">添加赛鸽</string>
@@ -399,7 +400,7 @@
     <string name="text_all_score">总积分:%1$s</string>
     <string name="text_all_speed">总分速:%1$s m/min</string>
     <string name="text_blood_content">血统:%1$s</string>
-    <string name="text_blood">血统填写</string>
+    <string name="text_blood">血统</string>
     <string name="text_blood_bank">血统库</string>
     <string name="text_foot_number">足环号码</string>
     <string name="text_input_please">请输入</string>

@@ -15,7 +15,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
-import com.cpigeon.book.module.photo.adpter.SelectFootToPhotoAdapter;
+import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.module.photo.viewmodel.PigeonPhotoViewModel;
 import com.cpigeon.book.service.EventBusService;
 
@@ -48,7 +48,7 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
 
         setStartSearchActvity(SearchFootToPhotoActivity.class);//搜索页面
 
-        mAdapter = new SelectFootToPhotoAdapter();
+        mAdapter = new MyHomingPigeonAdapter();
 
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 

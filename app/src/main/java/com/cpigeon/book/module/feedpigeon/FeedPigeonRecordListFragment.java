@@ -8,7 +8,7 @@ import android.view.View;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
-import com.cpigeon.book.module.feedpigeon.adapter.FeedPigeonRecordListAdapter;
+import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
 /**
  * 养鸽记录   足环列表
@@ -43,7 +43,7 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
 
         setStartSearchActvity(SearchFeedPigeonRecordActivity.class);//搜索页面
 
-        mAdapter = new FeedPigeonRecordListAdapter();
+        mAdapter = new MyHomingPigeonAdapter();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);

@@ -17,8 +17,8 @@ import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
+import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
-import com.cpigeon.book.module.play.adapter.PlayFootListAdapter;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
 import com.cpigeon.book.util.KLineManager;
 import com.cpigeon.book.widget.LeagueMarkerView;
@@ -97,7 +97,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
             InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);
         });
 
-        mAdapter = new PlayFootListAdapter();
+        mAdapter = new BreedPigeonListAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);

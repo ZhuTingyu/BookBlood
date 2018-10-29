@@ -306,6 +306,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
                     mViewModel.lineage = content;
                     mLvBlood.setRightText(content);
+                    mViewModel.isCanCommit();
                 }, () -> {
                     SelectBloodFragment.start(getBaseActivity());
                 });
@@ -315,6 +316,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank,mLvBlood.getContent(), 0, content -> {
                     mViewModel.lineage = content;
                     mLvBlood.setRightText(content);
+                    mViewModel.isCanCommit();
                 }, () -> {
                     SelectBloodFragment.start(getBaseActivity());
                 });
@@ -329,6 +331,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                         mBaseInputDialog.hide();
                         mViewModel.featherColor = content;
                         mLvFeatherColor.setRightText(content);
+                        mViewModel.isCanCommit();
                     }, () -> {
                         mBaseInputDialog.hide();
                         if (!Lists.isEmpty(mViewModel.mSelectTypes_FeatherColor)) {

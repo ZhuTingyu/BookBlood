@@ -8,12 +8,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseLetterSelectAdapter;
 import com.base.base.pinyin.LetterSortModel;
 import com.base.util.IntentBuilder;
 import com.base.widget.recyclerview.XRecyclerView;
+import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -94,6 +96,13 @@ class SelectBloodAdapter extends BaseLetterSelectAdapter<SelectTypeEntity, BaseV
     @Override
     protected void convert(BaseViewHolder helper, SelectTypeEntity item) {
         helper.setText(R.id.tvBlood, item.getContent());
+
+        Glide.with(mContext)
+                .load("")
+                .error( R.drawable.ic_img_default)
+                .placeholder(R.drawable.ic_img_default)
+                .fallback( R.drawable.ic_img_default)
+                .into((ImageView) helper.getView(R.id.imgHead));
     }
 }
 

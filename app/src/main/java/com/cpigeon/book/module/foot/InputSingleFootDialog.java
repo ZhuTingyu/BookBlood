@@ -121,14 +121,17 @@ public class InputSingleFootDialog extends BaseDialogFragment {
 
         if (isChina) {
             if (isStandard) {
+
                 mTvSwitch.setText(R.string.text_custom_foot_ring_number);
                 mTvYear.setVisibility(View.VISIBLE);
                 mTvArea.setVisibility(View.VISIBLE);
                 mGpFoot.setVisibility(View.VISIBLE);
                 mEdFoot.setVisibility(View.GONE);
                 mEdFoot.clearFocus();
+
                 mGpFoot.forceInputViewGetFocus();
             } else {
+                mEdFoot.setGravity(Gravity.CENTER);
                 mTvSwitch.setText(R.string.text_standard_foot_ring_number);
                 mTvYear.setVisibility(View.GONE);
                 mTvArea.setVisibility(View.GONE);
@@ -229,6 +232,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     private void switchStatus() {
         if (isStandard) {
             isStandard = false;
+            mEdFoot.setGravity(Gravity.CENTER);
             mTvSwitch.setText(R.string.text_standard_foot_ring_number);
             mTvYear.setVisibility(View.GONE);
             mTvArea.setVisibility(View.GONE);

@@ -102,7 +102,9 @@ public class BaseFootListFragment extends BaseBookFragment {
         mRecyclerView.setRefreshListener(() -> {
             Log.d("songshuaishuai", "66666: ");
             setProgressVisible(true);
+
             mAdapter.getData().clear();
+
             mAdapter.notifyDataSetChanged();
             mBreedPigeonListModel.pi = 1;
             mBreedPigeonListModel.getPigeonList();

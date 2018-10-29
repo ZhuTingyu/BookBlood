@@ -66,6 +66,7 @@
 
     <com.cpigeon.book.widget.gridpasswordview.GridPasswordView
         android:id="@+id/gpFoot"
+        android:gravity="center"
         android:background="@drawable/shape_bg_edit_text_view"
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -147,7 +148,6 @@
         android:maxLength="20"
         android:background="@drawable/shape_bg_edit_text_view"
         android:hint="@string/text_pleas_input_foot_number"
-        android:textColorHint="@color/black"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -1,5 +1,8 @@
 package com.cpigeon.book.module.basepigeon;
 
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -21,5 +24,23 @@ public class BasePigeonListAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
     @Override
     protected void convert(BaseViewHolder helper, PigeonEntity item) {
 
+    }
+    public void  setParams(TextView tv, int Resource)
+    {
+        tv.setPadding(5,2,5,2);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
+        params.height=60;
+        params.setMargins(0,0,10,0);
+        tv.setBackgroundResource(Resource);
+        tv.setLayoutParams(params);
+    }
+    public void  defultParams(TextView tv,int Resource)
+    {
+        tv.setPadding(0,0,0,0);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
+        params.height=60;
+        params.setMargins(0,0,0,0);
+        tv.setBackgroundResource(Resource);
+        tv.setLayoutParams(params);
     }
 }

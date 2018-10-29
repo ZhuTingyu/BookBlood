@@ -20,6 +20,7 @@ import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.utility.KeyboardUtils;
 import com.base.util.utility.StringUtil;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 
 /**
@@ -94,15 +95,21 @@ public class BaseInputDialog extends BaseDialogFragment {
         });
 
         mTvFinish.setOnClickListener(v -> {
-            try {
-                if (mOnFinishListener != null) {
-                    mOnFinishListener.finish(mEdContent.getText().toString());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (mEdContent.getText().toString().equals(""))
+            {
+                ToastUtils.showShort(getActivity(),"请输入"+getArguments().getString(IntentBuilder.KEY_TITLE));
             }
+            else {
+                try {
+                    if (mOnFinishListener != null) {
+                        mOnFinishListener.finish(mEdContent.getText().toString());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-            hide();
+                hide();
+            }
         });
 
         if (mOnChooseListener != null) {

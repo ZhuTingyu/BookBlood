@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,8 @@ import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
-import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 /**
@@ -63,8 +62,13 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_breed_pigeon_input);
         mFamilyTreeView.setOnFamilyClickListener(new FamilyTreeView.OnFamilyClickListener() {
+
             @Override
             public void add(int x, int y) {
+
+
+
+                Log.d("songshuaishuai", "add if: ");
                 if (x == mFamilyTreeView.getStartGeneration()) {
                     SelectPigeonToAddBreedFragment.start(getBaseActivity()
                             , StringUtil.emptyString()
@@ -72,18 +76,22 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                             , CODE_ADD_PIGEON
                             , PigeonEntity.ID_FEMALE, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
                 } else {
+                    Log.d("songshuaishuai", "add else: ");
                     PigeonEntity breedPigeonEntity = null;
                     if (mFamilyTreeView.getSon(x, y) != null) {
+                        Log.d("songshuaishuai", "add: if get son");
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
                     boolean isMan = FamilyTreeView.isMale(y);
                     if (isMan) {
+                        Log.d("songshuaishuai", "add: if is man");
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
                                 , CODE_ADD_PIGEON
                                 , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
                     }else {
+                        Log.d("songshuaishuai", "add: if is man else");
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
@@ -96,6 +104,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             @Override
             public void showInfo(int x, int y, PigeonEntity breedPigeonEntity) {
                 String sex = StringUtil.emptyString();
+                Log.d("songshuaishuai", "add: showinfo");
                 if (x != mFamilyTreeView.getStartGeneration()) {
                     sex = FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE;
                 }

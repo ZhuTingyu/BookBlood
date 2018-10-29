@@ -22,33 +22,43 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
 
     @Override
     protected void convert(BaseViewHolder helper, PigeonEntity item) {
-
-
         ImageView imgSex = helper.getView(R.id.imgSex);
-
-
-        helper.setText(R.id.tvColor, item.getTypeName());
-
-        TextView mPigeonType = helper.getView(R.id.tvColor);
-
+        TextView mPigeonType = helper.getView(R.id.zl);
+        TextView blood = helper.getView(R.id.blood);
+        TextView color = helper.getView(R.id.tvColor);
+        defultParams(mPigeonType,R.drawable.textcircledefult);
+        defultParams(blood,R.drawable.textcircledefult);
+        defultParams(color,R.drawable.textcircledefult);
+        mPigeonType.setTextColor(mContext.getResources().getColor(R.color.white));
         try {
             switch (item.getTypeID()) {
                 case PigeonEntity.ID_BREED_PIGEON:
                     //种鸽
-                    mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_F280FF));
+                    setParams(mPigeonType,R.drawable.textcirclebreed);
                     break;
                 case PigeonEntity.ID_MATCH_PIGEON:
                     //赛鸽
-                    mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_6B994D));
-
+                    setParams(mPigeonType,R.drawable.textcirclematch);
                     break;
                 default:
-                    mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_808080));
+                    mPigeonType.setBackgroundColor(mContext.getResources().getColor(R.color.color_808080));
             }
         } catch (Exception e) {
             mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_808080));
         }
 
+        if (!item.getPigeonPlumeName().trim().equals(""))
+        {
+          setParams(color,R.drawable.textcirclecolor);
+        }
+        if (!item.getPigeonBloodName().trim().equals(""))
+        {
+            setParams(blood,R.drawable.textcircleblood);
+        }
+        helper.setText(R.id.zl, " "+item.getTypeName()+" ");
+        helper.setText(R.id.tvColor, " "+item.getPigeonPlumeName()+" ");
+        helper.setText(R.id.blood," "+item.getPigeonBloodName()+" ");
+        helper.setText(R.id.state,item.getStateName());
         helper.setText(R.id.tvTime, item.getFootRingNum());
 
         Glide.with(mContext)

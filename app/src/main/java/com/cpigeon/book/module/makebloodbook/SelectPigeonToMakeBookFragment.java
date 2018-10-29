@@ -1,7 +1,6 @@
 package com.cpigeon.book.module.makebloodbook;
 
 import android.app.Activity;
-import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +9,9 @@ import android.widget.TextView;
 
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
-
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
 /**
  * 血统书制作  足环列表
@@ -34,7 +33,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         super.initData();
 
         setStartSearchActvity(SearchBreedPigeonToMakeBookActivity.class);//搜索页面
-
+        mAdapter=new MyHomingPigeonAdapter();
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
             try {

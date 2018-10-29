@@ -108,7 +108,8 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setToolbarRight(R.string.text_add, item -> {
+       setToolbarRight(R.string.text_add, item -> {
+
             InputPigeonFragment.start(getBaseActivity()
                     , StringUtil.emptyString()
                     , mSonFootId
@@ -116,8 +117,9 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
                     , mSexType
                     , PigeonEntity.ID_BREED_PIGEON
                     , CODE_ADD_PIGEON);
-            return false;
-        });
+
+          return false;
+       });
     }
 
     @Override
@@ -156,4 +158,6 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
 
 
     }
+
+
 }

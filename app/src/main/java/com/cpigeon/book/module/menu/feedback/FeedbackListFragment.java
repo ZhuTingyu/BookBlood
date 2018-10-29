@@ -78,9 +78,9 @@ public class FeedbackListFragment extends BaseBookFragment {
         setProgressVisible(true);
         mViewModel.getFeedbackList();
 
-        setTitle("意见反馈");
+        setTitle("我的反馈");
 
-        setToolbarRight("反馈", item -> {
+        setToolbarRight("提交反馈", item -> {
             FeedbackAddFragment.start(getActivity());
             return true;
         });

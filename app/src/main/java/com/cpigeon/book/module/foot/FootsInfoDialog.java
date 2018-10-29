@@ -1,11 +1,9 @@
 package com.cpigeon.book.module.foot;
 
 import android.app.Dialog;
-import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +54,7 @@ public class FootsInfoDialog extends BaseDialogFragment {
         mTvArea = dialog.findViewById(R.id.tvArea);
         mGpSFoot = dialog.findViewById(R.id.gpSFoot);
         mGpEFoot = dialog.findViewById(R.id.gpEFoot);
+
         getYears();
         getAreas();
 
