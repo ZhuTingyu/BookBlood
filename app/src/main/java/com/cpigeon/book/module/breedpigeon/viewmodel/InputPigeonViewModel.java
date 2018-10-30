@@ -1,17 +1,16 @@
 package com.cpigeon.book.module.breedpigeon.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.base.http.ApiResponse;
 import com.base.http.HttpErrorException;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
-import com.cpigeon.book.model.RacingPigeonModel;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.FootRingStateEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -115,9 +114,16 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     }
 
     public void isCanCommit() {
+        Log.d("songshuaishuai", "isCanCommit: "+foot);
         isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId);
     }
-
+    public void isFatherCanCommit() {
+        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footFather,pigeonFatherStateId);
+        Log.e("songshuaishuai", "isFatherCanCommit: "+footFather );
+    }
+    public void isMotherCanCommit() {
+        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footMother,pigeonMotherStateId);
+    }
     public boolean isHavePigeonInfo() {
         return mPigeonEntity != null && StringUtil.isStringValid(mPigeonEntity.getPigeonID());
     }

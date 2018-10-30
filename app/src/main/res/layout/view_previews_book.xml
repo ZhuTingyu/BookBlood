@@ -3,17 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlImage"
-    android:background="@color/white"
     android:layout_width="2480px"
     android:layout_height="3508px"
     android:visibility="invisible">
-
-    <ImageView
-        app:srcCompat="@drawable/svg_blood_book_water"
-        android:layout_width="2480px"
-        android:rotation="45"
-        android:layout_centerInParent="true"
-        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/llPrintImage"

@@ -12,15 +12,11 @@ import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
-import com.base.util.utility.StringUtil;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.FootEntity;
-import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.module.foot.SearchFootActivity;
 import com.cpigeon.book.module.select.adpter.SelectFootRingAdapter;
 import com.cpigeon.book.module.select.viewmodel.SelectFootRingViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -118,6 +114,7 @@ public class SelectFootRingFragment extends BaseBookFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
+
             FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
             IntentBuilder.Builder()
                     .putExtra(IntentBuilder.KEY_DATA, entity)

@@ -2,7 +2,6 @@ package com.cpigeon.book.module.breedpigeon.viewmodel;
 
 import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
@@ -32,7 +31,6 @@ public class BookViewModel extends BaseViewModel {
     public MutableLiveData<BloodBookEntity> mBookLiveData = new MutableLiveData<>();
     public MutableLiveData<String> mDataAddParentR = new MutableLiveData<>();
     public String pUid = UserModel.getInstance().getUserId();
-
     public BookViewModel(Activity activity) {
         foodId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA);
         pigeonId = activity.getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
@@ -41,10 +39,10 @@ public class BookViewModel extends BaseViewModel {
             pUid = uid;
         }
     }
+public BookViewModel()
+{
 
-    public BookViewModel() {}
-
-
+}
     //获取 血统书  四代
     public void getBloodBook() {
         submitRequestThrowError(BloodBookModel.getBloodBook4(pUid, foodId, pigeonId, isNeedMatch, isGoodPigeon), r -> {
@@ -57,7 +55,7 @@ public class BookViewModel extends BaseViewModel {
     public void addBloodnum() {
         submitRequestThrowError(BloodBookModel.addBloodNum(), r -> {
             if (r.isOk()) {
-                Log.d("songshuaishuai", "接口: ");
+
             } else throw new HttpErrorException(r);
         });
     }

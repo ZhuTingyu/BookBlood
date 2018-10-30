@@ -41,10 +41,10 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
                     setParams(mPigeonType,R.drawable.textcirclematch);
                     break;
                 default:
-                    mPigeonType.setBackgroundColor(mContext.getResources().getColor(R.color.color_808080));
+                    setParams(mPigeonType,R.drawable.textcirclechild);
             }
         } catch (Exception e) {
-            mPigeonType.setTextColor(mContext.getResources().getColor(R.color.color_808080));
+            defultParams(color,R.drawable.textcircledefult);
         }
 
         if (!item.getPigeonPlumeName().trim().equals(""))
