@@ -238,11 +238,15 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             if (footEntity != null) {
                 lvCity.setRightText(footEntity.getFootCodeName());
                 mViewModel.countryId = String.valueOf(footEntity.getFootCodeID());
+                mViewModel.footNumber=footEntity.getFootRingNum();
                 lvFoot.setRightText(footEntity.getFootRingNum());//足环号
+                mViewModel.footType = String.valueOf(footEntity.getTypeID());
                 lvCategory.setRightText(footEntity.getTypeName());//类别
+                mViewModel.footSource=footEntity.getSourceName();
                 lvSource.setRightText(footEntity.getSourceName());//来源
                 lvStatus.setRightText(footEntity.getStateName());
                 mViewModel.footType = String.valueOf(footEntity.getTypeID());
+                mViewModel.remark=footEntity.getRemark();
                 lvMoney.setRightText(Utils.getString(R.string.text_yuan, footEntity.getFootRingMoney()));//金额
                 mLvFatherFoot.setRightText(footEntity.getMenFootRingNum());
                 mLvMotherFoot.setRightText(footEntity.getWoFootRingNum());

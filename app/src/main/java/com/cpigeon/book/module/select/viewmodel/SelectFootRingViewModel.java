@@ -5,8 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.FootAdminModel;
-import com.cpigeon.book.model.entity.FootEntity;
-import com.haibin.calendarview.BaseView;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 import java.util.List;
 
@@ -22,10 +21,10 @@ public class SelectFootRingViewModel extends BaseViewModel {
     public String sexId;
     public String staterId;
 
-    public MutableLiveData<List<FootEntity>> mDataFootList = new MutableLiveData<>();
+    public MutableLiveData<List<PigeonEntity>> mDataFootList = new MutableLiveData<>();
 
     public void getFootList() {
-        submitRequestThrowError(FootAdminModel.getFootList(pi,
+        submitRequestThrowError(FootAdminModel.getFootList2(pi,
                 ps,
                 footNumber,
                 sexId,

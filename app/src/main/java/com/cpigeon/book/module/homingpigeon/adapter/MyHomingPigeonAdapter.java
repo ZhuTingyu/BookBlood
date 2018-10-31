@@ -20,6 +20,7 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
         super(R.layout.item_breed_pigeon_list, null);
     }
 
+
     @Override
     protected void convert(BaseViewHolder helper, PigeonEntity item) {
         ImageView imgSex = helper.getView(R.id.imgSex);

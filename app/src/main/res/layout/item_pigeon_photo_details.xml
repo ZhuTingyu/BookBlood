@@ -2,76 +2,103 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingLeft="12dp"
-    android:paddingRight="12dp"
-    android:paddingBottom="10dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_z"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <android.support.constraint.Guideline
+
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.2" />
             <android.support.constraint.Guideline
                 android:id="@+id/guideline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.78" />
+                app:layout_constraintGuide_percent="0.75" />
 
             <ImageView
+
                 android:id="@+id/img"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/guideline6"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@mipmap/about_logo" />
-
+            <TextView
+                android:id="@+id/bfbfbf"
+                android:background="@drawable/photobackground"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:orientation="horizontal">
+            </TextView>
             <TextView
                 android:id="@+id/tvColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
                 android:text="TextView"
-                android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline6" />
-
+                android:textColor="@color/color_53"
+                android:textSize="15sp"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintBottom_toBottomOf="@+id/bfbfbf"
+                app:layout_constraintLeft_toLeftOf="@+id/bfbfbf"
+                app:layout_constraintRight_toRightOf="@+id/bfbfbf"
+                app:layout_constraintTop_toTopOf="@+id/bfbfbf" />
+            <TextView
+                android:id="@+id/tvtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@color/color_53"
+                android:textSize="15sp"
+                app:layout_constraintHorizontal_bias="0.7"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintBottom_toBottomOf="@+id/bfbfbf"
+                app:layout_constraintLeft_toLeftOf="@+id/bfbfbf"
+                app:layout_constraintRight_toRightOf="@+id/bfbfbf"
+                app:layout_constraintTop_toTopOf="@+id/bfbfbf" />
             <TextView
                 android:id="@+id/tvNumberAndTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/medium_text_size"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:text="足环号和时间"
+                android:textColor="@color/color_0080FF"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/bfbfbf"
+                app:layout_constraintLeft_toLeftOf="@+id/bfbfbf"
+                app:layout_constraintRight_toRightOf="@+id/bfbfbf"
+                app:layout_constraintTop_toTopOf="@+id/bfbfbf"
+                app:layout_constraintVertical_bias="0.25" />
 
-            <View
-                android:id="@+id/view4"
-                android:layout_width="8dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="3dp"
-                android:background="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/tvNumberAndTime"
-                app:layout_constraintStart_toStartOf="@+id/tvColor"
-                app:layout_constraintTop_toBottomOf="@+id/tvColor" />
         </android.support.constraint.ConstraintLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>
 
 

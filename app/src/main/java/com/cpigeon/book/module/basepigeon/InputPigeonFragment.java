@@ -271,9 +271,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         //足环
         mLvRing.setOnRightClickListener(lineInputView -> {
 
-            InputSingleFootDialog.show(getFragmentManager(), mLvRing.getContent(), mViewModel.isChina(), dialog -> {
-                SelectFootRingFragment.start(getBaseActivity(), false);
-            }, foot -> {
+            InputSingleFootDialog.show(getFragmentManager(), mLvRing.getContent(), mViewModel.isChina(), null, foot -> {
                 mLvRing.setRightText(foot);
                 mViewModel.foot = foot;
                 mViewModel.isCanCommit();
@@ -389,6 +387,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     public void onOptionPicked(int index, String item) {
                         mViewModel.pigeonMotherStateId = mViewModel.mSelectTypes_State.get(index).getTypeID();
                         mLvMotherFootState.setContent(mViewModel.mSelectTypes_State.get(index).getTypeName());
+                        mViewModel.isMotherCanCommit();
                     }
                 });
             } catch (Exception e) {
@@ -826,17 +825,18 @@ public class InputPigeonFragment extends BaseBookFragment {
             setProgressVisible(false);
             mViewModel.getFootRingState();
         } else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
-            FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             mLvFatherFoot.setRightText(entity.getFootRingNum());
             mLvFatherFootState.setRightText(entity.getStateName());
+            mLvFatherFootState.setClickable(false);
+            mLvFatherFootState.setRightColor(R.color.gray);
             mViewModel.footFather = entity.getFootRingNum();
             mViewModel.footFatherId = String.valueOf(entity.getFootRingID());
             mViewModel.pigeonFatherId = entity.getPigeonID();
             mViewModel.pigeonFatherStateId = String.valueOf(entity.getStateID());
         } else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
-            FootEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             mLvMotherFoot.setRightText(entity.getFootRingNum());
-            mLvMotherFootState.setRightText(entity.getStateName());
             mViewModel.footMother = entity.getFootRingNum();
             mViewModel.footMotherId = String.valueOf(entity.getFootRingID());
             mViewModel.pigeonMotherId = entity.getPigeonID();

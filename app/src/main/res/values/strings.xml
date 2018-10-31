@@ -286,6 +286,7 @@
     <string name="text_add_breed_pigeon">添加种鸽</string>
     <string name="text_add_play_pigeon">添加赛鸽</string>
     <string name="text_go_choose">去选择</string>
+    <string name="text_breed">种鸽库</string>
     <string name="text_foot_input_price">足环金额录入</string>
     <string name="text_pleas_input_pigeon_name">请输入鸽子名称</string>
     <string name="text_pigeon_name">鸽名</string>
@@ -446,6 +447,7 @@
     <string name="text_add_feed_pigeon_record">添加爱鸽管理</string>
     <string name="text_sure_add">确认添加</string>
     <string name="text_pleas_choose">请选择</string>
+    <string name="text_pleas_addinput">请填写</string>
     <string name="text_current_temp">当前温度</string>
     <string name="text_current_wind_angle">当前风向</string>
     <string name="text_current_humidity">当前湿度</string>

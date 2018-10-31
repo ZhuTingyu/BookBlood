@@ -17,11 +17,9 @@ import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PictureSelectUtil;
 import com.base.util.PopWindowBuilder;
-import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.glide.GlideUtil;
 import com.base.util.picker.PickerUtil;
-import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -35,8 +33,6 @@ import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
 import com.cpigeon.book.widget.mydialog.ViewControlShare;
 import com.cpigeon.book.widget.mzbanner.MZBannerView;
 import com.cpigeon.book.widget.mzbanner.holder.MZViewHolder;
-import com.hitomi.cslibrary.CrazyShadow;
-import com.hitomi.cslibrary.base.CrazyShadowDirection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +51,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
     private SimpleTitleView mSTvSetFace;//设为封面
     private SimpleTitleView mSTvDelete;
     private SimpleTitleView sTvShare;
-
+public static String RingNum;
     PigeonPhotoDetailsViewModel mViewModel;
     SelectTypeViewModel mTypeViewModel;
     int typePosition = 0;
@@ -103,8 +99,8 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
 
         position = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA_3, 0);
 
-        setTitle(mViewModel.mPigeonEntity.getFootRingNum());
-
+        setTitle("信鸽相册");
+        RingNum=mViewModel.mPigeonEntity.getFootRingNum();
         mBanner = findViewById(R.id.banner);
         mSTvMove = findViewById(R.id.sTvMove);
         mSTvSetFace = findViewById(R.id.sTvSetFace);
@@ -121,6 +117,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         mBanner.setPages(mViewModel.mPigeonPhotoData, () -> {
             return new BannerViewHolder();
         });
+        mBanner.setIndicatorPadding(0,0,0,0);
 
         mBanner.getAdapter().setPageClickListener((view1, position1) -> {
             PictureSelectUtil.showImagePhoto(getBaseActivity(), view1.findViewById(R.id.img), Lists.newArrayList(mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPhotoUrl()), 0);
@@ -284,7 +281,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
 class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
 
     private ImageView mImg;
-    private TextView mTvColor;
+    private TextView mTvColor,mTvTime;
     private TextView mTvNumberAndTime;
 
 
@@ -293,17 +290,8 @@ class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
         View view = LayoutInflater.from(context).inflate(R.layout.item_pigeon_photo_details, null);
         mImg = view.findViewById(R.id.img);
         mTvColor = view.findViewById(R.id.tvColor);
+        mTvTime=view.findViewById(R.id.tvtime);
         mTvNumberAndTime = view.findViewById(R.id.tvNumberAndTime);
-
-        new CrazyShadow.Builder()
-                .setContext(context)
-                .setBaseShadowColor(Utils.getColor(R.color.gray))
-                .setDirection(CrazyShadowDirection.RIGHT_BOTTOM_LEFT)
-                .setShadowRadius(ScreenTool.dip2px(7))
-                .setCorner(ScreenTool.dip2px(0))
-                .setBackground(Utils.getColor(R.color.white))
-                .setImpl(CrazyShadow.IMPL_DRAW)
-                .action(view.findViewById(R.id.llRoot));
 
         return view;
     }
@@ -312,11 +300,14 @@ class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
     public void onBind(Context context, int position, PigeonPhotoEntity data) {
         // 数据绑定
         GlideUtil.setGlideImageView(context, data.getPhotoUrl(), mImg);
+        String str = data.getAddTime();
+
         //图片类型
         mTvColor.setText(data.getTypeName());
         //时间
-        mTvNumberAndTime.setText(data.getAddTime());
 
+        mTvNumberAndTime.setText(PigeonPhotoDetailsFragment.RingNum);
+        mTvTime.setText( str.substring(0, str.indexOf(" ")));
 
     }
 }

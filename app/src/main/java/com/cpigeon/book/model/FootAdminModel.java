@@ -5,12 +5,12 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.FootRingStatEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.HEAD;
 
 /**
  * Created by Administrator on 2018/8/7.
@@ -181,5 +181,20 @@ public class FootAdminModel {
                 .addBody("stateid", staterId)
                 .request();
     }
-
+    public static Observable<ApiResponse<List<PigeonEntity>>> getFootList2(
+            int pi,
+            int ps,
+            String footNumber,
+            String sexId,
+            String staterId
+    ) {
+        return RequestData.<ApiResponse<List<PigeonEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
+                }.getType())
+                .url(R.string.pigeon_breed_sift)
+                .addBody("pi", String.valueOf(pi))
+                .addBody("ps", String.valueOf(20))
+                .addBody("sexid", sexId)
+                .request();
+    }
 }
