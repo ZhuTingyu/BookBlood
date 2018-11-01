@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.utility.LogUtil;
+import com.base.util.utility.ToastUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -44,7 +45,6 @@ public class BaseFootListFragment extends BaseBookFragment {
     protected TextView mTvOk;
     @BindView(R.id.view_placeholder)
     protected View view_placeholder;
-
     protected BasePigeonListAdapter mAdapter;
     protected SelectTypeViewModel mSelectTypeViewModel;
 
@@ -102,9 +102,7 @@ public class BaseFootListFragment extends BaseBookFragment {
         mRecyclerView.setRefreshListener(() -> {
             Log.d("songshuaishuai", "66666: ");
             setProgressVisible(true);
-
             mAdapter.getData().clear();
-
             mAdapter.notifyDataSetChanged();
             mBreedPigeonListModel.pi = 1;
             mBreedPigeonListModel.getPigeonList();
@@ -319,7 +317,6 @@ public class BaseFootListFragment extends BaseBookFragment {
 
     @Override
     protected void initObserve() {
-
         mSelectTypeViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
             List<String> titles = Lists.newArrayList(Utils.getString(R.string.text_sex)
                     , Utils.getString(R.string.text_pigeon_status), Utils.getString(R.string.text_pigeon_blood));
@@ -346,6 +343,13 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         mBreedPigeonListModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
+        });
+        mBreedPigeonListModel.listDeleteMessage.observe(this, s -> {
+            mAdapter.getData().clear();
+            mAdapter.notifyDataSetChanged();
+            mBreedPigeonListModel.pi=1;
+            mBreedPigeonListModel.getPigeonList();
+            ToastUtils.showLong(getBaseActivity(),s);
         });
     }
 

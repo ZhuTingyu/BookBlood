@@ -301,18 +301,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //血统
         mLvBlood.setOnRightClickListener(lineInputView -> {
-            if(mLvBlood.getContent().equals(""))
-            {
-                BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
-                    mViewModel.lineage = content;
-                    mLvBlood.setRightText(content);
-                    mViewModel.isCanCommit();
-                }, () -> {
-                    SelectBloodFragment.start(getBaseActivity());
-                });
-            }
-            else
-            {
+
                 BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank,mLvBlood.getContent(), 0, content -> {
                     mViewModel.lineage = content;
                     mLvBlood.setRightText(content);
@@ -320,14 +309,14 @@ public class InputPigeonFragment extends BaseBookFragment {
                 }, () -> {
                     SelectBloodFragment.start(getBaseActivity());
                 });
-            }
+
 
         });
 
 
         mLvFeatherColor.setOnRightClickListener(lineInputView -> {
             mBaseInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.text_feather_color, mLvFeatherColor.getContent(), 0, content -> {
+                    , R.string.text_feather_color,R.string.text_feather_color_bank, mLvFeatherColor.getContent(), 0, content -> {
                         mBaseInputDialog.hide();
                         mViewModel.featherColor = content;
                         mLvFeatherColor.setRightText(content);
@@ -506,6 +495,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         mTvNextStep.setOnClickListener(v -> {
 
             if (!StringUtil.isStringValid(mViewModel.pigeonId)) {
+                setProgressVisible(true);
                 mViewModel.addPigeon();
             } else {
                 mViewModel.modifyBreedPigeonEntry();
@@ -603,7 +593,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //种鸽录入、修改
         mViewModel.mDataPigeon.observe(this, datas -> {
-
+        setProgressVisible(false);
             PigeonEntity o = datas.data;
 
             EventBus.getDefault().post(new PigeonAddEvent());
@@ -792,10 +782,12 @@ public class InputPigeonFragment extends BaseBookFragment {
                 CountyEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
                 mViewModel.countryId = entity.getFootCodeID();
                 mLvCountries.setRightText(entity.getCode());
+                mLvRing.setRightText(StringUtil.emptyString());
             } catch (Exception e) {
                 CountyAreaEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
                 mViewModel.countryId = entity.getFootCodeID();
                 mLvCountries.setRightText(entity.getCode());
+                mLvRing.setRightText(StringUtil.emptyString());
             }
         } else if (requestCode == ImgUploadFragment.CODE_SELECT_COUNTY) {
             ImgTypeEntity mImgTypeEntity = (ImgTypeEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
@@ -834,33 +826,22 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.footFatherId = String.valueOf(entity.getFootRingID());
             mViewModel.pigeonFatherId = entity.getPigeonID();
             mViewModel.pigeonFatherStateId = String.valueOf(entity.getStateID());
+            mViewModel.isFatherCanCommit();
+            mViewModel.isMotherCanCommit();
         } else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
             PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             mLvMotherFoot.setRightText(entity.getFootRingNum());
+            mLvMotherFootState.setRightText(entity.getStateName());
             mViewModel.footMother = entity.getFootRingNum();
             mViewModel.footMotherId = String.valueOf(entity.getFootRingID());
             mViewModel.pigeonMotherId = entity.getPigeonID();
             mViewModel.pigeonMotherStateId = String.valueOf(entity.getStateID());
+            mViewModel.isFatherCanCommit();
+            mViewModel.isMotherCanCommit();
         }
         mViewModel.isCanCommit();
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        setProgressVisible(false);
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        setProgressVisible(false);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        setProgressVisible(false);
-    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {

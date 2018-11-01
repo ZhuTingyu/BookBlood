@@ -36,9 +36,10 @@
         >
 
         <LinearLayout
-            android:background="#73000000"
-            android:layout_width="60dp"
-            android:layout_height="240dp"
+
+            android:background="@drawable/phototab"
+            android:layout_width="48dp"
+            android:layout_height="288dp"
             android:orientation="vertical">
 
             <com.cpigeon.book.widget.SimpleTitleView
@@ -46,6 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                app:simpleTitleView_PressTextColor="@color/white"
+                app:simpleTitleView_DefaultTextColor="@color/white"
                 app:simpleTitleView_image="@mipmap/ic_photo_details_share"
                 app:simpleTitleView_text="@string/text_share" />
 
@@ -55,6 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                app:simpleTitleView_PressTextColor="@color/white"
+                app:simpleTitleView_DefaultTextColor="@color/white"
                 app:simpleTitleView_image="@mipmap/ic_photo_details_move"
                 app:simpleTitleView_text="@string/text_move" />
 
@@ -63,6 +68,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                app:simpleTitleView_PressTextColor="@color/white"
+                app:simpleTitleView_DefaultTextColor="@color/white"
                 app:simpleTitleView_image="@mipmap/ic_photo_details_set_face"
                 app:simpleTitleView_text="@string/text_set_face" />
 
@@ -71,6 +78,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                app:simpleTitleView_PressTextColor="@color/white"
+                app:simpleTitleView_DefaultTextColor="@color/white"
                 app:simpleTitleView_image="@mipmap/ic_photo_details_delete"
                 app:simpleTitleView_text="@string/text_delete" />
 

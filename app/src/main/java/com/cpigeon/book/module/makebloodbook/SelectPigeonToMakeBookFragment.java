@@ -11,6 +11,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
 /**
@@ -33,7 +34,13 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         super.initData();
 
         setStartSearchActvity(SearchBreedPigeonToMakeBookActivity.class);//搜索页面
-        mAdapter=new MyHomingPigeonAdapter();
+        mAdapter=new MyHomingPigeonAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
 
             try {

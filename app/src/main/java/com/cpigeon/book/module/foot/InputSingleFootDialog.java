@@ -46,6 +46,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     private TextView mTvChoose;
     private EditText mEdFoot;
     private boolean isStandard = true;
+    private boolean isStandard2=false;
     private boolean isHaveStandard = true;
     List<String> years = Lists.newArrayList();
     List<String> area = Lists.newArrayList();
@@ -67,7 +68,6 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         KeyboardUtils.registerSoftInputChangedListener(getActivity(), isOpen -> {
             mKeyboardIsOpen = isOpen;
         });
-
         mImgClose = dialog.findViewById(R.id.imgClose);
         mTvFinish = dialog.findViewById(R.id.tvFinish);
         mGpFoot = dialog.findViewById(R.id.gpFoot);
@@ -76,6 +76,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         mTvSwitch = dialog.findViewById(R.id.tvSwitch);
         mTvChoose = dialog.findViewById(R.id.tvChoose);
         mEdFoot = dialog.findViewById(R.id.edFoot);
+        mEdFoot.setGravity(Gravity.CENTER);
 
         getYears();
         getAreas();
@@ -112,6 +113,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             }
         } else {
             isStandard = false;
+            isStandard2=true;
             if (!Lists.isEmpty(foots)) {
                 mTvYear.setText(foots.get(0));
                 mEdFoot.setText(foots.get(1));
@@ -131,7 +133,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
 
                 mGpFoot.forceInputViewGetFocus();
             } else {
-                mEdFoot.setGravity(Gravity.CENTER);
+
                 mTvSwitch.setText(R.string.text_standard_foot_ring_number);
                 mTvYear.setVisibility(View.GONE);
                 mTvArea.setVisibility(View.GONE);
@@ -141,7 +143,8 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                 mEdFoot.requestFocus();
             }
         } else {
-            mTvSwitch.setVisibility(View.GONE);
+            mTvSwitch.setVisibility(View.VISIBLE);
+            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
             mTvYear.setVisibility(View.VISIBLE);
             mTvArea.setVisibility(View.GONE);
             mGpFoot.setVisibility(View.GONE);
@@ -194,13 +197,25 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                             ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
                         }
                     } else {
-                        if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
-                            mOnFootStringFinishListener.foots(Utils.getString(R.string.text_standard_foot_2
-                                    , mTvYear.getText().toString()
-                                    , mEdFoot.getText().toString()));
-                            hide();
-                        } else {
-                            ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                        if (isStandard2)
+                        {
+                            if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
+                                mOnFootStringFinishListener.foots(Utils.getString(R.string.text_standard_foot_2
+                                        , mTvYear.getText().toString()
+                                        , mEdFoot.getText().toString()));
+                                hide();
+                            } else {
+                                ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                            }
+                    }
+                    else
+                        {
+                            if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
+                                mOnFootStringFinishListener.foots(mEdFoot.getText().toString());
+                                hide();
+                            } else {
+                                ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                            }
                         }
                     }
 
@@ -230,28 +245,52 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     }
 
     private void switchStatus() {
-        if (isStandard) {
-            isStandard = false;
-            mEdFoot.setGravity(Gravity.CENTER);
-            mTvSwitch.setText(R.string.text_standard_foot_ring_number);
-            mTvYear.setVisibility(View.GONE);
-            mTvArea.setVisibility(View.GONE);
-            mGpFoot.setVisibility(View.GONE);
-            mEdFoot.setVisibility(View.VISIBLE);
-            mGpFoot.clearFocus();
-            mEdFoot.requestFocus();
-            KeyboardUtils.showSoftInput(getActivity());
-        } else {
-            isStandard = true;
-            mTvSwitch.setText(R.string.text_custom_foot_ring_number);
-            mTvYear.setVisibility(View.VISIBLE);
-            mTvArea.setVisibility(View.VISIBLE);
-            mGpFoot.setVisibility(View.VISIBLE);
-            mEdFoot.setVisibility(View.GONE);
-            mEdFoot.clearFocus();
-            mGpFoot.forceInputViewGetFocus();
-        }
+        if(isChina) {
+            if (isStandard) {
+                isStandard = false;
+                mEdFoot.setGravity(Gravity.CENTER);
+                mTvSwitch.setText(R.string.text_standard_foot_ring_number);
+                mTvYear.setVisibility(View.GONE);
+                mTvArea.setVisibility(View.GONE);
+                mGpFoot.setVisibility(View.GONE);
+                mEdFoot.setVisibility(View.VISIBLE);
 
+                mGpFoot.clearFocus();
+                mEdFoot.requestFocus();
+                KeyboardUtils.showSoftInput(getActivity());
+            } else {
+                isStandard = true;
+                mTvSwitch.setText(R.string.text_custom_foot_ring_number);
+                mTvYear.setVisibility(View.VISIBLE);
+                mTvArea.setVisibility(View.VISIBLE);
+                mGpFoot.setVisibility(View.VISIBLE);
+                mEdFoot.setVisibility(View.GONE);
+                mEdFoot.clearFocus();
+                mGpFoot.forceInputViewGetFocus();
+            }
+        }
+        else
+        {
+            if (isStandard2) {
+                mEdFoot.setText(StringUtil.emptyString());
+                isStandard2 = false;
+                mTvSwitch.setText(R.string.text_standard_foot_ring_number);
+                mTvYear.setVisibility(View.GONE);
+                mTvArea.setVisibility(View.GONE);
+                mGpFoot.clearFocus();
+                mEdFoot.requestFocus();
+                KeyboardUtils.showSoftInput(getActivity());
+            } else {
+                mEdFoot.setText(StringUtil.emptyString());
+                isStandard2= true;
+                mTvSwitch.setText(R.string.text_custom_foot_ring_number);
+                mTvYear.setVisibility(View.VISIBLE);
+                mTvArea.setVisibility(View.GONE);
+                mGpFoot.setVisibility(View.GONE);
+                mEdFoot.clearFocus();
+                //mGpFoot.forceInputViewGetFocus();
+            }
+        }
     }
 
     private void getYears() {

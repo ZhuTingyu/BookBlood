@@ -7,6 +7,7 @@ import android.view.View;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
 
@@ -33,7 +34,13 @@ public class BreedingFootListFragment extends BaseFootListFragment {
 //            //搜索
 //            BaseSearchActivity.start(getBaseActivity(), .class, null);
 //        });
-    mAdapter=new MyHomingPigeonAdapter();
+    mAdapter=new MyHomingPigeonAdapter(new OnDeleteListener() {
+        @Override
+        public void delete(String PigeonId) {
+            mBreedPigeonListModel.id=PigeonId;
+            mBreedPigeonListModel.deletePigeon();
+        }
+    });
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);

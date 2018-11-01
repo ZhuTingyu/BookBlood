@@ -17,7 +17,13 @@ public class SearchMyHomingActivity extends BaseSearchPigeonActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new MyHomingPigeonAdapter();
+        mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
             BreedPigeonDetailsFragment.start(getBaseActivity(),

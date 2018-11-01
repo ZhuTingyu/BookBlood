@@ -285,5 +285,13 @@ public class BreedPigeonModel {
                 .addBody("sexid", sexId)
                 .request();
     }
+    public static Observable<ApiResponse<String>> deletePigeon(String PigeonId) {
+        return RequestData.<ApiResponse<String>>build()
+                .setToJsonType(new TypeToken<ApiResponse<String>>() {
+                }.getType())
+                .url(R.string.TXGP_Pigeon_Delete)
+                .addBody("pigeonid", PigeonId)
+                .request();
+    }
 
 }

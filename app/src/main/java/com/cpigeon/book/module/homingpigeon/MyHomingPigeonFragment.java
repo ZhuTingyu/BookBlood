@@ -15,12 +15,14 @@ import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
  * Created by Administrator on 2018/10/8 0008.
  */
 
-public class MyHomingPigeonFragment extends BaseFootListFragment {
+public class MyHomingPigeonFragment extends BaseFootListFragment  {
+
 
     public static void start(Activity activity) {
-
+        Bundle bundle = new Bundle();
+        bundle.putString(BaseFootListFragment.STATEID, PigeonEntity.ID_ALL);
         SearchFragmentParentActivity.
-                start(activity, MyHomingPigeonFragment.class, true, null);
+                start(activity, MyHomingPigeonFragment.class, true, bundle);
     }
 
     @Override
@@ -33,8 +35,13 @@ public class MyHomingPigeonFragment extends BaseFootListFragment {
         super.initData();
 
         setStartSearchActvity(SearchMyHomingActivity.class);//搜索页面
-
-        mAdapter = new MyHomingPigeonAdapter();
+        mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
@@ -45,6 +52,7 @@ public class MyHomingPigeonFragment extends BaseFootListFragment {
                 e.printStackTrace();
             }
         });
+
     }
 
     @Override

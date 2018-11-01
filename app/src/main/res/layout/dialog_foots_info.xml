@@ -80,6 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvYear" />
 
     <TextView
+
         android:id="@+id/tvYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,6 +92,7 @@
         android:padding="5dp"
         android:text="TextView"
         android:textSize="@dimen/medium_text_size"
+
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
 

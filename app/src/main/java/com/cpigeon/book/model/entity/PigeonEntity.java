@@ -23,7 +23,7 @@ public class PigeonEntity implements Serializable {
     public static final String ID_BREED_PIGEON = "9";//种鸽
     public static final String ID_MATCH_PIGEON = "10";//赛鸽
     public static final String ID_YOUNG_PIGEON = "10";
-
+    public static final String ID_ALL = "35,36";
     public static final String BIT_MATCH = "0"; //是否返回赛绩（0，不返回）
     public static final String BIT_MATCH_NO = "1"; //是否返回赛绩（1，返回）
 

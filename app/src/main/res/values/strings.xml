@@ -295,6 +295,7 @@
 
     <string name="text_pigeon_lineage">血统添加</string>
     <string name="text_feather_color">羽色</string>
+    <string name="text_feather_color_bank">羽色库</string>
     <string name="text_eye_sand">眼砂</string>
     <string name="text_feather">羽色:%1$s</string>
     <string name="text_feather_count">羽数</string>
@@ -333,7 +334,7 @@
     <string name="text_time">时间</string>
     <string name="text_set_photo_face">设为封面</string>
     <string name="text_move">移动</string>
-    <string name="text_set_face">设为封面</string>
+    <string name="text_set_face">封面</string>
 
     <string-array name="array_order_status">
         <item>@string/text_all</item>

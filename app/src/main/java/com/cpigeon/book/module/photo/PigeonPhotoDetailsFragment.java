@@ -18,6 +18,7 @@ import com.base.util.Lists;
 import com.base.util.PictureSelectUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.glide.GlideCacheUtil;
 import com.base.util.glide.GlideUtil;
 import com.base.util.picker.PickerUtil;
 import com.cpigeon.book.R;
@@ -45,13 +46,12 @@ import cn.qqtheme.framework.picker.OptionPicker;
  */
 
 public class PigeonPhotoDetailsFragment extends BaseBookFragment {
-
     private MZBannerView mBanner;
     private SimpleTitleView mSTvMove;
     private SimpleTitleView mSTvSetFace;//设为封面
     private SimpleTitleView mSTvDelete;
     private SimpleTitleView sTvShare;
-public static String RingNum;
+    public static String RingNum;
     PigeonPhotoDetailsViewModel mViewModel;
     SelectTypeViewModel mTypeViewModel;
     int typePosition = 0;
@@ -146,6 +146,7 @@ public static String RingNum;
 
         mSTvSetFace.setOnClickListener(v -> {
             //设为封面
+            removeCache();
             position = mBanner.getViewPager().getCurrentItem();
             setProgressVisible(true);
             mViewModel.photoid = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPigeonPhotoID();
@@ -276,6 +277,9 @@ public static String RingNum;
 //
 //        }
 //    }
+private void removeCache() {
+    GlideCacheUtil.clearImageDiskCache(getActivity());//清除Glide图片加载缓存
+}
 }
 
 class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {

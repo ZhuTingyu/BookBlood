@@ -27,7 +27,7 @@ public class BreedPigeonListModel extends BaseViewModel {
     public String typeid ;//鸽子类型（8为种鸽，9为赛鸽，不传则全部查询）
 
     public String bitmatch = PigeonEntity.BIT_MATCH;//是否返回赛绩（1，返回）
-
+    public  String id; //鸽子的ID
     public String year;//年份
     public String sexid;//性别
     public String stateid;//状态
@@ -41,7 +41,7 @@ public class BreedPigeonListModel extends BaseViewModel {
 
     public MutableLiveData<List<PigeonEntity>> mPigeonListData = new MutableLiveData<>();
     public MutableLiveData<PigeonSexCountEntity> mLivePigeonSexCount = new MutableLiveData<>();
-
+    public MutableLiveData<String> listDeleteMessage = new MutableLiveData<>();
     public String searchStr;//搜索的鸽子
 
     //获取  种鸽列表
@@ -66,7 +66,17 @@ public class BreedPigeonListModel extends BaseViewModel {
         });
 
     }
+    //删除单个鸽子
+public void deletePigeon()
+{
+    submitRequestThrowError(BreedPigeonModel.deletePigeon(id), r -> {
 
+        if (r.isOk()) {
+            listDeleteMessage.setValue(r.msg);
+        } else throw new HttpErrorException(r);
+    });
+
+}
     //获取统计数据
     public void getPigeonCount() {
         submitRequestThrowError(BreedPigeonModel.getPigeonSexCount(typeid), r -> {

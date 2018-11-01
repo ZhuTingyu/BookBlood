@@ -27,8 +27,7 @@ import java.util.List;
 public class BaseSearchPigeonActivity extends BaseSearchActivity {
 
     protected BasePigeonListAdapter mAdapter;
-
-    private BreedPigeonListModel mBreedPigeonListModel;
+    protected BreedPigeonListModel mBreedPigeonListModel;
     protected String SEARCH_HISTORY_KEY;
 
     @Override

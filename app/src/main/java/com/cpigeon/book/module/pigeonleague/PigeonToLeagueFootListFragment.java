@@ -11,6 +11,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.module.pigeonleague.viewmodel.PigeonToLeagueFootListViewModel;
 import com.cpigeon.book.widget.SimpleTitleView;
@@ -65,7 +66,13 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
     protected void initData() {
         super.initData();
 
-        mAdapter = new MyHomingPigeonAdapter();
+        mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
 
         setStartSearchActvity(SearchPigeonToLeagueActivity.class);//搜索页面
 
