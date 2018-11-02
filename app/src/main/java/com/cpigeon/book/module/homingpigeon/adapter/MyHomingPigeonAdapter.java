@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -143,7 +144,7 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
                 dataList.add("删除");
                 dataList.add("取消");
                 mPopupWindowList.setPopupWindowWidth(180);
-                mPopupWindowList.setDIVIDER(getBaseActivity().getResources().getDrawable(R.drawable.textcircleblood));
+                mPopupWindowList.setDIVIDER(getBaseActivity().getResources().getDrawable(R.drawable.popupwindowbackground));
                 mPopupWindowList.setLocation((int)mRawX,(int)mRawY);
                 mPopupWindowList.setAnchorView(v);
                 mPopupWindowList.setItemData(dataList);
@@ -153,6 +154,23 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Log.e(TAG, "click position="+position);
+                        if(position==0)
+                        {
+
+                if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
+                    getBaseActivity().errorDialog.dismiss();
+                }
+
+                String hintStr = "确认删除足环号为"+item.getFootRingNum()+"的信鸽吗？";
+                getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
+                    if(onDeleteListener!=null) {
+                        onDeleteListener.delete(item.getPigeonID());
+                    }
+                    sweetAlertDialog.dismiss();
+                }, sweetAlertDialog -> {
+                    sweetAlertDialog.dismiss();
+                });
+                        }
                         mPopupWindowList.hide();
                     }
                 });

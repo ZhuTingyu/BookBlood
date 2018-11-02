@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:layout_margin="8dp"
+    android:layout_width="335dp"
+    android:layout_height="75dp"
+    android:orientation="horizontal"
+    android:background="@drawable/popupwindowbackground">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="8dp"
+        android:gravity="center"
+        android:text="{"
+        android:textColor="@color/black"
+        android:textSize="28sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    >
+<TextView
+    android:textColor="@color/black"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/man_ring_num"
+    android:layout_weight="4"
+    android:textSize="15sp"
+    android:text="公的足环"/>
+    <ImageView
+        android:id="@+id/man_img"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_weight="1"
+        app:srcCompat="@mipmap/ic_male" />
+    <TextView
+        android:id="@+id/man_color"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:text="公颜色"
+        android:gravity="center"
+        android:textSize="11sp"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/man_blood"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:textSize="11sp"
+        android:text="母血统"
+        android:gravity="center"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="4"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/woman_ring_num"
+                android:text="母的足环"/>
+            <ImageView
+                android:id="@+id/woman_img"
+                android:layout_width="0dp"
+                android:layout_height="19dp"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_female" />
+            <TextView
+                android:id="@+id/woman_color"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:text="母颜色"
+                android:gravity="center"
+                android:textSize="11sp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/woman_blood"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:textSize="11sp"
+                android:text="母血统"
+                android:gravity="center"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    
+    
+    
+</LinearLayout>
+    
+    
+</LinearLayout>

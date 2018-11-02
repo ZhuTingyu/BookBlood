@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -123,6 +124,12 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             setProgressVisible(true);
             mViewModel.getBloodBook();
         }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exit();
+            }
+        });
     }
 
     @Override
@@ -146,5 +153,29 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             setProgressVisible(true);
             mViewModel.getBloodBook();
         }
+    }
+
+    @Override
+    public boolean OnBackClick() {
+
+        exit();
+
+        return true;
+    }
+
+    public void exit()
+    {
+        if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
+            getBaseActivity().errorDialog.dismiss();
+        }
+
+        String hintStr = "确定退出种鸽录入吗？";
+        getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
+            finish();
+            sweetAlertDialog.dismiss();
+
+        }, sweetAlertDialog -> {
+            sweetAlertDialog.dismiss();
+        });
     }
 }

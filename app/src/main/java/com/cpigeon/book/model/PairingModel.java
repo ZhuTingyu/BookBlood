@@ -3,9 +3,10 @@ package com.cpigeon.book.model;
 import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
-import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.BreedEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PairingNestInfoEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PriringRecommendEntity;
 import com.google.gson.reflect.TypeToken;
 
@@ -70,6 +71,16 @@ public class PairingModel {
                 .addBody("pigeonid", pigeonid)//
                 .addBody("footid", footid)//
                 .addBody("sexid", sexid)//
+                .request();
+    }
+
+    public static Observable<ApiResponse<List<BreedEntity>>> getTXGP_PigeonBreed_SelectAll(String year, String footnum) {
+        return RequestData.<ApiResponse<List<BreedEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<BreedEntity>>>() {
+                }.getType())
+                .url(R.string.pairing_info_breed)
+                .addBody("year", year)
+                .addBody("footnum", footnum)
                 .request();
     }
 

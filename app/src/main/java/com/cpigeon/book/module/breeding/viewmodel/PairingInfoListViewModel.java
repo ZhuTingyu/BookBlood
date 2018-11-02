@@ -1,12 +1,14 @@
 package com.cpigeon.book.module.breeding.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.PairingModel;
-import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.BreedEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 
 import java.util.List;
 
@@ -21,7 +23,11 @@ public class PairingInfoListViewModel extends BaseViewModel {
 
     public int pi = 1;
     public int ps = 50;
+    public String year="";
+    public String footnum="";
 
+
+    public MutableLiveData<List<BreedEntity>> mBreedingInfoListData = new MutableLiveData<>();
     public MutableLiveData<List<PairingInfoEntity>> mPairingInfoListData = new MutableLiveData<>();
 
     //获取  配对信息列表
@@ -38,6 +44,15 @@ public class PairingInfoListViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
-
+    public void getTXGP_PigeonBreed_SelectAll() {
+        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_SelectAll(year,footnum
+        ), r -> {
+            if (r.isOk()) {
+                listEmptyMessage.setValue(r.msg);
+                mBreedingInfoListData.setValue(r.data);
+                Log.d("shuaishuai", "getTXGP_PigeonBreed_SelectAll: "+r.data.size());
+            } else throw new HttpErrorException(r);
+        });
+    }
 
 }

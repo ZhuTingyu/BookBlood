@@ -22,6 +22,8 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.module.breeding.adapter.BreedingFootAdapter;
+import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
@@ -46,6 +48,7 @@ public class BaseFootListFragment extends BaseBookFragment {
     @BindView(R.id.view_placeholder)
     protected View view_placeholder;
     protected BasePigeonListAdapter mAdapter;
+    protected BreedingFootAdapter mPairingInfoListAdapter;
     protected SelectTypeViewModel mSelectTypeViewModel;
 
     protected BreedPigeonListModel mBreedPigeonListModel;
@@ -53,11 +56,12 @@ public class BaseFootListFragment extends BaseBookFragment {
 
     protected FiltrateListView mFiltrate;
     protected DrawerLayout mDrawerLayout;
-
+    protected PairingInfoListViewModel mPairingInfoListViewModel;
     public static final String TYPEID = "TYPEID";//鸽子类型（8为种鸽，9为赛鸽，不传则全部查询）
     public static final String BLOODID = "BLOODID";//血统id （1,2）
     public static final String SEXID = "SEXID";//性别id （1,2）
     public static final String YEAR = "YEAR";//出壳年份 （1,2）
+    public static final String YEARS="YEARS";//交配年份
     public static final String STATEID = "STATEID";//状态id （1,2）
     public static final String EYEID = "EYEID";//眼沙（1,2）
     public static final String FOOTNUM = "FOOTNUM";//足环号码
@@ -185,13 +189,12 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         mRecyclerView.addItemDecorationLine(20);
         mRecyclerView.setAdapter(mAdapter);
-
+        initBreedData();
         mAdapter.setOnLoadMoreListener(() -> {
             setProgressVisible(true);
             mBreedPigeonListModel.pi++;
             mBreedPigeonListModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
-
 
         mDrawerLayout = mActivity.getDrawerLayout();
         mFiltrate = mActivity.getFiltrate();
@@ -304,12 +307,19 @@ public class BaseFootListFragment extends BaseBookFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        try {
+            mPairingInfoListViewModel.year = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.YEARS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     protected void initData() {
 
     }
+    protected void initBreedData(){
 
+}
     //跳转的搜索页
     protected void setStartSearchActvity(Class cls) {
         this.cls = cls;

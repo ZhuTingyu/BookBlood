@@ -244,6 +244,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 lvCategory.setRightText(footEntity.getTypeName());//类别
                 mViewModel.footSource=footEntity.getSourceName();
                 lvSource.setRightText(footEntity.getSourceName());//来源
+                boxViewRemark.setText(footEntity.getRemark());
                 lvStatus.setRightText(footEntity.getStateName());
                 mViewModel.footType = String.valueOf(footEntity.getTypeID());
                 mViewModel.remark=footEntity.getRemark();

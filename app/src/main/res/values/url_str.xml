@@ -194,6 +194,8 @@
     <string name="pigeon_breed_sift">TXGP_PigeonList_SelectAll</string>
     <!--配对信息列表-->
     <string name="pairing_info_list">TXGP_PigeonBreed_SelectPigeonAll</string>
+    <!--繁育列表-->
+    <string name="pairing_info_breed">TXGP_PigeonBreed_SelectAll</string>
     <!--窝次信息列表-->
     <string name="pairing_nest_info_list">TXGP_PigeonBreed_SelectIDAll</string>
     <!--添加配对信息-->
