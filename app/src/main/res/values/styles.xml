@@ -3,6 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+
+
+
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -17,7 +20,9 @@
         <item name="actionMenuTextAppearance">@style/ToolbarMenuTextStyle</item>
         <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
     </style>
-
+    2     <style name="TextStyle">
+    3         <item name="android:fontFamily">sans-serif-light</item>
+    5     </style>
     <style name="activityAnimation" parent="@android:style/Animation">
         <item name="android:activityOpenEnterAnimation">@anim/anim_right_in</item>
         <item name="android:activityOpenExitAnimation">@anim/anim_left_out</item>

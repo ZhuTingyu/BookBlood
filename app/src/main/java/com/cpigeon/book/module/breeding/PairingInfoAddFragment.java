@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
 import com.base.util.map.LocationLiveData;
 import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
@@ -32,7 +31,6 @@ import com.cpigeon.book.module.basepigeon.SearchPigeonOrFootFragment;
 import com.cpigeon.book.module.basepigeon.SelectBloodFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoAddViewModel;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
-import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.LineInputView;
@@ -41,7 +39,6 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.qqtheme.framework.picker.OptionPicker;
 
 /**
  * 添加配对信息
@@ -62,15 +59,16 @@ public class PairingInfoAddFragment extends BaseBookFragment {
     @BindView(R.id.tv_next_step)
     TextView tvNextStep;
 
-    @BindView(R.id.ll_lineage)
-    LineInputView llLineage;
-    @BindView(R.id.ll_feather_color)
-    LineInputView llFeatherColor;
-
+//    @BindView(R.id.ll_lineage)
+//    LineInputView llLineage;
+//    @BindView(R.id.ll_feather_color)
+//    LineInputView llFeatherColor;
+private boolean IsMan=true;
     private PairingInfoAddViewModel mPairingInfoAddViewModel;
     protected SelectTypeViewModel mSelectTypeViewModel;
 
     public static void start(Activity activity, PigeonEntity mBreedPigeonEntity, PriringRecommendEntity item) {
+
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
                 .putExtra(IntentBuilder.KEY_DATA_2, item)
@@ -96,7 +94,6 @@ public class PairingInfoAddFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setTitle(getString(R.string.array_pairing_add));
-
         setToolbarRight(getString(R.string.array_pairing_recommend), item -> {
             PairingInfoRecommendFragment.start(getBaseActivity(), mPairingInfoAddViewModel.mPigeonEntity);
             return true;
@@ -112,11 +109,11 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
             //血统
             mPairingInfoAddViewModel.lineage = item.getPigeonBloodName();
-            llLineage.setRightText(item.getPigeonBloodName());
+//            llLineage.setRightText(item.getPigeonBloodName());
 
             //雨色
             mPairingInfoAddViewModel.featherColor = item.getPigeonPlumeName();
-            llFeatherColor.setContent(item.getPigeonPlumeName());
+//            llFeatherColor.setContent(item.getPigeonPlumeName());
         } else {
             mSelectTypeViewModel.getSelectType_FeatherColor();
             mSelectTypeViewModel.getSelectType_lineage();
@@ -130,11 +127,17 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         tvHintFoot.setText(mPairingInfoAddViewModel.mPigeonEntity.getFootRingNum());
 
         if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雌")) {
+            mPairingInfoAddViewModel.wofootid=mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
+            mPairingInfoAddViewModel.wopigeonid=mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
+            IsMan=false;
             imgHintSex.setImageResource(R.mipmap.ic_female);
             mPairingInfoAddViewModel.sex = "雄";
         } else if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雄")) {
             imgHintSex.setImageResource(R.mipmap.ic_male);
+            IsMan=true;
             mPairingInfoAddViewModel.sex = "雌";
+            mPairingInfoAddViewModel.menfootid=mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
+            mPairingInfoAddViewModel.menpigeonid=mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
         } else {
             mPairingInfoAddViewModel.sex = "未知";
             imgHintSex.setImageResource(R.mipmap.ic_sex_no);
@@ -156,7 +159,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
             try {
                 mPairingInfoAddViewModel.featherColor = mPairingInfoAddViewModel.mSelectTypes_FeatherColor.get(0).getTypeName();
-                llFeatherColor.setContent(mPairingInfoAddViewModel.mSelectTypes_FeatherColor.get(0).getTypeName());
+//                llFeatherColor.setContent(mPairingInfoAddViewModel.mSelectTypes_FeatherColor.get(0).getTypeName());
                 mPairingInfoAddViewModel.isCanCommit();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -168,7 +171,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
             mPairingInfoAddViewModel.mSelectTypes_Lineage = selectTypeEntities;
             try {
                 mPairingInfoAddViewModel.lineage = mPairingInfoAddViewModel.mSelectTypes_Lineage.get(0).getTypeName();
-                llLineage.setContent(mPairingInfoAddViewModel.mSelectTypes_Lineage.get(0).getTypeName());
+//                llLineage.setContent(mPairingInfoAddViewModel.mSelectTypes_Lineage.get(0).getTypeName());
                 mPairingInfoAddViewModel.isCanCommit();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -197,40 +200,56 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
     private BaseInputDialog mDialogInput;
 
-    @OnClick({R.id.ll_pairing_foot, R.id.ll_pairing_time, R.id.ll_feather_color, R.id.ll_lineage, R.id.tv_next_step, R.id.ll_head})
+    @OnClick({R.id.ll_pairing_foot, R.id.ll_pairing_time, R.id.tv_next_step, R.id.ll_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_pairing_foot:
                 //配偶环号
-                InputSingleFootDialog.show(getFragmentManager(), llPairingFoot.getContent(), true, dialog1 -> {
-//                    SelectFootRingFragment.start(getBaseActivity());
+//
+//                InputSingleFootDialog.show(getFragmentManager(), llPairingFoot.getContent(), true, dialog1 -> {
+////                    SelectFootRingFragment.start(getBaseActivity());
+//
+//
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString(BaseFootListFragment.PIGEONIDSTR, mPairingInfoAddViewModel.mPigeonEntity.getPigeonID());
+//
+//
+//                    if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雌")) {
+//                        bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_MALE);
+//                    } else if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雄")) {
+//                        bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_FEMALE);
+//                    } else {
+//
+//                    }
+//
+//                    SearchFragmentParentActivity.
+//                            start(getBaseActivity(),
+//                                    SearchPigeonOrFootFragment.class,
+//                                    SearchPigeonOrFootFragment.CODE_SEARCH_PIGEON_ORFOOT,
+//                                    false,
+//                                    bundle);
+//
+//                }, foot -> {
+//                    llPairingFoot.setRightText(foot);
+//                    mPairingInfoAddViewModel.pairingFoot = foot;
+//                    mPairingInfoAddViewModel.isCanCommit();
+//                });
 
+                Bundle bundle = new Bundle();
+                bundle.putString(BaseFootListFragment.PIGEONIDSTR, mPairingInfoAddViewModel.mPigeonEntity.getPigeonID());
+                if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雌")) {
+                    bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_MALE);
+                } else if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雄")) {
+                    bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_FEMALE);
+                } else {
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString(BaseFootListFragment.PIGEONIDSTR, mPairingInfoAddViewModel.mPigeonEntity.getPigeonID());
-
-
-                    if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雌")) {
-                        bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_MALE);
-                    } else if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雄")) {
-                        bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_FEMALE);
-                    } else {
-
-                    }
-
-                    SearchFragmentParentActivity.
+                }
+                SearchFragmentParentActivity.
                             start(getBaseActivity(),
                                     SearchPigeonOrFootFragment.class,
                                     SearchPigeonOrFootFragment.CODE_SEARCH_PIGEON_ORFOOT,
                                     false,
                                     bundle);
-
-                }, foot -> {
-                    llPairingFoot.setRightText(foot);
-                    mPairingInfoAddViewModel.pairingFoot = foot;
-                    mPairingInfoAddViewModel.isCanCommit();
-                });
-
                 break;
             case R.id.ll_pairing_time:
                 //配对时间
@@ -240,45 +259,45 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                     mPairingInfoAddViewModel.isCanCommit();
                 });
                 break;
-            case R.id.ll_feather_color:
-                //羽色
-                mDialogInput = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.text_feather_color, llFeatherColor.getContent(), 0, content -> {
-                            mDialogInput.hide();
-                            mPairingInfoAddViewModel.featherColor = content;
-                            llFeatherColor.setContent(content);
-                            mPairingInfoAddViewModel.isCanCommit();
-                        }, () -> {
-                            mDialogInput.hide();
+//            case R.id.ll_feather_color:
+//                //羽色
+//                mDialogInput = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
+//                        , R.string.text_feather_color, llFeatherColor.getContent(), 0, content -> {
+//                            mDialogInput.hide();
+//                            mPairingInfoAddViewModel.featherColor = content;
+//                            llFeatherColor.setContent(content);
+//                            mPairingInfoAddViewModel.isCanCommit();
+//                        }, () -> {
+//                            mDialogInput.hide();
+//
+//                            if (!Lists.isEmpty(mPairingInfoAddViewModel.mSelectTypes_FeatherColor)) {
+//                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mPairingInfoAddViewModel.mSelectTypes_FeatherColor), 0, new OptionPicker.OnOptionPickListener() {
+//                                    @Override
+//                                    public void onOptionPicked(int index, String item) {
+//                                        mPairingInfoAddViewModel.featherColor = mPairingInfoAddViewModel.mSelectTypes_FeatherColor.get(index).getTypeName();
+//                                        llFeatherColor.setContent(mPairingInfoAddViewModel.mSelectTypes_FeatherColor.get(index).getTypeName());
+//                                        mPairingInfoAddViewModel.isCanCommit();
+//                                    }
+//                                });
+//                            } else {
+//                                mSelectTypeViewModel.getSelectType_FeatherColor();
+//                            }
+//                        });
+//
+//                break;
 
-                            if (!Lists.isEmpty(mPairingInfoAddViewModel.mSelectTypes_FeatherColor)) {
-                                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mPairingInfoAddViewModel.mSelectTypes_FeatherColor), 0, new OptionPicker.OnOptionPickListener() {
-                                    @Override
-                                    public void onOptionPicked(int index, String item) {
-                                        mPairingInfoAddViewModel.featherColor = mPairingInfoAddViewModel.mSelectTypes_FeatherColor.get(index).getTypeName();
-                                        llFeatherColor.setContent(mPairingInfoAddViewModel.mSelectTypes_FeatherColor.get(index).getTypeName());
-                                        mPairingInfoAddViewModel.isCanCommit();
-                                    }
-                                });
-                            } else {
-                                mSelectTypeViewModel.getSelectType_FeatherColor();
-                            }
-                        });
-
-                break;
-
-            case R.id.ll_lineage:
-                //血统
-
-                BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
-
-                    mPairingInfoAddViewModel.lineage = content;
-                    llLineage.setRightText(content);
-                    mPairingInfoAddViewModel.isCanCommit();
-                }, () -> {
-                    SelectBloodFragment.start(getBaseActivity());
-                });
-
+//            case R.id.ll_lineage:
+//                //血统
+//
+//                BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, 0, content -> {
+//
+//                    mPairingInfoAddViewModel.lineage = content;
+////                    llLineage.setRightText(content);
+//                    mPairingInfoAddViewModel.isCanCommit();
+//                }, () -> {
+//                    SelectBloodFragment.start(getBaseActivity());
+//                });
+//
 //                mDialogInput = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
 //                        , R.string.text_pigeon_lineage, llLineage.getContent(),0, content -> {
 //                            mDialogInput.hide();
@@ -301,8 +320,8 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 //                                mSelectTypeViewModel.getSelectType_lineage();
 //                            }
 //                        });
-
-                break;
+//
+//                break;
             case R.id.tv_next_step:
                 mPairingInfoAddViewModel.getTXGP_PigeonBreed_AddData();
                 break;
@@ -328,16 +347,16 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                     PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
 
                     //足环号
-                    llPairingFoot.setContent(item.getFootRingNum());
+//                    llPairingFoot.setContent(item.getFootRingNum());
                     mPairingInfoAddViewModel.pairingFoot = item.getFootRingNum();
 
                     //血统
                     mPairingInfoAddViewModel.lineage = item.getPigeonBloodName();
-                    llLineage.setRightText(item.getPigeonBloodName());
+//                    llLineage.setRightText(item.getPigeonBloodName());
 
                     //雨色
                     mPairingInfoAddViewModel.featherColor = item.getPigeonPlumeName();
-                    llFeatherColor.setContent(item.getPigeonPlumeName());
+//                    llFeatherColor.setContent(item.getPigeonPlumeName());
 
                     mPairingInfoAddViewModel.isCanCommit();
                 } catch (Exception e) {
@@ -362,22 +381,31 @@ public class PairingInfoAddFragment extends BaseBookFragment {
             } else if (requestCode == SelectBloodFragment.CODE_SELECT_BLOOD) {
                 SelectTypeEntity blood = data.getParcelableExtra(IntentBuilder.KEY_DATA);
                 mPairingInfoAddViewModel.lineage = blood.getTypeName();
-                llLineage.setRightText(blood.getTypeName());
+//                llLineage.setRightText(blood.getTypeName());
                 mPairingInfoAddViewModel.isCanCommit();
             } else if (requestCode == SearchPigeonOrFootFragment.CODE_SEARCH_PIGEON_ORFOOT) {
                 PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
-
+                if(IsMan) {
+                    mPairingInfoAddViewModel.wopigeonid=entity.getPigeonID();
+                    mPairingInfoAddViewModel.wofootid=entity.getFootRingID();
+                }
+                else
+                {
+                    mPairingInfoAddViewModel.menpigeonid=entity.getPigeonID();
+                    mPairingInfoAddViewModel.menfootid=entity.getFootRingID();
+                }
                 //足环号
                 llPairingFoot.setContent(entity.getFootRingNum());
+
                 mPairingInfoAddViewModel.pairingFoot = entity.getFootRingNum();
 
                 //血统
                 mPairingInfoAddViewModel.lineage = entity.getPigeonBloodName();
-                llLineage.setRightText(entity.getPigeonBloodName());
+//                llLineage.setRightText(entity.getPigeonBloodName());
 
                 //雨色
                 mPairingInfoAddViewModel.featherColor = entity.getPigeonPlumeName();
-                llFeatherColor.setContent(entity.getPigeonPlumeName());
+//                llFeatherColor.setContent(entity.getPigeonPlumeName());
 
                 mPairingInfoAddViewModel.isCanCommit();
             }

@@ -49,18 +49,23 @@ public class PairingInfoAddViewModel extends BaseViewModel {
     //配对备注
     public String reamrk;
 
+    public String wofootid;
+    public String wopigeonid;
+    public String menfootid;
+    public String menpigeonid;
     public void isCanCommit() {
         isCanCommit(pairingFoot, pairingTime, featherColor, lineage);
     }
 
     public void getTXGP_PigeonBreed_AddData() {
 
-        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(mPigeonEntity.getFootRingID(),
-                mPigeonEntity.getPigeonID(),
+        submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_Add(wofootid,
+                wopigeonid,
+                menfootid,
+                menpigeonid,
                 pairingFoot,
                 lineage,
                 featherColor,
-                sex,
                 pairingTime,
                 weather,
                 temper,

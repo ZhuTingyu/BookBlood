@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.base.base.BaseViewHolder;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.utility.StringUtil;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -48,6 +49,11 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
         TextView mPigeonType = helper.getView(R.id.zl);
         TextView blood = helper.getView(R.id.blood);
         TextView color = helper.getView(R.id.tvColor);
+        helper.setText(R.id.tvColor, StringUtil.emptyString());
+        helper.setText(R.id.blood,StringUtil.emptyString());
+        helper.setText(R.id.zl, " "+item.getTypeName()+" ");
+        helper.setText(R.id.state,item.getStateName());
+        helper.setText(R.id.tvTime, item.getFootRingNum());
         defultParams(mPigeonType,R.drawable.textcircledefult);
         defultParams(blood,R.drawable.textcircledefult);
         defultParams(color,R.drawable.textcircledefult);
@@ -72,14 +78,14 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
         if (!item.getPigeonPlumeName().trim().equals(""))
         {
           setParams(color,R.drawable.textcirclecolor);
+            helper.setText(R.id.tvColor, " "+item.getPigeonPlumeName()+" ");
         }
         if (!item.getPigeonBloodName().trim().equals(""))
         {
             setParams(blood,R.drawable.textcircleblood);
+            helper.setText(R.id.blood," "+item.getPigeonBloodName()+" ");
         }
         helper.setText(R.id.zl, " "+item.getTypeName()+" ");
-        helper.setText(R.id.tvColor, " "+item.getPigeonPlumeName()+" ");
-        helper.setText(R.id.blood," "+item.getPigeonBloodName()+" ");
         helper.setText(R.id.state,item.getStateName());
         helper.setText(R.id.tvTime, item.getFootRingNum());
 
@@ -108,36 +114,6 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
         linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-//                PopupList popupList = new PopupList(getBaseActivity().getBaseContext());
-//                popupList.showPopupListWindow(getBaseActivity().getRootView(), helper.getAdapterPosition(), mRawX, mRawY, popupMenuItemList, new PopupList.PopupListListener() {
-//                    @Override
-//                    public boolean showPopupList(View adapterView, View contextView, int contextPosition) {
-//                        return true;
-//                    }
-//
-//
-//                    @Override
-//                    public void onPopupListClick(View contextView, int contextPosition, int position) {
-//                       if (position==0)
-//                       {
-//
-//
-//                if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
-//                    getBaseActivity().errorDialog.dismiss();
-//                }
-//
-//                String hintStr = "确认删除足环号为"+item.getFootRingNum()+"的信鸽吗？";
-//                getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
-//                    if(onDeleteListener!=null) {
-//                        onDeleteListener.delete(item.getPigeonID());
-//                    }
-//                    sweetAlertDialog.dismiss();
-//                }, sweetAlertDialog -> {
-//                    sweetAlertDialog.dismiss();
-//                });
-//                       }
-//                    }
-//                });
                 final PopupWindowList mPopupWindowList = new PopupWindowList(getBaseActivity());;
                 List<String> dataList = new ArrayList<>();
 

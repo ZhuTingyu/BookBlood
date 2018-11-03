@@ -20,6 +20,7 @@ import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -62,7 +63,13 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
             InputBreedInBookFragment.start(getBaseActivity());
         });
 
-        mAdapter = new BreedPigeonListAdapter();
+        mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);

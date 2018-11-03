@@ -19,6 +19,7 @@ import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
 import com.cpigeon.book.util.KLineManager;
 import com.cpigeon.book.widget.LeagueMarkerView;
@@ -97,7 +98,13 @@ public class PlayFootListFragment extends BaseFootListFragment {
             InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);
         });
 
-        mAdapter = new BreedPigeonListAdapter();
+        mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);

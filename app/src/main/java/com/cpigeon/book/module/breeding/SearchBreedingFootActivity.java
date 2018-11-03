@@ -5,6 +5,7 @@ import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 
 
 /**
@@ -16,7 +17,13 @@ public class SearchBreedingFootActivity extends BaseSearchPigeonActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new BreedPigeonListAdapter();
+        mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);

@@ -112,11 +112,11 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         //相册总容量
         String s = getString(R.string.text_photo_user_and_remain_place);
         s = s.replace("%1%", datas.getUseCount());
-        s = s.replace("%2%", String.valueOf(Integer.parseInt(datas.getTotalCount()) - Integer.parseInt(datas.getUseCount())));
+        s = s.replace("%2%", String.valueOf(Double.parseDouble(datas.getTotalCount()) - Double.parseDouble(datas.getUseCount())));
         tvUsePlace.setText(s);
 
-        progressBar.setMax(Integer.parseInt(datas.getTotalCount()));
-        progressBar.setProgress(Integer.parseInt(datas.getUseCount()));
+        progressBar.setMax((int)Double.parseDouble(datas.getTotalCount()));
+        progressBar.setProgress((int)Double.parseDouble(datas.getUseCount()));
         return view;
     }
 }

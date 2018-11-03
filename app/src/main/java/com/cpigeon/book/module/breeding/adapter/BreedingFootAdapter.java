@@ -1,10 +1,11 @@
 package com.cpigeon.book.module.breeding.adapter;
 
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedEntity;
 
@@ -22,18 +23,18 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
     public void  setParams(TextView tv, int Resource)
     {
         tv.setPadding(5,2,5,2);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)tv.getLayoutParams();
+        params.setMargins(10,0,0,0);
         params.height=60;
-        params.setMargins(0,0,10,0);
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
     }
     public void  defultParams(TextView tv,int Resource)
     {
         tv.setPadding(0,0,0,0);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
-        params.height=60;
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)tv.getLayoutParams();
         params.setMargins(0,0,0,0);
+        params.height=60;
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
     }
@@ -42,10 +43,10 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
     protected void convert(BaseViewHolder helper, BreedEntity item) {
         helper.setText(R.id.man_ring_num,item.getMenFootRingNum());
         helper.setText(R.id.woman_ring_num,item.getWoFootRingNum());
-        helper.setText(R.id.man_blood,item.getMenPigeonBloodName());
-       helper.setText(R.id.man_color,item.getMenPigeonPlumeName());
-        helper.setText(R.id.woman_blood,item.getMenPigeonBloodName());
-        helper.setText(R.id.man_color,item.getWoPigeonPlumeName());
+        helper.setText(R.id.man_blood, StringUtil.emptyString());
+        helper.setText(R.id.man_color,StringUtil.emptyString());
+        helper.setText(R.id.woman_blood,StringUtil.emptyString());
+        helper.setText(R.id.woman_color,StringUtil.emptyString());
         TextView man_blood = helper.getView(R.id.man_blood);
         TextView man_color = helper.getView(R.id.man_color);;
         TextView woman_blood = helper.getView(R.id.woman_blood);
@@ -56,18 +57,21 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
         defultParams(woman_blood,R.drawable.textcircledefult);
         if (!item.getWoPigeonPlumeName().trim().equals(""))
         {
+            helper.setText(R.id.woman_color," "+item.getWoPigeonPlumeName()+" ");
             setParams(woman_color,R.drawable.textcirclecolor);
         }
         if (!item.getMenPigeonPlumeName().trim().equals(""))
-        {
+        { helper.setText(R.id.man_color," "+item.getMenPigeonPlumeName()+" ");
             setParams(man_color,R.drawable.textcirclecolor);
         }
         if (!item.getMenPigeonBloodName().trim().equals(""))
         {
+            helper.setText(R.id.man_blood," "+item.getMenPigeonBloodName()+" ");
             setParams(man_blood,R.drawable.textcircleblood);
         }
         if (!item.getWoPigeonBloodName().trim().equals(""))
         {
+            helper.setText(R.id.woman_blood," "+item.getWoPigeonBloodName()+" ");
             setParams(woman_blood,R.drawable.textcircleblood);
         }
 

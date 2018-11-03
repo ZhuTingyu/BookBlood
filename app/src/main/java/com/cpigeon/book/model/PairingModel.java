@@ -22,12 +22,13 @@ public class PairingModel {
 
 
     //hl 添加配對
-    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_PigeonBreed_Add(String footid,
-                                                                                      String pigeonid,
+    public static Observable<ApiResponse<List<PigeonEntity>>> getTXGP_PigeonBreed_Add(String wofootid,
+                                                                                      String wopigeonid,
+                                                                                      String menfootid,
+                                                                                      String menpigeonid,
                                                                                       String footnum,
                                                                                       String blood,
                                                                                       String plume,
-                                                                                      String sex,
                                                                                       String time,
                                                                                       String weather,
                                                                                       String temper,
@@ -39,12 +40,13 @@ public class PairingModel {
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
                 .url(R.string.pairing_info_add)
-                .addBody("footid", footid)//要配对的足环id
-                .addBody("pigeonid", pigeonid)//要配对的鸽子id
+                .addBody("wofootid", wofootid)//要配对母的足环id
+                .addBody("wopigeonid", wopigeonid)//要配对母的鸽子id
+                .addBody("menfootid", menfootid)//要配对公的足环id
+                .addBody("menpigeonid", menpigeonid)//要配对公的鸽子id
                 .addBody("footnum", footnum)//配对的足环号码
                 .addBody("blood", blood)//配对的血统
                 .addBody("plume", plume)//配对的羽色
-                .addBody("sex", sex)//要配对的性别
                 .addBody("time", time)//配对时间
                 .addBody("weather", weather)//配对天气
                 .addBody("temper", temper)//配对气温

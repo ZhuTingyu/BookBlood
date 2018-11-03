@@ -4,6 +4,7 @@ import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.db.AppDatabase;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 
 /**
  * * 血统书制作  足环搜索
@@ -15,7 +16,13 @@ public class SearchBreedPigeonToMakeBookActivity extends BaseSearchPigeonActivit
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new BreedPigeonListAdapter();
+        mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PreviewsBookActivity.start(getBaseActivity(), mAdapter.getItem(position));

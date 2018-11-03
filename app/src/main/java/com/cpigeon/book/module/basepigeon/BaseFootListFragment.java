@@ -27,6 +27,7 @@ import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
 
@@ -183,7 +184,13 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         });
 
-        mAdapter = new BreedPigeonListAdapter();
+        mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        });
 
         initData();
 

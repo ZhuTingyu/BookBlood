@@ -24,6 +24,7 @@ public class PairingNestAddViewModel extends BaseViewModel {
     public PigeonEntity mBreedPigeonEntity;
 
     //窝次
+
     public String nestNum;
     //父足环号码
     public String footFather;
