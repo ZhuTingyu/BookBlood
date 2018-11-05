@@ -12,6 +12,7 @@ import com.base.base.BaseViewHolder;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BasePigeonListAdapter;
@@ -62,10 +63,14 @@ public class BreedPigeonListAdapter extends BasePigeonListAdapter {
         helper.setText(R.id.blood,"  "+item.getPigeonBloodName()+"  ");
         helper.setText(R.id.state,item.getStateName());
         helper.setText(R.id.tvTime, item.getFootRingNum());
+        ImageView imagehead=(ImageView)helper.getView(R.id.imgHead);
         Glide.with(mContext)
                 .load(item.getCoverPhotoUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.ic_img_default)
-                .into((ImageView) helper.getView(R.id.imgHead));
+                .error(R.drawable.ic_img_default)
+                .dontAnimate()
+                .into(imagehead);
 
 
         if (Utils.getString(R.string.text_male_a).equals(item.getPigeonSexName())) {

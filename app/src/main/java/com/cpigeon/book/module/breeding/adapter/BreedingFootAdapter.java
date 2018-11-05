@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.breeding.adapter;
 
+import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,9 +39,11 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
     }
-
     @Override
     protected void convert(BaseViewHolder helper, BreedEntity item) {
+        TextView count=helper.getView(R.id.count);
+        count.setText(helper.getPosition()+1+"");
+        count.setBackgroundResource(R.drawable.countbackground2);
         helper.setText(R.id.man_ring_num,item.getMenFootRingNum());
         helper.setText(R.id.woman_ring_num,item.getWoFootRingNum());
         helper.setText(R.id.man_blood, StringUtil.emptyString());
@@ -74,6 +77,7 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
             helper.setText(R.id.woman_blood," "+item.getWoPigeonBloodName()+" ");
             setParams(woman_blood,R.drawable.textcircleblood);
         }
-
+        Log.d("songshuaishuai", "convert: wo  "+woman_blood.getText().toString());
+        Log.d("songshuaishuai", "convert: men "+woman_color.getText().toString());
     }
 }

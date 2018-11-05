@@ -10,6 +10,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.base.application.BaseApplication;
@@ -162,6 +163,24 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
     @Override
     public void setOnItemClickListener(@Nullable OnItemClickListener listener) {
         super.setOnItemClickListener(listener);
+    }
+    public void  setParams(TextView tv,int Resource)
+    {
+        tv.setPadding(5,2,5,2);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
+        params.height=60;
+        params.setMargins(0,0,10,0);
+        tv.setBackgroundResource(Resource);
+        tv.setLayoutParams(params);
+    }
+    public void  defultParams(TextView tv,int Resource)
+    {
+        tv.setPadding(0,0,0,0);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
+        params.height=60;
+        params.setMargins(0,0,0,0);
+        tv.setBackgroundResource(Resource);
+        tv.setLayoutParams(params);
     }
 }
 

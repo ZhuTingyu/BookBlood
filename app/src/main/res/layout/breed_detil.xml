@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -10,20 +11,86 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
+            android:layout_weight="1"
+            android:gravity="center">
+           <LinearLayout
+               android:id="@+id/men_linear"
+               android:layout_width="160dp"
+               android:layout_height="28dp"
+               android:orientation="horizontal"
+               android:gravity="center"
+               android:background="@drawable/breed_detil_background_m">
+               <TextView
+                   android:id="@+id/man_foot"
+                   android:layout_width="111dp"
+                   android:layout_height="24dp"
+                   android:text="公的足环"
+                   android:textSize="13sp"
+                   android:textColor="@color/black"
+                   android:gravity="center"/>
+               <ImageView
+                   android:layout_width="24dp"
+                   android:layout_height="24dp"
+                   android:background="@mipmap/ic_male"/>
+           </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
+            android:layout_weight="1"
+            android:gravity="center">
+            <LinearLayout
+                android:id="@+id/woman_ll"
+                android:background="@drawable/breed_detil_background_w"
+                android:layout_width="160dp"
+                android:layout_height="28dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/woman_foot"
+                    android:layout_width="111dp"
+                    android:layout_height="24dp"
+                    android:text="母的足环"
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@mipmap/ic_female"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></LinearLayout>
+        android:layout_weight="1"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="335dp"
+            android:layout_height="44dp"
+            android:background="@drawable/popupwindowbackground"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/footring_count"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="足环号加配偶数量"
+                android:textColor="@color/black"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 </LinearLayout>
 </LinearLayout>

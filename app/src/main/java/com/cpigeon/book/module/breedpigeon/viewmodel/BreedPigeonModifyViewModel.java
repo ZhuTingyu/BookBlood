@@ -47,6 +47,8 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
                 mPigeonEntity.getPigeonBloodName(),//  血统 （可选可填，传血统名称）
                 mPigeonEntity.getStateID(),// 信鸽状态ID
                 mPigeonEntity.getCoverPhotoID(),//
+                mPigeonEntity.getMenPigeonStateID(),
+                mPigeonEntity .getWoPigeonStateID(),
                 setImageMap()), r -> {
 
             if (r.isOk()) {

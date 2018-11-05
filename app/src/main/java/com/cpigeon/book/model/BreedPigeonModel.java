@@ -79,11 +79,12 @@ public class BreedPigeonModel {
             String manFootnum,
             String manPigeonStateId,
 
+//            String manPigeonStateName,
             String womenFootId,
             String womenPigeonId,// ：母鸽子id
             String womenFootnum,
             String womenPigeonStateId,
-
+//            String womenPigeonStateName,
             String name,
             String sex,
             String plume,
@@ -100,6 +101,8 @@ public class BreedPigeonModel {
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_add)
+//                .addBody("wofootid", manPigeonStateName)// 父足环状态
+//                .addBody("wofootid", womenPigeonStateName)// 母足环状态
                 .addBody("typeid", pigeonType)//
                 .addBody("coodid", coodid)// 国家Id
                 .addBody("footnum", footnum)//足环（可选可填，传足环号）
@@ -110,8 +113,8 @@ public class BreedPigeonModel {
                 .addBody("menfootnum", manFootnum)// 父足环号码
                 .addBody("menpigeonid", manPigeonId)// 父鸽子id
                 .addBody("menfootstate", manPigeonStateId)// 父鸽子状态
-
                 .addBody("wofootid", womenFootId)// 母足环id
+
                 .addBody("wofootnum", womenFootnum)// 母足环号码
                 .addBody("wopigeonid", womenPigeonId)// 母鸽子id
                 .addBody("wofootstate", womenPigeonStateId)// 母鸽子状态
@@ -149,11 +152,15 @@ public class BreedPigeonModel {
             String blood,
             String stateid,
             String phototypeid,
+           String pigeonFatherStateId,
+            String   pigeonMotherStateId,
             Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_modify)
+                .addBody("menfootstate", pigeonFatherStateId)//
+                .addBody("wofootstate", pigeonMotherStateId)//
                 .addBody("typeid", pigeonType)//
                 .addBody("pigeonid", pigeonid)// 鸽子id
                 .addBody("coodid", coodid)// 国家Id

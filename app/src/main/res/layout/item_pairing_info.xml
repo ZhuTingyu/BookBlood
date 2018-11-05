@@ -1,55 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="80dp"
+    android:id="@+id/llay"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:paddingLeft="@dimen/spacing_left_reight"
     android:paddingRight="@dimen/spacing_left_reight">
+<RelativeLayout
+    android:layout_width="60dp"
+    android:layout_height="60dp">
 
-
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgHead"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:textSize="11sp"
+        android:textColor="@color/white"
+        android:id="@+id/count"
+        android:gravity="center"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
+</RelativeLayout>
     <LinearLayout
+        android:layout_marginVertical="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_view_height"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_margin="10dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+
+                    android:textStyle="bold"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/tvTime"
+                    android:layout_width="140dp"
+                    android:layout_height="match_parent"
+
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/medium_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgSex"
+                    android:layout_width="19dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/ic_male" />
+            </LinearLayout>
 
 
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/state"
+                android:textColor="@color/black"
+                android:textSize="@dimen/medium_text_size"
+                android:gravity="center"
+                android:text="状态"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+        </RelativeLayout>
 
-        <!--足环号-->
-        <TextView
-            android:id="@+id/tv_foot"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="2018-22-2323232"
-            android:textColor="@color/general_text_color"
-            android:textSize="@dimen/medium_text_size" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <!--血统-->
-        <TextView
-            android:id="@+id/tv_lineage"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="神奇的小鸟"
-            android:textColor="@color/general_text_color"
-            android:textSize="@dimen/medium_text_size" />
+            <TextView
+                android:id="@+id/zl"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:gravity="center"
+                android:text=""
+                android:paddingBottom="2dp"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgHead"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tvColor"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:gravity="center"
 
-        <!--窝次-->
-        <TextView
-            android:id="@+id/tv_nest_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
-            android:text="0窝"
-            android:textColor="@color/general_text_color"
-            android:textSize="@dimen/medium_text_size" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgHead"
+                app:layout_constraintTop_toTopOf="parent" />
 
-
+            <TextView
+                android:id="@+id/blood"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text_size"
+                />
+        </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/include_line_view_layout" />
+
+
+
+
+
 
 
 </LinearLayout>

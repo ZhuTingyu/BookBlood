@@ -10,12 +10,20 @@
     android:layout_height="75dp"
     android:orientation="horizontal"
     android:background="@drawable/popupwindowbackground">
-
+<TextView
+    android:layout_gravity="center_vertical"
+    android:id="@+id/count"
+    android:gravity="center"
+    android:layout_marginLeft="2dp"
+    android:layout_width="20dp"
+    android:textSize="15sp"
+    android:layout_height="20dp"
+    />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginHorizontal="2dp"
         android:gravity="center"
         android:text="["
         android:textColor="@color/black"
@@ -96,29 +104,26 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
                 android:paddingRight="20dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
 
                 <TextView
-                    android:id="@+id/woman_color"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/woman_blood"
-                    android:layout_weight="2"
+                    android:id="@+id/woman_color"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/woman_blood"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textSize="11sp"
                     android:layout_alignParentRight="true"
-                    android:layout_weight="2"
-
                     android:gravity="center"
-                    android:textSize="11sp" />
+                    android:layout_height="match_parent"/>
             </RelativeLayout>
 
         </LinearLayout>

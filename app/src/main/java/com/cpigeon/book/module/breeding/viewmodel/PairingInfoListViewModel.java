@@ -20,7 +20,9 @@ import java.util.List;
 public class PairingInfoListViewModel extends BaseViewModel {
 
     public PigeonEntity mBreedPigeonEntity;
-
+    public BreedEntity mBreedEntity;
+    public String PigeonID;
+    public String FootRingID;
 
     public int pi = 1;
     public int ps = 50;
@@ -35,9 +37,8 @@ public class PairingInfoListViewModel extends BaseViewModel {
     public void getTXGP_PigeonBreed_SelectPigeonAllData() {
         submitRequestThrowError(PairingModel.getTXGP_PigeonBreed_SelectPigeonAll(String.valueOf(pi),
                 String.valueOf(ps),
-                mBreedPigeonEntity.getPigeonID(),
-                mBreedPigeonEntity.getFootRingID(),
-                mBreedPigeonEntity.getPigeonSexID()
+                PigeonID,
+                FootRingID
         ), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);

@@ -49,7 +49,42 @@ public class PairingInfoEntity implements Serializable {
     private String PigeonBreedTime;
     private String PigeonBreedID;
     private String PigeonBreedCount;
+    private String WoPigeonPlumeName;
+    private String MenPigeonPlumeName;
+    private String WoCoverPhotoUrl;
+    private String MenCoverPhotoUrl;
 
+    public String getWoPigeonPlumeName() {
+        return WoPigeonPlumeName;
+    }
+
+    public void setWoPigeonPlumeName(String woPigeonPlumeName) {
+        WoPigeonPlumeName = woPigeonPlumeName;
+    }
+
+    public String getMenPigeonPlumeName() {
+        return MenPigeonPlumeName;
+    }
+
+    public void setMenPigeonPlumeName(String menPigeonPlumeName) {
+        MenPigeonPlumeName = menPigeonPlumeName;
+    }
+
+    public String getWoCoverPhotoUrl() {
+        return WoCoverPhotoUrl;
+    }
+
+    public void setWoCoverPhotoUrl(String woCoverPhotoUrl) {
+        WoCoverPhotoUrl = woCoverPhotoUrl;
+    }
+
+    public String getMenCoverPhotoUrl() {
+        return MenCoverPhotoUrl;
+    }
+
+    public void setMenCoverPhotoUrl(String menCoverPhotoUrl) {
+        MenCoverPhotoUrl = menCoverPhotoUrl;
+    }
 
     private PairingInfoEntity(Builder builder) {
         setWoPigeonID(builder.WoPigeonID);
@@ -64,6 +99,10 @@ public class PairingInfoEntity implements Serializable {
         setPigeonBreedTime(builder.PigeonBreedTime);
         setPigeonBreedID(builder.PigeonBreedID);
         setPigeonBreedCount(builder.PigeonBreedCount);
+        setWoPigeonID(builder.WoCoverPhotoUrl);
+        setWoPigeonID(builder.MenCoverPhotoUrl);
+        setWoPigeonID(builder.MenPigeonPlumeName);
+        setWoPigeonID(builder.WoPigeonPlumeName);
     }
 
 
@@ -177,12 +216,33 @@ public class PairingInfoEntity implements Serializable {
         private String PigeonBreedTime;
         private String PigeonBreedID;
         private String PigeonBreedCount;
+        private String WoPigeonPlumeName;
+        private String MenPigeonPlumeName;
+        private String WoCoverPhotoUrl;
+        private String MenCoverPhotoUrl;
+
 
         public Builder() {
         }
 
         public Builder WoPigeonID(String val) {
             WoPigeonID = val;
+            return this;
+        }
+        public Builder WoPigeonPlumeName(String val) {
+            WoPigeonPlumeName = val;
+            return this;
+        }
+        public Builder MenPigeonPlumeName(String val) {
+            MenPigeonPlumeName = val;
+            return this;
+        }
+        public Builder WoCoverPhotoUrl(String val) {
+            WoCoverPhotoUrl = val;
+            return this;
+        }
+        public Builder MenCoverPhotoUrl(String val) {
+            MenCoverPhotoUrl = val;
             return this;
         }
 

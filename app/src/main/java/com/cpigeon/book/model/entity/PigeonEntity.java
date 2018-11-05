@@ -23,7 +23,7 @@ public class PigeonEntity implements Serializable {
     public static final String ID_BREED_PIGEON = "9";//种鸽
     public static final String ID_MATCH_PIGEON = "10";//赛鸽
     public static final String ID_YOUNG_PIGEON = "10";
-    public static final String ID_ALL = "35,36";
+    public static final String ID_ALL = "35,36,37,38,39,40";
     public static  String TIME = "TIME";
     public static final String BIT_MATCH = "0"; //是否返回赛绩（0，不返回）
     public static final String BIT_MATCH_NO = "1"; //是否返回赛绩（1，返回）
@@ -107,10 +107,28 @@ public class PigeonEntity implements Serializable {
     private String UserName;
     private String UserService;//0 未开通 1 已开通
     private String PigeonHomePhone;
-
+    private String MenPigeonStateID;
+    private String WoPigeonStateID;
+    private String WoPigeonStateName;
+    private String MenPigeonStateName;
     private List<PigeonPlayEntity> MatchInfoList;
     private List<PigeonPlayEntity> MatchList;
 
+    public String getWoPigeonStateName() {
+        return WoPigeonStateName;
+    }
+
+    public void setWoPigeonStateName(String woPigeonStateName) {
+        WoPigeonStateName = woPigeonStateName;
+    }
+
+    public String getMenPigeonStateName() {
+        return MenPigeonStateName;
+    }
+
+    public void setMenPigeonStateName(String menPigeonStateName) {
+        MenPigeonStateName = menPigeonStateName;
+    }
 
     private String PigeonMoney;
     private String MatchInfoID;
@@ -123,6 +141,22 @@ public class PigeonEntity implements Serializable {
 
     public void setMatchInfoList(List<PigeonPlayEntity> matchInfoList) {
         MatchInfoList = matchInfoList;
+    }
+
+    public String getMenPigeonStateID() {
+        return MenPigeonStateID;
+    }
+
+    public void setMenPigeonStateID(String menPigeonStateID) {
+        this.MenPigeonStateID = menPigeonStateID;
+    }
+
+    public String getWoPigeonStateID() {
+        return WoPigeonStateID;
+    }
+
+    public void setWoPigeonStateID(String woPigeonStateID) {
+        this.WoPigeonStateID = woPigeonStateID;
     }
 
     public String getPigeonMoney() {
@@ -275,6 +309,8 @@ public class PigeonEntity implements Serializable {
         setMatchInfoID(builder.MatchInfoID);
         setMatchInfo(builder.MatchInfo);
         setPigeonMatchID(builder.PigeonMatchID);
+        setMenPigeonStateID(builder.MenPigeonStateID);
+        setWoPigeonStateID(builder.WoPigeonStateID);
         isSelect = builder.isSelect;
     }
 
@@ -646,9 +682,11 @@ public class PigeonEntity implements Serializable {
         private String MatchInfoID;
         private String MatchInfo;
         private String PigeonMatchID;
+        private String MenPigeonStateID;
+        private String WoPigeonStateID;
         private boolean isSelect;
-
-
+        private String WoPigeonStateName;
+        private String MenPigeonStateName;
         public Builder() {
         }
 
@@ -741,7 +779,14 @@ public class PigeonEntity implements Serializable {
             TypeID = val;
             return this;
         }
-
+        public Builder MenPigeonStateID(String val) {
+            MenPigeonStateID = val;
+            return this;
+        }
+        public Builder WoPigeonStateID(String val) {
+            WoPigeonStateID = val;
+            return this;
+        }
         public Builder FootRingTimeTo(String val) {
             FootRingTimeTo = val;
             return this;
@@ -917,11 +962,18 @@ public class PigeonEntity implements Serializable {
             return this;
         }
 
+        public Builder MenPigeonStateName(String val) {
+            MenPigeonStateName = val;
+            return this;
+        }
+        public Builder WoPigeonStateName(String val) {
+            WoPigeonStateName = val;
+            return this;
+        }
         public Builder MatchInfoID(String val) {
             MatchInfoID = val;
             return this;
         }
-
         public Builder MatchInfo(String val) {
             MatchInfo = val;
             return this;
@@ -944,6 +996,10 @@ public class PigeonEntity implements Serializable {
 
 
     protected PigeonEntity(Parcel in) {
+        this.WoPigeonStateName= in.readString();
+        this.MenPigeonStateName= in.readString();
+        this.MenPigeonStateID= in.readString();
+        this.WoPigeonStateID= in.readString();
         this.CoverPhotoUrl = in.readString();
         this.CoverPhotoID = in.readString();
         this.FootRingID = in.readString();

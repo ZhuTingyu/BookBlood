@@ -43,10 +43,12 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                 pigeonFatherId,
                 footFather,
                 pigeonFatherStateId,
+//                pigeonFatherStateName,
                 footMotherId,
                 pigeonMotherId,
                 footMother,
                 pigeonMotherStateId,
+//                pigeonMotherStateName,
                 pigeonName,
                 sexId,
                 featherColor,
@@ -86,6 +88,8 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                 lineage,//  血统 （可选可填，传血统名称）
                 stateId,// 信鸽状态ID
                 phototypeid,//
+                pigeonMotherStateId,
+                pigeonFatherStateId,
                 setImageMap()), r -> {
             if (r.isOk()) {
                 mPigeonEntity = r.data;

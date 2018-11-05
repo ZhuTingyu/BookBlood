@@ -45,6 +45,8 @@ public class BasePigeonViewModel extends BaseViewModel {
     public String pigeonMotherId = "";
     public String footMotherId = "";
     public String pigeonMotherStateId = "";
+    public String pigeonMotherStateName;
+    public String pigeonFatherStateName;
 
     //鸽名
     public String pigeonName = "";

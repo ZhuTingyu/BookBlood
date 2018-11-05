@@ -115,7 +115,6 @@ public class InputPigeonFragment extends BaseBookFragment {
     BookViewModel mBookViewModel;
     SelectTypeViewModel mSelectTypeViewModel;
     SelectParentFootRingViewModel mSelectParentFootRingViewModel;
-
     SelectImageAdapter2 mAdapter;
 
 
@@ -360,6 +359,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
                     @Override
                     public void onOptionPicked(int index, String item) {
+                        mViewModel.pigeonFatherStateName=mViewModel.mSelectTypes_State.get(index).getTypeName();
                         mViewModel.pigeonFatherStateId = mViewModel.mSelectTypes_State.get(index).getTypeID();
                         mLvFatherFootState.setContent(mViewModel.mSelectTypes_State.get(index).getTypeName());
                         mViewModel.isFatherCanCommit();
@@ -374,6 +374,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
                     @Override
                     public void onOptionPicked(int index, String item) {
+                        mViewModel.pigeonMotherStateName=mViewModel.mSelectTypes_State.get(index).getTypeName();
                         mViewModel.pigeonMotherStateId = mViewModel.mSelectTypes_State.get(index).getTypeID();
                         mLvMotherFootState.setContent(mViewModel.mSelectTypes_State.get(index).getTypeName());
                         mViewModel.isMotherCanCommit();
@@ -551,6 +552,8 @@ public class InputPigeonFragment extends BaseBookFragment {
             mLvFootSource.setRightText(breedPigeonEntity.getSourceName());
             mLvFatherFoot.setRightText(breedPigeonEntity.getMenFootRingNum());
             mLvMotherFoot.setRightText(breedPigeonEntity.getWoFootRingNum());
+            mLvFatherFootState.setRightText(breedPigeonEntity.getMenPigeonStateName());
+            mLvMotherFootState.setRightText(breedPigeonEntity.getWoPigeonStateName());
             mLvPigeonName.setRightText(breedPigeonEntity.getPigeonName());
             mLvSex.setRightText(breedPigeonEntity.getPigeonSexName());
             mLvFeatherColor.setRightText(breedPigeonEntity.getPigeonPlumeName());
@@ -558,7 +561,10 @@ public class InputPigeonFragment extends BaseBookFragment {
             mLvBirthTime.setRightText(breedPigeonEntity.getFootRingTime());
             mLvBlood.setRightText(breedPigeonEntity.getPigeonBloodName());
             mLvState.setRightText(breedPigeonEntity.getStateName());
-
+            mViewModel.pigeonMotherStateId=breedPigeonEntity.getWoPigeonStateID();
+            mViewModel.pigeonFatherStateId=breedPigeonEntity.getMenPigeonStateID();
+            mViewModel.pigeonMotherStateName=breedPigeonEntity.getWoPigeonStateName();
+            mViewModel.pigeonFatherStateName=breedPigeonEntity.getMenPigeonStateName();
             mViewModel.pigeonType = breedPigeonEntity.getTypeID();
             mViewModel.countryId = breedPigeonEntity.getFootCodeID();
             mViewModel.foot = breedPigeonEntity.getFootRingNum();
@@ -725,14 +731,16 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.footFatherId = pigeonEntity.getFootRingID();
                     mViewModel.footFather = pigeonEntity.getFootRingNum();
                     mViewModel.pigeonFatherId = pigeonEntity.getPigeonID();
-                    mViewModel.pigeonFatherStateId = pigeonEntity.getStateID();
+                    mViewModel.pigeonFatherStateName=pigeonEntity.getStateName();
+                    mViewModel.pigeonFatherStateId = String.valueOf(pigeonEntity.getStateID());
                     mLvFatherFootState.setRightText(pigeonEntity.getStateName());
                 } else {
                     mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
                     mViewModel.footMotherId = pigeonEntity.getFootRingID();
                     mViewModel.footMother = pigeonEntity.getFootRingNum();
                     mViewModel.pigeonMotherId = pigeonEntity.getPigeonID();
-                    mViewModel.pigeonMotherStateId = pigeonEntity.getStateID();
+                    mViewModel.pigeonMotherStateId = String.valueOf(pigeonEntity.getStateID());
+                    mViewModel.pigeonMotherStateName=pigeonEntity.getStateName();
                     mLvMotherFootState.setRightText(pigeonEntity.getStateName());
                 }
             });
@@ -826,6 +834,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.footFatherId = String.valueOf(entity.getFootRingID());
             mViewModel.pigeonFatherId = entity.getPigeonID();
             mViewModel.pigeonFatherStateId = String.valueOf(entity.getStateID());
+            mViewModel.pigeonFatherStateName = entity.getStateName();
             mViewModel.isFatherCanCommit();
             mViewModel.isMotherCanCommit();
         } else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
@@ -836,6 +845,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.footMotherId = String.valueOf(entity.getFootRingID());
             mViewModel.pigeonMotherId = entity.getPigeonID();
             mViewModel.pigeonMotherStateId = String.valueOf(entity.getStateID());
+            mViewModel.pigeonMotherStateName = entity.getStateName();
             mViewModel.isFatherCanCommit();
             mViewModel.isMotherCanCommit();
         }

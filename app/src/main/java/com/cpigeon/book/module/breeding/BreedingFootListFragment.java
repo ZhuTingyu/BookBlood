@@ -110,7 +110,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 try {
                     BreedEntity mBreedEntity = mPairingInfoListAdapter.getData().get(position);
-               //   PairingInfoListFragment.start(getBaseActivity(), mBreedEntity);
+                  PairingInfoListFragment.start(getBaseActivity(), mBreedEntity);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

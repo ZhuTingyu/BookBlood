@@ -62,8 +62,7 @@ public class PairingModel {
     public static Observable<ApiResponse<List<PairingInfoEntity>>> getTXGP_PigeonBreed_SelectPigeonAll(String pi,
                                                                                                        String ps,
                                                                                                        String pigeonid,
-                                                                                                       String footid,
-                                                                                                       String sexid) {
+                                                                                                       String footid) {
         return RequestData.<ApiResponse<List<PairingInfoEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PairingInfoEntity>>>() {
                 }.getType())
@@ -72,7 +71,6 @@ public class PairingModel {
                 .addBody("ps", ps)//
                 .addBody("pigeonid", pigeonid)//
                 .addBody("footid", footid)//
-                .addBody("sexid", sexid)//
                 .request();
     }
 

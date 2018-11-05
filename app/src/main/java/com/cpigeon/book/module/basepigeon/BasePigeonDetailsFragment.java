@@ -29,6 +29,7 @@ import com.base.widget.magicindicator.buildins.commonnavigator.abs.IPagerTitleVi
 import com.base.widget.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import com.base.widget.magicindicator.ext.titles.ScaleTransitionPagerTitleView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.AssEntity;
@@ -274,8 +275,11 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
 
             Glide.with(this)
                     .load(datas.getCoverPhotoUrl())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.ic_img_default2)
-                    .into(img_pigeon);//鸽子照片
+                    .error(R.drawable.ic_img_default2)
+                    .dontAnimate()
+                    .into(img_pigeon);
             if (TYPE_HIS_SHARE.equals(mType)) {
                 tvLeft.setText(mBreedPigeonDetailsViewModel.mPigeonEntity.getUserName());
             }
