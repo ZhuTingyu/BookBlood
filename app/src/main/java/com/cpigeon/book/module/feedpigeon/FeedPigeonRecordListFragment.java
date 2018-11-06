@@ -62,4 +62,9 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
 
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

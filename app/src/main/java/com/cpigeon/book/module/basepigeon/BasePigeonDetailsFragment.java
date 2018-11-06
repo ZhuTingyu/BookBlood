@@ -400,4 +400,10 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
 
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mBreedPigeonDetailsViewModel.getPigeonDetails();
+    }
 }

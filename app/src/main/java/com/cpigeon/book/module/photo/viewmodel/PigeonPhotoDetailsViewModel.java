@@ -12,7 +12,6 @@ import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.service.EventBusService;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class PigeonPhotoDetailsViewModel extends BaseViewModel {
 
 
     public PigeonEntity mPigeonEntity;
+    public String PigeonId;
     public List<PigeonPhotoEntity> mPigeonPhotoData;
     public List<SelectTypeEntity> mPhotoType;
     public String typeid;//
@@ -56,7 +56,7 @@ public class PigeonPhotoDetailsViewModel extends BaseViewModel {
     //删除图片  一张
     public void getTXGP_PigeonPhoto_DeleteData() {
         submitRequestThrowError(PhotoAlbumModel.getTXGP_PigeonPhoto_Delete(
-                photoid), r -> {
+                photoid,PigeonId), r -> {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.PIGEON_PHOTO_REFRESH);
                 imgDelCallBack.setValue(r.msg);

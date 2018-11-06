@@ -21,11 +21,14 @@ import com.base.util.picker.PickerUtil;
 import com.base.util.system.ScreenTool;
 import com.base.widget.BottomSheetAdapter;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
+import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
+import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonDetailsViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.adpter.ImageItemDecoration;
 import com.cpigeon.book.module.photo.adpter.PigeonPhotoHomeAdapter;
@@ -44,7 +47,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * 信鸽相册   图片列表 筛选
@@ -52,7 +54,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
  */
 
 public class PigeonPhotoHomeActivity extends BaseBookActivity {
-
+private BreedPigeonDetailsViewModel breedPigeonDetailsViewModel;
     private CollapsingToolbarLayout mCoordinator;
     private ImageView mImgHead;
     private TextView mTvFootNumber;
@@ -87,14 +89,15 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);//在当前界面注册一个订阅者
-
+        breedPigeonDetailsViewModel=new BreedPigeonDetailsViewModel();
         mViewModel = new PigeonPhotoViewModel();
         mTypeViewModel = new SelectTypeViewModel();
         initViewModel(mViewModel);
+        initViewModel(breedPigeonDetailsViewModel);
 
         mViewModel.mPigeonEntity = (PigeonEntity) getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
-
-
+        breedPigeonDetailsViewModel.pigeonId=mViewModel.mPigeonEntity.getPigeonID();
+        breedPigeonDetailsViewModel.pUid= UserModel.getInstance().getUserId();
         mCoordinator = findViewById(R.id.coordinator);
         mImgHead = findViewById(R.id.imgHead);
         mTvFootNumber = findViewById(R.id.tvFootNumber);
@@ -111,7 +114,7 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
 
 
         initRecyclerView();
-
+        breedPigeonDetailsViewModel.getPigeonDetails();
         mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
 
     }
@@ -120,11 +123,7 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
 
         mTvFootNumber.setText(mViewModel.mPigeonEntity.getFootRingNum());
 
-        Glide.with(this)
-                .load(mViewModel.mPigeonEntity.getCoverPhotoUrl())
-                .placeholder(R.drawable.ic_img_default2)
-                .bitmapTransform(new RoundedCornersTransformation(getBaseContext(), 13, 0))
-                .into(mImgHead);//鸽子照片
+
 
         mViewModel.mPhotoType = new ArrayList<>();
         mViewModel.mPhotoType.add(new SelectTypeEntity.Builder()
@@ -222,6 +221,10 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
             mViewModel.mPhotoType.addAll(selectTypeEntities);
             setProgressVisible(false);
         });
+        mViewModel.listEmptyMessage.observe(this, s -> {
+
+            mAdapter.setEmptyText(s);
+        });
 
         mViewModel.mPigeonPhotoData.observe(this, datas -> {
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
@@ -230,17 +233,22 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
             setProgressVisible(false);
         });
 
-        mViewModel.listEmptyMessage.observe(this, s -> {
-            mTvPhotoCount.setText("0张");
-            mAdapter.setEmptyText(s);
-        });
+
 
         //统计数据
         mViewModel.mPigeonPhotoCount.observe(this, datas -> {
 
         });
+        breedPigeonDetailsViewModel.mBreedPigeonData.observe(this, datas -> {
+            Glide.with(this)
+                    .load(datas.getCoverPhotoUrl())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.ic_img_default2)
+                    .error(R.drawable.ic_img_default2)
+                    .dontAnimate()
+                    .into(mImgHead);
+        });
     }
-
     private void initHead() {
 
     }
@@ -256,6 +264,7 @@ public class PigeonPhotoHomeActivity extends BaseBookActivity {
     private void initData(boolean isCount) {
         setProgressVisible(true);
         mAdapter.cleanList();
+        breedPigeonDetailsViewModel.getPigeonDetails();
         mViewModel.getTXGP_PigeonPhoto_SelectData();
 //        if (isCount) {
 //            mViewModel.getTXGP_PigeonPhoto_CountPhotoData();

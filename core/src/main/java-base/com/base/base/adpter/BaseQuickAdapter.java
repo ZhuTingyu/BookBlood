@@ -168,7 +168,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
     {
         tv.setPadding(5,2,5,2);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
-        params.height=60;
+        params.height=48;
         params.setMargins(0,0,10,0);
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);

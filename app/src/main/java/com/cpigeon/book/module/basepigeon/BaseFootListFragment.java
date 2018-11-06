@@ -114,8 +114,6 @@ public void onViewCreated(View view, Bundle savedInstanceState) {
         });
 
         setProgressVisible(true);
-        mBreedPigeonListModel.getPigeonList();
-
         mActivity.setSearchClickListener(v -> {
         //搜索
         Bundle bundle = new Bundle();
@@ -344,7 +342,7 @@ protected void initObserve() {
         });
 
         mBreedPigeonListModel.mPigeonListData.observe(this, datas -> {
-
+                Log.d("shuaishuai", "initObserve: "+datas.size());
         if (datas.isEmpty() || datas.size() == 0) {
 
         } else {
@@ -372,4 +370,20 @@ protected void initObserve() {
 
 protected void initHeadView() {
         }
+
+        @Override
+        public void onResume() {
+                super.onResume();
+                setProgressVisible(true);
+                mAdapter.getData().clear();
+                mAdapter.notifyDataSetChanged();
+                mBreedPigeonListModel.pi=1;
+                mBreedPigeonListModel.getPigeonList();
+
+
+
         }
+
+
+}
+

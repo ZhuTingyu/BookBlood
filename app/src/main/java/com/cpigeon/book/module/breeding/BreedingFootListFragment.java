@@ -94,10 +94,11 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         });
         setStartSearchActvity(SearchBreedingFootActivity.class);//搜索页面
         setProgressVisible(true);
-        mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
+        //mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
         mRecyclerView.setRefreshListener(() -> {
             Log.d("songshuaishuai", "66666: ");
             setProgressVisible(true);
+            mPairingInfoListViewModel.pi=1;
             mPairingInfoListAdapter.getData().clear();
             mPairingInfoListAdapter.notifyDataSetChanged();
             mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
@@ -145,5 +146,16 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         mPairingInfoListViewModel.listEmptyMessage.observe(this, s -> {
             mPairingInfoListAdapter.setEmptyText(s);
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setProgressVisible(true);
+        mPairingInfoListViewModel.pi=1;
+        mPairingInfoListAdapter.getData().clear();
+        mPairingInfoListAdapter.notifyDataSetChanged();
+        mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
+
     }
 }

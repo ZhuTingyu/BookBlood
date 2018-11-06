@@ -62,13 +62,14 @@ public class PhotoAlbumModel {
     }
 
     //hl 图片  删除
-    public static Observable<ApiResponse<Object>> getTXGP_PigeonPhoto_Delete(String photoid
+    public static Observable<ApiResponse<Object>> getTXGP_PigeonPhoto_Delete(String photoid,String pigeonid
     ) {
         return RequestData.<ApiResponse<Object>>build()
                 .setToJsonType(new TypeToken<ApiResponse<Object>>() {
                 }.getType())
                 .url(R.string.pigeion_img_one_del)
                 .addBody("photoid", photoid)//
+                .addBody("pigeonid", pigeonid )
                 .request();
     }
 

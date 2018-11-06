@@ -104,7 +104,6 @@
     <string name="array_blind_date">相亲配对</string>
     <string-array name="text_breeding_info">
         <item>@string/array_pairing_add</item>
-        <item>@string/array_pairing_recommend</item>
         <item>@string/array_blind_date</item>
     </string-array>
 
@@ -286,7 +285,7 @@
     <string name="text_add_breed_pigeon">添加种鸽</string>
     <string name="text_add_play_pigeon">添加赛鸽</string>
     <string name="text_go_choose">去选择</string>
-    <string name="text_breed">种鸽库</string>
+    <string name="text_breed">信鸽库</string>
     <string name="text_foot_input_price">足环金额录入</string>
     <string name="text_pleas_input_pigeon_name">请输入鸽子名称</string>
     <string name="text_pigeon_name">鸽名</string>

@@ -26,7 +26,7 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
         tv.setPadding(5,2,5,2);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)tv.getLayoutParams();
         params.setMargins(10,0,0,0);
-        params.height=60;
+        params.height=48;
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
     }

@@ -160,6 +160,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
                 //确定
                 sweetAlertDialog.dismiss();
                 setProgressVisible(true);
+                mViewModel.PigeonId=mViewModel.mPigeonEntity.getPigeonID();
                 mViewModel.photoid = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPigeonPhotoID();
                 mViewModel.getTXGP_PigeonPhoto_DeleteData();
             }, sweetAlertDialog -> {

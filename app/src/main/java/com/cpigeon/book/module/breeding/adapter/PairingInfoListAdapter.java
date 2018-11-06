@@ -86,7 +86,7 @@ public class PairingInfoListAdapter extends BaseQuickAdapter<PairingInfoEntity, 
             foot.setText(item.getMenFootRingNum());
             imgSex.setImageResource(R.mipmap.ic_male);
             Glide.with(mContext)
-                    .load(item.getWoCoverPhotoUrl())
+                    .load(item.getMenCoverPhotoUrl())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.ic_img_default)
                     .error(R.drawable.ic_img_default)

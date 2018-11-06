@@ -11,6 +11,7 @@
     android:orientation="horizontal"
     android:background="@drawable/popupwindowbackground">
 <TextView
+    android:textColor="@color/white"
     android:layout_gravity="center_vertical"
     android:id="@+id/count"
     android:gravity="center"

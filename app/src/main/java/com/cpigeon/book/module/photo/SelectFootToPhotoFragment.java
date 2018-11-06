@@ -119,4 +119,9 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         progressBar.setProgress((int)Double.parseDouble(datas.getUseCount()));
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

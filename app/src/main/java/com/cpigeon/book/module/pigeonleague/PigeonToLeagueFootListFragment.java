@@ -109,4 +109,9 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
         mStat2 = mHeadView.findViewById(R.id.stat2);
         mStat3 = mHeadView.findViewById(R.id.stat3);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

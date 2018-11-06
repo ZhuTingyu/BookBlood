@@ -4,10 +4,8 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
-import com.cpigeon.book.model.PairingModel;
 import com.cpigeon.book.model.PhotoAlbumModel;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
@@ -23,6 +21,7 @@ public class PigeonPhotoViewModel extends BaseViewModel {
     public PigeonEntity mPigeonEntity;
     public List<SelectTypeEntity> mPhotoType;
     public String typeid;//
+    public String count;
 
     public int pi = 1;
     public int ps = 15000;
@@ -45,6 +44,7 @@ public class PigeonPhotoViewModel extends BaseViewModel {
         ), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
+                count=r.data.size()+"";
                 mPigeonPhotoData.setValue(r.data);
             } else throw new HttpErrorException(r);
         });

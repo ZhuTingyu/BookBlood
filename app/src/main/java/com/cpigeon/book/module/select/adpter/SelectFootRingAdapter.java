@@ -95,7 +95,7 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
     {
         tv.setPadding(5,2,5,2);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
-        params.height=60;
+        params.height=48;
         params.setMargins(0,0,10,0);
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
@@ -104,7 +104,7 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
     {
         tv.setPadding(0,0,0,0);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
-        params.height=60;
+        params.height=50;
         params.setMargins(0,0,0,0);
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);

@@ -36,6 +36,10 @@ public class BreedPigeonDetailsViewModel extends BaseViewModel {
             pUid = uid;
         }
     }
+    public BreedPigeonDetailsViewModel() {
+
+
+    }
 
     //获取 鸽子  详情
     public void getPigeonDetails() {

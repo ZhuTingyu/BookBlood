@@ -2,6 +2,7 @@ package com.cpigeon.book.module.homingpigeon;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.cpigeon.book.base.SearchFragmentParentActivity;
@@ -64,4 +65,13 @@ public class MyHomingPigeonFragment extends BaseFootListFragment  {
         });
     }
 
+
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        Log.d("shuaishuai", "onResume: ");
+    }
 }
