@@ -106,7 +106,8 @@ public class SearchFootRingActivity extends BaseSearchActivity {
         mViewModel.mDataFootList.observe(this, footEntities -> {
             Log.d("shuaishuai", "initObserve: ");
             footEntities.size();
-           // mAdapter
+            mAdapter.getData().clear();
+            mAdapter.notifyDataSetChanged();
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, footEntities);
             setProgressVisible(false);
         });
