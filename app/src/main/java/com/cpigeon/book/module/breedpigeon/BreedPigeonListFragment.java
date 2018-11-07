@@ -36,6 +36,7 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
+        bundle.putString(BaseFootListFragment.STATEID, PigeonEntity.IN_THE_SHED);
         bundle.putString(BaseFootListFragment.TYPEID, PigeonEntity.ID_BREED_PIGEON);
         SearchFragmentParentActivity.
                 start(activity, BreedPigeonListFragment.class, true, bundle);

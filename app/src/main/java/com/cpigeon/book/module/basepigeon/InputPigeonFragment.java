@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -465,6 +466,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         mLvHangingRingDate.setOnRightClickListener(lineInputView -> {
             PickerUtil.showTimeYMD(getActivity(), System.currentTimeMillis(), (year, month, day) -> {
                 mViewModel.llHangingRingDate = Utils.getString(R.string.text_time_y_m_d, year, month, day);
+                Log.d("shuaishuai", "setClick: "+mViewModel.llHangingRingDate);
                 mLvHangingRingDate.setRightText(mViewModel.llHangingRingDate);
             });
         });
@@ -494,7 +496,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             }
         });
         mTvNextStep.setOnClickListener(v -> {
-
+            Log.d("shuaishuai", "setClick: "+mViewModel.footMother+mViewModel.pigeonMotherStateName+mViewModel.pigeonMotherStateId);
             if (!StringUtil.isStringValid(mViewModel.pigeonId)) {
                 setProgressVisible(true);
                 mViewModel.addPigeon();
@@ -558,11 +560,13 @@ public class InputPigeonFragment extends BaseBookFragment {
             mLvSex.setRightText(breedPigeonEntity.getPigeonSexName());
             mLvFeatherColor.setRightText(breedPigeonEntity.getPigeonPlumeName());
             mLvEyeSand.setRightText(breedPigeonEntity.getPigeonEyeName());
-            mLvBirthTime.setRightText(breedPigeonEntity.getFootRingTime());
+            mLvBirthTime.setRightText(breedPigeonEntity.getOutShellTime());
+            mLvHangingRingDate.setRightText(breedPigeonEntity.getFootRingTime());
             mLvBlood.setRightText(breedPigeonEntity.getPigeonBloodName());
             mLvState.setRightText(breedPigeonEntity.getStateName());
             mViewModel.pigeonMotherStateId=breedPigeonEntity.getWoPigeonStateID();
             mViewModel.pigeonFatherStateId=breedPigeonEntity.getMenPigeonStateID();
+            mViewModel.llHangingRingDate=breedPigeonEntity.getFootRingTime();
             mViewModel.pigeonMotherStateName=breedPigeonEntity.getWoPigeonStateName();
             mViewModel.pigeonFatherStateName=breedPigeonEntity.getMenPigeonStateName();
             mViewModel.pigeonType = breedPigeonEntity.getTypeID();
@@ -576,7 +580,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.sexId = breedPigeonEntity.getPigeonSexID();
             mViewModel.featherColor = breedPigeonEntity.getPigeonSexName();
             mViewModel.eyeSandId = breedPigeonEntity.getPigeonEyeID();
-            mViewModel.theirShellsDate = breedPigeonEntity.getFootRingTimeTo();
+            mViewModel.theirShellsDate = breedPigeonEntity.getOutShellTime();
             mViewModel.lineage = breedPigeonEntity.getPigeonBloodName();
             mViewModel.stateId = breedPigeonEntity.getStateID();
 
@@ -828,7 +832,6 @@ public class InputPigeonFragment extends BaseBookFragment {
             PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             mLvFatherFoot.setRightText(entity.getFootRingNum());
             mLvFatherFootState.setRightText(entity.getStateName());
-            mLvFatherFootState.setClickable(false);
             mLvFatherFootState.setRightColor(R.color.gray);
             mViewModel.footFather = entity.getFootRingNum();
             mViewModel.footFatherId = String.valueOf(entity.getFootRingID());

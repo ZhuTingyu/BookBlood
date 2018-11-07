@@ -45,6 +45,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
                 yearlist.add(year+"");
                 year--;
             }
+
             PickerUtil.showItemPicker(getBaseActivity(),yearlist
                     , 0, new OptionPicker.OnOptionPickListener() {
                         @Override
@@ -60,6 +61,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
                     });
             return true;
         });
+        mFiltrate.setOnSureClickListener(null);
     }
 
     public static void start(Activity activity) {

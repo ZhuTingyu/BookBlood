@@ -47,6 +47,7 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
         Bundle bundle = new Bundle();
         bundle.putString(BaseFootListFragment.TYPEID, PigeonEntity.ID_MATCH_PIGEON);
         bundle.putString(BaseFootListFragment.BITMATCH, PigeonEntity.BIT_MATCH_NO);
+        bundle.putString(BaseFootListFragment.STATEID, PigeonEntity.IN_THE_SHED);
         SearchFragmentParentActivity.
                 start(activity, PigeonToLeagueFootListFragment.class, false, bundle);
     }

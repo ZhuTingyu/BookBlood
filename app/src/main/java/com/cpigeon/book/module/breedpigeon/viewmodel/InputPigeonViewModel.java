@@ -73,6 +73,9 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     public void modifyBreedPigeonEntry() {
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
                 pigeonType.equals(PigeonEntity.ID_BREED_PIGEON) ? PigeonEntity.ID_BREED_PIGEON : PigeonEntity.ID_MATCH_PIGEON,
+                llHangingRingDate,
+                pigeonMotherStateId,
+                pigeonFatherStateId,
                 mPigeonEntity.getPigeonID(),// 鸽子id
                 countryId,// 国家Id
                 foot,//足环（可选可填，传足环号）
@@ -88,8 +91,6 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                 lineage,//  血统 （可选可填，传血统名称）
                 stateId,// 信鸽状态ID
                 phototypeid,//
-                pigeonMotherStateId,
-                pigeonFatherStateId,
                 setImageMap()), r -> {
             if (r.isOk()) {
                 mPigeonEntity = r.data;

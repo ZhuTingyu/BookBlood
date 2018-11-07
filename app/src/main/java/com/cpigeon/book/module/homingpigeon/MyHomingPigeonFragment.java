@@ -21,7 +21,7 @@ public class MyHomingPigeonFragment extends BaseFootListFragment  {
 
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
-        bundle.putString(BaseFootListFragment.STATEID, PigeonEntity.ID_ALL);
+        bundle.putString(BaseFootListFragment.STATEID, PigeonEntity.IN_THE_SHED);
         SearchFragmentParentActivity.
                 start(activity, MyHomingPigeonFragment.class, true, bundle);
     }

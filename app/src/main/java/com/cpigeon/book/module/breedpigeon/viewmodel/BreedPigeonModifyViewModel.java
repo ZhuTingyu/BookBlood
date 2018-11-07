@@ -32,6 +32,9 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
     public void modifyBreedPigeonEntry() {
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
                 pigeonType.equals(PigeonEntity.ID_BREED_PIGEON) ? PigeonEntity.ID_BREED_PIGEON : PigeonEntity.ID_MATCH_PIGEON,
+                mPigeonEntity.getFootRingTime(),
+                mPigeonEntity .getWoPigeonStateID(),
+                mPigeonEntity.getMenPigeonStateID(),
                 mPigeonEntity.getPigeonID(),// 鸽子id
                 mPigeonEntity.getFootCodeID(),// 国家Id
                 mPigeonEntity.getFootRingNum(),//足环（可选可填，传足环号）
@@ -47,8 +50,7 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
                 mPigeonEntity.getPigeonBloodName(),//  血统 （可选可填，传血统名称）
                 mPigeonEntity.getStateID(),// 信鸽状态ID
                 mPigeonEntity.getCoverPhotoID(),//
-                mPigeonEntity.getMenPigeonStateID(),
-                mPigeonEntity .getWoPigeonStateID(),
+
                 setImageMap()), r -> {
 
             if (r.isOk()) {

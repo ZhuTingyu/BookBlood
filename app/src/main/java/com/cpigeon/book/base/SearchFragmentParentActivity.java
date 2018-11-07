@@ -39,6 +39,7 @@ public class SearchFragmentParentActivity extends BaseBookActivity {
         Intent intent = new Intent();
         intent.setClass(activity, SearchFragmentParentActivity.class);
         intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);
+
         intent.putExtra(IntentBuilder.KEY_BOOLEAN, isHaveMenu);
         try {
             intent.putExtras(mBundle);
