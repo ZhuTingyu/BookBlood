@@ -96,7 +96,6 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
 
         });
 
-
     }
 
     public void setParams(TextView tv, int Resource) {
