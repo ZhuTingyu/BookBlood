@@ -738,6 +738,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.pigeonFatherStateName=pigeonEntity.getStateName();
                     mViewModel.pigeonFatherStateId = String.valueOf(pigeonEntity.getStateID());
                     mLvFatherFootState.setRightText(pigeonEntity.getStateName());
+                    mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
                 } else {
                     mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
                     mViewModel.footMotherId = pigeonEntity.getFootRingID();
@@ -746,6 +747,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.pigeonMotherStateId = String.valueOf(pigeonEntity.getStateID());
                     mViewModel.pigeonMotherStateName=pigeonEntity.getStateName();
                     mLvMotherFootState.setRightText(pigeonEntity.getStateName());
+                    mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
                 }
             });
         });

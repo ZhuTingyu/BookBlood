@@ -67,32 +67,27 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             @Override
             public void add(int x, int y) {
 
-
-
-                Log.d("songshuaishuai", "add if: ");
                 if (x == mFamilyTreeView.getStartGeneration()) {
-                    SelectPigeonToAddBreedFragment.start(getBaseActivity()
+                    InputPigeonFragment.start(getBaseActivity()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
-                            , CODE_ADD_PIGEON
-                            , PigeonEntity.ID_FEMALE, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
+                            , StringUtil.emptyString()
+                            , StringUtil.emptyString()
+                            , StringUtil.emptyString()
+                            , CODE_ADD_PIGEON);
                 } else {
-                    Log.d("songshuaishuai", "add else: ");
                     PigeonEntity breedPigeonEntity = null;
                     if (mFamilyTreeView.getSon(x, y) != null) {
-                        Log.d("songshuaishuai", "add: if get son");
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
                     boolean isMan = FamilyTreeView.isMale(y);
                     if (isMan) {
-                        Log.d("songshuaishuai", "add: if is man");
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
                                 , CODE_ADD_PIGEON
                                 , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
-                    }else {
-                        Log.d("songshuaishuai", "add: if is man else");
+                    } else {
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
@@ -146,7 +141,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         if (resultCode != Activity.RESULT_OK) return;
         if (requestCode == CODE_ADD_PIGEON) {
             if (!StringUtil.isStringValid(mViewModel.foodId)) {
-                PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA) ;
+                PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
                 mViewModel.foodId = entity.getFootRingID();
                 mViewModel.pigeonId = entity.getPigeonID();
             }
@@ -163,8 +158,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
         return true;
     }
 
-    public void exit()
-    {
+    public void exit() {
         if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
             getBaseActivity().errorDialog.dismiss();
         }

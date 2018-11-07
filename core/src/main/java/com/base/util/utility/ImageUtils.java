@@ -1817,7 +1817,7 @@ public final class ImageUtils {
     }
 
     //保存文件到指定路径
-    public static String saveImageToGallery(Context context, Bitmap bmp) {
+    public static String saveImageToGallery(Context context, Bitmap bmp, String title) {
 
         String storePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "dearxy";
         save(bmp, storePath, CompressFormat.JPEG);
@@ -1831,11 +1831,18 @@ public final class ImageUtils {
 
             File file = new File(storePath);
             //把文件插入到系统图库
-            MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), "血统书", null);
+            MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), title, null);
 
             //保存图片后发送广播通知更新数据库
             Uri uri = Uri.fromFile(new File(storePath));
             context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
+
+            ExifInterface exifInterface = new ExifInterface(file.getName());
+            exifInterface.setAttribute(ExifInterface.TAG_DATETIME_ORIGINAL
+                    , TimeUtil.format(System.currentTimeMillis(), TimeUtil.FORMAT_YYYYMMDDHHMMSS));
+            exifInterface.saveAttributes();
+
+
             if (isSuccess) {
                 return storePath;
             } else {
