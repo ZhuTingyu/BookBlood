@@ -61,7 +61,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
                     });
             return true;
         });
-        mFiltrate.setOnSureClickListener(null);
+
     }
 
     public static void start(Activity activity) {

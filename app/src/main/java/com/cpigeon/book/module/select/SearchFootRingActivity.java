@@ -3,6 +3,7 @@ package com.cpigeon.book.module.select;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
@@ -26,6 +27,7 @@ public class SearchFootRingActivity extends BaseSearchActivity {
 
     SelectFootRingAdapter mAdapter;
     SelectFootRingViewModel mViewModel;
+    String SexID;
     boolean mIsCanSetDeath = false;
 
     public static void start(Activity activity, boolean isCanSetDeath) {
@@ -34,7 +36,13 @@ public class SearchFootRingActivity extends BaseSearchActivity {
         BaseSearchActivity.start(activity, SearchFootRingActivity.class, bundle);
 
     }
+    public static void start(Activity activity, boolean isCanSetDeath,String sexID) {
+        Bundle bundle = new Bundle();
+        bundle.putString(IntentBuilder.KEY_DATA, sexID );
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isCanSetDeath);
+        BaseSearchActivity.start(activity, SearchFootRingActivity.class, bundle);
 
+    }
     @Override
     protected List<DbEntity> getHistory() {
         return AppDatabase.getInstance(getBaseActivity()).DbEntityDao()
@@ -49,9 +57,12 @@ public class SearchFootRingActivity extends BaseSearchActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        mIsCanSetDeath = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
+
         super.onCreate(savedInstanceState);
+        mIsCanSetDeath = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         mViewModel = new SelectFootRingViewModel();
+        mViewModel.sexId= getIntent().getStringExtra(IntentBuilder.KEY_DATA);
+
         initViewModel(mViewModel);
         mRecyclerView.addItemDecorationLine();
 
@@ -73,6 +84,8 @@ public class SearchFootRingActivity extends BaseSearchActivity {
 
         mSearchHistoryAdapter.setOnItemClickListener((adapter, view, position) -> {
             try {
+
+
                 mViewModel.footNumber = mSearchHistoryAdapter.getItem(position).searchTitle;
                 mViewModel.getFootList();
             } catch (Exception e) {
@@ -91,8 +104,15 @@ public class SearchFootRingActivity extends BaseSearchActivity {
     @Override
     protected void initObserve() {
         mViewModel.mDataFootList.observe(this, footEntities -> {
+            Log.d("shuaishuai", "initObserve: ");
+            footEntities.size();
+           // mAdapter
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, footEntities);
             setProgressVisible(false);
+        });
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
+            Log.d("shuaishuai", "initObserve: "+s);
         });
     }
 }
