@@ -8,9 +8,12 @@ import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
+import com.base.util.utility.StringUtil;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 
 /**
  * Created by Zhu TingYu on 2018/10/13.
@@ -80,31 +83,35 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
 
         helper.itemView.setOnClickListener(v -> {
 
+            String sexString = Utils.getString(R.string.text_male_a).equals(item.getPigeonSexName())
+                    ? Utils.getString(R.string.text_father) : Utils.getString(R.string.text_mother);
 
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, item)
-                    .finishForResult(getBaseActivity());
-
-
+            DialogUtils.createDialogWithLeft(getBaseActivity()
+                    , Utils.getString(R.string.text_hint_set_parent_pigeon, sexString), sweetAlertDialog -> {
+                        sweetAlertDialog.dismiss();
+                        IntentBuilder.Builder()
+                                .putExtra(IntentBuilder.KEY_DATA, item)
+                                .finishForResult(getBaseActivity());
+                    });
 
         });
 
     }
-    public void  setParams(TextView tv, int Resource)
-    {
-        tv.setPadding(5,2,5,2);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
-        params.height=48;
-        params.setMargins(0,0,10,0);
+
+    public void setParams(TextView tv, int Resource) {
+        tv.setPadding(5, 2, 5, 2);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tv.getLayoutParams();
+        params.height = 48;
+        params.setMargins(0, 0, 10, 0);
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
     }
-    public void  defultParams(TextView tv,int Resource)
-    {
-        tv.setPadding(0,0,0,0);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
-        params.height=50;
-        params.setMargins(0,0,0,0);
+
+    public void defultParams(TextView tv, int Resource) {
+        tv.setPadding(0, 0, 0, 0);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tv.getLayoutParams();
+        params.height = 50;
+        params.setMargins(0, 0, 0, 0);
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
     }

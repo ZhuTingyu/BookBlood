@@ -114,7 +114,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
         GlideUtil.setGlideImageView(getBaseActivity(), UserModel.getInstance().getUserData().touxiangurl
                 , mImgHead);
 
-        mTvFootNumber.setText(UserModel.getInstance().getUserData().pigeonHouseEntity.getXingming());
+        mTvFootNumber.setText(UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonHomeName());
 
         GlideUtil.setGlideImageView(getBaseActivity(), UserModel.getInstance().getUserData().touxiangurl
                 , mImgPrintHead);
@@ -123,7 +123,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
         mCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mLlImage.setVisibility(isChecked ? View.VISIBLE : View.GONE);
             if (isChecked) {
-                mTvPrintNumber.setText(UserModel.getInstance().getUserData().pigeonHouseEntity.getXingming());
+                mTvPrintNumber.setText(UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonHomeName());
                 mImgPrintHead.setVisibility(View.VISIBLE);
             } else {
                 mTvPrintNumber.setText(Utils.getString(R.string.text_blood_book_count, footNumber));

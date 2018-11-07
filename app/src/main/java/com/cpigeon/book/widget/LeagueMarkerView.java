@@ -60,10 +60,10 @@ public class LeagueMarkerView extends MarkerView {
         super.refreshContent(e, highlight);
     }
 
-//    @Override
-//    public MPPointF getOffset() {
-//        return new MPPointF(-(getWidth() / 2) * 2f, -getHeight() - 10);
-//    }
+    @Override
+    public MPPointF getOffset() {
+        return new MPPointF(-(getWidth() / 2) * 1f, -getHeight() - 10);
+    }
 
     @Override
     public void draw(Canvas canvas, float posX, float posY) {

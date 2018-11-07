@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
@@ -201,12 +202,12 @@ public class FamilyTreeView extends LinearLayout {
 
     private View getMemberView(Context context, int generationsPoint, int generationsOrder, int generationCount) {
 
-        LinearLayout.LayoutParams params;
+        RelativeLayout.LayoutParams params;
         if (isHorizontal) {
-            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
+            params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , mHeight / generationCount);
         } else {
-            params = new LinearLayout.LayoutParams(mWidth / generationCount
+            params = new RelativeLayout.LayoutParams(mWidth / generationCount
                     , ViewGroup.LayoutParams.MATCH_PARENT);
         }
 

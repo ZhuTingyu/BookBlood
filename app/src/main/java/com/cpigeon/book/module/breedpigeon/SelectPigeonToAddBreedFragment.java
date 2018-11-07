@@ -92,6 +92,7 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
 
         DialogUtils.createDialogWithLeft(getBaseActivity()
                 , Utils.getString(R.string.text_hint_set_parent_pigeon, sexString) , sweetAlertDialog -> {
+                    sweetAlertDialog.dismiss();
                     mPigeonEntity = mAdapter.getItem(position);
                     if (StringUtil.isStringValid(mSonPigeonId)) {
                         setProgressVisible(true);
