@@ -1,6 +1,8 @@
 package com.cpigeon.book.module.menu.service.adpter;
 
+import android.graphics.Color;
 import android.text.SpannableStringBuilder;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +36,7 @@ public class OpenServiceAdapter extends BaseQuickAdapter<ServiceEntity, BaseView
     private TextView mTvServiceName;
     private TextView mTvOpen;
     private TextView mTvCount;
-
+private TextView mTvTime;
    private String type;
    private boolean mIsOpen;
 
@@ -46,19 +48,22 @@ public class OpenServiceAdapter extends BaseQuickAdapter<ServiceEntity, BaseView
 
     @Override
     protected void convert(BaseViewHolder helper, ServiceEntity item) {
-
         mImgIcon = helper.getView(R.id.imgIcon);
         mTvServiceName = helper.getView(R.id.tvServiceName);
         mTvOpen = helper.getView(R.id.tvOpen);
         mTvCount = helper.getView(R.id.tvCount);
-
+        mTvTime= helper.getView(R.id.tvtime);
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder(item.getSintro());
-
         mTvServiceName.setText(item.getSname());
         if (TYPE_OPEN.equals(type)) {
+            mTvTime.setVisibility(View.GONE);
             mTvOpen.setText(Utils.getString(R.string.text_open_at_once));
         } else {
+            mTvTime.setVisibility(View.VISIBLE);
+            mTvTime.setText(item.getExpiredate()+"到期");
+            mTvTime.setTextColor(Color.RED);
             mTvOpen.setText(Utils.getString(R.string.text_renew_at_once));
+
         }
 
         helper.setGlideImageView(getBaseActivity(), R.id.imgIcon, item.getImgurl());

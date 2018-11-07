@@ -28,6 +28,15 @@ public class ServiceEntity implements Parcelable {
     private String price;
     private String sintro;
     private String imgurl;
+    private String expiredate;
+
+    public String getExpiredate() {
+        return expiredate;
+    }
+
+    public void setExpiredate(String expiredate) {
+        this.expiredate = expiredate;
+    }
 
     private ServiceEntity(Builder builder) {
         setScore(builder.score);
