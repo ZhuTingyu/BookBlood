@@ -45,8 +45,6 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
     @Override
@@ -55,7 +53,7 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
         setStartSearchActvity(BaseSearchPigeonActivity.class);
 
-        mTvOk.setVisibility(View.VISIBLE);
+        mTvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.VISIBLE);
 
         mTvOk.setText(R.string.text_add_breed_pigeon);

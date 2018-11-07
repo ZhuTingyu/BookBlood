@@ -21,7 +21,6 @@
         app:layout_moreProgress="@layout/view_load_more"
         app:mainLayoutId="@layout/refresh_recyclerview"
         app:recyclerClipToPadding="false"
-
         app:scrollbarStyle="insideOverlay" />
 
     <View

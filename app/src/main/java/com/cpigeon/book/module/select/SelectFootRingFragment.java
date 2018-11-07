@@ -116,7 +116,7 @@ public class SelectFootRingFragment extends BaseBookFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            PigeonEntity entity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
+            PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
             IntentBuilder.Builder()
                     .putExtra(IntentBuilder.KEY_DATA, entity)
                     .finishForResult(getBaseActivity());
