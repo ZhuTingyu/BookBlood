@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cpigeon.book.R;
@@ -84,18 +86,25 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
 
     @Override
     protected void setAdapterClick(BaseQuickAdapter adapter, View view, int position) {
-        mPigeonEntity = mAdapter.getItem(position);
-        if (StringUtil.isStringValid(mSonPigeonId)) {
-            setProgressVisible(true);
-            mBookViewModel.pigeonId = mPigeonEntity.getPigeonID();
-            mBookViewModel.foodId = mPigeonEntity.getFootRingID();
-            mBookViewModel.sexId = mPigeonEntity.getPigeonSexID();
-            mBookViewModel.addParent();
-        } else {
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
-                    .finishForResult(getBaseActivity());
-        }
+
+        String sexString = InputPigeonFragment.TYPE_SEX_MALE.equals(mSexType)
+                ? Utils.getString(R.string.text_father) : Utils.getString(R.string.text_mother);
+
+        DialogUtils.createDialogWithLeft(getBaseActivity()
+                , Utils.getString(R.string.text_hint_set_parent_pigeon, sexString) , sweetAlertDialog -> {
+                    mPigeonEntity = mAdapter.getItem(position);
+                    if (StringUtil.isStringValid(mSonPigeonId)) {
+                        setProgressVisible(true);
+                        mBookViewModel.pigeonId = mPigeonEntity.getPigeonID();
+                        mBookViewModel.foodId = mPigeonEntity.getFootRingID();
+                        mBookViewModel.sexId = mPigeonEntity.getPigeonSexID();
+                        mBookViewModel.addParent();
+                    } else {
+                        IntentBuilder.Builder()
+                                .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
+                                .finishForResult(getBaseActivity());
+                    }
+        });
     }
 
     @Override
@@ -108,7 +117,7 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       setToolbarRight(R.string.text_add, item -> {
+        setToolbarRight(R.string.text_add, item -> {
 
             InputPigeonFragment.start(getBaseActivity()
                     , StringUtil.emptyString()
@@ -118,8 +127,8 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
                     , PigeonEntity.ID_BREED_PIGEON
                     , CODE_ADD_PIGEON);
 
-          return false;
-       });
+            return false;
+        });
     }
 
     @Override
@@ -145,7 +154,7 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
                 mBookViewModel.foodId = mPigeonEntity.getFootRingID();
                 mBookViewModel.sexId = mPigeonEntity.getPigeonSexID();
                 mBookViewModel.addParent();
-            }else {
+            } else {
                 IntentBuilder.Builder()
                         .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
                         .finishForResult(getBaseActivity());

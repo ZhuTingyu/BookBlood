@@ -257,7 +257,11 @@ public class PigeonEntity implements Serializable {
             return data.subList(0, 2);
         }else {
             data.addAll(getMatchInfoList());
-            return data.subList(0, 2);
+            if(data.size() >= 3){
+                return data.subList(0, 2);
+            }else {
+                return data;
+            }
         }
     }
 

@@ -73,7 +73,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         View view;
         if (isHorizontal) {
             view = LayoutInflater.from(context).inflate(R.layout.view_family_print_model_member_layout, this);
-        }else {
+        } else {
             view = LayoutInflater.from(context).inflate(R.layout.view_family_print_model_v_member_layout, this);
             mLlInfo = view.findViewById(R.id.llInfo);
         }
@@ -161,10 +161,10 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         shadowP = new LayoutParams(rootW + ScreenTool.dip2px(shadowSize)
                 , rootH + ScreenTool.dip2px(shadowSize));
 
-        if(isHorizontal){
+        if (isHorizontal) {
             mScrollViewInfo.setLayoutParams(infoP);
             rlShadow.setLayoutParams(shadowP);
-        }else {
+        } else {
             LinearLayout.LayoutParams imgP = new LinearLayout.LayoutParams(imgW, imgH);
             mImgHead.setLayoutParams(imgP);
             rlShadow.setLayoutParams(shadowP);
@@ -186,18 +186,17 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     }
 
     public void bindData(PigeonEntity entity) {
-        if(!StringUtil.isStringValid(entity.getPigeonID())){
+        if (!StringUtil.isStringValid(entity.getPigeonID())) {
             return;
         }
+        mTvFootNumber.setText(entity.getFootRingNum());
+        mTvBlood.setText(entity.getPigeonBloodName());
+        mTvColor.setText(entity.getPigeonPlumeName());
+        GlideUtil.setGlideImageView(getContext(), entity.getCoverPhotoUrl(), mImgHead);
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
         MatchAdapter matchAdapter = new MatchAdapter();
         mList.setAdapter(matchAdapter);
         matchAdapter.setNewData(entity.getMatchData());
-
-        mTvFootNumber.setText(entity.getFootRingNum());
-        mTvBlood.setText(entity.getPigeonBloodName());
-        mTvColor.setText(entity.getPigeonPlumeName());
-        GlideUtil.setGlideImageView(getContext(),entity.getCoverPhotoUrl(),mImgHead);
 
     }
 
@@ -243,12 +242,12 @@ class MatchAdapter extends BaseQuickAdapter<PigeonPlayEntity, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, PigeonPlayEntity item) {
         TextView textView = (TextView) helper.itemView;
 
-        if(StringUtil.isStringValid(item.getMatchInfo())){
+        if (StringUtil.isStringValid(item.getMatchInfo())) {
             textView.setText(item.getMatchInfo());
-        }else {
+        } else {
             String div = "  ";
-            StringBuilder sb =  new StringBuilder();
-            if(StringUtil.isStringValid(item.getMatchTime())){
+            StringBuilder sb = new StringBuilder();
+            if (StringUtil.isStringValid(item.getMatchTime())) {
                 long time = TimeUtil.parse(item.getMatchTime(), TimeUtil.FORMAT_YYYYMMDDHHMMSS);
                 sb.append(TimeUtil.format(time, TimeUtil.FORMAT_YYYYMMDD));
                 sb.append(div);

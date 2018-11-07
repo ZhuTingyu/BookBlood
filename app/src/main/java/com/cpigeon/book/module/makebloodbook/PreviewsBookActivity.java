@@ -54,6 +54,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
     private TextView mTvOk;
     private PhotoView mImageView;
     private TextView mTvFootNumber;
+    String footNumber;
 
 
     private int bookType = SelectTemplateFragment.TYPE_H;
@@ -85,7 +86,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
         mViewModel = new BookViewModel(getBaseActivity());
         initViewModel(mViewModel);
 
-        String footNumber = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TITLE);
+        footNumber = getBaseActivity().getIntent().getStringExtra(IntentBuilder.KEY_TITLE);
         setTitle(footNumber);
         setToolbarRight(R.string.text_choose_template, item -> {
             SelectTemplateFragment.start(getBaseActivity(), bookType, CODE_CHOOSE_TEMPLATE);
@@ -217,7 +218,7 @@ public class PreviewsBookActivity extends BaseBookActivity {
             setProgressVisible(true);
             composite.add(RxUtils.delayed(100, aLong -> {
                 Bitmap bitmap = ImageUtils.view2Bitmap(view);
-                ImageUtils.saveImageToGallery(getBaseActivity(), bitmap);
+                ImageUtils.saveImageToGallery(getBaseActivity(), bitmap, Utils.getString(R.string.text_some_blood_book, footNumber));
                 mImageView.setVisibility(View.VISIBLE);
                 mImageView.setImageBitmap(bitmap);
                 setProgressVisible(false);

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.base.base.BaseWebViewActivity;
 import com.base.util.BarUtils;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.StringUtil;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -38,6 +39,7 @@ import com.cpigeon.book.module.pigeonleague.PigeonToLeagueFootListFragment;
 import com.cpigeon.book.module.play.PlayFootListFragment;
 import com.cpigeon.book.module.trainpigeon.TrainPigeonListFragment;
 import com.cpigeon.book.widget.SimpleTitleView;
+import com.luck.picture.lib.tools.StringUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -190,10 +192,11 @@ public class HomeFragment extends BaseBookFragment {
                     .centerCrop()
                     .bitmapTransform(new RoundedCornersTransformation(context, 5, 0))
                     .into(mImgAd);
-
-            mImgAd.setOnClickListener(v -> {
-                BaseWebViewActivity.start(getBaseActivity(), homeAdEntity.getAdUrl());
-            });
+            if(StringUtil.isStringValid(homeAdEntity.getAdUrl())){
+                mImgAd.setOnClickListener(v -> {
+                    BaseWebViewActivity.start(getBaseActivity(), homeAdEntity.getAdUrl());
+                });
+            }
 
         });
 

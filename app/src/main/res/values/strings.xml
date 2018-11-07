@@ -574,6 +574,7 @@
     <string name="text_service_down_load_league">导入赛绩开通</string>
     <string name="text_service_print_blood_book">打印血统书开通</string>
     <string name="text_blood_book_count">血统书  %1$s</string>
+    <string name="text_some_blood_book">%1$s的血统书</string>
     <string name="text_service_share_pigeon">共享种鸽开通</string>
     <string name="text_no_open_service">您还没有开通任务服务哦...</string>
     <string name="text_input_pay_password">请输入支付密码</string>
@@ -637,6 +638,8 @@
     <string name="text_pigeon_unit">羽</string>
     <string name="text_base_info">基础信息</string>
     <string name="text_addition_info">附加信息</string>
+    <string name="text_father">父</string>
+    <string name="text_mother">母</string>
     <string name="text_partrnt_info">父母信息</string>
     <string name="text_pigeon_type">信鸽类型</string>
     <string name="text_pleas_input_blood">请输入血统</string>
@@ -668,5 +671,6 @@
 
 
     <string name="str_shoot_org_hint">赛事组织可填写协会，鸽舍，比赛等组织名称</string>
+    <string name="text_hint_set_parent_pigeon">是否确定将此鸽设置为%1$s鸽</string>
 
 </resources>
