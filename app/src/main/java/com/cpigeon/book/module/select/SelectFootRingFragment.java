@@ -76,12 +76,14 @@ public class SelectFootRingFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
 
         String sex = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
+
         mViewModel.sexId = sex;
+
         mIsCanSetDeath = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
 
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
-            SearchFootRingActivity.start(getBaseActivity(), mIsCanSetDeath);
+            SearchFootRingActivity.start(getBaseActivity(), mIsCanSetDeath, mViewModel.sexId);
         });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();

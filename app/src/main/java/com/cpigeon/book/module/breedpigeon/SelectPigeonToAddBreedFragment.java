@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cpigeon.book.R;
@@ -84,18 +85,30 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
 
     @Override
     protected void setAdapterClick(BaseQuickAdapter adapter, View view, int position) {
-        mPigeonEntity = mAdapter.getItem(position);
-        if (StringUtil.isStringValid(mSonPigeonId)) {
-            setProgressVisible(true);
-            mBookViewModel.pigeonId = mPigeonEntity.getPigeonID();
-            mBookViewModel.foodId = mPigeonEntity.getFootRingID();
-            mBookViewModel.sexId = mPigeonEntity.getPigeonSexID();
-            mBookViewModel.addParent();
-        } else {
-            IntentBuilder.Builder()
-                    .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
-                    .finishForResult(getBaseActivity());
+        if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
+            getBaseActivity().errorDialog.dismiss();
         }
+
+        String hintStr = "确定选择？";
+        getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
+            mPigeonEntity = mAdapter.getItem(position);
+            if (StringUtil.isStringValid(mSonPigeonId)) {
+                setProgressVisible(true);
+                mBookViewModel.pigeonId = mPigeonEntity.getPigeonID();
+                mBookViewModel.foodId = mPigeonEntity.getFootRingID();
+                mBookViewModel.sexId = mPigeonEntity.getPigeonSexID();
+                mBookViewModel.addParent();
+            } else {
+                IntentBuilder.Builder()
+                        .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
+                        .finishForResult(getBaseActivity());
+            }
+            sweetAlertDialog.dismiss();
+
+        }, sweetAlertDialog -> {
+            sweetAlertDialog.dismiss();
+        });
+
     }
 
     @Override
