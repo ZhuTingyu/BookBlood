@@ -10,6 +10,7 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.FootRingStateEntity;
+import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,6 +31,8 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     public String sonPigeonId;
 
     public PigeonEntity mPigeonEntity = new PigeonEntity();
+
+    public PairingInfoEntity mPairingInfoEntity;
 
     //种鸽录入
     public void addPigeon() {

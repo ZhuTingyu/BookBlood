@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -319,7 +320,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             case R.id.ll_fertilized_egg:
                 //产蛋 受精蛋
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_fertilized_egg, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_fertilized_egg, EditorInfo.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
                             mPairingNestViewModel.mPairingNestInfoEntity.setInseEggCount(content);
                             mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();
@@ -330,7 +331,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             case R.id.ll_fertilized_egg_no:
                 //产蛋 无精蛋
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_fertilized_egg_no, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_fertilized_egg_no, EditorInfo.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
                             mPairingNestViewModel.mPairingNestInfoEntity.setFertEggCount(content);
                             mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();
@@ -352,7 +353,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             case R.id.ll_hatches_num:
                 //出壳个数
                 mInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                        , R.string.tv_hatches_num, InputType.TYPE_CLASS_NUMBER, content -> {
+                        , R.string.tv_hatches_num, EditorInfo.TYPE_CLASS_NUMBER, content -> {
                             mInputDialog.hide();
                             mPairingNestViewModel.mPairingNestInfoEntity.setOutShellCount(content);
                             mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();

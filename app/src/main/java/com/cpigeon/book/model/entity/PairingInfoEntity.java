@@ -22,7 +22,6 @@ public class PairingInfoEntity implements Serializable {
      */
 
 
-
     /**
      * WoPigeonID : 284
      * MenFootRingNum : 2018-01-1111111
@@ -53,6 +52,29 @@ public class PairingInfoEntity implements Serializable {
     private String MenPigeonPlumeName;
     private String WoCoverPhotoUrl;
     private String MenCoverPhotoUrl;
+
+
+    private String WoPigeonStateName;//雌鸽子状态名称"
+    private String MenPigeonStateName;//雄鸽子状态名称",
+    private String WoPigeonStateID;//雌鸽子状态ID",
+    private String MenPigeonStateID;//雄鸽子状态ID"
+
+
+    public String getWoPigeonStateName() {
+        return WoPigeonStateName;
+    }
+
+    public String getMenPigeonStateName() {
+        return MenPigeonStateName;
+    }
+
+    public String getWoPigeonStateID() {
+        return WoPigeonStateID;
+    }
+
+    public String getMenPigeonStateID() {
+        return MenPigeonStateID;
+    }
 
     public String getWoPigeonPlumeName() {
         return WoPigeonPlumeName;
@@ -229,18 +251,22 @@ public class PairingInfoEntity implements Serializable {
             WoPigeonID = val;
             return this;
         }
+
         public Builder WoPigeonPlumeName(String val) {
             WoPigeonPlumeName = val;
             return this;
         }
+
         public Builder MenPigeonPlumeName(String val) {
             MenPigeonPlumeName = val;
             return this;
         }
+
         public Builder WoCoverPhotoUrl(String val) {
             WoCoverPhotoUrl = val;
             return this;
         }
+
         public Builder MenCoverPhotoUrl(String val) {
             MenCoverPhotoUrl = val;
             return this;

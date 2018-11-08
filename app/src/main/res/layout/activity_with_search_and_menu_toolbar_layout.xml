@@ -10,7 +10,40 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_search_toolbar" />
+        <include layout="@layout/layout_toolbar" />
+
+        <LinearLayout
+            android:background="@color/white"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlSearch"
+                android:layout_width="230dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_bg_search_edit">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="24dp"
+                    app:srcCompat="@drawable/svg_search" />
+
+                <TextView
+                    android:id="@+id/tvSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textColor="@color/color_text_hint"
+                    android:textSize="@dimen/small_text_size" />
+            </RelativeLayout>
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/frame_holder"
@@ -27,10 +60,10 @@
 
     <RelativeLayout
         android:id="@+id/menuLayoutLeft"
-        android:layout_marginTop="@dimen/top_bar_height"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="right"
+        android:layout_marginTop="@dimen/top_bar_height"
         android:background="@color/white">
 
         <com.cpigeon.book.widget.FiltrateListView

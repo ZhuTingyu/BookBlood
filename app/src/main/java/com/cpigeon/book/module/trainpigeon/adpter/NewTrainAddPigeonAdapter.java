@@ -34,12 +34,6 @@ public class NewTrainAddPigeonAdapter extends BaseQuickAdapter<PigeonEntity, Bas
         }else {
             imgAdd.setVisibility(View.VISIBLE);
         }
-
-        helper.getView(R.id.imgAdd).setOnClickListener(v -> {
-            if (mOnAddPigeonListener != null) {
-                mOnAddPigeonListener.add(v, helper.getAdapterPosition());
-            }
-        });
     }
 
     public void setSelect(int position, boolean isSelect){
@@ -56,15 +50,5 @@ public class NewTrainAddPigeonAdapter extends BaseQuickAdapter<PigeonEntity, Bas
             }
         }
         return pigeonEntities;
-    }
-
-    public interface OnAddPigeonListener {
-        void add(View view, int position);
-    }
-
-    private OnAddPigeonListener mOnAddPigeonListener;
-
-    public void setOnAddPigeonListener(OnAddPigeonListener onAddPigeonListener) {
-        mOnAddPigeonListener = onAddPigeonListener;
     }
 }

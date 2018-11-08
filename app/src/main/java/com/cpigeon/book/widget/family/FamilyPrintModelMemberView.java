@@ -50,12 +50,17 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     private TextView mTvColor;
     private RecyclerView mList;
     private LinearLayout mLlInfo;
+    private FamilyTreeView mFamilyTreeView;
 
-    public FamilyPrintModelMemberView(Context context, int generationPoint, int generationsOrder, boolean isHorizontal) {
+    private View mVLeftLine;
+    private RelativeLayout mRlRightLine;
+
+    public FamilyPrintModelMemberView(Context context, FamilyTreeView familyTreeView, int generationPoint, int generationsOrder, boolean isHorizontal) {
         super(context);
         this.generationPoint = generationPoint;
         this.generationsOrder = generationsOrder;
         this.isHorizontal = isHorizontal;
+        this.mFamilyTreeView = familyTreeView;
         initView(context);
     }
 
@@ -87,6 +92,10 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         mTvColor = view.findViewById(R.id.tvColor);
         mList = view.findViewById(R.id.list);
         rlShadow = findViewById(R.id.rlShadow);
+
+        mVLeftLine = findViewById(R.id.vLeftLine);
+        mRlRightLine = findViewById(R.id.rlRightLine);
+
 
         /*if (generationPoint == 0) {
             mScrollViewInfo.setBackgroundResource(R.drawable.shape_bg_family_member_black);
@@ -155,11 +164,13 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         }
         rlShadow.addShadow(shadowColor, shadowSize);
 
-        LayoutParams shadowP;
+        RelativeLayout.LayoutParams shadowP;
         RelativeLayout.LayoutParams infoP;
         infoP = new RelativeLayout.LayoutParams(rootW, rootH);
-        shadowP = new LayoutParams(rootW + ScreenTool.dip2px(shadowSize)
+        shadowP = new RelativeLayout.LayoutParams(rootW + ScreenTool.dip2px(shadowSize)
                 , rootH + ScreenTool.dip2px(shadowSize));
+
+        shadowP.addRule(RelativeLayout.CENTER_IN_PARENT);
 
         if (isHorizontal) {
             mScrollViewInfo.setLayoutParams(infoP);
@@ -181,6 +192,14 @@ public class FamilyPrintModelMemberView extends FamilyMember {
             mImgHead.setVisibility(GONE);
             mTvBlood.setVisibility(GONE);
             mTvColor.setVisibility(GONE);
+        }
+
+        if (generationPoint == mFamilyTreeView.getStartGeneration()) {
+            mVLeftLine.setVisibility(GONE);
+        }
+
+        if (generationPoint == mFamilyTreeView.getMaxOfGeneration() - 1) {
+            mRlRightLine.setVisibility(GONE);
         }
 
     }

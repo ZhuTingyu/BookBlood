@@ -40,7 +40,7 @@ public class FamilyTreeView extends LinearLayout {
 
     private int mTypeMove = TYPE_IS_CAN_MOVE_N;
     private static final int COUNT_OF_GENERATIONS = 3; //屏幕中显示的辈数
-    private static final int MAX_OF_GENERATIONS = 4; //最大的辈数
+    public static final int MAX_OF_GENERATIONS = 4; //最大的辈数
     private int countOfGeneration = COUNT_OF_GENERATIONS; //一共显示几代
     private int maxOfGeneration = MAX_OF_GENERATIONS; //最高一代
 
@@ -112,7 +112,6 @@ public class FamilyTreeView extends LinearLayout {
         mPath = new Path();
 
         addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-
             if (!isDrawView) {
                 isDrawView = true;
                 initView();
@@ -125,7 +124,6 @@ public class FamilyTreeView extends LinearLayout {
                 }
             }
         });
-
     }
 
     @Override
@@ -138,9 +136,9 @@ public class FamilyTreeView extends LinearLayout {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         this.mCanvas = canvas;
-        if (isShowLine) {
-            drawPointLine(canvas);
-        }
+//        if (isShowLine) {
+//            drawPointLine(canvas);
+//        }
     }
 
     private void initAttrs(AttributeSet attrs) {
@@ -212,11 +210,11 @@ public class FamilyTreeView extends LinearLayout {
         }
 
         if (isPrintModel) {
-            FamilyPrintModelMemberView view = new FamilyPrintModelMemberView(context, generationsPoint, generationsOrder, isHorizontal);
+            FamilyPrintModelMemberView view = new FamilyPrintModelMemberView(context,this ,generationsPoint, generationsOrder, isHorizontal);
             view.setLayoutParams(params);
             return view;
         } else {
-            FamilyMemberView view = new FamilyMemberView(context, generationsPoint, generationsOrder, isMiniModel, isHorizontal);
+            FamilyMemberView view = new FamilyMemberView(context,this ,generationsPoint, generationsOrder, isMiniModel, isHorizontal);
             view.setLayoutParams(params);
             if (mOnFamilyClickListener != null) {
                 view.setOnMemberClickListener(new FamilyMemberView.OnMemberClickListener() {
@@ -449,6 +447,10 @@ public class FamilyTreeView extends LinearLayout {
 
     public void setShowInfoModel(boolean showInfoModel) {
         isShowInfoModel = showInfoModel;
+    }
+
+    public int getMaxOfGeneration() {
+        return maxOfGeneration;
     }
 
     /**

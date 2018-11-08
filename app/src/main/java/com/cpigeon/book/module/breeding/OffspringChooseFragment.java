@@ -56,7 +56,7 @@ public class OffspringChooseFragment extends BaseFootListFragment {
         });
 
         setToolbarRight("添加", item -> {
-            OffspringAddFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingInfoEntity);
+            OffspringAddFragment2.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingInfoEntity);
             return true;
         });
     }
