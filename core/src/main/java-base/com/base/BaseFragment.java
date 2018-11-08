@@ -164,6 +164,7 @@ public abstract class BaseFragment extends Fragment {
             if (getArguments() != null) {
                 isBack = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
             }
+
             toolbar = view.findViewById(R.id.toolbar);
             titleView = view.findViewById(R.id.toolbar_title);
             stateBar = view.findViewById(R.id.stateBar);
@@ -213,7 +214,12 @@ public abstract class BaseFragment extends Fragment {
             }
         }
     }
+    public void setTitleGone() {
+        if (null != toolbar) {
+            toolbar.setVisibility(View.GONE);
+            }
 
+    }
     public void setTitle(String title) {
         if (null != toolbar) {
             if (titleView != null) {

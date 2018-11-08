@@ -117,7 +117,7 @@ public class FootAdminListFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
 
         String[] chooseWays = getResources().getStringArray(R.array.array_choose_input_foot_number);
-        mTvOk.setText(R.string.text_add_foot_number);
+
         mTvOk.setOnClickListener(v -> {
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
                 if (chooseWays[p].equals(Utils.getString(R.string.text_one_foot_input))) {

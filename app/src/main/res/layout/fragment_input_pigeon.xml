@@ -87,7 +87,17 @@
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
                 app:lineInputView_LeftString="@string/text_blood" />
-
+            <!--眼砂-->
+            <com.cpigeon.book.widget.LineInputView
+                android:id="@+id/lvEyeSand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                app:lineInputView_Hint="黄眼"
+                app:lineInputView_IsCanEdit="false"
+                app:lineInputView_IsLookState="true"
+                app:lineInputView_IsNotNull="true"
+                app:lineInputView_LeftString="@string/text_eye_sand" />
             <!--羽色-->
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lvFeatherColor"
@@ -187,17 +197,7 @@
                 app:lineInputView_IsNotNull="false"
                 app:lineInputView_LeftString="@string/text_source" />
 
-            <!--眼砂-->
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/lvEyeSand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_white"
-                app:lineInputView_Hint="黄眼"
-                app:lineInputView_IsCanEdit="false"
-                app:lineInputView_IsLookState="true"
-                app:lineInputView_IsNotNull="false"
-                app:lineInputView_LeftString="@string/text_eye_sand" />
+
 
             <!--出壳日期-->
             <com.cpigeon.book.widget.LineInputView
@@ -316,10 +316,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"
-                app:lineInputView_Hint="如果存在请选择"
+                app:lineInputView_Hint="请先选择父环号"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="false"
+
                 app:lineInputView_LeftString="@string/text_father_ring_state" />
 
             <!--母足环-->
@@ -336,10 +337,11 @@
             <!--母环状态-->
             <com.cpigeon.book.widget.LineInputView
                 android:id="@+id/lvMotherState"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_white"
-                app:lineInputView_Hint="如果存在请选择"
+                app:lineInputView_Hint="请先选择母环号"
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="false"

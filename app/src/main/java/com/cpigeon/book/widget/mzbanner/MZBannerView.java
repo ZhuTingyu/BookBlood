@@ -648,6 +648,10 @@ public class MZBannerView<T> extends RelativeLayout {
                 e.printStackTrace();
             }
         }
+        public int getCurrentItem() {
+
+            return  mViewPager.getCurrentItem();
+        }
 
         /**
          * 获取真实的Count

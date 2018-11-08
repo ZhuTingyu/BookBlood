@@ -15,7 +15,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
-import com.cpigeon.book.module.select.adpter.SelectPigeonAdapter;
+import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.SearchTextView;
 
@@ -29,7 +29,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
 
     String mType;
 
-    SelectPigeonAdapter mAdapter;
+    MyHomingPigeonAdapter mAdapter;
     BreedPigeonListModel mViewModel;
 
     //
@@ -50,7 +50,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new SelectPigeonAdapter(getAdapterLayout());
+        mAdapter = new MyHomingPigeonAdapter();
         return mAdapter;
     }
 

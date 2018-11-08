@@ -91,7 +91,7 @@ public class TrainProjectInListFragment extends BaseBookFragment {
         });
 
         mTvOk.setBackgroundResource(R.drawable.selector_bg_cancel_btn);
-        mTvOk.setText(R.string.text_train_again);
+
         mTvOk.setOnClickListener(v -> {
             NewTrainPigeonFragment.start(getBaseActivity(), mViewModel.mTrainEntity);
         });

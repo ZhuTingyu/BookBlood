@@ -1,21 +1,25 @@
 package com.cpigeon.book.module.photo;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Lists;
-import com.base.util.PictureSelectUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.glide.GlideCacheUtil;
@@ -47,16 +51,21 @@ import cn.qqtheme.framework.picker.OptionPicker;
 
 public class PigeonPhotoDetailsFragment extends BaseBookFragment {
     private MZBannerView mBanner;
+    private boolean Click=true;
     private SimpleTitleView mSTvMove;
     private SimpleTitleView mSTvSetFace;//设为封面
     private SimpleTitleView mSTvDelete;
     private SimpleTitleView sTvShare;
+    private LinearLayout linearLayout;
     public static String RingNum;
     PigeonPhotoDetailsViewModel mViewModel;
     SelectTypeViewModel mTypeViewModel;
     int typePosition = 0;
     private PopupWindow mPopupWindow;
     private int position;
+    private AppBarLayout appBarLayout;
+    private ValueAnimator animator;//属性动画值
+    private float curTranslationY;//动画Y轴移动距离
 
     public static void start(Activity activity, PigeonEntity mPigeonEntity, List<PigeonPhotoEntity> mPigeonPhotoData, int position) {
         IntentBuilder.Builder()
@@ -99,19 +108,20 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
 
         position = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA_3, 0);
 
-        setTitle("信鸽相册");
+
         RingNum=mViewModel.mPigeonEntity.getFootRingNum();
         mBanner = findViewById(R.id.banner);
+        appBarLayout=getBaseActivity().findViewById(R.id.appbar);
         mSTvMove = findViewById(R.id.sTvMove);
         mSTvSetFace = findViewById(R.id.sTvSetFace);
         mSTvDelete = findViewById(R.id.sTvDelete);
         sTvShare = view.findViewById(R.id.sTvShare);
-
+        linearLayout=view.findViewById(R.id.photo_ll);
         sTvShare.setOnClickListener(v -> {
             String shareUrl = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPhotoUrl();
             showShareDialog(shareUrl);
         });
-
+        linearLayout.setVisibility(View.GONE);
         dialogFragment = new ShareDialogFragment();
 
         mBanner.setPages(mViewModel.mPigeonPhotoData, () -> {
@@ -120,10 +130,48 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         mBanner.setIndicatorPadding(0,0,0,0);
 
         mBanner.getAdapter().setPageClickListener((view1, position1) -> {
-            PictureSelectUtil.showImagePhoto(getBaseActivity(), view1.findViewById(R.id.img), Lists.newArrayList(mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPhotoUrl()), 0);
+//            startAnimator();
+            if (Click) {
+                appBarLayout.setVisibility(View.VISIBLE);
+                Click=false;
+                linearLayout.startAnimation(show());
+                linearLayout.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                Click=true;
+                appBarLayout.setVisibility(View.GONE);
+                linearLayout.startAnimation(hide());
+                linearLayout.setVisibility(View.GONE);
+            }
+
+            // PictureSelectUtil.showImagePhoto(getBaseActivity(), view1.findViewById(R.id.img), Lists.newArrayList(mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPhotoUrl()), 0);
         });
 
+if (mViewModel.mPigeonPhotoData.size()==0)
+{
+    setTitle("信鸽相册");
+}else
+{
+    setTitle((position+1+"/"+ mViewModel.mPigeonPhotoData.size()));
+}
         mBanner.getAdapter().setCurrentItem(position);
+        mBanner.addPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setTitle(((1+position)+"/"+ mViewModel.mPigeonPhotoData.size()));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         mSTvMove.setOnClickListener(v -> {
             //移动
             position = mBanner.getViewPager().getCurrentItem();
@@ -271,7 +319,59 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
             mBanner.getAdapter().setCurrentItem(position);
         });
     }
+    public TranslateAnimation hide()
+    {
+        TranslateAnimation hideAnim = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f);
+        hideAnim.setDuration(500);
+        return hideAnim;
+    }
+    public TranslateAnimation show()
+    {
+        TranslateAnimation showAnim = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f);
+        showAnim.setDuration(500);
 
+        return showAnim;
+    }
+    private void startAnimator() {
+        if (!Click) {//向下移动
+           // img_l_arrow.setRotation(0);
+            curTranslationY = appBarLayout.getTranslationY();//获取当前空间Y方向上的值
+            animator = ValueAnimator.ofFloat(0,-appBarLayout.getHeight() );
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float value = (float) animation.getAnimatedValue();
+                    appBarLayout.setTranslationY(value);
+                }
+            });//设置监听
+
+            animator.setDuration(700);//设置动画执行时间
+            if (!animator.isRunning()) {
+                animator.start();//开始动画
+            }
+        } else {//向上移动
+
+            curTranslationY = appBarLayout.getTranslationY();
+            animator = ValueAnimator.ofFloat(-appBarLayout.getHeight(), 0);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float value = (float) animation.getAnimatedValue();
+                    appBarLayout.setTranslationY(value);
+                }
+            });
+            animator.setDuration(700);
+            if (!animator.isRunning()) {
+                animator.start();
+            }
+        }
+    }
 //    @Subscribe //订阅事件FirstEvent
 //    public void onEventMainThread(String info) {
 //        if (info.equals(EventBusService.PIGEON_PHOTO_DEL_REFRESH)) {
@@ -315,4 +415,5 @@ class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
         mTvTime.setText( str.substring(0, str.indexOf(" ")));
 
     }
+
 }

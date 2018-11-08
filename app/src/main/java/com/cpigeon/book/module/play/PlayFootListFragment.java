@@ -49,6 +49,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
 
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
+        bundle.putString(BaseFootListFragment.STATEID, PigeonEntity.IN_THE_SHED);
         bundle.putString(BaseFootListFragment.TYPEID, PigeonEntity.ID_MATCH_PIGEON);
         SearchFragmentParentActivity.
                 start(activity, PlayFootListFragment.class, true, bundle);
@@ -92,7 +93,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
         mTvOk.setVisibility(View.VISIBLE);
         view_placeholder.setVisibility(View.VISIBLE);
 
-        mTvOk.setText(R.string.text_add_play_pigeon);
+
         mTvOk.setOnClickListener(v -> {
             //赛鸽录入
             InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);

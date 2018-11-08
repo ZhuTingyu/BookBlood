@@ -72,7 +72,7 @@ public class MySharePigeonFragment extends BaseBookFragment {
             });
         });
         mRecyclerView.setAdapter(mAdapter);
-        mTvOk.setText(R.string.text_add_share_pigeon);
+
         mTvOk.setOnClickListener(v -> {
             SelectPigeonToShareFragment.start(getBaseActivity());
         });

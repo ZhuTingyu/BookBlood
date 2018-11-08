@@ -120,14 +120,17 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
 
     public void isCanCommit() {
         Log.d("songshuaishuai", "isCanCommit: "+foot);
-        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId);
+        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,eyeSandId);
     }
     public void isFatherCanCommit() {
-        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footFather,pigeonFatherStateId);
+        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footFather,pigeonFatherStateId,eyeSandId);
         Log.e("songshuaishuai", "isFatherCanCommit: "+footFather );
     }
     public void isMotherCanCommit() {
-        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footMother,pigeonMotherStateId);
+        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footMother,pigeonMotherStateId,eyeSandId);
+    }
+    public void isallCanCommit() {
+        isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footMother,pigeonMotherStateId,eyeSandId,pigeonFatherStateId,footFather);
     }
     public boolean isHavePigeonInfo() {
         return mPigeonEntity != null && StringUtil.isStringValid(mPigeonEntity.getPigeonID());

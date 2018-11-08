@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +20,6 @@ import com.base.util.picker.PickerUtil;
 import com.base.util.utility.KeyboardUtils;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
-import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.widget.gridpasswordview.GridPasswordView;
@@ -184,17 +182,17 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                                 , mTvYear.getText().toString()
                                 , mTvArea.getText().toString()
                                 , mGpFoot.getPassWord()));
-                        hide();
+
                     } else {
-                        ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                        mOnFootStringFinishListener.foots(StringUtil.emptyString());
                     }
                 } else {
                     if (isChina) {
                         if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
                             mOnFootStringFinishListener.foots(mEdFoot.getText().toString());
-                            hide();
+
                         } else {
-                            ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                            mOnFootStringFinishListener.foots(StringUtil.emptyString());
                         }
                     } else {
                         if (isStandard2)
@@ -203,18 +201,17 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                                 mOnFootStringFinishListener.foots(Utils.getString(R.string.text_standard_foot_2
                                         , mTvYear.getText().toString()
                                         , mEdFoot.getText().toString()));
-                                hide();
+
                             } else {
-                                ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                                mOnFootStringFinishListener.foots(StringUtil.emptyString());
                             }
                     }
                     else
                         {
                             if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
-                                mOnFootStringFinishListener.foots(mEdFoot.getText().toString());
-                                hide();
+                                mOnFootStringFinishListener.foots(mEdFoot.getText().toString());;
                             } else {
-                                ToastUtils.showLong(getActivity(), R.string.text_pleas_input_foot_number);
+                                mOnFootStringFinishListener.foots(StringUtil.emptyString());
                             }
                         }
                     }
@@ -222,7 +219,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                 }
 
             }
-
+hide();
         });
 
         if (mOnChooseListener != null) {
@@ -236,7 +233,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
         mImgClose.setOnClickListener(v -> {
 
             hide();
-            Log.d("songshuaishuai", "initView: xx");
+         
         });
 
         if (!isHaveStandard) {

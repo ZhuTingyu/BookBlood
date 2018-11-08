@@ -55,8 +55,8 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
         mTvOk.setVisibility(View.VISIBLE);
         view_placeholder.setVisibility(View.VISIBLE);
+        mTvOk.setText("+");
 
-        mTvOk.setText(R.string.text_add_breed_pigeon);
         mTvOk.setOnClickListener(v -> {
             //种鸽录入
             InputBreedInBookFragment.start(getBaseActivity());

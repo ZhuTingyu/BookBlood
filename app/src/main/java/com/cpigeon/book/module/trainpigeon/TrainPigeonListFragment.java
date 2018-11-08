@@ -57,6 +57,7 @@ public class TrainPigeonListFragment extends BaseBookFragment {
         setTitle(R.string.text_train_record);
         mRecyclerView = findViewById(R.id.list);
         mtvOk = findViewById(R.id.tvOk);
+        mtvOk.setText(R.string.text_new);
         mAdapter = new TrainPigeonAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
