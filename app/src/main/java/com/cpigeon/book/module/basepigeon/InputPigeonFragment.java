@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.base.http.ApiResponse;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PictureSelectUtil;
@@ -94,14 +95,14 @@ public class InputPigeonFragment extends BaseBookFragment {
     private LineInputView mLvBlood;
     private LineInputView mLvFeatherColor;
     private LineInputView mLvState;
-    private RelativeLayout mRlAddition,parentRlAddition;
+    private RelativeLayout mRlAddition, parentRlAddition;
     private LineInputView mLvPigeonName;
     private LineInputView mLvFootVice;
     private LineInputView mLvFootSource;
-    private LineInputView mLvFatherFoot;
-    private LineInputView mLvMotherFoot;
-    private LineInputView mLvFatherFootState;
-    private LineInputView mLvMotherFootState;
+    protected LineInputView mLvFatherFoot;
+    protected LineInputView mLvMotherFoot;
+    protected LineInputView mLvFatherFootState;
+    protected LineInputView mLvMotherFootState;
     private LineInputView mLvEyeSand;
     private LineInputView mLvBirthTime;
     private LineInputView mLvHangingRingDate;
@@ -113,8 +114,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     private LineInputListLayout mLlAddition;
     private LineInputListLayout parentLlAddition;
 
-    InputPigeonViewModel mViewModel;
-    BookViewModel mBookViewModel;
+    protected InputPigeonViewModel mViewModel;
     SelectTypeViewModel mSelectTypeViewModel;
     SelectParentFootRingViewModel mSelectParentFootRingViewModel;
     SelectImageAdapter2 mAdapter;
@@ -123,7 +123,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     ObjectAnimator mOpenAnim;
     ObjectAnimator mCloseAnim;
     boolean mIsAdditionOpen = false;
-    boolean parentIsAdditionOpen =false;
+    boolean parentIsAdditionOpen = false;
     protected String mSexType;
     protected String mPigeonType;
     private BaseInputDialog mBaseInputDialog;
@@ -147,7 +147,6 @@ public class InputPigeonFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mViewModel = new InputPigeonViewModel();
-        mBookViewModel = new BookViewModel();
         mSelectTypeViewModel = new SelectTypeViewModel();
         mSelectParentFootRingViewModel = new SelectParentFootRingViewModel();
         mSexType = getBaseActivity().getIntent().getStringExtra(KEY_PIGEON_SEX_TYPE);
@@ -256,7 +255,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_PigeonType), p -> {
                     mLvPigeonType.setRightText(mViewModel.mSelectTypes_PigeonType.get(p).getTypeName());
                     mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(p).getTypeID();
-                  IsCanCommit();
+                    IsCanCommit();
                 });
             } catch (Exception e) {
                 mSelectTypeViewModel.getPigeonType();
@@ -305,21 +304,26 @@ public class InputPigeonFragment extends BaseBookFragment {
         //血统
         mLvBlood.setOnRightClickListener(lineInputView -> {
 
-                BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank,mLvBlood.getContent(), 0, content -> {
-                    mViewModel.lineage = content;
-                    mLvBlood.setRightText(content);
-                    IsCanCommit();
-                }, () -> {
-                    SelectBloodFragment.start(getBaseActivity());
-                });
-
-
+            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, mLvBlood.getContent(), 0, content -> {
+                mViewModel.lineage = content;
+                mLvBlood.setRightText(content);
+                IsCanCommit();
+            }, () -> {
+                SelectBloodFragment.start(getBaseActivity());
+            });
+            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, mLvBlood.getContent(), 0, content -> {
+                mViewModel.lineage = content;
+                mLvBlood.setRightText(content);
+                mViewModel.isCanCommit();
+            }, () -> {
+                SelectBloodFragment.start(getBaseActivity());
+            });
         });
 
 
         mLvFeatherColor.setOnRightClickListener(lineInputView -> {
             mBaseInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
-                    , R.string.text_feather_color,R.string.text_feather_color_bank, mLvFeatherColor.getContent(), 0, content -> {
+                    , R.string.text_feather_color, R.string.text_feather_color_bank, mLvFeatherColor.getContent(), 0, content -> {
                         mBaseInputDialog.hide();
                         mViewModel.featherColor = content;
                         mLvFeatherColor.setRightText(content);
@@ -342,8 +346,6 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
 
-
-
         mLvState.setOnRightClickListener(lineInputView -> {
             try {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
@@ -363,7 +365,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
                     @Override
                     public void onOptionPicked(int index, String item) {
-                        mViewModel.pigeonFatherStateName=mViewModel.mSelectTypes_State.get(index).getTypeName();
+                        mViewModel.pigeonFatherStateName = mViewModel.mSelectTypes_State.get(index).getTypeName();
                         mViewModel.pigeonFatherStateId = mViewModel.mSelectTypes_State.get(index).getTypeID();
                         mLvFatherFootState.setContent(mViewModel.mSelectTypes_State.get(index).getTypeName());
                         mViewModel.isFatherCanCommit();
@@ -379,7 +381,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
                     @Override
                     public void onOptionPicked(int index, String item) {
-                        mViewModel.pigeonMotherStateName=mViewModel.mSelectTypes_State.get(index).getTypeName();
+                        mViewModel.pigeonMotherStateName = mViewModel.mSelectTypes_State.get(index).getTypeName();
                         mViewModel.pigeonMotherStateId = mViewModel.mSelectTypes_State.get(index).getTypeID();
                         mLvMotherFootState.setContent(mViewModel.mSelectTypes_State.get(index).getTypeName());
                         mViewModel.isMotherCanCommit();
@@ -430,14 +432,13 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mSelectParentFootRingViewModel.mFootNumber = foot;
                     setProgressVisible(true);
                     mSelectParentFootRingViewModel.getPgieon();
-                } else
-                {
+                } else {
                     mLvFatherFoot.setRightText(StringUtil.emptyString());
                     mLvFatherFootState.setRightText(StringUtil.emptyString());
-                    mViewModel.footFather=StringUtil.emptyString();
-                    mViewModel.footFatherId=StringUtil.emptyString();
-                    mViewModel.pigeonFatherStateId=StringUtil.emptyString();
-                    mViewModel.pigeonFatherStateName=StringUtil.emptyString();
+                    mViewModel.footFather = StringUtil.emptyString();
+                    mViewModel.footFatherId = StringUtil.emptyString();
+                    mViewModel.pigeonFatherStateId = StringUtil.emptyString();
+                    mViewModel.pigeonFatherStateName = StringUtil.emptyString();
                     mLvFatherFootState.setClickable(false);
                     IsCanCommit();
                 }
@@ -451,29 +452,31 @@ public class InputPigeonFragment extends BaseBookFragment {
                 SelectFootRingFragment.start(getBaseActivity(), false
                         , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
-
                 if (!foot.equals(StringUtil.emptyString())) {
 
-                    mViewModel.footMother= foot;
+                    mViewModel.footMother = foot;
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_FEMALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
                     setProgressVisible(true);
                     mSelectParentFootRingViewModel.getPgieon();
-                }
-                else
-                {
+                } else {
 
                     mLvMotherFoot.setRightText(StringUtil.emptyString());
                     mLvMotherFootState.setRightText(StringUtil.emptyString());
-                    mViewModel.footMother=StringUtil.emptyString();
-                    mViewModel.footMotherId=StringUtil.emptyString();
-                    mViewModel.pigeonMotherStateId=StringUtil.emptyString();
-                    mViewModel.pigeonMotherStateName=StringUtil.emptyString();
+                    mViewModel.footMother = StringUtil.emptyString();
+                    mViewModel.footMotherId = StringUtil.emptyString();
+                    mViewModel.pigeonMotherStateId = StringUtil.emptyString();
+                    mViewModel.pigeonMotherStateName = StringUtil.emptyString();
                     mLvMotherFootState.setClickable(false);
                     IsCanCommit();
                 }
 
-
+                mViewModel.footMother = foot;
+                mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_FEMALE;
+                mSelectParentFootRingViewModel.mFootNumber = foot;
+                mViewModel.isMotherCanCommit();
+                setProgressVisible(true);
+                mSelectParentFootRingViewModel.getPgieon();
             });
         });
         //眼砂
@@ -502,7 +505,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         mLvHangingRingDate.setOnRightClickListener(lineInputView -> {
             PickerUtil.showTimeYMD(getActivity(), System.currentTimeMillis(), (year, month, day) -> {
                 mViewModel.llHangingRingDate = Utils.getString(R.string.text_time_y_m_d, year, month, day);
-                Log.d("shuaishuai", "setClick: "+mViewModel.llHangingRingDate);
+                Log.d("shuaishuai", "setClick: " + mViewModel.llHangingRingDate);
                 mLvHangingRingDate.setRightText(mViewModel.llHangingRingDate);
             });
         });
@@ -532,18 +535,16 @@ public class InputPigeonFragment extends BaseBookFragment {
             }
         });
         mTvNextStep.setOnClickListener(v -> {
-          if( IsClick) {
-              if (!StringUtil.isStringValid(mViewModel.pigeonId)) {
-                  setProgressVisible(true);
-                  mViewModel.addPigeon();
-              } else {
-                  mViewModel.modifyBreedPigeonEntry();
-              }
-          }
-            else
-          {
-              ToastUtils.showLong(getBaseActivity(),"请输入完整信息！");
-          }
+            if (IsClick) {
+                if (!StringUtil.isStringValid(mViewModel.pigeonId)) {
+                    setProgressVisible(true);
+                    mViewModel.addPigeon();
+                } else {
+                    mViewModel.modifyBreedPigeonEntry();
+                }
+            } else {
+                ToastUtils.showLong(getBaseActivity(), "请输入完整信息！");
+            }
         });
     }
 
@@ -556,17 +557,20 @@ public class InputPigeonFragment extends BaseBookFragment {
         mLvBlood = findViewById(R.id.lvBlood);
         mLvFeatherColor = findViewById(R.id.lvFeatherColor);
         mLvState = findViewById(R.id.lvState);
-        parentRlAddition=findViewById(R.id.rlAddition2);
+        parentRlAddition = findViewById(R.id.rlAddition2);
         mRlAddition = findViewById(R.id.rlAddition);
         mLvPigeonName = findViewById(R.id.lvPigeonName);
         mLvFootVice = findViewById(R.id.lv_foot_vice);
         mLvFootSource = findViewById(R.id.lv_foot_source);
         mLvFatherFoot = findViewById(R.id.lvFatherFoot);
-        mLvFatherFootState=findViewById(R.id.lvFatherState);
+        mLvFatherFootState = findViewById(R.id.lvFatherState);
 
         mLvMotherFoot = findViewById(R.id.lvMotherFoot);
-        mLvMotherFootState=findViewById(R.id.lvMotherState);
+        mLvMotherFootState = findViewById(R.id.lvMotherState);
 
+        mLvFatherFootState = findViewById(R.id.lvFatherState);
+        mLvMotherFoot = findViewById(R.id.lvMotherFoot);
+        mLvMotherFootState = findViewById(R.id.lvMotherState);
         mLvEyeSand = findViewById(R.id.lvEyeSand);
         mLvBirthTime = findViewById(R.id.lvBirthTime);
         mLvHangingRingDate = findViewById(R.id.lv_hanging_ring_date);
@@ -574,9 +578,9 @@ public class InputPigeonFragment extends BaseBookFragment {
         mList = findViewById(R.id.list);
         mTvNextStep = findViewById(R.id.tv_next_step);
         mLlAddition = findViewById(R.id.llAddition);
-        parentLlAddition=findViewById(R.id.llAddition2);
+        parentLlAddition = findViewById(R.id.llAddition2);
         mImgExpand = findViewById(R.id.imgExpand);
-        parentImgExpand=findViewById(R.id.imgExpand2);
+        parentImgExpand = findViewById(R.id.imgExpand2);
     }
 
     @Override
@@ -586,7 +590,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             setProgressVisible(false);
 
             TextViewUtil.setEnabled(mTvNextStep, true);
-            IsClick=aBoolean;
+            IsClick = aBoolean;
         });
 
         //详情
@@ -609,11 +613,11 @@ public class InputPigeonFragment extends BaseBookFragment {
             mLvHangingRingDate.setRightText(breedPigeonEntity.getFootRingTime());
             mLvBlood.setRightText(breedPigeonEntity.getPigeonBloodName());
             mLvState.setRightText(breedPigeonEntity.getStateName());
-            mViewModel.pigeonMotherStateId=breedPigeonEntity.getWoPigeonStateID();
-            mViewModel.pigeonFatherStateId=breedPigeonEntity.getMenPigeonStateID();
-            mViewModel.llHangingRingDate=breedPigeonEntity.getFootRingTime();
-            mViewModel.pigeonMotherStateName=breedPigeonEntity.getWoPigeonStateName();
-            mViewModel.pigeonFatherStateName=breedPigeonEntity.getMenPigeonStateName();
+            mViewModel.pigeonMotherStateId = breedPigeonEntity.getWoPigeonStateID();
+            mViewModel.pigeonFatherStateId = breedPigeonEntity.getMenPigeonStateID();
+            mViewModel.llHangingRingDate = breedPigeonEntity.getFootRingTime();
+            mViewModel.pigeonMotherStateName = breedPigeonEntity.getWoPigeonStateName();
+            mViewModel.pigeonFatherStateName = breedPigeonEntity.getMenPigeonStateName();
             mViewModel.pigeonType = breedPigeonEntity.getTypeID();
             mViewModel.countryId = breedPigeonEntity.getFootCodeID();
             mViewModel.foot = breedPigeonEntity.getFootRingNum();
@@ -648,46 +652,16 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //种鸽录入、修改
         mViewModel.mDataPigeon.observe(this, datas -> {
-        setProgressVisible(false);
-            PigeonEntity o = datas.data;
-
-            EventBus.getDefault().post(new PigeonAddEvent());
-
-            //保证界面只有一个提示
-           setProgressVisible(false);
-            if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
-                getBaseActivity().errorDialog.dismiss();
-            }
-
-            String hintStr = datas.getMsg();
-
-            if (o != null) {
-                if (Integer.valueOf(o.getPigeonMoney()) > 0) {
-                    hintStr += "获取" + o.getPigeonMoney() + "个鸽币，";
-                }
-            }
-
-            hintStr += "是否为该鸽子录入赛绩！";
-
-            getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
-                //确定
-                sweetAlertDialog.dismiss();
-                PlayAddFragment.start(getBaseActivity(), o, 0, CODE_ADD_PLAY);
-            }, sweetAlertDialog -> {
-                //取消
-                sweetAlertDialog.dismiss();
-                IntentBuilder.Builder()
-                        .putExtra(IntentBuilder.KEY_DATA, o)
-                        .finishForResult(getBaseActivity());
-            });
+            setProgressVisible(false);
+            mDataPigeonResult(datas);
         });
 
         //性别
         mSelectTypeViewModel.mSelectType_Sex.observe(this, selectTypeEntities -> {
-           setProgressVisible(false);
+            setProgressVisible(false);
             mViewModel.mSelectTypes_Sex = selectTypeEntities;
             mViewModel.mSelectTypes_Sex = selectTypeEntities;
-            if(StringUtil.isStringValid(mSexType)){
+            if (StringUtil.isStringValid(mSexType)) {
                 mViewModel.mSelectTypes_Sex.remove(0);
             }
         });
@@ -700,14 +674,14 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //眼沙
         mSelectTypeViewModel.mSelectType_EyeSand.observe(this, selectTypeEntities -> {
-           setProgressVisible(false);
+            setProgressVisible(false);
             mViewModel.mSelectTypes_EyeSand = selectTypeEntities;
         });
 
 
         //血统
         mSelectTypeViewModel.mSelectType_Lineage.observe(this, selectTypeEntities -> {
-           setProgressVisible(false);
+            setProgressVisible(false);
             mViewModel.mSelectTypes_Lineage = selectTypeEntities;
         });
 
@@ -725,7 +699,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //信鸽类型
         mSelectTypeViewModel.mSelectType_PigeonType.observe(this, selectTypeEntities -> {
-           setProgressVisible(false);
+            setProgressVisible(false);
             mViewModel.mSelectTypes_PigeonType = selectTypeEntities;
             if (PigeonEntity.ID_BREED_PIGEON.equals(mPigeonType)) {
                 mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(0).getTypeID();
@@ -759,7 +733,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mSelectParentFootRingViewModel.mDataPigeon.observe(this, pigeonEntities -> {
-           setProgressVisible(false);
+            setProgressVisible(false);
 
             if (Lists.isEmpty(pigeonEntities)) {
                 if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
@@ -783,7 +757,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.footFatherId = pigeonEntity.getFootRingID();
                     mViewModel.footFather = pigeonEntity.getFootRingNum();
                     mViewModel.pigeonFatherId = pigeonEntity.getPigeonID();
-                    mViewModel.pigeonFatherStateName=pigeonEntity.getStateName();
+                    mViewModel.pigeonFatherStateName = pigeonEntity.getStateName();
                     mViewModel.pigeonFatherStateId = String.valueOf(pigeonEntity.getStateID());
                     mLvFatherFootState.setRightText(pigeonEntity.getStateName());
                     mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
@@ -793,11 +767,44 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.footMother = pigeonEntity.getFootRingNum();
                     mViewModel.pigeonMotherId = pigeonEntity.getPigeonID();
                     mViewModel.pigeonMotherStateId = String.valueOf(pigeonEntity.getStateID());
-                    mViewModel.pigeonMotherStateName=pigeonEntity.getStateName();
+                    mViewModel.pigeonMotherStateName = pigeonEntity.getStateName();
                     mLvMotherFootState.setRightText(pigeonEntity.getStateName());
                     mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
                 }
             });
+        });
+    }
+
+    protected void mDataPigeonResult(ApiResponse<PigeonEntity> datas) {
+
+        PigeonEntity o = datas.data;
+        EventBus.getDefault().post(new PigeonAddEvent());
+
+        //保证界面只有一个提示
+        if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
+            getBaseActivity().errorDialog.dismiss();
+        }
+
+        String hintStr = datas.getMsg();
+
+        if (o != null) {
+            if (Integer.valueOf(o.getPigeonMoney()) > 0) {
+                hintStr += "获取" + o.getPigeonMoney() + "个鸽币，";
+            }
+        }
+
+        hintStr += "是否为该鸽子录入赛绩！";
+
+        getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
+            //确定
+            sweetAlertDialog.dismiss();
+            PlayAddFragment.start(getBaseActivity(), o, 0, CODE_ADD_PLAY);
+        }, sweetAlertDialog -> {
+            //取消
+            sweetAlertDialog.dismiss();
+            IntentBuilder.Builder()
+                    .putExtra(IntentBuilder.KEY_DATA, o)
+                    .finishForResult(getBaseActivity());
         });
     }
 
@@ -904,22 +911,20 @@ public class InputPigeonFragment extends BaseBookFragment {
     }
 
 
-protected void  IsCanCommit()
-{
-    if(mLvMotherFoot.getContent().equals(StringUtil.emptyString())&&mLvFatherFoot.getContent().equals(StringUtil.emptyString())) {
-        mViewModel.isCanCommit();
-    }
-    else {
-        if (!mLvMotherFoot.getContent().equals(StringUtil.emptyString()) && !mLvFatherFoot.getContent().equals(StringUtil.emptyString())) {
-            mViewModel.isallCanCommit();
+    protected void IsCanCommit() {
+        if (mLvMotherFoot.getContent().equals(StringUtil.emptyString()) && mLvFatherFoot.getContent().equals(StringUtil.emptyString())) {
+            mViewModel.isCanCommit();
         } else {
-            if (!mLvMotherFoot.getContent().equals(StringUtil.emptyString())) {
-                mViewModel.isMotherCanCommit();
-            }
-            if (!mLvFatherFoot.getContent().equals(StringUtil.emptyString())) {
-                mViewModel.isFatherCanCommit();
+            if (!mLvMotherFoot.getContent().equals(StringUtil.emptyString()) && !mLvFatherFoot.getContent().equals(StringUtil.emptyString())) {
+                mViewModel.isallCanCommit();
+            } else {
+                if (!mLvMotherFoot.getContent().equals(StringUtil.emptyString())) {
+                    mViewModel.isMotherCanCommit();
+                }
+                if (!mLvFatherFoot.getContent().equals(StringUtil.emptyString())) {
+                    mViewModel.isFatherCanCommit();
+                }
             }
         }
     }
-}
 }

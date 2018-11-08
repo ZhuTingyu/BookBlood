@@ -40,7 +40,7 @@ public class BaseInputDialog extends BaseDialogFragment {
     private String mContent;
     private boolean mIsOpen;
 
-    private int maxLength ;
+    private int maxLength = 10 ;
 
     @Override
     protected int getLayoutRes() {
@@ -176,7 +176,6 @@ public class BaseInputDialog extends BaseDialogFragment {
         bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(resId));
         if (editInputType != 0) {
             bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
-
         }
         bundle.putInt(IntentBuilder.KEY_DATA_2, 15);
 
@@ -226,6 +225,7 @@ public class BaseInputDialog extends BaseDialogFragment {
         BaseInputDialog dialog = new BaseInputDialog();
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TITLE, Utils.getString(resId));
+        bundle.putInt(IntentBuilder.KEY_DATA_2, 15);
         if (editInputType != 0) {
             bundle.putInt(IntentBuilder.KEY_TYPE, editInputType);
         }

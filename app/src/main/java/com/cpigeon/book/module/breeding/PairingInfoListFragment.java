@@ -37,10 +37,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class PairingInfoListFragment extends BaseListFragment {
 
-;
     private PairingInfoListAdapter mPairingInfoListAdapter;
-    private boolean IsMen=true;
-    private boolean IsSingle=true;
+    private boolean IsMen = true;
+    private boolean IsSingle = true;
     private PairingInfoListViewModel mPairingInfoListViewModel;
 
     public static void start(Activity activity, PigeonEntity mBreedPigeonEntity) {
@@ -49,6 +48,7 @@ public class PairingInfoListFragment extends BaseListFragment {
                 .startParentActivity(activity, PairingInfoListFragment.class);
 
     }
+
     public static void start(Activity activity, BreedEntity mBreedEntity) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mBreedEntity)
@@ -58,7 +58,7 @@ public class PairingInfoListFragment extends BaseListFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mPairingInfoListViewModel = new PairingInfoListViewModel();
+        mPairingInfoListViewModel = new PairingInfoListViewModel( );
         initViewModels(mPairingInfoListViewModel);
     }
 
@@ -66,34 +66,31 @@ public class PairingInfoListFragment extends BaseListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         try {
-                mPairingInfoListViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
-            mPairingInfoListViewModel.PigeonID=mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonID();
-            mPairingInfoListViewModel.FootRingID=mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingID();
-            if(mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌"))
-            {
-                IsMen=false;
+            mPairingInfoListViewModel.mBreedPigeonEntity = (PigeonEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+            mPairingInfoListViewModel.PigeonID = mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonID();
+            mPairingInfoListViewModel.FootRingID = mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingID();
+            if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
+                IsMen = false;
             }
 
-            }catch (Exception e)
-        {
-            IsSingle=false;
-            mPairingInfoListViewModel.mBreedPigeonEntity=new PigeonEntity();
+        } catch (Exception e) {
+            IsSingle = false;
+            mPairingInfoListViewModel.mBreedPigeonEntity = new PigeonEntity();
         }
         try {
 
             mPairingInfoListViewModel.mBreedEntity = (BreedEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
-            mPairingInfoListViewModel.PigeonID=mPairingInfoListViewModel.mBreedEntity.getMenPigeonID();
+            mPairingInfoListViewModel.PigeonID = mPairingInfoListViewModel.mBreedEntity.getMenPigeonID();
             mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonID(mPairingInfoListViewModel.mBreedEntity.getMenPigeonID());
             mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getMenFootRingID());
             mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonSexName("雄");
             mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingNum(mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum());
-            mPairingInfoListViewModel.FootRingID=mPairingInfoListViewModel.mBreedEntity.getMenFootRingID();
+            mPairingInfoListViewModel.FootRingID = mPairingInfoListViewModel.mBreedEntity.getMenFootRingID();
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
-        Log.d("shuaishuai", "onViewCreated: "+IsSingle);
+        Log.d("shuaishuai", "onViewCreated: " + IsSingle);
         tvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);
 
@@ -114,7 +111,7 @@ public class PairingInfoListFragment extends BaseListFragment {
             return false;
         });
 
-        mPairingInfoListAdapter = new PairingInfoListAdapter(mPairingInfoListViewModel.mBreedEntity,IsMen);
+        mPairingInfoListAdapter = new PairingInfoListAdapter(mPairingInfoListViewModel.mBreedEntity, IsMen);
 
         list.setAdapter(mPairingInfoListAdapter);
         mPairingInfoListAdapter.setOnItemClickListener((adapter, view1, position) -> {
@@ -138,7 +135,6 @@ public class PairingInfoListFragment extends BaseListFragment {
         }, list.getRecyclerView());
 
 
-
     }
 
     @Override
@@ -151,13 +147,11 @@ public class PairingInfoListFragment extends BaseListFragment {
             if (breedPigeonEntities.isEmpty() || breedPigeonEntities.size() == 0) {
             } else {
                 if (mPairingInfoListAdapter.getHeaderViewsCount() == 0) {
-        if(IsSingle)
-        {
-               mPairingInfoListAdapter.addHeaderView(initHeadView2());
-        }
-    else {
-    mPairingInfoListAdapter.addHeaderView(initHeadView(breedPigeonEntities.size()));
-}
+                    if (IsSingle) {
+                        mPairingInfoListAdapter.addHeaderView(initHeadView2());
+                    } else {
+                        mPairingInfoListAdapter.addHeaderView(initHeadView(breedPigeonEntities.size()));
+                    }
                 }
             }
 
@@ -184,13 +178,12 @@ public class PairingInfoListFragment extends BaseListFragment {
             LinearLayout ll_women = mHeadView.findViewById(R.id.woman_ll);
             manfoot.setText(mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum());
             womanfoot.setText(mPairingInfoListViewModel.mBreedEntity.getWoFootRingNum());
-            Log.d("shuaishuai", "initHeadView: "+IsMen);
+            Log.d("shuaishuai", "initHeadView: " + IsMen);
             if (IsMen) {
                 mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonID(mPairingInfoListViewModel.mBreedEntity.getMenPigeonID());
                 mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getMenFootRingID());
                 footcount.setText(mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum() + "配偶" + count + "羽");
-            }
-            else {
+            } else {
                 mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonID(mPairingInfoListViewModel.mBreedEntity.getWoPigeonID());
                 mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getWoFootRingID());
                 footcount.setText(mPairingInfoListViewModel.mBreedEntity.getWoFootRingNum() + "配偶" + count + "羽");
@@ -207,11 +200,11 @@ public class PairingInfoListFragment extends BaseListFragment {
 //            }
 
             ll_men.setOnClickListener(v -> {
-                IsMen=true;
+                IsMen = true;
                 Log.d("songshuaishuai", "initHeadView: llmen");
                 mPairingInfoListAdapter.setIsMen(true);
-                mPairingInfoListViewModel.PigeonID=mPairingInfoListViewModel.mBreedEntity.getMenPigeonID();
-                mPairingInfoListViewModel.FootRingID=mPairingInfoListViewModel.mBreedEntity.getMenFootRingID();
+                mPairingInfoListViewModel.PigeonID = mPairingInfoListViewModel.mBreedEntity.getMenPigeonID();
+                mPairingInfoListViewModel.FootRingID = mPairingInfoListViewModel.mBreedEntity.getMenFootRingID();
                 mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonID(mPairingInfoListViewModel.mBreedEntity.getMenPigeonID());
                 mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getMenFootRingID());
                 mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonSexName("雄");
@@ -223,10 +216,10 @@ public class PairingInfoListFragment extends BaseListFragment {
             });
 
             ll_women.setOnClickListener(v -> {
-                IsMen=false;
+                IsMen = false;
                 mPairingInfoListAdapter.setIsMen(false);
-                mPairingInfoListViewModel.PigeonID=mPairingInfoListViewModel.mBreedEntity.getWoPigeonID();
-                mPairingInfoListViewModel.FootRingID=mPairingInfoListViewModel.mBreedEntity.getWoFootRingID();
+                mPairingInfoListViewModel.PigeonID = mPairingInfoListViewModel.mBreedEntity.getWoPigeonID();
+                mPairingInfoListViewModel.FootRingID = mPairingInfoListViewModel.mBreedEntity.getWoFootRingID();
                 mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonID(mPairingInfoListViewModel.mBreedEntity.getWoPigeonID());
                 mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getWoFootRingID());
                 mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingNum(mPairingInfoListViewModel.mBreedEntity.getWoFootRingNum());
@@ -245,37 +238,37 @@ public class PairingInfoListFragment extends BaseListFragment {
     }
 
 
-private View initHeadView2()
-{
-    LinearLayout mHeadView = (LinearLayout) LayoutInflater.from(getBaseActivity()).inflate(R.layout.layout_pairing_info_head, list, false);
-    try {
+    private View initHeadView2() {
+        LinearLayout mHeadView = (LinearLayout) LayoutInflater.from(getBaseActivity()).inflate(R.layout.layout_pairing_info_head, list, false);
+        try {
 
 
-        TextView tv_hint_foot = mHeadView.findViewById(R.id.tv_hint_foot);
-        ImageView img_hint_sex = mHeadView.findViewById(R.id.img_hint_sex);
-        LinearLayout ll_head = mHeadView.findViewById(R.id.ll_head);
+            TextView tv_hint_foot = mHeadView.findViewById(R.id.tv_hint_foot);
+            ImageView img_hint_sex = mHeadView.findViewById(R.id.img_hint_sex);
+            LinearLayout ll_head = mHeadView.findViewById(R.id.ll_head);
 
-        tv_hint_foot.setText(mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingNum());
+            tv_hint_foot.setText(mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingNum());
 
-        if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
-            img_hint_sex.setImageResource(R.mipmap.ic_female);
-        } else if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雄")) {
-            img_hint_sex.setImageResource(R.mipmap.ic_male);
-        } else {
-            img_hint_sex.setImageResource(R.mipmap.ic_sex_no);
+            if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雌")) {
+                img_hint_sex.setImageResource(R.mipmap.ic_female);
+            } else if (mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonSexName().equals("雄")) {
+                img_hint_sex.setImageResource(R.mipmap.ic_male);
+            } else {
+                img_hint_sex.setImageResource(R.mipmap.ic_sex_no);
+            }
+
+            ll_head.setOnClickListener(v -> {
+                BreedPigeonDetailsFragment.start(getBaseActivity(),
+                        mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonID(),
+                        mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingID());
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        ll_head.setOnClickListener(v -> {
-            BreedPigeonDetailsFragment.start(getBaseActivity(),
-                    mPairingInfoListViewModel.mBreedPigeonEntity.getPigeonID(),
-                    mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingID());
-        });
-
-    } catch (Exception e) {
-        e.printStackTrace();
+        return mHeadView;
     }
-    return  mHeadView;
-}
+
     @Subscribe //订阅事件FirstEvent
     public void onEventMainThread(String info) {
         if (info.equals(EventBusService.PAIRING_INFO_REFRESH)) {
@@ -323,7 +316,6 @@ private View initHeadView2()
 
         }
     }
-
 
 
     @Override

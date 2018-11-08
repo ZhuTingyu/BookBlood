@@ -25,6 +25,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -91,6 +92,8 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
         View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_pigeon_match_details_head, null);
         LineChart mKLine;
         TextView mTvUserName;
+
+        Collections.reverse(data);
 
         mKLine = view.findViewById(R.id.kLine);
         mTvUserName = view.findViewById(R.id.tvUserName);

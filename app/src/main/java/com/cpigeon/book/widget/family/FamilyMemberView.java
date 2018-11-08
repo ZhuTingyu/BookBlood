@@ -37,7 +37,10 @@ public class FamilyMemberView extends FamilyMember {
     private TextView mTvFootNumber;
     private TextView mTvBlood;
     private TextView mTvName;
+    private View mVLeftLine;
+    private RelativeLayout mRlRightLine;
 
+    FamilyTreeView mFamilyTreeView;
     int generationPoint;
     int generationsOrder;
     int rootW;
@@ -47,12 +50,13 @@ public class FamilyMemberView extends FamilyMember {
     boolean isMiniModel;
     boolean isHorizontal;
 
-    public FamilyMemberView(Context context, int generationPoint, int generationsOrder, boolean isMiniModel, boolean isHorizontal) {
+    public FamilyMemberView(Context context, FamilyTreeView familyTreeView, int generationPoint, int generationsOrder, boolean isMiniModel, boolean isHorizontal) {
         super(context);
         this.generationPoint = generationPoint;
         this.generationsOrder = generationsOrder;
         this.isMiniModel = isMiniModel;
         this.isHorizontal = isHorizontal;
+        this.mFamilyTreeView = familyTreeView;
         initView(context);
     }
 
@@ -89,6 +93,9 @@ public class FamilyMemberView extends FamilyMember {
         mTvBlood = findViewById(R.id.tvBlood);
         mTvName = findViewById(R.id.tvName);
 
+        mVLeftLine = findViewById(R.id.vLeftLine);
+        mRlRightLine = findViewById(R.id.rlRightLine);
+
         if (generationPoint == 0) {
             rlMemberInfo.setBackgroundResource(R.drawable.shape_bg_family_member_black);
         } else {
@@ -111,7 +118,6 @@ public class FamilyMemberView extends FamilyMember {
             }
             shadowColor = R.color.color_text_hint;
         } else if (generationPoint == 1) {
-
             if (isMiniModel) {
                 rootW = size_80;
                 rootH = size_80;
@@ -151,17 +157,28 @@ public class FamilyMemberView extends FamilyMember {
         LayoutParams shadowP;
         RelativeLayout.LayoutParams infoP;
         RelativeLayout.LayoutParams imgP = new RelativeLayout.LayoutParams(imgSize, imgSize);
-        if (isHorizontal) {
-            shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
-            infoP = new RelativeLayout.LayoutParams(rootW, rootH);
-        } else {
-            shadowP = new LayoutParams(rootH + shadowSize, rootW + shadowSize);
-            infoP = new RelativeLayout.LayoutParams(rootH, rootW);
-        }
+
+        shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
+        infoP = new RelativeLayout.LayoutParams(rootW, rootH);
+//        if (isHorizontal) {
+//            shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
+//            infoP = new RelativeLayout.LayoutParams(rootW, rootH);
+//        } else {
+//            shadowP = new LayoutParams(rootH + shadowSize, rootW + shadowSize);
+//            infoP = new RelativeLayout.LayoutParams(rootH, rootW);
+//        }
         imgP.addRule(RelativeLayout.CENTER_IN_PARENT);
         rlMemberInfo.setLayoutParams(infoP);
         imgAdd.setLayoutParams(imgP);
         rlShadow.setLayoutParams(shadowP);
+
+        if (generationPoint == mFamilyTreeView.getStartGeneration()) {
+            mVLeftLine.setVisibility(GONE);
+        }
+
+        if (generationPoint == mFamilyTreeView.getMaxOfGeneration() - 1) {
+            mRlRightLine.setVisibility(GONE);
+        }
 
     }
 

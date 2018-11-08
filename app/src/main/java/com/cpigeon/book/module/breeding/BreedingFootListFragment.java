@@ -73,7 +73,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         Bundle bundle = new Bundle();
         bundle.putString(BaseFootListFragment.YEARS, PigeonEntity.TIME);
         SearchFragmentParentActivity.
-                start(activity, BreedingFootListFragment.class, true, bundle);
+                start(activity, BreedingFootListFragment.class, false, bundle);
     }
 
     @Override

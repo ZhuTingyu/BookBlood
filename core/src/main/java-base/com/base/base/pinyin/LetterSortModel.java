@@ -23,18 +23,21 @@ public class LetterSortModel<T extends LetterSortEntity> {
 
     public void setData(List<T> data) {
         mLetters.clear();
-        if (data != null) {
+        if (!Lists.isEmpty(data)) {
             for (LetterSortEntity entity : data) {
                 String pinyin = CharacterParser.getInstance().getSelling(entity.getContent());
-                String sortString = pinyin.substring(0, 1).toUpperCase();
-
-                if (sortString.matches("[A-Z]")) {
-                    String letter = sortString.toUpperCase();
-                    entity.setLetter(letter);
-                    if(!mLetters.contains(letter)){
-                        mLetters.add(letter);
+                try {
+                    String sortString = pinyin.substring(0, 1).toUpperCase();
+                    if (sortString.matches("[A-Z]")) {
+                        String letter = sortString.toUpperCase();
+                        entity.setLetter(letter);
+                        if(!mLetters.contains(letter)){
+                            mLetters.add(letter);
+                        }
+                    } else {
+                        entity.setLetter("#");
                     }
-                } else {
+                } catch (Exception e) {
                     entity.setLetter("#");
                 }
             }
