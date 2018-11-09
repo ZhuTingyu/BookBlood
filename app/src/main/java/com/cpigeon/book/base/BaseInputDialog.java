@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
 import android.text.InputFilter;
 import android.view.Gravity;
@@ -39,7 +40,7 @@ public class BaseInputDialog extends BaseDialogFragment {
     private int mEditInputType;
     private String mContent;
     private boolean mIsOpen;
-
+private ConstraintLayout bg;
     private int maxLength = 10 ;
 
     @Override
@@ -52,7 +53,6 @@ public class BaseInputDialog extends BaseDialogFragment {
         KeyboardUtils.registerSoftInputChangedListener(getActivity(), isOpen -> {
             mIsOpen = isOpen;
         });
-
         mImgClose = dialog.findViewById(R.id.imgClose);
         mTvTitle = dialog.findViewById(R.id.tvTitle);
         mTvFinish = dialog.findViewById(R.id.tvFinish);

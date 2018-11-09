@@ -214,6 +214,7 @@
     <string name="feed_pigeon_statistical">TXGP_Pigeon_SelectIDCount</string>
     <!--成长记录  列表-->
     <string name="pigeon_growth_record">TXGP_Pigeon_SelectGrowAll</string>
+    <string name="pigeon_growth_recordnew">TXGP_Pigeon_SelectGrowAllNew</string>
 
 
     <!--上传图片  一张-->

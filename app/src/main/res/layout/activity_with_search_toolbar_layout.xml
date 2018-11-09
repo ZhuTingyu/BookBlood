@@ -8,6 +8,7 @@
     <include layout="@layout/layout_toolbar"/>
 
     <LinearLayout
+        android:id="@+id/search_bg"
         android:gravity="center"
         android:background="@color/white"
         android:layout_width="match_parent"

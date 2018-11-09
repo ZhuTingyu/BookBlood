@@ -93,7 +93,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
         mTvOk.setVisibility(View.VISIBLE);
         view_placeholder.setVisibility(View.VISIBLE);
 
-
+        mTvOk.setText("+");
         mTvOk.setOnClickListener(v -> {
             //赛鸽录入
             InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);

@@ -9,6 +9,7 @@ import android.os.Parcelable;
 
 import com.base.BaseFragment;
 import com.base.FragmentParentActivity;
+
 import com.base.http.R;
 
 import java.io.Serializable;
@@ -335,7 +336,6 @@ public class IntentBuilder {
         context.startActivity(intent);
         context.overridePendingTransition(enter, exit);
     }
-
     public void startParentActivity(Activity context,boolean isHaveToolbar ,Class clz) {
         intent.setClass(context, FragmentParentActivity.class);
         intent.putExtra(FragmentParentActivity.KEY_FRAGMENT, clz);

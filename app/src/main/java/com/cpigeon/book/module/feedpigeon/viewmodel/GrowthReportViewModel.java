@@ -20,7 +20,8 @@ public class GrowthReportViewModel extends BaseViewModel {
     public PigeonEntity mPigeonEntity;
 
     public String puid;
-
+public String  year;
+public String bitAll;
     public int pi = 1;
     public int ps = 50;
 
@@ -39,5 +40,17 @@ public class GrowthReportViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
-
+    public void getTXGP_Pigeon_SelectGrowAllDataNew() {
+        submitRequestThrowError(GrowthReportModel.getTXGP_Pigeon_SelectGrowAllNew(
+                mPigeonEntity.getFootRingID(),
+                mPigeonEntity.getPigeonID(),
+                puid,
+                bitAll,
+                year), r -> {
+            if (r.isOk()) {
+                listEmptyMessage.setValue(r.msg);
+                mGrowthReportListData.setValue(r.data);
+            } else throw new HttpErrorException(r);
+        });
+    }
 }

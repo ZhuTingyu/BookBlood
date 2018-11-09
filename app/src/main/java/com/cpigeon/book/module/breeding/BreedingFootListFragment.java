@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.TimeUtil;
@@ -33,10 +35,12 @@ import cn.qqtheme.framework.picker.OptionPicker;
  */
 
 public class BreedingFootListFragment extends BaseFootListFragment {
-
+private LinearLayout search_bg;
+private RelativeLayout rlSearch;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.setBackground(getBaseActivity().getResources().getDrawable(R.color.Gray));
         setToolbarRight("▾ "+TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY), item -> {
             int year=Integer.parseInt(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY));
             ArrayList<String> yearlist=new ArrayList<>();
@@ -79,6 +83,10 @@ public class BreedingFootListFragment extends BaseFootListFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        search_bg=mActivity.findViewById(R.id.search_bg);
+        rlSearch=mActivity.findViewById(R.id.rlSearch);
+        search_bg.setBackgroundColor(getResources().getColor(R.color.Gray));
+      //  search_bg.setBackgroundColor(getResources().getColor(R.color.colorLayoutGray3));
         mPairingInfoListViewModel = new PairingInfoListViewModel();
         initViewModels(mPairingInfoListViewModel);
     }
@@ -87,8 +95,8 @@ public class BreedingFootListFragment extends BaseFootListFragment {
     protected void initBreedData() {
         super.initBreedData();
         mTvOk.setVisibility(View.VISIBLE);
-        view_placeholder.setVisibility(View.VISIBLE);
-        mTvOk.setText(R.string.array_pairing_add);
+        view_placeholder.setVisibility(View.GONE);
+        mTvOk.setText("+");
         mTvOk.setOnClickListener(v -> {
             //添加配对
             AddBreedingFragment.start(getBaseActivity());
@@ -106,7 +114,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
             mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
         });
         mPairingInfoListAdapter = new BreedingFootAdapter(R.layout.breed_manneger_item,null);
-        mRecyclerView.addItemDecorationLine(R.color.White,20);
+        mRecyclerView.addItemDecorationLine(R.color.Gray,15);
         mRecyclerView.setAdapter(mPairingInfoListAdapter);
         mPairingInfoListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

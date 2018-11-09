@@ -7,16 +7,12 @@ import android.widget.TextView;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
-import com.base.util.PictureSelectUtil;
-import com.base.util.Utils;
-import com.base.util.glide.GlideUtil;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.GrowthReportEntity;
 import com.cpigeon.book.module.photo.adpter.ImageItemDecoration;
-import com.cpigeon.book.util.MathUtil;
 
 /**
  * Created by Zhu TingYu on 2018/8/29.
@@ -37,15 +33,14 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
     protected void convert(BaseViewHolder helper, GrowthReportEntity item) {
 
         ImageView icon = helper.getView(R.id.imgIcon);
-
+        ImageView icon2 = helper.getView(R.id.img);
         helper.setText(R.id.tvDay, String.valueOf(TimeUtil.getTimeFormat(item.getUseTime(), TimeUtil.FORMAT_dd)));
         helper.setText(R.id.tvYear, String.valueOf(TimeUtil.getTimeFormat(item.getUseTime(), TimeUtil.FORMAT_YYYYMM)));
         helper.setText(R.id.tvTitle, item.getTypeName());
-        icon.setImageResource(R.mipmap.ic_report_auction);
-
+         icon.setImageResource(R.mipmap.ic_report_auction);
+        icon2.setVisibility(View.GONE);
         TextView tv1 = helper.getView(R.id.tv1);
         TextView tv2 = helper.getView(R.id.tv2);
-        ImageView img = helper.getView(R.id.img);
 
 
         if (getData().size() == 1) {
@@ -59,126 +54,120 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
         }
 
         switch (item.getTypeID()) {
-
-            case 1://出壳
+            case 1://状态
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.GONE);
-                img.setVisibility(View.GONE);
-                helper.setText(R.id.tv1, "第" + MathUtil.toChinese(String.valueOf(item.getLayNum() + 1)) + "窝" + split +
-                        item.getWeather() + split +
-                        item.getTemperature() + "℃" + split +
-                        item.getWeather());
+
+                helper.setText(R.id.tv1,item.getRemark());
+                helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_auction);
+                break;
+
+            case 2://出壳
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                helper.setText(R.id.tv1,item.getRemark());
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_hatches);
                 break;
 
-            case 2://挂环
+            case 3://挂环
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.GONE);
-                img.setVisibility(View.GONE);
-                helper.setText(R.id.tv1, "第" + MathUtil.toChinese(String.valueOf(item.getLayNum() + 1)) + "窝" + split + item.getFootRingNum());
+                helper.setText(R.id.tv1, item.getRemark());
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_set_foot);
 
                 break;
 
-            case 3://拍照
+            case 4: //窝次信息  需要拆分字符串
+            if(item.equals(StringUtil.emptyString()))
+            {
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.GONE);
-                img.setVisibility(View.VISIBLE);
-                GlideUtil.setGlideImageView(getBaseActivity(), item.getName(), img);
-                img.setOnClickListener(v -> {
-                    PictureSelectUtil.showImagePhoto(getBaseActivity(), img, Lists.newArrayList(item.getName())
-                            , 0);
-                });
-                tv1.setText(item.getInfo());
+                helper.setText(R.id.tv1,"与"+item.getFootRingNum()+"于今日产下第"+item.getNumber()+"窝");
+            }
+            else
+            {
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.GONE);
+                helper.setText(R.id.tv1,"与"+item.getFootRingNum()+"于今日产下第"+item.getNumber()+"窝");
+
+            }
+
+
+
+
+
                 break;
 
-            case 4://配对
-
+            case 5  ://配对
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.VISIBLE);
-                img.setVisibility(View.GONE);
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_pair);
-                helper.setText(R.id.tv1, item.getFootRingNum() + split + item.getPigeonPlumeName());
-                helper.setText(R.id.tv2, item.getPigeonBloodName());
+                helper.setText(R.id.tv1, item.getRemark());
+                helper.setText(R.id.tv2, item.getFootRingNum() + split + item.getPlumeName()+split+item.getBloodName());
 
                 break;
 
-            case 5://生病
+            case 6://生病
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.VISIBLE);
-                img.setVisibility(View.GONE);
-
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_condition);
-                helper.setText(R.id.tv1, "病情名称：" + item.getName());
-                helper.setText(R.id.tv2, "病情症状：" + item.getInfo());
+                helper.setText(R.id.tv1, "病情名称：" + item.getName()+split+"病情症状：" + item.getInfo());
+                helper.setText(R.id.tv2, item.getRemark());
 
                 break;
 
-            case 6://用药
+            case 7://用药
 
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.VISIBLE);
-                img.setVisibility(View.GONE);
-
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_drug_use);
 
-                helper.setText(R.id.tv1, "药品名称：" + item.getName());
-                String info = StringUtil.isStringValid(item.getInfo()) ? item.getInfo() : Utils.getString(R.string.text_temp_no);
-                helper.setText(R.id.tv2, "使用效果：" + info);
+                helper.setText(R.id.tv1, "药品名称：" + item.getName()+"|使用效果："+item.getInfo());
+                helper.setText(R.id.tv2, item.getRemark());
 
                 break;
 
-            case 7://疫苗
+            case 8://疫苗
 
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.VISIBLE);
-                img.setVisibility(View.GONE);
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_vaccine);
 
-                helper.setText(R.id.tv1, "疫苗名称：" + item.getName());
-                helper.setText(R.id.tv2, "注射原因：" + item.getInfo());
+                helper.setText(R.id.tv1, "疫苗名称：" + item.getName()+"|使用效果："+item.getInfo());
+                helper.setText(R.id.tv2, item.getRemark());
 
                 break;
 
-            case 8://保健品
+            case 9://保健品
 
-                tv1.setVisibility(View.VISIBLE);
-                tv2.setVisibility(View.GONE);
-                img.setVisibility(View.GONE);
-                helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_care);
-                helper.setText(R.id.tv1, "用品名称：" + item.getName());
-
-                break;
-            case 9://训练
 
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.VISIBLE);
-                img.setVisibility(View.GONE);
+                helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_care);
+                helper.setText(R.id.tv1, "保健品名称：" + item.getName());
+                helper.setText(R.id.tv2, item.getRemark());
 
+                break;
+            case 10://训练
+
+                tv1.setVisibility(View.VISIBLE);
+                tv2.setVisibility(View.VISIBLE);
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_train);
 
-                helper.setText(R.id.tv1, item.getMatchNumber() + "名" + split + item.getMatchCount()
-                        + "羽" + split + "归巢" + item.getRetureFly() + "羽");
-                helper.setText(R.id.tv2, Utils.getString(R.string.text_speed_content_1, item.getFraction()));
+                helper.setText(R.id.tv1, "第"+item.getNumber() + "名" + split +"总" +item.getCount() + "羽" + split+item.getFraction()+split+item.getName());
+
+                helper.setText(R.id.tv2, item.getRemark());
                 break;
 
-            case 10://比赛
+            case 11://比赛
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.VISIBLE);
-                img.setVisibility(View.GONE);
-
                 helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_match);
+                helper.setText(R.id.tv1, "第"+item.getNumber() + "名" + split +"总" +item.getCount() + "羽" + split+item.getName());
 
-                helper.setText(R.id.tv1, item.getMatchNumber() + "名" + split + +item.getMatchCount() + "羽" + split
-                        + Utils.getString(R.string.text_speed_content_1, item.getFraction()));
-                helper.setText(R.id.tv2, item.getName());
+                helper.setText(R.id.tv2, item.getRemark());
 
                 break;
-            case 11://现役在棚
-                tv1.setVisibility(View.VISIBLE);
-                tv2.setVisibility(View.GONE);
-                img.setVisibility(View.GONE);
-                helper.setText(R.id.tv1, item.getInfo());
 
         }
         addTopAndBttomMargin(helper, 32);
