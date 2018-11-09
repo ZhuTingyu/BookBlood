@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.TimeUtil;
@@ -33,6 +35,8 @@ import cn.qqtheme.framework.picker.OptionPicker;
  */
 
 public class BreedingFootListFragment extends BaseFootListFragment {
+    private LinearLayout search_bg;
+    private RelativeLayout rlSearch;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -40,23 +44,23 @@ public class BreedingFootListFragment extends BaseFootListFragment {
 
         setTitle(R.string.text_breed_info);
 
-        setToolbarRight("▾ "+TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY), item -> {
-            int year=Integer.parseInt(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY));
-            ArrayList<String> yearlist=new ArrayList<>();
-            for(int i=0;i<10;i++)
-            {
-                yearlist.add(year+"");
+        view.setBackground(getBaseActivity().getResources().getDrawable(R.color.Gray));
+        setToolbarRight("▾ " + TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY), item -> {
+            int year = Integer.parseInt(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY));
+            ArrayList<String> yearlist = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                yearlist.add(year + "");
                 year--;
             }
 
-            PickerUtil.showItemPicker(getBaseActivity(),yearlist
+            PickerUtil.showItemPicker(getBaseActivity(), yearlist
                     , 0, new OptionPicker.OnOptionPickListener() {
                         @Override
                         public void onOptionPicked(int index, String item) {
-                            setToolbarRight("▾ "+item);
+                            setToolbarRight("▾ " + item);
                             setProgressVisible(true);
                             mPairingInfoListAdapter.getData().clear();
-                            mPairingInfoListViewModel.year=item;
+                            mPairingInfoListViewModel.year = item;
                             mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
 
 
@@ -71,8 +75,8 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         Calendar cale = null;
         cale = Calendar.getInstance();
         int year = cale.get(Calendar.YEAR);
-        PigeonEntity.TIME=year+"";
-        Log.d("songshuaishuai", "start: "+year);
+        PigeonEntity.TIME = year + "";
+        Log.d("songshuaishuai", "start: " + year);
         Bundle bundle = new Bundle();
         bundle.putString(BaseFootListFragment.YEARS, PigeonEntity.TIME);
         SearchFragmentParentActivity.
@@ -82,6 +86,9 @@ public class BreedingFootListFragment extends BaseFootListFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        search_bg = mActivity.findViewById(R.id.search_bg);
+        rlSearch = mActivity.findViewById(R.id.rlSearch);
+        search_bg.setBackgroundColor(getResources().getColor(R.color.Gray));
         mPairingInfoListViewModel = new PairingInfoListViewModel();
         initViewModels(mPairingInfoListViewModel);
     }
@@ -90,8 +97,8 @@ public class BreedingFootListFragment extends BaseFootListFragment {
     protected void initBreedData() {
         super.initBreedData();
         mTvOk.setVisibility(View.VISIBLE);
-        view_placeholder.setVisibility(View.VISIBLE);
-        mTvOk.setText(R.string.array_pairing_add);
+        view_placeholder.setVisibility(View.GONE);
+        mTvOk.setText("+");
         mTvOk.setOnClickListener(v -> {
             //添加配对
             AddBreedingFragment.start(getBaseActivity());
@@ -103,20 +110,20 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         mRecyclerView.setRefreshListener(() -> {
             Log.d("songshuaishuai", "66666: ");
             setProgressVisible(true);
-            mPairingInfoListViewModel.pi=1;
+            mPairingInfoListViewModel.pi = 1;
             mPairingInfoListAdapter.getData().clear();
             mPairingInfoListAdapter.notifyDataSetChanged();
             mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
         });
-        mPairingInfoListAdapter = new BreedingFootAdapter(R.layout.breed_manneger_item,null);
-        mRecyclerView.addItemDecorationLine(R.color.White,20);
+        mPairingInfoListAdapter = new BreedingFootAdapter(R.layout.breed_manneger_item, null);
+        mRecyclerView.addItemDecorationLine(R.color.Gray, 15);
         mRecyclerView.setAdapter(mPairingInfoListAdapter);
         mPairingInfoListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 try {
                     BreedEntity mBreedEntity = mPairingInfoListAdapter.getData().get(position);
-                  PairingInfoListFragment.start(getBaseActivity(), mBreedEntity);
+                    PairingInfoListFragment.start(getBaseActivity(), mBreedEntity);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -134,15 +141,14 @@ public class BreedingFootListFragment extends BaseFootListFragment {
 //        }, mRecyclerView.getRecyclerView());
 
 
-
     }
 
     @Override
     protected void initObserve() {
         super.initObserve();
         mPairingInfoListViewModel.mBreedingInfoListData.observe(this, breedPigeonEntities -> {
-            Log.d("shuaishuai", "initObserve: "+breedPigeonEntities.size());
-           RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPairingInfoListAdapter, breedPigeonEntities);
+            Log.d("shuaishuai", "initObserve: " + breedPigeonEntities.size());
+            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPairingInfoListAdapter, breedPigeonEntities);
             mPairingInfoListAdapter.notifyDataSetChanged();
             setProgressVisible(false);
 
@@ -157,7 +163,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
     public void onResume() {
         super.onResume();
         setProgressVisible(true);
-        mPairingInfoListViewModel.pi=1;
+        mPairingInfoListViewModel.pi = 1;
         mPairingInfoListAdapter.getData().clear();
         mPairingInfoListAdapter.notifyDataSetChanged();
         mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();

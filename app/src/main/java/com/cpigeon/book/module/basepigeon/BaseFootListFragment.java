@@ -198,7 +198,7 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         });
 
-        mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
+           mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
                 mBreedPigeonListModel.id = PigeonId;

@@ -108,7 +108,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
         mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
-                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
         });

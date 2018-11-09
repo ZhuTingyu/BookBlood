@@ -210,13 +210,12 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone">
 
-
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvMatchPigeonAnalyse1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_match_pigeon_analyse"
                     app:simpleTitleView_image_size="40dp"
@@ -227,7 +226,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_blood_find"
                     app:simpleTitleView_image_size="40dp"

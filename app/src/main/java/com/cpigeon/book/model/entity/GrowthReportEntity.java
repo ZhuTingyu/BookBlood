@@ -25,25 +25,77 @@ public class GrowthReportEntity {
      * PigeonBloodName : 科技
      * Info : 多云
      */
-
+    private String BloodName;
+    private String PlumeName;
     private String FootRingNum;
+    private String Name;
+    private String Info;
+    private int Count;
+    private int MatchNumber;
     private int LayNum;
     private String TypeName;
     private int TypeID;
     private String UseTime;
-    private String Name;
     private int MatchCount;
-    private int MatchNumber;
     private String Fraction;
     private String Weather;
     private String Temperature = "0";
     private String Bodytemper;
     private String PigeonPlumeName;
     private String PigeonBloodName;
-    private String Info;
     private int RetureFly;
+    private int Number;
+    private int ReturnFly;
+    private String Remark;
+;
 
+    public String getBloodName() {
+        return BloodName;
+    }
 
+    public void setBloodName(String bloodName) {
+        BloodName = bloodName;
+    }
+
+    public String getPlumeName() {
+        return PlumeName;
+    }
+
+    public void setPlumeName(String plumeName) {
+        PlumeName = plumeName;
+    }
+
+    public int getCount() {
+        return Count;
+    }
+
+    public void setCount(int count) {
+        Count = count;
+    }
+
+    public int getNumber() {
+        return Number;
+    }
+
+    public void setNumber(int number) {
+        Number = number;
+    }
+
+    public int getReturnFly() {
+        return ReturnFly;
+    }
+
+    public void setReturnFly(int returnFly) {
+        ReturnFly = returnFly;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public int getRetureFly() {
         return RetureFly;

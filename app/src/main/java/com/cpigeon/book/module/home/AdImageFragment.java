@@ -55,7 +55,7 @@ public class AdImageFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
         mImageView = findViewById(R.id.img);
         int w = ScreenTool.getScreenWidth();
-        mImageView.setLayoutParams(new NestedScrollView.LayoutParams(w, ViewGroup.LayoutParams.MATCH_PARENT));
+        mImageView.setLayoutParams(new RelativeLayout.LayoutParams(w, ViewGroup.LayoutParams.MATCH_PARENT));
         if (TYPE_AI_PIGEON_HOUSE.equals(mType)) {
             setTitle(R.string.text_ai_pigeon_house);
             GlideUtil.setGlideImageView(getBaseActivity(), R.mipmap.ic_bg_ai_pigeon_house, mImageView);

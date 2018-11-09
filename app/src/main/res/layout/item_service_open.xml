@@ -10,44 +10,46 @@
     <LinearLayout
         android:id="@+id/linearLayout7"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="right">
-
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/imgIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@mipmap/ic_logo" />
 
-        </LinearLayout>
 
 
         <TextView
             android:id="@+id/tvServiceName"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
-            android:layout_weight="6"
             android:textColor="@color/black"
             android:textSize="@dimen/medium_text_size"
-            tools:text="天下鸽谱" />
+            tools:text="天下鸽谱"
+            android:layout_width="wrap_content" />
 
     </LinearLayout>
-
+        <TextView
+            android:layout_margin="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加载中..."
+            android:id="@+id/tvtime"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/tvOpen"
         style="@style/bottom_style"
@@ -57,6 +59,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="TextView"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -70,29 +73,28 @@
         android:layout_marginTop="16dp"
         android:paddingLeft="@dimen/spacing_left_reight"
         android:paddingRight="@dimen/spacing_left_reight"
-        android:text="TextView"
+        android:text="加载中..."
         android:textColor="@color/color_text_title"
         android:textSize="@dimen/small_text_size_2"
         app:layout_constraintBottom_toTopOf="@+id/tvOpen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvtime" />
-
-    <TextView
-        android:gravity="center"
-        android:id="@+id/tvtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:paddingLeft="@dimen/spacing_left_reight"
-        android:paddingRight="@dimen/spacing_left_reight"
-        android:text="TextView"
-        android:textColor="@color/color_text_title"
-        android:textSize="@dimen/small_text_size_2"
-        app:layout_constraintBottom_toTopOf="@+id/tvCount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+    <!--<TextView-->
+        <!--android:gravity="center"-->
+        <!--android:id="@+id/tvtime"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:paddingLeft="@dimen/spacing_left_reight"-->
+        <!--android:paddingRight="@dimen/spacing_left_reight"-->
+        <!--android:text="加载中..."-->
+        <!--android:textSize="@dimen/small_text_size_2"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/tvCount"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />-->
 
 </android.support.constraint.ConstraintLayout>

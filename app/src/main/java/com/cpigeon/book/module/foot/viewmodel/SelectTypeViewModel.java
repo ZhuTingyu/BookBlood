@@ -86,7 +86,23 @@ public class SelectTypeViewModel extends BaseViewModel {
             } else throw new HttpErrorException(r);
         });
     }
+    public void getClassify() {
+        //类别
+        whichIds = Lists.newArrayList("1000");
+        List<SelectTypeEntity> selectTypeEntities = Lists.newArrayList();
+        SelectTypeEntity selectTypeEntity=new SelectTypeEntity();
+        selectTypeEntity.setTypeName("配对记录");
+        selectTypeEntity.setTypeID("2");
+        selectTypeEntity.setWhichType("1000");
+        selectTypeEntities.add(selectTypeEntity);
 
+        SelectTypeEntity selectTypeEntity1=new SelectTypeEntity();
+        selectTypeEntity1.setTypeName("窝次记录");
+        selectTypeEntity1.setTypeID("3");
+        selectTypeEntity1.setWhichType("1000");
+        selectTypeEntities.add(selectTypeEntity1);
+        mSelectTypeLiveData.setValue(selectTypeEntities);
+    }
     //足环类型
     public void getSelectType_Foot_Ring() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_FOOT_RING,key), r -> {

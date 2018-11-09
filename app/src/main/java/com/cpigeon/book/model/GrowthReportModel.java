@@ -35,4 +35,23 @@ public class GrowthReportModel {
                 .request();
     }
 
+    //hl 获取 成长记录  列表
+    public static Observable<ApiResponse<List<GrowthReportEntity>>> getTXGP_Pigeon_SelectGrowAllNew(
+                                                                                                 String footid,
+                                                                                                 String pigeonid,
+                                                                                                 String puid,
+                                                                                                    String bitAll,
+                                                                                                    String year) {
+        return RequestData.<ApiResponse<List<GrowthReportEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<GrowthReportEntity>>>() {
+                }.getType())
+                .url(R.string.pigeon_growth_recordnew)
+                .addBody("footid", footid)//
+                .addBody("pigeonid", pigeonid)//
+                .addBody("puid", puid)
+                .addBody("bitAll", bitAll)
+                .addBody("year", year)
+                .request();
+    }
+
 }
