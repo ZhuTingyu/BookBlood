@@ -37,6 +37,9 @@ public class BreedingFootListFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setTitle(R.string.text_breed_info);
+
         setToolbarRight("▾ "+TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY), item -> {
             int year=Integer.parseInt(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY));
             ArrayList<String> yearlist=new ArrayList<>();
@@ -50,7 +53,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
                     , 0, new OptionPicker.OnOptionPickListener() {
                         @Override
                         public void onOptionPicked(int index, String item) {
-                            setToolbarRight("▾ "+item+"  ");
+                            setToolbarRight("▾ "+item);
                             setProgressVisible(true);
                             mPairingInfoListAdapter.getData().clear();
                             mPairingInfoListViewModel.year=item;

@@ -54,6 +54,7 @@ public class MySharePigeonFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewModel.type = ShareHallViewModel.TYPE_MY;
+        setTitle(R.string.text_my_share);
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
             SearchSharePigeonActivity.start(getBaseActivity(), true);
@@ -72,7 +73,7 @@ public class MySharePigeonFragment extends BaseBookFragment {
             });
         });
         mRecyclerView.setAdapter(mAdapter);
-
+        mTvOk.setText(R.string.text_add_share_pigeon);
         mTvOk.setOnClickListener(v -> {
             SelectPigeonToShareFragment.start(getBaseActivity());
         });

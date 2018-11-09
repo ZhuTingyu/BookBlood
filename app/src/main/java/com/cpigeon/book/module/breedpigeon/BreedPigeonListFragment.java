@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.base.util.Lists;
 import com.base.util.Utils;
@@ -33,6 +34,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class BreedPigeonListFragment extends BaseFootListFragment {
 
+    ImageView mImgAdd;
 
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
@@ -43,8 +45,14 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
     }
 
     @Override
+    protected int getLayoutRes() {
+        return R.layout.xreclyview_with_add_circle_btn;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setTitle(R.string.text_my_breed_pigeon);
     }
 
     @Override
@@ -53,11 +61,8 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
 
         setStartSearchActvity(BaseSearchPigeonActivity.class);
 
-        mTvOk.setVisibility(View.VISIBLE);
-        view_placeholder.setVisibility(View.VISIBLE);
-        mTvOk.setText("+");
-
-        mTvOk.setOnClickListener(v -> {
+        mImgAdd = findViewById(R.id.imgAdd);
+        mImgAdd.setOnClickListener(v -> {
             //种鸽录入
             InputBreedInBookFragment.start(getBaseActivity());
         });

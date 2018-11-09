@@ -672,5 +672,8 @@
 
     <string name="str_shoot_org_hint">赛事组织可填写协会，鸽舍，比赛等组织名称</string>
     <string name="text_hint_set_parent_pigeon">是否确定将此鸽设置为%1$s鸽</string>
+    <string name="text_foot_ring_admin">足环管理</string>
+    <string name="text_my_breed_pigeon">我的种鸽</string>
+    <string name="text_my_match_pigeon">我的赛鸽</string>
 
 </resources>

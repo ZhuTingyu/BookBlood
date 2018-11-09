@@ -81,13 +81,15 @@ public class FootAdminListFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setTitle(R.string.text_foot_ring_admin);
+
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
             BaseSearchActivity.start(getActivity(), SearchFootActivity.class, new Bundle());
         });
 
-
         mRecyclerView = findViewById(R.id.list);
+        mRecyclerView.addItemDecorationLineHaveMargin();
         mTvOk = findViewById(R.id.tvOk);
         mDrawerLayout = mActivity.getDrawerLayout();
         mFiltrate = mActivity.getFiltrate();
@@ -98,6 +100,8 @@ public class FootAdminListFragment extends BaseBookFragment {
             }
             return false;
         });
+
+        mTvOk.setText(R.string.text_add_foot_number);
 
         mAdapter = new FootAdminListAdapter(getBaseActivity());
 

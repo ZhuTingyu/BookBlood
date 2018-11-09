@@ -20,7 +20,9 @@
             android:layout_marginBottom="8dp"
             android:layout_gravity="center"
             android:background="@drawable/shape_bg_search_edit"
-            android:layout_width="230dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/normal_safe_distance"
+            android:layout_marginRight="@dimen/normal_safe_distance"
             android:layout_height="28dp">
 
             <ImageView

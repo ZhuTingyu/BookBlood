@@ -46,6 +46,13 @@ public class GlideUtil {
         setGlideImageViewHaveRound(context, url, imageView, 0);
     }
 
+    public static void setGlideImageView(Context context, int url, ImageView imageView) {
+        Glide.with(context).load(url)
+                .centerCrop()
+                .bitmapTransform(new RoundedCornersTransformation(context, 0, 0))
+                .into(imageView);
+    }
+
     public static void setGlideImageViewHaveRound(Context context, String url, ImageView imageView, int radius) {
         if(!StringUtil.isStringValid(url)){
             return;
@@ -61,7 +68,6 @@ public class GlideUtil {
                     .bitmapTransform(new RoundedCornersTransformation(context, radius, 0))
                     .into(imageView);
         }
-
     }
 
     public static void setGlideImageViewHaveRound(Context context, String url, ImageView imageView) {

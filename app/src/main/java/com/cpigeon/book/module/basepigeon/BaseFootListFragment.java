@@ -41,13 +41,8 @@ import butterknife.BindView;
  */
 
 public class BaseFootListFragment extends BaseBookFragment {
-
-
-    @BindView(R.id.list)
     protected XRecyclerView mRecyclerView;
-    @BindView(R.id.tvOk)
     protected TextView mTvOk;
-    @BindView(R.id.view_placeholder)
     protected View view_placeholder;
     protected BasePigeonListAdapter mAdapter;
     protected BreedingFootAdapter mPairingInfoListAdapter;
@@ -103,15 +98,31 @@ public class BaseFootListFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mRecyclerView = findViewById(R.id.list);
+        try {
+            mTvOk = findViewById(R.id.tvOk);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            view_placeholder = findViewById(R.id.view_placeholder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
 
-        mTvOk.setVisibility(View.GONE);
-        view_placeholder.setVisibility(View.GONE);
+        if(mTvOk != null){
+            mTvOk.setVisibility(View.GONE);
+        }
+
+        if(view_placeholder != null){
+            view_placeholder.setVisibility(View.GONE);
+        }
 
         initParameter();//初始化请求的参数
 
         mRecyclerView.setRefreshListener(() -> {
-            Log.d("songshuaishuai", "66666: ");
             setProgressVisible(true);
             mAdapter.getData().clear();
             mAdapter.notifyDataSetChanged();
@@ -119,7 +130,6 @@ public class BaseFootListFragment extends BaseBookFragment {
             mBreedPigeonListModel.getPigeonList();
         });
 
-        setProgressVisible(true);
         mActivity.setSearchClickListener(v -> {
             //搜索
             Bundle bundle = new Bundle();
@@ -198,7 +208,7 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         initData();
 
-        mRecyclerView.addItemDecorationLine(20);
+        mRecyclerView.addItemDecorationLineHaveMargin();
         mRecyclerView.setAdapter(mAdapter);
         initBreedData();
         mAdapter.setOnLoadMoreListener(() -> {
@@ -206,6 +216,10 @@ public class BaseFootListFragment extends BaseBookFragment {
             mBreedPigeonListModel.pi++;
             mBreedPigeonListModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
+
+
+        setProgressVisible(true);
+        mBreedPigeonListModel.getPigeonList();
 
         mDrawerLayout = mActivity.getDrawerLayout();
         mFiltrate = mActivity.getFiltrate();
@@ -253,7 +267,6 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.STATE_STATE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
         mSelectTypeViewModel.getSelectTypes();
-
     }
 
     //初始化请求的参数
@@ -350,7 +363,6 @@ public class BaseFootListFragment extends BaseBookFragment {
         });
 
         mBreedPigeonListModel.mPigeonListData.observe(this, datas -> {
-            Log.d("shuaishuai", "initObserve: " + datas.size());
             if (datas.isEmpty() || datas.size() == 0) {
 
             } else {
@@ -382,15 +394,6 @@ public class BaseFootListFragment extends BaseBookFragment {
     @Override
     public void onResume() {
         super.onResume();
-        setProgressVisible(true);
-        mAdapter.getData().clear();
-        mAdapter.notifyDataSetChanged();
-        mBreedPigeonListModel.pi = 1;
-        mBreedPigeonListModel.getPigeonList();
-
-
     }
-
-
 }
 

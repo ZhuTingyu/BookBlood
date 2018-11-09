@@ -110,7 +110,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_ai_pigeon_house"
                     app:simpleTitleView_image_size="40dp"
@@ -181,28 +181,38 @@
                     app:simpleTitleView_image_size="40dp"
                     app:simpleTitleView_text="@string/text_pigeon_photo" />
 
-                <View
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvMatchPigeonAnalyse"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
+                    app:simpleTitleView_image="@mipmap/ic_match_pigeon_analyse"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_match_pigeon_analyse" />
 
-
-                <View
+                <com.cpigeon.book.widget.SimpleTitleView
+                    android:id="@+id/sTvBloodFind"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
+                    app:simpleTitleView_image="@mipmap/ic_blood_find"
+                    app:simpleTitleView_image_size="40dp"
+                    app:simpleTitleView_text="@string/text_blood_find" />
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
 
                 <com.cpigeon.book.widget.SimpleTitleView
-                    android:id="@+id/sTvMatchPigeonAnalyse"
+                    android:id="@+id/sTvMatchPigeonAnalyse1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -213,7 +223,7 @@
                     app:simpleTitleView_text="@string/text_match_pigeon_analyse" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
-                    android:id="@+id/sTvBloodFind"
+                    android:id="@+id/sTvBloodFind1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

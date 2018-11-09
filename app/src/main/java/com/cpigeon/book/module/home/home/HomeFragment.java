@@ -28,6 +28,7 @@ import com.cpigeon.book.module.breeding.BreedingFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonListFragment;
 import com.cpigeon.book.module.feedpigeon.FeedPigeonRecordListFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
+import com.cpigeon.book.module.home.AdImageFragment;
 import com.cpigeon.book.module.home.home.adapter.HomeTopAdapter;
 import com.cpigeon.book.module.home.home.viewmodel.HomeViewModel;
 import com.cpigeon.book.module.makebloodbook.SelectPigeonToMakeBookFragment;
@@ -178,6 +179,18 @@ public class HomeFragment extends BaseBookFragment {
         mSTvPigeonPhoto.setOnClickListener(v -> {
             //信鸽相册
             SelectFootToPhotoFragment.start(getBaseActivity());
+        });
+
+        mSTvAiPigeonHouse.setOnClickListener(v -> {
+            AdImageFragment.start(getBaseActivity(), AdImageFragment.TYPE_AI_PIGEON_HOUSE);
+        });
+
+        mSTvBloodFind.setOnClickListener(v -> {
+            AdImageFragment.start(getBaseActivity(), AdImageFragment.TYPE_FIND_BLOOD);
+        });
+
+        mSTvMatchPigeonAnalyse.setOnClickListener(v -> {
+
         });
 
         mViewModel.getHomeAd();

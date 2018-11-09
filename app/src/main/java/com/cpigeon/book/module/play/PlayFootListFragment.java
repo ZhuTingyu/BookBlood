@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.base.util.Lists;
 import com.cpigeon.book.R;
@@ -46,6 +47,7 @@ public class PlayFootListFragment extends BaseFootListFragment {
     LeagueMarkerView mLeagueMarkerView;
     LineChart mLine;
     private CardView mCvLine;
+    ImageView mImgAdd;
 
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
@@ -63,8 +65,14 @@ public class PlayFootListFragment extends BaseFootListFragment {
     }
 
     @Override
+    protected int getLayoutRes() {
+        return R.layout.xreclyview_with_add_circle_btn;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setTitle(R.string.text_my_match_pigeon);
         initHeadViews();
     }
 
@@ -90,11 +98,9 @@ public class PlayFootListFragment extends BaseFootListFragment {
 
         setStartSearchActvity(PlayFootListActivity.class);//搜索页面
 
-        mTvOk.setVisibility(View.VISIBLE);
-        view_placeholder.setVisibility(View.VISIBLE);
 
-
-        mTvOk.setOnClickListener(v -> {
+        mImgAdd = findViewById(R.id.imgAdd);
+        mImgAdd.setOnClickListener(v -> {
             //赛鸽录入
             InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);
         });
@@ -183,6 +189,4 @@ public class PlayFootListFragment extends BaseFootListFragment {
         mBreedPigeonListModel.getPigeonList();
         mViewModel.getFirstLeague();//获取第一名赛绩
     }
-
-
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,7 +22,6 @@ import com.base.util.utility.StringUtil;
 import com.chad.library.adapter.base.BaseViewHolder;
 
 import java.util.List;
-
 /**
  * Created by Zhu TingYu on 2018/1/11.
  */
@@ -87,7 +87,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         TextView textView = view.findViewById(R.id.empty);
         textView.setTextColor(BaseApplication.getAppContext().getResources().getColor(R.color.colorPrimary));
         textView.setText(message);
-        AppCompatImageView imageView = view.findViewById(R.id.icon);
+        ImageView imageView = view.findViewById(R.id.icon);
         imageView.setImageResource(resId);
         setEmptyView(view);
     }

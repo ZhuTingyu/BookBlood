@@ -65,8 +65,8 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setTitle(R.string.text_blood_book_made);
         bloodUserViewModel.getBloodNum();
-
     }
 
 
@@ -77,7 +77,6 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
 
         bloodUserViewModel.count.observe(this, s -> {
             tv.setText(s.getCount());
-
         });
     }
 

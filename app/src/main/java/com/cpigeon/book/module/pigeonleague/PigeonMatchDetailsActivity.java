@@ -82,8 +82,12 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
         mViewModel.mDataLeague.observe(this, leagueDetailsEntities -> {
             setProgressVisible(false);
             mAdapter.setNewData(leagueDetailsEntities);
+
             if (!Lists.isEmpty(leagueDetailsEntities)) {
-                mAdapter.addHeaderView(initHeadView(leagueDetailsEntities));
+                List<LeagueDetailsEntity> kData = Lists.newArrayList();
+                kData.addAll(leagueDetailsEntities);
+                Collections.reverse(kData);
+                mAdapter.addHeaderView(initHeadView(kData));
             }
         });
     }
@@ -92,9 +96,6 @@ public class PigeonMatchDetailsActivity extends BaseBookActivity {
         View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_pigeon_match_details_head, null);
         LineChart mKLine;
         TextView mTvUserName;
-
-        Collections.reverse(data);
-
         mKLine = view.findViewById(R.id.kLine);
         mTvUserName = view.findViewById(R.id.tvUserName);
         LeagueMarkerView mLeagueMarkerView = new LeagueMarkerView(getBaseActivity(), data);
