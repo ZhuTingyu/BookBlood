@@ -26,7 +26,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+
         android:textColor="@color/black"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,8 @@
         android:id="@+id/tvBlood"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:text="TextVi1312"
+
+
         android:textColor="@color/black"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="parent"

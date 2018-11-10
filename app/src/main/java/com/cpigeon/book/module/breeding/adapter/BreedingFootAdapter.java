@@ -77,7 +77,6 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
             helper.setText(R.id.woman_blood," "+item.getWoPigeonBloodName()+" ");
             setParams(woman_blood,R.drawable.textcircleblood);
         }
-        Log.d("songshuaishuai", "convert: wo  "+woman_blood.getText().toString());
-        Log.d("songshuaishuai", "convert: men "+woman_color.getText().toString());
+
     }
 }

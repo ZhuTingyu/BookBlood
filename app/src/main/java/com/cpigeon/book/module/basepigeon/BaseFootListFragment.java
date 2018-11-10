@@ -6,7 +6,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,12 +28,13 @@ import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
 
-import java.util.List;
+import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.BindView;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/10.
@@ -97,7 +97,6 @@ public class BaseFootListFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mRecyclerView = findViewById(R.id.list);
         try {
             mTvOk = findViewById(R.id.tvOk);
@@ -112,11 +111,11 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
 
-        if(mTvOk != null){
+        if (mTvOk != null) {
             mTvOk.setVisibility(View.GONE);
         }
 
-        if(view_placeholder != null){
+        if (view_placeholder != null) {
             view_placeholder.setVisibility(View.GONE);
         }
 
@@ -198,7 +197,7 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         });
 
-           mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
+        mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
                 mBreedPigeonListModel.id = PigeonId;
@@ -391,9 +390,17 @@ public class BaseFootListFragment extends BaseBookFragment {
     protected void initHeadView() {
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
+            initData(true);
+        }
+    }
+
+    protected void initData(boolean isCount) {
+        setProgressVisible(true);
+        mAdapter.getData().clear();
+        mBreedPigeonListModel.pi = 1;
+        mBreedPigeonListModel.getPigeonList();
     }
 }
-

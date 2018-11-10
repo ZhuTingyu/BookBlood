@@ -90,7 +90,7 @@ public class PairingInfoListFragment extends BaseListFragment {
         } catch (Exception e) {
 
         }
-        Log.d("shuaishuai", "onViewCreated: " + IsSingle);
+
         tvOk.setVisibility(View.GONE);
         view_placeholder.setVisibility(View.GONE);
 
@@ -200,7 +200,6 @@ public class PairingInfoListFragment extends BaseListFragment {
 
             ll_men.setOnClickListener(v -> {
                 IsMen = true;
-                Log.d("songshuaishuai", "initHeadView: llmen");
                 mPairingInfoListAdapter.setIsMen(true);
                 mPairingInfoListViewModel.PigeonID = mPairingInfoListViewModel.mBreedEntity.getMenPigeonID();
                 mPairingInfoListViewModel.FootRingID = mPairingInfoListViewModel.mBreedEntity.getMenFootRingID();

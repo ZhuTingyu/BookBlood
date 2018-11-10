@@ -7,16 +7,18 @@
     android:layout_height="151dp">
 
     <ImageView
+        android:padding="1dp"
         android:id="@+id/imgHead"
         android:layout_width="105dp"
         android:layout_height="105dp"
+        android:background="@drawable/popupwindowbackground"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/about_logo" />
+        app:srcCompat="@mipmap/ic_default_head" />
 
     <TextView
         android:id="@+id/tvFootNumber"
@@ -24,7 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="58dp"
-        android:text="TextView"
         android:textColor="@color/white"
         android:textSize="@dimen/large_text_size"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textColor="@color/white"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintStart_toStartOf="@+id/tvFootNumber"

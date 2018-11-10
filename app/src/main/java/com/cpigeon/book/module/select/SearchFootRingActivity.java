@@ -3,7 +3,6 @@ package com.cpigeon.book.module.select;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
@@ -104,7 +103,7 @@ public class SearchFootRingActivity extends BaseSearchActivity {
     @Override
     protected void initObserve() {
         mViewModel.mDataFootList.observe(this, footEntities -> {
-            Log.d("shuaishuai", "initObserve: ");
+
             footEntities.size();
             mAdapter.getData().clear();
             mAdapter.notifyDataSetChanged();
@@ -113,7 +112,7 @@ public class SearchFootRingActivity extends BaseSearchActivity {
         });
         mViewModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
-            Log.d("shuaishuai", "initObserve: "+s);
+
         });
     }
 }

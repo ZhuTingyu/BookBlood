@@ -4,7 +4,6 @@ package com.cpigeon.book.module.breeding;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -76,7 +75,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         cale = Calendar.getInstance();
         int year = cale.get(Calendar.YEAR);
         PigeonEntity.TIME = year + "";
-        Log.d("songshuaishuai", "start: " + year);
+
         Bundle bundle = new Bundle();
         bundle.putString(BaseFootListFragment.YEARS, PigeonEntity.TIME);
         SearchFragmentParentActivity.
@@ -98,7 +97,7 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         super.initBreedData();
         mTvOk.setVisibility(View.VISIBLE);
         view_placeholder.setVisibility(View.GONE);
-        mTvOk.setText("+");
+        mTvOk.setText("添加配对");
         mTvOk.setOnClickListener(v -> {
             //添加配对
             AddBreedingFragment.start(getBaseActivity());
@@ -108,7 +107,6 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         setProgressVisible(true);
         //mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
         mRecyclerView.setRefreshListener(() -> {
-            Log.d("songshuaishuai", "66666: ");
             setProgressVisible(true);
             mPairingInfoListViewModel.pi = 1;
             mPairingInfoListAdapter.getData().clear();
@@ -147,7 +145,6 @@ public class BreedingFootListFragment extends BaseFootListFragment {
     protected void initObserve() {
         super.initObserve();
         mPairingInfoListViewModel.mBreedingInfoListData.observe(this, breedPigeonEntities -> {
-            Log.d("shuaishuai", "initObserve: " + breedPigeonEntities.size());
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPairingInfoListAdapter, breedPigeonEntities);
             mPairingInfoListAdapter.notifyDataSetChanged();
             setProgressVisible(false);

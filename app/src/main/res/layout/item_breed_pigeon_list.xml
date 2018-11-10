@@ -43,7 +43,7 @@
         android:layout_height="match_parent"
 
         android:gravity="center_vertical"
-        android:text="TextView"
+
         android:textColor="@color/black"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="parent"

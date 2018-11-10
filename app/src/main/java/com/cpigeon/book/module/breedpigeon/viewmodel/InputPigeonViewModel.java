@@ -1,7 +1,6 @@
 package com.cpigeon.book.module.breedpigeon.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.base.http.ApiResponse;
 import com.base.http.HttpErrorException;
@@ -123,12 +122,10 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
     }
 
     public void isCanCommit() {
-        Log.d("songshuaishuai", "isCanCommit: "+foot);
         isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,eyeSandId);
     }
     public void isFatherCanCommit() {
         isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footFather,pigeonFatherStateId,eyeSandId);
-        Log.e("songshuaishuai", "isFatherCanCommit: "+footFather );
     }
     public void isMotherCanCommit() {
         isCanCommit(foot, countryId, sexId, lineage, featherColor, stateId,footMother,pigeonMotherStateId,eyeSandId);
