@@ -71,7 +71,8 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="TextView"
+
+
         android:textColor="@color/black"
         android:textSize="@dimen/large_text_size"
         app:layout_constraintBottom_toBottomOf="parent"

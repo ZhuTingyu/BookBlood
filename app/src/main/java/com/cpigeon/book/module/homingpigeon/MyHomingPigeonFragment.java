@@ -2,7 +2,6 @@ package com.cpigeon.book.module.homingpigeon;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.cpigeon.book.base.SearchFragmentParentActivity;
@@ -34,7 +33,7 @@ public class MyHomingPigeonFragment extends BaseFootListFragment  {
     @Override
     protected void initData() {
         super.initData();
-
+setTitle("我的信鸽");
         setStartSearchActvity(SearchMyHomingActivity.class);//搜索页面
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
@@ -72,6 +71,5 @@ public class MyHomingPigeonFragment extends BaseFootListFragment  {
 
         super.onResume();
 
-        Log.d("shuaishuai", "onResume: ");
     }
 }

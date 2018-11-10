@@ -88,7 +88,8 @@ public class FlyBackRecordFragment extends BaseBookFragment {
         });
 
         if (isEnd) {
-            mTvOk.setVisibility(View.GONE);
+
+          mTvOk.setVisibility(View.GONE);
         } else {
             setToolbarRight(R.string.text_add, item -> {
 

@@ -13,7 +13,6 @@
         android:layout_marginStart="8dp"
         android:drawableLeft="@mipmap/ic_order_down"
         android:drawablePadding="3dp"
-        android:text="TextView"
         android:textColor="@color/white"
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintBottom_toBottomOf="parent"

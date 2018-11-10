@@ -76,6 +76,8 @@ public class TrainProjectInListFragment extends BaseBookFragment {
         });
         mRecyclerView = findViewById(R.id.list);
         mTvOk = findViewById(R.id.tvOk);
+        mTvOk.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        mTvOk.setText("再训");
         mAdapter = new TrainProjectListAdapter();
         mRecyclerView.setAdapter(mAdapter);
 

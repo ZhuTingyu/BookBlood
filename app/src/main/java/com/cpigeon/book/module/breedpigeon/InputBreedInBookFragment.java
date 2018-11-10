@@ -100,7 +100,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
             @Override
             public void showInfo(int x, int y, PigeonEntity breedPigeonEntity) {
                 String sex = StringUtil.emptyString();
-                Log.d("songshuaishuai", "add: showinfo");
+
                 if (x != mFamilyTreeView.getStartGeneration()) {
                     sex = FamilyTreeView.isMale(y) ? InputPigeonFragment.TYPE_SEX_MALE : InputPigeonFragment.TYPE_SEX_FEMALE;
                 }

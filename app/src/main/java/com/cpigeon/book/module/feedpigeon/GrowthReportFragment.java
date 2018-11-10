@@ -99,7 +99,8 @@ public class GrowthReportFragment extends BaseBookFragment {
             //年份
             List<SelectTypeEntity> mSelectTypeYear = selectItems.get(0);
             mViewModel.year=SelectTypeEntity.getTypeIds(mSelectTypeYear);
-            Log.d("shuaishuai", "onViewCreated: "+mViewModel.year);
+
+
 
             List<SelectTypeEntity> mSelectTypeClassify = selectItems.get(1);
             mViewModel.bitAll=SelectTypeEntity.getTypeIds(mSelectTypeClassify);

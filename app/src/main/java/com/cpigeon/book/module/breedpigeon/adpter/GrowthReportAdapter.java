@@ -57,9 +57,30 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
             case 1://状态
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.GONE);
-
                 helper.setText(R.id.tv1,item.getRemark());
-                helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_auction);
+                switch (item.getTypeName()) {
+                    case "拍卖":
+                        helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_auction);
+                        break;
+                    case "转让":
+                        helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_transfer);
+                        break;
+                    case   "现役在棚":
+                    case   "闲置在棚":
+                        helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_inpeng);
+                        break;
+                    case "死亡":
+                    case "丢失":
+                        helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_death);
+                        break;
+                    case "游棚":
+                    case "非本棚鸽":
+                        helper.setImageResource(R.id.imgIcon, R.mipmap.ic_report_outpeng);
+                        break;
+                    default:
+                        break;
+                }
+
                 break;
 
             case 2://出壳
@@ -78,6 +99,7 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
                 break;
 
             case 4: //窝次信息  需要拆分字符串
+                helper.setImageResource(R.id.imgIcon, R.mipmap.aiwowo);
             if(item.equals(StringUtil.emptyString()))
             {
                 tv1.setVisibility(View.VISIBLE);
@@ -89,7 +111,13 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
                 tv1.setVisibility(View.VISIBLE);
                 tv2.setVisibility(View.GONE);
                 helper.setText(R.id.tv1,"与"+item.getFootRingNum()+"于今日产下第"+item.getNumber()+"窝");
-
+                String[] as = item.getInfo().split(",");
+                String tv2text="分别为足环：";
+                for (int i = 0; i < as.length; i++) {
+                    System.out.println(as[i]);
+                    tv2text=tv2text+as[i]+split;
+                }
+                tv2.setText(tv2text);
             }
 
 

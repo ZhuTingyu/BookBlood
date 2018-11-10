@@ -48,7 +48,7 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         super.initData();
 
         setStartSearchActvity(SearchFootToPhotoActivity.class);//搜索页面
-
+        setTitle("信鸽相册");
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
@@ -87,7 +87,9 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
     @Subscribe //订阅事件FirstEvent
     public void onEventMainThread(String info) {
         if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
+
             mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
+            super.initData(true);
         }
     }
 

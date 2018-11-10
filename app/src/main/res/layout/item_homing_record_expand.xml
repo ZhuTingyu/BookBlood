@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textColor="@color/color_text_title"
         android:textSize="@dimen/small_text_size_2"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +24,6 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         android:textColor="@color/color_text_title"
         android:textSize="@dimen/small_text_size_2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
-        android:text="TextView"
         android:textColor="@color/color_text_title"
         android:textSize="@dimen/small_text_size_2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +47,6 @@
         android:layout_marginBottom="16dp"
         android:textColor="@color/color_text_title"
         android:textSize="@dimen/small_text_size_2"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

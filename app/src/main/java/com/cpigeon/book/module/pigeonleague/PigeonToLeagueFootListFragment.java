@@ -66,7 +66,7 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
     @Override
     protected void initData() {
         super.initData();
-
+setTitle("信鸽赛绩");
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {

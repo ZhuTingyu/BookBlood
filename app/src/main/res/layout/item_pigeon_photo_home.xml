@@ -5,7 +5,9 @@
     android:layout_height="105dp">
 
     <ImageView
+        android:background="@drawable/photo_bg"
         android:id="@+id/img"
+        android:padding="2dp"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

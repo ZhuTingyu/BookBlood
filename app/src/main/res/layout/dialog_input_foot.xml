@@ -93,7 +93,8 @@
         android:drawablePadding="3dp"
         android:drawableRight="@mipmap/ic_arrow_down"
         android:padding="5dp"
-        android:text="TextView"
+
+
         android:textSize="@dimen/medium_text_size"
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />

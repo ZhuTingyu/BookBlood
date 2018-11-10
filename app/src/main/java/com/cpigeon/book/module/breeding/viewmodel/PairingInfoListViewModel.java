@@ -52,7 +52,6 @@ public class PairingInfoListViewModel extends BaseViewModel {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
                 mBreedingInfoListData.setValue(r.data);
-                Log.d("shuaishuai", "getTXGP_PigeonBreed_SelectAll: "+r.data.size());
             } else throw new HttpErrorException(r);
         });
     }

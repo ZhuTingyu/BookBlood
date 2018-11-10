@@ -53,7 +53,6 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/rl1"
             app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
             android:textColor="@color/black"
             android:textSize="@dimen/small_text_size_2"
             app:layout_constraintBottom_toBottomOf="parent"

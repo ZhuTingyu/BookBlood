@@ -13,7 +13,6 @@
         android:layout_marginTop="8dp"
         android:textSize="@dimen/medium_text_size"
         android:textColor="@color/black"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         android:textSize="@dimen/medium_text_size"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

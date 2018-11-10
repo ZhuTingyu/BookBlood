@@ -25,7 +25,6 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/black"
         android:textSize="@dimen/small_text_size_2"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +38,6 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/black"
         android:textSize="@dimen/small_text_size_2"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvTitle"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +51,6 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/black"
         android:textSize="@dimen/small_text_size_2"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvOpenTime"
         app:layout_constraintTop_toTopOf="parent" />

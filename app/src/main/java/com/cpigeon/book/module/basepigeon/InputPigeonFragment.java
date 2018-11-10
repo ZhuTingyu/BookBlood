@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,6 @@ import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
 import com.cpigeon.book.module.breedpigeon.viewmodel.InputPigeonViewModel;
 import com.cpigeon.book.module.foot.InputSingleFootDialog;
 import com.cpigeon.book.module.foot.SelectCountyFragment;
@@ -311,13 +309,6 @@ public class InputPigeonFragment extends BaseBookFragment {
             }, () -> {
                 SelectBloodFragment.start(getBaseActivity());
             });
-            BaseInputDialog.show(getFragmentManager(), R.string.text_blood, R.string.text_blood_bank, mLvBlood.getContent(), 0, content -> {
-                mViewModel.lineage = content;
-                mLvBlood.setRightText(content);
-                mViewModel.isCanCommit();
-            }, () -> {
-                SelectBloodFragment.start(getBaseActivity());
-            });
         });
 
 
@@ -505,7 +496,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         mLvHangingRingDate.setOnRightClickListener(lineInputView -> {
             PickerUtil.showTimeYMD(getActivity(), System.currentTimeMillis(), (year, month, day) -> {
                 mViewModel.llHangingRingDate = Utils.getString(R.string.text_time_y_m_d, year, month, day);
-                Log.d("shuaishuai", "setClick: " + mViewModel.llHangingRingDate);
+
                 mLvHangingRingDate.setRightText(mViewModel.llHangingRingDate);
             });
         });
