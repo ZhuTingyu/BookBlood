@@ -132,7 +132,7 @@ public class PairingInfoListFragment extends BaseListFragment {
             mPairingInfoListViewModel.pi++;
             mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
         }, list.getRecyclerView());
-
+        mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
 
     }
 
@@ -290,10 +290,9 @@ public class PairingInfoListFragment extends BaseListFragment {
 
         if (requestCode == PairingInfoRecommendFragment.RECOMMEND_REQUEST) {
             try {
-
                 PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
                 PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, item);
-            } catch (Exception e) {
+                } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -315,11 +314,4 @@ public class PairingInfoListFragment extends BaseListFragment {
         }
     }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mPairingInfoListAdapter.cleanList();
-        mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
-    }
 }

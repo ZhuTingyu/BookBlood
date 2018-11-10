@@ -131,8 +131,4 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
         mBreedPigeonListModel.getPigeonList();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 }

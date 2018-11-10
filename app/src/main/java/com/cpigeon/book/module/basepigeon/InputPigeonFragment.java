@@ -28,7 +28,6 @@ import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.StringUtil;
-import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -366,7 +365,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mSelectTypeViewModel.getSelectType_State();
             }
         });
-        mLvMotherFootState.setClickable(false);
+        mLvFatherFootState.setClickable(false);
         mLvMotherFootState.setOnRightClickListener(lineInputView -> {
             try {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
@@ -382,7 +381,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mSelectTypeViewModel.getSelectType_State();
             }
         });
-        mLvFatherFootState.setClickable(false);
+        mLvMotherFootState.setClickable(false);
         mLvPigeonName.setOnRightClickListener(lineInputView -> {
             mBaseInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                     , R.string.text_pleas_input_pigeon_name, mLvPigeonName.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
