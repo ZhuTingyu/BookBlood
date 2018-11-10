@@ -19,9 +19,10 @@ import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 
 public class OffspringAddFragment2 extends InputPigeonFragment {
 
-    public static void start(Activity activity, int requestCode, PairingInfoEntity mPairingInfoEntity) {
+    public static void start(Activity activity, String nestTimeId, PairingInfoEntity mPairingInfoEntity, int requestCode) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPairingInfoEntity)
+                .putExtra(IntentBuilder.KEY_DATA_2, nestTimeId)
                 .startParentActivity(activity, OffspringAddFragment2.class, requestCode);
     }
 
@@ -61,7 +62,7 @@ public class OffspringAddFragment2 extends InputPigeonFragment {
     @Override
     protected void mDataPigeonResult(ApiResponse<PigeonEntity> datas) {
 
-        PigeonEntity o =  datas.getData();
+        PigeonEntity o = datas.getData();
 
         if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
             getBaseActivity().errorDialog.dismiss();

@@ -20,10 +20,12 @@ import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 public class OffspringChooseFragment extends BaseFootListFragment {
 
     private PairingInfoEntity mPairingInfoEntity;
+    private String mNestTimeId;
 
-    public static void start(Activity activity, int requestCode, PairingInfoEntity mPairingInfoEntity) {
+    public static void start(Activity activity, String nestTimeId, PairingInfoEntity mPairingInfoEntity, int requestCode) {
         Bundle mBudle = new Bundle();
         mBudle.putSerializable(IntentBuilder.KEY_DATA, mPairingInfoEntity);
+        mBudle.putString(IntentBuilder.KEY_DATA_2, nestTimeId);
         SearchFragmentParentActivity
                 .start(activity, OffspringChooseFragment.class, requestCode, false, mBudle);
     }
@@ -33,8 +35,8 @@ public class OffspringChooseFragment extends BaseFootListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView.addItemDecorationLine();
-
         mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
+        mNestTimeId = getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class OffspringChooseFragment extends BaseFootListFragment {
         });
 
         setToolbarRight("添加", item -> {
-            OffspringAddFragment2.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingInfoEntity);
+            OffspringAddFragment2.start(getBaseActivity(), mNestTimeId, mPairingInfoEntity, PairingNestAddFragment.requestCode);
             return true;
         });
     }

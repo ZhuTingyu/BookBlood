@@ -63,6 +63,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                 sonFootId,
                 sonPigeonId,
                 llHangingRingDate,
+                nestId,
                 setImageMap()), r -> {
 
             if (r.isOk()) {

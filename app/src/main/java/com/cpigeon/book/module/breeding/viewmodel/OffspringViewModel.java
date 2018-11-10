@@ -49,6 +49,7 @@ public class OffspringViewModel extends BasePigeonViewModel {
                 "",
                 "",
                 llHangingRingDate,
+                nestId,
                 setImageMap()), r -> {
             if (r.isOk()) {
                 mEntryData.setValue(r.data);

@@ -86,6 +86,8 @@ public class BasePigeonViewModel extends BaseViewModel {
     public String imgTypeStr = "";
     public String imgTypeId = "";
 
+    public String nestId; //窝次id
+
     public HashMap<String, String> setImageMap() {
         HashMap<String, String> map = new HashMap<>();
         for (int i = 0, len = images.size(); i < len; i++) {

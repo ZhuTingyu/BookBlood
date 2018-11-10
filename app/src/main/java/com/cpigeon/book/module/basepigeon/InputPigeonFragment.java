@@ -543,7 +543,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.modifyBreedPigeonEntry();
                 }
             } else {
-                ToastUtils.showLong(getBaseActivity(), "请输入完整信息！");
+                DialogUtils.createHintDialog(getBaseActivity(), "请输入完整信息！");
             }
         });
     }

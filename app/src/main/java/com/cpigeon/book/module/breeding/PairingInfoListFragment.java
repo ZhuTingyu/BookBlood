@@ -124,7 +124,6 @@ public class PairingInfoListFragment extends BaseListFragment {
         });
 
         list.setRefreshListener(() -> {
-
             initData();
         });
 
@@ -321,6 +320,7 @@ public class PairingInfoListFragment extends BaseListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        mPairingInfoListAdapter.cleanList();
         mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectPigeonAllData();
     }
 }
