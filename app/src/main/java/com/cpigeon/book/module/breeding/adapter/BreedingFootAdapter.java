@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.breeding.adapter;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,65 +19,48 @@ import java.util.List;
 
 public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewHolder> {
 
-    public BreedingFootAdapter(int layoutResId, List<BreedEntity> data) {
-        super(layoutResId, data);
+    public BreedingFootAdapter() {
+        super(R.layout.breed_manneger_item, null);
     }
-    public void  setParams(TextView tv, int Resource)
-    {
-        tv.setPadding(5,2,5,2);
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)tv.getLayoutParams();
-        params.setMargins(10,0,0,0);
-        params.height=48;
-        tv.setBackgroundResource(Resource);
-        tv.setLayoutParams(params);
-    }
-    public void  defultParams(TextView tv,int Resource)
-    {
-        tv.setPadding(0,0,0,0);
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)tv.getLayoutParams();
-        params.setMargins(0,0,0,0);
-        params.height=60;
-        tv.setBackgroundResource(Resource);
-        tv.setLayoutParams(params);
-    }
+
     @Override
     protected void convert(BaseViewHolder helper, BreedEntity item) {
-        TextView count=helper.getView(R.id.count);
-        count.setText(helper.getPosition()+1+"");
+        TextView count = helper.getView(R.id.count);
+        count.setText(String.valueOf(helper.getAdapterPosition() + 1));
         count.setBackgroundResource(R.drawable.countbackground2);
-        helper.setText(R.id.man_ring_num,item.getMenFootRingNum());
-        helper.setText(R.id.woman_ring_num,item.getWoFootRingNum());
+        helper.setText(R.id.man_ring_num, item.getMenFootRingNum());
+        helper.setText(R.id.woman_ring_num, item.getWoFootRingNum());
         helper.setText(R.id.man_blood, StringUtil.emptyString());
-        helper.setText(R.id.man_color,StringUtil.emptyString());
-        helper.setText(R.id.woman_blood,StringUtil.emptyString());
-        helper.setText(R.id.woman_color,StringUtil.emptyString());
+        helper.setText(R.id.man_color, StringUtil.emptyString());
+        helper.setText(R.id.woman_blood, StringUtil.emptyString());
+        helper.setText(R.id.woman_color, StringUtil.emptyString());
         TextView man_blood = helper.getView(R.id.man_blood);
-        TextView man_color = helper.getView(R.id.man_color);;
+        TextView man_color = helper.getView(R.id.man_color);
         TextView woman_blood = helper.getView(R.id.woman_blood);
-        TextView woman_color = helper.getView(R.id.woman_color);;
-        defultParams(man_blood,R.drawable.textcircledefult);
-        defultParams(man_color,R.drawable.textcircledefult);
-        defultParams(woman_color,R.drawable.textcircledefult);
-        defultParams(woman_blood,R.drawable.textcircledefult);
-        if (!item.getWoPigeonPlumeName().trim().equals(""))
-        {
-            helper.setText(R.id.woman_color," "+item.getWoPigeonPlumeName()+" ");
-            setParams(woman_color,R.drawable.textcirclecolor);
+        TextView woman_color = helper.getView(R.id.woman_color);
+        if (StringUtil.isStringValid(item.getWoPigeonPlumeName())) {
+            helper.setViewVisible(R.id.woman_color, View.VISIBLE);
+            helper.setText(R.id.woman_color, item.getWoPigeonPlumeName());
+        }else {
+            helper.setViewVisible(R.id.woman_color, View.GONE);
         }
-        if (!item.getMenPigeonPlumeName().trim().equals(""))
-        { helper.setText(R.id.man_color," "+item.getMenPigeonPlumeName()+" ");
-            setParams(man_color,R.drawable.textcirclecolor);
+        if (StringUtil.isStringValid(item.getMenPigeonPlumeName())) {
+            helper.setViewVisible(R.id.man_color, View.VISIBLE);
+            helper.setText(R.id.man_color, item.getMenPigeonPlumeName());
+        }else {
+            helper.setViewVisible(R.id.man_color, View.GONE);
         }
-        if (!item.getMenPigeonBloodName().trim().equals(""))
-        {
-            helper.setText(R.id.man_blood," "+item.getMenPigeonBloodName()+" ");
-            setParams(man_blood,R.drawable.textcircleblood);
+        if (StringUtil.isStringValid(item.getMenPigeonBloodName())) {
+            helper.setViewVisible(R.id.man_blood, View.VISIBLE);
+            helper.setText(R.id.man_blood, item.getMenPigeonBloodName());
+        }else {
+            helper.setViewVisible(R.id.man_blood, View.GONE);
         }
-        if (!item.getWoPigeonBloodName().trim().equals(""))
-        {
-            helper.setText(R.id.woman_blood," "+item.getWoPigeonBloodName()+" ");
-            setParams(woman_blood,R.drawable.textcircleblood);
+        if (StringUtil.isStringValid(item.getWoPigeonBloodName())) {
+            helper.setViewVisible(R.id.woman_blood, View.VISIBLE);
+            helper.setText(R.id.woman_blood,  item.getWoPigeonBloodName());
+        }else {
+            helper.setViewVisible(R.id.woman_blood, View.GONE);
         }
-
     }
 }

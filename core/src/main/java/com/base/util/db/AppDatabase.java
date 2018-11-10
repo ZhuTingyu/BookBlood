@@ -36,6 +36,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String TYPE_SEARCH_SHARE_PIGEON = "TYPE_SEARCH_SHARE_PIGEON";
     public static final String TYPE_SEARCH_SELECT_PIGEON = "TYPE_SEARCH_SELECT_PIGEON";
     public static final String TYPE_SEARCH_FOOT_RING = "TYPE_SEARCH_FOOT_RING";
+    public static final String TYPE_SEARCH_BREED_INFO = "TYPE_SEARCH_BREED_INFO";
 
     private static AppDatabase INSTANCE;
     private static final Object sLok = new Object();

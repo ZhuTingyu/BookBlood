@@ -64,6 +64,14 @@
                     tools:text="雨色"
                     android:textColor="@color/color_4c4c4c" />
 
+                <TextView
+                    android:id="@+id/tvEye"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30px"
+                    tools:text="雨色"
+                    android:textColor="@color/color_4c4c4c" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/list"
                     android:layout_width="match_parent"

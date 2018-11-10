@@ -48,6 +48,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     private TextView mTvFootNumber;
     private TextView mTvBlood;
     private TextView mTvColor;
+    private TextView mTvEye;
     private RecyclerView mList;
     private LinearLayout mLlInfo;
     private FamilyTreeView mFamilyTreeView;
@@ -90,6 +91,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         mTvFootNumber = view.findViewById(R.id.tvFootNumber);
         mTvBlood = view.findViewById(R.id.tvBlood);
         mTvColor = view.findViewById(R.id.tvColor);
+        mTvEye = view.findViewById(R.id.tvEye);
         mList = view.findViewById(R.id.list);
         rlShadow = findViewById(R.id.rlShadow);
 
@@ -208,9 +210,10 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         if (!StringUtil.isStringValid(entity.getPigeonID())) {
             return;
         }
-        mTvFootNumber.setText(entity.getFootRingNum());
-        mTvBlood.setText(entity.getPigeonBloodName());
-        mTvColor.setText(entity.getPigeonPlumeName());
+        setTextCotent(mTvFootNumber, entity.getFootRingNum());
+        setTextCotent(mTvBlood, entity.getFootRingNum());
+        setTextCotent(mTvColor, entity.getFootRingNum());
+        setTextCotent(mTvEye, entity.getPigeonEyeName());
         GlideUtil.setGlideImageView(getContext(), entity.getCoverPhotoUrl(), mImgHead);
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
         MatchAdapter matchAdapter = new MatchAdapter();
@@ -218,6 +221,7 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         matchAdapter.setNewData(entity.getMatchData());
 
     }
+
 
     public RelativeLayout getRlMemberInfo() {
         return rlShadow;

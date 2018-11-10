@@ -45,7 +45,7 @@ public class BaseFootListFragment extends BaseBookFragment {
     protected TextView mTvOk;
     protected View view_placeholder;
     protected BasePigeonListAdapter mAdapter;
-    protected BreedingFootAdapter mPairingInfoListAdapter;
+
     protected SelectTypeViewModel mSelectTypeViewModel;
 
     protected BreedPigeonListModel mBreedPigeonListModel;
@@ -223,49 +223,47 @@ public class BaseFootListFragment extends BaseBookFragment {
         mDrawerLayout = mActivity.getDrawerLayout();
         mFiltrate = mActivity.getFiltrate();
 
-        if (mDrawerLayout == null || mFiltrate == null) {
-            return;
+        if (mDrawerLayout != null && mFiltrate != null) {
+            setToolbarRightImage(R.drawable.svg_filtrate, item -> {
+                if (mDrawerLayout != null) {
+                    mDrawerLayout.openDrawer(Gravity.RIGHT);
+                }
+                return false;
+            });
+
+            mFiltrate.setOnSureClickListener(selectItems -> {
+                LogUtil.print(selectItems);
+                mDrawerLayout.closeDrawer(Gravity.RIGHT);
+
+                setProgressVisible(true);
+                mBreedPigeonListModel.pi = 1;
+                mBreedPigeonListModel.isSearch = false;
+                mAdapter.cleanList();
+
+                //年份
+                List<SelectTypeEntity> mSelectTypeYear = selectItems.get(0);
+                mBreedPigeonListModel.year = SelectTypeEntity.getTypeName(mSelectTypeYear);
+
+                //性别
+                List<SelectTypeEntity> mSelectTypeSex = selectItems.get(1);
+                mBreedPigeonListModel.sexid = SelectTypeEntity.getTypeIds(mSelectTypeSex);
+
+                //状态
+                List<SelectTypeEntity> mSelectTypeStatus = selectItems.get(2);
+                mBreedPigeonListModel.stateid = SelectTypeEntity.getTypeIds(mSelectTypeStatus);
+
+                //血统
+                List<SelectTypeEntity> mSelectTypeLineage = selectItems.get(3);
+                mBreedPigeonListModel.bloodid = SelectTypeEntity.getTypeIds(mSelectTypeLineage);
+
+                mBreedPigeonListModel.getPigeonList();
+                mBreedPigeonListModel.getPigeonCount();
+
+            });
+
+            mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.STATE_STATE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
+            mSelectTypeViewModel.getSelectTypes();
         }
-
-        setToolbarRightImage(R.drawable.svg_filtrate, item -> {
-            if (mDrawerLayout != null) {
-                mDrawerLayout.openDrawer(Gravity.RIGHT);
-            }
-            return false;
-        });
-
-        mFiltrate.setOnSureClickListener(selectItems -> {
-            LogUtil.print(selectItems);
-            mDrawerLayout.closeDrawer(Gravity.RIGHT);
-
-            setProgressVisible(true);
-            mBreedPigeonListModel.pi = 1;
-            mBreedPigeonListModel.isSearch = false;
-            mAdapter.cleanList();
-
-            //年份
-            List<SelectTypeEntity> mSelectTypeYear = selectItems.get(0);
-            mBreedPigeonListModel.year = SelectTypeEntity.getTypeName(mSelectTypeYear);
-
-            //性别
-            List<SelectTypeEntity> mSelectTypeSex = selectItems.get(1);
-            mBreedPigeonListModel.sexid = SelectTypeEntity.getTypeIds(mSelectTypeSex);
-
-            //状态
-            List<SelectTypeEntity> mSelectTypeStatus = selectItems.get(2);
-            mBreedPigeonListModel.stateid = SelectTypeEntity.getTypeIds(mSelectTypeStatus);
-
-            //血统
-            List<SelectTypeEntity> mSelectTypeLineage = selectItems.get(3);
-            mBreedPigeonListModel.bloodid = SelectTypeEntity.getTypeIds(mSelectTypeLineage);
-
-            mBreedPigeonListModel.getPigeonList();
-            mBreedPigeonListModel.getPigeonCount();
-
-        });
-
-        mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.STATE_STATE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
-        mSelectTypeViewModel.getSelectTypes();
     }
 
     //初始化请求的参数

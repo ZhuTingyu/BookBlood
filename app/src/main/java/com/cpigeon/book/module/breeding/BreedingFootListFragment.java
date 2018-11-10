@@ -4,7 +4,11 @@ package com.cpigeon.book.module.breeding;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -12,6 +16,8 @@ import com.base.util.picker.PickerUtil;
 import com.base.util.utility.TimeUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cpigeon.book.R;
+import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.BreedEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -33,42 +39,13 @@ import cn.qqtheme.framework.picker.OptionPicker;
  * Created by Administrator on 2018/9/10.
  */
 
-public class BreedingFootListFragment extends BaseFootListFragment {
+public class BreedingFootListFragment extends BaseBookFragment {
+    SearchFragmentParentActivity mActivity;
+    PairingInfoListViewModel mViewModel;
+    protected BreedingFootAdapter mAdapter;
     private LinearLayout search_bg;
     private RelativeLayout rlSearch;
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        setTitle(R.string.text_breed_info);
-
-        view.setBackground(getBaseActivity().getResources().getDrawable(R.color.Gray));
-        setToolbarRight("▾ " + TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY), item -> {
-            int year = Integer.parseInt(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY));
-            ArrayList<String> yearlist = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                yearlist.add(year + "");
-                year--;
-            }
-
-            PickerUtil.showItemPicker(getBaseActivity(), yearlist
-                    , 0, new OptionPicker.OnOptionPickListener() {
-                        @Override
-                        public void onOptionPicked(int index, String item) {
-                            setToolbarRight("▾ " + item);
-                            setProgressVisible(true);
-                            mPairingInfoListAdapter.getData().clear();
-                            mPairingInfoListViewModel.year = item;
-                            mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
-
-
-                        }
-                    });
-            return true;
-        });
-
-    }
 
     public static void start(Activity activity) {
         Calendar cale = null;
@@ -88,71 +65,101 @@ public class BreedingFootListFragment extends BaseFootListFragment {
         search_bg = mActivity.findViewById(R.id.search_bg);
         rlSearch = mActivity.findViewById(R.id.rlSearch);
         search_bg.setBackgroundColor(getResources().getColor(R.color.Gray));
-        mPairingInfoListViewModel = new PairingInfoListViewModel();
-        initViewModels(mPairingInfoListViewModel);
+        mViewModel = new PairingInfoListViewModel();
+        initViewModels(mViewModel);
+        mActivity = (SearchFragmentParentActivity) getBaseActivity();
+    }
+
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_breeding_foot_list, container, false);
     }
 
     @Override
-    protected void initBreedData() {
-        super.initBreedData();
-        mTvOk.setVisibility(View.VISIBLE);
-        view_placeholder.setVisibility(View.GONE);
-        mTvOk.setText("添加配对");
-        mTvOk.setOnClickListener(v -> {
-            //添加配对
-            AddBreedingFragment.start(getBaseActivity());
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        setTitle(R.string.text_breed_info);
+        mActivity.setSearchClickListener(v -> {
+            BaseSearchActivity.start(getBaseActivity(), SearchBreedInfoActivity.class);
         });
-        setStartSearchActvity(SearchBreedingFootActivity.class);//搜索页面
-        setProgressVisible(true);
-        //mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
-        mRecyclerView.setRefreshListener(() -> {
-            setProgressVisible(true);
-            mPairingInfoListViewModel.pi = 1;
-            mPairingInfoListAdapter.getData().clear();
-            mPairingInfoListAdapter.notifyDataSetChanged();
-            mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
-        });
-        mPairingInfoListAdapter = new BreedingFootAdapter(R.layout.breed_manneger_item, null);
-        mRecyclerView.addItemDecorationLine(R.color.Gray, 15);
-        mRecyclerView.setAdapter(mPairingInfoListAdapter);
-        mPairingInfoListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                try {
-                    BreedEntity mBreedEntity = mPairingInfoListAdapter.getData().get(position);
-                    PairingInfoListFragment.start(getBaseActivity(), mBreedEntity);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        mActivity.setSearchHint(R.string.text_input_foot_number_search);
+
+        view.setBackground(getBaseActivity().getResources().getDrawable(R.color.Gray));
+        setToolbarRight("▾ " + TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY), item -> {
+            int year = Integer.parseInt(TimeUtil.format(new Date().getTime(), TimeUtil.FORMAT_YYYY));
+            ArrayList<String> yearlist = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                yearlist.add(year + "");
+                year--;
             }
+
+            PickerUtil.showItemPicker(getBaseActivity(), yearlist
+                    , 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            setToolbarRight("▾ " + item);
+                            setProgressVisible(true);
+                            mAdapter.getData().clear();
+                            mViewModel.year = item;
+                            mViewModel.getTXGP_PigeonBreed_SelectAll();
+
+
+                        }
+                    });
+            return true;
         });
-
-//        mActivity.setSearchClickListener(v -> {
-//            //搜索
-//            BaseSearchActivity.start(getBaseActivity(), .class, null);
-//        });
-//        mPairingInfoListAdapter.setOnLoadMoreListener(() -> {
-//            setProgressVisible(true);
-//            mPairingInfoListViewModel.pi++;
-//            mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();;
-//        }, mRecyclerView.getRecyclerView());
-
 
     }
+
+
+//    protected void initBreedData() {
+//        mTvOk.setVisibility(View.VISIBLE);
+//        mTvOk.setText("添加配对");
+//        mTvOk.setOnClickListener(v -> {
+//            //添加配对
+//            AddBreedingFragment.start(getBaseActivity());
+//
+//        });
+//        setProgressVisible(true);
+//        //mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
+//        mRecyclerView.setRefreshListener(() -> {
+//            setProgressVisible(true);
+//            mPairingInfoListViewModel.pi = 1;
+//            mPairingInfoListAdapter.getData().clear();
+//            mPairingInfoListAdapter.notifyDataSetChanged();
+//            mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
+//        });
+//        mPairingInfoListAdapter = new BreedingFootAdapter();
+//        mRecyclerView.addItemDecorationLine(R.color.Gray, 15);
+//        mRecyclerView.setAdapter(mPairingInfoListAdapter);
+//        mPairingInfoListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                try {
+//                    BreedEntity mBreedEntity = mPairingInfoListAdapter.getData().get(position);
+//                    PairingInfoListFragment.start(getBaseActivity(), mBreedEntity);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
     @Override
     protected void initObserve() {
         super.initObserve();
-        mPairingInfoListViewModel.mBreedingInfoListData.observe(this, breedPigeonEntities -> {
-            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPairingInfoListAdapter, breedPigeonEntities);
-            mPairingInfoListAdapter.notifyDataSetChanged();
+        mViewModel.mBreedingInfoListData.observe(this, breedPigeonEntities -> {
+//            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPairingInfoListAdapter, breedPigeonEntities);
             setProgressVisible(false);
 
         });
 
-        mPairingInfoListViewModel.listEmptyMessage.observe(this, s -> {
-            mPairingInfoListAdapter.setEmptyText(s);
+        mViewModel.listEmptyMessage.observe(this, s -> {
+            mAdapter.setEmptyText(s);
         });
     }
 
@@ -160,10 +167,10 @@ public class BreedingFootListFragment extends BaseFootListFragment {
     public void onResume() {
         super.onResume();
         setProgressVisible(true);
-        mPairingInfoListViewModel.pi = 1;
-        mPairingInfoListAdapter.getData().clear();
-        mPairingInfoListAdapter.notifyDataSetChanged();
-        mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
+        mViewModel.pi = 1;
+        mAdapter.getData().clear();
+        mAdapter.notifyDataSetChanged();
+        mViewModel.getTXGP_PigeonBreed_SelectAll();
 
     }
 }

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -38,8 +37,8 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_RightString="@string/text_racing_pigeon"
-                app:lineInputView_LeftString="@string/text_pigeon_type" />
+                app:lineInputView_LeftString="@string/text_pigeon_type"
+                app:lineInputView_RightString="@string/text_racing_pigeon" />
 
             <!--国家-->
             <com.cpigeon.book.widget.LineInputView
@@ -49,8 +48,8 @@
                 app:lineInputView_IsCanEdit="false"
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="true"
-                app:lineInputView_RightString="@string/text_china_code"
-                app:lineInputView_LeftString="国家" />
+                app:lineInputView_LeftString="国家"
+                app:lineInputView_RightString="@string/text_china_code" />
 
             <!--足环号码-->
             <com.cpigeon.book.widget.LineInputView
@@ -124,11 +123,12 @@
                 app:lineInputView_isShowLineDivisions="gone" />
 
         </com.cpigeon.book.widget.LineInputListLayout>
-<View
-    android:layout_width="match_parent"
 
-    android:layout_height="1dp"
-    android:background="@color/white"></View>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"/>
+
         <RelativeLayout
             android:id="@+id/rlAddition"
             android:layout_width="match_parent"
@@ -155,11 +155,11 @@
 
         <com.cpigeon.book.widget.LineInputListLayout
             android:id="@+id/llAddition"
-            android:paddingLeft="@dimen/normal_safe_distance"
-            android:paddingRight="@dimen/normal_safe_distance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/normal_safe_distance"
+            android:paddingRight="@dimen/normal_safe_distance">
 
             <!--鸽名-->
             <com.cpigeon.book.widget.LineInputView
@@ -196,7 +196,6 @@
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="false"
                 app:lineInputView_LeftString="@string/text_source" />
-
 
 
             <!--出壳日期-->
@@ -250,8 +249,8 @@
                         android:id="@+id/list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp" />
 
 
                 </LinearLayout>
@@ -260,11 +259,13 @@
             </LinearLayout>
 
         </com.cpigeon.book.widget.LineInputListLayout>
+
         <View
             android:layout_width="match_parent"
 
             android:layout_height="1dp"
             android:background="@color/white"></View>
+
         <RelativeLayout
             android:id="@+id/rlAddition2"
             android:layout_width="match_parent"
@@ -291,13 +292,14 @@
                 android:src="@mipmap/ic_arrow_down_gray" />
 
         </RelativeLayout>
+
         <com.cpigeon.book.widget.LineInputListLayout
             android:id="@+id/llAddition2"
-            android:paddingLeft="@dimen/normal_safe_distance"
-            android:paddingRight="@dimen/normal_safe_distance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/normal_safe_distance"
+            android:paddingRight="@dimen/normal_safe_distance">
 
             <!--父足环-->
             <com.cpigeon.book.widget.LineInputView
@@ -346,7 +348,6 @@
                 app:lineInputView_IsLookState="true"
                 app:lineInputView_IsNotNull="false"
                 app:lineInputView_LeftString="@string/text_mother_ring_state" />
-
 
 
         </com.cpigeon.book.widget.LineInputListLayout>

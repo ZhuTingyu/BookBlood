@@ -252,6 +252,9 @@
         <activity android:name=".module.makebloodbook.PreviewsBookActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
+        <activity android:name=".module.breeding.SearchBreedInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
     </application>
 

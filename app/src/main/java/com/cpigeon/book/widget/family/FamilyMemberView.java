@@ -197,6 +197,7 @@ public class FamilyMemberView extends FamilyMember {
         mTvFootNumber.setText(entity.getFootRingNum());
         mTvBlood.setText(entity.getPigeonBloodName());
         mTvName.setText(entity.getPigeonName());
+        setTextCotent(mTvName, entity.getPigeonName());
 
         if (generationPoint == 0) {
             if (isMiniModel) {

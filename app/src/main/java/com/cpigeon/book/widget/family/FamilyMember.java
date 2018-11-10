@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.model.entity.PigeonEntity;
 
 /**
@@ -33,5 +35,13 @@ public abstract class FamilyMember extends LinearLayout{
    public abstract void bindData(PigeonEntity entity);
    public PigeonEntity getData(){
        return mPigeonEntity;
+   }
+   protected void setTextCotent(TextView textView, String content){
+       if(StringUtil.isStringValid(content)){
+           textView.setVisibility(VISIBLE);
+           textView.setText(content);
+       }else {
+           textView.setVisibility(GONE);
+       }
    }
 }
