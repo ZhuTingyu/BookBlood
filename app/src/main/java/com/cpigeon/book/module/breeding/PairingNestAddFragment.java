@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
 import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
@@ -205,7 +206,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_pairing_time:
                 //配对时间
                 PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    llPairingTime.setContent(year + "-" + (monthOfYear ) + "-" + dayOfMonth);
+                    llPairingTime.setContent(year + "-" + (monthOfYear) + "-" + dayOfMonth);
                     mPairingNestAddViewModel.pairingTime = year + "-" + (monthOfYear) + "-" + dayOfMonth;
                     mPairingNestAddViewModel.isCanCommit();
                 });
@@ -243,8 +244,8 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_lay_eggs_time:
                 //产蛋时间
                 PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    llLayEggsTime.setContent(year + "-" + (monthOfYear ) + "-" + dayOfMonth);
-                    mPairingNestAddViewModel.layEggsTime = year + "-" + (monthOfYear ) + "-" + dayOfMonth;
+                    llLayEggsTime.setContent(year + "-" + (monthOfYear) + "-" + dayOfMonth);
+                    mPairingNestAddViewModel.layEggsTime = year + "-" + (monthOfYear) + "-" + dayOfMonth;
                 });
                 break;
             case R.id.ll_fertilized_egg:
@@ -293,7 +294,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                 String lleggstr = llFertilizedEgg.getContent().replace("个", "");
 
                 if (!StringUtil.isStringValid(lleggstr)) {
-                    ToastUtils.showLong(getBaseActivity(), "请先填写产蛋信息下的受精蛋个数！");
+                    DialogUtils.createHintDialog(getBaseActivity(), "请先填写产蛋信息下的受精蛋个数！");
                     return;
                 }
 
@@ -326,8 +327,8 @@ public class PairingNestAddFragment extends BaseBookFragment {
             case R.id.ll_hatches_time:
                 //出壳时间
                 PickerUtil.showTimeYMD(getActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    llHatchesTime.setContent(year + "-" + (monthOfYear ) + "-" + dayOfMonth);
-                    mPairingNestAddViewModel.hatchesTime = year + "-" + (monthOfYear ) + "-" + dayOfMonth;
+                    llHatchesTime.setContent(year + "-" + (monthOfYear) + "-" + dayOfMonth);
+                    mPairingNestAddViewModel.hatchesTime = year + "-" + (monthOfYear) + "-" + dayOfMonth;
                 });
                 break;
             case R.id.ll_hatches_num:
@@ -349,7 +350,7 @@ public class PairingNestAddFragment extends BaseBookFragment {
                     return;
                 }
 
-                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingNestAddViewModel.mPairingInfoEntity);
+                OffspringChooseFragment.start(getBaseActivity(),StringUtil.emptyString() ,mPairingNestAddViewModel.mPairingInfoEntity, PairingNestAddFragment.requestCode);
                 break;
             case R.id.tv_next_step:
                 //立即添加

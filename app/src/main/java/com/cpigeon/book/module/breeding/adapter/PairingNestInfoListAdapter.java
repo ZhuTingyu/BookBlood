@@ -313,7 +313,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             case R.id.ll_lay_eggs_time:
                 //产蛋时间
                 PickerUtil.showTimeYMD(getBaseActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    mPairingNestViewModel.mPairingNestInfoEntity.setLayEggTime(year + "-" + (monthOfYear ) + "-" + dayOfMonth);
+                    mPairingNestViewModel.mPairingNestInfoEntity.setLayEggTime(year + "-" + (monthOfYear) + "-" + dayOfMonth);
                     mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();
                 });
                 break;
@@ -346,7 +346,7 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
             case R.id.ll_hatches_time:
                 //出壳时间
                 PickerUtil.showTimeYMD(getBaseActivity(), new Date().getTime(), (year, monthOfYear, dayOfMonth) -> {
-                    mPairingNestViewModel.mPairingNestInfoEntity.setOutShellTime(year + "-" + (monthOfYear ) + "-" + dayOfMonth);
+                    mPairingNestViewModel.mPairingNestInfoEntity.setOutShellTime(year + "-" + (monthOfYear) + "-" + dayOfMonth);
                     mPairingNestViewModel.getTXGP_PigeonBreedNest_UpdateData();
                 });
                 break;
@@ -362,7 +362,10 @@ public class PairingNestInfoListAdapter extends BaseQuickAdapter<PairingNestInfo
                 break;
             case R.id.ll_offspring_info:
                 //子代信息
-                OffspringChooseFragment.start(getBaseActivity(), PairingNestAddFragment.requestCode, mPairingNestViewModel.mPairingInfoEntity);
+                OffspringChooseFragment.start(getBaseActivity()
+                        , item.getPigeonBreedNestID()
+                        , mPairingNestViewModel.mPairingInfoEntity
+                        , PairingNestAddFragment.requestCode);
                 break;
         }
     }

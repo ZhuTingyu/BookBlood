@@ -95,6 +95,7 @@ public class BreedPigeonModel {
             String sonFootId,
             String sonPigeonId,
             String setFootTime,
+            String nestId,
             Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
@@ -128,6 +129,7 @@ public class BreedPigeonModel {
                 .addBody("sonpigeonid", sonPigeonId)// 子类鸽子id
                 .addBody("sonfootid", sonFootId)// 子类足环id
                 .addBody("foottime", setFootTime)// 足环挂环日期
+                .addBody("nestid", nestId)// 窝次id
                 .addImageFileBodys(body)
                 .request();
     }
@@ -292,6 +294,7 @@ public class BreedPigeonModel {
                 .addBody("sexid", sexId)
                 .request();
     }
+
     public static Observable<ApiResponse<String>> deletePigeon(String PigeonId) {
         return RequestData.<ApiResponse<String>>build()
                 .setToJsonType(new TypeToken<ApiResponse<String>>() {

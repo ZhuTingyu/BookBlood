@@ -54,7 +54,7 @@ public class PairingInfoAddViewModel extends BaseViewModel {
     public String menfootid;
     public String menpigeonid;
     public void isCanCommit() {
-        isCanCommit(pairingFoot, pairingTime, featherColor, lineage);
+        isCanCommit(pairingFoot, pairingTime);
     }
 
     public void getTXGP_PigeonBreed_AddData() {

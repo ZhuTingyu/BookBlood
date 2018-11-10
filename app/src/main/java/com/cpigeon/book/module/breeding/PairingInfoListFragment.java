@@ -124,7 +124,6 @@ public class PairingInfoListFragment extends BaseListFragment {
         });
 
         list.setRefreshListener(() -> {
-
             initData();
         });
 

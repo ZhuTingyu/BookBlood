@@ -28,7 +28,6 @@ import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.StringUtil;
-import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -534,7 +533,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.modifyBreedPigeonEntry();
                 }
             } else {
-                ToastUtils.showLong(getBaseActivity(), "请输入完整信息！");
+                DialogUtils.createHintDialog(getBaseActivity(), "请输入完整信息！");
             }
         });
     }
