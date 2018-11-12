@@ -1,17 +1,16 @@
 package com.cpigeon.book.module.breeding.adapter;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedEntity;
-
-import java.util.List;
+import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
 
 /**
  * Created by Administrator on 2018/11/2 0002.
@@ -19,8 +18,11 @@ import java.util.List;
 
 public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewHolder> {
 
-    public BreedingFootAdapter() {
+    PairingInfoListViewModel mViewModel;
+
+    public BreedingFootAdapter(PairingInfoListViewModel viewModel) {
         super(R.layout.breed_manneger_item, null);
+        mViewModel = viewModel;
     }
 
     @Override
@@ -61,6 +63,39 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
             helper.setText(R.id.woman_blood,  item.getWoPigeonBloodName());
         }else {
             helper.setViewVisible(R.id.woman_blood, View.GONE);
+        }
+
+        boolean isTogether = item.isTogether();
+
+        TextView delete = helper.getView(R.id.tvDelete);
+        TextView setNotTogether = helper.getView(R.id.tvSetNotTogether);
+
+        mViewModel.pairingId = item.getPigeonBreedID();
+
+        delete.setOnClickListener(v -> {
+            DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_hint_is_delete_pairing_info)
+                    ,sweetAlertDialog -> {
+                        sweetAlertDialog.dismiss();
+                        getBaseActivity().setProgressVisible(true);
+                        mViewModel.delectPairingInfo();
+                    });
+        });
+
+        setNotTogether.setOnClickListener(v -> {
+            DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_hint_set_not_together)
+                    ,sweetAlertDialog -> {
+                        sweetAlertDialog.dismiss();
+                        getBaseActivity().setProgressVisible(true);
+                        mViewModel.setPigeonTogether();
+                    });
+        });
+
+        if(isTogether){
+            delete.setVisibility(View.GONE);
+            setNotTogether.setVisibility(View.VISIBLE);
+        }else {
+            delete.setVisibility(View.VISIBLE);
+            setNotTogether.setVisibility(View.GONE);
         }
     }
 }

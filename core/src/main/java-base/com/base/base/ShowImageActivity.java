@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -19,18 +17,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.base.event.ShowImagePositionEvent;
+import com.base.http.R;
 import com.base.util.BarUtils;
+import com.base.util.Lists;
 import com.base.util.regex.RegexUtils;
-import com.base.util.utility.StringUtil;
 import com.base.widget.magicindicator.MagicIndicator;
 import com.base.widget.magicindicator.ViewPagerHelper;
 import com.base.widget.magicindicator.ext.navigator.ScaleCircleNavigator;
 import com.base.widget.photoview.PhotoView;
-import com.base.widget.videoplay.VideoPlayActivity;
-import com.base.http.R;
-import com.base.util.Lists;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -239,9 +234,9 @@ public class ShowImageActivity extends BaseActivity {
                     }else {
                         Glide.with(ShowImageActivity.this).load(new File(path)).asBitmap().diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(480, 800) {
                             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                imageView.setImageBitmap(resource);
-                                ShowImageActivity.this.dismissDialog();
-                            }
+                        imageView.setImageBitmap(resource);
+                        ShowImageActivity.this.dismissDialog();
+                    }
                         });
                     }
 

@@ -20,7 +20,6 @@ import com.base.util.file.FileUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.UpdateInfo;
 import com.cpigeon.book.module.menu.AboutAsFragment;
 import com.cpigeon.book.module.menu.LogbookFragment;
@@ -28,7 +27,6 @@ import com.cpigeon.book.module.menu.SettingFragment;
 import com.cpigeon.book.module.menu.account_security.ReviseLoginPsdFragment;
 import com.cpigeon.book.module.menu.mycurrency.MyPigeonCurrencyFragment;
 import com.cpigeon.book.module.menu.service.OpenServiceFragment;
-import com.cpigeon.book.module.menu.smalltools.recyclebin.RecycleBinFragment;
 import com.cpigeon.book.module.menu.update.UpdateManager;
 import com.cpigeon.book.module.menu.update.viewmodel.UpdateViewModel;
 import com.cpigeon.book.module.menu.viewmodel.ShareViewModel;
@@ -116,7 +114,7 @@ public class UserInfoFragment extends BaseBookFragment {
 
     @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting, R.id.ll_my_order,
             R.id.ll_my_gebi, R.id.ll_renewal, R.id.ll_account_balance, R.id.ll_share_txgp
-            , R.id.ll_test, R.id.ll_test2})
+            })
     public void onViewClicked(View view) {
 
         if (AntiShake.getInstance().check()) {//防止点击过快
@@ -187,14 +185,7 @@ public class UserInfoFragment extends BaseBookFragment {
                 mShareViewModel.getZGW_Users_SignGuiZeData();
                 break;
 
-            case R.id.ll_test:
 
-                checkNewVersion(2);
-                break;
-
-            case R.id.ll_test2:
-                RecycleBinFragment.start(getBaseActivity());
-                break;
 
         }
     }

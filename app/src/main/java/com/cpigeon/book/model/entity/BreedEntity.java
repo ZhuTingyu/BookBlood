@@ -18,6 +18,8 @@ public class BreedEntity implements Serializable {
     private String WoPigeonPlumeName;
     private String WoPigeonBloodName;
     private String PigeonBreedID;
+    private int BitTogether;//配对是否是分居（1是同居，0（或则是其他）是分居
+
     private BreedEntity(Builder builder) {
         setWoPigeonPlumeName(MenPigeonPlumeName);
         setWoPigeonID(builder.WoPigeonID);
@@ -31,6 +33,11 @@ public class BreedEntity implements Serializable {
         setMenPigeonID(builder.MenPigeonID);
         setPigeonBreedID(builder.PigeonBreedID);
     }
+
+    public boolean isTogether(){
+        return BitTogether == 1;
+    }
+
     public String getMenPigeonPlumeName() {
         return MenPigeonPlumeName;
     }
@@ -118,6 +125,7 @@ public class BreedEntity implements Serializable {
     public void setPigeonBreedID(String pigeonBreedID) {
         PigeonBreedID = pigeonBreedID;
     }
+
     public static final class Builder {
         private String MenPigeonPlumeName;
         private String WoPigeonID;
@@ -138,10 +146,12 @@ public class BreedEntity implements Serializable {
             WoPigeonPlumeName = val;
             return this;
         }
+
         public Builder MenPigeonPlumeName(String val) {
             MenPigeonPlumeName = val;
             return this;
         }
+
         public Builder WoPigeonID(String val) {
             WoPigeonID = val;
             return this;
@@ -184,12 +194,10 @@ public class BreedEntity implements Serializable {
         }
 
 
-
         public Builder PigeonBreedID(String val) {
             PigeonBreedID = val;
             return this;
         }
-
 
 
         public BreedEntity build() {

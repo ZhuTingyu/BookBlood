@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
@@ -21,20 +22,24 @@ public class SearchPigeonOrFootActivity extends BaseSearchPigeonActivity {
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
-                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
-        });
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            try {
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
+                try
+                {
                 PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
                 IntentBuilder.Builder()
                         .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
                         .finishForResult(getBaseActivity());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            }catch (Exception e) {
+                    e.printStackTrace();
+                }
+                }
         });
+
 
         return mAdapter;
     }

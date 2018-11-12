@@ -31,8 +31,17 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 public class BaseViewHolder extends com.chad.library.adapter.base.BaseViewHolder {
+
+    private float mTouchX;
+    private float mTouchY;
+
     public BaseViewHolder(View itemView) {
         super(itemView);
+//        itemView.setOnTouchListener((v, event) -> {
+//            mTouchX = event.getRawX();
+//            mTouchY = event.getRawY();
+//            return false;
+//        });
     }
 
     /**
@@ -210,4 +219,11 @@ public class BaseViewHolder extends com.chad.library.adapter.base.BaseViewHolder
         return (Activity) itemView.getContext();
     }
 
+    public float getTouchX() {
+        return mTouchX;
+    }
+
+    public float getTouchY() {
+        return mTouchY;
+    }
 }

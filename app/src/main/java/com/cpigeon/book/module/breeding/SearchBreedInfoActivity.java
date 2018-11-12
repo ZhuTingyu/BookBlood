@@ -34,7 +34,7 @@ public class SearchBreedInfoActivity extends BaseSearchActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new BreedingFootAdapter();
+        mAdapter = new BreedingFootAdapter(mViewModel);
         return mAdapter;
     }
 
@@ -69,6 +69,16 @@ public class SearchBreedInfoActivity extends BaseSearchActivity {
         mViewModel.mBreedingInfoListData.observe(this, breedPigeonEntities -> {
             setProgressVisible(false);
             mAdapter.setNewData(breedPigeonEntities);
+        });
+
+        mViewModel.mDataSetTogetherR.observe(this, aBoolean -> {
+            setProgressVisible(true);
+            mViewModel.getTXGP_PigeonBreed_SelectAll();
+        });
+
+        mViewModel.mDataDeletR.observe(this, aBoolean -> {
+            setProgressVisible(true);
+            mViewModel.getTXGP_PigeonBreed_SelectAll();
         });
     }
 }

@@ -8,6 +8,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
 /**
@@ -33,25 +34,31 @@ public class MyHomingPigeonFragment extends BaseFootListFragment  {
     @Override
     protected void initData() {
         super.initData();
-setTitle("我的信鸽");
+        setTitle("我的信鸽");
         setStartSearchActvity(SearchMyHomingActivity.class);//搜索页面
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
-                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.id = PigeonId;
+                setProgressVisible(true);
                 mBreedPigeonListModel.deletePigeon();
             }
-        });
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            try {
-                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-                BreedPigeonDetailsFragment.start(getBaseActivity(),
-                        mBreedPigeonEntity.getPigeonID(),
-                        mBreedPigeonEntity.getFootRingID());
-            } catch (Exception e) {
-                e.printStackTrace();
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
+                try {
+                    PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                    BreedPigeonDetailsFragment.start(getBaseActivity(),
+                            mBreedPigeonEntity.getPigeonID(),
+                            mBreedPigeonEntity.getFootRingID());
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
             }
         });
+
+
 
     }
 
@@ -66,10 +73,4 @@ setTitle("我的信鸽");
 
 
 
-    @Override
-    public void onResume() {
-
-        super.onResume();
-
-    }
 }

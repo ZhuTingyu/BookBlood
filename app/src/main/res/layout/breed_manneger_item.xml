@@ -1,209 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mcxtzhang.swipemenulib.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center_horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginHorizontal="@dimen/normal_safe_distance"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/popupwindowbackground"
-        android:orientation="horizontal">
-
-        <TextView
-
-            android:id="@+id/count"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="8dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-
-        <LinearLayout
-            android:layout_marginRight="2dp"
-            android:orientation="vertical"
-            android:layout_width="14dp"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <View
-                    android:id="@+id/vLineTop1"
-                    android:background="@color/black"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="7.5dp"
-                    android:layout_height="1dp"/>
-
-                <View
-                    android:layout_below="@id/vLineTop1"
-                    android:background="@color/black"
-                    android:layout_width="1dp"
-                    android:layout_centerInParent="true"
-                    android:layout_height="match_parent"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <View
-                    android:id="@+id/vLine2"
-                    android:background="@color/black"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="7.5dp"
-                    android:layout_height="1dp"/>
-
-                <View
-                    android:layout_above="@id/vLine2"
-                    android:background="@color/black"
-                    android:layout_width="1dp"
-                    android:layout_centerInParent="true"
-                    android:layout_height="match_parent"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="75dp"
+            android:layout_marginHorizontal="@dimen/normal_safe_distance"
+            android:layout_marginVertical="8dp"
+            android:background="@drawable/popupwindowbackground"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:id="@+id/count"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_width="14dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:orientation="vertical">
 
-                <com.base.widget.MarqueeTextView
-                    style="@style/Marquee"
-                    android:id="@+id/man_ring_num"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    tools:text="公的足环1111111111111111111"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-                <ImageView
-                    android:id="@+id/man_img"
-                    android:layout_width="0dp"
-                    android:layout_height="19dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_male" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:gravity="end|center_vertical"
-                    android:paddingRight="20dp">
-
-                    <TextView
-                        android:id="@+id/man_color"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:layout_marginRight="8dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="2dp"
-                        android:background="@drawable/textcirclecolor"
-                        android:paddingBottom="2dp"
-                        android:layout_toLeftOf="@+id/man_blood"
-                        android:gravity="center"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        android:id="@+id/man_blood"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="2dp"
-                        android:background="@drawable/textcircleblood"
-                        android:paddingBottom="2dp"
+                    <View
+                        android:id="@+id/vLineTop1"
+                        android:layout_width="7.5dp"
+                        android:layout_height="1dp"
                         android:layout_alignParentRight="true"
-                        android:gravity="center"
-                        android:textSize="11sp" />
-                </LinearLayout>
+                        android:layout_centerVertical="true"
+                        android:background="@color/black" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/vLineTop1"
+                        android:layout_centerInParent="true"
+                        android:background="@color/black" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <View
+                        android:id="@+id/vLine2"
+                        android:layout_width="7.5dp"
+                        android:layout_height="1dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@color/black" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_above="@id/vLine2"
+                        android:layout_centerInParent="true"
+                        android:background="@color/black" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <com.base.widget.MarqueeTextView
-                    style="@style/Marquee"
-                    android:id="@+id/woman_ring_num"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:text="母的足环11111111111111111111111111"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <ImageView
-                    android:id="@+id/woman_img"
-                    android:layout_width="0dp"
-                    android:layout_height="19dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@mipmap/ic_female" />
-
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:gravity="end|center_vertical"
-                    android:paddingRight="20dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/woman_color"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:layout_marginRight="8dp"
-                        android:paddingTop="2dp"
-                        android:background="@drawable/textcirclecolor"
-                        android:paddingBottom="2dp"
-                        android:layout_toLeftOf="@+id/woman_blood"
-                        android:gravity="center"
-                        android:textSize="11sp" />
+                    <com.base.widget.MarqueeTextView
+                        android:id="@+id/man_ring_num"
+                        style="@style/Marquee"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:text="公的足环1111111111111111111" />
 
-                    <TextView
-                        android:id="@+id/woman_blood"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
-                        android:background="@drawable/textcircleblood"
-                        android:layout_alignParentRight="true"
-                        android:gravity="center"
-                        android:textSize="11sp" />
+                    <ImageView
+                        android:id="@+id/man_img"
+                        android:layout_width="0dp"
+                        android:layout_height="19dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/ic_male" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingRight="20dp">
+
+                        <TextView
+                            android:id="@+id/man_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/man_blood"
+                            android:background="@drawable/textcirclecolor"
+                            android:gravity="center"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="2dp"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/man_blood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/textcircleblood"
+                            android:gravity="center"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="2dp"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.base.widget.MarqueeTextView
+                        android:id="@+id/woman_ring_num"
+                        style="@style/Marquee"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:text="母的足环11111111111111111111111111"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/woman_img"
+                        android:layout_width="0dp"
+                        android:layout_height="19dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/ic_female" />
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingRight="20dp">
+
+                        <TextView
+                            android:id="@+id/woman_color"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@+id/woman_blood"
+                            android:background="@drawable/textcirclecolor"
+                            android:gravity="center"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="2dp"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/woman_blood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/textcircleblood"
+                            android:gravity="center"
+                            android:paddingBottom="2dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="2dp"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -213,5 +220,31 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvSetNotTogether"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:textSize="@dimen/big_text_size"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/text_separation"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tvDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/color_bg_red"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/text_delete"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</com.mcxtzhang.swipemenulib.SwipeMenuLayout>

@@ -120,4 +120,6 @@ dependencies {
     //评分控件
     compile 'com.github.CB-ysx:CBRatingBar:3.0.1'
     compile 'com.github.everhad:AndroidRatingStar:v1.0.1'
+
+    compile 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
 }

@@ -555,7 +555,7 @@
         <item>雄鸽</item>
         <item>雌鸽</item>
         <item>幼鸽</item>
-        <item>成鸽</item>
+        <item>成年鸽</item>
         <item>老龄鸽</item>
         <item>长寿鸽</item>
     </string-array>
@@ -676,5 +676,9 @@
     <string name="text_foot_ring_admin">足环管理</string>
     <string name="text_my_breed_pigeon">我的种鸽</string>
     <string name="text_my_match_pigeon">我的赛鸽</string>
+    <string name="text_live_together">同居</string>
+    <string name="text_separation">分居</string>
+    <string name="text_hint_is_delete_pairing_info">你是否要删除该发育的信息?</string>
+    <string name="text_hint_set_not_together">你是否将这两只鸽子分居?</string>
 
 </resources>

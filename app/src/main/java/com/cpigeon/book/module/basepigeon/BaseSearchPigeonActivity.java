@@ -14,6 +14,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -51,15 +52,18 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
                 mBreedPigeonListModel.id=PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
-        });
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            try {
-                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-                BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID(), mBreedPigeonEntity.getFootRingID());
-            } catch (Exception e) {
-                e.printStackTrace();
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
+                try {
+                    PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                    BreedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity.getPigeonID(), mBreedPigeonEntity.getFootRingID());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
+
         return mAdapter;
     }
 

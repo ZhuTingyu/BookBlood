@@ -11,6 +11,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.module.pigeonleague.viewmodel.PigeonToLeagueFootListViewModel;
@@ -70,21 +71,22 @@ setTitle("信鸽赛绩");
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
-                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
-        });
-
-        setStartSearchActvity(SearchPigeonToLeagueActivity.class);//搜索页面
-
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            try {
-                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-                PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
-            } catch (Exception e) {
-                e.printStackTrace();
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
+                try {
+                    PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                    PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
+        setStartSearchActvity(SearchPigeonToLeagueActivity.class);//搜索页面
+
 
     }
 
