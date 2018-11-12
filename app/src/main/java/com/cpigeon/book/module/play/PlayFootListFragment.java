@@ -19,6 +19,7 @@ import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
@@ -111,17 +112,16 @@ public class PlayFootListFragment extends BaseFootListFragment {
                 mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
-        });
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            try {
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
                 BreedPigeonDetailsFragment.start(getBaseActivity(),
                         mBreedPigeonEntity.getPigeonID(),
                         mBreedPigeonEntity.getFootRingID());
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         });
+
 
         mViewModel.getFirstLeague();//获取第一名赛绩
     }

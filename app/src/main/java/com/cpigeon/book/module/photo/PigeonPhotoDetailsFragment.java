@@ -3,6 +3,7 @@ package com.cpigeon.book.module.photo;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,11 +21,16 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.PictureSelectUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.glide.GlideCacheUtil;
-import com.base.util.glide.GlideUtil;
 import com.base.util.picker.PickerUtil;
+import com.base.widget.photoview.PhotoView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -130,7 +136,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         mBanner.setIndicatorPadding(0,0,0,0);
 
         mBanner.getAdapter().setPageClickListener((view1, position1) -> {
-//            startAnimator();
+
             if (Click) {
                 appBarLayout.setVisibility(View.VISIBLE);
                 Click=false;
@@ -385,7 +391,7 @@ private void removeCache() {
 
 class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
 
-    private ImageView mImg;
+    private PhotoView mImg;
     private TextView mTvColor,mTvTime;
     private TextView mTvNumberAndTime;
 
@@ -404,7 +410,14 @@ class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
     @Override
     public void onBind(Context context, int position, PigeonPhotoEntity data) {
         // 数据绑定
-        GlideUtil.setGlideImageView(context, data.getPhotoUrl(), mImg);
+        Glide.with(context).load(data.getPhotoUrl()).asBitmap().diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(480, 800) {
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                mImg.setImageBitmap(resource);
+            }
+        });
+
+//        Glide.with(context).load(data.getPhotoUrl()).override(480, 800)
+//                .diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.HIGH).into(mImg);
         String str = data.getAddTime();
 
         //图片类型

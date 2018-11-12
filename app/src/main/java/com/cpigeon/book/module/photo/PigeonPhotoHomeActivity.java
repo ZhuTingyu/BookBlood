@@ -197,6 +197,7 @@ private BreedPigeonDetailsViewModel breedPigeonDetailsViewModel;
             //跳转详情
             try {
                 PigeonPhotoDetailsFragment.start(getBaseActivity(), mViewModel.mPigeonEntity, mAdapter.getData(), position);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

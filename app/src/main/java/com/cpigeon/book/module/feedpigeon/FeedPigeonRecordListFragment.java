@@ -9,6 +9,7 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
@@ -29,7 +30,9 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
     }
 
     public static void start(Activity activity) {
-
+        Bundle bundle = new Bundle();
+        bundle.putString(BaseFootListFragment.STATEID, PigeonEntity.IN_THE_SHED);
+        bundle.putString(BaseFootListFragment.TYPEID, PigeonEntity.ID_BREED_MATCCH_PIGEON);
         SearchFragmentParentActivity.
                 start(activity, FeedPigeonRecordListFragment.class, false, null);
     }
@@ -49,18 +52,23 @@ public class FeedPigeonRecordListFragment extends BaseFootListFragment {
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
-                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
-        });
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            try {
-                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-                FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
-            } catch (Exception e) {
-                e.printStackTrace();
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
+                try {
+                    PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                    FeedPigeonDetailsFragment.start(getBaseActivity(), mBreedPigeonEntity);
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
             }
         });
+
 
         mRecyclerView.setAdapter(mAdapter);
     }

@@ -1,16 +1,9 @@
 package com.cpigeon.book.module.basepigeon;
 
 import android.support.annotation.ColorRes;
-import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
-import com.base.util.Lists;
-import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
 import com.cpigeon.book.R;
 import com.cpigeon.book.widget.stats.StatView;

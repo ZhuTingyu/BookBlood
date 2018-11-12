@@ -1,27 +1,17 @@
 package com.cpigeon.book.module.breeding.adapter;
 
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListPopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
-import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
-import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedEntity;
 import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
-import com.cpigeon.book.widget.PopupWindowList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2018/11/2 0002.

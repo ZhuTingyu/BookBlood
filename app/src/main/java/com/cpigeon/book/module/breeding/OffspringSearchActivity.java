@@ -7,6 +7,7 @@ import com.base.util.IntentBuilder;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 
 /**
@@ -24,18 +25,17 @@ public class OffspringSearchActivity extends BaseSearchPigeonActivity {
                 mBreedPigeonListModel.id=PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
-        });
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            try {
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
                 Intent intent = new Intent();
                 intent.putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity);
                 getBaseActivity().setResult(PairingNestAddFragment.requestCode, intent);
                 getBaseActivity().finish();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         });
+
         return mAdapter;
     }
 

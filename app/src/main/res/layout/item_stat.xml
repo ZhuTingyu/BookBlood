@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/statView"
     android:layout_margin="20dp"
-    app:statView_unit="@string/text_ring_unit"
+    app:statView_unit="@string/text_pigeon_unit"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />

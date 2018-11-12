@@ -14,17 +14,17 @@ import android.widget.TextView;
 
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.LogUtil;
-import com.base.util.utility.ToastUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.breeding.adapter.BreedingFootAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
@@ -203,6 +203,11 @@ public class BaseFootListFragment extends BaseBookFragment {
                 mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
+
+            }
         });
 
         initData();
@@ -377,11 +382,11 @@ public class BaseFootListFragment extends BaseBookFragment {
             mAdapter.setEmptyText(s);
         });
         mBreedPigeonListModel.listDeleteMessage.observe(this, s -> {
+            DialogUtils.createHintDialog(getBaseActivity(),s );
             mAdapter.getData().clear();
-            mAdapter.notifyDataSetChanged();
             mBreedPigeonListModel.pi = 1;
             mBreedPigeonListModel.getPigeonList();
-            ToastUtils.showLong(getBaseActivity(), s);
+
         });
     }
 

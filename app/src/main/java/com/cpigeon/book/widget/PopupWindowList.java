@@ -174,6 +174,8 @@ public class PopupWindowList {
                 //在上方
                 y = yMiddle;
             }
+            mPopupWindow.showAtLocation(mAnchorView, Gravity.NO_GRAVITY, x,y);
+
             mPopupWindow.showAtLocation(mAnchorView, Gravity.NO_GRAVITY, this.x, this.y);
         }
     }

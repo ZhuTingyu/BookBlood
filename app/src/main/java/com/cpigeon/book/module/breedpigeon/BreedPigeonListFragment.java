@@ -20,6 +20,7 @@ import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 
@@ -70,10 +71,23 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
         mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
-                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
+                try {
+                    PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                    BreedPigeonDetailsFragment.start(getBaseActivity(),
+                            mBreedPigeonEntity.getPigeonID(),
+                            mBreedPigeonEntity.getFootRingID());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
+
         mAdapter.setOnItemClickListener((adapter, view1, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);

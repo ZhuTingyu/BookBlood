@@ -3,7 +3,6 @@ package com.cpigeon.book.module.basepigeon;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 
 import java.util.List;
 
@@ -13,11 +12,7 @@ import java.util.List;
  */
 
 public class BasePigeonListAdapter extends BaseQuickAdapter<PigeonEntity, BaseViewHolder> {
-    protected  OnDeleteListener onDeleteListener;
-    public void BasePigeonListAdapter(OnDeleteListener onDeleteListener )
-    {
-        this.onDeleteListener=onDeleteListener;
-    }
+
 
     public BasePigeonListAdapter(int layoutResId, List<PigeonEntity> data) {
         super(layoutResId, data);

@@ -18,12 +18,10 @@ import android.widget.TextView;
 
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.TimeUtil;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
-import com.cpigeon.book.model.entity.BreedEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breeding.adapter.BreedingFootAdapter;

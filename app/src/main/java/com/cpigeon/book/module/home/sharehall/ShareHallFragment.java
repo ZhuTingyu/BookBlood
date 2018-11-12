@@ -28,6 +28,7 @@ import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.home.sharehall.adpter.ShareHallHomeAdapter;
 import com.cpigeon.book.module.home.sharehall.viewmodel.ShareHallViewModel;
 import com.cpigeon.book.module.menu.service.OpenServiceFragment;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.FiltrateListView;
 
@@ -182,9 +183,18 @@ public class ShareHallFragment extends BaseBookFragment {
             setProgressVisible(false);
         });
     }
-
+    @Subscribe
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
+            setProgressVisible(true);
+            mAdapter.cleanList();
+            mViewModel.pi = 1;
+            mViewModel.getSharePigeons();
+        }
+    }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(ShareHallEvent event) {
+        setProgressVisible(true);
         mAdapter.cleanList();
         mViewModel.pi = 1;
         mViewModel.getSharePigeons();
