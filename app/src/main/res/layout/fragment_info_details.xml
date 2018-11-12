@@ -216,37 +216,37 @@
                 app:lineInputView_isShowLineDivisions="gone" />
 
 
-            <!--测试-->
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/ll_test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                app:lineInputView_DrawableLeft="@mipmap/info_rizhi"
-                app:lineInputView_IsCanEdit="false"
-                app:lineInputView_IsLookState="true"
-                app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="测试"
-                app:lineInputView_RightString=""
-                app:lineInputView_content_paddingLeft="@dimen/spacing_left_reight"
-                app:lineInputView_content_paddingRight="@dimen/spacing_left_reight"
-                app:lineInputView_isShowLineDivisions="gone" />
+            <!--&lt;!&ndash;测试&ndash;&gt;-->
+            <!--<com.cpigeon.book.widget.LineInputView-->
+                <!--android:id="@+id/ll_test"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--app:lineInputView_DrawableLeft="@mipmap/info_rizhi"-->
+                <!--app:lineInputView_IsCanEdit="false"-->
+                <!--app:lineInputView_IsLookState="true"-->
+                <!--app:lineInputView_IsNotNull="true"-->
+                <!--app:lineInputView_LeftString="测试"-->
+                <!--app:lineInputView_RightString=""-->
+                <!--app:lineInputView_content_paddingLeft="@dimen/spacing_left_reight"-->
+                <!--app:lineInputView_content_paddingRight="@dimen/spacing_left_reight"-->
+                <!--app:lineInputView_isShowLineDivisions="gone" />-->
 
-            <!--测试-->
-            <com.cpigeon.book.widget.LineInputView
-                android:id="@+id/ll_test2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                app:lineInputView_DrawableLeft="@mipmap/info_rizhi"
-                app:lineInputView_IsCanEdit="false"
-                app:lineInputView_IsLookState="true"
-                app:lineInputView_IsNotNull="true"
-                app:lineInputView_LeftString="测试2"
-                app:lineInputView_RightString=""
-                app:lineInputView_content_paddingLeft="@dimen/spacing_left_reight"
-                app:lineInputView_content_paddingRight="@dimen/spacing_left_reight"
-                app:lineInputView_isShowLineDivisions="gone" />
+            <!--&lt;!&ndash;测试&ndash;&gt;-->
+            <!--<com.cpigeon.book.widget.LineInputView-->
+                <!--android:id="@+id/ll_test2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--app:lineInputView_DrawableLeft="@mipmap/info_rizhi"-->
+                <!--app:lineInputView_IsCanEdit="false"-->
+                <!--app:lineInputView_IsLookState="true"-->
+                <!--app:lineInputView_IsNotNull="true"-->
+                <!--app:lineInputView_LeftString="测试2"-->
+                <!--app:lineInputView_RightString=""-->
+                <!--app:lineInputView_content_paddingLeft="@dimen/spacing_left_reight"-->
+                <!--app:lineInputView_content_paddingRight="@dimen/spacing_left_reight"-->
+                <!--app:lineInputView_isShowLineDivisions="gone" />-->
 
 
         </LinearLayout>

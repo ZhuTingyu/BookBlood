@@ -61,6 +61,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Collections;
 import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -231,7 +232,6 @@ public class InputPigeonFragment extends BaseBookFragment {
         mSelectTypeViewModel.getSelectType_State();
         mSelectTypeViewModel.getSelectType_PigeonSource();
         mSelectTypeViewModel.getPigeonType();
-
         IsCanCommit();
     }
 
@@ -272,7 +272,6 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mLvRing.setRightText(foot);
                 mViewModel.foot = foot;
                 IsCanCommit();
-
                 mViewModel.getFootRingState();
                 setProgressVisible(true);
 
@@ -284,8 +283,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
             if (!StringUtil.isStringValid(mSexType)) {
                 try {
-
-
+                    Collections.reverse(mViewModel.mSelectTypes_Sex);
                     BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Sex), p -> {
                         mLvSex.setRightText(mViewModel.mSelectTypes_Sex.get(p).getTypeName());
                         mViewModel.sexId = mViewModel.mSelectTypes_Sex.get(p).getTypeID();
@@ -365,7 +363,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mSelectTypeViewModel.getSelectType_State();
             }
         });
-        mLvFatherFootState.setClickable(false);
+
         mLvMotherFootState.setOnRightClickListener(lineInputView -> {
             try {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
@@ -381,7 +379,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mSelectTypeViewModel.getSelectType_State();
             }
         });
-        mLvMotherFootState.setClickable(false);
+
         mLvPigeonName.setOnRightClickListener(lineInputView -> {
             mBaseInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                     , R.string.text_pleas_input_pigeon_name, mLvPigeonName.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
@@ -420,7 +418,6 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.footFather = foot;
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_MALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
-                    setProgressVisible(true);
                     mSelectParentFootRingViewModel.getPgieon();
                 } else {
                     mLvFatherFoot.setRightText(StringUtil.emptyString());
@@ -447,7 +444,6 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.footMother = foot;
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_FEMALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
-                    setProgressVisible(true);
                     mSelectParentFootRingViewModel.getPgieon();
                 } else {
 
@@ -461,12 +457,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     IsCanCommit();
                 }
 
-                mViewModel.footMother = foot;
-                mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_FEMALE;
-                mSelectParentFootRingViewModel.mFootNumber = foot;
-                mViewModel.isMotherCanCommit();
-                setProgressVisible(true);
-                mSelectParentFootRingViewModel.getPgieon();
+
             });
         });
         //眼砂
@@ -622,7 +613,23 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.theirShellsDate = breedPigeonEntity.getOutShellTime();
             mViewModel.lineage = breedPigeonEntity.getPigeonBloodName();
             mViewModel.stateId = breedPigeonEntity.getStateID();
+            if(mViewModel.footMother.equals(StringUtil.emptyString()))
+            {
+                mLvMotherFootState.setClickable(false);
 
+            }
+            if(mViewModel.footFather.equals(StringUtil.emptyString()))
+            {
+                mLvFatherFootState.setClickable(false);
+            }
+//        if (   mViewModel.pigeonMotherStateId.equals(StringUtil.emptyString()))
+//        {
+//            mViewModel.pigeonMotherStateId="36";
+//        }
+//            if (   mViewModel.pigeonFatherStateId.equals(StringUtil.emptyString()))
+//            {
+//                mViewModel.pigeonMotherStateId="36";
+//            }
             if (StringUtil.isStringValid(breedPigeonEntity.getCoverPhotoUrl())) {
                 List<ImgTypeEntity> imgs = Lists.newArrayList();
                 ImgTypeEntity entity = new ImgTypeEntity.Builder()
@@ -729,11 +736,11 @@ public class InputPigeonFragment extends BaseBookFragment {
                 if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
                     mLvFatherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
                     mViewModel.footFather = mSelectParentFootRingViewModel.mFootNumber;
+                    mLvFatherFootState.setClickable(true);
                 } else {
-
                     mLvMotherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
-
                     mViewModel.footMother = mSelectParentFootRingViewModel.mFootNumber;
+                    mLvMotherFootState.setClickable(true);
                 }
                 IsCanCommit();
                 return;
@@ -797,10 +804,8 @@ public class InputPigeonFragment extends BaseBookFragment {
                     .finishForResult(getBaseActivity());
         });
     }
-
     private static class ViewWrapper {
         private View mTarget;
-
         public ViewWrapper(View view) {
             mTarget = view;
         }

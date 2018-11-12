@@ -18,6 +18,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.module.home.sharehall.adpter.ShareHallHomeAdapter;
 import com.cpigeon.book.module.home.sharehall.viewmodel.ShareHallViewModel;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -63,7 +64,7 @@ public class MySharePigeonFragment extends BaseBookFragment {
         mTvOk = findViewById(R.id.tvOk);
         mAdapter = new ShareHallHomeAdapter(true);
         mAdapter.setOnDletetClickLisenter((position, pigeonEntity) -> {
-            DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_is_cancel_share),sweetAlertDialog -> {
+            DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_is_cancel_share), sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();
                 setProgressVisible(true);
                 delectPosition = position;
@@ -109,8 +110,19 @@ public class MySharePigeonFragment extends BaseBookFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(ShareHallEvent event) {
+        setProgressVisible(true);
         mAdapter.cleanList();
         mViewModel.pi = 1;
         mViewModel.getSharePigeons();
+    }
+
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        setProgressVisible(true);
+        if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
+            mAdapter.cleanList();
+            mViewModel.pi = 1;
+            mViewModel.getSharePigeons();
+        }
     }
 }
