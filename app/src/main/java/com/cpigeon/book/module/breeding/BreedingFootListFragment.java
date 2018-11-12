@@ -6,11 +6,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.base.util.picker.PickerUtil;
 import com.base.util.utility.TimeUtil;
@@ -42,9 +46,22 @@ import cn.qqtheme.framework.picker.OptionPicker;
 public class BreedingFootListFragment extends BaseBookFragment {
     SearchFragmentParentActivity mActivity;
     PairingInfoListViewModel mViewModel;
-    protected BreedingFootAdapter mAdapter;
+    protected BreedingFootAdapter mAdapter1;
+    protected BreedingFootAdapter mAdapter2;
     private LinearLayout search_bg;
     private RelativeLayout rlSearch;
+
+    private RelativeLayout mRlAddition1;
+    private ImageView mImgExpand1;
+    private RecyclerView mList1;
+    private RelativeLayout mRlAddition2;
+    private ImageView mImgExpand2;
+    private RecyclerView mList2;
+    private View mViewPlaceholder;
+    private TextView mTvOk;
+
+    private boolean mTIsExpand = true;
+    private boolean mFIsExpand = false;
 
 
     public static void start(Activity activity) {
@@ -62,12 +79,12 @@ public class BreedingFootListFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mActivity = (SearchFragmentParentActivity) getBaseActivity();
         search_bg = mActivity.findViewById(R.id.search_bg);
         rlSearch = mActivity.findViewById(R.id.rlSearch);
         search_bg.setBackgroundColor(getResources().getColor(R.color.Gray));
         mViewModel = new PairingInfoListViewModel();
         initViewModels(mViewModel);
-        mActivity = (SearchFragmentParentActivity) getBaseActivity();
     }
 
 
@@ -103,7 +120,8 @@ public class BreedingFootListFragment extends BaseBookFragment {
                         public void onOptionPicked(int index, String item) {
                             setToolbarRight("▾ " + item);
                             setProgressVisible(true);
-                            mAdapter.getData().clear();
+                            mAdapter1.getData().clear();
+                            mAdapter2.getData().clear();
                             mViewModel.year = item;
                             mViewModel.getTXGP_PigeonBreed_SelectAll();
 
@@ -112,6 +130,58 @@ public class BreedingFootListFragment extends BaseBookFragment {
                     });
             return true;
         });
+
+        mRlAddition1 = findViewById(R.id.rlAddition1);
+        mImgExpand1 = findViewById(R.id.imgExpand1);
+        mList1 = findViewById(R.id.list1);
+        mRlAddition2 = findViewById(R.id.rlAddition2);
+        mImgExpand2 = findViewById(R.id.imgExpand2);
+        mList2 = findViewById(R.id.list2);
+        mViewPlaceholder = findViewById(R.id.view_placeholder);
+        mTvOk = findViewById(R.id.tvOk);
+
+        mList1.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+        mList2.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+
+        mAdapter1 = new BreedingFootAdapter(mViewModel);
+        mAdapter2 = new BreedingFootAdapter(mViewModel);
+
+        mList1.setAdapter(mAdapter1);
+        mList2.setAdapter(mAdapter2);
+
+        mTvOk.setText("添加配对");
+        mTvOk.setOnClickListener(v -> {
+            //添加配对
+            AddBreedingFragment.start(getBaseActivity());
+        });
+
+        mRlAddition1.setOnClickListener(v -> {
+            if(mTIsExpand){
+                mTIsExpand = false;
+                mImgExpand1.setRotation(0);
+                mList1.setVisibility(View.GONE);
+            }else {
+                mTIsExpand = true;
+                mImgExpand1.setRotation(180);
+                mList1.setVisibility(View.VISIBLE);
+            }
+        });
+
+        mRlAddition2.setOnClickListener(v -> {
+            if(mFIsExpand){
+                mFIsExpand = false;
+                mImgExpand2.setRotation(0);
+                mList2.setVisibility(View.GONE);
+            }else {
+                mFIsExpand = true;
+                mImgExpand2.setRotation(180);
+                mList2.setVisibility(View.VISIBLE);
+            }
+        });
+
+        setProgressVisible(true);
+        mViewModel.getTXGP_PigeonBreed_SelectAll();
+
 
     }
 
@@ -152,25 +222,24 @@ public class BreedingFootListFragment extends BaseBookFragment {
     @Override
     protected void initObserve() {
         super.initObserve();
-        mViewModel.mBreedingInfoListData.observe(this, breedPigeonEntities -> {
-//            RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mPairingInfoListAdapter, breedPigeonEntities);
+        mViewModel.mBreedingInfoListDataT.observe(this, breedPigeonEntities -> {
             setProgressVisible(false);
-
+            mAdapter1.setNewData(breedPigeonEntities);
         });
 
-        mViewModel.listEmptyMessage.observe(this, s -> {
-            mAdapter.setEmptyText(s);
+        mViewModel.mBreedingInfoListDataF.observe(this, breedPigeonEntities -> {
+            setProgressVisible(false);
+            mAdapter2.setNewData(breedPigeonEntities);
         });
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        setProgressVisible(true);
-        mViewModel.pi = 1;
-        mAdapter.getData().clear();
-        mAdapter.notifyDataSetChanged();
-        mViewModel.getTXGP_PigeonBreed_SelectAll();
+        mViewModel.mDataSetTogetherR.observe(this, aBoolean -> {
+            setProgressVisible(true);
+            mViewModel.getTXGP_PigeonBreed_SelectAll();
+        });
 
+        mViewModel.mDataDeletR.observe(this, aBoolean -> {
+            setProgressVisible(true);
+            mViewModel.getTXGP_PigeonBreed_SelectAll();
+        });
     }
 }

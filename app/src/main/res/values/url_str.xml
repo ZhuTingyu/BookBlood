@@ -373,5 +373,8 @@
     <string name="get_pigeon_by_footNumber_and_sex">TXGP_SelectFootPigeon</string>
     <string name="get_blood_user_times">TXGP_XTS_GetCount</string>
     <string name="add_blood_user_times">TXGP_XTS_SetCount</string>
+    <string name="set_breed_pigeon_not_together">TXGP_PigeonBreed_UpdateBitTogether</string>
+    <string name="delete_pairing_info">TXGP_PigeonBreed_Delete</string>
+
 
 </resources>

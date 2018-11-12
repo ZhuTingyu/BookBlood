@@ -72,7 +72,7 @@ public class InputBreedInBookFragment extends BaseBookFragment {
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
                             , StringUtil.emptyString()
-                            , StringUtil.emptyString()
+                            , PigeonEntity.ID_BREED_PIGEON
                             , CODE_ADD_PIGEON);
                 } else {
                     PigeonEntity breedPigeonEntity = null;

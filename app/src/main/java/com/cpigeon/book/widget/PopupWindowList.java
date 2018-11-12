@@ -23,9 +23,9 @@ import java.util.List;
  */
 
 public class PopupWindowList {
-private Drawable DIVIDER;
-private int x;
-private int y;
+    private Drawable DIVIDER;
+    private int x;
+    private int y;
     private Context mContext;
     private PopupWindow mPopupWindow;
     //the view where PopupWindow lie in
@@ -40,15 +40,16 @@ private int y;
     private int mPopupWindowHeight;
     private AdapterView.OnItemClickListener mItemClickListener;
     private boolean mModal;
-    public void setDIVIDER(Drawable DIVIDER)
-{
- this.DIVIDER=DIVIDER;
-}
-public void setLocation(int x,int y)
-{
-    this.x=x;
-    this.y=y;
-}
+
+    public void setDIVIDER(Drawable DIVIDER) {
+        this.DIVIDER = DIVIDER;
+    }
+
+    public void setLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public PopupWindowList(Context mContext) {
         if (mContext == null) {
             throw new IllegalArgumentException("context can not be null");
@@ -79,7 +80,7 @@ public void setLocation(int x,int y)
 
     /**
      * Set whether this window should be modal when shown.
-     *
+     * <p>
      * <p>If a popup window is modal, it will receive all touch and key input.
      * If the user touches outside the popup window's content area the popup window
      * will be dismissed.
@@ -90,11 +91,11 @@ public void setLocation(int x,int y)
         mModal = modal;
     }
 
-    public boolean isShowing(){
+    public boolean isShowing() {
         return mPopupWindow != null && mPopupWindow.isShowing();
     }
 
-    public void hide(){
+    public void hide() {
         if (isShowing()) {
             mPopupWindow.dismiss();
         }
@@ -104,7 +105,6 @@ public void setLocation(int x,int y)
      * Sets a listener to receive events when a list item is clicked.
      *
      * @param clickListener Listener to register
-     *
      * @see ListView#setOnItemClickListener(AdapterView.OnItemClickListener)
      */
     public void setOnItemClickListener(@Nullable AdapterView.OnItemClickListener clickListener) {
@@ -174,7 +174,7 @@ public void setLocation(int x,int y)
                 //在上方
                 y = yMiddle;
             }
-            mPopupWindow.showAtLocation(mAnchorView, Gravity.NO_GRAVITY, this.x,this.y);
+            mPopupWindow.showAtLocation(mAnchorView, Gravity.NO_GRAVITY, this.x, this.y);
         }
     }
 

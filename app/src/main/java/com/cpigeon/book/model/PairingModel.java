@@ -266,5 +266,23 @@ public class PairingModel {
                 .request();
     }
 
+    public static Observable<ApiResponse> setPigeonNotTogether(String pairingId) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.set_breed_pigeon_not_together)
+                .addBody("breedid", pairingId)
+                .request();
+    }
+
+    public static Observable<ApiResponse> deletePairingInfo(String pairingId) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
+                }.getType())
+                .url(R.string.set_breed_pigeon_not_together)
+                .addBody("breedid", pairingId)
+                .request();
+    }
+
 
 }
