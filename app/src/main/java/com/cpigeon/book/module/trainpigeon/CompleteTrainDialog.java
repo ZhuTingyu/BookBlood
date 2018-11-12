@@ -22,6 +22,7 @@ import com.base.util.Utils;
 import com.base.util.picker.SelectTimeHaveHMSDialog;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
+import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
 import com.cpigeon.book.util.MathUtil;
@@ -130,10 +131,10 @@ public class CompleteTrainDialog extends BaseDialogFragment {
         if (mOnSureClickListener != null) {
             mTvOk.setOnClickListener(v -> {
                 if (!isDataNotNull()) {
-                    getBaseActivity().error(Utils.getString(R.string.text_pleas_complete_train_info));
+                    error(Utils.getString(R.string.text_pleas_complete_train_info));
                     return;
                 }
-                mOnSureClickListener.click(mTime, mFlyLocation, mDis, mLocation);
+                mOnSureClickListener.click(this ,mTime, mFlyLocation, mDis, mLocation);
             });
         }
     }
@@ -215,7 +216,7 @@ public class CompleteTrainDialog extends BaseDialogFragment {
 
 
     public interface OnSureClickListener {
-        void click(String time, LatLng latLng, float dis, String location);
+        void click(CompleteTrainDialog dialog, String time, LatLng latLng, float dis, String location);
     }
 
     private OnSureClickListener mOnSureClickListener;

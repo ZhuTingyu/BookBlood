@@ -45,7 +45,7 @@ public abstract class BaseBookActivity extends BaseActivity {
     @Override
     public void error(int code, String error) {
 
-        if (code == 90102) {
+        if (code == 90102 || code == 90100) {
 
             if (!StringUtil.isStringValid(error)) {
                 return;

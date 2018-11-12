@@ -12,7 +12,7 @@ import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
-import com.cpigeon.book.module.play.PlayInportFragment;
+import com.cpigeon.book.module.play.PlayImportFragment;
 import com.cpigeon.book.module.select.PlayOrgLoftFragment;
 import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.widget.LineInputView;
@@ -59,9 +59,17 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
                 return;
             }
 
+            String type;
+
+            if (unitName.getContent().equals("协会")) {
+                type = "xh";
+            } else {
+                type = "gp";
+            }
+
             this.dismiss();
             //导入赛绩
-            PlayInportFragment.start(getActivity());
+            PlayImportFragment.start(getActivity(), ll_foot.getContent(), type,ll_org.getContent());
         });
 
         //足环号
@@ -100,6 +108,5 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
     public void setllUnitName(String ll_unit_name) {
         unitName.setContent(ll_unit_name);
     }
-
 
 }

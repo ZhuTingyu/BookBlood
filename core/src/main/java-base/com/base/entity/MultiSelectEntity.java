@@ -32,4 +32,15 @@ public class MultiSelectEntity implements Parcelable {
         this.isVisible = in.readByte() != 0;
     }
 
+    public static final Creator<MultiSelectEntity> CREATOR = new Creator<MultiSelectEntity>() {
+        @Override
+        public MultiSelectEntity createFromParcel(Parcel source) {
+            return new MultiSelectEntity(source);
+        }
+
+        @Override
+        public MultiSelectEntity[] newArray(int size) {
+            return new MultiSelectEntity[size];
+        }
+    };
 }

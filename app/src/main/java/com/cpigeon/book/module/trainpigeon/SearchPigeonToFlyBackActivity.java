@@ -55,6 +55,7 @@ public class SearchPigeonToFlyBackActivity extends BaseSearchActivity {
         mViewModel = new SearchFootRingViewModel(getBaseActivity());
         initViewModel(mViewModel);
         super.onCreate(savedInstanceState);
+        setTitle(R.string.add_fly_back_record);
         mRecyclerView.addItemDecorationLine();
         setSearchHint(R.string.text_input_foot_number_search);
 

@@ -35,7 +35,7 @@ public class BaseBookFragment extends BaseFragment {
     @Override
     public void error(int code, String error) {
         setProgressVisible(false);//加载框
-        if (code == 90102) {
+        if (code == 90102 || code == 90100) {
 
             if (!StringUtil.isStringValid(error)) {
                 return;

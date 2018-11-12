@@ -246,15 +246,22 @@
             android:name="com.base.util.hipermission.PermissionActivity"
             android:configChanges="orientation|keyboardHidden"
             android:theme="@style/Permission_Dialog" />
-        <activity android:name=".module.select.SearchFootRingActivity"
+        <activity
+            android:name=".module.select.SearchFootRingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".module.makebloodbook.PreviewsBookActivity"
+        <activity
+            android:name=".module.makebloodbook.PreviewsBookActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.breeding.SearchBreedInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.breeding.SearchBreedInfoActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.cpigeon.book.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
 
     </application>
 

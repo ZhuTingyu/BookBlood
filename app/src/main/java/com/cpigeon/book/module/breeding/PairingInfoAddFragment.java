@@ -59,11 +59,11 @@ public class PairingInfoAddFragment extends BaseBookFragment {
     @BindView(R.id.tv_next_step)
     TextView tvNextStep;
 
-//    @BindView(R.id.ll_lineage)
+    //    @BindView(R.id.ll_lineage)
 //    LineInputView llLineage;
 //    @BindView(R.id.ll_feather_color)
 //    LineInputView llFeatherColor;
-private boolean IsMan=true;
+    private boolean IsMan = true;
     private PairingInfoAddViewModel mPairingInfoAddViewModel;
     protected SelectTypeViewModel mSelectTypeViewModel;
 
@@ -127,17 +127,17 @@ private boolean IsMan=true;
         tvHintFoot.setText(mPairingInfoAddViewModel.mPigeonEntity.getFootRingNum());
 
         if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雌")) {
-            mPairingInfoAddViewModel.wofootid=mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
-            mPairingInfoAddViewModel.wopigeonid=mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
-            IsMan=false;
+            mPairingInfoAddViewModel.wofootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
+            mPairingInfoAddViewModel.wopigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
+            IsMan = false;
             imgHintSex.setImageResource(R.mipmap.ic_female);
             mPairingInfoAddViewModel.sex = "雄";
         } else if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雄")) {
             imgHintSex.setImageResource(R.mipmap.ic_male);
-            IsMan=true;
+            IsMan = true;
             mPairingInfoAddViewModel.sex = "雌";
-            mPairingInfoAddViewModel.menfootid=mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
-            mPairingInfoAddViewModel.menpigeonid=mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
+            mPairingInfoAddViewModel.menfootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
+            mPairingInfoAddViewModel.menpigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
         } else {
             mPairingInfoAddViewModel.sex = "未知";
             imgHintSex.setImageResource(R.mipmap.ic_sex_no);
@@ -245,11 +245,11 @@ private boolean IsMan=true;
 
                 }
                 SearchFragmentParentActivity.
-                            start(getBaseActivity(),
-                                    SearchPigeonOrFootFragment.class,
-                                    SearchPigeonOrFootFragment.CODE_SEARCH_PIGEON_ORFOOT,
-                                    false,
-                                    bundle);
+                        start(getBaseActivity(),
+                                SearchPigeonOrFootFragment.class,
+                                SearchPigeonOrFootFragment.CODE_SEARCH_PIGEON_ORFOOT,
+                                false,
+                                bundle);
                 break;
             case R.id.ll_pairing_time:
                 //配对时间
@@ -385,14 +385,12 @@ private boolean IsMan=true;
                 mPairingInfoAddViewModel.isCanCommit();
             } else if (requestCode == SearchPigeonOrFootFragment.CODE_SEARCH_PIGEON_ORFOOT) {
                 PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
-                if(IsMan) {
-                    mPairingInfoAddViewModel.wopigeonid=entity.getPigeonID();
-                    mPairingInfoAddViewModel.wofootid=entity.getFootRingID();
-                }
-                else
-                {
-                    mPairingInfoAddViewModel.menpigeonid=entity.getPigeonID();
-                    mPairingInfoAddViewModel.menfootid=entity.getFootRingID();
+                if (IsMan) {
+                    mPairingInfoAddViewModel.wopigeonid = entity.getPigeonID();
+                    mPairingInfoAddViewModel.wofootid = entity.getFootRingID();
+                } else {
+                    mPairingInfoAddViewModel.menpigeonid = entity.getPigeonID();
+                    mPairingInfoAddViewModel.menfootid = entity.getFootRingID();
                 }
                 //足环号
                 llPairingFoot.setContent(entity.getFootRingNum());

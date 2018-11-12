@@ -6,7 +6,7 @@ import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.LeagueDetailsEntity;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.model.entity.PlayAdditionalInfoEntity;
-import com.cpigeon.book.model.entity.PlayInportListEntity;
+import com.cpigeon.book.model.entity.PlayImportListEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -196,16 +196,24 @@ public class PlayModel {
     }
 
     //获取中鸽直播赛绩
-    public static Observable<ApiResponse<List<PlayInportListEntity>>> getLivePlay(String pi,
-                                                                                  String ps,
-                                                                                  String orgid) {
-        return RequestData.<ApiResponse<List<PlayInportListEntity>>>build()
-                .setToJsonType(new TypeToken<ApiResponse<List<PlayInportListEntity>>>() {
+    public static Observable<ApiResponse<List<PlayImportListEntity>>> getLivePlay(
+            String footNumber,//足环号码
+            String organizeType,//类型，lx=gp或lx=xh
+            String organizeName,//赛事组织名称
+            String name,//姓名
+            String houseNumber,//棚号
+            String MatchNumber//赛事编号
+    ) {
+        return RequestData.<ApiResponse<List<PlayImportListEntity>>>build()
+                .setToJsonType(new TypeToken<ApiResponse<List<PlayImportListEntity>>>() {
                 }.getType())
                 .url(R.string.live_play_list)
-                .addBody("pi", pi)
-                .addBody("ps", ps)
-                .addBody("orgid", orgid)
+                .addBody("foot", footNumber)
+                .addBody("lx", organizeType)
+                .addBody("zz", organizeName)
+                .addBody("xm", name)
+                .addBody("ph", houseNumber)
+                .addBody("bh", MatchNumber)
                 .request();
     }
 

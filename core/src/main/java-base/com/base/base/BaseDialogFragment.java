@@ -34,16 +34,18 @@ public abstract class BaseDialogFragment extends DialogFragment {
     protected LoadingView progressView;
     ViewGroup mRootView;
 
-    public BaseDialogFragment(){}
+    public BaseDialogFragment() {
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //Dialog dialog = new Dialog(getActivity(), R.style.BottomDialog);g
         Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定
-        if(getLayoutView() == null){
+        if (getLayoutView() == null) {
             dialog.setContentView(getLayoutRes());
-        }else {
+        } else {
             dialog.setContentView(getLayoutView());
         }
         dialog.setCanceledOnTouchOutside(true); // 外部点击取消
@@ -57,40 +59,38 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
         initView(dialog);
 
-//        initProgressLayout(dialog);
-//        getBaseActivity().setProgressVisible(true);
-
+        initProgressLayout(dialog);
 
         return dialog;
     }
 
     @LayoutRes
-    protected abstract int  getLayoutRes();
+    protected abstract int getLayoutRes();
 
-    protected  View  getLayoutView(){
+    protected View getLayoutView() {
         return null;
     }
 
     protected abstract void initView(Dialog dialog);
 
-    protected void initLayout(Window window, WindowManager.LayoutParams lp){
+    protected void initLayout(Window window, WindowManager.LayoutParams lp) {
         lp.gravity = Gravity.CENTER;
         lp.width = (ScreenTool.getScreenWidth() / 4) * 3;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
     }
 
-    public void show(FragmentManager manager){
+    public void show(FragmentManager manager) {
         show(manager, "dialog");
     }
 
-    public void hide(){
-       this.dismiss();
+    public void hide() {
+        this.dismiss();
     }
 
-    public BaseActivity getBaseActivity(){
+    public BaseActivity getBaseActivity() {
         BaseActivity activity = null;
-        if(getActivity() instanceof BaseActivity){
+        if (getActivity() instanceof BaseActivity) {
             activity = (BaseActivity) getActivity();
         }
         return activity;
@@ -107,12 +107,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
     }
 
     protected void error(String message) {
-        getBaseActivity().setProgressVisible(false);
+        setProgressVisible(false);
         getBaseActivity().error(message);
     }
 
     protected void error(@StringRes int resId) {
-        getBaseActivity().setProgressVisible(false);
+        setProgressVisible(false);
         getBaseActivity().error(Utils.getString(resId));
     }
 
@@ -120,14 +120,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
         getBaseActivity().error(code, error);
     }
 
-//    private void initProgressLayout(Dialog dialog) {
-//        mRootView = (ViewGroup)dialog.getWindow().getDecorView();
-//        if (progressView == null) {
-//            progressView = new LoadingView(getContext());
-//        }
-//        setProgressVisible(false);
-//        mRootView.addView(progressView);
-//    }
+    private void initProgressLayout(Dialog dialog) {
+        mRootView = (ViewGroup) dialog.getWindow().getDecorView();
+        if (progressView == null) {
+            progressView = new LoadingView(getContext());
+        }
+        setProgressVisible(false);
+        mRootView.addView(progressView);
+    }
 
     /**
      * 加载框
@@ -136,22 +136,17 @@ public abstract class BaseDialogFragment extends DialogFragment {
      */
 
     public void setProgressVisible(boolean isVisible) {
-        try {
-            if (progressView != null) {
-                progressView.bringToFront();
-                int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-                progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-                progressView.animate().setDuration(shortAnimTime).alpha(
-                        isVisible ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-                    }
-                });
-            }
-        }catch(Exception ex){
-
+        if (progressView != null) {
+            progressView.bringToFront();
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+            progressView.animate().setDuration(shortAnimTime).alpha(
+                    isVisible ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+                }
+            });
         }
     }
-
 }

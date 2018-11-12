@@ -16,6 +16,7 @@ import com.base.util.system.ScreenTool;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedEntity;
+import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
 import com.cpigeon.book.widget.PopupWindowList;
 
@@ -80,13 +81,12 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
         TextView delete = helper.getView(R.id.tvDelete);
         TextView setNotTogether = helper.getView(R.id.tvSetNotTogether);
 
-        mViewModel.pairingId = item.getPigeonBreedID();
-
         delete.setOnClickListener(v -> {
             DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_hint_is_delete_pairing_info)
                     ,sweetAlertDialog -> {
                         sweetAlertDialog.dismiss();
                         getBaseActivity().setProgressVisible(true);
+                        mViewModel.pairingId = item.getPigeonBreedID();
                         mViewModel.delectPairingInfo();
                     });
         });
@@ -96,6 +96,7 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
                     ,sweetAlertDialog -> {
                         sweetAlertDialog.dismiss();
                         getBaseActivity().setProgressVisible(true);
+                        mViewModel.pairingId = item.getPigeonBreedID();
                         mViewModel.setPigeonTogether();
                     });
         });
@@ -107,5 +108,9 @@ public class BreedingFootAdapter extends BaseQuickAdapter<BreedEntity, BaseViewH
             delete.setVisibility(View.VISIBLE);
             setNotTogether.setVisibility(View.GONE);
         }
+
+        helper.getView(R.id.llRoot).setOnClickListener(v -> {
+            PairingInfoListFragment.start(getBaseActivity(), item);
+        });
     }
 }

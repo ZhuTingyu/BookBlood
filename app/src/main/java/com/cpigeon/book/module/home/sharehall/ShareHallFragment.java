@@ -151,7 +151,7 @@ public class ShareHallFragment extends BaseBookFragment {
             mViewModel.getSharePigeons();
         });
 
-        mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_PIGEON_BLOOD, SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.TYPE_EYE);
+        mSelectTypeViewModel.setSelectType(SelectTypeViewModel.TYPE_SEX, SelectTypeViewModel.TYPE_EYE, SelectTypeViewModel.TYPE_PIGEON_BLOOD);
         mSelectTypeViewModel.getSelectTypes();
 
         mLlMyShare.setOnClickListener(v -> {
@@ -169,8 +169,8 @@ public class ShareHallFragment extends BaseBookFragment {
         });
 
         mSelectTypeViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
-            List<String> titles = Lists.newArrayList(Utils.getString(R.string.text_pigeon_blood), Utils.getString(R.string.text_sex)
-                    , Utils.getString(R.string.text_eye_sand));
+            List<String> titles = Lists.newArrayList(Utils.getString(R.string.text_sex)
+                    , Utils.getString(R.string.text_eye_sand), Utils.getString(R.string.text_pigeon_blood));
 
             if (mFiltrate != null) {
                 mFiltrate.setData(false, selectTypeEntities, titles, mSelectTypeViewModel.whichIds);

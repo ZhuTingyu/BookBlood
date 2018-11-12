@@ -101,8 +101,8 @@ public class FlyBackRecordFragment extends BaseBookFragment {
                     }
                 } else {
                     mCompleteTrainDialog = new CompleteTrainDialog();
-                    mCompleteTrainDialog.setOnSureClickListener((time, latLng, dis, location) -> {
-                        setProgressVisible(true);
+                    mCompleteTrainDialog.setOnSureClickListener((dialog, time, latLng, dis, location) -> {
+                        mCompleteTrainDialog.setProgressVisible(true);
                         mViewModel.fromTime = time;
                         mViewModel.fromLo = latLng.longitude;
                         mViewModel.fromLa = latLng.latitude;
@@ -198,7 +198,7 @@ public class FlyBackRecordFragment extends BaseBookFragment {
         });
 
         mViewModel.mDataSetTrainInfoR.observe(this, s -> {
-            setProgressVisible(false);
+            mCompleteTrainDialog.setProgressVisible(false);
             mViewModel.mTrainEntity.setDistance(mViewModel.dis);
             mViewModel.mTrainEntity.setFromFlyTime(mViewModel.fromTime);
             DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {

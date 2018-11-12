@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.base.util.utility.LogUtil;
+import com.cpigeon.book.event.WXPayEvent;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -52,6 +55,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
 //        CommonUitls.getInstance().onWxPay(this, baseResp.errCode);
 //        EventBus.getDefault().post(new WXPayResultEvent(baseResp.errCode));
 //        EventBus.getDefault().post(new GXTUserInfoEvent());
+        EventBus.getDefault().post(new WXPayEvent());
         this.finish();
     }
 }

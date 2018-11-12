@@ -29,7 +29,10 @@ import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breeding.adapter.BreedingFootAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.AddBreedingFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -86,7 +89,6 @@ public class BreedingFootListFragment extends BaseBookFragment {
         mViewModel = new PairingInfoListViewModel();
         initViewModels(mViewModel);
     }
-
 
 
     @Nullable
@@ -156,11 +158,11 @@ public class BreedingFootListFragment extends BaseBookFragment {
         });
 
         mRlAddition1.setOnClickListener(v -> {
-            if(mTIsExpand){
+            if (mTIsExpand) {
                 mTIsExpand = false;
                 mImgExpand1.setRotation(0);
                 mList1.setVisibility(View.GONE);
-            }else {
+            } else {
                 mTIsExpand = true;
                 mImgExpand1.setRotation(180);
                 mList1.setVisibility(View.VISIBLE);
@@ -168,11 +170,11 @@ public class BreedingFootListFragment extends BaseBookFragment {
         });
 
         mRlAddition2.setOnClickListener(v -> {
-            if(mFIsExpand){
+            if (mFIsExpand) {
                 mFIsExpand = false;
                 mImgExpand2.setRotation(0);
                 mList2.setVisibility(View.GONE);
-            }else {
+            } else {
                 mFIsExpand = true;
                 mImgExpand2.setRotation(180);
                 mList2.setVisibility(View.VISIBLE);
@@ -181,43 +183,15 @@ public class BreedingFootListFragment extends BaseBookFragment {
 
         setProgressVisible(true);
         mViewModel.getTXGP_PigeonBreed_SelectAll();
-
-
     }
 
-
-//    protected void initBreedData() {
-//        mTvOk.setVisibility(View.VISIBLE);
-//        mTvOk.setText("添加配对");
-//        mTvOk.setOnClickListener(v -> {
-//            //添加配对
-//            AddBreedingFragment.start(getBaseActivity());
-//
-//        });
-//        setProgressVisible(true);
-//        //mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
-//        mRecyclerView.setRefreshListener(() -> {
-//            setProgressVisible(true);
-//            mPairingInfoListViewModel.pi = 1;
-//            mPairingInfoListAdapter.getData().clear();
-//            mPairingInfoListAdapter.notifyDataSetChanged();
-//            mPairingInfoListViewModel.getTXGP_PigeonBreed_SelectAll();
-//        });
-//        mPairingInfoListAdapter = new BreedingFootAdapter();
-//        mRecyclerView.addItemDecorationLine(R.color.Gray, 15);
-//        mRecyclerView.setAdapter(mPairingInfoListAdapter);
-//        mPairingInfoListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                try {
-//                    BreedEntity mBreedEntity = mPairingInfoListAdapter.getData().get(position);
-//                    PairingInfoListFragment.start(getBaseActivity(), mBreedEntity);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.PAIRING_INFO_REFRESH)) {
+            setProgressVisible(true);
+            mViewModel.getTXGP_PigeonBreed_SelectAll();
+        }
+    }
 
     @Override
     protected void initObserve() {

@@ -112,6 +112,9 @@ public class AddBackFlyRecordDialog extends BaseDialogFragment {
             setProgressVisible(false);
             EventBus.getDefault().post(new FlyBackAddRecordEvent());
             dismiss();
+            DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+            });
         });
 
     }

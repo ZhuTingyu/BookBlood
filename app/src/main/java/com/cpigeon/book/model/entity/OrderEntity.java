@@ -18,6 +18,7 @@ public class OrderEntity {
      */
 
     private String id;
+    private String oid;
     private String gb;
     private String ddbh;
     private String item;
@@ -88,5 +89,9 @@ public class OrderEntity {
 
     public void setDatetime(String datetime) {
         this.datetime = datetime;
+    }
+
+    public String getOid() {
+        return oid;
     }
 }

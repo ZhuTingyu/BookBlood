@@ -279,7 +279,7 @@ public class PairingModel {
         return RequestData.<ApiResponse>build()
                 .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
-                .url(R.string.set_breed_pigeon_not_together)
+                .url(R.string.delete_pairing_info)
                 .addBody("breedid", pairingId)
                 .request();
     }

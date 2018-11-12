@@ -11,11 +11,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.base.util.Lists;
 import com.base.util.RxUtils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.system.AppManager;
 import com.base.util.utility.ToastUtils;
+import com.base.widget.BottomSheetAdapter;
 import com.bumptech.glide.Glide;
+import com.cpigeon.book.MyApp;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
@@ -99,6 +102,16 @@ public class LoginFragment extends BaseBookFragment {
 
         bindUi(RxUtils.textChanges(edUserName), mViewModel.setPhone());
         bindUi(RxUtils.textChanges(edPassword), mViewModel.setPassword());
+
+        imgHead.setOnClickListener(v -> {
+            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList("外网", "内网"),p -> {
+               if(p == 0){
+                   MyApp.getMyApp().setOutNet(true);
+               }else {
+                   MyApp.getMyApp().setOutNet(false);
+               }
+            });
+        });
 
         tvRegister.setOnClickListener(v -> {
             loginActivity.replace(LoginActivity.TYPE_REGISTER);

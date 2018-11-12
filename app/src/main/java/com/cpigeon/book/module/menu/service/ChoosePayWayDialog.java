@@ -2,6 +2,7 @@ package com.cpigeon.book.module.menu.service;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,12 +17,19 @@ import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
+import com.cpigeon.book.event.OpenServiceEvent;
+import com.cpigeon.book.event.WXPayEvent;
 import com.cpigeon.book.model.entity.ServiceEntity;
 import com.cpigeon.book.module.menu.service.adpter.PayOpenServiceAdapter;
 import com.cpigeon.book.module.menu.service.viewmodel.PayServiceOrderViewModel;
 import com.cpigeon.book.util.MathUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Zhu TingYu on 2018/9/4.
@@ -41,13 +49,18 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
     ServiceEntity mServiceEntity;
     private String mPayWay;
 
+    PayServiceOrderViewModel mPayServiceOrderViewModel;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        EventBus.getDefault().register(this);
         if (getArguments() != null) {
             mServiceEntity = getArguments().getParcelable(IntentBuilder.KEY_DATA);
             mIsOpen = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
         }
+        mPayServiceOrderViewModel = new PayServiceOrderViewModel();
+        initViewModel(mPayServiceOrderViewModel);
     }
 
     @Override
@@ -81,12 +94,26 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
 
         mTvOk.setOnClickListener(v -> {
             if (mPayWay.equals(PayServiceOrderViewModel.WAY_WX)) {
-
+                setProgressVisible(true);
+                mPayServiceOrderViewModel.mPayWay = PayServiceOrderViewModel.WAY_WX;
+                mPayServiceOrderViewModel.mServiceId = mServiceEntity.getSid();
+                if(mIsOpen){
+                    mPayServiceOrderViewModel.payOder();
+                }else {
+                    mPayServiceOrderViewModel.renewalPayOder();
+                }
             } else {
                 PayServiceOrderDialog.show(getFragmentManager(), mServiceEntity, mPayWay, mIsOpen);
                 dismiss();
             }
         });
+
+        mPayServiceOrderViewModel.mDataWXOrder.observe(this, s -> {
+            ToastUtils.showLong(getBaseActivity(), Utils.getString(R.string.text_to_wx));
+            mPayServiceOrderViewModel.mOrderId = s.getOid();
+            mPayServiceOrderViewModel.getWXOrder();
+        });
+
     }
 
     private void setPayWay(int position) {
@@ -145,5 +172,18 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
         ChoosePayWayDialog dialog = new ChoosePayWayDialog();
         dialog.setArguments(bundle);
         dialog.show(fragmentManager);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(WXPayEvent event){
+        setProgressVisible(false);
+        EventBus.getDefault().post(new OpenServiceEvent());
+        dismiss();
     }
 }

@@ -26,6 +26,7 @@ public class IntentBuilder {
     public static final String KEY_DATA = "KEY_DATA";
     public static final String KEY_DATA_2 = "KEY_DATA_2";
     public static final String KEY_DATA_3 = "KEY_DATA_3";
+    public static final String KEY_FOOT_NUMBER = "KEY_FOOT_NUMBER";
 
 
     private Intent intent;
