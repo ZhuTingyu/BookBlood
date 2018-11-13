@@ -15,13 +15,13 @@ import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.utility.StringUtil;
 import com.base.widget.recyclerview.XRecyclerView;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
+import com.cpigeon.book.module.select.adpter.ChooseAdapter;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**

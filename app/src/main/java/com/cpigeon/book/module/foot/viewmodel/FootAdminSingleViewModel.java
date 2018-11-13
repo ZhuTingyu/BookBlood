@@ -32,7 +32,10 @@ public class FootAdminSingleViewModel extends BaseViewModel {
     public String money;
     public String footNumber;
     public String footType;//足环类型
-
+    public String footmother;
+    public String MotherId;
+    public String FatherId;
+    public String footfather;
     public List<SelectTypeEntity> mSelectType_Foot_Source;//足环来源
     public String footSource;//足环来源
     public String remark;//备注
@@ -67,7 +70,7 @@ public class FootAdminSingleViewModel extends BaseViewModel {
     //修改足环（单个）
     public void modifyFootNumber() {
         submitRequestThrowError(FootAdminModel.getTXGP_FootRing_Edit(foodId, countryId, footNumber, money.replace("元", "")
-                , footType, footSource, remark), r -> {
+                , footType, footSource, remark, footfather, footmother), r -> {
             if (r.isOk()) {
                 normalResult.setValue(r.msg);
             } else throw new HttpErrorException(r);
@@ -141,7 +144,7 @@ public class FootAdminSingleViewModel extends BaseViewModel {
         return foot;
     }
 
-    public boolean isChina(){
+    public boolean isChina() {
         return Utils.getString(R.string.text_china_id).equals(countryId);
     }
 

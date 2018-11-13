@@ -69,7 +69,10 @@ public class SearchFootRingActivity extends BaseSearchActivity {
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
             public void search(String key) {
+
                 setProgressVisible(true);
+                mAdapter.getData().clear();
+                mViewModel.pi=1;
                 mViewModel.footNumber = key;
                 mViewModel.getFootList();
                 saveHistory(key, AppDatabase.TYPE_SEARCH_FOOT_RING);
@@ -104,9 +107,7 @@ public class SearchFootRingActivity extends BaseSearchActivity {
     protected void initObserve() {
         mViewModel.mDataFootList.observe(this, footEntities -> {
 
-            footEntities.size();
-            mAdapter.getData().clear();
-            mAdapter.notifyDataSetChanged();
+
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, footEntities);
             setProgressVisible(false);
         });

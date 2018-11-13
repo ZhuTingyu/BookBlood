@@ -25,7 +25,6 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.CountyAreaEntity;
 import com.cpigeon.book.model.entity.CountyEntity;
-import com.cpigeon.book.model.entity.FootEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminSingleViewModel;
@@ -186,21 +185,17 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             mLvMotherFoot.setVisibility(View.VISIBLE);
 
             mLvFatherFoot.setOnRightClickListener(lineInputView -> {
-                InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvFatherFoot.getContent(), mViewModel.isChina(), dialog -> {
+
                     SelectFootRingFragment.start(getBaseActivity(), false
                             , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
-                }, foot -> {
-                    mLvFatherFoot.setRightText(foot);
-                });
+
             });
 
             mLvMotherFoot.setOnRightClickListener(lineInputView -> {
-                InputSingleFootDialog.show(getBaseActivity().getSupportFragmentManager(), mLvMotherFoot.getContent(), mViewModel.isChina(), dialog -> {
+
                     SelectFootRingFragment.start(getBaseActivity(), false
                             , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
-                }, foot -> {
-                    mLvMotherFoot.setRightText(foot);
-                });
+
             });
 
             llRoot.setOnInputViewGetFocusListener(() -> {
@@ -248,12 +243,17 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                 lvStatus.setRightText(footEntity.getStateName());
                 mViewModel.footType = String.valueOf(footEntity.getTypeID());
                 mViewModel.remark=footEntity.getRemark();
+                mViewModel.footmother =footEntity.getWoFootRingNum();
+
+                mViewModel.footfather = footEntity.getMenFootRingNum();
+
                 lvMoney.setRightText(Utils.getString(R.string.text_yuan, footEntity.getFootRingMoney()));//金额
                 mLvFatherFoot.setRightText(footEntity.getMenFootRingNum());
                 mLvMotherFoot.setRightText(footEntity.getWoFootRingNum());
-                if (!footEntity.isSetRing()) {
+                if (footEntity.isSetRing()) {
                     mLvFatherFoot.setVisibility(View.GONE);
                     mLvMotherFoot.setVisibility(View.GONE);
+
                 }
             }
         });
@@ -334,11 +334,15 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     lvCity.setRightText(entity.getCode());
                 }
             } else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
-                FootEntity footEntity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-                mLvFatherFoot.setRightText(footEntity.getFootRingNum());
+                PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
+                mLvFatherFoot.setRightText(entity.getFootRingNum());
+                mViewModel.footfather=entity.getFootRingNum();
+
             } else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
-                FootEntity footEntity = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-                mLvMotherFoot.setRightText(footEntity.getFootRingNum());
+                PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
+
+                mLvMotherFoot.setRightText(entity.getFootRingNum());
+                mViewModel.footmother=entity.getFootRingNum();
             }
         }
 

@@ -68,7 +68,6 @@ private BreedPigeonDetailsViewModel breedPigeonDetailsViewModel;
 
     PigeonPhotoHomeAdapter mAdapter;
     RecyclerView mRecyclerView;
-
     PigeonPhotoViewModel mViewModel;
     SelectTypeViewModel mTypeViewModel;
     private int typePosition = 0;

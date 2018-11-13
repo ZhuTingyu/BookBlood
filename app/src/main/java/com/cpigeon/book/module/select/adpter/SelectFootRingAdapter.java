@@ -9,11 +9,9 @@ import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
-import com.base.util.utility.StringUtil;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 
 /**
  * Created by Zhu TingYu on 2018/10/13.
@@ -24,7 +22,7 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
     private boolean mIsCanSetDeath;
 
     public SelectFootRingAdapter(boolean isCanSetDeath) {
-        super(R.layout.item_breed_pigeon_list, null);
+        super(R.layout.choose_layout, null);
         mIsCanSetDeath = isCanSetDeath;
     }
 

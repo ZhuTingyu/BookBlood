@@ -115,14 +115,18 @@ public class PlayFootListFragment extends BaseFootListFragment {
         }, new LinearLayoutListener() {
             @Override
             public void click(int position) {
-                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-                BreedPigeonDetailsFragment.start(getBaseActivity(),
-                        mBreedPigeonEntity.getPigeonID(),
-                        mBreedPigeonEntity.getFootRingID());
+
+                    try {
+                        PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                        BreedPigeonDetailsFragment.start(getBaseActivity(),
+                                mBreedPigeonEntity.getPigeonID(),
+                                mBreedPigeonEntity.getFootRingID());
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
             }
         });
-
-
         mViewModel.getFirstLeague();//获取第一名赛绩
     }
 
