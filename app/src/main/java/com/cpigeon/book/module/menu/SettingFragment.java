@@ -153,7 +153,7 @@ public class SettingFragment extends BaseBookFragment {
             case R.id.ll_use_help:
                 //使用帮助
                 Intent intent2 = new Intent(getActivity(), BaseWebViewActivity.class);
-                intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_use_help)));
+                intent2.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUr_j) + getString(R.string.txgp_use_help)));
                 intent2.putExtra(IntentBuilder.KEY_TITLE, getString(R.string.web_title_use_help));
                 startActivity(intent2);
                 break;

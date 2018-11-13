@@ -18,6 +18,7 @@ import com.base.util.system.AppManager;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cpigeon.book.MyApp;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -87,7 +88,14 @@ public class LoginFragment extends BaseBookFragment {
         });
 
         mViewModel.head.observe(this, s -> {
-            Glide.with(getActivity()).load(s).into(imgHead);
+
+            Glide.with(getActivity())
+                    .load(s)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.mipmap.ic_logo)
+                    .error(R.mipmap.ic_logo)
+                    .dontAnimate()
+                    .into(imgHead);
         });
 
         LoginActivity loginActivity = (LoginActivity) getBaseActivity();

@@ -9,8 +9,9 @@ import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.base.util.system.ScreenTool;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cpigeon.book.R;
-import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonPhotoEntity;
 
 
@@ -33,7 +34,14 @@ public class PigeonPhotoHomeAdapter extends BaseQuickAdapter<PigeonPhotoEntity, 
     @Override
     protected void convert(BaseViewHolder helper, PigeonPhotoEntity item) {
         ImageView imageView = helper.getView(R.id.img);
-        helper.setGlideImageView(mContext, R.id.img, item.getPhotoUrl());
+        Glide.with(getBaseActivity())
+                .load(item.getPhotoUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.ic_img_default2)
+                .error(R.drawable.ic_img_default2)
+                .dontAnimate()
+                .into(imageView);
+
 
 
         rlRoot = helper.getView(R.id.rlRoot);

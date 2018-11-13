@@ -150,7 +150,6 @@
             android:name=".module.order.OrderListActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".module.basepigeon.BaseSearchPigeonActivity"
             android:launchMode="singleTask"

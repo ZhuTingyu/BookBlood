@@ -92,7 +92,7 @@ public class BalanceRefillFragment extends BaseBookFragment {
             case R.id.tv_paly_agreement:
                 //支付协议
                 Intent intent1 = new Intent(getActivity(), BaseWebViewActivity.class);
-                intent1.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUrl) + getString(R.string.txgp_play_protocol)));
+                intent1.putExtra(IntentBuilder.KEY_DATA, String.valueOf(getString(R.string.baseUr_j) + getString(R.string.txgp_play_protocol)));
                 intent1.putExtra(IntentBuilder.KEY_TITLE, getString(R.string.web_title_play_agreement));
                 startActivity(intent1);
                 break;
