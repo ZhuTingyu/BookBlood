@@ -20,7 +20,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
-import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
+import com.cpigeon.book.module.select.adpter.ChooseAdapter;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
@@ -37,7 +37,7 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
     public static int CODE_SEARCH = 0x321;
 
     protected XRecyclerView mRecyclerView;
-    protected MyHomingPigeonAdapter mAdapter;
+    protected ChooseAdapter mAdapter;
     protected BreedPigeonListModel mViewModel;
     protected SearchFragmentParentActivity mActivity;
     protected String mType;
@@ -72,7 +72,7 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
         });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
-        mAdapter = new MyHomingPigeonAdapter();
+        mAdapter = new ChooseAdapter();
         mAdapter.setOnItemClickListener(this::setAdapterClick);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setRefreshListener(() -> {

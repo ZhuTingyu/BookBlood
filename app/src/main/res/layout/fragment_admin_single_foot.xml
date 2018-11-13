@@ -105,6 +105,8 @@
                 app:inputBoxView_tittle="@string/text_remark"
                 app:text_hint="500字内" />
 
+
+
         </com.cpigeon.book.widget.LineInputListLayout>
 
     </android.support.v4.widget.NestedScrollView>

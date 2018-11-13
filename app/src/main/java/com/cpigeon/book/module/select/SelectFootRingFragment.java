@@ -80,7 +80,7 @@ public class SelectFootRingFragment extends BaseBookFragment {
         mViewModel.sexId = sex;
 
         mIsCanSetDeath = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
-
+        setTitle("足环搜索");
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
             SearchFootRingActivity.start(getBaseActivity(), mIsCanSetDeath, mViewModel.sexId);
