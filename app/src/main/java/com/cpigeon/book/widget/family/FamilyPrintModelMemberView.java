@@ -210,10 +210,10 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         if (!StringUtil.isStringValid(entity.getPigeonID())) {
             return;
         }
-        setTextCotent(mTvFootNumber, entity.getFootRingNum());
-        setTextCotent(mTvBlood, entity.getFootRingNum());
-        setTextCotent(mTvColor, entity.getFootRingNum());
-        setTextCotent(mTvEye, entity.getPigeonEyeName());
+        setTextContent(mTvFootNumber, entity.getFootRingNum());
+        setTextContent(mTvBlood, entity.getPigeonBloodName());
+        setTextContent(mTvColor, entity.getPigeonPlumeName());
+        setTextContent(mTvEye, entity.getPigeonEyeName());
         GlideUtil.setGlideImageView(getContext(), entity.getCoverPhotoUrl(), mImgHead);
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
         MatchAdapter matchAdapter = new MatchAdapter();

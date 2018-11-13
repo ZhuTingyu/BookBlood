@@ -4,7 +4,9 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
+import com.base.util.http.GsonUtil;
 import com.cpigeon.book.model.PlayModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PlayImportListEntity;
 
 import java.util.List;
@@ -16,24 +18,25 @@ import java.util.List;
 
 public class PlayImportViewModel extends BaseViewModel {
 
-
-    public String footNumber = "2017-15-0662750";//足环号码
-    public String organizeType = "xh";//类型，lx=gp或lx=xh
-    public String organizeName = "山东冠县正信俱乐部";//赛事组织名称
+    public PigeonEntity mPigeonEntity;
+    public String organizeType;//"xh";//类型，lx=gp或lx=xh
+    public String organizeName;// = "山东冠县正信俱乐部";//赛事组织名称
+    public String organizeId;//赛事组织名称
     public String name;//姓名
     public String houseNumber = "000466";//棚号
     public String matchNumber;//赛事编号
+    public List<PlayImportListEntity> mPlayData;
 
     //直播赛绩列表
     public MutableLiveData<List<PlayImportListEntity>> mPlayListData = new MutableLiveData<>();
 
     //导入赛绩结果回调
-    public MutableLiveData<Object> mPlayInporttData = new MutableLiveData<>();
+    public MutableLiveData<String> mPlayInporttData = new MutableLiveData<>();
 
     //获取中鸽直播赛绩 列表
     public void getLivePlay() {
         submitRequestThrowError(PlayModel.getLivePlay(
-                footNumber,//足环号码
+                mPigeonEntity.getFootRingNum(),//足环号码
                 organizeType,//类型，lx=gp或lx=xh
                 organizeName,//赛事组织名称
                 name,//姓名
@@ -49,13 +52,24 @@ public class PlayImportViewModel extends BaseViewModel {
 
 
     //标准的赛绩 导入中鸽直播赛绩
-    public void getLivePlayInputData() {
-        submitRequestThrowError(PlayModel.getLivePlayInput(footNumber), r -> {
+    public void inputLivePlayData() {
+        submitRequestThrowError(PlayModel.inputLivePlay(
+                organizeId,
+                mPigeonEntity.getPigeonID(),
+                mPigeonEntity.getFootRingID(),
+                getPlayData()
+        ), r -> {
             if (r.isOk()) {
-                mPlayInporttData.setValue(r.data);
+                mPlayInporttData.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }
 
 
+    public String getPlayData() {
+        for (PlayImportListEntity playImportListEntity : mPlayData) {
+            playImportListEntity.setRid(playImportListEntity.getId());
+        }
+        return GsonUtil.toJson(mPlayData);
+    }
 }

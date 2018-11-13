@@ -36,6 +36,7 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         super.onAttach(context);
         mViewModel = new PigeonPhotoViewModel();
         initViewModel(mViewModel);
+        mBreedPigeonListModel.stateid = PigeonEntity.ID_ALL_MY_PGIEON;
     }
 
     public static void start(Activity activity) {

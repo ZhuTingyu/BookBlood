@@ -36,12 +36,21 @@ public abstract class FamilyMember extends LinearLayout{
    public PigeonEntity getData(){
        return mPigeonEntity;
    }
-   protected void setTextCotent(TextView textView, String content){
+   protected void setTextContent(LinearLayout llContent, TextView textView, String content){
        if(StringUtil.isStringValid(content)){
-           textView.setVisibility(VISIBLE);
+           llContent.setVisibility(VISIBLE);
            textView.setText(content);
        }else {
-           textView.setVisibility(GONE);
+           llContent.setVisibility(GONE);
        }
    }
+
+    protected void setTextContent(TextView textView, String content){
+        if(StringUtil.isStringValid(content)){
+            textView.setVisibility(VISIBLE);
+            textView.setText(content);
+        }else {
+            textView.setVisibility(GONE);
+        }
+    }
 }

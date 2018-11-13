@@ -75,7 +75,7 @@ public class PairingInfoAddViewModel extends BaseViewModel {
                 reamrk), r -> {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.PAIRING_INFO_REFRESH);
-                showHintClosePage.setValue(new RestHintInfo.Builder().message(r.msg).isClosePage(true).cancelable(false).build());
+                normalResult.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }

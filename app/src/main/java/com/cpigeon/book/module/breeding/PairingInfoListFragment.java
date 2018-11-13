@@ -101,7 +101,7 @@ public class PairingInfoListFragment extends BaseListFragment {
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
                 if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_add))) {
                     //添加配对
-                    PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, null);
+                    PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, null, 0);
 
                 } else if (chooseWays[p].equals(Utils.getString(R.string.array_blind_date))) {
                     //相亲配对
@@ -291,7 +291,7 @@ public class PairingInfoListFragment extends BaseListFragment {
         if (requestCode == PairingInfoRecommendFragment.RECOMMEND_REQUEST) {
             try {
                 PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-                PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, item);
+                PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, item, 0);
                 } catch (Exception e) {
                 e.printStackTrace();
             }

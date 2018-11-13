@@ -23,7 +23,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.GoodPigeonEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.home.goodpigeon.viewmodel.ApplyAddGoodPigeonViewModel;
-import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
 import com.cpigeon.book.widget.LineInputView;
 
 import org.greenrobot.eventbus.EventBus;

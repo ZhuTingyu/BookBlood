@@ -4,6 +4,7 @@ import android.support.multidex.MultiDex;
 import android.util.DisplayMetrics;
 
 import com.base.application.BaseApplication;
+import com.base.util.SharedPreferencesUtil;
 import com.facebook.stetho.Stetho;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
@@ -17,9 +18,11 @@ import org.xutils.x;
 
 public class MyApp extends BaseApplication {
 
+    public static final String IS_OUT_NET = "IS_OUT_NET";
+
+
     public static int screenWidth;
     public static int screenHeight;
-    public boolean isOutNet = false;
 
     private static MyApp myApp;
 
@@ -64,10 +67,12 @@ public class MyApp extends BaseApplication {
     }
 
     public void setOutNet(boolean outNet) {
-        isOutNet = outNet;
+        SharedPreferencesUtil.setBoolean(getAppContext(), SharedPreferencesUtil.IS_OUT_NET
+                , IS_OUT_NET, outNet);
     }
 
     public boolean isOutNet() {
-        return isOutNet;
+        return SharedPreferencesUtil.getBoolean(getAppContext(), SharedPreferencesUtil.IS_OUT_NET
+                , IS_OUT_NET, false);
     }
 }

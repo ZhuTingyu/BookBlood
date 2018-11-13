@@ -18,6 +18,7 @@ import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
+import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
 import com.cpigeon.book.module.select.SearchPigeonActivity;
 
@@ -72,20 +73,23 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
         mViewModel.pigeonidStr = mSonPigeonId;
 
         if (sexIds.contains(PigeonEntity.ID_MALE) && sexIds.contains(PigeonEntity.ID_FEMALE)) {
+            setTitle("选择鸽子");
             return;
         }
 
         if (sexIds.contains(PigeonEntity.ID_MALE)) {
             mSexType = InputPigeonFragment.TYPE_SEX_MALE;
             mViewModel.sexid = PigeonEntity.ID_MALE;
+            setTitle("选择父鸽子");
         } else if (sexIds.contains(PigeonEntity.ID_FEMALE)) {
             mSexType = InputPigeonFragment.TYPE_SEX_FEMALE;
             mViewModel.sexid = PigeonEntity.ID_FEMALE;
+            setTitle("选择母鸽子");
         }
     }
 
     @Override
-    protected void setAdapterClick(BaseQuickAdapter adapter, View view, int position) {
+    protected void setAdapterClick(MyHomingPigeonAdapter adapter, View view, int position) {
 
         String sexString = InputPigeonFragment.TYPE_SEX_MALE.equals(mSexType)
                 ? Utils.getString(R.string.text_father) : Utils.getString(R.string.text_mother);

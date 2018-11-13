@@ -7,6 +7,7 @@ public class SharedPreferencesUtil {
 
     public static final String CONFIG_FILE = "Config_file";
     public static final String GUIDE_FILE = "GUIDE_FILE";
+    public static final String IS_OUT_NET = "IS_OUT_NET";
 
     public static final String SP_FILE_APPSETTING = "apcpSetting";// 应用配置
     public static final String SP_FILE_APPSTATE = "appState";// 应用状态

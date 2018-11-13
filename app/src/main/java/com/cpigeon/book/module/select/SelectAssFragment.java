@@ -51,6 +51,7 @@ public class SelectAssFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setTitle("选择协会");
 
         mRecyclerView = findViewById(R.id.list);
         mWaveSideBar = findViewById(R.id.side_bar);

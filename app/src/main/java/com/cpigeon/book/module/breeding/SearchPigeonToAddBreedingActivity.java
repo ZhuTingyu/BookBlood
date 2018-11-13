@@ -1,28 +1,22 @@
-package com.cpigeon.book.module.makebloodbook;
+package com.cpigeon.book.module.breeding;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
-import com.base.util.db.AppDatabase;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
-import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
+import static com.cpigeon.book.module.breeding.viewmodel.AddBreedingFragment.CODE_ADD_BREEDING;
+
 /**
- * * 血统书制作  足环搜索
- * Created by Zhu TingYu on 2018/9/10.
+ * Created by Zhu TingYu on 2018/11/13.
  */
 
-public class SearchBreedPigeonToMakeBookActivity extends BaseSearchPigeonActivity {
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mRecyclerView.setListPadding(0, 0, 0, 0);
-    }
+public class SearchPigeonToAddBreedingActivity extends BaseSearchPigeonActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
@@ -35,16 +29,23 @@ public class SearchBreedPigeonToMakeBookActivity extends BaseSearchPigeonActivit
         }, new LinearLayoutListener() {
             @Override
             public void click(int position) {
-                PreviewsBookActivity.start(getBaseActivity(), mAdapter.getItem(position));
+                try {
+                    PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+
+                    PairingInfoAddFragment.start(getBaseActivity(), mBreedPigeonEntity, null, CODE_ADD_BREEDING);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
-
         return mAdapter;
     }
 
     @Override
     protected void initData() {
         super.initData();
-        SEARCH_HISTORY_KEY = AppDatabase.TYPE_SEARCH_BREED_PIGEON;
+        SEARCH_HISTORY_KEY = "search_history_to_add_breeding";
     }
+
+
 }

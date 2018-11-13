@@ -43,7 +43,8 @@ public class BreedPigeonModel {
                                                                                        String pigeonidStr,// ：在列表中排除的鸽子
                                                                                        String bitshare,// ：是否是在共享厅（1：存在，2，不存在，其他全查）
                                                                                        String bitMotto,
-                                                                                       String footNumber//搜索的足环号
+                                                                                       String footNumber,//搜索的足环号
+                                                                                       String bitTogether//搜索的足环号
     ) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
@@ -62,6 +63,7 @@ public class BreedPigeonModel {
                 .addBody("bitshare", bitshare)
                 .addBody("bitmotto", bitMotto)
                 .addBody("footnum", footNumber)
+                .addBody("bitTogether", bitTogether)
                 .request();
     }
 

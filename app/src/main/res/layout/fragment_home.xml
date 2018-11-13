@@ -151,7 +151,7 @@
                     app:simpleTitleView_DefaultTextColor="@color/color_text_cancel"
                     app:simpleTitleView_image="@mipmap/ic_breed_info"
                     app:simpleTitleView_image_size="40dp"
-                    app:simpleTitleView_text="@string/text_breed_info" />
+                    app:simpleTitleView_text="@string/text_breed_manager" />
 
                 <com.cpigeon.book.widget.SimpleTitleView
                     android:id="@+id/sTvPigeonMatchInfo"

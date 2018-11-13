@@ -14,8 +14,7 @@ import java.util.List;
  * Created by Zhu TingYu on 2018/8/19.
  */
 
-public class
-SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable {
+public class SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable {
 
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_CUSTOM = 1;
@@ -78,8 +77,8 @@ SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable
         this.TypeID = TypeID;
     }
 
-    public static List<String> getTypeNames(List<SelectTypeEntity> data){
-        if(Lists.isEmpty(data)){
+    public static List<String> getTypeNames(List<SelectTypeEntity> data) {
+        if (Lists.isEmpty(data)) {
             return null;
         }
         List<String> names = Lists.newArrayList();
@@ -91,7 +90,7 @@ SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable
     }
 
 
-    public static String getTypeName(List<SelectTypeEntity> data){
+    public static String getTypeName(List<SelectTypeEntity> data) {
         List<String> names = Lists.newArrayList();
         for (SelectTypeEntity entity : data) {
             String typeName = entity.getTypeName();
@@ -101,11 +100,11 @@ SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable
     }
 
 
-    public static String getTypeIds(List<SelectTypeEntity> data){
+    public static String getTypeIds(List<SelectTypeEntity> data) {
         //全部
-        if(data.size() == 1 && !StringUtil.isStringValid(data.get(0).getTypeName())){
+        if (data.size() == 1 && !StringUtil.isStringValid(data.get(0).getTypeName())) {
             return StringUtil.emptyString();
-        }else {
+        } else {
             List<String> ids = Lists.newArrayList();
             for (SelectTypeEntity entity : data) {
                 ids.add(entity.getTypeID());
@@ -114,7 +113,7 @@ SelectTypeEntity extends LetterSortEntity implements MultiItemEntity, Parcelable
         }
     }
 
-    public static SelectTypeEntity getCustomEntity(String whichType){
+    public static SelectTypeEntity getCustomEntity(String whichType) {
         SelectTypeEntity entity = new SelectTypeEntity();
         entity.setWhichType(whichType);
         return entity;

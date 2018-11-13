@@ -152,8 +152,6 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                                 , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
                     }else {
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
-
-
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
                                 ,0
@@ -298,7 +296,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 break;
             case R.id.img_play_import:
                 //赛绩导入
-                mAddPlayDialog.setFoot(mBreedPigeonDetailsViewModel.mPigeonEntity.getFootRingNum());
+                mAddPlayDialog.setPigeon(mBreedPigeonDetailsViewModel.mPigeonEntity);
                 mAddPlayDialog.show(getBaseActivity().getFragmentManager(), "");
 //                LineInputView ll_foot = mAddPlayDialog.getDialog().findViewById(R.id.ll_foot);
 //                ll_foot.setContent(mBreedPigeonDetailsViewModel.mPigeonEntity.getFootRingNum());

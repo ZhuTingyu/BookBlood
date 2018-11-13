@@ -98,8 +98,6 @@ public class BaseWebViewActivity extends BaseActivity {
 
         webSettings.setPluginState(WebSettings.PluginState.ON);
 
-        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {

@@ -195,9 +195,8 @@ public class FamilyMemberView extends FamilyMember {
         mRlInMemberInfo.setVisibility(VISIBLE);
         GlideUtil.setGlideImageView(getContext(), entity.getCoverPhotoUrl(), mImgHead);
         mTvFootNumber.setText(entity.getFootRingNum());
-        mTvBlood.setText(entity.getPigeonBloodName());
-        mTvName.setText(entity.getPigeonName());
-        setTextCotent(mTvName, entity.getPigeonName());
+        setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
+        setTextContent(mLlName, mTvName, entity.getPigeonName());
 
         if (generationPoint == 0) {
             if (isMiniModel) {

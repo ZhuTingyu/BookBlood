@@ -25,12 +25,12 @@ public class BreedPigeonListAdapter extends BasePigeonListAdapter {
     private float mRawX;
     private float mRawY;
     private OnDeleteListener onDeleteListener;
-protected LinearLayoutListener LinearLayoutListener;
+    protected LinearLayoutListener LinearLayoutListener;
 
-    public BreedPigeonListAdapter(OnDeleteListener onDeleteListener,LinearLayoutListener LinearLayoutListener) {
+    public BreedPigeonListAdapter(OnDeleteListener onDeleteListener, LinearLayoutListener LinearLayoutListener) {
         super(R.layout.item_breed_pigeon_list, null);
-        this.onDeleteListener=onDeleteListener;
-        this.LinearLayoutListener=LinearLayoutListener;
+        this.onDeleteListener = onDeleteListener;
+        this.LinearLayoutListener = LinearLayoutListener;
     }
 
     public BreedPigeonListAdapter(int layoutResId, List<PigeonEntity> data) {
@@ -45,22 +45,20 @@ protected LinearLayoutListener LinearLayoutListener;
         ImageView imgSex = helper.getView(R.id.imgSex);
         TextView color = helper.getView(R.id.tvColor);
         TextView blood = helper.getView(R.id.blood);
-        defultParams(color,R.drawable.textcircledefult);
-        defultParams(blood,R.drawable.textcircledefult);
-        if (!item.getPigeonPlumeName().trim().equals(""))
-        {
-            setParams(color,R.drawable.textcirclecolor);
+        defultParams(color, R.drawable.textcircledefult);
+        defultParams(blood, R.drawable.textcircledefult);
+        if (!item.getPigeonPlumeName().trim().equals("")) {
+            setParams(color, R.drawable.textcirclecolor);
         }
-        if (!item.getPigeonBloodName().trim().equals(""))
-        {
-            setParams(blood,R.drawable.textcircleblood);
+        if (!item.getPigeonBloodName().trim().equals("")) {
+            setParams(blood, R.drawable.textcircleblood);
         }
 
-        helper.setText(R.id.tvColor, "  "+item.getPigeonPlumeName()+"  ");
-        helper.setText(R.id.blood,"  "+item.getPigeonBloodName()+"  ");
-        helper.setText(R.id.state,item.getStateName());
+        helper.setText(R.id.tvColor, "  " + item.getPigeonPlumeName() + "  ");
+        helper.setText(R.id.blood, "  " + item.getPigeonBloodName() + "  ");
+        helper.setText(R.id.state, item.getStateName());
         helper.setText(R.id.tvTime, item.getFootRingNum());
-        ImageView imagehead=(ImageView)helper.getView(R.id.imgHead);
+        ImageView imagehead = (ImageView) helper.getView(R.id.imgHead);
         Glide.with(mContext)
                 .load(item.getCoverPhotoUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -78,7 +76,7 @@ protected LinearLayoutListener LinearLayoutListener;
             imgSex.setImageResource(R.mipmap.ic_sex_no);
 
         }
-        TextView delete =helper.getView(R.id.tvDelete);
+        TextView delete = helper.getView(R.id.tvDelete);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,33 +96,32 @@ protected LinearLayoutListener LinearLayoutListener;
                 });
             }
         });
-        LinearLayout linearLayout=helper.getView(R.id.llay);
+        LinearLayout linearLayout = helper.getView(R.id.llay);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(LinearLayoutListener!=null)
-                {
-                    LinearLayoutListener.click(helper.getAdapterPosition()-getHeaderLayoutCount());
+                if (LinearLayoutListener != null) {
+                    LinearLayoutListener.click(helper.getAdapterPosition() - getHeaderLayoutCount());
                 }
             }
         });
     }
-    public void  setParams(TextView tv,int Resource)
-    {
-        tv.setPadding(5,2,5,2);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
-        params.height=48;
-        params.setMargins(0,0,10,0);
+
+    public void setParams(TextView tv, int Resource) {
+        tv.setPadding(5, 2, 5, 2);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tv.getLayoutParams();
+        params.height = 48;
+        params.setMargins(0, 0, 10, 0);
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
     }
-    public void  defultParams(TextView tv,int Resource)
-    {
 
-        tv.setPadding(0,0,0,0);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)tv.getLayoutParams();
-        params.height=60;
-        params.setMargins(0,0,0,0);
+    public void defultParams(TextView tv, int Resource) {
+
+        tv.setPadding(0, 0, 0, 0);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tv.getLayoutParams();
+        params.height = 60;
+        params.setMargins(0, 0, 0, 0);
         tv.setBackgroundResource(Resource);
         tv.setLayoutParams(params);
     }

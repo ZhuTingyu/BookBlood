@@ -298,7 +298,7 @@
     <!--导入 中鸽网直播数据  列表-->
     <string name="live_play_list">TXGP_Race_GetResult</string>
     <!--导入 直播数据-->
-    <string name="live_play_input">TXGP_Race_GetResult</string>
+    <string name="input_play_data">TXGP_Race_AddResult</string>
 
 
     <!--添加赛绩附加信息-->
