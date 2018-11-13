@@ -54,8 +54,12 @@ public class OffspringAddFragment2 extends InputPigeonFragment {
 
             mViewModel.footFatherId = mViewModel.mPairingInfoEntity.getMenFootRingID();
             mViewModel.footMotherId = mViewModel.mPairingInfoEntity.getWoFootRingID();
+
             mViewModel.pigeonFatherId = mViewModel.mPairingInfoEntity.getMenPigeonID();
             mViewModel.pigeonMotherId = mViewModel.mPairingInfoEntity.getWoPigeonID();
+
+            mViewModel.pigeonFatherStateId = mViewModel.mPairingInfoEntity.getMenPigeonStateID();
+            mViewModel.pigeonMotherStateId = mViewModel.mPairingInfoEntity.getWoPigeonStateID();
         }
     }
 

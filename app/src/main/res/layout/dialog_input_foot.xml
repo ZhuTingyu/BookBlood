@@ -125,7 +125,7 @@
         android:layout_marginTop="144dp"
         android:drawableRight="@mipmap/ic_arrow_right"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="gone"
         android:text="@string/text_breed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -32,6 +32,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.event.OpenServiceEvent;
 import com.cpigeon.book.model.entity.AssEntity;
 import com.cpigeon.book.model.entity.LoftEntity;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BookViewModel;
@@ -44,6 +45,9 @@ import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
 import com.cpigeon.book.util.PigeonPublicUtil;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 import com.cpigeon.book.widget.mydialog.AddPlayDialog;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -404,6 +408,11 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
     @Override
     public void onResume() {
         super.onResume();
+        mBreedPigeonDetailsViewModel.getPigeonDetails();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(OpenServiceEvent event){
         mBreedPigeonDetailsViewModel.getPigeonDetails();
     }
 }

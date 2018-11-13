@@ -117,6 +117,10 @@ public class PigeonEntity implements Serializable {
     private List<PigeonPlayEntity> MatchInfoList;
     private List<PigeonPlayEntity> MatchList;
 
+    public boolean isOpenShare(){
+        return Integer.valueOf(UserService) == 1;
+    }
+
     public String getWoPigeonStateName() {
         return WoPigeonStateName;
     }

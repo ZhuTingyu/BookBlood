@@ -28,7 +28,7 @@ public class PayServiceOrderViewModel extends BaseViewModel {
     public void payOder() {
         submitRequestThrowError(ServiceModel.payServiceOrder(mServiceId, mPayWay, mPassword), apiResponse -> {
             if (apiResponse.isOk()) {
-                normalResult.setValue(apiResponse.msg);
+                normalResult.setValue(String.valueOf(apiResponse.errorCode));
                 mDataWXOrder.setValue(apiResponse.data);
             } else throw new HttpErrorException(apiResponse);
         });
@@ -37,7 +37,7 @@ public class PayServiceOrderViewModel extends BaseViewModel {
     public void renewalPayOder() {
         submitRequestThrowError(ServiceModel.renewalServiceOrder(mServiceId, mPayWay, mPassword), apiResponse -> {
             if (apiResponse.isOk()) {
-                normalResult.setValue(apiResponse.msg);
+                normalResult.setValue(String.valueOf(apiResponse.errorCode));
                 mDataWXOrder.setValue(apiResponse.data);
             } else throw new HttpErrorException(apiResponse);
         });

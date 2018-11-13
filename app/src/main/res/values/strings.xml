@@ -683,5 +683,6 @@
     <string name="text_hint_is_delete_pairing_info">你是否要删除该发育的信息?</string>
     <string name="text_hint_set_not_together">你是否将这两只鸽子分居?</string>
     <string name="text_to_wx">跳转微信中...</string>
+    <string name="text_hint_not_open_share" >很抱歉，您还未购买共享厅数据服务，无法使用联系人功能，是否前往购买？</string>
 
 </resources>

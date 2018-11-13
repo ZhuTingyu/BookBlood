@@ -48,7 +48,7 @@ public class AddBreedingFragment extends BaseFootListFragment {
         super.initData();
         setTitle("选择配对信鸽");
         setStartSearchActvity(SearchPigeonToAddBreedingActivity.class);//搜索页面
-        mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
+        MyHomingPigeonAdapter myHomingPigeonAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
                 mBreedPigeonListModel.id = PigeonId;
@@ -66,6 +66,8 @@ public class AddBreedingFragment extends BaseFootListFragment {
                 }
             }
         });
+        myHomingPigeonAdapter.setInBreed(true);
+        mAdapter = myHomingPigeonAdapter;
     }
 
     @Override

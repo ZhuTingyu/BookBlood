@@ -25,6 +25,7 @@ import com.cpigeon.book.module.basepigeon.SelectBloodFragment;
 import com.cpigeon.book.module.breeding.PairingInfoListFragment;
 import com.cpigeon.book.module.feedpigeon.GrowthReportFragment;
 import com.cpigeon.book.module.makebloodbook.PreviewsBookActivity;
+import com.cpigeon.book.module.menu.service.OpenServiceFragment;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.score.ScoreFragment;
@@ -125,17 +126,17 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 boolean isMan = FamilyTreeView.isMale(y);
 
                 if (x == mFamilyTreeView.getStartGeneration()) {
-                    if(isMan){
+                    if (isMan) {
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
                                 , mBookViewModel.foodId
                                 , mBookViewModel.pigeonId
-                                ,0
+                                , 0
                                 , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
-                    }else {
+                    } else {
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
                                 , mBookViewModel.foodId
                                 , mBookViewModel.pigeonId
-                                ,0
+                                , 0
                                 , PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
                     }
                 } else {
@@ -144,17 +145,17 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                         breedPigeonEntity = mFamilyTreeView.getSon(x, y).getData();
                     }
 
-                    if(isMan){
+                    if (isMan) {
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                                ,0
+                                , 0
                                 , PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
-                    }else {
+                    } else {
                         SelectPigeonToAddBreedFragment.start(getBaseActivity()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getFootRingID()
                                 , breedPigeonEntity == null ? StringUtil.emptyString() : breedPigeonEntity.getPigeonID()
-                                ,0
+                                , 0
                                 , PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
                     }
                 }
@@ -198,16 +199,24 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 });
             } else if (TYPE_HIS_SHARE.equals(mType)) {
                 tvRight.setOnClickListener(v -> {
-                    List<String> way = Lists.newArrayList(getResources().getStringArray(R.array.array_contact_way));
-                    BottomSheetAdapter.createBottomSheet(getBaseActivity(), way, p -> {
-                        if (p == 0) {
-                            //打电话
-                            PhoneUtils.dial(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
-                        } else {
-                            //发短信
-                            PhoneUtils.sms(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
-                        }
-                    });
+                    if (mBreedPigeonDetailsViewModel.mPigeonEntity.isOpenShare()) {
+                        List<String> way = Lists.newArrayList(getResources().getStringArray(R.array.array_contact_way));
+                        BottomSheetAdapter.createBottomSheet(getBaseActivity(), way, p -> {
+                            if (p == 0) {
+                                //打电话
+                                PhoneUtils.dial(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
+                            } else {
+                                //发短信
+                                PhoneUtils.sms(getBaseActivity(), mBreedPigeonDetailsViewModel.mPigeonEntity.getPigeonHomePhone());
+                            }
+                        });
+                    } else {
+                        DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_hint_not_open_share)
+                                , sweetAlertDialog -> {
+                                    sweetAlertDialog.dismiss();
+                                    OpenServiceFragment.start(getBaseActivity());
+                                });
+                    }
                 });
             }
         }

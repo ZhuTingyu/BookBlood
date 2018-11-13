@@ -146,7 +146,7 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
         TextView tvTogetherState = helper.getView(R.id.tvTogetherState);
         if(isInBreed){
             tvTogetherState.setVisibility(View.VISIBLE);
-            //todo
+            tvTogetherState.setText("(分居状态)");
         }else {
             tvTogetherState.setVisibility(View.GONE);
         }

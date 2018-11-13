@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.module.basepigeon.AuthCodeViewModel;
 import com.cpigeon.book.module.login.LoginActivity;
 import com.cpigeon.book.module.menu.viewmodel.RevisePsdViewModel;
 import com.cpigeon.book.service.SingleLoginService;
@@ -85,6 +86,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
     private int type = -1;//1  修改登录密码   2  修改支付密码
 
     private RevisePsdViewModel mRevisePsdViewModel;
+    private AuthCodeViewModel mAuthCodeViewModel;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
@@ -95,7 +97,8 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mRevisePsdViewModel = new RevisePsdViewModel();
-        initViewModels(mRevisePsdViewModel);
+        mAuthCodeViewModel = new AuthCodeViewModel();
+        initViewModels(mRevisePsdViewModel, mAuthCodeViewModel);
     }
 
 
@@ -109,6 +112,8 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        bindUi(RxUtils.textChanges(ll2_phone.getEditText()), mAuthCodeViewModel.setPhoneNumber());
 
         type = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA, -1);
 
@@ -133,7 +138,6 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
                     isNeedVerCode = true;
                     ll1.setVisibility(View.GONE);
                     ll2.setVisibility(View.VISIBLE);
-
                 }
                 return true;
             });
@@ -146,6 +150,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
             ll2_input_new_psd.getEditText().setHint("请输入6位数字");
             ll2_input_new_psd.getEditText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});//支付密码限制6位
             ll2_input_new_psd.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+            mAuthCodeViewModel.mType = AuthCodeViewModel.TYPE_PAY_PASSWORD;
         }
 
         ll2_phone.getEditText().setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)});//手机号限制11位
@@ -172,7 +177,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
         mRevisePsdViewModel.isCanCommit.observe(this, aBoolean -> {
             TextViewUtil.setEnabled(tvNextStep, aBoolean);
         });
-        
+
         mRevisePsdViewModel.reviseLoginPsd.observe(this, s -> {
             getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), s, SweetAlertDialog.ERROR_TYPE, false, dialog -> {
                 SingleLoginService.stopService();
@@ -181,6 +186,11 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
                 AppManager.getAppManager().killAllActivity();
                 LoginActivity.start(getBaseActivity());
             });
+        });
+
+        mAuthCodeViewModel.mDataCode.observe(this, code -> {
+            setProgressVisible(false);
+            ToastUtils.showLong(getBaseActivity(), "发送验证码成功！");
         });
 
     }
@@ -214,7 +224,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
                         ToastUtils.showLong(getBaseActivity(), "输入图片验证码不符，请重新输入");
                         return;
                     }
-
+                    setProgressVisible(true);
                     mRevisePsdViewModel.getZGW_Users_GetPlayData();
                 }
 
@@ -228,6 +238,8 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
 
                 if (thread == null || !thread.isAlive()) {
                     thread = new Thread(VerifyCountdownUtil.getYzm(tv_ver_code, getActivity()));
+                    setProgressVisible(true);
+                    mAuthCodeViewModel.getAuthCode();
                     thread.start();
                 }
 

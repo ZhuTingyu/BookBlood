@@ -29,7 +29,7 @@ public class LoginActivity extends BaseActivity {
     public static final String TYPE_REGISTER = "TYPE_REGISTER";
     public static final String TYPE_FORGET_PASSWORD = "TYPE_FORGET_PASSWORD";
 
-    public static void start(Activity activity){
+    public static void start(Activity activity) {
         IntentBuilder.Builder(activity, LoginActivity.class)
                 .startActivity();
     }
@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        BarUtils.setStatusBarVisibility(this,false);
+        BarUtils.setStatusBarVisibility(this, false);
         BarUtils.setStatusBarAllAlpha(this);
 
         mVideoView = findViewById(R.id.video_player);
@@ -55,21 +55,21 @@ public class LoginActivity extends BaseActivity {
         mRegisterFragment = new RegisterFragment();
         mForgetPasswordFragment = new ForgetPasswordFragment();
 
-        FragmentUtils.add(getSupportFragmentManager(),mRegisterFragment, R.id.rlMain);
-        FragmentUtils.add(getSupportFragmentManager(),mForgetPasswordFragment, R.id.rlMain);
-        FragmentUtils.add(getSupportFragmentManager(),mLoginFragment, R.id.rlMain);
+        FragmentUtils.add(getSupportFragmentManager(), mRegisterFragment, R.id.rlMain);
+        FragmentUtils.add(getSupportFragmentManager(), mForgetPasswordFragment, R.id.rlMain);
+        FragmentUtils.add(getSupportFragmentManager(), mLoginFragment, R.id.rlMain);
 
-        FragmentUtils.replace(getSupportFragmentManager(),mLoginFragment, R.id.rlMain);
+        FragmentUtils.replace(getSupportFragmentManager(), mLoginFragment, R.id.rlMain);
 
     }
 
-    public void replace(String type){
-        if(TYPE_REGISTER.equals(type)){
-            FragmentUtils.replace(getSupportFragmentManager(),mRegisterFragment, R.id.rlMain);
-        }else if(TYPE_LOGIN.equals(type)){
-            FragmentUtils.replace(getSupportFragmentManager(),mLoginFragment, R.id.rlMain);
-        }else if(TYPE_FORGET_PASSWORD.equals(type)){
-            FragmentUtils.replace(getSupportFragmentManager(),mForgetPasswordFragment, R.id.rlMain);
+    public void replace(String type) {
+        if (TYPE_REGISTER.equals(type)) {
+            FragmentUtils.replace(getSupportFragmentManager(), mRegisterFragment, R.id.rlMain);
+        } else if (TYPE_LOGIN.equals(type)) {
+            FragmentUtils.replace(getSupportFragmentManager(), mLoginFragment, R.id.rlMain);
+        } else if (TYPE_FORGET_PASSWORD.equals(type)) {
+            FragmentUtils.replace(getSupportFragmentManager(), mForgetPasswordFragment, R.id.rlMain);
         }
     }
 }

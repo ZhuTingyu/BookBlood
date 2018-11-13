@@ -98,6 +98,25 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
 
         mViewModel.getError().observe(this, restErrorInfo -> {
             setProgressVisible(false);
+
+            int errorCode = restErrorInfo.code;
+            String msg = null;
+            if(errorCode == 998){
+                msg = "未找到服务";
+            }else if(errorCode == 999){
+                msg = "未开通服务";
+            }else if(errorCode == 1001){
+                msg = "订单不存在";
+            }else if(errorCode == 1002){
+                msg = "余额不足";
+            }else if(errorCode == 1003){
+                msg = "余额扣除失败";
+            }else if(errorCode == 1004){
+                msg = "订单回调失败";
+            }
+
+            restErrorInfo.message = msg;
+
             if (restErrorInfo.code == 1099) {
                 DialogUtils.createDialog(getBaseActivity(), Utils.getString(R.string.text_error), restErrorInfo.message
                         , Utils.getString(R.string.text_forget_password)
