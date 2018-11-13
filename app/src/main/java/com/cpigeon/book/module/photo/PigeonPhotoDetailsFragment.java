@@ -21,12 +21,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.PictureSelectUtil;
 import com.base.util.PopWindowBuilder;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.glide.GlideCacheUtil;
 import com.base.util.picker.PickerUtil;
-import com.base.widget.photoview.PhotoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -128,6 +126,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
             showShareDialog(shareUrl);
         });
         linearLayout.setVisibility(View.GONE);
+     //   appBarLayout.setVisibility(View.GONE);
         dialogFragment = new ShareDialogFragment();
 
         mBanner.setPages(mViewModel.mPigeonPhotoData, () -> {
@@ -136,9 +135,9 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
         mBanner.setIndicatorPadding(0,0,0,0);
 
         mBanner.getAdapter().setPageClickListener((view1, position1) -> {
-
+//            startAnimator();
             if (Click) {
-                appBarLayout.setVisibility(View.VISIBLE);
+                //appBarLayout.setVisibility(View.VISIBLE);
                 Click=false;
                 linearLayout.startAnimation(show());
                 linearLayout.setVisibility(View.VISIBLE);
@@ -146,7 +145,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
             else
             {
                 Click=true;
-                appBarLayout.setVisibility(View.GONE);
+               // appBarLayout.setVisibility(View.GONE);
                 linearLayout.startAnimation(hide());
                 linearLayout.setVisibility(View.GONE);
             }
@@ -391,13 +390,14 @@ private void removeCache() {
 
 class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
 
-    private PhotoView mImg;
+    private ImageView mImg;
     private TextView mTvColor,mTvTime;
     private TextView mTvNumberAndTime;
-
+private Context context;
 
     @Override
     public View createView(Context context) {
+
         View view = LayoutInflater.from(context).inflate(R.layout.item_pigeon_photo_details, null);
         mImg = view.findViewById(R.id.img);
         mTvColor = view.findViewById(R.id.tvColor);
@@ -415,9 +415,6 @@ class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
                 mImg.setImageBitmap(resource);
             }
         });
-
-//        Glide.with(context).load(data.getPhotoUrl()).override(480, 800)
-//                .diskCacheStrategy(DiskCacheStrategy.SOURCE).priority(Priority.HIGH).into(mImg);
         String str = data.getAddTime();
 
         //图片类型

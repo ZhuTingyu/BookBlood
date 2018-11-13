@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/black"
+    android:layout_height="match_parent">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:orientation="vertical"
-    >
-
-    <LinearLayout
-        android:layout_marginVertical="30dp"
+    android:orientation="vertical">
+    <com.luck.picture.lib.widget.PreviewViewPager
+        android:id="@+id/photo_details_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-
-        <com.cpigeon.book.widget.mzbanner.MZBannerView
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:canLoop="true"
-            app:indicatorAlign="center"
-            app:indicatorPaddingLeft="0dp"
-            app:indicatorPaddingRight="0dp"
-            app:indicatorPaddingTop="0dp"
-            app:indicatorPaddingBottom="0dp"
-            app:middle_page_cover="false"
-            app:open_mz_mode="false" />
-    </LinearLayout>
-
-
+    <com.base.widget.magicindicator.MagicIndicator
+        android:id="@+id/magic_indicator3"
+        android:background="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="45dp" />
+</LinearLayout>
     <LinearLayout
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
@@ -42,7 +34,7 @@
 
             android:background="@drawable/phototab"
             android:layout_width="48dp"
-            android:layout_height="250dp"
+            android:layout_height="288dp"
             android:orientation="vertical">
 
             <com.cpigeon.book.widget.SimpleTitleView
@@ -89,6 +81,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
 </RelativeLayout>

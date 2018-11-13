@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.model.LoginModel;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.UserEntity;
@@ -57,11 +58,13 @@ public class LoginViewModel extends BaseViewModel {
 
     //获取用户头像
     public void getUserHeadImg() {
-        submitRequestThrowError(LoginModel.getUserHeadImgData(mPhone), r -> {
-            if (r.isOk()) {
-                head.setValue(r.data.touxiangurl);
-            } else throw new HttpErrorException(r);
-        });
+        if(!mPhone.equals(StringUtil.emptyString())) {
+            submitRequestThrowError(LoginModel.getUserHeadImgData(mPhone), r -> {
+                if (r.isOk()) {
+                    head.setValue(r.data.touxiangurl);
+                } else throw new HttpErrorException(r);
+            });
+        }
     }
 
     //第一次启动 获取鸽币
