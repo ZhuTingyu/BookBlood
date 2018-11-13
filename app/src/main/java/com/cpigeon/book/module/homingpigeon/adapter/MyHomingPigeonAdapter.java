@@ -11,11 +11,13 @@ import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BasePigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 
 /**
  * Created by Administrator on 2018/10/9 0009.
@@ -25,15 +27,17 @@ public class MyHomingPigeonAdapter extends BasePigeonListAdapter {
     private float mRawX;
     private float mRawY;
     private OnDeleteListener onDeleteListener;
-private LinearLayoutListener linearLayoutListener;
+    private LinearLayoutListener linearLayoutListener;
+    private boolean isInBreed = false;
+
     public MyHomingPigeonAdapter() {
         super(R.layout.item_breed_pigeon_list, null);
     }
 
-    public MyHomingPigeonAdapter(OnDeleteListener onDeleteListener,LinearLayoutListener linearLayoutListener) {
+    public MyHomingPigeonAdapter(OnDeleteListener onDeleteListener, LinearLayoutListener linearLayoutListener) {
         super(R.layout.item_breed_pigeon_list, null);
         this.onDeleteListener = onDeleteListener;
-        this.linearLayoutListener=linearLayoutListener;
+        this.linearLayoutListener = linearLayoutListener;
     }
 
     @Override
@@ -96,34 +100,86 @@ private LinearLayoutListener linearLayoutListener;
         } else {
             imgSex.setImageResource(R.mipmap.ic_sex_no);
         }
-        TextView delete =helper.getView(R.id.tvDelete);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
-                    getBaseActivity().errorDialog.dismiss();
-                }
+        SwipeMenuLayout swipeMenuLayout = (SwipeMenuLayout) helper.itemView;
 
-                String hintStr = "确认删除足环号为" + item.getFootRingNum() + "的信鸽吗？";
-                getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
-                    if (onDeleteListener != null) {
-                        onDeleteListener.delete(item.getPigeonID());
+        if (onDeleteListener == null) {
+            swipeMenuLayout.setSwipeEnable(false);
+        } else {
+            TextView delete = helper.getView(R.id.tvDelete);
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
+                        getBaseActivity().errorDialog.dismiss();
                     }
-                    sweetAlertDialog.dismiss();
-                }, sweetAlertDialog -> {
-                    sweetAlertDialog.dismiss();
-                });
-            }
-        });
-        LinearLayout linearLayout=helper.getView(R.id.llay);
+
+                    String hintStr = "确认删除足环号为" + item.getFootRingNum() + "的信鸽吗？";
+                    getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
+                        if (onDeleteListener != null) {
+                            onDeleteListener.delete(item.getPigeonID());
+                        }
+                        sweetAlertDialog.dismiss();
+                    }, sweetAlertDialog -> {
+                        sweetAlertDialog.dismiss();
+                    });
+                }
+            });
+        }
+
+        LinearLayout linearLayout = helper.getView(R.id.llay);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                linearLayoutListener.click(helper.getAdapterPosition()-getHeaderLayoutCount());
+                if (linearLayoutListener != null) {
+                    linearLayoutListener.click(helper.getAdapterPosition() - getHeaderLayoutCount());
+                }
+
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.click(MyHomingPigeonAdapter.this, v, helper.getAdapterPosition() - getHeaderLayoutCount());
+                }
+
             }
         });
+
+        TextView tvTogetherState = helper.getView(R.id.tvTogetherState);
+        if(isInBreed){
+            tvTogetherState.setVisibility(View.VISIBLE);
+            //todo
+        }else {
+            tvTogetherState.setVisibility(View.GONE);
+        }
+
     }
 
+    public OnDeleteListener getOnDeleteListener() {
+        return onDeleteListener;
+    }
 
+    public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
+        this.onDeleteListener = onDeleteListener;
+    }
+
+    public LinearLayoutListener getLinearLayoutListener() {
+        return linearLayoutListener;
+    }
+
+    public void setLinearLayoutListener(LinearLayoutListener linearLayoutListener) {
+        this.linearLayoutListener = linearLayoutListener;
+    }
+
+    public interface OnItemClickListener {
+        void click(MyHomingPigeonAdapter myAdapter, View view, int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnInItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public void setInBreed(boolean inBreed) {
+        isInBreed = inBreed;
+    }
 }

@@ -11,6 +11,9 @@ import com.base.util.utility.ToastUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.model.entity.AssEntity;
+import com.cpigeon.book.model.entity.LoftEntity;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.play.PlayImportFragment;
 import com.cpigeon.book.module.select.PlayOrgLoftFragment;
@@ -30,8 +33,12 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
     private LineInputView ll_org;
     private LineInputView unitName;
 
-    private String foot = "";
+    private PigeonEntity mPigeonEntity;
     private String[] chooseWays;
+
+    private AssEntity mAssEntity;
+    private LoftEntity mLoftEntity;
+    private String mOrgType;
 
     @Override
     public int setContentView() {
@@ -59,22 +66,15 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
                 return;
             }
 
-            String type;
-
-            if (unitName.getContent().equals("协会")) {
-                type = "xh";
-            } else {
-                type = "gp";
-            }
-
             this.dismiss();
             //导入赛绩
-            PlayImportFragment.start(getActivity(), ll_foot.getContent(), type,ll_org.getContent());
+            PlayImportFragment.start(getActivity(), mPigeonEntity, mOrgType, unitName.getContent()
+                    ,mAssEntity != null ? mAssEntity.getPigeonISOCID() : mLoftEntity.getGpid());
         });
 
         //足环号
         ll_foot = dialog.findViewById(R.id.ll_foot);
-        ll_foot.setContent(foot);
+        ll_foot.setContent(mPigeonEntity.getFootRingNum());
         //组织类型
         ll_org = dialog.findViewById(R.id.ll_org);
 
@@ -93,20 +93,28 @@ public class AddPlayDialog extends CustomBaseBottomDialog {
                 //选择协会
                 SearchFragmentParentActivity.start(getActivity(), SelectAssFragment.class, BreedPigeonDetailsFragment.CODE_ORGANIZE, null);
                 ll_org.setRightText("协会");
+                mOrgType = "xh";
             } else if (Utils.getString(R.string.title_select_loft).equals(way)) {
                 //选择公棚
                 SearchFragmentParentActivity.start(getActivity(), PlayOrgLoftFragment.class, BreedPigeonDetailsFragment.CODE_LOFT, null);
                 ll_org.setRightText("公棚");
+                mOrgType = "gp";
             }
         });
     }
 
-    public void setFoot(String foot) {
-        this.foot = foot;
+    public void setPigeon(PigeonEntity pigeon) {
+        this.mPigeonEntity = pigeon;
     }
 
-    public void setllUnitName(String ll_unit_name) {
-        unitName.setContent(ll_unit_name);
+    public void setllUnitName(AssEntity ll_unit_name) {
+        mAssEntity = ll_unit_name;
+        unitName.setContent(ll_unit_name.getISOCName());
+    }
+
+    public void setllUnitName(LoftEntity ll_unit_name) {
+        mLoftEntity = ll_unit_name;
+        unitName.setContent(ll_unit_name.getGpname());
     }
 
 }

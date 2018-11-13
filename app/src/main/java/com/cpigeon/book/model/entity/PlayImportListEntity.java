@@ -24,6 +24,7 @@ public class PlayImportListEntity extends MultiSelectEntity {
      * sjly : 数据来源
      */
 
+    private String rid;
     private String id;
     private String sfkj;
     private String sfdd;
@@ -35,6 +36,10 @@ public class PlayImportListEntity extends MultiSelectEntity {
     private String bsrq;
     private String xmmc;
     private String sjly;
+
+    public void setRid(String rid) {
+        this.rid = rid;
+    }
 
     public String getId() {
         return id;

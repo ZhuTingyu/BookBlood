@@ -44,7 +44,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
     private TextView mTvChoose;
     private EditText mEdFoot;
     private boolean isStandard = true;
-    private boolean isStandard2=false;
+    private boolean isStandard2 = false;
     private boolean isHaveStandard = true;
     List<String> years = Lists.newArrayList();
     List<String> area = Lists.newArrayList();
@@ -111,7 +111,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
             }
         } else {
             isStandard = false;
-            isStandard2=true;
+            isStandard2 = true;
             if (!Lists.isEmpty(foots)) {
                 mTvYear.setText(foots.get(0));
                 mEdFoot.setText(foots.get(1));
@@ -195,8 +195,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                             mOnFootStringFinishListener.foots(StringUtil.emptyString());
                         }
                     } else {
-                        if (isStandard2)
-                        {
+                        if (isStandard2) {
                             if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
                                 mOnFootStringFinishListener.foots(Utils.getString(R.string.text_standard_foot_2
                                         , mTvYear.getText().toString()
@@ -205,11 +204,10 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                             } else {
                                 mOnFootStringFinishListener.foots(StringUtil.emptyString());
                             }
-                    }
-                    else
-                        {
+                        } else {
                             if (StringUtil.isStringValid(mEdFoot.getText().toString())) {
-                                mOnFootStringFinishListener.foots(mEdFoot.getText().toString());;
+                                mOnFootStringFinishListener.foots(mEdFoot.getText().toString());
+                                ;
                             } else {
                                 mOnFootStringFinishListener.foots(StringUtil.emptyString());
                             }
@@ -219,7 +217,7 @@ public class InputSingleFootDialog extends BaseDialogFragment {
                 }
 
             }
-hide();
+            hide();
         });
 
         if (mOnChooseListener != null) {
@@ -233,16 +231,16 @@ hide();
         mImgClose.setOnClickListener(v -> {
 
             hide();
-         
+
         });
 
         if (!isHaveStandard) {
-            mTvSwitch.setVisibility(View.GONE);
+            mTvSwitch.setVisibility(View.INVISIBLE);
         }
     }
 
     private void switchStatus() {
-        if(isChina) {
+        if (isChina) {
             if (isStandard) {
                 isStandard = false;
                 mEdFoot.setGravity(Gravity.CENTER);
@@ -265,9 +263,7 @@ hide();
                 mEdFoot.clearFocus();
                 mGpFoot.forceInputViewGetFocus();
             }
-        }
-        else
-        {
+        } else {
             if (isStandard2) {
                 mEdFoot.setText(StringUtil.emptyString());
                 isStandard2 = false;
@@ -279,7 +275,7 @@ hide();
                 KeyboardUtils.showSoftInput(getActivity());
             } else {
                 mEdFoot.setText(StringUtil.emptyString());
-                isStandard2= true;
+                isStandard2 = true;
                 mTvSwitch.setText(R.string.text_custom_foot_ring_number);
                 mTvYear.setVisibility(View.VISIBLE);
                 mTvArea.setVisibility(View.GONE);
@@ -341,6 +337,7 @@ hide();
             KeyboardUtils.toggleSoftInput();
         }
     }
+
     //自己足环
     public static void show(FragmentManager fragmentManager, String footNumber, boolean isChina, OnChooseListener onChooseListener, OnFootStringFinishListener onFootStringFinishListener) {
         Bundle bundle = new Bundle();
@@ -361,6 +358,7 @@ hide();
     public interface OnFootStringCancelListener {
         void cencel();
     }
+
     public interface OnChooseListener {
         void choose(InputSingleFootDialog dialog);
     }
@@ -373,9 +371,11 @@ hide();
     public void setOnFootStringFinishListener(OnFootStringFinishListener onFootStringFinishListener) {
         mOnFootStringFinishListener = onFootStringFinishListener;
     }
+
     public void setOnFootStringCancelListener(OnFootStringCancelListener onFootStringCancelListener) {
         mOnFootStringCancelListene = onFootStringCancelListener;
     }
+
     public void setOnChooseListener(OnChooseListener onChooseListener) {
         mOnChooseListener = onChooseListener;
     }

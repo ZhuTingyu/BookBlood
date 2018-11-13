@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.base.util.IntentBuilder;
+import com.base.util.Utils;
 import com.base.util.utility.StringUtil;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -59,7 +60,7 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.xrecyclerview_layout, container, false);
+        return inflater.inflate(R.layout.xrecyclerview_no_padding_layout, container, false);
     }
 
     @Override
@@ -71,9 +72,10 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
             startSearchActivity();
         });
         mRecyclerView = findViewById(R.id.list);
+        mRecyclerView.setBackgroundColor(Utils.getColor(R.color.white));
         mRecyclerView.addItemDecorationLine();
         mAdapter = new MyHomingPigeonAdapter();
-        mAdapter.setOnItemClickListener(this::setAdapterClick);
+        mAdapter.setOnInItemClickListener(this::setAdapterClick);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setRefreshListener(() -> {
             mAdapter.cleanList();
@@ -91,7 +93,7 @@ public abstract class BaseSelectPigeonFragment extends BaseBookFragment {
         mViewModel.getPigeonList();
     }
 
-    protected void setAdapterClick(BaseQuickAdapter adapter, View view, int position) {
+    protected void setAdapterClick(MyHomingPigeonAdapter adapter, View view, int position) {
         PigeonEntity pigeonEntity = mAdapter.getItem(position);
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)

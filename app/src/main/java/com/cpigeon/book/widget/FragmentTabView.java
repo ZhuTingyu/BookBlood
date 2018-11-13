@@ -177,4 +177,8 @@ public class FragmentTabView extends LinearLayout {
     public void setOnSelectListener(OnSelectListener onSelectListener) {
         mOnSelectListener = onSelectListener;
     }
+
+    public int getCPosition() {
+        return mCPosition;
+    }
 }

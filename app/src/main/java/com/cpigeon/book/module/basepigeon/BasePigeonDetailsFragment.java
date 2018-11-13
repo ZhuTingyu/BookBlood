@@ -390,13 +390,13 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
 
             //选择协会回调
             AssEntity organize = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-            mAddPlayDialog.setllUnitName(organize.getISOCName());
+            mAddPlayDialog.setllUnitName(organize);
 
         } else if (requestCode == CODE_LOFT) {
 
             //选择公棚回调
             LoftEntity organize = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-            mAddPlayDialog.setllUnitName(organize.getGpname());
+            mAddPlayDialog.setllUnitName(organize);
 
         }
     }

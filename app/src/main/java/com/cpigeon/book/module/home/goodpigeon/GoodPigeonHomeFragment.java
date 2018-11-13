@@ -19,9 +19,14 @@ import com.base.util.RxUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseSearchActivity;
+import com.cpigeon.book.event.GoodPigeonEvent;
+import com.cpigeon.book.model.entity.GoodPigeonCountEntity;
 import com.cpigeon.book.module.home.goodpigeon.viewmodel.GoodPigeonHomeViewModel;
 import com.cpigeon.book.widget.FragmentTabView;
 import com.cpigeon.book.widget.stats.StatView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -89,6 +94,7 @@ public class GoodPigeonHomeFragment extends BaseBookFragment {
             mTabView.setSelect(0);
             mTabView.setOnSelectListener(position -> {
                 FragmentUtils.showHide(position, mFragments);
+                bindStateData(position);
             });
         }));
 
@@ -97,13 +103,55 @@ public class GoodPigeonHomeFragment extends BaseBookFragment {
         mViewModel.getCount();
     }
 
-    @Override
-    protected void initObserve() {
-        mViewModel.mDataGoodPitgeonCount.observe(this, goodPigeonCountEntity -> {
+    private void bindStateData(int position) {
+        GoodPigeonCountEntity goodPigeonCountEntity = mViewModel.mGoodPigeonCountEntity;
+        if (position == 0) {
             mStat1.bindData(goodPigeonCountEntity.getAllCount(), goodPigeonCountEntity.getAllCount());
             mStat2.bindData(goodPigeonCountEntity.getAllXiongCount(), goodPigeonCountEntity.getAllCount());
             mStat3.bindData(goodPigeonCountEntity.getAllCiCount(), goodPigeonCountEntity.getAllCount());
+            if(goodPigeonCountEntity.getAllCiCount() == 0){
+                setStatVisible(false);
+            }else {
+                setStatVisible(true);
+            }
+        } else if (position == 1) {
+            mStat1.bindData(goodPigeonCountEntity.getWoCount(), goodPigeonCountEntity.getWoCount());
+            mStat2.bindData(goodPigeonCountEntity.getWoXiongCount(), goodPigeonCountEntity.getWoCount());
+            mStat3.bindData(goodPigeonCountEntity.getWoCiCount(), goodPigeonCountEntity.getWoCount());
+            if(goodPigeonCountEntity.getWoCount() == 0){
+                setStatVisible(false);
+            }else {
+                setStatVisible(true);
+            }
+        } else if (position == 2) {
+            mStat1.bindData(goodPigeonCountEntity.getCount(), goodPigeonCountEntity.getCount());
+            mStat2.bindData(goodPigeonCountEntity.getXiongCount(), goodPigeonCountEntity.getCount());
+            mStat3.bindData(goodPigeonCountEntity.getCiCount(), goodPigeonCountEntity.getCount());
+            if(goodPigeonCountEntity.getCount() == 0){
+                setStatVisible(false);
+            }else {
+                setStatVisible(true);
+            }
+        }
+    }
+
+    @Override
+    protected void initObserve() {
+        mViewModel.mDataGoodPitgeonCount.observe(this, goodPigeonCountEntity -> {
+            bindStateData(mTabView.getCPosition());
         });
+    }
+
+    public void setStatVisible(boolean visible) {
+        if (visible) {
+            mStat1.setVisibility(View.VISIBLE);
+            mStat2.setVisibility(View.VISIBLE);
+            mStat3.setVisibility(View.VISIBLE);
+        } else {
+            mStat1.setVisibility(View.GONE);
+            mStat2.setVisibility(View.GONE);
+            mStat3.setVisibility(View.GONE);
+        }
     }
 
     protected void initFragments() {
@@ -118,5 +166,10 @@ public class GoodPigeonHomeFragment extends BaseBookFragment {
 
     protected void initTitles() {
         mTitles = Lists.newArrayList(getBaseActivity().getResources().getStringArray(R.array.array_good_pigeon));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(GoodPigeonEvent event) {
+        mViewModel.getCount();
     }
 }

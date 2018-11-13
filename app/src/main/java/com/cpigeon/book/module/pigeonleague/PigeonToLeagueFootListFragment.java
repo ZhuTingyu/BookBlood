@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.base.util.Lists;
 import com.base.util.Utils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
 import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
@@ -41,6 +43,7 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
         super.onAttach(context);
         mViewModel = new PigeonToLeagueFootListViewModel();
         initViewModel(mViewModel);
+        mBreedPigeonListModel.stateid = PigeonEntity.ID_ALL_MY_PGIEON;
     }
 
     public static void start(Activity activity) {
@@ -67,7 +70,7 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
     @Override
     protected void initData() {
         super.initData();
-setTitle("信鸽赛绩");
+        setTitle("信鸽赛绩");
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {

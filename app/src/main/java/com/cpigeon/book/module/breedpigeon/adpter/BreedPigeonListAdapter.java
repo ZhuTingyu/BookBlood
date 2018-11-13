@@ -104,7 +104,7 @@ protected LinearLayoutListener LinearLayoutListener;
             public void onClick(View v) {
                 if(LinearLayoutListener!=null)
                 {
-                    LinearLayoutListener.click(helper.getAdapterPosition());
+                    LinearLayoutListener.click(helper.getAdapterPosition() - getHeaderLayoutCount());
                 }
             }
         });

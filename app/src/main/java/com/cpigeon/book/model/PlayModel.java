@@ -219,12 +219,20 @@ public class PlayModel {
 
 
     //导入中鸽直播赛绩
-    public static Observable<ApiResponse<Object>> getLivePlayInput(String orgid) {
-        return RequestData.<ApiResponse<Object>>build()
-                .setToJsonType(new TypeToken<ApiResponse<Object>>() {
+    public static Observable<ApiResponse> inputLivePlay(
+            String orgId,//：赛事组织ID
+            String pigeonId,//信鸽ID
+            String footId,//足环ID
+            String data
+    ) {
+        return RequestData.<ApiResponse>build()
+                .setToJsonType(new TypeToken<ApiResponse>() {
                 }.getType())
-                .url(R.string.live_play_list)
-                .addBody("orgid", orgid)
+                .url(R.string.input_play_data)
+                .addBody("zz", orgId)
+                .addBody("pid", pigeonId)
+                .addBody("zhid", footId)
+                .addBody("od", data)
                 .request();
     }
 

@@ -113,7 +113,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     protected void error(@StringRes int resId) {
         setProgressVisible(false);
-        getBaseActivity().error(Utils.getString(resId));
+        error(Utils.getString(resId));
     }
 
     public void error(int code, String error) {

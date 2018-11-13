@@ -23,7 +23,7 @@ public class PigeonEntity implements Serializable {
     public static final String ID_BREED_PIGEON = "9";//种鸽
     public static final String ID_MATCH_PIGEON = "10";//赛鸽
     public static final String ID_BREED_MATCCH_PIGEON = "9,10";//种鸽
-    public static final String ID_ALL = "35,36,37,38,39,40";
+    public static final String ID_ALL_MY_PGIEON = "35,36,37,38,39,40";
     public static final String IN_THE_SHED= "35,36";
     public static  String TIME = "TIME";
     public static final String BIT_MATCH = "0"; //是否返回赛绩（0，不返回）
@@ -31,6 +31,8 @@ public class PigeonEntity implements Serializable {
     public static final String SEXYEAR = "1";
     public static final String STATUS_OPEN_SERVICE = "1"; //已经开通服务
     public static final String STATUS_NOT_OPEN_SERVICE = "0"; //没开通服务
+    public static final String STATUS_NOT_TOGETHER = "2"; //分居
+    public static final String STATUS_TOGETHER = "1"; //同居
 
     /**
      * CoverPhotoUrl :

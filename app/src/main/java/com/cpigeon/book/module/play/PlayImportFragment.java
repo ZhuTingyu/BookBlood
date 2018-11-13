@@ -15,18 +15,23 @@ import android.widget.TextView;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.RxUtils;
+import com.base.util.dialog.DialogUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PlayImportListEntity;
 import com.cpigeon.book.module.play.adapter.PlayImportAdapter;
 import com.cpigeon.book.module.play.viewmodel.PlayImportViewModel;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.mydialog.CustomAlertDialog2;
 import com.cpigeon.book.widget.mydialog.HintDialog;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -56,11 +61,12 @@ public class PlayImportFragment extends BaseBookFragment {
     private ProgressBar progressBar;
     Timer timer;
 
-    public static void start(Activity activity, String footNumber, String orgType, String orgName) {
+    public static void start(Activity activity, PigeonEntity pigeonEntity, String orgType, String orgName, String orgId) {
         IntentBuilder.Builder()
-                .putExtra(IntentBuilder.KEY_FOOT_NUMBER, footNumber)
+                .putExtra(IntentBuilder.KEY_FOOT_NUMBER, pigeonEntity)
                 .putExtra(IntentBuilder.KEY_DATA, orgType)
                 .putExtra(IntentBuilder.KEY_DATA_2, orgName)
+                .putExtra(IntentBuilder.KEY_DATA_3, orgId)
                 .startParentActivity(activity, PlayImportFragment.class);
     }
 
@@ -69,11 +75,12 @@ public class PlayImportFragment extends BaseBookFragment {
         super.onAttach(context);
         mPlayInportViewModel = new PlayImportViewModel();
         initViewModels(mPlayInportViewModel);
-//        mPlayInportViewModel.footNumber = getIntent().getStringExtra(IntentBuilder.KEY_FOOT_NUMBER);
-//        mPlayInportViewModel.organizeType = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
-//        mPlayInportViewModel.organizeName = getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
-//        mPlayInportViewModel.houseNumber = UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonHomeID();
-//        mPlayInportViewModel.matchNumber = UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonMatchNum();
+        mPlayInportViewModel.mPigeonEntity = (PigeonEntity) getIntent().getSerializableExtra(IntentBuilder.KEY_FOOT_NUMBER);
+        mPlayInportViewModel.organizeType = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
+        mPlayInportViewModel.organizeName = getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
+        mPlayInportViewModel.organizeId = getIntent().getStringExtra(IntentBuilder.KEY_DATA_3);
+        //mPlayInportViewModel.houseNumber = UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonHomeID();
+        //mPlayInportViewModel.matchNumber = UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonMatchNum();
     }
 
     @Nullable
@@ -117,8 +124,9 @@ public class PlayImportFragment extends BaseBookFragment {
         Glide.with(getBaseActivity()).load(uri).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(img_gif);
 
         tvOk.setOnClickListener(v -> {
-//            input_play_gif
-
+            mAdapter.getSelectedEntity();
+            setProgressVisible(true);
+            mPlayInportViewModel.inputLivePlayData();
         });
 
         mAdapter = new PlayImportAdapter();
@@ -142,7 +150,9 @@ public class PlayImportFragment extends BaseBookFragment {
         });
 
         tvOk.setOnClickListener(v -> {
-
+            mPlayInportViewModel.mPlayData = mAdapter.getSelectedEntity();
+            setProgressVisible(true);
+            mPlayInportViewModel.inputLivePlayData();
         });
 
         setProgressVisible(true);
@@ -180,6 +190,14 @@ public class PlayImportFragment extends BaseBookFragment {
         mPlayInportViewModel.mPlayListData.observe(this, playImportListEntities -> {
             setProgressVisible(false);
             mAdapter.setNewData(playImportListEntities);
+        });
+
+        mPlayInportViewModel.mPlayInporttData.observe(this, s -> {
+            EventBus.getDefault().post(EventBusService.PIGEON_PLAY_LIST_REFRESH);
+            DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                finish();
+            });
         });
     }
 }

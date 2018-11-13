@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
 import com.base.util.map.WeatherLiveData;
 import com.base.util.picker.PickerUtil;
@@ -67,12 +68,12 @@ public class PairingInfoAddFragment extends BaseBookFragment {
     private PairingInfoAddViewModel mPairingInfoAddViewModel;
     protected SelectTypeViewModel mSelectTypeViewModel;
 
-    public static void start(Activity activity, PigeonEntity mBreedPigeonEntity, PriringRecommendEntity item) {
+    public static void start(Activity activity, PigeonEntity mBreedPigeonEntity, PriringRecommendEntity item, int code) {
 
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mBreedPigeonEntity)
                 .putExtra(IntentBuilder.KEY_DATA_2, item)
-                .startParentActivity(activity, PairingInfoAddFragment.class);
+                .startParentActivity(activity, PairingInfoAddFragment.class, code);
     }
 
     @Override
@@ -195,6 +196,13 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         });
 
         mPairingInfoAddViewModel.isCanCommit();
+
+        mPairingInfoAddViewModel.normalResult.observe(this, s -> {
+            DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
+               sweetAlertDialog.dismiss();
+               IntentBuilder.Builder().finishForResult(getBaseActivity());
+            });
+        });
 
     }
 

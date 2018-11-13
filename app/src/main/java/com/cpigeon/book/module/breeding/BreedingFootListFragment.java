@@ -99,7 +99,7 @@ public class BreedingFootListFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle(R.string.text_breed_info);
+        setTitle(R.string.text_breed_manager);
         mActivity.setSearchClickListener(v -> {
             BaseSearchActivity.start(getBaseActivity(), SearchBreedInfoActivity.class);
         });

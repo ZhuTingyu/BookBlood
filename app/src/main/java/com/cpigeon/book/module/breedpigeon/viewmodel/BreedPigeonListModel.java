@@ -38,6 +38,7 @@ public class BreedPigeonListModel extends BaseViewModel {
     public String pigeonidStr;// ：在列表中排除的鸽子
     public String bitshare;// ：是否是在共享厅（1：存在，2，不存在，其他全查）
     public String bitMotto;// ：是不是铭鸽（1：是，2：正在申请 ，3，不是，其他全查）
+    public String bitTogether;//鸽子是否是分居状态（1是同居，2是分居，不传全部）
 
     public MutableLiveData<List<PigeonEntity>> mPigeonListData = new MutableLiveData<>();
     public MutableLiveData<PigeonSexCountEntity> mLivePigeonSexCount = new MutableLiveData<>();
@@ -57,7 +58,8 @@ public class BreedPigeonListModel extends BaseViewModel {
                 pigeonidStr,// ：在列表中排除的鸽子
                 bitshare,// ：是否是在共享厅（1：存在，2，不存在，其他全查）
                 bitMotto,
-                searchStr), r -> {
+                searchStr,
+                bitTogether), r -> {
 
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);

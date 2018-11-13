@@ -11,6 +11,7 @@ import com.cpigeon.book.event.ShareHallEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
+import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.module.select.BaseSelectPigeonFragment;
 import com.cpigeon.book.module.select.SearchPigeonActivity;
 
@@ -22,7 +23,7 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 
 public class SelectPigeonToShareFragment extends BaseSelectPigeonFragment {
-    //共享厅选择
+    //共享厅选择  
     public static void start(Activity activity) {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TYPE, BaseSelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE);
@@ -30,8 +31,15 @@ public class SelectPigeonToShareFragment extends BaseSelectPigeonFragment {
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setTitle("选择想要共享的种鸽");
+    }
+
+    @Override
     protected void setTypeParam() {
         mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
+        mViewModel.typeid = PigeonEntity.ID_BREED_PIGEON;
     }
 
     @Override
@@ -40,7 +48,7 @@ public class SelectPigeonToShareFragment extends BaseSelectPigeonFragment {
     }
 
     @Override
-    protected void setAdapterClick(BaseQuickAdapter adapter, View view, int position) {
+    protected void setAdapterClick(MyHomingPigeonAdapter adapter, View view, int position) {
         PigeonEntity pigeonEntity = mAdapter.getItem(position);
         BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
                 , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());

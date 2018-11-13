@@ -1,5 +1,8 @@
 package com.cpigeon.book.module.breeding;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import com.base.base.adpter.BaseQuickAdapter;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
@@ -14,6 +17,7 @@ import static com.cpigeon.book.module.breeding.viewmodel.AddBreedingFragment.COD
  */
 
 public class SearchPigeonToAddBreedingActivity extends BaseSearchPigeonActivity {
+
     @Override
     protected BaseQuickAdapter getResultAdapter() {
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
@@ -42,4 +46,6 @@ public class SearchPigeonToAddBreedingActivity extends BaseSearchPigeonActivity 
         super.initData();
         SEARCH_HISTORY_KEY = "search_history_to_add_breeding";
     }
+
+
 }

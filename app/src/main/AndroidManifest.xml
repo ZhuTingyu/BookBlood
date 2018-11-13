@@ -262,6 +262,10 @@
             android:name="com.cpigeon.book.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".module.breeding.SearchPigeonToAddBreedingActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
 
     </application>
 

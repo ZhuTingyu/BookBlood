@@ -36,7 +36,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
     public static void start(Activity activity, String type, Bundle bundleOther) {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TYPE, type);
-        if(bundleOther != null){
+        if (bundleOther != null) {
             bundle.putAll(bundleOther);
         }
         BaseSearchActivity.start(activity, SearchPigeonActivity.class, BaseSelectPigeonFragment.CODE_SEARCH, bundle);
@@ -58,6 +58,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         mType = getIntent().getStringExtra(IntentBuilder.KEY_TYPE);
         super.onCreate(savedInstanceState);
+        mRecyclerView.setListPadding(0, 0, 0, 0);
         mViewModel = new BreedPigeonListModel();
         initViewModel(mViewModel);
         mSearchTextView.setHint(R.string.text_input_foot_number_search);
@@ -90,14 +91,14 @@ public class SearchPigeonActivity extends BaseSearchActivity {
             mViewModel.getPigeonList();
         }, mRecyclerView.getRecyclerView());
 
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+        mAdapter.setOnInItemClickListener((myAdapter, view, position) -> {
             try {
                 PigeonEntity pigeonEntity = mAdapter.getItem(position);
                 //共享厅
                 if (BaseSelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
                     BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
                             , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
-                }else {
+                } else {
                     IntentBuilder.Builder()
                             .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
                             .finishForResult(getBaseActivity());

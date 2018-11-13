@@ -13,10 +13,12 @@ import com.cpigeon.book.model.entity.GoodPigeonCountEntity;
 
 public class GoodPigeonHomeViewModel extends BaseViewModel {
     public MutableLiveData<GoodPigeonCountEntity> mDataGoodPitgeonCount = new MutableLiveData<>();
+    public GoodPigeonCountEntity mGoodPigeonCountEntity;
 
     public void getCount() {
         submitRequestThrowError(GoodPigeonModel.getGoodPigeonCount(), r -> {
             if(r.isOk()){
+                mGoodPigeonCountEntity = r.data;
                 mDataGoodPitgeonCount.setValue(r.data);
             }else throw new HttpErrorException(r);
         });
