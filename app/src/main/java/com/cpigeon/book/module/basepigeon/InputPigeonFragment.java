@@ -222,6 +222,11 @@ public class InputPigeonFragment extends BaseBookFragment {
             setProgressVisible(true);
             mViewModel.getPigeonDetails();
         }
+        else
+        {
+            mViewModel.stateId = "35";
+            mLvState.setRightText("现役在棚");
+        }
 
         setExpandAnim();
         setClick();
@@ -594,7 +599,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             mLvBirthTime.setRightText(breedPigeonEntity.getOutShellTime());
             mLvHangingRingDate.setRightText(breedPigeonEntity.getFootRingTime());
             mLvBlood.setRightText(breedPigeonEntity.getPigeonBloodName());
-            mLvState.setRightText(breedPigeonEntity.getStateName());
+
             mViewModel.pigeonMotherStateId = breedPigeonEntity.getWoPigeonStateID();
             mViewModel.pigeonFatherStateId = breedPigeonEntity.getMenPigeonStateID();
             mViewModel.llHangingRingDate = breedPigeonEntity.getFootRingTime();
@@ -614,6 +619,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.theirShellsDate = breedPigeonEntity.getOutShellTime();
             mViewModel.lineage = breedPigeonEntity.getPigeonBloodName();
             mViewModel.stateId = breedPigeonEntity.getStateID();
+            mLvState.setRightText(breedPigeonEntity.getStateName());
             if(mViewModel.footMother.equals(StringUtil.emptyString()))
             {
                 mLvMotherFootState.setClickable(false);

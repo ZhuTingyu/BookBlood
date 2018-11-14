@@ -1,13 +1,13 @@
 package com.cpigeon.book.module.basepigeon;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.base.util.db.AppDatabase;
 import com.base.util.db.DbEntity;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseSearchActivity;
@@ -18,8 +18,11 @@ import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.SearchTextView;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -197,13 +200,24 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
     }
 
 
-    protected void initObserve() {
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
 
+        if (info.equals(EventBusService.PIGEON_DELETE)) {
+            mAdapter.getData().clear();
+            mBreedPigeonListModel.pi = 1;
+            mBreedPigeonListModel.getPigeonList();
+        }
+    }
+
+    protected void initObserve() {
+        mBreedPigeonListModel.listDeleteMessage.observe(this, s -> {
+            DialogUtils.createHintDialog(getBaseActivity(),s );
+        });
         mBreedPigeonListModel.mPigeonListData.observe(this, datas -> {
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
             setProgressVisible(false);
         });
-
         mBreedPigeonListModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
         });

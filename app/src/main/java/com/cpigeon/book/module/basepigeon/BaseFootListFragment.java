@@ -383,9 +383,7 @@ public class BaseFootListFragment extends BaseBookFragment {
         });
         mBreedPigeonListModel.listDeleteMessage.observe(this, s -> {
             DialogUtils.createHintDialog(getBaseActivity(),s );
-            mAdapter.getData().clear();
-            mBreedPigeonListModel.pi = 1;
-            mBreedPigeonListModel.getPigeonList();
+
 
         });
     }
@@ -398,8 +396,13 @@ public class BaseFootListFragment extends BaseBookFragment {
         if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
             initData(true);
         }
-    }
+        if (info.equals(EventBusService.PIGEON_DELETE)) {
 
+            mAdapter.getData().clear();
+            mBreedPigeonListModel.pi = 1;
+            mBreedPigeonListModel.getPigeonList();
+        }
+    }
     protected void initData(boolean isCount) {
         setProgressVisible(true);
         mAdapter.getData().clear();

@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
-import com.cpigeon.book.module.pigeonleague.adpter.SelectPigeonToLeagueAdapter;
+import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
+import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
+import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
 /**
  * 信鸽赛绩  搜索足环列表
@@ -17,14 +19,22 @@ public class SearchPigeonToLeagueActivity extends BaseSearchPigeonActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new SelectPigeonToLeagueAdapter();
-
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            try {
-                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-                PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
-            } catch (Exception e) {
-                e.printStackTrace();
+        mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
+            @Override
+            public void delete(String PigeonId) {
+                mBreedPigeonListModel.id = PigeonId;
+                mBreedPigeonListModel.deletePigeon();
+            }
+        }, new LinearLayoutListener() {
+            @Override
+            public void click(int position) {
+                try {
+                    PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
+                    PigeonMatchDetailsActivity.start(getBaseActivity(), mBreedPigeonEntity);
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         });
 

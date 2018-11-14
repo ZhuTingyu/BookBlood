@@ -22,7 +22,7 @@ public class SearchPigeonOrFootFragment extends BaseFootListFragment {
     protected void initData() {
         super.initData();
         setStartSearchActvity(SearchPigeonOrFootActivity.class);//搜索页面
-
+setTitle("选择配偶");
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
