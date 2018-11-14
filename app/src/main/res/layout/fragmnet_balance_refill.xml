@@ -79,7 +79,7 @@
                 android:layout_marginLeft="32dp"
                 android:background="@null"
                 android:hint="@string/user_money_hint_num"
-                android:digits="1234567890"
+                android:inputType="numberDecimal"
                 android:textColor="@color/general_text_color"
                 android:textColorHint="@color/color_text_hint"
 

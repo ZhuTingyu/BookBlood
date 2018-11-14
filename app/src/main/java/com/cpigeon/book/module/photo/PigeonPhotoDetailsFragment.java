@@ -42,6 +42,7 @@ import com.cpigeon.book.widget.mydialog.ShareDialogFragment;
 import com.cpigeon.book.widget.mydialog.ViewControlShare;
 import com.cpigeon.book.widget.mzbanner.MZBannerView;
 import com.cpigeon.book.widget.mzbanner.holder.MZViewHolder;
+import com.luck.picture.lib.dialog.PictureDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,9 @@ import cn.qqtheme.framework.picker.OptionPicker;
  * Created by Zhu TingYu on 2018/8/30.
  */
 
-public class PigeonPhotoDetailsFragment extends BaseBookFragment {
+public class PigeonPhotoDetailsFragment extends BaseBookFragment
+{
+    PictureDialog dialog;
     private MZBannerView mBanner;
     private boolean Click=true;
     private SimpleTitleView mSTvMove;
@@ -70,10 +73,6 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
     private AppBarLayout appBarLayout;
     private ValueAnimator animator;//属性动画值
     private float curTranslationY;//动画Y轴移动距离
-public void setProgress(boolean visible)
-{
-    setProgressVisible(visible);
-}
     public static void start(Activity activity, PigeonEntity mPigeonEntity, List<PigeonPhotoEntity> mPigeonPhotoData, int position) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
@@ -114,7 +113,6 @@ public void setProgress(boolean visible)
         mViewModel.mPigeonPhotoData = getBaseActivity().getIntent().getParcelableArrayListExtra(IntentBuilder.KEY_DATA_2);
 
         position = getBaseActivity().getIntent().getIntExtra(IntentBuilder.KEY_DATA_3, 0);
-
 
         RingNum=mViewModel.mPigeonEntity.getFootRingNum();
         mBanner = findViewById(R.id.banner);
@@ -283,7 +281,6 @@ if (mViewModel.mPigeonPhotoData.size()==0)
     @Override
     protected void initObserve() {
         mTypeViewModel.mSelectType_ImgType.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
             mViewModel.mPhotoType = selectTypeEntities;
         });
 
@@ -388,45 +385,47 @@ if (mViewModel.mPigeonPhotoData.size()==0)
 private void removeCache() {
     GlideCacheUtil.clearImageDiskCache(getActivity());//清除Glide图片加载缓存
 }
+
+   public class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
+
+        private ImageView mImg;
+        private TextView mTvColor,mTvTime;
+        private TextView mTvNumberAndTime;
+
+
+        @Override
+        public View createView(Context context) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_pigeon_photo_details, null);
+            mImg = view.findViewById(R.id.img);
+            mTvColor = view.findViewById(R.id.tvColor);
+            mTvTime=view.findViewById(R.id.tvtime);
+            mTvNumberAndTime = view.findViewById(R.id.tvNumberAndTime);
+
+            return view;
+        }
+
+        @Override
+        public void onBind(Context context, int position, PigeonPhotoEntity data) {
+            // 数据绑定
+            Glide.with(context).load(data.getPhotoUrl()).asBitmap().diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(480, 800) {
+                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                    mImg.setImageBitmap(resource);
+                    getBaseActivity().setProgressVisible(false);
+                }
+
+            });
+            String str = data.getAddTime();
+
+            //图片类型
+            mTvColor.setText(data.getTypeName());
+            //时间
+
+            mTvNumberAndTime.setText(PigeonPhotoDetailsFragment.RingNum);
+            mTvTime.setText( str.substring(0, str.indexOf(" ")));
+
+        }
+
+    }
 }
 
-class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
 
-    private ImageView mImg;
-    private TextView mTvColor,mTvTime;
-    private TextView mTvNumberAndTime;
-private Context context;
-
-    @Override
-    public View createView(Context context) {
-
-        View view = LayoutInflater.from(context).inflate(R.layout.item_pigeon_photo_details, null);
-        mImg = view.findViewById(R.id.img);
-        mTvColor = view.findViewById(R.id.tvColor);
-        mTvTime=view.findViewById(R.id.tvtime);
-        mTvNumberAndTime = view.findViewById(R.id.tvNumberAndTime);
-
-        return view;
-    }
-
-    @Override
-    public void onBind(Context context, int position, PigeonPhotoEntity data) {
-        // 数据绑定
-        Glide.with(context).load(data.getPhotoUrl()).asBitmap().diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(480, 800) {
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                mImg.setImageBitmap(resource);
-
-            }
-        });
-        String str = data.getAddTime();
-
-        //图片类型
-        mTvColor.setText(data.getTypeName());
-        //时间
-
-        mTvNumberAndTime.setText(PigeonPhotoDetailsFragment.RingNum);
-        mTvTime.setText( str.substring(0, str.indexOf(" ")));
-
-    }
-
-}

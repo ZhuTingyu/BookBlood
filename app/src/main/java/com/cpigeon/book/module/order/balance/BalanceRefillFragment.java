@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,8 +71,10 @@ public class BalanceRefillFragment extends BaseBookFragment {
         super.onViewCreated(view, savedInstanceState);
 
         setTitle("余额充值");
+        CashierInputFilter cashierInputFilter=new CashierInputFilter();
+        et_input_money.setFilters(new InputFilter[]{cashierInputFilter});
         et_input_money.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL| InputType.TYPE_CLASS_NUMBER);
-        bindUi(RxUtils.PaytextChanges(et_input_money), mBalanceViewModel.hintMoney(getBaseActivity(), tv_next_step, tv_hint_money));
+        bindUi(RxUtils.textChanges(et_input_money), mBalanceViewModel.hintMoney(getBaseActivity(), tv_next_step, tv_hint_money));
 
         TextViewUtil.setEnabled(tv_next_step, false);
 
