@@ -53,6 +53,11 @@ public class FamilyPrintModelMemberView extends FamilyMember {
     private LinearLayout mLlInfo;
     private FamilyTreeView mFamilyTreeView;
 
+    private LinearLayout mLlBlood;
+    private LinearLayout mLlColor;
+    private LinearLayout mLlEye;
+
+
     private View mVLeftLine;
     private RelativeLayout mRlRightLine;
 
@@ -97,6 +102,10 @@ public class FamilyPrintModelMemberView extends FamilyMember {
 
         mVLeftLine = findViewById(R.id.vLeftLine);
         mRlRightLine = findViewById(R.id.rlRightLine);
+
+        mLlBlood = findViewById(R.id.llBlood);
+        mLlColor = findViewById(R.id.llColor);
+        mLlEye = findViewById(R.id.llEye);
 
 
         /*if (generationPoint == 0) {
@@ -211,14 +220,20 @@ public class FamilyPrintModelMemberView extends FamilyMember {
             return;
         }
         setTextContent(mTvFootNumber, entity.getFootRingNum());
-        setTextContent(mTvBlood, entity.getPigeonBloodName());
-        setTextContent(mTvColor, entity.getPigeonPlumeName());
-        setTextContent(mTvEye, entity.getPigeonEyeName());
+        setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
+        setTextContent(mLlColor, mTvColor, entity.getPigeonPlumeName());
+        setTextContent(mLlEye, mTvEye, entity.getPigeonEyeName());
         GlideUtil.setGlideImageView(getContext(), entity.getCoverPhotoUrl(), mImgHead);
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
         MatchAdapter matchAdapter = new MatchAdapter();
         mList.setAdapter(matchAdapter);
         matchAdapter.setNewData(entity.getMatchData());
+
+        if (StringUtil.isStringValid(entity.getCoverPhotoUrl())) {
+            mImgHead.setVisibility(VISIBLE);
+        } else {
+            mImgHead.setVisibility(GONE);
+        }
 
     }
 

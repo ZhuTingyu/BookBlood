@@ -46,22 +46,75 @@
                         tools:text="2018-22-1234567" />
 
 
-                    <TextView
-                        android:id="@+id/tvBlood"
+                    <LinearLayout
+                        android:id="@+id/llBlood"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30px"
-                        android:textColor="@color/color_4c4c4c"
-                        tools:text="詹森系" />
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="32px"
+                            android:text="@string/text_blood"
+                            android:textColor="@color/color_4c4c4c" />
 
-                    <TextView
-                        android:id="@+id/tvColor"
+                        <TextView
+                            android:id="@+id/tvBlood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_4c4c4c"
+                            tools:text="詹森系" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llColor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30px"
-                        android:textColor="@color/color_4c4c4c"
-                        tools:text="雨色" />
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="32px"
+                            android:text="@string/text_feather_color"
+                            android:textColor="@color/color_4c4c4c" />
+
+                        <TextView
+                            android:id="@+id/tvColor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_4c4c4c"
+                            tools:text="雨色" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llEye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30px"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="32px"
+                            android:text="@string/text_eye_sand"
+                            android:textColor="@color/color_4c4c4c" />
+
+
+                        <TextView
+                            android:id="@+id/tvEye"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_4c4c4c"
+                            tools:text="雨色" />
+                    </LinearLayout>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/list"

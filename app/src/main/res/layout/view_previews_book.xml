@@ -7,6 +7,11 @@
     android:layout_height="3508px"
     android:visibility="invisible">
 
+    <ImageView
+        android:background="@mipmap/ic_water_blood_book"
+        android:layout_width="2480px"
+        android:layout_height="3508px" />
+
     <LinearLayout
         android:id="@+id/llPrintImage"
         android:layout_width="wrap_content"

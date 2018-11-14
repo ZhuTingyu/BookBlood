@@ -34,7 +34,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
 
     protected BasePigeonListAdapter mAdapter;
     protected BreedPigeonListModel mBreedPigeonListModel;
-    protected String SEARCH_HISTORY_KEY;
+    protected String SEARCH_HISTORY_KEY = "search_history_pigeon";
 
 
     @Override
@@ -76,6 +76,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         initData();
         super.onCreate(savedInstanceState);
+        mRecyclerView.setListPadding(0, 0, 0, 0);
         mBreedPigeonListModel = new BreedPigeonListModel();
         initViewModel(mBreedPigeonListModel);
 

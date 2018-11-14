@@ -7,17 +7,17 @@
 
     <com.cpigeon.book.widget.ShadowRelativeLayout
         android:id="@+id/rlShadow"
-        android:layout_centerInParent="true"
         android:layout_width="236dp"
         android:layout_height="510dp"
+        android:layout_centerInParent="true"
         android:background="@color/transparent">
 
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scrollViewInfo"
-            android:background="@drawable/shape_bg_family_member_black"
             android:layout_width="226dp"
-            android:layout_height="500dp">
+            android:layout_height="500dp"
+            android:background="@drawable/shape_bg_family_member_black">
 
             <LinearLayout
                 android:id="@+id/rlInMemberInfo"
@@ -31,8 +31,8 @@
                     android:id="@+id/imgHead"
                     android:layout_width="match_parent"
                     android:layout_height="310px"
-                    android:layout_marginBottom="20px"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20px"
                     android:visibility="visible" />
 
                 <com.cpigeon.book.widget.DivideTextView
@@ -42,35 +42,79 @@
                     android:layout_below="@id/imgHead"
                     android:gravity="center"
                     android:textColor="@color/color_text_red_2"
-                    android:textStyle="bold"
                     android:textSize="@dimen/large_text_size"
-                    tools:text="2018-22-1234567" />
+                    android:textStyle="bold"
+                    tools:text="2018-22-12345671313" />
 
-
-                <TextView
-                    android:id="@+id/tvBlood"
+                <LinearLayout
+                    android:id="@+id/llBlood"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30px"
-                    tools:text="詹森系"
-                    android:textColor="@color/color_4c4c4c" />
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="32px"
+                        android:text="@string/text_blood"
+                        android:textColor="@color/color_4c4c4c" />
 
-                <TextView
-                    android:id="@+id/tvColor"
+                    <TextView
+                        android:id="@+id/tvBlood"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_4c4c4c"
+                        tools:text="詹森系" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30px"
-                    tools:text="雨色"
-                    android:textColor="@color/color_4c4c4c" />
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tvEye"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="32px"
+                        android:text="@string/text_feather_color"
+                        android:textColor="@color/color_4c4c4c" />
+
+                    <TextView
+                        android:id="@+id/tvColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_4c4c4c"
+                        tools:text="雨色" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llEye"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30px"
-                    tools:text="雨色"
-                    android:textColor="@color/color_4c4c4c" />
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="32px"
+                        android:text="@string/text_eye_sand"
+                        android:textColor="@color/color_4c4c4c" />
+
+
+                    <TextView
+                        android:id="@+id/tvEye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_4c4c4c"
+                        tools:text="雨色" />
+                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/list"
