@@ -41,6 +41,7 @@ public class PairingInfoListFragment extends BaseListFragment {
     private PairingInfoListAdapter mPairingInfoListAdapter;
     private boolean IsMen = true;
     private boolean IsSingle = true;
+
     private PairingInfoListViewModel mPairingInfoListViewModel;
 
     public static void start(Activity activity, PigeonEntity mBreedPigeonEntity) {
@@ -86,6 +87,10 @@ public class PairingInfoListFragment extends BaseListFragment {
             mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getMenFootRingID());
             mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonSexName("雄");
             mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingNum(mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum());
+            if(mPairingInfoListViewModel.mBreedEntity.isTogether())
+            {
+                mPairingInfoListViewModel.mBreedPigeonEntity.setBitTogether(1);
+            }
             mPairingInfoListViewModel.FootRingID = mPairingInfoListViewModel.mBreedEntity.getMenFootRingID();
 
         } catch (Exception e) {
@@ -100,8 +105,8 @@ public class PairingInfoListFragment extends BaseListFragment {
         String[] chooseWays = getResources().getStringArray(R.array.text_breeding_info);
         setToolbarRightImage(R.drawable.svg_filtrate, item -> {
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
-                if( mPairingInfoListViewModel.mBreedEntity.isTogether()) {
-                    DialogUtils.createHintDialog(getBaseActivity(),"该鸽子"+mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum()+"正处于“同居中”,不可再进行配对！");
+                if(mPairingInfoListViewModel.mBreedPigeonEntity.getBitTogether()==1) {
+                    DialogUtils.createHintDialog(getBaseActivity(),"该鸽子"+mPairingInfoListViewModel.mBreedPigeonEntity.getMenFootRingNum()+"正处于“同居中”,不可再进行配对！");
 
                 }else {
                     if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_add))) {

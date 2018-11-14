@@ -3,6 +3,7 @@ package com.base.util;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
@@ -87,6 +88,7 @@ public class RxUtils {
             final TextWatcher watcher = new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
                 }
 
                 @Override
@@ -96,6 +98,7 @@ public class RxUtils {
 
                 @Override
                 public void afterTextChanged(Editable s) {
+
                 }
             };
 
@@ -106,7 +109,59 @@ public class RxUtils {
             }
         });
     }
+    public static Observable<String> PaytextChanges(EditText view) {
+        return Observable.create(subscriber -> {
+            final TextWatcher watcher = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+
+
+                    if (s.toString().contains(".")) {
+                        if (s.length() - s.toString().indexOf(".") > 2) {
+                            s = s.toString().subSequence(0,
+                                    s.toString().indexOf(".") + 2);
+                            view.setText(s);
+                            view.setSelection(s.length());
+                        }
+                    }
+
+
+                    if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
+                        if (!s.toString().substring(1, 2).equals(".")) {
+                            s=s.subSequence(0, 1);
+                            view.setText(s);
+                            view.setSelection(1);
+                            return;
+                        }
+                    }
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    subscriber.onNext(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (view.getText().toString().trim() != null && !view.getText().toString().trim().equals("")) {
+                        if (view.getText().toString().trim().substring(0, 1).equals(".")) {
+
+                            view.setText("0" + view.getText().toString().trim());
+                            view.setSelection(1);
+                        }
+                    }
+
+                }
+            };
+
+            if (view != null) {
+                view.removeTextChangedListener(watcher);
+                view.addTextChangedListener(watcher);
+                subscriber.onNext(view.getText().toString());
+            }
+        });
+    }
     public static Consumer<? super Boolean> enabled(final View view) {
         return b -> {
             if (view != null)

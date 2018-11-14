@@ -48,8 +48,18 @@ public class PigeonEntity implements Serializable {
      * PigeonID : 46
      * FootRingNum : 2018-01-44
      */
+private int BitTogether;
 
     private String CoverPhotoUrl;
+
+    public int getBitTogether() {
+        return BitTogether;
+    }
+
+    public void setBitTogether(int bitTogether) {
+        BitTogether = bitTogether;
+    }
+
     private String CoverPhotoID;
     private String FootRingID;
     private String StateID;
