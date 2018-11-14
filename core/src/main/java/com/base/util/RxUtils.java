@@ -126,7 +126,6 @@ public class RxUtils {
                         }
                     }
 
-
                     if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
                         if (!s.toString().substring(1, 2).equals(".")) {
                             s=s.subSequence(0, 1);
