@@ -29,7 +29,44 @@ public class FootEntity implements Parcelable {
      * UseFootRingNum : 0
      * Section : 1
      */
+    private String MenPigeonID;
 
+    public String getMenPigeonID() {
+        return MenPigeonID;
+    }
+
+    public void setMenPigeonID(String menPigeonID) {
+        MenPigeonID = menPigeonID;
+    }
+
+    public String getMenFootRingID() {
+        return MenFootRingID;
+    }
+
+    public void setMenFootRingID(String menFootRingID) {
+        MenFootRingID = menFootRingID;
+    }
+
+    public String getWoPigeonID() {
+        return WoPigeonID;
+    }
+
+    public void setWoPigeonID(String woPigeonID) {
+        WoPigeonID = woPigeonID;
+    }
+
+    public String getWoFootRingID() {
+        return WoFootRingID;
+    }
+
+    public void setWoFootRingID(String woFootRingID) {
+        WoFootRingID = woFootRingID;
+    }
+
+    private String       MenFootRingID;
+    private String WoPigeonID;
+
+    private String WoFootRingID;
     private int FootRingID;
     private String FootCodeName;
     private int FootCodeID;

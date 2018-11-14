@@ -137,7 +137,7 @@
     <!--添加单个足环-->
     <string name="foot_add_single">TXGP_FootRing_Add</string>
     <!--修改单个足环-->
-    <string name="foot_edit_single">TXGP_FootRing_Edit</string>
+    <string name="foot_edit_single">TXGP_FootRing_EditNew</string>
     <!--获取单个足环详细-->
     <string name="foot_details_single">TXGP_FootRing_Select</string>
     <!--删除单个足环-->

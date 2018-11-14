@@ -186,15 +186,15 @@ public class FootAdminSingleFragment extends BaseBookFragment {
 
             mLvFatherFoot.setOnRightClickListener(lineInputView -> {
 
-                    SelectFootRingFragment.start(getBaseActivity(), false
-                            , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
+                SelectFootRingFragment.start(getBaseActivity(), false
+                        , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
 
             });
 
             mLvMotherFoot.setOnRightClickListener(lineInputView -> {
 
-                    SelectFootRingFragment.start(getBaseActivity(), false
-                            , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
+                SelectFootRingFragment.start(getBaseActivity(), false
+                        , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
 
             });
 
@@ -233,22 +233,26 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             if (footEntity != null) {
                 lvCity.setRightText(footEntity.getFootCodeName());
                 mViewModel.countryId = String.valueOf(footEntity.getFootCodeID());
-                mViewModel.footNumber=footEntity.getFootRingNum();
+                mViewModel.footNumber = footEntity.getFootRingNum();
                 lvFoot.setRightText(footEntity.getFootRingNum());//足环号
                 mViewModel.footType = String.valueOf(footEntity.getTypeID());
                 lvCategory.setRightText(footEntity.getTypeName());//类别
-                mViewModel.footSource=footEntity.getSourceName();
+                mViewModel.footSource = footEntity.getSourceName();
                 lvSource.setRightText(footEntity.getSourceName());//来源
                 boxViewRemark.setText(footEntity.getRemark());
                 lvStatus.setRightText(footEntity.getStateName());
                 mViewModel.footType = String.valueOf(footEntity.getTypeID());
-                mViewModel.remark=footEntity.getRemark();
-                mViewModel.footmother =footEntity.getWoFootRingNum();
-
-                mViewModel.footfather = footEntity.getMenFootRingNum();
-
-                lvMoney.setRightText(Utils.getString(R.string.text_yuan, footEntity.getFootRingMoney()));//金额
+                mViewModel.remark = footEntity.getRemark();
+                mViewModel.PigeonId = footEntity.getPigeonID();
+                mViewModel.UseNum = String.valueOf(footEntity.getUseFootRingNum());
+                mViewModel.FatherId = footEntity.getMenPigeonID();
+                mViewModel.FatherRingId = footEntity.getMenFootRingID();
+                mViewModel.FatherRingNum = footEntity.getMenFootRingNum();
                 mLvFatherFoot.setRightText(footEntity.getMenFootRingNum());
+                mViewModel.MotherId = footEntity.getWoPigeonID();
+                mViewModel.MotherRingId = footEntity.getWoFootRingID();
+                lvMoney.setRightText(Utils.getString(R.string.text_yuan, footEntity.getFootRingMoney()));//金额
+                mViewModel.MotherRingNum = footEntity.getWoFootRingNum();
                 mLvMotherFoot.setRightText(footEntity.getWoFootRingNum());
                 if (footEntity.isSetRing()) {
                     mLvFatherFoot.setVisibility(View.GONE);
@@ -270,7 +274,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
         mPublicViewModel.mSelectTypeLiveData.observe(this, selectTypeEntities -> {
             mViewModel.mSelectTypes = selectTypeEntities;
 
-            if (!mIsLook){
+            if (!mIsLook) {
                 mViewModel.footType = mViewModel.mSelectTypes.get(0).getTypeID();
                 lvCategory.setContent(mViewModel.mSelectTypes.get(0).getTypeName());
             }
@@ -311,7 +315,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                                 lvCategory.setContent(mViewModel.mSelectTypes.get(p).getTypeName());
                                 mViewModel.isCanCommit();
                             });
-                }else {
+                } else {
 
                 }
                 break;
@@ -336,13 +340,15 @@ public class FootAdminSingleFragment extends BaseBookFragment {
             } else if (SelectFootRingFragment.CODE_SELECT_FATHER_FOOT == requestCode) {
                 PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
                 mLvFatherFoot.setRightText(entity.getFootRingNum());
-                mViewModel.footfather=entity.getFootRingNum();
-
+                mViewModel.FatherRingNum=entity.getFootRingNum();
+                mViewModel.FatherRingId = entity.getFootRingID();
+                mViewModel.FatherId = entity.getPigeonID();
             } else if (SelectFootRingFragment.CODE_SELECT_MATHER_FOOT == requestCode) {
                 PigeonEntity entity = (PigeonEntity) data.getSerializableExtra(IntentBuilder.KEY_DATA);
-
+                mViewModel.MotherRingNum=entity.getFootRingNum();
                 mLvMotherFoot.setRightText(entity.getFootRingNum());
-                mViewModel.footmother=entity.getFootRingNum();
+                mViewModel.MotherRingId = entity.getFootRingID();
+                mViewModel.MotherId = entity.getPigeonID();
             }
         }
 
