@@ -23,7 +23,7 @@ public class PlayImportViewModel extends BaseViewModel {
     public String organizeName;// = "山东冠县正信俱乐部";//赛事组织名称
     public String organizeId;//赛事组织名称
     public String name;//姓名
-    public String houseNumber = "000466";//棚号
+    public String houseNumber;//棚号
     public String matchNumber;//赛事编号
     public List<PlayImportListEntity> mPlayData;
 

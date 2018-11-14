@@ -13,9 +13,7 @@ import com.cpigeon.book.module.breeding.PairingInfoAddFragment;
 import com.cpigeon.book.module.breeding.SearchPigeonToAddBreedingActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
-import com.cpigeon.book.module.homingpigeon.SearchMyHomingActivity;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
-import com.cpigeon.book.module.select.SearchPigeonActivity;
 
 /**
  * Created by Administrator on 2018/11/3 0003.

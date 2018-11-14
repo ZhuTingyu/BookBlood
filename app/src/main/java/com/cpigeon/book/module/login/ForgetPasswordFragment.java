@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.base.base.BaseWebViewActivity;
 import com.base.util.RxUtils;
+import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -27,6 +31,7 @@ import com.cpigeon.book.util.VerifyCountdownUtil;
 public class ForgetPasswordFragment extends BaseBookFragment {
 
     ForgetPasswordViewModel mViewModel;
+    NestedScrollView mSvRoot;
 
     private ImageView mImgClose;
     private EditText edUserPhone;
@@ -70,7 +75,7 @@ public class ForgetPasswordFragment extends BaseBookFragment {
         });
 
         mLoginActivity = (LoginActivity) getBaseActivity();
-
+        mSvRoot = findViewById(R.id.svRoot);
         mImgClose = findViewById(R.id.imgClose);
         edUserPhone = findViewById(R.id.edUserPhone);
         mEdAuthCode = findViewById(R.id.edAuthCode);
@@ -81,6 +86,8 @@ public class ForgetPasswordFragment extends BaseBookFragment {
         mLlAgreement = findViewById(R.id.llAgreement);
         mTvAgreement = findViewById(R.id.tvAgreement);
         mTvOk = findViewById(R.id.tvOk);
+
+        mSvRoot.setBackgroundResource(R.drawable.ic_bg_find_password);
 
         bindUi(RxUtils.textChanges(edUserPhone), mViewModel.setPhone());
         bindUi(RxUtils.textChanges(mEdAuthCode), mViewModel.setAuthCode());

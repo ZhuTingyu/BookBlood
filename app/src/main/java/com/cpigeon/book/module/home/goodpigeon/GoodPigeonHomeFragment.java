@@ -109,7 +109,7 @@ public class GoodPigeonHomeFragment extends BaseBookFragment {
             mStat1.bindData(goodPigeonCountEntity.getAllCount(), goodPigeonCountEntity.getAllCount());
             mStat2.bindData(goodPigeonCountEntity.getAllXiongCount(), goodPigeonCountEntity.getAllCount());
             mStat3.bindData(goodPigeonCountEntity.getAllCiCount(), goodPigeonCountEntity.getAllCount());
-            if(goodPigeonCountEntity.getAllCiCount() == 0){
+            if(goodPigeonCountEntity.getAllCount() == 0){
                 setStatVisible(false);
             }else {
                 setStatVisible(true);

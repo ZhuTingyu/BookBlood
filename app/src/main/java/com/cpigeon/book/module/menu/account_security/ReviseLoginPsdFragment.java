@@ -142,6 +142,8 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
                 return true;
             });
 
+            mAuthCodeViewModel.mType = AuthCodeViewModel.TYPE_FIND_PASSWORD;
+
         } else if (type == 2) {
             //支付密码
             setTitle(getString(R.string.text_renewal_play_psd));
@@ -179,7 +181,8 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
         });
 
         mRevisePsdViewModel.reviseLoginPsd.observe(this, s -> {
-            getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), s, SweetAlertDialog.ERROR_TYPE, false, dialog -> {
+            setProgressVisible(false);
+            getBaseActivity().errorDialog = DialogUtils.createHintDialog(getActivity(), s, SweetAlertDialog.SUCCESS_TYPE, false, dialog -> {
                 SingleLoginService.stopService();
                 UserModel.getInstance().cleanUserInfo();
                 dialog.dismiss();
@@ -190,7 +193,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
 
         mAuthCodeViewModel.mDataCode.observe(this, code -> {
             setProgressVisible(false);
-            ToastUtils.showLong(getBaseActivity(), "发送验证码成功！");
+            ToastUtils.showLong(getBaseActivity(), "成功发送验证码！");
         });
 
     }
@@ -200,6 +203,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.tv_next_step:
                 //点击提交
+                setProgressVisible(true);
                 if (type == 1) {
                     //修改登录密码
                     if (isNeedVerCode) {
@@ -224,7 +228,6 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
                         ToastUtils.showLong(getBaseActivity(), "输入图片验证码不符，请重新输入");
                         return;
                     }
-                    setProgressVisible(true);
                     mRevisePsdViewModel.getZGW_Users_GetPlayData();
                 }
 

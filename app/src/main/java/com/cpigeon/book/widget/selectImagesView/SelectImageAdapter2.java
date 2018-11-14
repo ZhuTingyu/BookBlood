@@ -145,7 +145,6 @@ public class SelectImageAdapter2 extends RecyclerView.Adapter<BaseViewHolder> {
             rlRoot = itemView.findViewById(R.id.rlRoot);
             addBtn = itemView.findViewById(R.id.imgAdd);
 
-            addBtn.setScaleType(ImageView.ScaleType.CENTER);
             addBtn.setImageResource(R.mipmap.ic_add);
 
             RecyclerView.LayoutParams rootParams = new RecyclerView.LayoutParams(rootW, ViewGroup.LayoutParams.WRAP_CONTENT);

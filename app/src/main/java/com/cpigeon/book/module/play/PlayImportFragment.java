@@ -79,8 +79,8 @@ public class PlayImportFragment extends BaseBookFragment {
         mPlayInportViewModel.organizeType = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
         mPlayInportViewModel.organizeName = getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
         mPlayInportViewModel.organizeId = getIntent().getStringExtra(IntentBuilder.KEY_DATA_3);
-        //mPlayInportViewModel.houseNumber = UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonHomeID();
-        //mPlayInportViewModel.matchNumber = UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonMatchNum();
+        mPlayInportViewModel.houseNumber = UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonHomeID();
+        mPlayInportViewModel.matchNumber = UserModel.getInstance().getUserData().pigeonHouseEntity.getPigeonMatchNum();
     }
 
     @Nullable
@@ -193,6 +193,7 @@ public class PlayImportFragment extends BaseBookFragment {
         });
 
         mPlayInportViewModel.mPlayInporttData.observe(this, s -> {
+            setProgressVisible(false);
             EventBus.getDefault().post(EventBusService.PIGEON_PLAY_LIST_REFRESH);
             DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
                 sweetAlertDialog.dismiss();

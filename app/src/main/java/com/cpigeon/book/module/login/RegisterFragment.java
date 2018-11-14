@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.base.base.BaseWebViewActivity;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.basepigeon.AuthCodeViewModel;
 import com.cpigeon.book.module.login.viewmodel.RegisterViewModel;
 import com.cpigeon.book.util.VerifyCountdownUtil;
 
@@ -28,6 +32,7 @@ import com.cpigeon.book.util.VerifyCountdownUtil;
 public class RegisterFragment extends BaseBookFragment {
 
     RegisterViewModel mViewModel;
+    AuthCodeViewModel mAuthCodeViewModel;
 
     private ImageView mImgClose;
     private EditText mEdUserPhone;
@@ -39,6 +44,7 @@ public class RegisterFragment extends BaseBookFragment {
     private AppCompatCheckBox mChkAgree;
     private TextView mTvAgreement;
     private TextView mTvOk;
+    private NestedScrollView mSvRoot;
     private LoginActivity mLoginActivity;
 
     private Thread thread;
@@ -46,6 +52,10 @@ public class RegisterFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mViewModel = new RegisterViewModel();
+        mAuthCodeViewModel = new AuthCodeViewModel();
+        mAuthCodeViewModel.mType = AuthCodeViewModel.TYPE_REGISTER;
+        initViewModels(mViewModel, mAuthCodeViewModel);
 
     }
 
@@ -59,8 +69,6 @@ public class RegisterFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mViewModel = new RegisterViewModel();
-        initViewModel(mViewModel);
 
         mViewModel.registerR.observe(this, s -> {
             setProgressVisible(false);
@@ -76,7 +84,15 @@ public class RegisterFragment extends BaseBookFragment {
             }
         });
 
+        mAuthCodeViewModel.mDataCode.observe(this, code -> {
+            setProgressVisible(false);
+            thread = new Thread(VerifyCountdownUtil.getYzm(mTvGetCode, getActivity()));
+            thread.start();
+            ToastUtils.showLong(getBaseActivity(), "成功发送验证码！");
+        });
+
         mLoginActivity = (LoginActivity) getBaseActivity();
+        mSvRoot = findViewById(R.id.svRoot);
         mImgClose = findViewById(R.id.imgClose);
         mEdUserPhone = findViewById(R.id.edUserPhone);
         mEdAuthCode = findViewById(R.id.edAuthCode);
@@ -88,11 +104,14 @@ public class RegisterFragment extends BaseBookFragment {
         mEdInviteCode = findViewById(R.id.edInviteCode);
         mTvOk = findViewById(R.id.tvOk);
 
+        mSvRoot.setBackgroundResource(R.drawable.ic_bg_register);
+
         bindUi(RxUtils.textChanges(mEdUserPhone), mViewModel.setPhone());
         bindUi(RxUtils.textChanges(mEdAuthCode), mViewModel.setAuthCode());
         bindUi(RxUtils.textChanges(mEdPassword), mViewModel.setPassword());
         bindUi(RxUtils.textChanges(mEdPassword2), mViewModel.setPassword2());
         bindUi(RxUtils.textChanges(mEdInviteCode), mViewModel.setInviteCode());
+        bindUi(RxUtils.textChanges(mEdUserPhone), mAuthCodeViewModel.setPhoneNumber());
 
         mImgClose.setOnClickListener(v -> {
             mLoginActivity.replace(LoginActivity.TYPE_LOGIN);
@@ -109,8 +128,14 @@ public class RegisterFragment extends BaseBookFragment {
 
 
         mTvGetCode.setOnClickListener(v -> {
-            thread = new Thread(VerifyCountdownUtil.getYzm(mTvGetCode, getActivity()));
-            thread.start();
+            setProgressVisible(true);
+            mAuthCodeViewModel.getAuthCode();
+        });
+
+
+        mTvAgreement.setOnClickListener(v -> {
+            BaseWebViewActivity.start(getBaseActivity(), Utils.getString(R.string.baseUr_j)
+                    + Utils.getString(R.string.baseUr_j) );
         });
     }
 

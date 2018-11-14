@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.basepigeon;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
@@ -32,6 +33,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
     protected BreedPigeonListModel mBreedPigeonListModel;
     protected String SEARCH_HISTORY_KEY;
 
+
     @Override
     protected List<DbEntity> getHistory() {
 
@@ -49,7 +51,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
         mAdapter = new BreedPigeonListAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
-                mBreedPigeonListModel.id=PigeonId;
+                mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
         }, new LinearLayoutListener() {
@@ -71,7 +73,6 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         initData();
         super.onCreate(savedInstanceState);
-
         mBreedPigeonListModel = new BreedPigeonListModel();
         initViewModel(mBreedPigeonListModel);
 

@@ -1,6 +1,10 @@
 package com.cpigeon.book.module.homingpigeon;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import com.base.base.adpter.BaseQuickAdapter;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
@@ -15,6 +19,12 @@ import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
 public class SearchMyHomingActivity extends BaseSearchPigeonActivity {
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mBreedPigeonListModel.stateid = StringUtil.emptyString();
+        mRecyclerView.setListPadding(0, 0, 0, 0);
+    }
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
