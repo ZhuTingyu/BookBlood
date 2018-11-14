@@ -70,7 +70,10 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
     private AppBarLayout appBarLayout;
     private ValueAnimator animator;//属性动画值
     private float curTranslationY;//动画Y轴移动距离
-
+public void setProgress(boolean visible)
+{
+    setProgressVisible(visible);
+}
     public static void start(Activity activity, PigeonEntity mPigeonEntity, List<PigeonPhotoEntity> mPigeonPhotoData, int position) {
         IntentBuilder.Builder()
                 .putExtra(IntentBuilder.KEY_DATA, mPigeonEntity)
@@ -125,8 +128,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment {
             String shareUrl = mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPhotoUrl();
             showShareDialog(shareUrl);
         });
-        linearLayout.setVisibility(View.GONE);
-     //   appBarLayout.setVisibility(View.GONE);
+
         dialogFragment = new ShareDialogFragment();
 
         mBanner.setPages(mViewModel.mPigeonPhotoData, () -> {
@@ -413,6 +415,7 @@ private Context context;
         Glide.with(context).load(data.getPhotoUrl()).asBitmap().diskCacheStrategy(DiskCacheStrategy.RESULT).into(new SimpleTarget<Bitmap>(480, 800) {
             public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                 mImg.setImageBitmap(resource);
+
             }
         });
         String str = data.getAddTime();

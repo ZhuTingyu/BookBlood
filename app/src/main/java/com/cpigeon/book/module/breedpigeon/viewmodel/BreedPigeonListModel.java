@@ -7,6 +7,9 @@ import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonSexCountEntity;
+import com.cpigeon.book.service.EventBusService;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -74,6 +77,7 @@ public void deletePigeon()
     submitRequestThrowError(BreedPigeonModel.deletePigeon(id), r -> {
 
         if (r.isOk()) {
+            EventBus.getDefault().post(EventBusService.PIGEON_DELETE);
             listDeleteMessage.setValue(r.msg);
         } else throw new HttpErrorException(r);
     });

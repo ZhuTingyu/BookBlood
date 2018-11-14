@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_text_title"
                 android:textSize="@dimen/small_text_size_2"
-                tools:text="中1231111111111111133111111111111111111111111开大厦" />
+                tools:text="" />
 
         </LinearLayout>
 

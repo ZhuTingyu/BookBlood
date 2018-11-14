@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.dialog.DialogUtils;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.BreedEntity;
@@ -99,13 +100,18 @@ public class PairingInfoListFragment extends BaseListFragment {
         String[] chooseWays = getResources().getStringArray(R.array.text_breeding_info);
         setToolbarRightImage(R.drawable.svg_filtrate, item -> {
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
-                if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_add))) {
-                    //添加配对
-                    PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, null, 0);
+                if( mPairingInfoListViewModel.mBreedEntity.isTogether()) {
+                    DialogUtils.createHintDialog(getBaseActivity(),"该鸽子"+mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum()+"正处于“同居中”,不可再进行配对！");
 
-                } else if (chooseWays[p].equals(Utils.getString(R.string.array_blind_date))) {
-                    //相亲配对
-                    ShareHallFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
+                }else {
+                    if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_add))) {
+                        //添加配对
+                        PairingInfoAddFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity, null, 0);
+
+                    } else if (chooseWays[p].equals(Utils.getString(R.string.array_blind_date))) {
+                        //相亲配对
+                        ShareHallFragment.start(getBaseActivity(), mPairingInfoListViewModel.mBreedPigeonEntity);
+                    }
                 }
             });
             return false;

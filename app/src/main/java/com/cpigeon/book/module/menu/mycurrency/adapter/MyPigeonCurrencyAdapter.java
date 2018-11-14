@@ -17,7 +17,6 @@ import com.cpigeon.book.module.foot.FootAdminAddMultipleFragment;
 import com.cpigeon.book.module.foot.FootAdminSingleFragment;
 import com.cpigeon.book.module.menu.SignFragment;
 import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
-import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
 
 /**
  * Created by Zhu TingYu on 2018/8/24.
@@ -62,7 +61,8 @@ public class MyPigeonCurrencyAdapter extends BaseQuickAdapter<PigeonCurrencyEnti
 
                 } else if (item.getSname().equals(mContext.getString(R.string.str_gb_entry_racing_pigeon))) {
                     //录入赛鸽
-                    RacingPigeonEntryFragment.start(getBaseActivity());
+                    InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);
+
 
                 } else if (item.getSname().equals(mContext.getString(R.string.str_gb_feed_pigeon))) {
                     //养鸽记录

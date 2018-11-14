@@ -7,6 +7,7 @@ import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
 import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.cpigeon.book.module.trainpigeon.FlyBackRecordFragment;
@@ -26,28 +27,40 @@ public class TrainProjectListAdapter extends BaseQuickAdapter<TrainEntity, BaseV
     protected void convert(BaseViewHolder helper, TrainEntity trainEntity) {
         helper.setViewVisible(R.id.llCheck, View.GONE);
         TextView tvStatus = helper.getView(R.id.tvStatus);
-        helper.setText(R.id.tvLocation, trainEntity.getFromPlace());
+
         helper.setText(R.id.tvCount, String.valueOf(trainEntity.getReturnCount()));
 
         helper.setText(R.id.tvTrainedOrder, String.valueOf(trainEntity.getTrainCount()));
         tvStatus.setText(trainEntity.getTrainStateName());
 
-        if(Utils.getString(R.string.text_end_yet).equals(trainEntity.getTrainStateName())){
+        if (Utils.getString(R.string.text_end_yet).equals(trainEntity.getTrainStateName())) {
             tvStatus.setTextColor(Utils.getColor(R.color.color_text_title));
             helper.itemView.setOnClickListener(v -> {
                 FlyBackRecordFragment.start(getBaseActivity(), trainEntity, true);
             });
-        }else if(Utils.getString(R.string.text_training).equals(trainEntity.getTrainStateName())){
+        } else if (Utils.getString(R.string.text_training).equals(trainEntity.getTrainStateName())) {
             tvStatus.setTextColor(Utils.getColor(R.color.color_text_red));
             helper.itemView.setOnClickListener(v -> {
                 FlyBackRecordFragment.start(getBaseActivity(), trainEntity, false);
             });
-        }else if(Utils.getString(R.string.text_start_not).equals(trainEntity.getTrainStateName())){
+        } else if (Utils.getString(R.string.text_start_not).equals(trainEntity.getTrainStateName())) {
             tvStatus.setTextColor(Utils.getColor(R.color.color_text_title));
             helper.itemView.setOnClickListener(v -> {
                 OpenAndCloseTrainFragment.start(getBaseActivity(), true, trainEntity);
             });
         }
-        helper.setText(R.id.tvTime, trainEntity.getFromFlyTime());
+        if (trainEntity.getFromFlyTime().equals(StringUtil.emptyString())) {
+            helper.setText(R.id.tvTime, "未设置");
+
+        } else {
+            helper.setText(R.id.tvTime, trainEntity.getFromFlyTime());
+        }
+        if (trainEntity.getFromFlyTime().equals(StringUtil.emptyString())) {
+            helper.setText(R.id.tvLocation, "未设置");
+        }
+        else
+        {
+            helper.setText(R.id.tvLocation, trainEntity.getFromPlace());
+        }
     }
 }

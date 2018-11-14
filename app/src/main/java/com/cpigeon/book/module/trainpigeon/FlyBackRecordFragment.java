@@ -26,7 +26,6 @@ import com.cpigeon.book.event.UpdateTrainEvent;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.cpigeon.book.module.trainpigeon.adpter.FlyBackRecordAdapter;
 import com.cpigeon.book.module.trainpigeon.viewmodel.FlyBackRecordViewModel;
-import com.cpigeon.book.util.TextViewUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -116,7 +115,7 @@ public class FlyBackRecordFragment extends BaseBookFragment {
 
                 return false;
             });
-            TextViewUtil.setCancle(mTvOk);
+            //TextViewUtil.setCancle(mTvOk);
             mTvOk.setText(R.string.text_end_train);
             mTvOk.setOnClickListener(v -> {
                 DialogUtils.createDialogWithLeft(getBaseActivity(), Utils.getString(R.string.text_is_end_train), sweetAlertDialog -> {
