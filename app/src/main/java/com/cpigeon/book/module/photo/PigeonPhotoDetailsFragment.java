@@ -58,7 +58,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment
 {
     PictureDialog dialog;
     private MZBannerView mBanner;
-    private boolean Click=true;
+    private boolean Click=false;
     private SimpleTitleView mSTvMove;
     private SimpleTitleView mSTvSetFace;//设为封面
     private SimpleTitleView mSTvDelete;

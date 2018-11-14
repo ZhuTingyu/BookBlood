@@ -11,6 +11,7 @@ import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
+import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 
 /**
  * 选择子代信息  列表
@@ -34,6 +35,7 @@ public class OffspringChooseFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setTitle("子代选择");
         mRecyclerView.addItemDecorationLine();
         mPairingInfoEntity = (PairingInfoEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         mNestTimeId = getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
@@ -44,8 +46,8 @@ public class OffspringChooseFragment extends BaseFootListFragment {
         super.initData();
         setProgressVisible(false);
         setStartSearchActvity(OffspringSearchActivity.class);//搜索页面
-
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
+        MyHomingPigeonAdapter myHomingPigeonAdapter  =new MyHomingPigeonAdapter();
+        myHomingPigeonAdapter.setOnInItemClickListener((myAdapter, view, position) -> {
             try {
                 PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
                 Intent intent = new Intent();
@@ -56,7 +58,7 @@ public class OffspringChooseFragment extends BaseFootListFragment {
                 e.printStackTrace();
             }
         });
-
+        mAdapter = myHomingPigeonAdapter;
         setToolbarRight("添加", item -> {
             OffspringAddFragment2.start(getBaseActivity(), mNestTimeId, mPairingInfoEntity, PairingNestAddFragment.requestCode);
             return true;

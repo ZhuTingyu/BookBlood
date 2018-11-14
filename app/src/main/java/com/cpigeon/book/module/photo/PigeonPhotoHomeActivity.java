@@ -108,9 +108,7 @@ private BreedPigeonDetailsViewModel breedPigeonDetailsViewModel;
         imgAdd = findViewById(R.id.imgAdd);
         mAdapter = new PigeonPhotoHomeAdapter();
 
-
         initDatas();
-
 
         initRecyclerView();
         breedPigeonDetailsViewModel.getPigeonDetails();
