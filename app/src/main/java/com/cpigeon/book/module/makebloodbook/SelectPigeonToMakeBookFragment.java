@@ -61,9 +61,13 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         bloodUserViewModel = new BloodUserViewModel();
         initViewModels(bloodUserViewModel);
+    }
+
+    @Override
+    protected void initParameter() {
+        mBreedPigeonListModel.stateid = PigeonEntity.ID_ALL_MY_PGIEON;
     }
 
     @Override
@@ -71,6 +75,25 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.text_blood_book_made);
         bloodUserViewModel.getBloodNum();
+        setNotMyPigeon();
+    }
+
+    private void setNotMyPigeon(){
+        setToolbarRight("非本棚鸽", item -> {
+            mBreedPigeonListModel.stateid = PigeonEntity.ID_NOT_MY_PIGEON;
+            initData(true);
+            setMyPigeon();
+            return false;
+        });
+    }
+
+    private void setMyPigeon(){
+        setToolbarRight("我的信鸽", item -> {
+            mBreedPigeonListModel.stateid = PigeonEntity.ID_ALL_MY_PGIEON;
+            initData(true);
+            setNotMyPigeon();
+            return false;
+        });
     }
 
 

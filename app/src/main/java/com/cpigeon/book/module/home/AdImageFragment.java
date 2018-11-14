@@ -63,7 +63,8 @@ public class AdImageFragment extends BaseBookFragment {
             setTitle(R.string.text_blood_find);
             GlideUtil.setGlideImageView(getBaseActivity(), R.mipmap.ic_bg_find_blood, mImageView);
         } else {
-            GlideUtil.setGlideImageView(getBaseActivity(), R.mipmap.ic_bg_find_blood, mImageView);
+            setTitle(R.string.text_train_analyze);
+            GlideUtil.setGlideImageView(getBaseActivity(), R.mipmap.ic_bg_match_fen, mImageView);
         }
     }
 }

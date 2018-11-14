@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
+import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.PhoneUtils;
@@ -174,6 +175,10 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
         if (!mBreedPigeonDetailsViewModel.pUid.equals(UserModel.getInstance().getUserId())) {
             mFamilyTreeView.setShowInfoModel(true);
         }
+
+        composite.add(RxUtils.delayed(200, aLong -> {
+            mFamilyTreeView.initView();
+        }));
 
         if (StringUtil.isStringValid(mType)) {
             llButton.setVisibility(View.VISIBLE);

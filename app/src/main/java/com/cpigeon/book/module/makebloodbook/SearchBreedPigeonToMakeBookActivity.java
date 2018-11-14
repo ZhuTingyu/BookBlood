@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.db.AppDatabase;
+import com.base.util.utility.StringUtil;
+import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
@@ -22,6 +24,7 @@ public class SearchBreedPigeonToMakeBookActivity extends BaseSearchPigeonActivit
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRecyclerView.setListPadding(0, 0, 0, 0);
+        mBreedPigeonListModel.stateid = StringUtil.emptyString();
     }
 
     @Override

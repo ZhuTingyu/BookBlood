@@ -139,12 +139,17 @@ public class SelectTimeHaveHMSDialog extends BaseDialogFragment {
         wheelView.setTextPadding(textPadding);
         wheelView.setTextSize(textSize);
         wheelView.setTypeface(typeface);
-        wheelView.setTextColor(textColorNormal, textColorFocus);
+        wheelView.setTextColor(com.base.util.Utils.getColor(R.color.black));
+        wheelView.setDividerColor(com.base.util.Utils.getColor(R.color.color_line));
         wheelView.setDividerConfig(dividerConfig);
         wheelView.setOffset(offset);
         wheelView.setCycleDisable(cycleDisable);
         wheelView.setUseWeight(useWeight);
         wheelView.setTextSizeAutoFit(textSizeAutoFit);
+//        picker.setTextColor(com.base.util.Utils.getColor(R.color.black));
+//        picker.setDividerColor(com.base.util.Utils.getColor(R.color.color_line));
+//        picker.setCancelTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
+//        picker.setSubmitTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
     }
 
     public interface OnTimeSelectListener {

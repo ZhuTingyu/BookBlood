@@ -16,7 +16,7 @@ import com.base.BaseFragment;
 import com.base.FragmentParentActivity;
 import com.base.util.IntentBuilder;
 import com.cpigeon.book.R;
-import com.cpigeon.book.widget.FiltrateListView;
+import com.cpigeon.book.widget.filtrate.FiltrateListView;
 
 
 /**

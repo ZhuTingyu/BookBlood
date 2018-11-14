@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +26,7 @@ import com.cpigeon.book.module.breedpigeon.adpter.GrowthReportAdapter;
 import com.cpigeon.book.module.feedpigeon.viewmodel.GrowthReportViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
-import com.cpigeon.book.widget.FiltrateListView;
+import com.cpigeon.book.widget.filtrate.FiltrateListView;
 import com.google.gson.Gson;
 
 import java.util.List;

@@ -250,10 +250,10 @@ public class PreviewsBookActivity extends BaseBookActivity {
 
             if (bookType == SelectTemplateFragment.TYPE_H) {
 
-                mFamilyTreeView.setHorizontal(true);
-                mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
-                mFamilyTreeView.initView();
-                mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+//                mFamilyTreeView.setHorizontal(true);
+//                mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_H);
+//                mFamilyTreeView.initView();
+//                mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
 
                 RelativeLayout.LayoutParams treeP = new RelativeLayout.LayoutParams(2480, 3270);
                 treeP.addRule(RelativeLayout.CENTER_IN_PARENT);

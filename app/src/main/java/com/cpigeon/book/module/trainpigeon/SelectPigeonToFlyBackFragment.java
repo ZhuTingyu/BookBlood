@@ -57,6 +57,7 @@ public class SelectPigeonToFlyBackFragment extends BaseBookFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setTitle("选择你要归巢的信鸽");
         mActivity.setSearchHint(R.string.text_input_foot_number_search);
         mActivity.setSearchClickListener(v -> {
             SearchPigeonToFlyBackActivity.start(getBaseActivity(), mViewModel.mTrainEntity);

@@ -115,13 +115,6 @@ public class FamilyTreeView extends LinearLayout {
             if (!isDrawView) {
                 isDrawView = true;
                 initView();
-                if (!isShowInfoModel) {
-                    LinearLayout first = generationLinearLayouts.get(0);
-                    for (int i = 0, len = first.getChildCount(); i < len; i++) {
-                        FamilyMember member = (FamilyMember) first.getChildAt(i);
-                        member.setCanAdd();
-                    }
-                }
             }
         });
     }
@@ -194,6 +187,14 @@ public class FamilyTreeView extends LinearLayout {
             }
             addView(linearLayout);
             generationLinearLayouts.add(linearLayout);
+        }
+
+        if (!isShowInfoModel) {
+            LinearLayout first = generationLinearLayouts.get(0);
+            for (int i = 0, len = first.getChildCount(); i < len; i++) {
+                FamilyMember member = (FamilyMember) first.getChildAt(i);
+                member.setCanAdd();
+            }
         }
     }
 

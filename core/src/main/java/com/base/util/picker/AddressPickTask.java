@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import com.alibaba.fastjson.JSON;
+import com.base.http.R;
 
 import java.util.ArrayList;
 
@@ -82,6 +83,11 @@ public class AddressPickTask extends AsyncTask<String, Void, ArrayList<Province>
         dialog.dismiss();
         if (result.size() > 0) {
             AddressPicker picker = new AddressPicker(activity, result);
+            picker.setTextColor(com.base.util.Utils.getColor(R.color.black));
+            picker.setDividerColor(com.base.util.Utils.getColor(R.color.color_line));
+            picker.setCancelTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
+            picker.setSubmitTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
+            picker.setTopLineColor(com.base.util.Utils.getColor(R.color.black));
             picker.setHideProvince(hideProvince);
             picker.setHideCounty(hideCounty);
             if (hideCounty) {

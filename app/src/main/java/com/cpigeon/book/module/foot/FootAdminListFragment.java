@@ -30,7 +30,7 @@ import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminListViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
-import com.cpigeon.book.widget.FiltrateListView;
+import com.cpigeon.book.widget.filtrate.FiltrateListView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

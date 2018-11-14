@@ -1,4 +1,4 @@
-package com.cpigeon.book.widget;
+package com.cpigeon.book.widget.filtrate;
 
 import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
-import com.cpigeon.book.adpter.FiltrateItemAdapter;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 
 import java.util.List;

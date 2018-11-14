@@ -1,4 +1,4 @@
-package com.cpigeon.book.adpter;
+package com.cpigeon.book.widget.filtrate;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -122,6 +122,7 @@ public class FiltrateItemAdapter extends BaseMultiItemQuickAdapter<SelectTypeEnt
                         if (StringUtil.isStringValid(content)) {
                             custom.setTypeName(mEditText.getText().toString());
                             custom.setSelect(true);
+                            isAll(false);
                         }else {
                             custom.setSelect(false);
                         }
@@ -157,6 +158,10 @@ public class FiltrateItemAdapter extends BaseMultiItemQuickAdapter<SelectTypeEnt
                 setSelect(entity, false);
                 notifyItemChanged(i);
             }
+        }
+        if (mEditText != null) {
+            mEditText.setText(StringUtil.emptyString());
+            mEditText.clearFocus();
         }
         isAll(isHaveAll);
     }

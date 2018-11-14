@@ -30,7 +30,7 @@ import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
-import com.cpigeon.book.widget.FiltrateListView;
+import com.cpigeon.book.widget.filtrate.FiltrateListView;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -272,7 +272,7 @@ public class BaseFootListFragment extends BaseBookFragment {
     }
 
     //初始化请求的参数
-    private void initParameter() {
+    protected void initParameter() {
         try {
             mBreedPigeonListModel.typeid = getBaseActivity().getIntent().getStringExtra(BaseFootListFragment.TYPEID);
         } catch (Exception e) {

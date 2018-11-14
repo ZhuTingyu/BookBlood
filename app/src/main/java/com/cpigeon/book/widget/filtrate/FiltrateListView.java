@@ -1,4 +1,4 @@
-package com.cpigeon.book.widget;
+package com.cpigeon.book.widget.filtrate;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,7 +12,6 @@ import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.utility.TimeUtil;
 import com.cpigeon.book.R;
-import com.cpigeon.book.adpter.FiltrateItemAdapter;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 

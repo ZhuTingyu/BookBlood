@@ -190,7 +190,7 @@ public class HomeFragment extends BaseBookFragment {
         });
 
         mSTvMatchPigeonAnalyse.setOnClickListener(v -> {
-
+            AdImageFragment.start(getBaseActivity(), AdImageFragment.TYPE_MATCH_PIGEON_ANALYSE);
         });
 
         mViewModel.getHomeAd();

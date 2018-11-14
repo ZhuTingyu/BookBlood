@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.base.util.IntentBuilder;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.basepigeon.BaseFootListFragment;
@@ -79,8 +80,8 @@ public class AddBreedingFragment extends BaseFootListFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(Activity.RESULT_OK == requestCode){
-            finish();
+        if(Activity.RESULT_OK == resultCode){
+            IntentBuilder.Builder().finishForResult(getBaseActivity());
         }
     }
 }

@@ -355,7 +355,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                     PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
 
                     //足环号
-//                    llPairingFoot.setContent(item.getFootRingNum());
+                    llPairingFoot.setContent(item.getFootRingNum());
                     mPairingInfoAddViewModel.pairingFoot = item.getFootRingNum();
 
                     //血统

@@ -30,7 +30,7 @@ import com.cpigeon.book.module.home.sharehall.viewmodel.ShareHallViewModel;
 import com.cpigeon.book.module.menu.service.OpenServiceFragment;
 import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
-import com.cpigeon.book.widget.FiltrateListView;
+import com.cpigeon.book.widget.filtrate.FiltrateListView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
 import com.base.http.R;
+import com.wdullaer.materialdatetimepicker.Utils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
@@ -76,6 +77,11 @@ public class PickerUtil {
             picker.setSelectedItem(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH) + 1, endCalendar.get(Calendar.DAY_OF_MONTH));
             picker.setResetWhileWheel(false);
             picker.setOnDatePickListener(listener);
+            picker.setTextColor(com.base.util.Utils.getColor(R.color.black));
+            picker.setDividerColor(com.base.util.Utils.getColor(R.color.color_line));
+            picker.setCancelTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
+            picker.setSubmitTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
+            picker.setTopLineColor(com.base.util.Utils.getColor(R.color.black));
             picker.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,6 +141,11 @@ public class PickerUtil {
         OptionPicker picker = new OptionPicker(activity, data);
         picker.setCanceledOnTouchOutside(false);
         picker.setDividerRatio(WheelView.DividerConfig.FILL);
+        picker.setTextColor(com.base.util.Utils.getColor(R.color.black));
+        picker.setDividerColor(com.base.util.Utils.getColor(R.color.color_line));
+        picker.setCancelTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
+        picker.setSubmitTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
+        picker.setTopLineColor(com.base.util.Utils.getColor(R.color.black));
         picker.setSelectedIndex(defaultPosition);
         picker.setCycleDisable(true);
         picker.setTextSize(16);

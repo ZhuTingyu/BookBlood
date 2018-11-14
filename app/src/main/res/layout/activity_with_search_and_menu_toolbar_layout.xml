@@ -70,7 +70,7 @@
         android:layout_marginTop="@dimen/top_bar_height"
         android:background="@color/white">
 
-        <com.cpigeon.book.widget.FiltrateListView
+        <com.cpigeon.book.widget.filtrate.FiltrateListView
             android:id="@+id/filtrate"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
