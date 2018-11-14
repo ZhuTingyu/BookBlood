@@ -6,19 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="151dp">
 
-    <ImageView
-        android:padding="0.5dp"
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgHead"
         android:layout_width="105dp"
         android:layout_height="105dp"
-        android:background="@drawable/popupwindowbackground"
+
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="8dp"
+        android:src="@drawable/ic_img_default2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_default_head" />
+       />
 
     <TextView
         android:id="@+id/tvFootNumber"

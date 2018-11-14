@@ -98,7 +98,7 @@ private BreedPigeonDetailsViewModel breedPigeonDetailsViewModel;
         breedPigeonDetailsViewModel.pigeonId=mViewModel.mPigeonEntity.getPigeonID();
         breedPigeonDetailsViewModel.pUid= UserModel.getInstance().getUserId();
         mCoordinator = findViewById(R.id.coordinator);
-        mImgHead = findViewById(R.id.imgHead);
+        mImgHead = (ImageView) findViewById(R.id.imgHead);
         mTvFootNumber = findViewById(R.id.tvFootNumber);
         mTvPhotoCount = findViewById(R.id.tvPhotoCount);
         mAppBar = findViewById(R.id.appbar);

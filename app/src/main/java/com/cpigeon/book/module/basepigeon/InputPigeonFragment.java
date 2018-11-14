@@ -61,7 +61,6 @@ import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.Collections;
 import java.util.List;
 
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -254,11 +253,17 @@ public class InputPigeonFragment extends BaseBookFragment {
         //信鸽类型
         mLvPigeonType.setOnRightClickListener(lineInputView -> {
             try {
-                BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_PigeonType), p -> {
-                    mLvPigeonType.setRightText(mViewModel.mSelectTypes_PigeonType.get(p).getTypeName());
-                    mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(p).getTypeID();
-                    IsCanCommit();
+
+
+                PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_PigeonType), 0, new OptionPicker.OnOptionPickListener() {
+                    @Override
+                    public void onOptionPicked(int index, String item) {
+                        mLvSex.setRightText(mViewModel.mSelectTypes_PigeonType.get(index).getTypeName());
+                        mViewModel.sexId = mViewModel.mSelectTypes_PigeonType.get(index).getTypeID();
+                        IsCanCommit();
+                    }
                 });
+
             } catch (Exception e) {
                 mSelectTypeViewModel.getPigeonType();
             }
@@ -288,11 +293,13 @@ public class InputPigeonFragment extends BaseBookFragment {
 
             if (!StringUtil.isStringValid(mSexType)) {
                 try {
-
-                    BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Sex), p -> {
-                        mLvSex.setRightText(mViewModel.mSelectTypes_Sex.get(p).getTypeName());
-                        mViewModel.sexId = mViewModel.mSelectTypes_Sex.get(p).getTypeID();
-                        IsCanCommit();
+                    PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Sex), 0, new OptionPicker.OnOptionPickListener() {
+                        @Override
+                        public void onOptionPicked(int index, String item) {
+                            mLvSex.setRightText(mViewModel.mSelectTypes_Sex.get(index).getTypeName());
+                            mViewModel.sexId = mViewModel.mSelectTypes_Sex.get(index).getTypeID();
+                            IsCanCommit();
+                        }
                     });
                 } catch (Exception e) {
                     mSelectTypeViewModel.getSelectType_Sex();
@@ -523,8 +530,9 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
         mTvNextStep.setOnClickListener(v -> {
             if (IsClick) {
+                setProgressVisible(true);
                 if (!StringUtil.isStringValid(mViewModel.pigeonId)) {
-                    setProgressVisible(true);
+
                     mViewModel.addPigeon();
                 } else {
                     mViewModel.modifyBreedPigeonEntry();
@@ -614,7 +622,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.footMother = breedPigeonEntity.getWoFootRingNum();
             mViewModel.pigeonName = breedPigeonEntity.getPigeonName();
             mViewModel.sexId = breedPigeonEntity.getPigeonSexID();
-            mViewModel.featherColor = breedPigeonEntity.getPigeonSexName();
+            mViewModel.featherColor = breedPigeonEntity.getPigeonPlumeName();
             mViewModel.eyeSandId = breedPigeonEntity.getPigeonEyeID();
             mViewModel.theirShellsDate = breedPigeonEntity.getOutShellTime();
             mViewModel.lineage = breedPigeonEntity.getPigeonBloodName();
