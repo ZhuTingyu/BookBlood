@@ -82,6 +82,7 @@ public class PickerUtil {
             picker.setCancelTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
             picker.setSubmitTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
             picker.setTopLineColor(com.base.util.Utils.getColor(R.color.black));
+            picker.setLabelTextColor(com.base.util.Utils.getColor(R.color.black));
             picker.show();
         } catch (Exception e) {
             e.printStackTrace();
