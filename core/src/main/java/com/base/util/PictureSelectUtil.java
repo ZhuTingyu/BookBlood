@@ -44,7 +44,11 @@ public class PictureSelectUtil {
     }
 
     public static void showChooseImage(Activity activity, int type, int count) {
-        showChooseImage(activity, type, count, false, PictureConfig.MULTIPLE);
+        if(count == 1){
+            showChooseImage(activity, type, count, false, PictureConfig.SINGLE);
+        }else {
+            showChooseImage(activity, type, count, false, PictureConfig.MULTIPLE);
+        }
     }
 
     public static void showChooseHeadImage(Activity activity) {
