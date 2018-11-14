@@ -283,7 +283,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
             if (!StringUtil.isStringValid(mSexType)) {
                 try {
-                    Collections.reverse(mViewModel.mSelectTypes_Sex);
+
                     BottomSheetAdapter.createBottomSheet(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_Sex), p -> {
                         mLvSex.setRightText(mViewModel.mSelectTypes_Sex.get(p).getTypeName());
                         mViewModel.sexId = mViewModel.mSelectTypes_Sex.get(p).getTypeID();
@@ -318,6 +318,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                         IsCanCommit();
                     }, () -> {
                         mBaseInputDialog.hide();
+
                         if (!Lists.isEmpty(mViewModel.mSelectTypes_FeatherColor)) {
                             PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_FeatherColor), 0, new OptionPicker.OnOptionPickListener() {
                                 @Override

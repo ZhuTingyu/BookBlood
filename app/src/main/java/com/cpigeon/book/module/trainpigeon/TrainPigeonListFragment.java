@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.Utils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -75,7 +74,6 @@ public class TrainPigeonListFragment extends BaseBookFragment {
         setProgressVisible(true);
         mViewModel.getTrainPigeonList();
 
-        mtvOk.setText(Utils.getString(R.string.text_new));
         mtvOk.setOnClickListener(v -> {
             NewTrainPigeonFragment.start(getBaseActivity());
         });

@@ -76,7 +76,7 @@ public class PigeonEntity implements Serializable {
      * SourceName : 繁育
      * PigeonEyeName : 幼鸽未知
      */
-    private String WoPigeonID;
+
 
     public String getWoPigeonID() {
         return WoPigeonID;
@@ -93,8 +93,27 @@ public class PigeonEntity implements Serializable {
     public void setMenPigeonID(String menPigeonID) {
         MenPigeonID = menPigeonID;
     }
+    private String MenFootRingID;
+    private String WoFootRingID;
+
+    public String getMenFootRingID() {
+        return MenFootRingID;
+    }
+
+    public void setMenFootRingID(String menFootRingID) {
+        MenFootRingID = menFootRingID;
+    }
+
+    public String getWoFootRingID() {
+        return WoFootRingID;
+    }
+
+    public void setWoFootRingID(String woFootRingID) {
+        WoFootRingID = woFootRingID;
+    }
 
     private String MenPigeonID;
+    private String WoPigeonID;
     private String FootRingIDToNum;
     private String TypeID = "";
     private String FootRingTimeTo;

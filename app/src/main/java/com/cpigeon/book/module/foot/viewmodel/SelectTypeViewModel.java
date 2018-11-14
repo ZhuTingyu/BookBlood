@@ -8,6 +8,7 @@ import com.base.util.Lists;
 import com.cpigeon.book.model.PigeonPublicModel;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -116,6 +117,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public void getSelectType_Sex() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_SEX,key), r -> {
             if (r.isOk()) {
+                Collections.reverse(r.data);
                 mSelectType_Sex.setValue(r.data);
             } else throw new HttpErrorException(r);
         });
@@ -126,6 +128,7 @@ public class SelectTypeViewModel extends BaseViewModel {
     public void getSelectType_FeatherColor() {
         submitRequestThrowError(PigeonPublicModel.getTXGP_Type_Select(SelectTypeViewModel.TYPE_COLOR_FEATHER,key), r -> {
             if (r.isOk()) {
+                Collections.reverse(r.data);
                 mSelectType_FeatherColor.setValue(r.data);
             } else throw new HttpErrorException(r);
         });

@@ -21,9 +21,11 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.event.UpdateTrainEvent;
 import com.cpigeon.book.model.entity.TrainEntity;
 import com.cpigeon.book.module.trainpigeon.adpter.TrainProjectListAdapter;
+import com.cpigeon.book.module.trainpigeon.viewmodel.NewTrainPigeonViewModel;
 import com.cpigeon.book.module.trainpigeon.viewmodel.TrainProjectInListViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -34,7 +36,7 @@ import java.util.ArrayList;
  */
 
 public class TrainProjectInListFragment extends BaseBookFragment {
-
+    NewTrainPigeonViewModel newTrainPigeonViewModel;
     XRecyclerView mRecyclerView;
     TrainProjectListAdapter mAdapter;
     TrainProjectInListViewModel mViewModel;
@@ -49,6 +51,8 @@ public class TrainProjectInListFragment extends BaseBookFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        newTrainPigeonViewModel = new NewTrainPigeonViewModel(getBaseActivity());
+        initViewModel(newTrainPigeonViewModel);
         mViewModel = new TrainProjectInListViewModel(getBaseActivity());
         initViewModel(mViewModel);
     }
@@ -77,7 +81,7 @@ public class TrainProjectInListFragment extends BaseBookFragment {
         mRecyclerView = findViewById(R.id.list);
         mTvOk = findViewById(R.id.tvOk);
         mTvOk.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        mTvOk.setText("再训");
+        mTvOk.setText("再训一次");
         mAdapter = new TrainProjectListAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
@@ -92,10 +96,11 @@ public class TrainProjectInListFragment extends BaseBookFragment {
             mViewModel.getCountList();
         });
 
-        mTvOk.setBackgroundResource(R.drawable.selector_bg_cancel_btn);
 
         mTvOk.setOnClickListener(v -> {
-            NewTrainPigeonFragment.start(getBaseActivity(), mViewModel.mTrainEntity);
+            newTrainPigeonViewModel.mTrainEntity = mViewModel.mTrainEntity;
+            newTrainPigeonViewModel.trainAgain();
+            //NewTrainPigeonFragment.start(getBaseActivity(), mViewModel.mTrainEntity);
         });
 
         setProgressVisible(true);
@@ -119,22 +124,30 @@ public class TrainProjectInListFragment extends BaseBookFragment {
         mViewModel.mDataCountList.observe(this, trainEntities -> {
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, trainEntities);
 
-            if(Lists.isEmpty(mAdapter.getData())){
+            if (Lists.isEmpty(mAdapter.getData())) {
                 return;
             }
 
-            if(mAdapter.getData().get(0).getTrainStateName()
-                    .equals(Utils.getString(R.string.text_end_yet))){
+            if (mAdapter.getData().get(0).getTrainStateName()
+                    .equals(Utils.getString(R.string.text_end_yet))) {
                 mTvOk.setVisibility(View.VISIBLE);
                 findViewById(R.id.view1).setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 mTvOk.setVisibility(View.GONE);
                 findViewById(R.id.view1).setVisibility(View.GONE);
             }
 
             setProgressVisible(false);
         });
-    }
+        newTrainPigeonViewModel.normalResult.observe(this, s -> {
+            setProgressVisible(false);
+            EventBus.getDefault().post(new UpdateTrainEvent());
+            DialogUtils.createHintDialog(getBaseActivity(), s, sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                finish();
 
+            });
+        });
+    }
 
 }
