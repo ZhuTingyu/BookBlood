@@ -394,7 +394,7 @@
     <string name="text_start_not">未开始</string>
     <string name="text_add">添加</string>
     <string name="text_training">训鸽中</string>
-    <string name="text_speed_content">分速:%1$s m/min</string>
+    <string name="text_speed_content">分速:%1$s m</string>
     <string name="text_speed_content_1">%1$sm/min</string>
     <string name="text_speed">分速</string>
     <string name="text_fly_back_time_content">归巢:%1$s</string>

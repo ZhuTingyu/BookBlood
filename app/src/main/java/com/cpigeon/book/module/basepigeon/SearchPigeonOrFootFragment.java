@@ -23,14 +23,14 @@ public class SearchPigeonOrFootFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle("选择配对鸽子");
+        setTitle("选择配偶");
     }
 
     @Override
     protected void initData() {
         super.initData();
         setStartSearchActvity(SearchPigeonOrFootActivity.class);//搜索页面
-setTitle("选择配偶");
+
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
