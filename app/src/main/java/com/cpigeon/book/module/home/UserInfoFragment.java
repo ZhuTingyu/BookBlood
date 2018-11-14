@@ -98,7 +98,7 @@ public class UserInfoFragment extends BaseBookFragment {
         setToolbarNotBack();
         setTitle("我的");
 
-        //checkNewVersion(1);//版本更新检查
+        checkNewVersion(2);//版本更新检查
 
         dialogFragment = new ShareDialogFragment();
 
@@ -114,7 +114,7 @@ public class UserInfoFragment extends BaseBookFragment {
 
     @OnClick({R.id.ll_loft_info, R.id.ll_account_security, R.id.ll_logbook, R.id.ll_about_us, R.id.ll_setting, R.id.ll_my_order,
             R.id.ll_my_gebi, R.id.ll_renewal, R.id.ll_account_balance, R.id.ll_share_txgp
-            })
+    })
     public void onViewClicked(View view) {
 
         if (AntiShake.getInstance().check()) {//防止点击过快
@@ -184,7 +184,6 @@ public class UserInfoFragment extends BaseBookFragment {
                 setProgressVisible(true);
                 mShareViewModel.getZGW_Users_SignGuiZeData();
                 break;
-
 
 
         }

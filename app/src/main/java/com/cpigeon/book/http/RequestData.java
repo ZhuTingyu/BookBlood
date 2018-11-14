@@ -17,13 +17,11 @@ public class RequestData<T> extends RequestUtil {
     public static <T> RequestUtil<T> build() {
         RequestUtil<T> request = RequestUtil.builder();
         request.addHead("auth", EncryptionTool.encryptAES(getRequestHead()));
-        if(MyApp.getMyApp().isOutNet()){
-            request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUr_j));
-        }else {
-            request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
-        }
+
+        request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUr_j));
+
         request.headUrl(MyApp.getAppContext().getString(R.string.api_head));
-        if(StringUtil.isStringValid(UserModel.getInstance().getUserId())){
+        if (StringUtil.isStringValid(UserModel.getInstance().getUserId())) {
             request.addBody("uid", UserModel.getInstance().getUserId());
         }
         request.setSignString(Utils.getString(R.string.keySign));
@@ -44,7 +42,7 @@ public class RequestData<T> extends RequestUtil {
         builder.append(System.currentTimeMillis() / 1000);
        /* return UserModel.getInstance().getUserId() + "|" + UserModel.getInstance().getUserToken() + "|" +
                 PhoneUtils.getCombinedDeviceID(Utils.getApp()) + "|" + System.currentTimeMillis() / 1000;*/
-       return builder.toString();
+        return builder.toString();
     }
 }
 

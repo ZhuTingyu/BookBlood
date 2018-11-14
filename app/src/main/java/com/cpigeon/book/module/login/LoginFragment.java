@@ -111,15 +111,15 @@ public class LoginFragment extends BaseBookFragment {
         bindUi(RxUtils.textChanges(edUserName), mViewModel.setPhone());
         bindUi(RxUtils.textChanges(edPassword), mViewModel.setPassword());
 
-        imgHead.setOnClickListener(v -> {
-            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList("外网", "内网"),p -> {
-               if(p == 0){
-                   MyApp.getMyApp().setOutNet(true);
-               }else {
-                   MyApp.getMyApp().setOutNet(false);
-               }
-            });
-        });
+//        imgHead.setOnClickListener(v -> {
+//            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList("外网", "内网"),p -> {
+//               if(p == 0){
+//                   MyApp.getMyApp().setOutNet(true);
+//               }else {
+//                   MyApp.getMyApp().setOutNet(false);
+//               }
+//            });
+//        });
 
         tvRegister.setOnClickListener(v -> {
             loginActivity.replace(LoginActivity.TYPE_REGISTER);

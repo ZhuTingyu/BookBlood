@@ -6,6 +6,7 @@ import android.util.DisplayMetrics;
 import com.base.application.BaseApplication;
 import com.base.util.SharedPreferencesUtil;
 import com.facebook.stetho.Stetho;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -50,7 +51,7 @@ public class MyApp extends BaseApplication {
         Config.DEBUG = true;
 
         //bugly
-//        CrashReport.initCrashReport(getApplicationContext(), "4d1c4ee910", false);
+        CrashReport.initCrashReport(getApplicationContext(), "4d1c4ee910", false);
 
         x.Ext.init(this);
         x.Ext.setDebug(BuildConfig.DEBUG);
