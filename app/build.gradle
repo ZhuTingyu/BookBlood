@@ -36,7 +36,66 @@ android {
         ]
     }
 
-//    //修改生成的apk名字
+    packagingOptions {
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
+    }
+
+    buildTypes {
+        release {
+            //Zipalign优化
+//            zipAlignEnabled true
+//            //移除无用的resource文件
+//            shrinkResources true
+            debuggable true
+            minifyEnabled true
+            signingConfig signingConfigs.book
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            crunchPngs false
+            signingConfig signingConfigs.book
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        incremental = true  //开启增量编译
+
+    }
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    //如果是构建debug包, 则禁用 "png cruncher" (默认cruncherEnabled=true, 禁用以加速构建)
+    def enableCruncher = { ->
+        return !isDebug()
+    }
+
+    aaptOptions { //禁用cruncher, 以加速编译
+        cruncherEnabled = enableCruncher()
+        cruncherProcesses = 0
+    }
+
+    dexOptions { //优化dex配置
+        dexInProcess true
+        preDexLibraries true
+        javaMaxHeapSize "2g"
+    }
+
+    //跳过Lint和Test相关的task, 以加速编译
+    if (isDebug()) {
+        gradle.taskGraph.whenReady {
+            tasks.each { task ->
+                if (task.name.contains("Test") || task.name.contains("Lint")) {
+                    task.enabled = false
+                }
+            }
+        }
+    }
+
+    //    //修改生成的apk名字
 //    applicationVariants.all { variant ->
 //        variant.outputs.each { output ->
 //            def oldFile = output.outputFile
@@ -58,34 +117,6 @@ android {
 //        }
 //    }
 
-    packagingOptions {
-        doNotStrip '*/mips/*.so'
-        doNotStrip '*/mips64/*.so'
-    }
-
-    buildTypes {
-        release {
-            //Zipalign优化
-//            zipAlignEnabled true
-//            //移除无用的resource文件
-//            shrinkResources true
-            debuggable true
-            minifyEnabled true
-            signingConfig signingConfigs.book
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-
-        debug {
-            signingConfig signingConfigs.book
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    aaptOptions.cruncherEnabled = false
-    aaptOptions.useNewCruncher = false
 }
 
 int getCustomVersionCode() {
@@ -143,6 +174,17 @@ def getDate() {
     def date = new Date()
     def formattedDate = date.format('yyyyMMddHHmm')
     return formattedDate
+}
+
+//是否是执行Debug相关task (通用函数, 可供子module调用)
+def isDebug() {
+    def taskNames = gradle.startParameter.taskNames
+    for (tn in taskNames) {
+        if( (tn.contains("install") || tn.contains("assemble")) && tn.contains("Debug")) {
+            return true
+        }
+    }
+    return false
 }
 
 dependencies {
