@@ -50,7 +50,7 @@ public class SearchFootRingActivity extends BaseSearchActivity {
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {
-        mAdapter = new SelectFootRingAdapter(mIsCanSetDeath);
+        mAdapter = new SelectFootRingAdapter(mIsCanSetDeath,mViewModel.sexId);
         return mAdapter;
     }
 

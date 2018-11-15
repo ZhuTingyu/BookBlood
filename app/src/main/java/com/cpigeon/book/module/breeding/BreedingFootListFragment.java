@@ -28,7 +28,6 @@ import com.cpigeon.book.module.breeding.adapter.BreedingFootAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.AddBreedingFragment;
 import com.cpigeon.book.module.breeding.viewmodel.PairingInfoListViewModel;
 import com.cpigeon.book.service.EventBusService;
-import com.cpigeon.book.util.RecyclerViewUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -62,7 +61,7 @@ public class BreedingFootListFragment extends BaseBookFragment {
     private TextView mTvOk;
 
     private boolean mTIsExpand = true;
-    private boolean mFIsExpand = false;
+    private boolean mFIsExpand = true;
 
 
     public static void start(Activity activity) {
@@ -178,7 +177,8 @@ public class BreedingFootListFragment extends BaseBookFragment {
                 mList2.setVisibility(View.VISIBLE);
             }
         });
-
+        mImgExpand1.setRotation(180);
+        mImgExpand2.setRotation(180);
         setProgressVisible(true);
         mViewModel.getTXGP_PigeonBreed_SelectAll();
     }

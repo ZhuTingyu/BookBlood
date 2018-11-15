@@ -258,8 +258,9 @@ public class InputPigeonFragment extends BaseBookFragment {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_PigeonType), 0, new OptionPicker.OnOptionPickListener() {
                     @Override
                     public void onOptionPicked(int index, String item) {
-                        mLvSex.setRightText(mViewModel.mSelectTypes_PigeonType.get(index).getTypeName());
-                        mViewModel.sexId = mViewModel.mSelectTypes_PigeonType.get(index).getTypeID();
+
+                        mLvPigeonType.setRightText(mViewModel.mSelectTypes_PigeonType.get(index).getTypeName());
+                        mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(index).getTypeID();
                         IsCanCommit();
                     }
                 });
