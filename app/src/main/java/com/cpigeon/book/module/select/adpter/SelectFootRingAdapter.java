@@ -20,9 +20,11 @@ import com.cpigeon.book.model.entity.PigeonEntity;
 public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseViewHolder> {
 
     private boolean mIsCanSetDeath;
+    private String SexId;
 
-    public SelectFootRingAdapter(boolean isCanSetDeath) {
+    public SelectFootRingAdapter(boolean isCanSetDeath,String sexId) {
         super(R.layout.choose_layout, null);
+        this.SexId=sexId;
         mIsCanSetDeath = isCanSetDeath;
     }
 
@@ -81,7 +83,7 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
 
         helper.itemView.setOnClickListener(v -> {
 
-            String sexString = Utils.getString(R.string.text_male_a).equals(item.getPigeonSexName())
+            String sexString = SexId.contains(PigeonEntity.ID_MALE)
                     ? Utils.getString(R.string.text_father) : Utils.getString(R.string.text_mother);
 
             DialogUtils.createDialogWithLeft(getBaseActivity()

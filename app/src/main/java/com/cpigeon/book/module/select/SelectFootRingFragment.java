@@ -87,7 +87,7 @@ public class SelectFootRingFragment extends BaseBookFragment {
         });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
-        mAdapter = new SelectFootRingAdapter(mIsCanSetDeath);
+        mAdapter = new SelectFootRingAdapter(mIsCanSetDeath, mViewModel.sexId);
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnLoadMoreListener(() -> {

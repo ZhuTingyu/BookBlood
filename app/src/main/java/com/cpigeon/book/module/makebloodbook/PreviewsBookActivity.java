@@ -1,15 +1,11 @@
 package com.cpigeon.book.module.makebloodbook;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,7 +22,6 @@ import com.base.util.utility.ToastUtils;
 import com.base.widget.photoview.PhotoView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookActivity;
-import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.model.entity.PigeonEntryEntity;
@@ -66,7 +61,6 @@ public class PreviewsBookActivity extends BaseBookActivity {
 
     private BookViewModel mViewModel;
 
-
     public static void start(Activity activity, PigeonEntity entity) {
         IntentBuilder.Builder(activity, PreviewsBookActivity.class)
                 .putExtra(IntentBuilder.KEY_DATA, entity.getFootRingID())
@@ -74,12 +68,10 @@ public class PreviewsBookActivity extends BaseBookActivity {
                 .putExtra(IntentBuilder.KEY_TITLE, entity.getFootRingNum())
                 .startActivity();
     }
-
     @Override
     protected int getContentView() {
         return R.layout.fragment_preview_book;
     }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -210,7 +202,6 @@ public class PreviewsBookActivity extends BaseBookActivity {
 
         initObserve();
     }
-
     public void getBookView() {
         mViewModel.addBloodnum();
         try {
@@ -229,7 +220,6 @@ public class PreviewsBookActivity extends BaseBookActivity {
         }
 
     }
-
     @Override
     protected void initObserve() {
         mViewModel.mBookLiveData.observe(this, bloodBookEntity -> {
@@ -238,7 +228,6 @@ public class PreviewsBookActivity extends BaseBookActivity {
             mPrintFamilyTreeView.setData(bloodBookEntity);
         });
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
