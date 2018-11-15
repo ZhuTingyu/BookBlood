@@ -382,6 +382,7 @@ public class BaseFootListFragment extends BaseBookFragment {
             mAdapter.setEmptyText(s);
         });
         mBreedPigeonListModel.listDeleteMessage.observe(this, s -> {
+            setProgressVisible(false);
             DialogUtils.createHintDialog(getBaseActivity(),s );
 
 
@@ -398,10 +399,8 @@ public class BaseFootListFragment extends BaseBookFragment {
         }
         if (info.equals(EventBusService.PIGEON_DELETE)) {
 
-            mAdapter.getData().clear();
-            mBreedPigeonListModel.pi = 1;
-            mBreedPigeonListModel.getPigeonList();
-        }
+            initData(true);
+        };
     }
     protected void initData(boolean isCount) {
         setProgressVisible(true);

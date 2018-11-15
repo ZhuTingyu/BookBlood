@@ -177,8 +177,10 @@ public class BreedingFootListFragment extends BaseBookFragment {
                 mList2.setVisibility(View.VISIBLE);
             }
         });
-        mImgExpand1.setRotation(180);
-        mImgExpand2.setRotation(180);
+        mImgExpand1.setRotation(0);
+        mImgExpand2.setRotation(0);
+        mList1.setVisibility(View.VISIBLE);
+        mList2.setVisibility(View.VISIBLE);
         setProgressVisible(true);
         mViewModel.getTXGP_PigeonBreed_SelectAll();
     }

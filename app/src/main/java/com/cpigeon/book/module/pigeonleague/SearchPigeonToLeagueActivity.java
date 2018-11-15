@@ -22,6 +22,7 @@ public class SearchPigeonToLeagueActivity extends BaseSearchPigeonActivity {
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
+                setProgressVisible(true);
                 mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }

@@ -19,9 +19,6 @@ import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.module.photo.viewmodel.PigeonPhotoViewModel;
-import com.cpigeon.book.service.EventBusService;
-
-import org.greenrobot.eventbus.Subscribe;
 
 /**
  * 信鸽相册   足环列表
@@ -54,6 +51,7 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
+                setProgressVisible(true);
                 mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }
@@ -89,14 +87,7 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         });
     }
 
-    @Subscribe //订阅事件FirstEvent
-    public void onEventMainThread(String info) {
-        if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
 
-            mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
-            super.initData(true);
-        }
-    }
 
     private View initHead(PigeonPhotoEntity datas) {
         View view = LayoutInflater.from(getBaseActivity()).inflate(R.layout.include_select_foot_to_photo_head, null);
@@ -127,8 +118,5 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
+
 }

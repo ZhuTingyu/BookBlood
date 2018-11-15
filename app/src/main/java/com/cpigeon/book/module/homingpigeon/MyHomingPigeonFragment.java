@@ -39,6 +39,7 @@ public class MyHomingPigeonFragment extends BaseFootListFragment  {
         mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
+
                 mBreedPigeonListModel.id = PigeonId;
                 setProgressVisible(true);
                 mBreedPigeonListModel.deletePigeon();

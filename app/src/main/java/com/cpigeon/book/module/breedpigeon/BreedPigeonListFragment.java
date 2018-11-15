@@ -88,17 +88,6 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
             }
         });
 
-        mAdapter.setOnItemClickListener((adapter, view1, position) -> {
-            try {
-                PigeonEntity mBreedPigeonEntity = mAdapter.getData().get(position);
-                BreedPigeonDetailsFragment.start(getBaseActivity(),
-                        mBreedPigeonEntity.getPigeonID(),
-                        mBreedPigeonEntity.getFootRingID());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
         mBreedPigeonListModel.getPigeonCount();
 
     }

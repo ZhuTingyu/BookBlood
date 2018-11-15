@@ -806,9 +806,9 @@ public class InputPigeonFragment extends BaseBookFragment {
             }
         }
 
-        hintStr += "是否为该鸽子录入赛绩！";
+        hintStr += "是否为该鸽子录入赛绩？";
 
-        getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
+        getBaseActivity().errorDialog = DialogUtils.createDialogReturn2(getBaseActivity(), hintStr, sweetAlertDialog -> {
             //确定
             sweetAlertDialog.dismiss();
             PlayAddFragment.start(getBaseActivity(), o, 0, CODE_ADD_PLAY);

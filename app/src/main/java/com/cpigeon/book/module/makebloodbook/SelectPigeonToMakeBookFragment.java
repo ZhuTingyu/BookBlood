@@ -38,6 +38,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         mAdapter=new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
+                setProgressVisible(true);
                 mBreedPigeonListModel.id = PigeonId;
                 mBreedPigeonListModel.deletePigeon();
             }

@@ -69,7 +69,6 @@ public class BaseImgUploadFragment extends BaseBookFragment {
         mSelectTypeViewModel = new SelectTypeViewModel();
         mImgUploadViewModel = new ImgUploadViewModel();
         initViewModels(mSelectTypeViewModel, mImgUploadViewModel);
-
         mImgUploadViewModel.mImgTypeEntity = (ImgTypeEntity) getBaseActivity().getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
     }
 
