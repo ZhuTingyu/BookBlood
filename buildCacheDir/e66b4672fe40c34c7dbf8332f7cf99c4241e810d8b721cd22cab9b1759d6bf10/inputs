@@ -1,0 +1,10 @@
+COMMAND=PREDEX_LIBRARY_TO_DEX_ARCHIVE
+FILE.path=D:\PigeonSpectrumAndroid\app\build\intermediates\transforms\desugar\debug\39.jar
+FILE.hash=3312ad5b907882ea8f9ac4b7528affd3a334c9e6def958b28586b96aa16d34c8
+DX_VERSION=1.14
+JUMBO_MODE=true
+OPTIMIZE=true
+DEXER_TOOL=D8
+CACHE_KEY_VERSION=4
+MIN_SDK_VERSION=16
+IS_DEBUGGABLE=true

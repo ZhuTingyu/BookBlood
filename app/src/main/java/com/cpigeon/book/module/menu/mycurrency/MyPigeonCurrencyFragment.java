@@ -69,6 +69,7 @@ public class MyPigeonCurrencyFragment extends BaseBookFragment {
         mSTvCurrencyExchange.setOnClickListener(v -> {
             //鸽币兑换
             PigeonCurrencyExchangeFragment.start(getBaseActivity());
+
         });
 
         mSTvCurrencyDetails.setOnClickListener(v -> {

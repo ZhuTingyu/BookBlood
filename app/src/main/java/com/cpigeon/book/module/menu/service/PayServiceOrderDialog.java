@@ -48,6 +48,7 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
             mServiceEntity = getArguments().getParcelable(IntentBuilder.KEY_DATA);
             mPayWay = getArguments().getString(IntentBuilder.KEY_TYPE);
             mIsOpen = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN, false);
+            mStatusIsPay = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN_2, false);
         }
         mViewModel = new PayServiceOrderViewModel();
     }
@@ -135,6 +136,7 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
                 return;
             }
             DialogUtils.createErrorDialog(mBaseActivity, restErrorInfo.message);
+            dismiss();
         });
 
         dialog.setOnShowListener(dialog1 -> {
@@ -155,6 +157,17 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
         bundle.putParcelable(IntentBuilder.KEY_DATA, serviceEntity);
         bundle.putString(IntentBuilder.KEY_TYPE, payWay);
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isOpen);
+        PayServiceOrderDialog payServiceOrderDialog = new PayServiceOrderDialog();
+        payServiceOrderDialog.setArguments(bundle);
+        payServiceOrderDialog.show(fragmentManager);
+        return payServiceOrderDialog;
+    }
+    public static PayServiceOrderDialog show2(FragmentManager fragmentManager, ServiceEntity serviceEntity, String payWay, boolean isOpen,boolean mStatusIsPay) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(IntentBuilder.KEY_DATA, serviceEntity);
+        bundle.putString(IntentBuilder.KEY_TYPE, payWay);
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isOpen);
+        bundle.putBoolean(IntentBuilder.KEY_BOOLEAN_2, mStatusIsPay);
         PayServiceOrderDialog payServiceOrderDialog = new PayServiceOrderDialog();
         payServiceOrderDialog.setArguments(bundle);
         payServiceOrderDialog.show(fragmentManager);

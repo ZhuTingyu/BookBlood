@@ -17,7 +17,8 @@ import com.cpigeon.book.model.entity.CurrencyExchangeEntity;
 import com.cpigeon.book.model.entity.ServiceEntity;
 import com.cpigeon.book.module.menu.mycurrency.adapter.PigeonCurrencyExchangeAdapter;
 import com.cpigeon.book.module.menu.mycurrency.viewmodel.PigeonCurrencyViewModel;
-import com.cpigeon.book.module.menu.service.ChoosePayWayDialog;
+import com.cpigeon.book.module.menu.service.PayServiceOrderDialog;
+import com.cpigeon.book.module.menu.service.viewmodel.PayServiceOrderViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
 
 /**
@@ -79,7 +80,9 @@ public class PigeonCurrencyExchangeFragment extends BaseFragment {
                         .num(mCurrencyExchangeEntity.getNumber())
                         .sname(mCurrencyExchangeEntity.getSname())
                         .build();
-                ChoosePayWayDialog.show(item, false, getBaseActivity().getSupportFragmentManager());
+
+                PayServiceOrderDialog.show2(getFragmentManager(), item, PayServiceOrderViewModel.WAY_SCORE, false,true);
+                //ChoosePayWayDialog.show(item, false, getBaseActivity().getSupportFragmentManager());
             } catch (Exception e) {
                 e.printStackTrace();
             }
