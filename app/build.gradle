@@ -69,14 +69,14 @@ android {
     aaptOptions.useNewCruncher = false
 
     //如果是构建debug包, 则禁用 "png cruncher" (默认cruncherEnabled=true, 禁用以加速构建)
-    def enableCruncher = { ->
-        return !isDebug()
-    }
+//    def enableCruncher = { ->
+//        return !isDebug()
+//    }
 
-    aaptOptions { //禁用cruncher, 以加速编译
-        cruncherEnabled = enableCruncher()
-        cruncherProcesses = 0
-    }
+//    aaptOptions { //禁用cruncher, 以加速编译
+//        cruncherEnabled = enableCruncher()
+//        cruncherProcesses = 0
+//    }
 
     dexOptions { //优化dex配置
         dexInProcess true

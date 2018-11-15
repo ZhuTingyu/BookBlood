@@ -24,11 +24,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.services.weather.LocalWeatherLive;
 import com.base.util.IntentBuilder;
 import com.base.util.LocationFormatUtils;
 import com.base.util.RxUtils;
+import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.map.LocationLiveData;
+import com.base.util.map.WeatherManager;
 import com.base.util.utility.LogUtil;
 import com.base.util.utility.StringUtil;
 import com.base.util.utility.TimeUtil;
@@ -108,6 +111,10 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
     @BindView(R.id.water_tv_ad)
     TextView water_tv_ad;//
 
+    private TextView mTvWeather;
+    private TextView mTvTemperature;
+    private TextView mTvWindDirection;
+
     private CameraView mCameraView;
     private View mCapture;
     private FocusImageView mFocus;
@@ -131,6 +138,8 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
 
 
     private boolean isBitmap = true;
+
+    private WeatherManager mWeatherManager;
 
     private TimerTask mTimerTask = new TimerTask() {
         @Override
@@ -165,6 +174,16 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
 
             water_tv_ad.setText(aMapLocation.getCountry() + " " + aMapLocation.getCity());
 
+            mWeatherManager.requestWeatherByCityName(aMapLocation.getCity(), localWeatherLiveApiResponse -> {
+                LocalWeatherLive localWeatherLive = localWeatherLiveApiResponse.getData();
+                if(localWeatherLive != null){
+                    mTvWeather.setText(localWeatherLive.getWeather());
+                    mTvTemperature.setText(Utils.getString(R.string.text_temp, localWeatherLive.getTemperature()));
+                    mTvWindDirection.setText(localWeatherLive.getWindDirection());
+                }
+            });
+
+
             //获取海拔高度
             android.location.LocationManager GpsManager = (android.location.LocationManager) AtAnyTimeShootingActivity.this.getSystemService(Context.LOCATION_SERVICE);
             if (ActivityCompat.checkSelfPermission(AtAnyTimeShootingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(AtAnyTimeShootingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -179,6 +198,7 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
             }
 
             LogUtil.print(aMapLocation);
+
         });
     }
 
@@ -194,6 +214,7 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUnbinder = ButterKnife.bind(this);
+        mWeatherManager = new WeatherManager(getBaseActivity());
         executorService = Executors.newSingleThreadExecutor();
         mSensorControler = SensorControler.getInstance();
         mSensorControler.setCameraFocusListener(this);
@@ -230,6 +251,9 @@ public class AtAnyTimeShootingActivity extends BaseBookActivity implements View.
         mCameraView = findViewById(R.id.camera_view);
         mCapture = findViewById(R.id.mCapture);
         mFocus = findViewById(R.id.focusImageView);
+        mTvWeather = findViewById(R.id.tvWeather);
+        mTvTemperature = findViewById(R.id.tvTemperature);
+        mTvWindDirection = findViewById(R.id.tvWindDirection);
 
         mCameraView.setOnTouchListener(this);
 
