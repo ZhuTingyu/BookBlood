@@ -5,5 +5,14 @@ package com.cpigeon.book.event;
  */
 
 public class WXPayEvent {
-    public WXPayEvent(){}
+
+    int code;
+
+    public WXPayEvent(int code){
+        this.code = code;
+    }
+
+    public boolean isSueecse(){
+        return code == 0;
+    }
 }

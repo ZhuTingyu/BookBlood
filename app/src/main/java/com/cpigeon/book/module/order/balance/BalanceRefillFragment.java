@@ -18,11 +18,17 @@ import android.widget.TextView;
 import com.base.base.BaseWebViewActivity;
 import com.base.util.IntentBuilder;
 import com.base.util.RxUtils;
+import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.event.WXPayEvent;
 import com.cpigeon.book.module.order.viewmodel.BalanceViewModel;
+import com.cpigeon.book.util.SendWX;
 import com.cpigeon.book.util.TextViewUtil;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -81,6 +87,14 @@ public class BalanceRefillFragment extends BaseBookFragment {
 
     }
 
+    @Override
+    protected void initObserve() {
+        mBalanceViewModel.mDataWXOrder.observe(this, weiXinPayEntity -> {
+            ToastUtils.showLong(getBaseActivity(), "微信跳转中...");
+            SendWX sendWX = new SendWX(getBaseActivity());
+            sendWX.payWeiXin(weiXinPayEntity.getPayReq());
+        });
+    }
 
     @OnClick({R.id.ll_cb, R.id.tv_paly_agreement, R.id.tv_next_step})
     public void onViewClicked(View view) {
@@ -103,7 +117,9 @@ public class BalanceRefillFragment extends BaseBookFragment {
                 break;
             case R.id.tv_next_step:
                 //下一步
-                ToastUtils.showLong(getActivity(), "下一步");
+                setProgressVisible(true);
+                mBalanceViewModel.mMoney = et_input_money.getText().toString();
+                mBalanceViewModel.rechargeBalance();
 
                 if (checkBoxb.isChecked()) {
 
@@ -112,6 +128,17 @@ public class BalanceRefillFragment extends BaseBookFragment {
                 }
 
                 break;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(WXPayEvent event){
+        setProgressVisible(false);
+        if(event.isSueecse()){
+            DialogUtils.createSuccessDialog(getBaseActivity(), "充值成功！", sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+                finish();
+            });
         }
     }
 }

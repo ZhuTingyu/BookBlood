@@ -11,8 +11,11 @@ import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.BalanceModel;
+import com.cpigeon.book.model.ServiceModel;
 import com.cpigeon.book.model.entity.AccountBalanceListEntity;
+import com.cpigeon.book.model.entity.WeiXinPayEntity;
 import com.cpigeon.book.util.OrderUtil;
+import com.cpigeon.book.util.SendWX;
 import com.cpigeon.book.util.TextViewUtil;
 
 import java.util.List;
@@ -29,8 +32,11 @@ public class BalanceViewModel extends BaseViewModel {
 
     public int pi = 1;
     public int ps = 50;
+    public String mMoney;
 
     public MutableLiveData<List<AccountBalanceListEntity>> mAccountBalanceListData = new MutableLiveData<>();
+    public MutableLiveData<WeiXinPayEntity> mDataWXOrder = new MutableLiveData<>();
+    private String mOrderId;
 
 
     //获取  充值明细列表
@@ -40,6 +46,23 @@ public class BalanceViewModel extends BaseViewModel {
                 listEmptyMessage.setValue(r.msg);
                 mAccountBalanceListData.setValue(r.data);
             } else throw new HttpErrorException(r);
+        });
+    }
+
+    public void rechargeBalance() {
+        submitRequestThrowError(BalanceModel.rechargeBalance(mMoney), r -> {
+            if(r.isOk()){
+                mOrderId = r.data.getOid();
+                getWXOrder();
+            }else throw new HttpErrorException(r);
+        });
+    }
+
+    private void getWXOrder(){
+        submitRequestThrowError(ServiceModel.getWXOrder(mOrderId), r -> {
+            if(r.isOk()){
+                mDataWXOrder.setValue(r.data);
+            }else throw new HttpErrorException(r);
         });
     }
 

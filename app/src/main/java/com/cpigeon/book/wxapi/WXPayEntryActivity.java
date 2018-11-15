@@ -55,7 +55,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
 //        CommonUitls.getInstance().onWxPay(this, baseResp.errCode);
 //        EventBus.getDefault().post(new WXPayResultEvent(baseResp.errCode));
 //        EventBus.getDefault().post(new GXTUserInfoEvent());
-        EventBus.getDefault().post(new WXPayEvent());
+        EventBus.getDefault().post(new WXPayEvent(baseResp.errCode));
         this.finish();
     }
 }

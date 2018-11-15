@@ -73,6 +73,8 @@
     <string name="get_server_record">TXGP_GetServiceList</string>
     <!--充值明细-->
     <string name="account_balance_details">TXGP_ChongZhi_List</string>
+    <string name="recharge_balance">TXGP_ChongZhi</string>
+    <string name="get_balance">TXGP_Account_YuE</string>
     <!--我的订单   列表-->
     <string name="my_order_list">TXGP_GetOrderList</string>
 

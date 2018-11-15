@@ -1,6 +1,7 @@
 package com.cpigeon.book.module.order.balance;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,11 @@ import com.base.util.IntentBuilder;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.event.WXPayEvent;
+import com.cpigeon.book.module.order.viewmodel.AccountBalanceViewModel;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,10 +33,17 @@ public class AccountBalanceFragment extends BaseBookFragment {
 
     @BindView(R.id.tv_balance)
     TextView tvBalance;
+    AccountBalanceViewModel mViewModel;
 
     public static void start(Activity activity) {
         IntentBuilder.Builder()
                 .startParentActivity(activity, AccountBalanceFragment.class);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mViewModel = new AccountBalanceViewModel();
     }
 
     @Nullable
@@ -51,6 +64,17 @@ public class AccountBalanceFragment extends BaseBookFragment {
         });
 
         tvBalance.setTypeface(Typeface.createFromAsset(getBaseActivity().getAssets(), "SF-PRO-TEXT_REGULAR.TTF"));
+
+        setProgressVisible(true);
+        mViewModel.getBalance();
+    }
+
+    @Override
+    protected void initObserve() {
+        mViewModel.mDataBalance.observe(this, balanceEntity -> {
+            setProgressVisible(false);
+            tvBalance.setText(balanceEntity.getAb());
+        });
     }
 
     @OnClick({R.id.balance_refill, R.id.balance_withdraw, R.id.tv_bottom_help})
@@ -71,5 +95,10 @@ public class AccountBalanceFragment extends BaseBookFragment {
 
                 break;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnEvent(WXPayEvent event) {
+        mViewModel.getBalance();
     }
 }

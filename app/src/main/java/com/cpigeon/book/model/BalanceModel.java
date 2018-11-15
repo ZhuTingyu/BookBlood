@@ -4,6 +4,9 @@ import com.base.http.ApiResponse;
 import com.cpigeon.book.R;
 import com.cpigeon.book.http.RequestData;
 import com.cpigeon.book.model.entity.AccountBalanceListEntity;
+import com.cpigeon.book.model.entity.BalanceEntity;
+import com.cpigeon.book.model.entity.OrderEntity;
+import com.cpigeon.book.model.entity.WeiXinPayEntity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -24,6 +27,24 @@ public class BalanceModel {
                 .url(R.string.account_balance_details)
                 .addBody("pi", String.valueOf(pi))
                 .addBody("ps", String.valueOf(ps))
+                .request();
+    }
+
+    public static Observable<ApiResponse<OrderEntity>> rechargeBalance(String money) {
+        return RequestData.<ApiResponse<OrderEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<OrderEntity>>() {
+                }.getType())
+                .url(R.string.recharge_balance)
+                .addBody("uc", "android")
+                .addBody("mm", money)
+                .request();
+    }
+
+    public static Observable<ApiResponse<BalanceEntity>> getBalance() {
+        return RequestData.<ApiResponse<BalanceEntity>>build()
+                .setToJsonType(new TypeToken<ApiResponse<BalanceEntity>>() {
+                }.getType())
+                .url(R.string.get_balance)
                 .request();
     }
 }
