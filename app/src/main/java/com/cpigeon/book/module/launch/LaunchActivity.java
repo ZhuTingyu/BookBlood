@@ -12,6 +12,7 @@ import com.base.util.BarUtils;
 import com.base.util.IntentBuilder;
 import com.base.util.SharedPreferencesUtil;
 import com.base.util.Utils;
+import com.base.util.glide.GlideUtil;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
@@ -63,7 +64,7 @@ public class LaunchActivity extends BaseActivity {
         mViewModel = new LaunchViewModel();
         initViewModel(mViewModel);
         mViewModel.launchImgStr.observe(this, s -> {
-            Glide.with(this).load(s).into(ic_img);
+            GlideUtil.setGlideImageView(getBaseActivity(), s, ic_img);
         });
 
         mViewModel.getLaunchImg();
