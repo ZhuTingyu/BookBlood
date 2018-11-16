@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +17,14 @@ import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.basepigeon.AuthCodeViewModel;
 import com.cpigeon.book.module.login.viewmodel.RegisterViewModel;
 import com.cpigeon.book.util.VerifyCountdownUtil;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * 注册
@@ -44,7 +46,7 @@ public class RegisterFragment extends BaseBookFragment {
     private AppCompatCheckBox mChkAgree;
     private TextView mTvAgreement;
     private TextView mTvOk;
-    private NestedScrollView mSvRoot;
+    private ImageView mSvRoot;
     private LoginActivity mLoginActivity;
 
     private Thread thread;
@@ -103,8 +105,11 @@ public class RegisterFragment extends BaseBookFragment {
         mTvAgreement = findViewById(R.id.tvAgreement);
         mEdInviteCode = findViewById(R.id.edInviteCode);
         mTvOk = findViewById(R.id.tvOk);
+        Glide.with(getBaseActivity()).load(R.drawable.ic_bg_register)
+                .centerCrop()
+                .bitmapTransform(new RoundedCornersTransformation(context, 10, 0))
+                .into(mSvRoot);
 
-        mSvRoot.setBackgroundResource(R.drawable.ic_bg_register);
 
         bindUi(RxUtils.textChanges(mEdUserPhone), mViewModel.setPhone());
         bindUi(RxUtils.textChanges(mEdAuthCode), mViewModel.setAuthCode());

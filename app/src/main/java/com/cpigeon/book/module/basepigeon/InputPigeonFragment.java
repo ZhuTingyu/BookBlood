@@ -798,17 +798,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             getBaseActivity().errorDialog.dismiss();
         }
 
-        String hintStr = datas.getMsg();
-
-        if (o != null) {
-            if (Integer.valueOf(o.getPigeonMoney()) > 0) {
-                hintStr += "获取" + o.getPigeonMoney() + "个鸽币，";
-            }
-        }
-
-        hintStr += "是否录入赛绩？";
-
-        getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), hintStr, sweetAlertDialog -> {
+        getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), datas.getMsg(), sweetAlertDialog -> {
             //确定
             sweetAlertDialog.dismiss();
             PlayAddFragment.start(getBaseActivity(), o, 0, CODE_ADD_PLAY);

@@ -7,14 +7,20 @@
         android:id="@+id/video_player"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
+<ImageView
+    android:layout_marginLeft="17dp"
+    android:layout_marginRight="17dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/login_bg"
+    android:layout_marginBottom="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
     <FrameLayout
         android:id="@+id/rlMain"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/login_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

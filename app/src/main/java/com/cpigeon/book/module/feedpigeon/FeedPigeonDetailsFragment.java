@@ -21,7 +21,6 @@ import com.base.widget.recyclerview.XRecyclerView;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
-import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.FeedPigeonEntity;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -233,7 +232,7 @@ public class FeedPigeonDetailsFragment extends BaseBookFragment {
         mTvStatus = view.findViewById(R.id.tvStatus);
         mTvRemark = view.findViewById(R.id.tvRemark);
 
-        GlideUtil.setGlideImageView(getBaseActivity(), UserModel.getInstance().getUserData().touxiangurl, mCircleImageView);
+        GlideUtil.setGlideImageView(getBaseActivity(),R.drawable.ic_img_default, mCircleImageView);
         mTvFootNumber.setText("");
 
 
