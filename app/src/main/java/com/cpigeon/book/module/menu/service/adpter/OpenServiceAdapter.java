@@ -36,14 +36,18 @@ public class OpenServiceAdapter extends BaseQuickAdapter<ServiceEntity, BaseView
     private TextView mTvServiceName;
     private TextView mTvOpen;
     private TextView mTvCount;
-private TextView mTvTime;
-   private String type;
-   private boolean mIsOpen;
+    private TextView mTvTime;
+    private String type;
+    private boolean mIsOpen;
+    double mScore;
+    double mBanlance;
 
-    public OpenServiceAdapter(String type, boolean isOpen) {
+    public OpenServiceAdapter(String type, boolean isOpen, double score, double banlance) {
         super(R.layout.item_service_open, Lists.newArrayList());
         this.type = type;
         this.mIsOpen = isOpen;
+        mScore = score;
+        mBanlance = banlance;
     }
 
     @Override
@@ -52,7 +56,7 @@ private TextView mTvTime;
         mTvServiceName = helper.getView(R.id.tvServiceName);
         mTvOpen = helper.getView(R.id.tvOpen);
         mTvCount = helper.getView(R.id.tvCount);
-        mTvTime= helper.getView(R.id.tvtime);
+        mTvTime = helper.getView(R.id.tvtime);
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder(item.getSintro());
         mTvServiceName.setText(item.getSname());
         if (TYPE_OPEN.equals(type)) {
@@ -60,7 +64,7 @@ private TextView mTvTime;
             mTvOpen.setText(Utils.getString(R.string.text_open_at_once));
         } else {
             mTvTime.setVisibility(View.VISIBLE);
-            mTvTime.setText(item.getExpiredate()+"到期");
+            mTvTime.setText(item.getExpiredate() + "到期");
             mTvTime.setTextColor(Color.RED);
             mTvOpen.setText(Utils.getString(R.string.text_renew_at_once));
 
@@ -71,7 +75,7 @@ private TextView mTvTime;
         mTvCount.setText(stringBuilder);
 
         mTvOpen.setOnClickListener(v -> {
-            ChoosePayWayDialog.show(item, mIsOpen ,getBaseActivity().getSupportFragmentManager());
+            ChoosePayWayDialog.show(item, mIsOpen, mScore, mBanlance, getBaseActivity().getSupportFragmentManager());
         });
     }
 }

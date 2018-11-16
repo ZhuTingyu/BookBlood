@@ -337,9 +337,6 @@ public static java.lang.String TABLENAME;
   public *;
 }
 
+-keepattributes InnerClasses,Signature
 
-
-
-
-
-
+-keep class cn.qqtheme.framework.entity.** { *;}

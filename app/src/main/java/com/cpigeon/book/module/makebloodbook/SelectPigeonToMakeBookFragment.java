@@ -83,6 +83,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         setToolbarRight("非本棚鸽", item -> {
             mBreedPigeonListModel.stateid = PigeonEntity.ID_NOT_MY_PIGEON;
             initData(true);
+            bloodUserViewModel.getBloodNum();
             setMyPigeon();
             return false;
         });
@@ -92,6 +93,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         setToolbarRight("我的信鸽", item -> {
             mBreedPigeonListModel.stateid = PigeonEntity.ID_ALL_MY_PGIEON;
             initData(true);
+            bloodUserViewModel.getBloodNum();
             setNotMyPigeon();
             return false;
         });
@@ -114,4 +116,5 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         tv = mHeadView.findViewById(R.id.tvUserCount);
         return mHeadView;
     }
+
 }
