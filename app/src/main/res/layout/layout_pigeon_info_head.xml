@@ -26,7 +26,6 @@
                 android:id="@+id/tv_foot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CHN-2018-22-2323321"
                 android:textColor="@color/general_text_color"
                 android:textSize="@dimen/medium_text_size" />
 
@@ -65,7 +64,7 @@
                 android:id="@+id/tv_foot_vice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2018-232-323"
+
                 android:textColor="@color/color_4c4c4c"
                 android:textSize="@dimen/small_text_size_2" />
 
@@ -97,7 +96,7 @@
                 android:id="@+id/tv_lineage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="愤怒的小鸟"
+
                 android:textColor="@color/color_4c4c4c"
                 android:textSize="@dimen/small_text_size_2" />
 
@@ -129,7 +128,6 @@
                 android:id="@+id/tv_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="现役在棚"
                 android:textColor="@color/color_4c4c4c"
                 android:textSize="@dimen/small_text_size_2" />
 
@@ -161,7 +159,6 @@
                 android:id="@+id/tv_eye_sand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="牛眼"
                 android:textColor="@color/color_4c4c4c"
                 android:textSize="@dimen/small_text_size_2" />
 
@@ -193,7 +190,6 @@
                 android:id="@+id/tv_feather_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="灰白条"
                 android:textColor="@color/color_4c4c4c"
                 android:textSize="@dimen/small_text_size_2" />
 
@@ -228,7 +224,6 @@
             android:id="@+id/tv_their_shells_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2018-03-28"
             android:textColor="@color/color_4c4c4c"
             android:textSize="@dimen/small_text_size_2" />
 
@@ -262,7 +257,6 @@
             android:id="@+id/tv_foot_source"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="繁育"
             android:textColor="@color/color_4c4c4c"
             android:textSize="@dimen/small_text_size_2" />
 
@@ -317,7 +311,6 @@
             android:id="@+id/tv_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="暂无"
             android:textColor="@color/color_4c4c4c"
             android:textSize="@dimen/small_text_size_2" />
 

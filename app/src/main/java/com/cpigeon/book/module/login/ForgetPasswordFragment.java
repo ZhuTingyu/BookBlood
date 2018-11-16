@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +12,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.base.base.BaseWebViewActivity;
 import com.base.util.RxUtils;
-import com.base.util.Utils;
-import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.module.login.viewmodel.ForgetPasswordViewModel;
 import com.cpigeon.book.util.VerifyCountdownUtil;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by Zhu TingYu on 2018/7/26.
@@ -31,7 +29,7 @@ import com.cpigeon.book.util.VerifyCountdownUtil;
 public class ForgetPasswordFragment extends BaseBookFragment {
 
     ForgetPasswordViewModel mViewModel;
-    NestedScrollView mSvRoot;
+    ImageView mSvRoot;
 
     private ImageView mImgClose;
     private EditText edUserPhone;
@@ -86,9 +84,11 @@ public class ForgetPasswordFragment extends BaseBookFragment {
         mLlAgreement = findViewById(R.id.llAgreement);
         mTvAgreement = findViewById(R.id.tvAgreement);
         mTvOk = findViewById(R.id.tvOk);
-
-        mSvRoot.setBackgroundResource(R.drawable.ic_bg_find_password);
-
+        Glide.with(getBaseActivity()).load(R.drawable.ic_bg_find_password)
+                .centerCrop()
+                .bitmapTransform(new RoundedCornersTransformation(context, 10, 0))
+                .into(mSvRoot);
+        //Glide.with(this).load(R.drawable.ic_bg_find_password).bitmapTransform(new CropCircleTransformation(getBaseActivity())).crossFade(10).into(mSvRoot);
         bindUi(RxUtils.textChanges(edUserPhone), mViewModel.setPhone());
         bindUi(RxUtils.textChanges(mEdAuthCode), mViewModel.setAuthCode());
         bindUi(RxUtils.textChanges(mEdPassword), mViewModel.setPassword());
