@@ -34,6 +34,8 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
     private TextView mTvPrice;
     private GridPasswordView mPassword;
     private ServiceEntity mServiceEntity;
+    private double mScore;
+    private double mBanlace;
     PayServiceOrderViewModel mViewModel;
     String mPayWay;
     boolean mIsOpen;
@@ -46,6 +48,8 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
         mBaseActivity = (BaseActivity) context;
         if (getArguments() != null) {
             mServiceEntity = getArguments().getParcelable(IntentBuilder.KEY_DATA);
+            mScore = getArguments().getDouble(IntentBuilder.KEY_DATA_2);
+            mBanlace = getArguments().getDouble(IntentBuilder.KEY_DATA_3);
             mPayWay = getArguments().getString(IntentBuilder.KEY_TYPE);
             mIsOpen = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN, false);
             mStatusIsPay = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN_2, false);
@@ -152,9 +156,11 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
         window.setAttributes(lp);
     }
 
-    public static PayServiceOrderDialog show(FragmentManager fragmentManager, ServiceEntity serviceEntity, String payWay, boolean isOpen) {
+    public static PayServiceOrderDialog show(FragmentManager fragmentManager, ServiceEntity serviceEntity,double score, double banlace, String payWay, boolean isOpen) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(IntentBuilder.KEY_DATA, serviceEntity);
+        bundle.putDouble(IntentBuilder.KEY_DATA_2, score);
+        bundle.putDouble(IntentBuilder.KEY_DATA_3, banlace);
         bundle.putString(IntentBuilder.KEY_TYPE, payWay);
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isOpen);
         PayServiceOrderDialog payServiceOrderDialog = new PayServiceOrderDialog();
@@ -177,7 +183,7 @@ public class PayServiceOrderDialog extends BaseDialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         if (!mStatusIsPay) {
-            ChoosePayWayDialog.show(mServiceEntity, mIsOpen, getFragmentManager());
+            ChoosePayWayDialog.show(mServiceEntity, mIsOpen,mScore, mBanlace, getFragmentManager());
         }
         super.onDismiss(dialog);
 

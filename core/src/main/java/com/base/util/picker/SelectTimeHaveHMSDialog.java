@@ -122,7 +122,11 @@ public class SelectTimeHaveHMSDialog extends BaseDialogFragment {
 
     private void getH() {
         for (int i = 0; i < 24; i++) {
-            mH.add(String.valueOf(i));
+            String s = String.valueOf(i);
+            if (s.length() == 1) {
+                s = "0" + s;
+            }
+            mH.add(s);
         }
     }
 
@@ -146,8 +150,8 @@ public class SelectTimeHaveHMSDialog extends BaseDialogFragment {
         wheelView.setCycleDisable(cycleDisable);
         wheelView.setUseWeight(useWeight);
         wheelView.setTextSizeAutoFit(textSizeAutoFit);
+        wheelView.setDividerColor(com.base.util.Utils.getColor(R.color.color_line));
 //        picker.setTextColor(com.base.util.Utils.getColor(R.color.black));
-//        picker.setDividerColor(com.base.util.Utils.getColor(R.color.color_line));
 //        picker.setCancelTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
 //        picker.setSubmitTextColor(com.base.util.Utils.getColor(R.color.home_bottom_color));
     }

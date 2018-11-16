@@ -193,6 +193,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
 
         mAuthCodeViewModel.mDataCode.observe(this, code -> {
             setProgressVisible(false);
+            thread.start();
             ToastUtils.showLong(getBaseActivity(), "成功发送验证码！");
         });
 
@@ -243,7 +244,6 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
                     thread = new Thread(VerifyCountdownUtil.getYzm(tv_ver_code, getActivity()));
                     setProgressVisible(true);
                     mAuthCodeViewModel.getAuthCode();
-                    thread.start();
                 }
 
                 break;

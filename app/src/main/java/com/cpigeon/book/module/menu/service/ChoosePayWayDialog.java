@@ -47,6 +47,8 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
 
     PayOpenServiceAdapter mAdapter;
     ServiceEntity mServiceEntity;
+    double mScore;
+    double mBlance;
     private String mPayWay;
 
     PayServiceOrderViewModel mPayServiceOrderViewModel;
@@ -57,6 +59,8 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
         EventBus.getDefault().register(this);
         if (getArguments() != null) {
             mServiceEntity = getArguments().getParcelable(IntentBuilder.KEY_DATA);
+            mScore = getArguments().getDouble(IntentBuilder.KEY_DATA_2);
+            mBlance = getArguments().getDouble(IntentBuilder.KEY_DATA_3);
             mIsOpen = getArguments().getBoolean(IntentBuilder.KEY_BOOLEAN);
         }
         mPayServiceOrderViewModel = new PayServiceOrderViewModel();
@@ -97,13 +101,26 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
                 setProgressVisible(true);
                 mPayServiceOrderViewModel.mPayWay = PayServiceOrderViewModel.WAY_WX;
                 mPayServiceOrderViewModel.mServiceId = mServiceEntity.getSid();
-                if(mIsOpen){
+                if (mIsOpen) {
                     mPayServiceOrderViewModel.payOder();
-                }else {
+                } else {
                     mPayServiceOrderViewModel.renewalPayOder();
                 }
             } else {
-                PayServiceOrderDialog.show(getFragmentManager(), mServiceEntity, mPayWay, mIsOpen);
+
+                if (mPayWay.equals(PayServiceOrderViewModel.WAY_SCORE)) {
+                    if (mScore < Double.valueOf(mServiceEntity.getPrice())) {
+                        error(R.string.text_score_not_lack);
+                        return;
+                    }
+                } else {
+                    if (mBlance < Double.valueOf(mServiceEntity.getPrice())) {
+                        error(R.string.text_blance_not_lack);
+                        return;
+                    }
+                }
+
+                PayServiceOrderDialog.show(getFragmentManager(), mServiceEntity, mScore, mBlance, mPayWay, mIsOpen);
                 dismiss();
             }
         });
@@ -165,9 +182,11 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
 
 
     //传入订单实体类
-    public static void show(ServiceEntity s, boolean isOpen, FragmentManager fragmentManager) {
+    public static void show(ServiceEntity s, boolean isOpen, double score, double banlace, FragmentManager fragmentManager) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(IntentBuilder.KEY_DATA, s);
+        bundle.putDouble(IntentBuilder.KEY_DATA_2, score);
+        bundle.putDouble(IntentBuilder.KEY_DATA_3, banlace);
         bundle.putBoolean(IntentBuilder.KEY_BOOLEAN, isOpen);
         ChoosePayWayDialog dialog = new ChoosePayWayDialog();
         dialog.setArguments(bundle);
@@ -181,7 +200,7 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void OnEvent(WXPayEvent event){
+    public void OnEvent(WXPayEvent event) {
         setProgressVisible(false);
         EventBus.getDefault().post(new OpenServiceEvent());
         dismiss();
