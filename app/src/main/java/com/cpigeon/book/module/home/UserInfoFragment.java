@@ -293,7 +293,7 @@ public class UserInfoFragment extends BaseBookFragment {
                 if (onCheckUpdateInfoListener != null) {
                     onCheckUpdateInfoListener.onGetUpdateInfoEnd(null);
                 }
-                throw new HttpErrorException(data);
+                error(data.msg);
             }
 
         });
