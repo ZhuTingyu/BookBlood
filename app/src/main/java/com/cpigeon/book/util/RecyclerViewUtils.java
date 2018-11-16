@@ -20,7 +20,6 @@ import java.util.List;
 
 public class RecyclerViewUtils {
     public static void setLoadMoreCallBack(XRecyclerView xRecyclerView, BaseQuickAdapter adapter, List data) {
-        xRecyclerView.setRefreshing(false);
         if (data.isEmpty() || data.size() == 0) {
             if (adapter.getData().size() == 0) {
                 adapter.removeAllHeaderView();
@@ -31,6 +30,7 @@ public class RecyclerViewUtils {
             adapter.setLoadMore(false);
             adapter.addData(data);
         }
+        xRecyclerView.setRefreshing(false);
     }
 
     public static void setLoadMoreCallBack(RecyclerView mRecyclerView, BaseQuickAdapter adapter, List data) {

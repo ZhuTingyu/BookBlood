@@ -42,12 +42,10 @@ public class OpenServiceAdapter extends BaseQuickAdapter<ServiceEntity, BaseView
     double mScore;
     double mBanlance;
 
-    public OpenServiceAdapter(String type, boolean isOpen, double score, double banlance) {
+    public OpenServiceAdapter(String type, boolean isOpen) {
         super(R.layout.item_service_open, Lists.newArrayList());
         this.type = type;
         this.mIsOpen = isOpen;
-        mScore = score;
-        mBanlance = banlance;
     }
 
     @Override
@@ -77,5 +75,13 @@ public class OpenServiceAdapter extends BaseQuickAdapter<ServiceEntity, BaseView
         mTvOpen.setOnClickListener(v -> {
             ChoosePayWayDialog.show(item, mIsOpen, mScore, mBanlance, getBaseActivity().getSupportFragmentManager());
         });
+    }
+
+    public void setScore(double score) {
+        mScore = score;
+    }
+
+    public void setBanlance(double banlance) {
+        mBanlance = banlance;
     }
 }

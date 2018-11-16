@@ -154,7 +154,7 @@ public class XRecyclerView extends FrameLayout {
                 @Override
                 public void onChanged() {
                     super.onChanged();
-                    swipeRefreshLayout.setRefreshing(false);
+                    //swipeRefreshLayout.setRefreshing(false);
                     quickAdapter.loadMoreComplete();
                 }
             });

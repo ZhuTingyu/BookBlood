@@ -111,7 +111,7 @@ if(!mIsOpen)
             } else {
 
                 if (mPayWay.equals(PayServiceOrderViewModel.WAY_SCORE)) {
-                    if (mScore < Double.valueOf(mServiceEntity.getPrice())) {
+                    if (mScore < Double.valueOf(mServiceEntity.getScore())) {
                         error(R.string.text_score_not_lack);
                         return;
                     }

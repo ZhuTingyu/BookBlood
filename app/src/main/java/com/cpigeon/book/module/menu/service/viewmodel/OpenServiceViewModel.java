@@ -24,10 +24,10 @@ public class OpenServiceViewModel extends BaseViewModel {
     public void getServiceInfo() {
         submitRequestThrowError(ServiceModel.getServiceInfo(), r -> {
             if (r.isOk()) {
-                mDataOpenServiceList.setValue(r.getData().getServices());
-                mDataNotServiceList.setValue(r.getData().getServices_no());
                 balance = r.data.getYu();
                 score = r.data.getGb();
+                mDataOpenServiceList.setValue(r.getData().getServices());
+                mDataNotServiceList.setValue(r.getData().getServices_no());
             } else throw new HttpErrorException(r);
         });
     }
