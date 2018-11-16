@@ -405,6 +405,7 @@ public class BaseFootListFragment extends BaseBookFragment {
     protected void initData(boolean isCount) {
         setProgressVisible(true);
         mAdapter.getData().clear();
+        mAdapter.notifyDataSetChanged();
         mBreedPigeonListModel.pi = 1;
         mBreedPigeonListModel.getPigeonList();
     }
