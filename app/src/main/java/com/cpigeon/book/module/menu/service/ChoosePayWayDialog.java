@@ -17,7 +17,6 @@ import com.base.base.BaseDialogFragment;
 import com.base.util.IntentBuilder;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
-import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.cpigeon.book.R;
 import com.cpigeon.book.event.OpenServiceEvent;
@@ -91,7 +90,10 @@ public class ChoosePayWayDialog extends BaseDialogFragment {
         mImgClose.setOnClickListener(v -> {
             hide();
         });
-
+if(!mIsOpen)
+{
+    mTvOk.setText("立即续费");
+}
         mTvOk.setOnClickListener(v -> {
             if (mPayWay.equals(PayServiceOrderViewModel.WAY_WX)) {
                 setProgressVisible(true);
