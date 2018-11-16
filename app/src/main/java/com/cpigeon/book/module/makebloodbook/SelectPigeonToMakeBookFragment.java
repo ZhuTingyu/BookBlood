@@ -38,9 +38,9 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
     @Override
     protected void initData() {
         super.initData();
-
+        mRecyclerView.setListPadding(0, 0, 0, 0);
         setStartSearchActvity(SearchBreedPigeonToMakeBookActivity.class);//搜索页面
-        mAdapter=new MyHomingPigeonAdapter(new OnDeleteListener() {
+        mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
                 setProgressVisible(true);
@@ -53,8 +53,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
                 try {
                     PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
                     PreviewsBookActivity.start(getBaseActivity(), mPigeonEntity);
-                }catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -83,7 +82,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         setNotMyPigeon();
     }
 
-    private void setNotMyPigeon(){
+    private void setNotMyPigeon() {
         setToolbarRight("非本棚鸽", item -> {
             mBreedPigeonListModel.stateid = PigeonEntity.ID_NOT_MY_PIGEON;
             initData(true);
@@ -92,7 +91,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         });
     }
 
-    private void setMyPigeon(){
+    private void setMyPigeon() {
         setToolbarRight("我的信鸽", item -> {
             mBreedPigeonListModel.stateid = PigeonEntity.ID_ALL_MY_PGIEON;
             initData(true);
@@ -100,7 +99,6 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
             return false;
         });
     }
-
 
 
     @Override
@@ -116,4 +114,5 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         mHeadView = findViewById(R.id.llHead);
         tv = mHeadView.findViewById(R.id.tvUserCount);
     }
+
 }
