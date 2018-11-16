@@ -56,7 +56,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         });
 
 
-        mAdapter.addHeaderView(initHead());
+
     }
 
     @Override
@@ -104,6 +104,7 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         super.initObserve();
 
         bloodUserViewModel.count.observe(this, s -> {
+            mAdapter.addHeaderView(initHead());
             tv.setText(s.getCount());
         });
     }
@@ -112,12 +113,5 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         View mHeadView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.fragment_select_pigeon_to_make_book, null);
         tv = mHeadView.findViewById(R.id.tvUserCount);
         return mHeadView;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        bloodUserViewModel.getBloodNum();
-
     }
 }

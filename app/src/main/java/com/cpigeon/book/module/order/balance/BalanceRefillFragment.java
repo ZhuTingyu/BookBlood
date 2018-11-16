@@ -117,11 +117,13 @@ public class BalanceRefillFragment extends BaseBookFragment {
                 break;
             case R.id.tv_next_step:
                 //下一步
-                setProgressVisible(true);
-                mBalanceViewModel.mMoney = et_input_money.getText().toString();
-                mBalanceViewModel.rechargeBalance();
+
 
                 if (checkBoxb.isChecked()) {
+
+                    setProgressVisible(true);
+                    mBalanceViewModel.mMoney = et_input_money.getText().toString();
+                    mBalanceViewModel.rechargeBalance();
 
                 } else {
                     ToastUtils.showLong(getActivity(), "请先阅读并同意支付协议!");
