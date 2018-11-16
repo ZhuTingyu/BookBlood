@@ -21,10 +21,10 @@
             <ImageView
                 android:id="@+id/imgHead"
                 android:layout_width="412px"
-                android:layout_height="412px"
-                android:layout_marginRight="20px" />
+                android:layout_height="412px" />
 
             <android.support.v4.widget.NestedScrollView
+                android:layout_marginLeft="20px"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

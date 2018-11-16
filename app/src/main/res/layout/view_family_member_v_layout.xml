@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center">
+
+        <com.cpigeon.book.widget.ShadowRelativeLayout
+            android:id="@+id/rlShadow"
+            android:layout_width="90dp"
+            android:layout_height="139dp"
+            android:background="@color/transparent">
+
+            <RelativeLayout
+                android:id="@+id/rlMemberInfo"
+                android:layout_width="80dp"
+                android:layout_height="129dp">
+
+                <ImageView
+                    android:id="@+id/imgAdd"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/ic_pigeon_add_in_book"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/rlInMemberInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgHead"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="6dp"
+                        android:src="@drawable/ic_img_default"
+                        android:visibility="visible" />
+
+                    <com.cpigeon.book.widget.DivideTextView
+                        android:id="@+id/tvFootNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgHead"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="3dp"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"
+                        tools:text="2018-22-1234567" />
+
+                    <LinearLayout
+                        android:id="@+id/llBlood"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvFootNumber"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_blood_book"
+                            android:textColor="@color/color_text_hint"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/tvBlood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="@color/black"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llBlood"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_name"
+                            android:textColor="@color/color_text_hint"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="@color/black"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+        </com.cpigeon.book.widget.ShadowRelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vLeftLine"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/llContent"
+        android:background="@color/color_line" />
+
+    <RelativeLayout
+        android:id="@+id/rlRightLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/llContent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_centerVertical="true"
+            android:background="@color/color_line" />
+
+        <LinearLayout
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/color_line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

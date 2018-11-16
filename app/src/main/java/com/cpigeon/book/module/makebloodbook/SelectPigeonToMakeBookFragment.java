@@ -31,11 +31,16 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
     }
 
     @Override
+    protected int getLayoutRes() {
+        return R.layout.fragment_select_pgeion_to_make_book;
+    }
+
+    @Override
     protected void initData() {
         super.initData();
-
+        mRecyclerView.setListPadding(0, 0, 0, 0);
         setStartSearchActvity(SearchBreedPigeonToMakeBookActivity.class);//搜索页面
-        mAdapter=new MyHomingPigeonAdapter(new OnDeleteListener() {
+        mAdapter = new MyHomingPigeonAdapter(new OnDeleteListener() {
             @Override
             public void delete(String PigeonId) {
                 setProgressVisible(true);
@@ -48,15 +53,13 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
                 try {
                     PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
                     PreviewsBookActivity.start(getBaseActivity(), mPigeonEntity);
-                }catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-
-
+        initHead();
     }
 
     @Override
@@ -79,26 +82,23 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         setNotMyPigeon();
     }
 
-    private void setNotMyPigeon(){
+    private void setNotMyPigeon() {
         setToolbarRight("非本棚鸽", item -> {
             mBreedPigeonListModel.stateid = PigeonEntity.ID_NOT_MY_PIGEON;
             initData(true);
-            bloodUserViewModel.getBloodNum();
             setMyPigeon();
             return false;
         });
     }
 
-    private void setMyPigeon(){
+    private void setMyPigeon() {
         setToolbarRight("我的信鸽", item -> {
             mBreedPigeonListModel.stateid = PigeonEntity.ID_ALL_MY_PGIEON;
             initData(true);
-            bloodUserViewModel.getBloodNum();
             setNotMyPigeon();
             return false;
         });
     }
-
 
 
     @Override
@@ -106,15 +106,13 @@ public class SelectPigeonToMakeBookFragment extends BaseFootListFragment {
         super.initObserve();
 
         bloodUserViewModel.count.observe(this, s -> {
-            mAdapter.addHeaderView(initHead());
             tv.setText(s.getCount());
         });
     }
 
-    private View initHead() {
-        View mHeadView = LayoutInflater.from(getBaseActivity()).inflate(R.layout.fragment_select_pigeon_to_make_book, null);
+    private void initHead() {
+        mHeadView = findViewById(R.id.llHead);
         tv = mHeadView.findViewById(R.id.tvUserCount);
-        return mHeadView;
     }
 
 }
