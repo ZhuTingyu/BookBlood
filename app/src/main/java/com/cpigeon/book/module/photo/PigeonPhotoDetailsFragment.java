@@ -25,6 +25,7 @@ import com.base.util.PopWindowBuilder;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.glide.GlideCacheUtil;
 import com.base.util.picker.PickerUtil;
+import com.base.widget.photoview.PhotoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -136,19 +137,7 @@ public class PigeonPhotoDetailsFragment extends BaseBookFragment
 
         mBanner.getAdapter().setPageClickListener((view1, position1) -> {
 //            startAnimator();
-            if (Click) {
-                //appBarLayout.setVisibility(View.VISIBLE);
-                Click=false;
-                linearLayout.startAnimation(show());
-                linearLayout.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                Click=true;
-               // appBarLayout.setVisibility(View.GONE);
-                linearLayout.startAnimation(hide());
-                linearLayout.setVisibility(View.GONE);
-            }
+
 
             // PictureSelectUtil.showImagePhoto(getBaseActivity(), view1.findViewById(R.id.img), Lists.newArrayList(mViewModel.mPigeonPhotoData.get(mBanner.getViewPager().getCurrentItem() % mBanner.getAdapter().getRealCount()).getPhotoUrl()), 0);
         });
@@ -388,7 +377,7 @@ private void removeCache() {
 
    public class BannerViewHolder implements MZViewHolder<PigeonPhotoEntity> {
 
-        private ImageView mImg;
+        private PhotoView mImg;
         private TextView mTvColor,mTvTime;
         private TextView mTvNumberAndTime;
 
@@ -422,7 +411,23 @@ private void removeCache() {
 
             mTvNumberAndTime.setText(PigeonPhotoDetailsFragment.RingNum);
             mTvTime.setText( str.substring(0, str.indexOf(" ")));
+            mImg.setOnViewTapListener((view, x, y) -> {
+                if (Click) {
+                    //appBarLayout.setVisibility(View.VISIBLE);
+                    Click=false;
+                    linearLayout.startAnimation(show());
+                    linearLayout.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    Click=true;
+                    // appBarLayout.setVisibility(View.GONE);
+                    linearLayout.startAnimation(hide());
+                    linearLayout.setVisibility(View.GONE);
+                }
 
+            });
+mImg.setTag(position);
         }
 
     }

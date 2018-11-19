@@ -21,12 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
+
             app:lineInputView_IsCanEdit="false"
             app:lineInputView_IsLookState="true"
             app:lineInputView_IsNotNull="true"
             app:lineInputView_LeftString="第一窝"
             app:lineInputView_LeftTextSize="@dimen/medium_text_size"
             app:lineInputView_RightString="删除"
+            app:lineInputView_RightTextColor="@color/colorRed"
             app:lineInputView_RightTextSize="@dimen/medium_text_size"
             app:lineInputView_isLeftBold="false" />
 

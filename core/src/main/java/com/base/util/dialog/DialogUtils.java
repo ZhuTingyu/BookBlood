@@ -189,6 +189,7 @@ public class DialogUtils {
         SweetAlertDialog dialogPrompt;
         dialogPrompt = new SweetAlertDialog(context);
         dialogPrompt.setTitleText("成功");
+        dialogPrompt.setConfirmText("确定");
         dialogPrompt.setContentText(message);
         dialogPrompt.setConfirmClickListener(mConfirmClick);
         dialogPrompt.setCancelable(false);
