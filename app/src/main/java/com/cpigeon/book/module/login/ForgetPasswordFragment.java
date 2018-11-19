@@ -17,6 +17,7 @@ import com.base.util.utility.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.module.basepigeon.AuthCodeViewModel;
 import com.cpigeon.book.module.login.viewmodel.ForgetPasswordViewModel;
 import com.cpigeon.book.util.VerifyCountdownUtil;
 
@@ -29,6 +30,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class ForgetPasswordFragment extends BaseBookFragment {
 
     ForgetPasswordViewModel mViewModel;
+    AuthCodeViewModel mAuthCodeViewModel;
     ImageView mSvRoot;
 
     private ImageView mImgClose;
@@ -64,12 +66,20 @@ public class ForgetPasswordFragment extends BaseBookFragment {
         LoginActivity activity = (LoginActivity) getBaseActivity();
 
         mViewModel = new ForgetPasswordViewModel();
-        initViewModel(mViewModel);
+        mAuthCodeViewModel =  new AuthCodeViewModel();
+        mAuthCodeViewModel.mType = AuthCodeViewModel.TYPE_FIND_PASSWORD;
+        initViewModels(mViewModel, mAuthCodeViewModel);
 
         mViewModel.normalResult.observe(this, s -> {
             setProgressVisible(false);
             ToastUtils.showLong(getBaseActivity(), s);
             activity.replace(LoginActivity.TYPE_LOGIN);
+        });
+
+        mAuthCodeViewModel.mDataCode.observe(this, code -> {
+            setProgressVisible(false);
+            thread.start();
+            ToastUtils.showLong(getBaseActivity(), "验证码发送成功！");
         });
 
         mLoginActivity = (LoginActivity) getBaseActivity();
@@ -90,9 +100,11 @@ public class ForgetPasswordFragment extends BaseBookFragment {
                 .into(mSvRoot);
         //Glide.with(this).load(R.drawable.ic_bg_find_password).bitmapTransform(new CropCircleTransformation(getBaseActivity())).crossFade(10).into(mSvRoot);
         bindUi(RxUtils.textChanges(edUserPhone), mViewModel.setPhone());
+        bindUi(RxUtils.textChanges(edUserPhone), mAuthCodeViewModel.setPhoneNumber());
         bindUi(RxUtils.textChanges(mEdAuthCode), mViewModel.setAuthCode());
         bindUi(RxUtils.textChanges(mEdPassword), mViewModel.setPassword());
         bindUi(RxUtils.textChanges(mEdPassword2), mViewModel.setPassword2());
+
 
         mTvOk.setText(getString(R.string.text_sure_commit));
 
@@ -110,7 +122,8 @@ public class ForgetPasswordFragment extends BaseBookFragment {
 
         mTvGetCode.setOnClickListener(v -> {
             thread = new Thread(VerifyCountdownUtil.getYzm(mTvGetCode, getActivity()));
-            thread.start();
+            setProgressVisible(true);
+            mAuthCodeViewModel.getAuthCode();
         });
 
     }

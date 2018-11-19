@@ -51,16 +51,6 @@ public class RegisterFragment extends BaseBookFragment {
 
     private Thread thread;
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mViewModel = new RegisterViewModel();
-        mAuthCodeViewModel = new AuthCodeViewModel();
-        mAuthCodeViewModel.mType = AuthCodeViewModel.TYPE_REGISTER;
-        initViewModels(mViewModel, mAuthCodeViewModel);
-
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,6 +61,11 @@ public class RegisterFragment extends BaseBookFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mViewModel = new RegisterViewModel();
+        mAuthCodeViewModel = new AuthCodeViewModel();
+        mAuthCodeViewModel.mType = AuthCodeViewModel.TYPE_REGISTER;
+        initViewModel(mViewModel);
+        initViewModel(mAuthCodeViewModel);
 
         mViewModel.registerR.observe(this, s -> {
             setProgressVisible(false);
@@ -146,4 +141,9 @@ public class RegisterFragment extends BaseBookFragment {
         super.onDestroy();
     }
 
+    @Override
+    public boolean OnBackClick() {
+        setProgressVisible(false);
+        return true;
+    }
 }

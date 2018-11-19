@@ -346,7 +346,7 @@ public abstract class BaseFragment extends Fragment {
                 viewModel.onDestroy();
             }
         }
-
+        viewModels.clear();
     }
 
     protected <T extends View> T findViewById(@NonNull View view, @IdRes int resId) {

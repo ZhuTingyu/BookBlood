@@ -97,7 +97,16 @@ public class VideoEncoderCore {
 
         //video init
         mBufferInfo = new MediaCodec.BufferInfo();
-        MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, width, height);
+        int formatWidth = width;
+        int formatHeight = height;
+        if ((formatWidth & 1) == 1) {
+            formatWidth--;
+        }
+        if ((formatHeight & 1) == 1) {
+            formatHeight--;
+        }
+
+        MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, formatWidth, formatHeight);
 
         // Set some properties.  Failing to specify some of these can cause the MediaCodec
         // configure() call to throw an unhelpful exception.
