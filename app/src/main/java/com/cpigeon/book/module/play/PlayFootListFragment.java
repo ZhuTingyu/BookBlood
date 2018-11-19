@@ -127,17 +127,20 @@ public class PlayFootListFragment extends BaseFootListFragment {
                     }
             }
         });
-        mViewModel.getFirstLeague();//获取第一名赛绩
     }
 
+    @Override
+    protected void afterSetListData() {
+        mViewModel.getFirstLeague();//获取第一名赛绩
+    }
 
     @Override
     protected void initObserve() {
         super.initObserve();
         mViewModel.mDataFristLeague.observe(this, data -> {
-
-
-            mAdapter.addHeaderView(mHeadView);
+            if(mAdapter.getHeaderLayoutCount() == 0){
+                mAdapter.addHeaderView(mHeadView);
+            }
 
             if (Lists.isEmpty(data)) {
                 mCvLine.setVisibility(View.GONE);
@@ -191,6 +194,5 @@ public class PlayFootListFragment extends BaseFootListFragment {
         mAdapter.cleanList();
         mBreedPigeonListModel.pi = 1;
         mBreedPigeonListModel.getPigeonList();
-        mViewModel.getFirstLeague();//获取第一名赛绩
     }
 }

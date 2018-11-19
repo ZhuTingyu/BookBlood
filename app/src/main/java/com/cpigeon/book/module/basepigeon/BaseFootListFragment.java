@@ -122,7 +122,6 @@ public class BaseFootListFragment extends BaseBookFragment {
         initParameter();//初始化请求的参数
 
 
-
         mActivity.setSearchClickListener(v -> {
             //搜索
             Bundle bundle = new Bundle();
@@ -378,6 +377,7 @@ public class BaseFootListFragment extends BaseBookFragment {
             }
 
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+
             afterSetListData();
 
         });
@@ -387,11 +387,11 @@ public class BaseFootListFragment extends BaseBookFragment {
         });
         mBreedPigeonListModel.listDeleteMessage.observe(this, s -> {
             setProgressVisible(false);
-            DialogUtils.createHintDialog(getBaseActivity(),s );
+            DialogUtils.createHintDialog(getBaseActivity(), s);
         });
     }
 
-    protected void afterSetListData(){
+    protected void afterSetListData() {
 
     }
 
@@ -406,8 +406,10 @@ public class BaseFootListFragment extends BaseBookFragment {
         if (info.equals(EventBusService.PIGEON_DELETE)) {
 
             initData(true);
-        };
+        }
+        ;
     }
+
     protected void initData(boolean isCount) {
         setProgressVisible(true);
         mAdapter.getData().clear();

@@ -59,12 +59,16 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewModel.getLeagueEntity();
         mRecyclerView.setListPadding(0, 0, 0, 0);
         mRecyclerView.setBackgroundColor(Utils.getColor(R.color.white));
         mRecyclerView.addItemDecorationLine(20);
         initHead();
         mAdapter.addHeaderView(mHeadView);
+    }
+
+    @Override
+    protected void afterSetListData() {
+        mViewModel.getLeagueEntity();
     }
 
     @Override
@@ -98,6 +102,11 @@ public class PigeonToLeagueFootListFragment extends BaseFootListFragment {
     protected void initObserve() {
         super.initObserve();
         mViewModel.mDataLeague.observe(this, leagueStatEntity -> {
+
+            if(mAdapter.getHeaderLayoutCount() == 0){
+                mAdapter.addHeaderView(mHeadView);
+            }
+
             mSTvMatchFirst.setTitleText(Utils.getString(R.string.text_match_first_count, leagueStatEntity.getOneCount()));
             mSTvMatchSecond.setTitleText(Utils.getString(R.string.text_match_second_count, leagueStatEntity.getTwoCount()));
             mSTvMatchThird.setTitleText(Utils.getString(R.string.text_match_third_count, leagueStatEntity.getThreeCount()));

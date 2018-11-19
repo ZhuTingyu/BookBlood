@@ -20,6 +20,8 @@ import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.module.photo.viewmodel.PigeonPhotoViewModel;
 
+import java.util.Observable;
+
 /**
  * 信鸽相册   足环列表
  */
@@ -61,8 +63,7 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
                 try {
                     PigeonEntity mPigeonEntity = mAdapter.getData().get(position);
                     PigeonPhotoHomeActivity.start(getBaseActivity(), mPigeonEntity);
-                }catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -70,23 +71,24 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         });
 
 
-        mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
     }
 
+    @Override
+    protected void afterSetListData() {
+        mViewModel.getTXGP_PigeonPhoto_CountPhotoData();
+
+    }
 
     @Override
     protected void initObserve() {
         super.initObserve();
         //统计数据
         mViewModel.mPigeonPhotoCount.observe(this, datas -> {
-
-            mAdapter.removeAllHeaderView();
-            mAdapter.notifyDataSetChanged();
-
-            mAdapter.addHeaderView(initHead(datas));
+            if (mAdapter.getHeaderLayoutCount() == 0) {
+                mAdapter.addHeaderView(initHead(datas));
+            }
         });
     }
-
 
 
     private View initHead(PigeonPhotoEntity datas) {
@@ -113,8 +115,8 @@ public class SelectFootToPhotoFragment extends BaseFootListFragment {
         s = s.replace("%2%", String.valueOf(Double.parseDouble(datas.getTotalCount()) - Double.parseDouble(datas.getUseCount())));
         tvUsePlace.setText(s);
 
-        progressBar.setMax((int)Double.parseDouble(datas.getTotalCount()));
-        progressBar.setProgress((int)Double.parseDouble(datas.getUseCount()));
+        progressBar.setMax((int) Double.parseDouble(datas.getTotalCount()));
+        progressBar.setProgress((int) Double.parseDouble(datas.getUseCount()));
         return view;
     }
 
