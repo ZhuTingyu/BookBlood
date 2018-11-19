@@ -230,5 +230,10 @@
         <attr name="star_padding" format="dimension"/>
     </declare-styleable>
 
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#FFFFFF</item>
+        <item name="colorControlActivated">#FFFFFF</item>
+    </style>
+
 
 </resources>

@@ -2,6 +2,7 @@ package com.cpigeon.book.util;
 
 import android.support.annotation.ColorRes;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Lists;
@@ -27,6 +28,9 @@ public class RecyclerViewUtils {
             }
             adapter.setLoadMore(true);
         } else {
+            if (adapter.getEmptyView() != null) {
+                adapter.getEmptyView().setVisibility(View.GONE);
+            }
             adapter.setLoadMore(false);
             adapter.addData(data);
         }

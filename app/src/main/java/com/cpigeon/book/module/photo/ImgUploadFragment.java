@@ -125,7 +125,7 @@ public class ImgUploadFragment extends BaseImgUploadFragment {
                             .imgTypeId(mImgUploadViewModel.imgTypeId)
                             .imgType(mImgUploadViewModel.imgTypeStr)
                             .imgPath(mImgUploadViewModel.mImgTypeEntity.getImgPath())
-                            .imgRemark(boxViewRemark.getText())
+                            .imgRemark(mImgUploadViewModel.mImgTypeEntity.getImgRemark())
                             .build());
                     getBaseActivity().setResult(Activity.RESULT_OK, intent);
                     getBaseActivity().finish();

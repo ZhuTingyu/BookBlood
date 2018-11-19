@@ -13,14 +13,14 @@
 
         <com.cpigeon.book.widget.ShadowRelativeLayout
             android:id="@+id/rlShadow"
-            android:layout_width="90dp"
-            android:layout_height="139dp"
+            android:layout_width="139dp"
+            android:layout_height="90dp"
             android:background="@color/transparent">
 
             <RelativeLayout
                 android:id="@+id/rlMemberInfo"
-                android:layout_width="80dp"
-                android:layout_height="129dp">
+                android:layout_width="129dp"
+                android:layout_height="80dp">
 
                 <ImageView
                     android:id="@+id/imgAdd"
@@ -40,31 +40,33 @@
                         android:id="@+id/imgHead"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_centerVertical="true"
                         android:layout_marginTop="6dp"
                         android:src="@drawable/ic_img_default"
                         android:visibility="visible" />
 
                     <com.cpigeon.book.widget.DivideTextView
                         android:id="@+id/tvFootNumber"
+                        android:layout_toRightOf="@id/imgHead"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/imgHead"
                         android:layout_marginLeft="6dp"
                         android:layout_marginRight="6dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="8dp"
                         android:textColor="@color/black"
                         android:textSize="10sp"
                         tools:text="2018-22-1234567" />
 
                     <LinearLayout
                         android:id="@+id/llBlood"
+                        android:layout_toRightOf="@id/imgHead"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvFootNumber"
                         android:layout_marginLeft="6dp"
                         android:layout_marginRight="6dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal"
                         android:visibility="visible">
 
@@ -86,12 +88,13 @@
 
                     <LinearLayout
                         android:id="@+id/llName"
+                        android:layout_toRightOf="@id/imgHead"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/llBlood"
                         android:layout_marginLeft="6dp"
                         android:layout_marginRight="6dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal"
                         android:visibility="visible">
 
@@ -122,51 +125,50 @@
 
     <View
         android:id="@+id/vLeftLine"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/llContent"
+        android:layout_width="1px"
+        android:layout_above="@id/llContent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
         android:background="@color/color_line" />
 
     <RelativeLayout
         android:id="@+id/rlRightLine"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/llContent">
+        android:layout_below="@id/llContent"
+        android:layout_height="wrap_content">
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_centerVertical="true"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
             android:background="@color/color_line" />
 
         <LinearLayout
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/color_line" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/color_line" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1" />
 
         </LinearLayout>

@@ -14,7 +14,7 @@
     <string name="text_get_auth_code">获取验证码</string>
     <string name="text_input_auth_code">输入验证码</string>
     <string name="text_agree_and_read">我已阅读并同意</string>
-    <string name="text_book_use_agreement">天下鸽谱使用协议</string>
+    <string name="text_book_use_agreement">《天下鸽谱使用协议》</string>
     <string name="text_input_request_code">输入邀请码可获取鸽币（选填）</string>
     <string name="text_sure_commit">确认提交</string>
     <string name="text_password_length_hint">由6到16位包含字母数字的字符组成</string>

@@ -71,7 +71,11 @@ public class FamilyMemberView extends FamilyMember {
     }
 
     private void initView(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.view_family_member_layout, this);
+        if(isHorizontal){
+            View view = LayoutInflater.from(context).inflate(R.layout.view_family_member_layout, this);
+        }else {
+            View view = LayoutInflater.from(context).inflate(R.layout.view_family_member_v_layout, this);
+        }
 
         int size_80 = ScreenTool.dip2px(80);
         int size_129 = ScreenTool.dip2px(129);
@@ -160,13 +164,13 @@ public class FamilyMemberView extends FamilyMember {
 
         shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
         infoP = new RelativeLayout.LayoutParams(rootW, rootH);
-//        if (isHorizontal) {
-//            shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
-//            infoP = new RelativeLayout.LayoutParams(rootW, rootH);
-//        } else {
-//            shadowP = new LayoutParams(rootH + shadowSize, rootW + shadowSize);
-//            infoP = new RelativeLayout.LayoutParams(rootH, rootW);
-//        }
+        if (isHorizontal) {
+            shadowP = new LayoutParams(rootW + shadowSize, rootH + shadowSize);
+            infoP = new RelativeLayout.LayoutParams(rootW, rootH);
+        } else {
+            shadowP = new LayoutParams(rootH + shadowSize, rootW + shadowSize);
+            infoP = new RelativeLayout.LayoutParams(rootH, rootW);
+        }
         imgP.addRule(RelativeLayout.CENTER_IN_PARENT);
         rlMemberInfo.setLayoutParams(infoP);
         imgAdd.setLayoutParams(imgP);
@@ -195,23 +199,21 @@ public class FamilyMemberView extends FamilyMember {
         mRlInMemberInfo.setVisibility(VISIBLE);
         GlideUtil.setGlideImageView(getContext(), entity.getCoverPhotoUrl(), mImgHead);
         mTvFootNumber.setText(entity.getFootRingNum());
-        setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
-        setTextContent(mLlName, mTvName, entity.getPigeonName());
 
         if (generationPoint == 0) {
             if (isMiniModel) {
                 mLlBlood.setVisibility(GONE);
                 mLlName.setVisibility(GONE);
-            } else {
-
+            }else {
+                bindInData(entity);
             }
         } else if (generationPoint == 1) {
 
             if (isMiniModel) {
                 mLlBlood.setVisibility(GONE);
                 mLlName.setVisibility(GONE);
-            } else {
-
+            }else {
+                bindInData(entity);
             }
         } else if (generationPoint == 2) {
             if (isMiniModel) {
@@ -219,20 +221,25 @@ public class FamilyMemberView extends FamilyMember {
                 mLlBlood.setVisibility(GONE);
                 mLlName.setVisibility(GONE);
             } else {
-                mLlBlood.setVisibility(GONE);
-                mLlName.setVisibility(GONE);
+                if(!isHorizontal){
+                    mImgHead.setVisibility(GONE);
+                    bindInData(entity);
+                }else {
+                    mLlBlood.setVisibility(GONE);
+                    mLlName.setVisibility(GONE);
+                }
             }
         } else if (generationPoint == 3) {
-            if (isMiniModel) {
                 mImgHead.setVisibility(GONE);
                 mLlBlood.setVisibility(GONE);
                 mLlName.setVisibility(GONE);
-            } else {
-                mImgHead.setVisibility(GONE);
-                mLlBlood.setVisibility(GONE);
-                mLlName.setVisibility(GONE);
-            }
         }
+
+    }
+
+    private void bindInData(PigeonEntity entity){
+        setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
+        setTextContent(mLlName, mTvName, entity.getPigeonName());
     }
 
 

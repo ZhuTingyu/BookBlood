@@ -77,5 +77,4 @@
         <item name="android:windowAnimationStyle">@style/notAnimation</item>
     </style>
 
-
 </resources>

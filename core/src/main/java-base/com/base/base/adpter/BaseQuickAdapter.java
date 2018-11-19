@@ -46,6 +46,10 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
             if (!getEmptyViewText().isEmpty()) {
                 this.setEmptyView();
             }
+        }else {
+            if(getEmptyView() != null){
+                getEmptyView().setVisibility(View.GONE);
+            }
         }
         super.setNewData(data);
     }

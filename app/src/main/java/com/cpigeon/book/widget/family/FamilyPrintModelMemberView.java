@@ -193,17 +193,6 @@ public class FamilyPrintModelMemberView extends FamilyMember {
             mLlInfo.setLayoutParams(infoP);
         }
 
-        if (generationPoint == 0) {
-
-        } else if (generationPoint == 1) {
-
-        } else if (generationPoint == 2) {
-            mImgHead.setVisibility(GONE);
-        } else if (generationPoint == 3) {
-            mImgHead.setVisibility(GONE);
-            mTvBlood.setVisibility(GONE);
-            mTvColor.setVisibility(GONE);
-        }
 
         if (generationPoint == mFamilyTreeView.getStartGeneration()) {
             mVLeftLine.setVisibility(GONE);
@@ -219,15 +208,14 @@ public class FamilyPrintModelMemberView extends FamilyMember {
         if (!StringUtil.isStringValid(entity.getPigeonID())) {
             return;
         }
-        setTextContent(mTvFootNumber, entity.getFootRingNum());
-        setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
-        setTextContent(mLlColor, mTvColor, entity.getPigeonPlumeName());
-        setTextContent(mLlEye, mTvEye, entity.getPigeonEyeName());
+
         GlideUtil.setGlideImageView(getContext(), entity.getCoverPhotoUrl(), mImgHead);
         mList.setLayoutManager(new LinearLayoutManager(getContext()));
         MatchAdapter matchAdapter = new MatchAdapter();
         mList.setAdapter(matchAdapter);
         matchAdapter.setNewData(entity.getMatchData());
+        setTextContent(mTvFootNumber, entity.getFootRingNum());
+
 
         if (StringUtil.isStringValid(entity.getCoverPhotoUrl())) {
             mImgHead.setVisibility(VISIBLE);
@@ -235,6 +223,25 @@ public class FamilyPrintModelMemberView extends FamilyMember {
             mImgHead.setVisibility(GONE);
         }
 
+        if (generationPoint == 0) {
+            setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
+            setTextContent(mLlColor, mTvColor, entity.getPigeonPlumeName());
+            setTextContent(mLlEye, mTvEye, entity.getPigeonEyeName());
+        } else if (generationPoint == 1) {
+            setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
+            setTextContent(mLlColor, mTvColor, entity.getPigeonPlumeName());
+            setTextContent(mLlEye, mTvEye, entity.getPigeonEyeName());
+        } else if (generationPoint == 2) {
+            mImgHead.setVisibility(GONE);
+            setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
+            setTextContent(mLlColor, mTvColor, entity.getPigeonPlumeName());
+            setTextContent(mLlEye, mTvEye, entity.getPigeonEyeName());
+        } else if (generationPoint == 3) {
+            mImgHead.setVisibility(GONE);
+            mLlColor.setVisibility(GONE);
+            mLlEye.setVisibility(GONE);
+            setTextContent(mLlBlood, mTvBlood, entity.getPigeonBloodName());
+        }
     }
 
 

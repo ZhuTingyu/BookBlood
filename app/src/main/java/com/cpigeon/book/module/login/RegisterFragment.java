@@ -80,12 +80,6 @@ public class RegisterFragment extends BaseBookFragment {
             });
         });
 
-        mViewModel.getError().observe(this, restErrorInfo -> {
-            if (restErrorInfo != null) {
-                error(restErrorInfo.code, restErrorInfo.message);
-            }
-        });
-
         mAuthCodeViewModel.mDataCode.observe(this, code -> {
             setProgressVisible(false);
             thread = new Thread(VerifyCountdownUtil.getYzm(mTvGetCode, getActivity()));
@@ -140,7 +134,7 @@ public class RegisterFragment extends BaseBookFragment {
 
         mTvAgreement.setOnClickListener(v -> {
             BaseWebViewActivity.start(getBaseActivity(), Utils.getString(R.string.baseUr_j)
-                    + Utils.getString(R.string.baseUr_j) );
+                    + Utils.getString(R.string.txgp_use_protocol) );
         });
     }
 

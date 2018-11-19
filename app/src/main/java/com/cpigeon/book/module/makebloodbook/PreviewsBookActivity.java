@@ -262,10 +262,10 @@ public class PreviewsBookActivity extends BaseBookActivity {
                 mLlPrintTextV.setVisibility(View.GONE);
 
             } else if (bookType == SelectTemplateFragment.TYPE_V) {
-//                mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
-//                mFamilyTreeView.setHorizontal(false);
-//                mFamilyTreeView.initView();
-//                mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
+                mFamilyTreeView.setTypeMove(FamilyTreeView.TYPE_IS_CAN_MOVE_V);
+                mFamilyTreeView.setHorizontal(false);
+                mFamilyTreeView.initView();
+                mFamilyTreeView.setData(mViewModel.mBloodBookEntity);
 
 
                 mPrintFamilyTreeView.setHorizontal(false);

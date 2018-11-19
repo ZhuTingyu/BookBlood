@@ -4,6 +4,8 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.base.base.BaseViewModel;
 import com.base.http.HttpErrorException;
+import com.base.util.regex.RegexUtils;
+import com.cpigeon.book.R;
 import com.cpigeon.book.model.AuthCodeModel;
 
 import java.net.HttpRetryException;
@@ -25,6 +27,12 @@ public class AuthCodeViewModel extends BaseViewModel {
     public MutableLiveData<AuthCodeModel.Code> mDataCode = new MutableLiveData<>();
 
     public void getAuthCode(){
+
+        if(!RegexUtils.isMobileExact(mPhoneNumber)){
+            error(R.string.text_input_right_phone);
+            return;
+        }
+
         submitRequestThrowError(AuthCodeModel.getAuthCode(mPhoneNumber, mType), r -> {
             if(r.isOk()){
                 mDataCode.setValue(r.data);
