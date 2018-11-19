@@ -31,7 +31,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.75" />
 
-            <ImageView
+            <com.base.widget.photoview.PhotoView
 
                 android:id="@+id/img"
                 android:layout_width="match_parent"

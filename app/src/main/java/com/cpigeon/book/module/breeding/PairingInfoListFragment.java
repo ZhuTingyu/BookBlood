@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -106,7 +105,7 @@ public class PairingInfoListFragment extends BaseListFragment {
         setToolbarRightImage(R.drawable.svg_filtrate, item -> {
             BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
                 if(mPairingInfoListViewModel.mBreedPigeonEntity.getBitTogether()==1) {
-                    DialogUtils.createHintDialog(getBaseActivity(),"该鸽子"+mPairingInfoListViewModel.mBreedPigeonEntity.getMenFootRingNum()+"正处于“同居中”,不可再进行配对！");
+                    DialogUtils.createHintDialog(getBaseActivity(),"该鸽子"+mPairingInfoListViewModel.mBreedPigeonEntity.getFootRingNum()+"正处于“同居中”,不可再进行配对！");
 
                 }else {
                     if (chooseWays[p].equals(Utils.getString(R.string.array_pairing_add))) {
@@ -188,14 +187,16 @@ public class PairingInfoListFragment extends BaseListFragment {
             LinearLayout ll_women = mHeadView.findViewById(R.id.woman_ll);
             manfoot.setText(mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum());
             womanfoot.setText(mPairingInfoListViewModel.mBreedEntity.getWoFootRingNum());
-            Log.d("shuaishuai", "initHeadView: " + IsMen);
+
             if (IsMen) {
                 mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonID(mPairingInfoListViewModel.mBreedEntity.getMenPigeonID());
                 mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getMenFootRingID());
+                mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum());
                 footcount.setText(mPairingInfoListViewModel.mBreedEntity.getMenFootRingNum() + "配偶" + count + "羽");
             } else {
                 mPairingInfoListViewModel.mBreedPigeonEntity.setPigeonID(mPairingInfoListViewModel.mBreedEntity.getWoPigeonID());
                 mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getWoFootRingID());
+                mPairingInfoListViewModel.mBreedPigeonEntity.setFootRingID(mPairingInfoListViewModel.mBreedEntity.getWoFootRingNum());
                 footcount.setText(mPairingInfoListViewModel.mBreedEntity.getWoFootRingNum() + "配偶" + count + "羽");
 
             }

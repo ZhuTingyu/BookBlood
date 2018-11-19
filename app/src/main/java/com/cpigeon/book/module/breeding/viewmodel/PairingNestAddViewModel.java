@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.breeding.viewmodel;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.base.base.BaseViewModel;
@@ -8,9 +9,6 @@ import com.cpigeon.book.model.PairingModel;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breeding.adapter.OffspringInfoAdapter;
-import com.cpigeon.book.service.EventBusService;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * 添加窝次
@@ -19,10 +17,9 @@ import org.greenrobot.eventbus.EventBus;
 
 public class PairingNestAddViewModel extends BaseViewModel {
 
-
+    public MutableLiveData<String> msg = new MutableLiveData<>();
     public PairingInfoEntity mPairingInfoEntity;
     public PigeonEntity mBreedPigeonEntity;
-
     //窝次
 
     public String nestNum;
@@ -90,8 +87,8 @@ public class PairingNestAddViewModel extends BaseViewModel {
                 giveprson,
                 ""), r -> {
             if (r.isOk()) {
-                hintDialog(r.msg);
-                EventBus.getDefault().post(EventBusService.PAIRING_INFO_REFRESH);
+                this.msg.setValue(r.msg);
+
             } else throw new HttpErrorException(r);
         });
     }

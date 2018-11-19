@@ -36,14 +36,17 @@ import com.cpigeon.book.model.entity.PairingNestInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breeding.adapter.OffspringInfoAdapter;
 import com.cpigeon.book.module.breeding.viewmodel.PairingNestAddViewModel;
-import com.cpigeon.book.util.TextViewUtil;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.widget.LineInputView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * 添加窝次
@@ -51,7 +54,7 @@ import butterknife.OnClick;
  */
 
 public class PairingNestAddFragment extends BaseBookFragment {
-
+    private boolean IsPairing;
 
     @BindView(R.id.ll_nest_num)
     LineInputView llNestNum;
@@ -169,9 +172,20 @@ public class PairingNestAddFragment extends BaseBookFragment {
     protected void initObserve() {
         super.initObserve();
         mPairingNestAddViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(tvNextStep, aBoolean);
-        });
+            IsPairing=aBoolean;
 
+        });
+        mPairingNestAddViewModel.msg.observe(this,s -> {
+            EventBus.getDefault().post(EventBusService.PAIRING_INFO_REFRESH);
+            DialogUtils.createSuccessDialog(getBaseActivity(), s, new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    finish();
+                }
+            });
+
+
+        });
         LocationLiveData.get(true).observe(this, aMapLocation -> {
             Log.d("dingwei", "initObserve: 城市--》" + aMapLocation.getCity());
             LogUtil.print(aMapLocation);
@@ -350,11 +364,17 @@ public class PairingNestAddFragment extends BaseBookFragment {
                     return;
                 }
 
-                OffspringChooseFragment.start(getBaseActivity(),StringUtil.emptyString() ,mPairingNestAddViewModel.mPairingInfoEntity, PairingNestAddFragment.requestCode);
+                OffspringChooseFragment.start(getBaseActivity(), StringUtil.emptyString(), mPairingNestAddViewModel.mPairingInfoEntity, PairingNestAddFragment.requestCode);
                 break;
             case R.id.tv_next_step:
                 //立即添加
-                mPairingNestAddViewModel.getTXGP_PigeonBreedNest_Add();
+                if(IsPairing) {
+                    mPairingNestAddViewModel.getTXGP_PigeonBreedNest_Add();
+                }
+                else
+                {
+                    DialogUtils.createHintDialog(getBaseActivity(), "请输入完整信息！");
+                }
                 break;
         }
     }
