@@ -66,7 +66,7 @@ public class OpenServiceFragment extends BaseBookFragment {
 //        });
         mRecyclerView = findViewById(R.id.list);
         mRecyclerView.addItemDecorationLine();
-        mAdapter = new OpenServiceAdapter(OpenServiceAdapter.TYPE_OPEN, true, mViewModel.score, mViewModel.balance);
+        mAdapter = new OpenServiceAdapter(OpenServiceAdapter.TYPE_OPEN, true);
         initHeadView();
         mAdapter.addHeaderView(mHeadView);
         mRecyclerView.setAdapter(mAdapter);
@@ -85,17 +85,21 @@ public class OpenServiceFragment extends BaseBookFragment {
         mViewModel.mDataOpenServiceList.observe(this, serviceEntities -> {
             setProgressVisible(false);
             mRenewalAdapter.setNewData(serviceEntities);
+            mRenewalAdapter.setScore(mViewModel.score);
+            mRenewalAdapter.setBanlance(mViewModel.balance);
         });
 
         mViewModel.mDataNotServiceList.observe(this, serviceEntities -> {
             setProgressVisible(false);
             mAdapter.setNewData(serviceEntities);
+            mAdapter.setScore(mViewModel.score);
+            mAdapter.setBanlance(mViewModel.balance);
         });
     }
 
     private void initHeadView() {
         mHeadView = LayoutInflater.from(getContext()).inflate(R.layout.include_renew_head, null);
-        mRenewalAdapter = new OpenServiceAdapter(OpenServiceAdapter.TYPE_RENEW, false, mViewModel.score, mViewModel.balance);
+        mRenewalAdapter = new OpenServiceAdapter(OpenServiceAdapter.TYPE_RENEW, false);
         mRenewalAdapter.setEmptyText(Utils.getString(R.string.text_no_open_service));
         RecyclerView recyclerView = mHeadView.findViewById(R.id.openList);
         addItemDecorationLine(recyclerView);

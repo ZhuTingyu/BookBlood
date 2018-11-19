@@ -121,13 +121,7 @@ public class BaseFootListFragment extends BaseBookFragment {
 
         initParameter();//初始化请求的参数
 
-        mRecyclerView.setRefreshListener(() -> {
-            setProgressVisible(true);
-            mAdapter.getData().clear();
-            mAdapter.notifyDataSetChanged();
-            mBreedPigeonListModel.pi = 1;
-            mBreedPigeonListModel.getPigeonList();
-        });
+
 
         mActivity.setSearchClickListener(v -> {
             //搜索
@@ -215,6 +209,15 @@ public class BaseFootListFragment extends BaseBookFragment {
         mRecyclerView.addItemDecorationLineHaveMargin();
         mRecyclerView.setAdapter(mAdapter);
         initBreedData();
+
+        mRecyclerView.setRefreshListener(() -> {
+            setProgressVisible(true);
+            mAdapter.getData().clear();
+            mAdapter.notifyDataSetChanged();
+            mBreedPigeonListModel.pi = 1;
+            mBreedPigeonListModel.getPigeonList();
+        });
+
         mAdapter.setOnLoadMoreListener(() -> {
             setProgressVisible(true);
             mBreedPigeonListModel.pi++;
@@ -365,6 +368,7 @@ public class BaseFootListFragment extends BaseBookFragment {
         });
 
         mBreedPigeonListModel.mPigeonListData.observe(this, datas -> {
+            setProgressVisible(false);
             if (datas.isEmpty() || datas.size() == 0) {
 
             } else {
@@ -374,8 +378,8 @@ public class BaseFootListFragment extends BaseBookFragment {
             }
 
             RecyclerViewUtils.setLoadMoreCallBack(mRecyclerView, mAdapter, datas);
+            afterSetListData();
 
-            setProgressVisible(false);
         });
 
         mBreedPigeonListModel.listEmptyMessage.observe(this, s -> {
@@ -384,9 +388,11 @@ public class BaseFootListFragment extends BaseBookFragment {
         mBreedPigeonListModel.listDeleteMessage.observe(this, s -> {
             setProgressVisible(false);
             DialogUtils.createHintDialog(getBaseActivity(),s );
-
-
         });
+    }
+
+    protected void afterSetListData(){
+
     }
 
     protected void initHeadView() {

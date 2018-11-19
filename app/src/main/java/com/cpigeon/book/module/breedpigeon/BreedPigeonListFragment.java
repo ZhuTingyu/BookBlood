@@ -93,13 +93,21 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
     }
 
 
+
     @Override
     protected void initObserve() {
         super.initObserve();
         mBreedPigeonListModel.mLivePigeonSexCount.observe(this, pigeonSexCountEntity -> {
-            mAdapter.addHeaderView(initHeadView(pigeonSexCountEntity));
+            if(mAdapter.getHeaderLayoutCount() == 0){
+                mAdapter.addHeaderView(initHeadView(pigeonSexCountEntity));
+            }
         });
 
+    }
+
+    @Override
+    protected void afterSetListData() {
+        mBreedPigeonListModel.getPigeonCount();
     }
 
     private View initHeadView(PigeonSexCountEntity countEntity) {

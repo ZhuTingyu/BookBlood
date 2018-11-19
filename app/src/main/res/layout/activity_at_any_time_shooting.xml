@@ -178,27 +178,27 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/white"
+                        android:visibility="visible"
                         android:textSize="13sp"
-                        tools:text="天气" />
-
+                        android:text="" />
                     <TextView
                         android:id="@+id/tvTemperature"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/white"
+                        android:visibility="visible"
                         android:textSize="13sp"
-                        tools:text="温度" />
-
+                        android:text="" />
                     <TextView
                         android:id="@+id/tvWindDirection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/white"
+                        android:visibility="visible"
                         android:textSize="13sp"
-                        tools:text="风向" />
-
+                        android:text="" />
                 </LinearLayout>
                 <!--时间-->
 
@@ -254,9 +254,10 @@
 
                     <View
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="30dp"
                         android:layout_marginBottom="3dp"
                         android:layout_marginLeft="7dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="7dp"
                         android:layout_marginTop="3dp"
                         android:background="@color/colorWhite" />
