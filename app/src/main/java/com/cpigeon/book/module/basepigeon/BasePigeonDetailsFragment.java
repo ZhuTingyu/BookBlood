@@ -42,6 +42,7 @@ import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.play.PlayFragment1;
 import com.cpigeon.book.module.play.PlayFragment2;
 import com.cpigeon.book.module.play.viewmodel.PlayListViewModel;
+import com.cpigeon.book.util.MathUtil;
 import com.cpigeon.book.util.PigeonPublicUtil;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 import com.cpigeon.book.widget.mydialog.AddPlayDialog;
@@ -271,8 +272,8 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
                 tvFootSource.setText(getString(R.string.str_hint_no));//来源
             }
 
-            if (StringUtil.isStringValid(datas.getPigeonScore())) {
-                tvScore.setText(datas.getPigeonScore());//评分
+            if (datas.getPigeonScore() != 0) {
+                tvScore.setText(MathUtil.doubleformat(datas.getPigeonScore(), 1));//评分
             } else {
                 tvScore.setText(getString(R.string.str_hint_no));//评分
             }

@@ -38,6 +38,13 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         super(data);
     }
 
+    public int mCurrentOperatePosition = -1;
+
+    public void notifyOperatePosition(){
+        if(mCurrentOperatePosition != -1){
+            notifyItemChanged(mCurrentOperatePosition);
+        }
+    }
 
     @Override
     public void setNewData(List<T> data) {
@@ -164,10 +171,6 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         return super.getData();
     }
 
-    @Override
-    public void setOnItemClickListener(@Nullable OnItemClickListener listener) {
-        super.setOnItemClickListener(listener);
-    }
     public void  setParams(TextView tv,int Resource)
     {
         tv.setPadding(5,2,5,2);

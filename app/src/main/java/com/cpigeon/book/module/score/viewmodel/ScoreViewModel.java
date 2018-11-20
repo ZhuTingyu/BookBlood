@@ -7,7 +7,9 @@ import com.base.http.HttpErrorException;
 import com.cpigeon.book.model.ScoreModel;
 import com.cpigeon.book.model.entity.LeagueDetailsEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
+import com.cpigeon.book.model.entity.PigeonScoreItemEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,19 +20,40 @@ public class ScoreViewModel extends BaseViewModel {
 
 
     public MutableLiveData<List<LeagueDetailsEntity>> mDataFristLeague = new MutableLiveData<>();
+    public MutableLiveData<List<PigeonScoreItemEntity>> mDataScoreItem = new MutableLiveData<>();
+    public MutableLiveData<String> mDataSetScoreR = new MutableLiveData<>();
 
 
     public PigeonEntity mPigeonEntity;
 
-    public String score;
+
+    public List<Integer> mListScore;
+
+    public int AllScore;
+    public String scoreId;//：评分项目ID
+    public String score;//：分数字
+    public String allScore;//：总评分
 
 
-    //获取  修改鸽子评分
-    public void getZGW_Users_GetLogData() {
-        submitRequestThrowError(ScoreModel.getTXGP_Pigeon_UpdateScore(mPigeonEntity.getPigeonID(), mPigeonEntity.getFootRingID(), score), r -> {
+    public void getPigeonScoreItem() {
+        submitRequestThrowError(ScoreModel.getPigeonScoreItem(), r -> {
             if (r.isOk()) {
-//              hintDialog(r.msg);
-//                EventBus.getDefault().post(new PigeonAddEvent());
+                listEmptyMessage.setValue(r.msg);
+                mDataScoreItem.setValue(r.data);
+                mListScore = new ArrayList<>(r.data.size());
+            } else throw new HttpErrorException(r);
+        });
+    }
+
+    public void setPigeonItemScore() {
+        submitRequestThrowError(ScoreModel.setPigeonItemScore(
+                mPigeonEntity.getPigeonID(),
+                scoreId,
+                score,
+                allScore
+        ), r -> {
+            if (r.isOk()) {
+                mDataSetScoreR.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }

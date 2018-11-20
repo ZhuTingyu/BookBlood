@@ -101,15 +101,14 @@ public class StarRatingView extends LinearLayout {
             }
             addView(list.get(i));
         }
-        if(ratable&&onRateChangeListener!=null){
-            onRateChangeListener.onRateChange(rate);
-        }
+
     }
 
     public void setOnRateChangeListener(OnRateChangeListener l){
         onRateChangeListener = l;
-
     }
+
+    private boolean isHaveDown;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -117,7 +116,16 @@ public class StarRatingView extends LinearLayout {
         if(!ratable){
             return super.onTouchEvent(event);
         }
-        setRate(calculateStar(event.getX()));
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            isHaveDown = true;
+        }else if(event.getAction() == MotionEvent.ACTION_UP){
+            if(isHaveDown){
+                if(ratable&&onRateChangeListener!=null){
+                    onRateChangeListener.onRateChange(calculateStar(event.getX()));
+                }
+                isHaveDown = false;
+            }
+        }
         return true;
     }
 

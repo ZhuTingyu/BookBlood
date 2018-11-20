@@ -277,6 +277,8 @@
 
     <!--评分 修改-->
     <string name="pigeon_score_edit">TXGP_Pigeon_UpdateScore</string>
+    <string name="set_pigeon_item_score">TXGP_SetPigeonPingFen</string>
+    <string name="get_pigeon_score_item">TXGP_GetPigeonPingFen</string>
 
 
     <!--信鸽血统推荐-->

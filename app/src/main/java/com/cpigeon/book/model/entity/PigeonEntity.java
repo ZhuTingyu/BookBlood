@@ -133,7 +133,7 @@ private int BitTogether;
     private String PigeonBreedID;
     private String TypeName;
     private String OutShellTime;//出壳日期
-    private String PigeonScore;
+    private double PigeonScore;
     private String FootRingTime;
     private String FootRingIDTo;
     private String PigeonBloodName;//血统名字
@@ -569,11 +569,11 @@ private int BitTogether;
     }
 
 
-    public String getPigeonScore() {
+    public double getPigeonScore() {
         return PigeonScore;
     }
 
-    public void setPigeonScore(String pigeonScore) {
+    public void setPigeonScore(double pigeonScore) {
         PigeonScore = pigeonScore;
     }
 
@@ -711,7 +711,7 @@ private int BitTogether;
         private String TypeName;
         private String OutShellTime;
         private String PigeonBlood;
-        private String PigeonScore;
+        private double PigeonScore;
         private String FootRingTime;
         private String FootRingIDTo;
         private String PigeonBloodName;
@@ -882,7 +882,7 @@ private int BitTogether;
             return this;
         }
 
-        public Builder PigeonScore(String val) {
+        public Builder PigeonScore(double val) {
             PigeonScore = val;
             return this;
         }
@@ -1077,7 +1077,7 @@ private int BitTogether;
         this.PigeonBreedID = in.readString();
         this.TypeName = in.readString();
         this.OutShellTime = in.readString();
-        this.PigeonScore = in.readString();
+        this.PigeonScore = in.readDouble();
         this.FootRingTime = in.readString();
         this.FootRingIDTo = in.readString();
         this.PigeonBloodName = in.readString();
