@@ -192,7 +192,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
 
         mStatusIllnessRecordAddViewModel.mVaccineAdd.observe(this, datas -> {
             //添加成功后回调
-
+setProgressVisible(false);
             mStatusIllnessRecordAddViewModel.illnessName = "";//疾病名称
             mStatusIllnessRecordAddViewModel.illnessSymptom = "";//症状
             mStatusIllnessRecordAddViewModel.illnessTime = "";//生病日期
@@ -204,7 +204,12 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
             lvIllTime.setContent(mStatusIllnessRecordAddViewModel.illnessTime);
             lvBodyTemp.setRightText(mStatusIllnessRecordAddViewModel.bodyTemperature);
             inputRemark.setText(mStatusIllnessRecordAddViewModel.remark);
-
+        });
+        mStatusIllnessRecordAddViewModel.msg.observe(this,s ->
+        {
+            DialogUtils.createSuccessDialog(getBaseActivity(),s,sweetAlertDialog -> {
+                finish();
+            });
         });
     }
 

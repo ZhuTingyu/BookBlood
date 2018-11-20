@@ -269,7 +269,12 @@ public class CareDrugFragment extends BaseBookFragment {
             lvBodyTemp.setRightText(mCareDrugViewModel.bodyTemp);//体温
 
         });
-
+        mCareDrugViewModel.msg.observe(this,s ->
+        {
+            DialogUtils.createSuccessDialog(getBaseActivity(),s,sweetAlertDialog -> {
+                finish();
+            });
+        });
     }
 
     private BaseInputDialog mInputDialog;

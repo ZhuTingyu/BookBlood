@@ -54,6 +54,7 @@ public class UseVaccineViewModel extends BaseViewModel {
     public String remark;
 
     public MutableLiveData<Object> mVaccineAdd = new MutableLiveData<>();
+    public MutableLiveData<String> msg = new MutableLiveData<>();
 
 
     // 疫苗注射 添加
@@ -73,7 +74,7 @@ public class UseVaccineViewModel extends BaseViewModel {
         ), r -> {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
-                hintDialog(r.msg);
+                msg.setValue(r.msg);
                 mVaccineAdd.setValue(r);
             } else throw new HttpErrorException(r);
         });
@@ -95,7 +96,7 @@ public class UseVaccineViewModel extends BaseViewModel {
         ), r -> {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.FEED_PIGEON_DETAILS_REFRESH);
-                hintDialog(r.msg);
+                msg.setValue(r.msg);
             } else throw new HttpErrorException(r);
         });
     }

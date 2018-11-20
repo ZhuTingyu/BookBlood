@@ -220,9 +220,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         if (StringUtil.isStringValid(mViewModel.pigeonId)) {
             setProgressVisible(true);
             mViewModel.getPigeonDetails();
-        }
-        else
-        {
+        } else {
             mViewModel.stateId = "35";
             mLvState.setRightText("现役在棚");
         }
@@ -629,13 +627,11 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.lineage = breedPigeonEntity.getPigeonBloodName();
             mViewModel.stateId = breedPigeonEntity.getStateID();
             mLvState.setRightText(breedPigeonEntity.getStateName());
-            if(mViewModel.footMother.equals(StringUtil.emptyString()))
-            {
+            if (mViewModel.footMother.equals(StringUtil.emptyString())) {
                 mLvMotherFootState.setClickable(false);
 
             }
-            if(mViewModel.footFather.equals(StringUtil.emptyString()))
-            {
+            if (mViewModel.footFather.equals(StringUtil.emptyString())) {
                 mLvFatherFootState.setClickable(false);
             }
 //        if (   mViewModel.pigeonMotherStateId.equals(StringUtil.emptyString()))
@@ -792,13 +788,9 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         PigeonEntity o = datas.data;
         EventBus.getDefault().post(new PigeonAddEvent());
-
         //保证界面只有一个提示
-        if (getBaseActivity().errorDialog != null && getBaseActivity().errorDialog.isShowing()) {
-            getBaseActivity().errorDialog.dismiss();
-        }
-
-        getBaseActivity().errorDialog = DialogUtils.createDialogReturn(getBaseActivity(), datas.getMsg(), sweetAlertDialog -> {
+        String msg = datas.msg;
+        DialogUtils.createDialogReturn(getBaseActivity(), msg, sweetAlertDialog -> {
             //确定
             sweetAlertDialog.dismiss();
             PlayAddFragment.start(getBaseActivity(), o, 0, CODE_ADD_PLAY);
@@ -810,8 +802,10 @@ public class InputPigeonFragment extends BaseBookFragment {
                     .finishForResult(getBaseActivity());
         });
     }
+
     private static class ViewWrapper {
         private View mTarget;
+
         public ViewWrapper(View view) {
             mTarget = view;
         }

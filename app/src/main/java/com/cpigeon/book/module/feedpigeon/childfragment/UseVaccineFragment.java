@@ -219,6 +219,12 @@ public class UseVaccineFragment extends BaseBookFragment {
             inputRemark.setText(mUseVaccineViewModel.remark);
 
         });
+        mUseVaccineViewModel.msg.observe(this,s ->
+        {
+            DialogUtils.createSuccessDialog(getBaseActivity(),s,sweetAlertDialog -> {
+                finish();
+            });
+        });
     }
 
     private BaseInputDialog mInputDialog;

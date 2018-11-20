@@ -227,9 +227,8 @@ public class DrugUseCaseFragment extends BaseBookFragment {
         });
 
         mDrugUseCaseViewModel.mVaccineAdd.observe(this, datas -> {
-
+setProgressVisible(false);
             //添加完成
-
             mDrugUseCaseViewModel.illnessName = "";//疾病名称
             mDrugUseCaseViewModel.drugName = "";//药品名称
             mDrugUseCaseViewModel.drugUseTime = "";//用药日期
@@ -245,6 +244,12 @@ public class DrugUseCaseFragment extends BaseBookFragment {
             lvBodyTemp.setRightText(mDrugUseCaseViewModel.bodyTemp);//体温
             inputRemark.setText(mDrugUseCaseViewModel.remark);//备注
 
+        });
+        mDrugUseCaseViewModel.msg.observe(this,s ->
+        {
+            DialogUtils.createSuccessDialog(getBaseActivity(),s,sweetAlertDialog -> {
+                finish();
+            });
         });
     }
 
