@@ -169,6 +169,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         if (StringUtil.isStringValid(mViewModel.pigeonId)) {
             //修改
             setTitle(R.string.text_pigeon_edit);
+
             mLlImage.setVisibility(View.GONE);
         } else {
             //添加
@@ -281,8 +282,9 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mLvRing.setRightText(foot);
                 mViewModel.foot = foot;
                 IsCanCommit();
-                mViewModel.getFootRingState();
                 setProgressVisible(true);
+                mViewModel.getFootRingState();
+
 
             });
         });
@@ -427,6 +429,8 @@ public class InputPigeonFragment extends BaseBookFragment {
                         , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 if (!foot.equals(StringUtil.emptyString())) {
+                    mViewModel.footFatherId=StringUtil.emptyString();
+                    mViewModel.pigeonFatherId=StringUtil.emptyString();
                     mViewModel.footFather = foot;
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_MALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
@@ -452,7 +456,8 @@ public class InputPigeonFragment extends BaseBookFragment {
                         , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 if (!foot.equals(StringUtil.emptyString())) {
-
+                    mViewModel.footMotherId=StringUtil.emptyString();
+                    mViewModel.pigeonMotherId=StringUtil.emptyString();
                     mViewModel.footMother = foot;
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_FEMALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
@@ -589,7 +594,7 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //详情
         mViewModel.mDataPigeonDetails.observe(this, breedPigeonEntity -> {
-            setProgressVisible(false);
+
             mLvPigeonType.setRightText(breedPigeonEntity.getTypeName());
             mLvCountries.setRightText(breedPigeonEntity.getFootCode());
             mLvRing.setRightText(breedPigeonEntity.getFootRingNum());
@@ -618,7 +623,14 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.footVice = breedPigeonEntity.getFootRingIDToNum();
             mViewModel.sourceId = breedPigeonEntity.getSourceID();
             mViewModel.footFather = breedPigeonEntity.getMenFootRingNum();
+            mViewModel.footFatherId=breedPigeonEntity.getMenFootRingID();
+            mViewModel.pigeonFatherId=breedPigeonEntity.getMenPigeonID();
+            mViewModel.pigeonFatherStateId=breedPigeonEntity.getMenPigeonStateID();
+
             mViewModel.footMother = breedPigeonEntity.getWoFootRingNum();
+            mViewModel.footMotherId=breedPigeonEntity.getWoFootRingID();
+            mViewModel.pigeonMotherId=breedPigeonEntity.getWoPigeonID();
+            mViewModel.pigeonMotherStateId=breedPigeonEntity.getWoPigeonStateID();
             mViewModel.pigeonName = breedPigeonEntity.getPigeonName();
             mViewModel.sexId = breedPigeonEntity.getPigeonSexID();
             mViewModel.featherColor = breedPigeonEntity.getPigeonPlumeName();
@@ -657,6 +669,7 @@ public class InputPigeonFragment extends BaseBookFragment {
             }
 
             IsCanCommit();
+            setProgressVisible(false);
         });
 
         //种鸽录入、修改
@@ -760,9 +773,9 @@ public class InputPigeonFragment extends BaseBookFragment {
 
 
             SelectParentFootRingDialog.show(getFragmentManager(), pigeonEntities, mSelectParentFootRingViewModel.mSexId, pigeonEntity -> {
-                setProgressVisible(false);
                 if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
 //                    mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
+                    mLvFatherFootState.setClickable(true);
                     mViewModel.footFatherId = pigeonEntity.getFootRingID();
                     mViewModel.footFather = pigeonEntity.getFootRingNum();
                     mViewModel.pigeonFatherId = pigeonEntity.getPigeonID();
@@ -771,6 +784,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mLvFatherFootState.setRightText(pigeonEntity.getStateName());
                     mLvFatherFoot.setRightText(pigeonEntity.getFootRingNum());
                 } else {
+                    mLvMotherFootState.setClickable(true);
                     mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
                     mViewModel.footMotherId = pigeonEntity.getFootRingID();
                     mViewModel.footMother = pigeonEntity.getFootRingNum();
@@ -780,7 +794,9 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mLvMotherFootState.setRightText(pigeonEntity.getStateName());
                     mLvMotherFoot.setRightText(pigeonEntity.getFootRingNum());
                 }
+                IsCanCommit();
             });
+
         });
     }
 
@@ -789,8 +805,8 @@ public class InputPigeonFragment extends BaseBookFragment {
         PigeonEntity o = datas.data;
         EventBus.getDefault().post(new PigeonAddEvent());
         //保证界面只有一个提示
-        String msg = datas.msg;
-        DialogUtils.createDialogReturn(getBaseActivity(), msg, sweetAlertDialog -> {
+        String msg=datas.msg;
+       DialogUtils.createDialogReturn(getBaseActivity(), msg, sweetAlertDialog -> {
             //确定
             sweetAlertDialog.dismiss();
             PlayAddFragment.start(getBaseActivity(), o, 0, CODE_ADD_PLAY);

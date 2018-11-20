@@ -138,17 +138,24 @@ public class BreedPigeonModel {
 
     //hl 种鸽信息修改
     public static Observable<ApiResponse<PigeonEntity>> getTXGP_Pigeon_Modify(
+
             String pigeonType,
-            String setFootTime,
-            String pigeonMotherStateId,
-            String pigeonFatherStateId,
             String pigeonid,
             String coodid,
             String footnum,
             String footnumto,
             String sourceid,
-            String manfootnum,
-            String wofootnum,
+
+            String manFootId,
+            String manPigeonId,// ：父鸽子id
+            String manFootnum,
+            String manPigeonStateId,
+//            String manPigeonStateName,
+            String womenFootId,
+            String womenPigeonId,// ：母鸽子id
+            String womenFootnum,
+            String womenPigeonStateId,
+//            String womenPigeonStateName,
             String name,
             String sex,
             String plume,
@@ -157,22 +164,33 @@ public class BreedPigeonModel {
             String blood,
             String stateid,
             String phototypeid,
+            String sonFootId,
+            String sonPigeonId,
+            String setFootTime,
+            String nestId,
             Map<String, String> body) {
         return RequestData.<ApiResponse<PigeonEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
                 .url(R.string.pigeon_breed_modify)
-                .addBody("menfootstate", pigeonFatherStateId)//
-                .addBody("wofootstate", pigeonMotherStateId)//
-                .addBody("foottime", setFootTime)// 足环挂环日期
+                .addBody("pigeonid",pigeonid)
                 .addBody("typeid", pigeonType)//
-                .addBody("pigeonid", pigeonid)// 鸽子id
+                .addBody("wofootstate", womenPigeonStateId)// 母鸽子状态
+                .addBody("menfootstate", manPigeonStateId)// 父鸽子状态
                 .addBody("coodid", coodid)// 国家Id
                 .addBody("footnum", footnum)//足环（可选可填，传足环号）
                 .addBody("footnumto", footnumto)// 副环（可选可填 ，传足环号）
                 .addBody("sourceid", sourceid)// 信鸽来源ID
-                .addBody("menfootnum", manfootnum)// 父足环号码
-                .addBody("wofootnum", wofootnum)// 母足环号码
+
+                .addBody("menfootid", manFootId)// 父足环id
+                .addBody("menfootnum", manFootnum)// 父足环号码
+                .addBody("menpigeonid", manPigeonId)// 父鸽子id
+
+                .addBody("wofootid", womenFootId)// 母足环id
+
+                .addBody("wofootnum", womenFootnum)// 母足环号码
+                .addBody("wopigeonid", womenPigeonId)// 母鸽子id
+
                 .addBody("name", name)// 信鸽名称
                 .addBody("sex", sex)//  性别（传ID）
                 .addBody("plume", plume)//  羽色（可选可填，传羽色名称）
@@ -180,8 +198,12 @@ public class BreedPigeonModel {
                 .addBody("outtime", outtime)//   出壳时间
                 .addBody("blood", blood)//  血统 （可选可填，传血统名称）
                 .addBody("stateid", stateid)// 信鸽状态ID
-//                .addBody("phototypeid", phototypeid)// 图片类型
-//                .addImageFileBodys(body)
+                .addBody("phototypeid", phototypeid)// 信鸽状态ID
+                .addBody("sonpigeonid", sonPigeonId)// 子类鸽子id
+                .addBody("sonfootid", sonFootId)// 子类足环id
+                .addBody("foottime", setFootTime)// 足环挂环日期
+                .addBody("nestid", nestId)// 窝次id
+                .addImageFileBodys(body)
                 .request();
     }
 

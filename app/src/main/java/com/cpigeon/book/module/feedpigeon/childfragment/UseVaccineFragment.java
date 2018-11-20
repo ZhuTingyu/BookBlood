@@ -203,7 +203,7 @@ public class UseVaccineFragment extends BaseBookFragment {
         mUseVaccineViewModel.mVaccineAdd.observe(this, datas -> {
 
             //添加成功 后回调
-
+            setProgressVisible(false);
             mUseVaccineViewModel.vaccineName = "";//疫苗名称
             mUseVaccineViewModel.vaccineNameId = "";//疫苗名称id
             mUseVaccineViewModel.injectionTiem = "";//注射日期
@@ -221,8 +221,11 @@ public class UseVaccineFragment extends BaseBookFragment {
         });
         mUseVaccineViewModel.msg.observe(this,s ->
         {
-            DialogUtils.createSuccessDialog(getBaseActivity(),s,sweetAlertDialog -> {
-                finish();
+            String msg= s+"是否继续添加？";
+            DialogUtils.createDialogReturn(getBaseActivity(),msg,sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+            },sweetAlertDialog -> {
+                 finish();
             });
         });
     }
