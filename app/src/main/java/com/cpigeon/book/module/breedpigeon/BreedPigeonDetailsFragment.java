@@ -176,7 +176,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
             mFamilyTreeView.setShowInfoModel(true);
         }
 
-        composite.add(RxUtils.delayed(200, aLong -> {
+        composite.add(RxUtils.delayed(50, aLong -> {
             mFamilyTreeView.initView();
         }));
 
@@ -237,6 +237,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
 
         mBreedPigeonDetailsViewModel.getPigeonDetails();//获取 鸽子  详情
         mBookViewModel.getBloodBook();// //获取 血统书  四代
+
     }
 
 
@@ -259,6 +260,7 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
                 EventBus.getDefault().post(new ShareHallEvent());
             });
         });
+
     }
 
     private BaseInputDialog mInputDialog;

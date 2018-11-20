@@ -404,13 +404,6 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
 
         }
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mBreedPigeonDetailsViewModel.getPigeonDetails();
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void OnEvent(OpenServiceEvent event){
         mBreedPigeonDetailsViewModel.getPigeonDetails();
