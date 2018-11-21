@@ -105,6 +105,11 @@ public class GoodPigeonHomeFragment extends BaseBookFragment {
 
     private void bindStateData(int position) {
         GoodPigeonCountEntity goodPigeonCountEntity = mViewModel.mGoodPigeonCountEntity;
+
+        if(goodPigeonCountEntity == null){
+            return;
+        }
+
         if (position == 0) {
             mStat1.bindData(goodPigeonCountEntity.getAllCount(), goodPigeonCountEntity.getAllCount());
             mStat2.bindData(goodPigeonCountEntity.getAllXiongCount(), goodPigeonCountEntity.getAllCount());
