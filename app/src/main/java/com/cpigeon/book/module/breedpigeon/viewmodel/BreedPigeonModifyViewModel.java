@@ -3,6 +3,7 @@ package com.cpigeon.book.module.breedpigeon.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.base.http.HttpErrorException;
+import com.base.util.utility.StringUtil;
 import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -32,25 +33,31 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
     public void modifyBreedPigeonEntry() {
         submitRequestThrowError(BreedPigeonModel.getTXGP_Pigeon_Modify(
                 pigeonType.equals(PigeonEntity.ID_BREED_PIGEON) ? PigeonEntity.ID_BREED_PIGEON : PigeonEntity.ID_MATCH_PIGEON,
-                mPigeonEntity.getFootRingTime(),
-                mPigeonEntity .getWoPigeonStateID(),
-                mPigeonEntity.getMenPigeonStateID(),
-                mPigeonEntity.getPigeonID(),// 鸽子id
-                mPigeonEntity.getFootCodeID(),// 国家Id
-                mPigeonEntity.getFootRingNum(),//足环（可选可填，传足环号）
-                mPigeonEntity.getFootRingIDToNum(),//副足环
-                mPigeonEntity.getSourceID(),//信鸽来源ID
-                mPigeonEntity.getMenFootRingNum(),// 父足环号码
-                mPigeonEntity.getWoFootRingNum(),// 母足环号码
-                mPigeonEntity.getPigeonName(),// 信鸽名称
-                mPigeonEntity.getPigeonSexID(),//  性别（传ID）
-                mPigeonEntity.getPigeonPlumeName(),//  羽色（可选可填，传羽色名称）
-                mPigeonEntity.getPigeonEyeID(),//  眼沙（传ID）
-                mPigeonEntity.getOutShellTime(),//   出壳时间
-                mPigeonEntity.getPigeonBloodName(),//  血统 （可选可填，传血统名称）
-                mPigeonEntity.getStateID(),// 信鸽状态ID
-                mPigeonEntity.getCoverPhotoID(),//
-
+                pigeonid,
+                countryId,
+                foot,
+                footVice,
+                sourceId,
+                footFatherId,
+                pigeonFatherId,
+                footFather,
+                pigeonFatherStateId,
+                footMotherId,
+                pigeonMotherId,
+                footMother,
+                pigeonMotherStateId,
+                pigeonName,
+                sexId,
+                featherColor,
+                eyeSandId,
+                theirShellsDate,
+                lineage,
+                stateId,
+                phototypeid,
+                StringUtil.emptyString(),
+                StringUtil.emptyString(),
+                llHangingRingDate,
+                nestId,
                 setImageMap()), r -> {
 
             if (r.isOk()) {

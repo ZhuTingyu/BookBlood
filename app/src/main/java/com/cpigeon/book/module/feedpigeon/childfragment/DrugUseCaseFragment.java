@@ -247,7 +247,10 @@ setProgressVisible(false);
         });
         mDrugUseCaseViewModel.msg.observe(this,s ->
         {
-            DialogUtils.createSuccessDialog(getBaseActivity(),s,sweetAlertDialog -> {
+            String msg= s+"是否继续添加？";
+            DialogUtils.createDialogReturn(getBaseActivity(),msg,sweetAlertDialog -> {
+               sweetAlertDialog.dismiss();
+            },sweetAlertDialog -> {
                 finish();
             });
         });

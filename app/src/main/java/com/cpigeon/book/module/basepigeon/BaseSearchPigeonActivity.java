@@ -22,6 +22,7 @@ import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.SearchTextView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
@@ -76,6 +77,7 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         initData();
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         mRecyclerView.setListPadding(0, 0, 0, 0);
         mBreedPigeonListModel = new BreedPigeonListModel();
         initViewModel(mBreedPigeonListModel);
@@ -222,5 +224,11 @@ public class BaseSearchPigeonActivity extends BaseSearchActivity {
         mBreedPigeonListModel.listEmptyMessage.observe(this, s -> {
             mAdapter.setEmptyText(s);
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

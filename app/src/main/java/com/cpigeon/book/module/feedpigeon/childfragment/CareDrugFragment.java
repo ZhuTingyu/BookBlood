@@ -250,7 +250,7 @@ public class CareDrugFragment extends BaseBookFragment {
 
         mCareDrugViewModel.mVaccineAdd.observe(this, datas -> {
             //添加完成后回调
-
+            setProgressVisible(false);
             mCareDrugViewModel.careDrugName = "";//保健品名称
             mCareDrugViewModel.careDrugNameId = "";//保健品名称
             mCareDrugViewModel.careDrugFunction = "";//保健品功能
@@ -271,7 +271,10 @@ public class CareDrugFragment extends BaseBookFragment {
         });
         mCareDrugViewModel.msg.observe(this,s ->
         {
-            DialogUtils.createSuccessDialog(getBaseActivity(),s,sweetAlertDialog -> {
+            String msg= s+"是否继续添加？";
+            DialogUtils.createDialogReturn(getBaseActivity(),msg,sweetAlertDialog -> {
+                sweetAlertDialog.dismiss();
+            },sweetAlertDialog -> {
                 finish();
             });
         });

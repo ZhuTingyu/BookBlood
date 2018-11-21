@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.select.adpter;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,10 +31,13 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, PigeonEntity item) {
+
         ImageView imgSex = helper.getView(R.id.imgSex);
         TextView mPigeonType = helper.getView(R.id.zl);
         TextView blood = helper.getView(R.id.blood);
         TextView color = helper.getView(R.id.tvColor);
+        blood.setVisibility(View.GONE);
+        color.setVisibility(View.GONE);
         defultParams(mPigeonType, R.drawable.textcircledefult);
         defultParams(blood, R.drawable.textcircledefult);
         defultParams(color, R.drawable.textcircledefult);
@@ -56,14 +60,19 @@ public class SelectFootRingAdapter extends BaseQuickAdapter<PigeonEntity, BaseVi
         }
 
         if (!item.getPigeonPlumeName().trim().equals("")) {
+            color.setVisibility(View.VISIBLE);
             setParams(color, R.drawable.textcirclecolor);
+            helper.setText(R.id.tvColor, " " + item.getPigeonPlumeName() + " ");
         }
         if (!item.getPigeonBloodName().trim().equals("")) {
+            blood.setVisibility(View.VISIBLE);
             setParams(blood, R.drawable.textcircleblood);
+            helper.setText(R.id.blood, " " + item.getPigeonBloodName() + " ");
+
         }
         helper.setText(R.id.zl, " " + item.getTypeName() + " ");
-        helper.setText(R.id.tvColor, " " + item.getPigeonPlumeName() + " ");
-        helper.setText(R.id.blood, " " + item.getPigeonBloodName() + " ");
+
+
         helper.setText(R.id.state, item.getStateName());
         helper.setText(R.id.tvTime, item.getFootRingNum());
 
