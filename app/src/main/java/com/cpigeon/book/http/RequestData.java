@@ -18,7 +18,7 @@ public class RequestData<T> extends RequestUtil {
         RequestUtil<T> request = RequestUtil.builder();
         request.addHead("auth", EncryptionTool.encryptAES(getRequestHead()));
 
-        request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
+        request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUr_j));
 
         request.headUrl(MyApp.getAppContext().getString(R.string.api_head));
         if (StringUtil.isStringValid(UserModel.getInstance().getUserId())) {

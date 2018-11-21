@@ -49,13 +49,15 @@ public class BreedPigeonListAdapter extends BasePigeonListAdapter {
         defultParams(blood, R.drawable.textcircledefult);
         if (!item.getPigeonPlumeName().trim().equals("")) {
             setParams(color, R.drawable.textcirclecolor);
+            helper.setText(R.id.tvColor, "  " + item.getPigeonPlumeName() + "  ");
         }
         if (!item.getPigeonBloodName().trim().equals("")) {
             setParams(blood, R.drawable.textcircleblood);
+            helper.setText(R.id.blood, "  " + item.getPigeonBloodName() + "  ");
         }
 
-        helper.setText(R.id.tvColor, "  " + item.getPigeonPlumeName() + "  ");
-        helper.setText(R.id.blood, "  " + item.getPigeonBloodName() + "  ");
+
+
         helper.setText(R.id.state, item.getStateName());
         helper.setText(R.id.tvTime, item.getFootRingNum());
         ImageView imagehead = (ImageView) helper.getView(R.id.imgHead);

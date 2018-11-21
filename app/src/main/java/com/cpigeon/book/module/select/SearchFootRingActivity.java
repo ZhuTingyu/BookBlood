@@ -56,14 +56,15 @@ public class SearchFootRingActivity extends BaseSearchActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        mIsCanSetDeath = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
         mViewModel = new SelectFootRingViewModel();
         mViewModel.sexId= getIntent().getStringExtra(IntentBuilder.KEY_DATA);
+        super.onCreate(savedInstanceState);
+        mIsCanSetDeath = getIntent().getBooleanExtra(IntentBuilder.KEY_BOOLEAN, false);
+
 
         initViewModel(mViewModel);
         mRecyclerView.addItemDecorationLine();
+        mRecyclerView.setListPadding(0, 0, 0, 0);
 
         mSearchTextView.setHint(R.string.text_input_foot_number_search);
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
