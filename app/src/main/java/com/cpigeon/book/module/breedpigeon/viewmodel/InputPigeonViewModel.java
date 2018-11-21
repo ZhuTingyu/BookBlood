@@ -5,14 +5,11 @@ import android.arch.lifecycle.MutableLiveData;
 import com.base.http.ApiResponse;
 import com.base.http.HttpErrorException;
 import com.base.util.utility.StringUtil;
-import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.BreedPigeonModel;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.FootRingStateEntity;
 import com.cpigeon.book.model.entity.PairingInfoEntity;
 import com.cpigeon.book.model.entity.PigeonEntity;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * 种鸽录入
@@ -66,7 +63,7 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
             if (r.isOk()) {
                 mPigeonEntity = r.data;
                 mDataPigeon.setValue(r);
-                EventBus.getDefault().post(new PigeonAddEvent());
+
             } else throw new HttpErrorException(r);
         });
     }
@@ -98,12 +95,10 @@ public class InputPigeonViewModel extends BasePigeonViewModel {
                 sonFootId,
                 sonPigeonId,
                 llHangingRingDate,
-                nestId,
-                setImageMap()), r -> {
+                nestId), r -> {
             if (r.isOk()) {
                 mPigeonEntity = r.data;
                 mDataPigeon.setValue(r);
-                EventBus.getDefault().post(new PigeonAddEvent());
             } else throw new HttpErrorException(r);
         });
     }

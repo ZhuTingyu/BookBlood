@@ -429,8 +429,8 @@ public class InputPigeonFragment extends BaseBookFragment {
                         , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 if (!foot.equals(StringUtil.emptyString())) {
-                    mViewModel.footFatherId=StringUtil.emptyString();
-                    mViewModel.pigeonFatherId=StringUtil.emptyString();
+                    mViewModel.footFatherId = StringUtil.emptyString();
+                    mViewModel.pigeonFatherId = StringUtil.emptyString();
                     mViewModel.footFather = foot;
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_MALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
@@ -456,8 +456,8 @@ public class InputPigeonFragment extends BaseBookFragment {
                         , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 if (!foot.equals(StringUtil.emptyString())) {
-                    mViewModel.footMotherId=StringUtil.emptyString();
-                    mViewModel.pigeonMotherId=StringUtil.emptyString();
+                    mViewModel.footMotherId = StringUtil.emptyString();
+                    mViewModel.pigeonMotherId = StringUtil.emptyString();
                     mViewModel.footMother = foot;
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_FEMALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
@@ -623,14 +623,14 @@ public class InputPigeonFragment extends BaseBookFragment {
             mViewModel.footVice = breedPigeonEntity.getFootRingIDToNum();
             mViewModel.sourceId = breedPigeonEntity.getSourceID();
             mViewModel.footFather = breedPigeonEntity.getMenFootRingNum();
-            mViewModel.footFatherId=breedPigeonEntity.getMenFootRingID();
-            mViewModel.pigeonFatherId=breedPigeonEntity.getMenPigeonID();
-            mViewModel.pigeonFatherStateId=breedPigeonEntity.getMenPigeonStateID();
+            mViewModel.footFatherId = breedPigeonEntity.getMenFootRingID();
+            mViewModel.pigeonFatherId = breedPigeonEntity.getMenPigeonID();
+            mViewModel.pigeonFatherStateId = breedPigeonEntity.getMenPigeonStateID();
 
             mViewModel.footMother = breedPigeonEntity.getWoFootRingNum();
-            mViewModel.footMotherId=breedPigeonEntity.getWoFootRingID();
-            mViewModel.pigeonMotherId=breedPigeonEntity.getWoPigeonID();
-            mViewModel.pigeonMotherStateId=breedPigeonEntity.getWoPigeonStateID();
+            mViewModel.footMotherId = breedPigeonEntity.getWoFootRingID();
+            mViewModel.pigeonMotherId = breedPigeonEntity.getWoPigeonID();
+            mViewModel.pigeonMotherStateId = breedPigeonEntity.getWoPigeonStateID();
             mViewModel.pigeonName = breedPigeonEntity.getPigeonName();
             mViewModel.sexId = breedPigeonEntity.getPigeonSexID();
             mViewModel.featherColor = breedPigeonEntity.getPigeonPlumeName();
@@ -673,9 +673,10 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         //种鸽录入、修改
-        mViewModel.mDataPigeon.observe(this, datas -> {
+        mViewModel.mDataPigeon.observe(this, data -> {
             setProgressVisible(false);
-            mDataPigeonResult(datas);
+
+            mDataPigeonResult(data);
         });
 
         //性别
@@ -801,12 +802,10 @@ public class InputPigeonFragment extends BaseBookFragment {
     }
 
     protected void mDataPigeonResult(ApiResponse<PigeonEntity> datas) {
-
-        PigeonEntity o = datas.data;
         EventBus.getDefault().post(new PigeonAddEvent());
-        //保证界面只有一个提示
-        String msg=datas.msg;
-       DialogUtils.createDialogReturn(getBaseActivity(), msg, sweetAlertDialog -> {
+        PigeonEntity o = datas.data;
+        String msg = datas.msg;
+        DialogUtils.createDialogReturn(getBaseActivity(), msg, sweetAlertDialog -> {
             //确定
             sweetAlertDialog.dismiss();
             PlayAddFragment.start(getBaseActivity(), o, 0, CODE_ADD_PLAY);

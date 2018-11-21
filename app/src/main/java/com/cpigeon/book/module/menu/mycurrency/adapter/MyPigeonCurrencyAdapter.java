@@ -39,7 +39,6 @@ public class MyPigeonCurrencyAdapter extends BaseQuickAdapter<PigeonCurrencyEnti
             status.setTextColor(Utils.getColor(R.color.white));
             status.setText(Utils.getString(R.string.text_go_finish));
             status.setBackgroundResource(R.mipmap.ic_my_currency_go_finish);
-
             helper.getView(R.id.view_z).setOnClickListener(v -> {
                 if (item.getSname().equals(mContext.getString(R.string.str_gb_sign))) {
                     //签到
@@ -79,6 +78,7 @@ public class MyPigeonCurrencyAdapter extends BaseQuickAdapter<PigeonCurrencyEnti
             status.setTextColor(Utils.getColor(R.color.color_text_hint));
             status.setText(Utils.getString(R.string.text_finished));
             status.setBackgroundResource(R.mipmap.ic_my_currency_finish);
+            helper.getView(R.id.view_z).setOnClickListener(null);
         }
     }
 }

@@ -417,6 +417,7 @@ private void removeCache() {
                     Click=false;
                     linearLayout.startAnimation(show());
                     linearLayout.setVisibility(View.VISIBLE);
+
                 }
                 else
                 {

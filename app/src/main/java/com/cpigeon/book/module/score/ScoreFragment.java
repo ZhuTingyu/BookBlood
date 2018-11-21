@@ -11,14 +11,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.base.util.IntentBuilder;
-import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.score.viewmodel.ScoreViewModel;
 import com.cpigeon.book.util.MathUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 评分
@@ -94,6 +96,7 @@ public class ScoreFragment extends BaseBookFragment {
 
         mScoreViewModel.mDataSetScoreR.observe(this, s -> {
             setProgressVisible(false);
+            EventBus.getDefault().post(new PigeonAddEvent());
             ToastUtils.showLong(getBaseActivity(), s);
             mAdapter.notifyOperatePosition();
         });
