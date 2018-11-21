@@ -91,6 +91,7 @@ public class OpenServiceFragment extends BaseBookFragment {
 
         mViewModel.mDataNotServiceList.observe(this, serviceEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(serviceEntities);
             mAdapter.setScore(mViewModel.score);
             mAdapter.setBanlance(mViewModel.balance);

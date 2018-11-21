@@ -3,10 +3,13 @@ package com.base.base;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
@@ -23,6 +26,8 @@ import com.base.widget.LoadingView;
 
 import java.util.List;
 
+import io.reactivex.disposables.CompositeDisposable;
+
 /**
  * Created by Zhu TingYu on 2018/8/6.
  */
@@ -33,6 +38,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     protected LoadingView progressView;
     ViewGroup mRootView;
+    protected final CompositeDisposable composite = new CompositeDisposable();
 
     public BaseDialogFragment() {
     }
@@ -40,8 +46,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        //Dialog dialog = new Dialog(getActivity(), R.style.BottomDialog);g
-        Dialog dialog = new Dialog(getActivity());
+        //Dialog dialog = new Dialog(getActivity(), R.style.BottomDialog);
+        Dialog dialog = new Dialog(getActivity(), getDialogStyle());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 设置Content前设定
         if (getLayoutView() == null) {
             dialog.setContentView(getLayoutRes());
@@ -52,7 +58,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
         // 设置宽度为屏宽, 靠近屏幕底部。
         final Window window = dialog.getWindow();
         assert window != null;
-        window.setBackgroundDrawableResource(R.drawable.shape_bg_corner_3);
+        if(getDialogBackground() != 0){
+            window.setBackgroundDrawableResource(getDialogBackground());
+        }
         //window.setWindowAnimations(R.style.AnimBottomDialog);
         final WindowManager.LayoutParams lp = window.getAttributes();
         initLayout(window, lp);
@@ -62,6 +70,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
         initProgressLayout(dialog);
 
         return dialog;
+    }
+    @StyleRes
+    protected int getDialogStyle(){
+        return 0;
+    }
+    @DrawableRes
+    protected int getDialogBackground(){
+        return R.drawable.shape_bg_corner_3;
     }
 
     @LayoutRes
@@ -148,5 +164,11 @@ public abstract class BaseDialogFragment extends DialogFragment {
                 }
             });
         }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        composite.clear();
+        super.onDismiss(dialog);
     }
 }

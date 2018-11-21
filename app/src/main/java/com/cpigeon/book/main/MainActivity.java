@@ -1,48 +1,32 @@
-package com.cpigeon.book.module;
+package com.cpigeon.book.main;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import com.base.util.IntentBuilder;
 import com.base.util.Lists;
 import com.base.util.PermissionUtil;
 import com.base.util.PopWindowBuilder;
-import com.base.util.RxUtils;
-import com.base.util.Utils;
 import com.base.util.db.AppDatabase;
 import com.base.util.system.AppManager;
 import com.base.util.system.ScreenTool;
 import com.base.util.utility.ToastUtils;
-import com.base.widget.BottomSheetAdapter;
 import com.base.widget.CustomViewPager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.adpter.ContentFragmentAdapter;
 import com.cpigeon.book.base.BaseBookActivity;
 import com.cpigeon.book.model.UserModel;
-import com.cpigeon.book.module.basepigeon.InputPigeonFragment;
-import com.cpigeon.book.module.breedpigeon.InputBreedInBookFragment;
-import com.cpigeon.book.module.foot.FootAdminAddMultipleFragment;
-import com.cpigeon.book.module.foot.FootAdminSingleFragment;
 import com.cpigeon.book.module.home.UserInfoFragment;
 import com.cpigeon.book.module.home.goodpigeon.GoodPigeonHomeFragment;
 import com.cpigeon.book.module.home.home.HomeFragment;
 import com.cpigeon.book.module.home.sharehall.ShareHallFragment;
 import com.cpigeon.book.module.login.viewmodel.LoginViewModel;
-import com.cpigeon.book.module.menu.smalltools.SmallToolsHomeFragment;
-import com.cpigeon.book.module.photo.SelectFootToPhotoFragment;
-import com.cpigeon.book.module.racing.RacingPigeonEntryFragment;
-import com.cpigeon.book.module.trainpigeon.NewTrainPigeonFragment;
 import com.cpigeon.book.widget.BottomAddTabView;
-import com.cpigeon.book.widget.SimpleTitleView;
 
 import java.util.List;
 
@@ -110,15 +94,16 @@ public class MainActivity extends BaseBookActivity {
         bottomAddTabView.switchTab(0);
 
         bottomAddTabView.setAddClickListener(() -> {
-            mPopupWindow = PopWindowBuilder.builder(this)
-                    .setSize(ScreenTool.getScreenWidth(), ScreenTool.getScreenHeight()
-                            - getResources().getDimensionPixelSize(R.dimen.top_bar_height))
-                    .setView(initPopView())
-                    .setBackgroundColor(R.color.main_home_pop_bg)
-                    .setAnimationStyle(R.style.bottom_out_in_anim)
-                    .showAtLocation(rootView, 0
-                            , 0, Gravity.CENTER);
-
+//            mPopupWindow = PopWindowBuilder.builder(this)
+//                    .setSize(ScreenTool.getScreenWidth(), ScreenTool.getScreenHeight()
+//                            + getResources().getDimensionPixelSize(R.dimen.top_bar_height))
+//                    .setView(initPopView())
+//                    .setBackgroundColor(R.color.main_home_pop_bg)
+//                    .setAnimationStyle(R.style.bottom_out_in_anim)
+//                    .showAtLocation(rootView, 0
+//                            , 0, Gravity.BOTTOM);
+            MainMenuDialogFragment fragment = new MainMenuDialogFragment();
+            fragment.show(getSupportFragmentManager());
         });
 
         //第一次登录  获取鸽币
@@ -139,91 +124,91 @@ public class MainActivity extends BaseBookActivity {
     }
 
 
-    private View initPopView() {
-        View view = LayoutInflater.from(this).inflate(R.layout.pop_mian_home, null);
-        List<Integer> ids = Lists.newArrayList(R.id.simpleText1, R.id.simpleText2, R.id.simpleText3
-                , R.id.simpleText4, R.id.simpleText5, R.id.simpleText6);
-        List<View> views = Lists.newArrayList();
-        for (int i = 0; i < ids.size(); i++) {
-            SimpleTitleView simpleTitleView = view.findViewById(ids.get(i));
-            views.add(simpleTitleView);
-        }
+//    private View initPopView() {
+//        View view = LayoutInflater.from(this).inflate(R.layout.pop_mian_home, null);
+//        List<Integer> ids = Lists.newArrayList(R.id.simpleText1, R.id.simpleText2, R.id.simpleText3
+//                , R.id.simpleText4, R.id.simpleText5, R.id.simpleText6);
+//        List<View> views = Lists.newArrayList();
+//        for (int i = 0; i < ids.size(); i++) {
+//            SimpleTitleView simpleTitleView = view.findViewById(ids.get(i));
+//            views.add(simpleTitleView);
+//        }
+//
+//        ImageView close = view.findViewById(R.id.imgClose);
+//        SimpleTitleView simpleText1 = view.findViewById(R.id.simpleText1);
+//        SimpleTitleView simpleText2 = view.findViewById(R.id.simpleText2);
+//        SimpleTitleView simpleText3 = view.findViewById(R.id.simpleText3);
+//        SimpleTitleView simpleText4 = view.findViewById(R.id.simpleText4);
+//        SimpleTitleView simpleText5 = view.findViewById(R.id.simpleText5);
+//        SimpleTitleView simpleText6 = view.findViewById(R.id.simpleText6);
+//        close.setOnClickListener(v -> {
+//            mPopupWindow.dismiss();
+//        });
+//
+//
+//        String[] chooseWays = getResources().getStringArray(R.array.array_choose_input_foot_number);
+//        simpleText1.setOnClickListener(v -> {
+//            //足环录入
+//            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
+//                if (chooseWays[p].equals(Utils.getString(R.string.text_one_foot_input))) {
+//                    FootAdminSingleFragment.start(getBaseActivity());
+//                } else {
+//                    FootAdminAddMultipleFragment.start(getBaseActivity());
+//                }
+//                mPopupWindow.dismiss();
+//            });
+//        });
+//
+//        simpleText2.setOnClickListener(v -> {
+//            //种鸽录入
+//            mPopupWindow.dismiss();
+////            BreedPigeonEntryFragment.start(getBaseActivity());
+//            InputBreedInBookFragment.start(getBaseActivity());
+//        });
+//
+//        simpleText3.setOnClickListener(v -> {
+//            //赛鸽录入
+//            mPopupWindow.dismiss();
+//            InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);
+//        });
+//
+//        simpleText4.setOnClickListener(v -> {
+//            //赛鸽路训
+//            mPopupWindow.dismiss();
+//            NewTrainPigeonFragment.start(getBaseActivity());
+//        });
+//
+//        simpleText5.setOnClickListener(v -> {
+//            //爱鸽拍照
+//            mPopupWindow.dismiss();
+//            SelectFootToPhotoFragment.start(getBaseActivity());
+//        });
+//
+//        simpleText6.setOnClickListener(v -> {
+//            //赛鸽工具
+//            mPopupWindow.dismiss();
+//            SmallToolsHomeFragment.start(getBaseActivity());
+//        });
+//
+//        spring = new SpringForce(0)
+//                .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
+//                .setStiffness(SpringForce.STIFFNESS_MEDIUM);
+//        for (int i = 0; i < views.size(); i++) {
+//            addAnimation(views.get(i), 300 + (100 * i));
+//        }
+//        return view;
+//    }
 
-        ImageView close = view.findViewById(R.id.imgClose);
-        SimpleTitleView simpleText1 = view.findViewById(R.id.simpleText1);
-        SimpleTitleView simpleText2 = view.findViewById(R.id.simpleText2);
-        SimpleTitleView simpleText3 = view.findViewById(R.id.simpleText3);
-        SimpleTitleView simpleText4 = view.findViewById(R.id.simpleText4);
-        SimpleTitleView simpleText5 = view.findViewById(R.id.simpleText5);
-        SimpleTitleView simpleText6 = view.findViewById(R.id.simpleText6);
-        close.setOnClickListener(v -> {
-            mPopupWindow.dismiss();
-        });
-
-
-        String[] chooseWays = getResources().getStringArray(R.array.array_choose_input_foot_number);
-        simpleText1.setOnClickListener(v -> {
-            //足环录入
-            BottomSheetAdapter.createBottomSheet(getBaseActivity(), Lists.newArrayList(chooseWays), p -> {
-                if (chooseWays[p].equals(Utils.getString(R.string.text_one_foot_input))) {
-                    FootAdminSingleFragment.start(getBaseActivity());
-                } else {
-                    FootAdminAddMultipleFragment.start(getBaseActivity());
-                }
-                mPopupWindow.dismiss();
-            });
-        });
-
-        simpleText2.setOnClickListener(v -> {
-            //种鸽录入
-            mPopupWindow.dismiss();
-//            BreedPigeonEntryFragment.start(getBaseActivity());
-            InputBreedInBookFragment.start(getBaseActivity());
-        });
-
-        simpleText3.setOnClickListener(v -> {
-            //赛鸽录入
-            mPopupWindow.dismiss();
-            InputPigeonFragment.start(getBaseActivity(), null, null, null, null, null, 0);
-        });
-
-        simpleText4.setOnClickListener(v -> {
-            //赛鸽路训
-            mPopupWindow.dismiss();
-            NewTrainPigeonFragment.start(getBaseActivity());
-        });
-
-        simpleText5.setOnClickListener(v -> {
-            //爱鸽拍照
-            mPopupWindow.dismiss();
-            SelectFootToPhotoFragment.start(getBaseActivity());
-        });
-
-        simpleText6.setOnClickListener(v -> {
-            //赛鸽工具
-            mPopupWindow.dismiss();
-            SmallToolsHomeFragment.start(getBaseActivity());
-        });
-
-        spring = new SpringForce(0)
-                .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
-                .setStiffness(SpringForce.STIFFNESS_MEDIUM);
-        for (int i = 0; i < views.size(); i++) {
-            addAnimation(views.get(i), 300 + (100 * i));
-        }
-        return view;
-    }
-
-    private void addAnimation(View view, int time) {
-        view.setVisibility(View.GONE);
-        final SpringAnimation anim = new SpringAnimation(view, SpringAnimation.TRANSLATION_Y).setSpring(spring);
-        anim.setStartValue(500);
-        bindUi(RxUtils.delayed(time), aLong -> {
-            view.setVisibility(View.VISIBLE);
-            anim.cancel();
-            anim.start();
-        });
-    }
+//    private void addAnimation(View view, int time) {
+//        view.setVisibility(View.GONE);
+//        final SpringAnimation anim = new SpringAnimation(view, SpringAnimation.TRANSLATION_Y).setSpring(spring);
+//        anim.setStartValue(500);
+//        bindUi(RxUtils.delayed(time), aLong -> {
+//            view.setVisibility(View.VISIBLE);
+//            anim.cancel();
+//            anim.start();
+//        });
+//    }
 
 
     private long firstTime = 0;//双击返回退出应用，记录时间

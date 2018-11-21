@@ -74,6 +74,7 @@ public class SelectPigeonToFlyBackFragment extends BaseBookFragment{
     protected void initObserve() {
         mViewModel.mDataPigeon.observe(this, pigeonEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(pigeonEntities);
         });
     }

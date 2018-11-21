@@ -76,6 +76,7 @@ public class SelectParentFootRingDialog extends BaseDialogFragment {
             dismiss();
         });
 
+
         mAdapter.setNewData(mPigeonEntities);
 
     }

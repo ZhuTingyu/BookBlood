@@ -67,6 +67,7 @@ public class TrainAnalyzeFragment extends BaseBookFragment{
 
         mViewModel.mDataTrainAnalyse.observe(this, trainAnalyseEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(trainAnalyseEntities);
         });
     }

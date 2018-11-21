@@ -68,6 +68,7 @@ public class FeedbackDetailsFragment extends BaseBookFragment {
 
         mViewModel.mFeedbackDetaisLiveData.observe(getBaseActivity(), feedbackDetails -> {
             setProgressVisible(false);
+            recyclerView.setRefreshing(false);
             mAdapter.setNewData(feedbackDetails);
         });
     }

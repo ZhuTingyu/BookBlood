@@ -69,6 +69,7 @@ public class PigeonTrainDetailsFragment extends BaseBookFragment {
 
         mViewModel.mDataPigeonTrainDetails.observe(this, pigeonTrainDetailsEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(pigeonTrainDetailsEntities);
         });
     }

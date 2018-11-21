@@ -353,7 +353,6 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
                 try {
                     PriringRecommendEntity item = data.getParcelableExtra(IntentBuilder.KEY_DATA);
-
                     //足环号
                     llPairingFoot.setContent(item.getFootRingNum());
                     mPairingInfoAddViewModel.pairingFoot = item.getFootRingNum();
@@ -365,6 +364,15 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                     //雨色
                     mPairingInfoAddViewModel.featherColor = item.getPigeonPlumeName();
 //                    llFeatherColor.setContent(item.getPigeonPlumeName());
+
+                    if(mPairingInfoAddViewModel.mPigeonEntity != null && mPairingInfoAddViewModel.mPigeonEntity.isMale()){
+                        mPairingInfoAddViewModel.wofootid = item.getFootRingID();
+                        mPairingInfoAddViewModel.wopigeonid = item.getPigeonID();
+                    }else {
+                        mPairingInfoAddViewModel.menfootid = item.getFootRingID();
+                        mPairingInfoAddViewModel.menpigeonid = item.getPigeonID();
+                    }
+
 
                     mPairingInfoAddViewModel.isCanCommit();
                 } catch (Exception e) {

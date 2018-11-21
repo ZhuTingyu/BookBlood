@@ -48,7 +48,7 @@ public class MyApp extends BaseApplication {
 
         UMShareAPI.get(this);//友盟初始化
 
-        Config.DEBUG = true;
+        Config.DEBUG = BuildConfig.DEBUG;
 
         //bugly
         CrashReport.initCrashReport(getApplicationContext(), "4d1c4ee910", false);

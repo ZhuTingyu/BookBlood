@@ -14,6 +14,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.base.util.system.ScreenTool;
+
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
@@ -54,8 +56,8 @@ class MaskView extends ViewGroup {
     super(context, attrs, defStyle);
     setWillNotDraw(false);
     Point size = new Point();
-    size.x = getResources().getDisplayMetrics().widthPixels;
-    size.y = getResources().getDisplayMetrics().heightPixels;
+    size.x = ScreenTool.getScreenWidth();
+    size.y = ScreenTool.getScreenHeight() + 100;
 
     mEraserBitmap = Bitmap.createBitmap(size.x, size.y, Bitmap.Config.ARGB_8888);
     mEraserCanvas = new Canvas(mEraserBitmap);

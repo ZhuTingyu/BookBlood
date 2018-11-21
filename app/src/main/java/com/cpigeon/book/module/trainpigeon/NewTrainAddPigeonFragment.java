@@ -232,6 +232,7 @@ public class NewTrainAddPigeonFragment extends BaseBookFragment {
     protected void initObserve() {
         mViewModel.mDataAllPigeon.observe(this, pigeonEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(pigeonEntities);
         });
 

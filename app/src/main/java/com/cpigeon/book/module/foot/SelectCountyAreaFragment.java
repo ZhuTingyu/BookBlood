@@ -75,6 +75,7 @@ public class SelectCountyAreaFragment extends BaseFragment {
     protected void initObserve() {
         mViewModel.mAreaLiveData.observe(this, countyEntities -> {
             setProgressVisible(false);
+            recyclerView.setRefreshing(false);
             mAdapter.setNewData(countyEntities);
         });
     }

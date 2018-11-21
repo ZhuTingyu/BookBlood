@@ -8,8 +8,13 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.alibaba.idst.nls.internal.protocol.Content;
 import com.base.application.BaseApplication;
+import com.base.http.R;
 import com.base.util.Utils;
+import com.base.util.utility.LogUtil;
+
+import java.lang.reflect.Method;
 
 /**
  * Created by Antony on 2016/10/19.
@@ -45,7 +50,97 @@ public class ScreenTool {
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.heightPixels;
+
+
+        return outMetrics.heightPixels + getHairHeight(BaseApplication.getAppContext());
+    }
+
+    private static int getHairHeight(Context context) {
+        int height = 0;
+
+        height = getStatusBarHeight(context);
+
+        if (hasNotchInHuawei(context)) {
+            height = getNotchSizeHW(context);
+        }
+
+        if (hasNotchInOppo(context)) {
+            height = getStatusBarHeight(context);
+        }
+
+//        if(height != 0){
+//            height = height - BaseApplication.getAppContext().getResources().getDimensionPixelSize(R.dimen.top_bar_height);
+//        }
+
+        return height;
+    }
+
+    //判断华为是否有刘海
+    public static boolean hasNotchInHuawei(Context context) {
+        boolean hasNotch = false;
+        try {
+            ClassLoader cl = context.getClassLoader();
+            Class HwNotchSizeUtil = cl.loadClass("com.huawei.android.util.HwNotchSizeUtil");
+            Method hasNotchInScreen = HwNotchSizeUtil.getMethod("hasNotchInScreen");
+            if (hasNotchInScreen != null) {
+                hasNotch = (boolean) hasNotchInScreen.invoke(HwNotchSizeUtil);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return hasNotch;
+    }
+
+    public static int getNotchSizeHW(Context context) {
+        int[] ret = new int[]{0, 0};
+        try {
+            ClassLoader cl = context.getClassLoader();
+            Class HwNotchSizeUtil = cl.loadClass("com.huawei.android.util.HwNotchSizeUtil");
+            Method get = HwNotchSizeUtil.getMethod("getNotchSize");
+            ret = (int[]) get.invoke(HwNotchSizeUtil);
+        } catch (ClassNotFoundException e) {
+            LogUtil.print("testgetNotchSize ClassNotFoundException");
+        } catch (NoSuchMethodException e) {
+            LogUtil.print("testgetNotchSize NoSuchMethodException");
+        } catch (Exception e) {
+            LogUtil.print("testgetNotchSize Exception");
+        } finally {
+            return ret[1];
+        }
+    }
+
+    //判断该 OPPO//小米 手机是否为刘海屏手机
+    public static boolean hasNotchInOppo(Context context) {
+        return context.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        int statusBarHeight = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
+    }
+
+    public static final int VIVO_NOTCH = 0x00000020;//是否有刘海
+
+    public static boolean hasNotchAtVivo(Context context) {
+        boolean ret = false;
+        try {
+            ClassLoader classLoader = context.getClassLoader();
+            Class FtFeature = classLoader.loadClass("android.util.FtFeature");
+            Method method = FtFeature.getMethod("isFeatureSupport", int.class);
+            ret = (boolean) method.invoke(FtFeature, VIVO_NOTCH);
+        } catch (ClassNotFoundException e) {
+            LogUtil.print("NotchhasNotchAtVivo ClassNotFoundException");
+        } catch (NoSuchMethodException e) {
+            LogUtil.print("NotchhasNotchAtVivo NoSuchMethodException");
+        } catch (Exception e) {
+            LogUtil.print("NotchhasNotchAtVivo Exception");
+        } finally {
+            return ret;
+        }
     }
 
     /**
@@ -126,13 +221,14 @@ public class ScreenTool {
         return bp;
 
     }
+
     /**
      * 将px值转换为dip或dp值，保证尺寸大小不变
      *
      * @param pxValue
      * @return
      */
-    public static int px2dip( float pxValue) {
+    public static int px2dip(float pxValue) {
         final float scale = Utils.getApp().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }

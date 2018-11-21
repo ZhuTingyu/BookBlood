@@ -49,6 +49,7 @@ public class SearchCountyActivity extends BaseSearchActivity {
         mViewModel.mLiveData.observe(this, countyEntities -> {
             setProgressVisible(false);
             saveHistory(mViewModel.key, AppDatabase.TYPE_SEARCH_COUNTY_HISTORY);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(countyEntities);
         });
 

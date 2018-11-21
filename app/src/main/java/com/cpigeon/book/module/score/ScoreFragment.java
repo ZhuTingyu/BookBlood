@@ -16,9 +16,12 @@ import com.base.util.utility.ToastUtils;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.event.PigeonAddEvent;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.score.viewmodel.ScoreViewModel;
 import com.cpigeon.book.util.MathUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 评分
@@ -66,8 +69,8 @@ public class ScoreFragment extends BaseBookFragment {
         mRecyclerView.addItemDecorationLine();
         mAdapter = new ScoreAdapter();
         mAdapter.setOnAllScoreGetListener(allScore -> {
-            mScoreViewModel.allScore = String.valueOf(allScore);
-            mTvAllScore.setText(MathUtil.doubleformat(allScore, 1));
+            mScoreViewModel.allScore = MathUtil.doubleformat(allScore,2);
+            mTvAllScore.setText(MathUtil.doubleformat(allScore, 2));
         });
 
         mAdapter.setOnItemScoreGetListener((position, pigeonScoreItemEntity) -> {
@@ -88,6 +91,7 @@ public class ScoreFragment extends BaseBookFragment {
     protected void initObserve() {
         mScoreViewModel.mDataScoreItem.observe(this, pigeonScoreItemEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(pigeonScoreItemEntities);
             mTvAllScore.setText(MathUtil.doubleformat(mAdapter.getAllScore(), 2));
         });
@@ -96,6 +100,7 @@ public class ScoreFragment extends BaseBookFragment {
             setProgressVisible(false);
             ToastUtils.showLong(getBaseActivity(), s);
             mAdapter.notifyOperatePosition();
+            EventBus.getDefault().post(new PigeonAddEvent());
         });
     }
 }

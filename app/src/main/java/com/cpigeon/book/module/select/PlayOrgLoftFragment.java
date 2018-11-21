@@ -88,6 +88,7 @@ public class PlayOrgLoftFragment extends BaseFragment {
             mModel.setData(assEntities);
             mAdapter.initWave(mModel, mWaveSideBar);
             mAdapter.initHead(getBaseActivity());
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(mModel.getData());
         });
     }

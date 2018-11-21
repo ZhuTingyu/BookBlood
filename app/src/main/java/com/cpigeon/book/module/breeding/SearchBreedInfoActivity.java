@@ -68,6 +68,7 @@ public class SearchBreedInfoActivity extends BaseSearchActivity {
 
         mViewModel.mBreedingInfoListData.observe(this, breedPigeonEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(breedPigeonEntities);
         });
 

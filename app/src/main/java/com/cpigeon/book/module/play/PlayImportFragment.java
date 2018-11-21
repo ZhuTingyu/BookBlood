@@ -189,6 +189,7 @@ public class PlayImportFragment extends BaseBookFragment {
     protected void initObserve() {
         mPlayInportViewModel.mPlayListData.observe(this, playImportListEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(playImportListEntities);
         });
 

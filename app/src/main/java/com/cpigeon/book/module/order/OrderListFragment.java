@@ -97,7 +97,6 @@ public class OrderListFragment extends BaseBookFragment {
         }, mRecyclerView.getRecyclerView());
         setProgressVisible(true);
         mViewModel.getTXGP_GetOrderListData();
-
     }
 
     @Override
@@ -112,6 +111,7 @@ public class OrderListFragment extends BaseBookFragment {
             mAdapter.setEmptyText(s);
         });
     }
+
 
 
 }

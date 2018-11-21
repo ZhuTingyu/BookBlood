@@ -80,6 +80,7 @@ public class SelectCountyFragment extends BaseFragment {
             mModel.setData(selectCountyEntities);
             mAdapter.initWave(mModel, mWaveSideBar);
             mAdapter.initHead(getBaseActivity());
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(mModel.getData());
         });
     }

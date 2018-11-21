@@ -83,6 +83,7 @@ public class SelectBloodFragment extends BaseBookFragment {
             mModel.setData(assEntities);
             mAdapter.initWave(mModel, mWaveSideBar);
             mAdapter.initHead(getBaseActivity());
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(mModel.getData());
         });
     }

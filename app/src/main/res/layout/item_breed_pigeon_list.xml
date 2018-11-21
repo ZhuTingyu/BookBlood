@@ -22,12 +22,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginVertical="5dp"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <LinearLayout
@@ -66,31 +66,25 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         app:srcCompat="@mipmap/ic_male" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
 
+                    <TextView
+                        android:id="@+id/state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:gravity="right|center_vertical"
+                        android:text="现役在棚"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/state"
-        android:layout_marginRight="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:gravity="center"
-        android:text="状态"
-        android:textColor="@color/black"
-        android:textSize="@dimen/medium_text_size"
-        android:textStyle="bold" />
-</LinearLayout>
 
                 </LinearLayout>
 
 
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -111,8 +105,7 @@
                         android:gravity="center"
                         android:paddingBottom="2dp"
                         android:text=""
-                        android:textSize="@dimen/small_text_size"
-                />
+                        android:textSize="@dimen/small_text_size" />
 
                     <TextView
                         android:id="@+id/tvColor"
@@ -120,8 +113,7 @@
                         android:layout_height="21dp"
                         android:gravity="center"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/small_text_size"
-          />
+                        android:textSize="@dimen/small_text_size" />
 
                     <TextView
                         android:id="@+id/blood"
@@ -134,12 +126,12 @@
 
                 <TextView
                     android:id="@+id/tvTogetherState"
-                    tools:text="1231231312"
-                    android:visibility="gone"
-                    android:textSize="@dimen/small_text_size"
-                    android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/small_text_size"
+                    android:visibility="gone"
+                    tools:text="1231231312" />
             </LinearLayout>
 
 

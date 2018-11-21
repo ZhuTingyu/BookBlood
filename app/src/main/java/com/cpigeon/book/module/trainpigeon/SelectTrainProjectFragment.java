@@ -76,6 +76,8 @@ public class SelectTrainProjectFragment extends BaseBookFragment {
                     .startParentActivity(getBaseActivity(), TrainAnalyzeFragment.class);
         });
 
+        mRecyclerView.setRefreshing(false);
+
         mAdapter.setNewData(mTrainEntities);
     }
 }

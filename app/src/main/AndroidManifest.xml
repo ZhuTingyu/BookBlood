@@ -36,7 +36,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-
+        <meta-data android:name="android.notch_support" android:value="true"/>
         <!--分享-->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -102,7 +102,7 @@
             android:value="eaa472f5b6b36270351a48f1e4fa36d6" />
 
         <activity
-            android:name=".module.MainActivity"
+            android:name=".main.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 

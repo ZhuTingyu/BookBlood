@@ -176,6 +176,7 @@ public class FlyBackRecordFragment extends BaseBookFragment {
 
         mViewModel.mDataFlyBack.observe(this, flyBackRecordEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             if (Lists.isEmpty(flyBackRecordEntities)) {
                 mAdapter.setNewData(Lists.newArrayList());
             } else {

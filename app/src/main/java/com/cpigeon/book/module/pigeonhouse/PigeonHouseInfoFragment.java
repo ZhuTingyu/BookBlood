@@ -36,7 +36,7 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.AssEntity;
-import com.cpigeon.book.module.MainActivity;
+import com.cpigeon.book.main.MainActivity;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;

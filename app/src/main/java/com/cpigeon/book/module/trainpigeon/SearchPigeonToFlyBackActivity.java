@@ -79,6 +79,7 @@ public class SearchPigeonToFlyBackActivity extends BaseSearchActivity {
 
         mViewModel.mDataPigeon.observe(this, pigeonEntities -> {
             setProgressVisible(false);
+            mRecyclerView.setRefreshing(false);
             mAdapter.setNewData(pigeonEntities);
         });
 
