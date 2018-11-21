@@ -273,9 +273,9 @@ public class BasePigeonDetailsFragment extends BaseBookFragment {
             }
 
             if (datas.getPigeonScore() != 0) {
-                tvScore.setText(MathUtil.doubleformat(datas.getPigeonScore(), 1));//评分
+                tvScore.setText(MathUtil.doubleformat(datas.getPigeonScore(), 2));//评分
             } else {
-                tvScore.setText(getString(R.string.str_hint_no));//评分
+                tvScore.setText("0");//评分
             }
 
             Glide.with(this)

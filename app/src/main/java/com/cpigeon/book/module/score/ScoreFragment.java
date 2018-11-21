@@ -63,6 +63,7 @@ public class ScoreFragment extends BaseBookFragment {
         mScoreViewModel.mPigeonEntity = (PigeonEntity) getIntent().getSerializableExtra(IntentBuilder.KEY_DATA);
         mRecyclerView = findViewById(R.id.list);
         mTvAllScore = findViewById(R.id.tvAllScore);
+        mRecyclerView.addItemDecorationLine();
         mAdapter = new ScoreAdapter();
         mAdapter.setOnAllScoreGetListener(allScore -> {
             mScoreViewModel.allScore = String.valueOf(allScore);
@@ -88,6 +89,7 @@ public class ScoreFragment extends BaseBookFragment {
         mScoreViewModel.mDataScoreItem.observe(this, pigeonScoreItemEntities -> {
             setProgressVisible(false);
             mAdapter.setNewData(pigeonScoreItemEntities);
+            mTvAllScore.setText(MathUtil.doubleformat(mAdapter.getAllScore(), 2));
         });
 
         mScoreViewModel.mDataSetScoreR.observe(this, s -> {

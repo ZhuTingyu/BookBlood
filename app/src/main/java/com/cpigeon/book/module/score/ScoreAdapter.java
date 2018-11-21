@@ -33,9 +33,9 @@ public class ScoreAdapter extends BaseQuickAdapter<PigeonScoreItemEntity, BaseVi
         mSrvScore = helper.getView(R.id.srvScore);
 
         mTvTitle.setText(item.getItems());
-        mTvScore.setText(MathUtil.doubleformat(item.getPscore(), 1));
+        mTvScore.setText(MathUtil.doubleformat(item.getPscore(), 2));
 
-        int rant = (int) ((item.getTscore() / item.getPscore()) * 10);
+        int rant = (int) ((item.getPscore() / item.getTscore()) * 10);
 
         mSrvScore.setRate(rant);
 
@@ -43,13 +43,8 @@ public class ScoreAdapter extends BaseQuickAdapter<PigeonScoreItemEntity, BaseVi
             double score = (item.getTscore() / 10f) * rate;
             item.setPscore(score);
 
-            notifyItemChanged(helper.getAdapterPosition());
             if (mOnAllScoreGetListener != null) {
-                double result = 0;
-                for (PigeonScoreItemEntity entity : getData()) {
-                    result = result + entity.getPscore();
-                }
-
+                double result = getAllScore();
                 mOnAllScoreGetListener.allScore(result);
             }
 
@@ -76,5 +71,13 @@ public class ScoreAdapter extends BaseQuickAdapter<PigeonScoreItemEntity, BaseVi
 
     public void setOnItemScoreGetListener(OnItemScoreGetListener onItemScoreGetListener) {
         mOnItemScoreGetListener = onItemScoreGetListener;
+    }
+
+    public double getAllScore(){
+        double result = 0;
+        for (PigeonScoreItemEntity entity : getData()) {
+            result = result + entity.getPscore();
+        }
+        return result;
     }
 }

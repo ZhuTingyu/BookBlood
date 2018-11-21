@@ -1,65 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="44dp"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:layout_height="64dp"
+    android:orientation="horizontal"
+    android:id="@+id/relativeLayout3">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/medium_text_size"
-            tools:text="外形表现" />
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="外形表现"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:text="("
-            android:textColor="@color/color_text_red"
-            android:textSize="@dimen/medium_text_size" />
 
-        <TextView
-            android:id="@+id/tvScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:textColor="@color/color_text_red"
-            android:textSize="@dimen/medium_text_size"
-            tools:text="10" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:text=")"
-            android:textColor="@color/color_text_red"
-            android:textSize="@dimen/medium_text_size" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_text_red"
+        android:textSize="15sp"
+        tools:text="10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <com.cpigeon.book.widget.StarRatingView
         android:id="@+id/srvScore"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         app:ratable="true"
         app:star_padding="10dp"
-        app:stat_half="@drawable/ic_pentagrams3"
-        app:stat_off="@drawable/ic_pentagrams"
-        app:stat_on="@drawable/ic_pentagrams2" />
+        app:stat_half="@mipmap/ic_start_half"
+        app:stat_off="@mipmap/ic_start_no"
+        app:stat_on="@mipmap/ic_start_all"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

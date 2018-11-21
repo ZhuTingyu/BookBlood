@@ -36,7 +36,7 @@ public class ScoreViewModel extends BaseViewModel {
 
 
     public void getPigeonScoreItem() {
-        submitRequestThrowError(ScoreModel.getPigeonScoreItem(), r -> {
+        submitRequestThrowError(ScoreModel.getPigeonScoreItem(mPigeonEntity.getPigeonID()), r -> {
             if (r.isOk()) {
                 listEmptyMessage.setValue(r.msg);
                 mDataScoreItem.setValue(r.data);

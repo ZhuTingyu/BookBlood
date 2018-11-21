@@ -32,11 +32,12 @@ public class ScoreModel {
     }
 
 
-    public static Observable<ApiResponse<List<PigeonScoreItemEntity>>> getPigeonScoreItem() {
+    public static Observable<ApiResponse<List<PigeonScoreItemEntity>>> getPigeonScoreItem(String pigeonId) {
         return RequestData.<ApiResponse<List<PigeonScoreItemEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonScoreItemEntity>>>() {
                 }.getType())
                 .url(R.string.get_pigeon_score_item)
+                .addBody("pid", pigeonId)
                 .request();
     }
 
