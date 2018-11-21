@@ -30,6 +30,7 @@ import com.cpigeon.book.module.menu.service.OpenServiceFragment;
 import com.cpigeon.book.module.photo.PigeonPhotoHomeActivity;
 import com.cpigeon.book.module.play.PlayAddFragment;
 import com.cpigeon.book.module.score.ScoreFragment;
+import com.cpigeon.book.service.EventBusService;
 import com.cpigeon.book.widget.family.FamilyTreeView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -362,4 +363,10 @@ public class BreedPigeonDetailsFragment extends BasePigeonDetailsFragment {
         mBookViewModel.getBloodBook();
     }
 
+    @Subscribe //订阅事件FirstEvent
+    public void onEventMainThread(String info) {
+        if (info.equals(EventBusService.PIGEON_PHOTO_REFRESH)) {
+            mBreedPigeonDetailsViewModel.getPigeonDetails();
+        }
+    }
 }

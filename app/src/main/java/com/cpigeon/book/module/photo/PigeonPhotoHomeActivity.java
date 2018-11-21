@@ -291,6 +291,7 @@ private BreedPigeonDetailsViewModel breedPigeonDetailsViewModel;
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         EventBus.getDefault().unregister(this);//取消注册
     }
 }

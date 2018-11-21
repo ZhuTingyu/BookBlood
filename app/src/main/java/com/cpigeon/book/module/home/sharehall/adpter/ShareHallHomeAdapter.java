@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.base.base.BaseViewHolder;
 import com.base.base.adpter.BaseQuickAdapter;
 import com.base.util.Utils;
-import com.base.util.utility.StringUtil;
 import com.cpigeon.book.R;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
@@ -62,8 +61,6 @@ public class ShareHallHomeAdapter extends BaseQuickAdapter<PigeonEntity, BaseVie
             mTvLocation.setVisibility(View.VISIBLE);
         }
 
-
-
         if (UserModel.getInstance().getUserId().equals(item.getUserID())) {
             if (!isHaveDelete) {
                 mImgTagMy.setVisibility(View.VISIBLE);
@@ -80,9 +77,12 @@ public class ShareHallHomeAdapter extends BaseQuickAdapter<PigeonEntity, BaseVie
             });
         }
 
+        mImgSex.setImageResource(R.mipmap.ic_sex_no);
         if (item.getPigeonSexName().equals(Utils.getString(R.string.text_male_a))) {
             mImgSex.setImageResource(R.mipmap.ic_male);
-        } else {
+        }
+        if(item.getPigeonSexName().equals(Utils.getString(R.string.text_female_a)))
+        {
             mImgSex.setImageResource(R.mipmap.ic_female);
         }
 

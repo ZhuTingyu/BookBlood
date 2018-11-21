@@ -57,8 +57,7 @@ public class BreedPigeonModifyViewModel extends BasePigeonViewModel {
                 StringUtil.emptyString(),
                 StringUtil.emptyString(),
                 llHangingRingDate,
-                nestId,
-                setImageMap()), r -> {
+                nestId), r -> {
 
             if (r.isOk()) {
 

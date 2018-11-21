@@ -167,8 +167,7 @@ public class BreedPigeonModel {
             String sonFootId,
             String sonPigeonId,
             String setFootTime,
-            String nestId,
-            Map<String, String> body) {
+            String nestId) {
         return RequestData.<ApiResponse<PigeonEntity>>build()
                 .setToJsonType(new TypeToken<ApiResponse<PigeonEntity>>() {
                 }.getType())
@@ -187,10 +186,8 @@ public class BreedPigeonModel {
                 .addBody("menpigeonid", manPigeonId)// 父鸽子id
 
                 .addBody("wofootid", womenFootId)// 母足环id
-
                 .addBody("wofootnum", womenFootnum)// 母足环号码
                 .addBody("wopigeonid", womenPigeonId)// 母鸽子id
-
                 .addBody("name", name)// 信鸽名称
                 .addBody("sex", sex)//  性别（传ID）
                 .addBody("plume", plume)//  羽色（可选可填，传羽色名称）
@@ -203,7 +200,6 @@ public class BreedPigeonModel {
                 .addBody("sonfootid", sonFootId)// 子类足环id
                 .addBody("foottime", setFootTime)// 足环挂环日期
                 .addBody("nestid", nestId)// 窝次id
-                .addImageFileBodys(body)
                 .request();
     }
 

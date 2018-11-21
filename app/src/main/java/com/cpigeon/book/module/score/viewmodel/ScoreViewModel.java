@@ -46,6 +46,7 @@ public class ScoreViewModel extends BaseViewModel {
     }
 
     public void setPigeonItemScore() {
+
         submitRequestThrowError(ScoreModel.setPigeonItemScore(
                 mPigeonEntity.getPigeonID(),
                 scoreId,
