@@ -26,7 +26,6 @@ import com.cpigeon.book.widget.filtrate.FiltrateListView;
 public class SearchFragmentParentActivity extends BaseBookActivity {
 
     public static String KEY_FRAGMENT = "KEY_FRAGMENT";
-
     BaseFragment baseFragment;
 
     private RelativeLayout mRlSearch;

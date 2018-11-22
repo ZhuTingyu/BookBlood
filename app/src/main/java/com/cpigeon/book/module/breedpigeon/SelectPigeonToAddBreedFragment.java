@@ -11,7 +11,6 @@ import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.utility.StringUtil;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.PigeonAddEvent;
@@ -115,7 +114,9 @@ public class SelectPigeonToAddBreedFragment extends BaseSelectPigeonFragment {
     @Override
     public void startSearchActivity() {
         Bundle bundle = new Bundle();
+
         bundle.putString(IntentBuilder.KEY_DATA, mViewModel.sexid);
+        bundle.putString(IntentBuilder.KEY_DATA_2, mViewModel.pigeonidStr);
         SearchPigeonActivity.start(getBaseActivity(), mType, bundle);
     }
 

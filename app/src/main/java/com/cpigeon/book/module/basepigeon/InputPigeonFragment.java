@@ -423,9 +423,9 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mLvFatherFoot.setOnRightClickListener(lineInputView -> {
-            mLvFatherFootState.setClickable(true);
             InputSingleFootDialog.show(getFragmentManager(), mLvFatherFoot.getContent(), mViewModel.isChina(), dialog -> {
                 SelectFootRingFragment.start(getBaseActivity(), false
+
                         , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 if (!foot.equals(StringUtil.emptyString())) {
@@ -450,7 +450,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mLvMotherFoot.setOnRightClickListener(lineInputView -> {
-            mLvMotherFootState.setClickable(true);
+
             InputSingleFootDialog.show(getFragmentManager(), mLvMotherFoot.getContent(), mViewModel.isChina(), dialog -> {
                 SelectFootRingFragment.start(getBaseActivity(), false
                         , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
@@ -542,7 +542,67 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.modifyBreedPigeonEntry();
                 }
             } else {
-                DialogUtils.createHintDialog(getBaseActivity(), "请输入完整信息！");
+                String Msg=null;
+                if(mLvPigeonType.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvPigeonType.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+                if(mLvCountries.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvCountries.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+                if(mLvRing.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvRing.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+                if(mLvSex.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvSex.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+                if(mLvBlood.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvBlood.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+                if(mLvEyeSand.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvEyeSand.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+              if(mLvFeatherColor.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvFeatherColor.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+                if(mLvState.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvState.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+                    if(!mLvFatherFoot.getContent().equals(StringUtil.emptyString())&&mLvFatherFootState.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvFatherFootState.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
+                if(!mLvFatherFoot.getContent().equals(StringUtil.emptyString())&&mLvMotherFootState.getContent().equals(StringUtil.emptyString()))
+                {
+                    Msg="请输入"+mLvMotherFootState.getTitle()+"!";
+                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
+                    return;
+                }
             }
         });
     }

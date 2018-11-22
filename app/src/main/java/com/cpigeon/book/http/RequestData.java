@@ -23,7 +23,7 @@ public class RequestData<T> extends RequestUtil {
         }else {
             request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
         }
-//        request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUr_j));
+       // request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
 
         request.headUrl(MyApp.getAppContext().getString(R.string.api_head));
         if (StringUtil.isStringValid(UserModel.getInstance().getUserId())) {
