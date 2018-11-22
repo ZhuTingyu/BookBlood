@@ -16,7 +16,6 @@ import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
-import com.cpigeon.book.module.select.adpter.ChooseAdapter;
 import com.cpigeon.book.util.RecyclerViewUtils;
 import com.cpigeon.book.widget.SearchTextView;
 
@@ -37,6 +36,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
     public static void start(Activity activity, String type, Bundle bundleOther) {
         Bundle bundle = new Bundle();
         bundle.putString(IntentBuilder.KEY_TYPE, type);
+
         if (bundleOther != null) {
             bundle.putAll(bundleOther);
         }
@@ -62,6 +62,7 @@ public class SearchPigeonActivity extends BaseSearchActivity {
         mRecyclerView.setListPadding(0, 0, 0, 0);
         mViewModel = new BreedPigeonListModel();
         initViewModel(mViewModel);
+
         mSearchTextView.setHint(R.string.text_input_foot_number_search);
         mSearchTextView.setOnSearchTextClickListener(new SearchTextView.OnSearchTextClickListener() {
             @Override
@@ -85,6 +86,8 @@ public class SearchPigeonActivity extends BaseSearchActivity {
             mViewModel.bitshare = BreedPigeonListModel.CODE_IN_NOT_SHARE_HALL;
         } else if (BaseSelectPigeonFragment.TYPE_SELECT_PIGEON_TO_ADD_BREED_PIGEON.equals(mType)) {
             mViewModel.sexid = getIntent().getStringExtra(IntentBuilder.KEY_DATA);
+            mViewModel.pigeonidStr = getIntent().getStringExtra(IntentBuilder.KEY_DATA_2);
+
         }
 
         mAdapter.setOnLoadMoreListener(() -> {

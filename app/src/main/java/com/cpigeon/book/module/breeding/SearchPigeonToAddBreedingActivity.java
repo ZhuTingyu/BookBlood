@@ -17,6 +17,11 @@ import static com.cpigeon.book.module.breeding.viewmodel.AddBreedingFragment.COD
  */
 
 public class SearchPigeonToAddBreedingActivity extends BaseSearchPigeonActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mBreedPigeonListModel.bitTogether = PigeonEntity.STATUS_NOT_TOGETHER;
+    }
 
     @Override
     protected BaseQuickAdapter getResultAdapter() {

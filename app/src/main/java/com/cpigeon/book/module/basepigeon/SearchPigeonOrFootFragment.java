@@ -1,5 +1,6 @@
 package com.cpigeon.book.module.basepigeon;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +20,11 @@ public class SearchPigeonOrFootFragment extends BaseFootListFragment {
 
 
     public  static final  int  CODE_SEARCH_PIGEON_ORFOOT = 0x000032;
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mBreedPigeonListModel.bitTogether = PigeonEntity.STATUS_NOT_TOGETHER;
+    }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

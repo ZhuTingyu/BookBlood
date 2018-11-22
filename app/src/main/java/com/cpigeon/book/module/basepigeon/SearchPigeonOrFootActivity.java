@@ -49,6 +49,7 @@ public class SearchPigeonOrFootActivity extends BaseSearchPigeonActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRecyclerView.setListPadding(0, 0, 0, 0);
+        mBreedPigeonListModel.bitTogether=PigeonEntity.STATUS_NOT_TOGETHER;
     }
 
     @Override

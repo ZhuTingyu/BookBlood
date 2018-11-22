@@ -274,7 +274,9 @@ public class LineInputView extends RelativeLayout {
     public void setTitle(String title) {
         mTextView.setText(title);
     }
-
+    public String getTitle() {
+        return  mTextView.getText().toString();
+    }
     public void setContent(@StringRes int resId) {
         setRightText(Utils.getString(resId));
     }
