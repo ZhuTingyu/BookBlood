@@ -154,7 +154,7 @@ public class FeedPigeonDetailsAdapter extends BaseQuickAdapter<FeedPigeonEntity,
 //            mTvRight3.setText(item.getState());
         }
 
-        addTopAndBttomMargin(helper, 16);
+        addTopAndBottomMargin(helper, 16);
 
     }
 }

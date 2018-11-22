@@ -53,6 +53,10 @@ public class PairingInfoAddViewModel extends BaseViewModel {
     public String wopigeonid;
     public String menfootid;
     public String menpigeonid;
+
+    public String motherFootNumber;
+    public String fatherFootNumber;
+
     public void isCanCommit() {
         isCanCommit(pairingFoot, pairingTime);
     }
@@ -72,7 +76,10 @@ public class PairingInfoAddViewModel extends BaseViewModel {
                 hum,
                 dir,
                 bitpair,
-                reamrk), r -> {
+                reamrk,
+                motherFootNumber,
+                fatherFootNumber
+        ), r -> {
             if (r.isOk()) {
                 EventBus.getDefault().post(EventBusService.PAIRING_INFO_REFRESH);
                 normalResult.setValue(r.msg);

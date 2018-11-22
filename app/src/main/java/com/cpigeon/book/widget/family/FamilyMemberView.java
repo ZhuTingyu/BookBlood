@@ -78,6 +78,7 @@ public class FamilyMemberView extends FamilyMember {
         }
 
         int size_80 = ScreenTool.dip2px(80);
+        int size_100 = ScreenTool.dip2px(100);
         int size_129 = ScreenTool.dip2px(129);
         int size_40 = ScreenTool.dip2px(40);
         int size_28 = ScreenTool.dip2px(28);
@@ -116,18 +117,18 @@ public class FamilyMemberView extends FamilyMember {
                 rootH = size_80;
                 imgSize = size_40;
             } else {
-                rootW = size_80;
+                rootW = size_100;
                 rootH = size_129;
                 imgSize = size_50;
             }
             shadowColor = R.color.color_text_hint;
         } else if (generationPoint == 1) {
             if (isMiniModel) {
-                rootW = size_80;
+                rootW = size_100;
                 rootH = size_80;
                 imgSize = size_40;
             } else {
-                rootW = size_80;
+                rootW = size_100;
                 rootH = size_129;
                 imgSize = size_50;
             }
@@ -138,7 +139,7 @@ public class FamilyMemberView extends FamilyMember {
                 rootH = size_40;
                 imgSize = size_40;
             } else {
-                rootW = size_80;
+                rootW = size_100;
                 rootH = size_80;
                 imgSize = size_50;
             }
@@ -150,7 +151,7 @@ public class FamilyMemberView extends FamilyMember {
                 rootH = size_28;
                 imgSize = size_40;
             } else {
-                rootW = size_80;
+                rootW = size_100;
                 rootH = size_40;
                 imgSize = size_31;
             }

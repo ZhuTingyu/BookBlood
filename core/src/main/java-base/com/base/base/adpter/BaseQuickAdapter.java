@@ -143,7 +143,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         notifyDataSetChanged();
     }
 
-    public void addTopAndBttomMargin(com.base.base.BaseViewHolder holder, float margin) {
+    public void addTopAndBottomMargin(com.base.base.BaseViewHolder holder, float margin) {
 
         int marginT = ScreenTool.dip2px(margin);
 
@@ -161,7 +161,6 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends com.
         }
 
         holder.itemView.setLayoutParams(layoutParams);
-
     }
 
 

@@ -35,7 +35,10 @@ public class PairingModel {
                                                                                       String hum,
                                                                                       String dir,
                                                                                       String bitpair,
-                                                                                      String reamrk) {
+                                                                                      String reamrk,
+                                                                                      String motherFootNumber,
+                                                                                      String fatherFootNumber
+    ) {
         return RequestData.<ApiResponse<List<PigeonEntity>>>build()
                 .setToJsonType(new TypeToken<ApiResponse<List<PigeonEntity>>>() {
                 }.getType())
@@ -54,6 +57,8 @@ public class PairingModel {
                 .addBody("dir", dir)//配对风向
                 .addBody("bitpair", bitpair)//是否是平台配对（1和2） 是否相亲配对
                 .addBody("reamrk", reamrk)//配对备注
+                .addBody("wofootnum", motherFootNumber)//母足环号
+                .addBody("menfootnum", fatherFootNumber)//父足环号
                 .request();
     }
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgHead"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_img_default2" />
+
+        <FrameLayout
+            android:id="@+id/flCircle"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:background="@drawable/shape_radius_100_stroke_blue" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp"
+        tools:text="1" />
+
+    <View
+        android:id="@+id/vBLine"
+        android:layout_width="5dp"
+        android:layout_height="0.5dp"
+        android:background="@color/colorPrimary" />
+
+</LinearLayout>

@@ -15,6 +15,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.PigeonEntity;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonDetailsFragment;
 import com.cpigeon.book.module.breedpigeon.viewmodel.BreedPigeonListModel;
+import com.cpigeon.book.module.findblood.FindPigeonBloodFragment;
 import com.cpigeon.book.module.homingpigeon.adapter.MyHomingPigeonAdapter;
 import com.cpigeon.book.module.select.adpter.ChooseAdapter;
 import com.cpigeon.book.util.RecyclerViewUtils;
@@ -99,7 +100,9 @@ public class SearchPigeonActivity extends BaseSearchActivity {
                 if (BaseSelectPigeonFragment.TYPE_SHARE_PIGEON_TO_SHARE.equals(mType)) {
                     BreedPigeonDetailsFragment.start(getBaseActivity(), pigeonEntity.getPigeonID()
                             , pigeonEntity.getFootRingID(), BreedPigeonDetailsFragment.TYPE_SHARE_PIGEON, pigeonEntity.getUserID());
-                } else {
+                } else if(BaseSelectPigeonFragment.TYPE_SELECT_PIGEON_TO_FIND_BLOOD.equals(mType)){
+                    FindPigeonBloodFragment.start(getBaseActivity(), pigeonEntity);
+                }else {
                     IntentBuilder.Builder()
                             .putExtra(IntentBuilder.KEY_DATA, pigeonEntity)
                             .finishForResult(getBaseActivity());

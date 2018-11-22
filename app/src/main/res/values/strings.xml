@@ -631,6 +631,7 @@
     <string name="text_breed_person">作育人</string>
     <string name="text_fly_person">作翔人</string>
     <string name="text_pigeon_generation_title">%1$s上%2$s代</string>
+    <string name="text_pigeon_generation">上%1$s代</string>
     <string name="text_pleas_choose_time">请选择时间</string>
     <string name="text_pleas_complete_train_info">请完善司放坐标和时间！</string>
 

@@ -211,11 +211,11 @@ public class FamilyTreeView extends LinearLayout {
         }
 
         if (isPrintModel) {
-            FamilyPrintModelMemberView view = new FamilyPrintModelMemberView(context,this ,generationsPoint, generationsOrder, isHorizontal);
+            FamilyPrintModelMemberView view = new FamilyPrintModelMemberView(context, this, generationsPoint, generationsOrder, isHorizontal);
             view.setLayoutParams(params);
             return view;
         } else {
-            FamilyMemberView view = new FamilyMemberView(context,this ,generationsPoint, generationsOrder, isMiniModel, isHorizontal);
+            FamilyMemberView view = new FamilyMemberView(context, this, generationsPoint, generationsOrder, isMiniModel, isHorizontal);
             view.setLayoutParams(params);
             if (mOnFamilyClickListener != null) {
                 view.setOnMemberClickListener(new FamilyMemberView.OnMemberClickListener() {
@@ -494,9 +494,7 @@ public class FamilyTreeView extends LinearLayout {
             for (int generationOrder = 0, generationLen = linearLayout.getChildCount(); generationOrder < generationLen; generationOrder++) {
                 try {
                     PigeonEntity breedPigeonEntity = breedPigeonEntities.get(generationOrder);
-                    if (!breedPigeonEntity.isEmpty()) {
-                        setData(breedPigeonEntity, dataPosition, generationOrder);
-                    }
+                    setData(breedPigeonEntity, dataPosition, generationOrder);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -45,23 +45,34 @@
                         android:src="@drawable/ic_img_default"
                         android:visibility="visible" />
 
-                    <com.cpigeon.book.widget.DivideTextView
-                        android:id="@+id/tvFootNumber"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/llFoot"
+                        android:layout_marginTop="3dp"
                         android:layout_below="@id/imgHead"
+                        android:orientation="horizontal"
                         android:layout_marginLeft="6dp"
                         android:layout_marginRight="6dp"
-                        android:layout_marginTop="3dp"
-                        android:textColor="@color/black"
-                        android:textSize="10sp"
-                        tools:text="2018-22-1234567" />
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.cpigeon.book.widget.DivideTextView
+                            android:id="@+id/tvFootNumber"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/black"
+                            android:textSize="10sp"
+                            tools:text="2018-22-99" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/llBlood"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tvFootNumber"
+                        android:layout_below="@id/llFoot"
                         android:layout_marginLeft="6dp"
                         android:layout_marginRight="6dp"
                         android:layout_marginTop="8dp"
@@ -75,7 +86,7 @@
                             android:textColor="@color/color_text_hint"
                             android:textSize="10sp" />
 
-                        <TextView
+                        <com.cpigeon.book.widget.DivideTextView
                             android:id="@+id/tvBlood"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

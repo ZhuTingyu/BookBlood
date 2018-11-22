@@ -27,6 +27,7 @@ import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.module.breeding.BreedingFootListFragment;
 import com.cpigeon.book.module.breedpigeon.BreedPigeonListFragment;
 import com.cpigeon.book.module.feedpigeon.FeedPigeonRecordListFragment;
+import com.cpigeon.book.module.findblood.SelectPigeonToFindBloodFragment;
 import com.cpigeon.book.module.foot.FootAdminListFragment;
 import com.cpigeon.book.module.home.AdImageFragment;
 import com.cpigeon.book.module.home.home.adapter.HomeTopAdapter;
@@ -186,7 +187,7 @@ public class HomeFragment extends BaseBookFragment {
         });
 
         mSTvBloodFind.setOnClickListener(v -> {
-            AdImageFragment.start(getBaseActivity(), AdImageFragment.TYPE_FIND_BLOOD);
+            SelectPigeonToFindBloodFragment.start(getBaseActivity());
         });
 
         mSTvMatchPigeonAnalyse.setOnClickListener(v -> {

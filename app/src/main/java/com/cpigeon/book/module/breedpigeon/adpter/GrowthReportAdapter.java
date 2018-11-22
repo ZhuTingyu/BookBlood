@@ -198,6 +198,6 @@ public class GrowthReportAdapter extends BaseQuickAdapter<GrowthReportEntity, Ba
                 break;
 
         }
-        addTopAndBttomMargin(helper, 32);
+        addTopAndBottomMargin(helper, 32);
     }
 }
