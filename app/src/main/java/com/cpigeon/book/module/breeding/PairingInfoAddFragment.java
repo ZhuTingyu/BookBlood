@@ -129,19 +129,15 @@ public class PairingInfoAddFragment extends BaseBookFragment {
         tvHintFoot.setText(mPairingInfoAddViewModel.mPigeonEntity.getFootRingNum());
 
         if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雌")) {
-            mPairingInfoAddViewModel.wofootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
-            mPairingInfoAddViewModel.wopigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
-            CHOOSE_SEX =PigeonEntity.ID_FEMALE;
+            CHOOSE_SEX = PigeonEntity.ID_FEMALE;
             imgHintSex.setImageResource(R.mipmap.ic_female);
             mPairingInfoAddViewModel.sex = "雄";
         } else if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雄")) {
             imgHintSex.setImageResource(R.mipmap.ic_male);
-            CHOOSE_SEX =PigeonEntity.ID_MALE;
+            CHOOSE_SEX = PigeonEntity.ID_MALE;
             mPairingInfoAddViewModel.sex = "雌";
-            mPairingInfoAddViewModel.menfootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
-            mPairingInfoAddViewModel.menpigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
         } else {
-            CHOOSE_SEX =PigeonEntity.ID_NONE_SEX;
+            CHOOSE_SEX = PigeonEntity.ID_NONE_SEX;
             mPairingInfoAddViewModel.sex = "未知";
             imgHintSex.setImageResource(R.mipmap.ic_sex_no);
         }
@@ -201,8 +197,8 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 
         mPairingInfoAddViewModel.normalResult.observe(this, s -> {
             DialogUtils.createSuccessDialog(getBaseActivity(), s, sweetAlertDialog -> {
-               sweetAlertDialog.dismiss();
-               IntentBuilder.Builder().finishForResult(getBaseActivity());
+                sweetAlertDialog.dismiss();
+                IntentBuilder.Builder().finishForResult(getBaseActivity());
             });
         });
 
@@ -252,7 +248,7 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                 } else if (mPairingInfoAddViewModel.mPigeonEntity.getPigeonSexName().equals("雄")) {
                     bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_FEMALE);
                 } else {
-                    bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_FEMALE+","+ PigeonEntity.ID_MALE);
+                    bundle.putString(BaseFootListFragment.SEXID, PigeonEntity.ID_FEMALE + "," + PigeonEntity.ID_MALE);
                 }
 
                 SearchFragmentParentActivity.
@@ -368,12 +364,22 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                     mPairingInfoAddViewModel.featherColor = item.getPigeonPlumeName();
 //                    llFeatherColor.setContent(item.getPigeonPlumeName());
 
-                    if(mPairingInfoAddViewModel.mPigeonEntity != null && mPairingInfoAddViewModel.mPigeonEntity.isMale()){
+                    if (item.getPigeonSexID().equals(PigeonEntity.ID_FEMALE)) {
                         mPairingInfoAddViewModel.wofootid = item.getFootRingID();
                         mPairingInfoAddViewModel.wopigeonid = item.getPigeonID();
+                        mPairingInfoAddViewModel.menfootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
+                        mPairingInfoAddViewModel.menpigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
+
+                        mPairingInfoAddViewModel.womenFootNumber = item.getFootRingNum();
+                        mPairingInfoAddViewModel.manFootNumber = mPairingInfoAddViewModel.mPigeonEntity.getFootRingNum();
                     }else {
                         mPairingInfoAddViewModel.menfootid = item.getFootRingID();
                         mPairingInfoAddViewModel.menpigeonid = item.getPigeonID();
+                        mPairingInfoAddViewModel.wofootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
+                        mPairingInfoAddViewModel.wopigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
+
+                        mPairingInfoAddViewModel.womenFootNumber = mPairingInfoAddViewModel.mPigeonEntity.getFootRingNum();
+                        mPairingInfoAddViewModel.manFootNumber = item.getFootRingNum();
                     }
 
 
@@ -409,29 +415,29 @@ public class PairingInfoAddFragment extends BaseBookFragment {
                     mPairingInfoAddViewModel.wopigeonid = entity.getPigeonID();
                     mPairingInfoAddViewModel.wofootid = entity.getFootRingID();
                 }
-                if (CHOOSE_SEX.equals(PigeonEntity.ID_FEMALE))
-                {
+                if (CHOOSE_SEX.equals(PigeonEntity.ID_FEMALE)) {
                     mPairingInfoAddViewModel.menpigeonid = entity.getPigeonID();
                     mPairingInfoAddViewModel.menfootid = entity.getFootRingID();
                 }
-                if (CHOOSE_SEX.equals(PigeonEntity.ID_NONE_SEX))
-                {
-                    if (entity.getPigeonSexID().equals(PigeonEntity.ID_FEMALE))
-                    {
-                        mPairingInfoAddViewModel.wofootid =  entity.getFootRingID();
-                        mPairingInfoAddViewModel.wopigeonid = entity.getPigeonID();
-                        mPairingInfoAddViewModel.menfootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
-                        mPairingInfoAddViewModel.menpigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
-                    }
-                    if (entity.getPigeonSexID().equals(PigeonEntity.ID_MALE))
-                    {
-                        mPairingInfoAddViewModel.menfootid =   entity.getFootRingID();
-                        mPairingInfoAddViewModel.menpigeonid =  entity.getPigeonID();
-                        mPairingInfoAddViewModel.wofootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
-                        mPairingInfoAddViewModel.wopigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
-                    }
 
+                if (entity.getPigeonSexID().equals(PigeonEntity.ID_FEMALE)) {
+                    mPairingInfoAddViewModel.wofootid = entity.getFootRingID();
+                    mPairingInfoAddViewModel.wopigeonid = entity.getPigeonID();
+                    mPairingInfoAddViewModel.menfootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
+                    mPairingInfoAddViewModel.menpigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
+
+                    mPairingInfoAddViewModel.womenFootNumber = entity.getFootRingNum();
+                    mPairingInfoAddViewModel.manFootNumber = mPairingInfoAddViewModel.mPigeonEntity.getFootRingNum();
+                }else {
+                    mPairingInfoAddViewModel.menfootid = entity.getFootRingID();
+                    mPairingInfoAddViewModel.menpigeonid = entity.getPigeonID();
+                    mPairingInfoAddViewModel.wofootid = mPairingInfoAddViewModel.mPigeonEntity.getFootRingID();
+                    mPairingInfoAddViewModel.wopigeonid = mPairingInfoAddViewModel.mPigeonEntity.getPigeonID();
+
+                    mPairingInfoAddViewModel.womenFootNumber = mPairingInfoAddViewModel.mPigeonEntity.getFootRingNum();
+                    mPairingInfoAddViewModel.manFootNumber = entity.getFootRingNum();
                 }
+
                 //足环号
                 llPairingFoot.setContent(entity.getFootRingNum());
 
