@@ -24,7 +24,6 @@ import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.model.entity.PigeonEntity;
-import com.cpigeon.book.model.entity.PigeonEntryEntity;
 import com.cpigeon.book.model.entity.PigeonPlayEntity;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
@@ -45,7 +44,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
  */
 
 public class PlayAddFragment extends BaseBookFragment {
-
+private boolean IsCanClick=true;
     @BindView(R.id.ll_foot)
     LineInputView llFoot;
     @BindView(R.id.ll_play_org)
@@ -221,7 +220,7 @@ public class PlayAddFragment extends BaseBookFragment {
                 tv_next_step.setVisibility(View.VISIBLE);
             }
 
-            TextViewUtil.setEnabled(tv_next_step, aBoolean);
+            IsCanClick=aBoolean;
         });
 
         mPlayViewModel.addPigeonPlayData.observe(this, o -> {
@@ -398,8 +397,20 @@ public class PlayAddFragment extends BaseBookFragment {
                 break;
             case R.id.tv_next_step:
                 //点击按钮添加赛绩
-                setProgressVisible(true);
-                mPlayViewModel.addPigeonPlay();
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    mPlayViewModel.addPigeonPlay();
+                }else {
+                    if(isStandard)
+                    {
+                        TextViewUtil.DialogShowNullMsg(getBaseActivity(),llPlayOrg,llProjectName,llPalyScale,llPalyRank,llFlyPlace,llFlyUllage,llPlayTime);
+                    }
+                    else
+                    {
+                        DialogUtils.createHintDialog(getBaseActivity(), "请输入附加信息！");
+                    }
+
+                }
                 break;
         }
     }

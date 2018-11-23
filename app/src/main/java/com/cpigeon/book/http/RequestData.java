@@ -21,7 +21,7 @@ public class RequestData<T> extends RequestUtil {
         if(MyApp.getMyApp().isOutNet()){
             request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUr_j));
         }else {
-            request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
+            request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUr_j));
         }
        // request.setBaseUrl(MyApp.getAppContext().getString(R.string.baseUrl));
 

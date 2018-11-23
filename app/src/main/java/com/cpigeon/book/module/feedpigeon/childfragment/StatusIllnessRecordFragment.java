@@ -44,7 +44,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
  */
 
 public class StatusIllnessRecordFragment extends BaseBookFragment {
-
+private boolean IsCanClick;
     @BindView(R.id.lvIllnessName)
     LineInputView lvIllnessName;
     @BindView(R.id.lvIllnessSymptom)
@@ -147,7 +147,7 @@ public class StatusIllnessRecordFragment extends BaseBookFragment {
         mStatusIllnessRecordAddViewModel.isCanCommit();
 
         mStatusIllnessRecordAddViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(tvOk, aBoolean);
+            IsCanClick=aBoolean;
         });
 
         if (mStatusIllnessRecordAddViewModel.typePag == 0) {
@@ -308,8 +308,13 @@ setProgressVisible(false);
             case R.id.llRoot:
                 break;
             case R.id.tvOk:
-                setProgressVisible(true);
-                mStatusIllnessRecordAddViewModel.getTXGP_PigeonVaccine_AddData();
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    mStatusIllnessRecordAddViewModel.getTXGP_PigeonVaccine_AddData();
+                }else {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),lvIllnessName,lvIllnessSymptom,lvIllTime);
+                }
+
                 break;
         }
     }

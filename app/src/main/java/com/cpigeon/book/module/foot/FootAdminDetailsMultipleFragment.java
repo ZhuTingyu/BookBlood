@@ -22,7 +22,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.BaseInputDialog;
 import com.cpigeon.book.event.FootUpdateEvent;
 import com.cpigeon.book.model.entity.SelectTypeEntity;
-import com.cpigeon.book.module.foot.viewmodel.FootAddMultiViewModel;
 import com.cpigeon.book.module.foot.viewmodel.FootDetailsMultiViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.TextViewUtil;
@@ -44,9 +43,10 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
 
     FootDetailsMultiViewModel mViewModel;
     SelectTypeViewModel mPublicViewModel;
-
+private boolean IsCanClick=true;
     private LineInputListLayout mLlRoot;
     private LineInputView mLvCity;
+
     private LineInputView mLvFoot;
     private LineInputView mLvCategory;
     private LineInputView mLvStatus;
@@ -160,8 +160,13 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            setProgressVisible(true);
-            mViewModel.modifyFoots();
+            if(IsCanClick) {
+                setProgressVisible(true);
+                mViewModel.modifyFoots();
+            }else
+                {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),mLvSource,mLvMoney);
+                }
         });
 
         setProgressVisible(true);
@@ -186,7 +191,7 @@ public class FootAdminDetailsMultipleFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(mTvOk, aBoolean);
+            IsCanClick=aBoolean;
         });
 
         mPublicViewModel.mSelectType_Foot_Ring.observe(this, selectTypeEntities -> {

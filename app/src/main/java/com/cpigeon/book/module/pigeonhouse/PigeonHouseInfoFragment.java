@@ -34,9 +34,9 @@ import com.bumptech.glide.Glide;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
+import com.cpigeon.book.main.MainActivity;
 import com.cpigeon.book.model.UserModel;
 import com.cpigeon.book.model.entity.AssEntity;
-import com.cpigeon.book.main.MainActivity;
 import com.cpigeon.book.module.pigeonhouse.viewmodle.PigeonHouseViewModel;
 import com.cpigeon.book.module.select.SelectAssFragment;
 import com.cpigeon.book.module.select.SelectLocationByMapFragment;
@@ -63,7 +63,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     public static int CODE_ORGANIZE = 0x123;
     public static int CODE_LOCATION = 0x234;
     public static int CODE_AUTH = 0x345;
-
+private boolean IsCanClick=true;
     private CircleImageView mImgHead;
     private TextView mTvName;
     private TextView mTvAuth;
@@ -239,8 +239,12 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
         if (!mIsLook) {
             mTvOk.setVisibility(View.VISIBLE);
             mTvOk.setOnClickListener(v -> {
-                setProgressVisible(true);
-                mViewModel.setPigeonHouse();
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    mViewModel.setPigeonHouse();
+                }else {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),mLvPhone,mLvShedId,mLvHouseLocation);
+                }
             });
         } else {
             mLlLineInput.setOnInputViewGetFocusListener(() -> {
@@ -250,8 +254,12 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
             mViewModel.getPigeonHouse();
             mTvOk.setText(Utils.getString(R.string.text_sure_commit));
             mTvOk.setOnClickListener(v -> {
-                setProgressVisible(true);
-                mViewModel.setPigeonHouse();
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    mViewModel.setPigeonHouse();
+                }else {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),mLvPhone,mLvShedId,mLvHouseLocation);
+                }
             });
 
         }
@@ -261,7 +269,7 @@ public class PigeonHouseInfoFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(mTvOk, aBoolean);
+            IsCanClick=aBoolean;
         });
 
         UserModel.getInstance().mUserLiveData.observe(this, userEntity -> {

@@ -81,7 +81,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
     ImageView img_verCode;
 
     private Thread thread;
-
+private boolean IsCanClick=true;
     private boolean isNeedVerCode = false;//是否需要验证码
     private int type = -1;//1  修改登录密码   2  修改支付密码
 
@@ -177,7 +177,7 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mRevisePsdViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(tvNextStep, aBoolean);
+            IsCanClick=aBoolean;
         });
 
         mRevisePsdViewModel.reviseLoginPsd.observe(this, s -> {
@@ -204,32 +204,37 @@ public class ReviseLoginPsdFragment extends BaseBookFragment {
         switch (view.getId()) {
             case R.id.tv_next_step:
                 //点击提交
-                setProgressVisible(true);
-                if (type == 1) {
-                    //修改登录密码
-                    if (isNeedVerCode) {
-                        //需要验证码
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    if (type == 1) {
+                        //修改登录密码
+                        if (isNeedVerCode) {
+                            //需要验证码
 
+
+                            if (!et_imgVerCode.getText().toString().toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase())) {
+                                ToastUtils.showLong(getBaseActivity(), "输入图片验证码不符，请重新输入");
+                                return;
+                            }
+
+                            mRevisePsdViewModel.getZGW_Users_GetLoginData2();
+                        } else {
+                            //不需要验证码
+                            mRevisePsdViewModel.getZGW_Users_GetLoginData1();
+                        }
+
+                    } else if (type == 2) {
+                        //修改支付密码
 
                         if (!et_imgVerCode.getText().toString().toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase())) {
                             ToastUtils.showLong(getBaseActivity(), "输入图片验证码不符，请重新输入");
                             return;
                         }
-
-                        mRevisePsdViewModel.getZGW_Users_GetLoginData2();
-                    } else {
-                        //不需要验证码
-                        mRevisePsdViewModel.getZGW_Users_GetLoginData1();
+                        mRevisePsdViewModel.getZGW_Users_GetPlayData();
                     }
-
-                } else if (type == 2) {
-                    //修改支付密码
-
-                    if (!et_imgVerCode.getText().toString().toLowerCase().equals(CodeUtils.getInstance().getCode().toLowerCase())) {
-                        ToastUtils.showLong(getBaseActivity(), "输入图片验证码不符，请重新输入");
-                        return;
-                    }
-                    mRevisePsdViewModel.getZGW_Users_GetPlayData();
+                }
+                else {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),modifyOriginalPsd,modifyNewPsd,modifyNewPsd2);
                 }
 
                 break;

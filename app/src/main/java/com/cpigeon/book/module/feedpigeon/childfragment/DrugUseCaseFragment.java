@@ -46,7 +46,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
  */
 
 public class DrugUseCaseFragment extends BaseBookFragment {
-
+private boolean IsCanClick=true;
     public static final int CODE_ILLNESS_RECORD = 0x123;
     //    @BindView(R.id.lvIllnessRecord)
 //    LineInputView lvIllnessRecord;
@@ -160,7 +160,7 @@ public class DrugUseCaseFragment extends BaseBookFragment {
         mDrugUseCaseViewModel.isCanCommit();
 
         mDrugUseCaseViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(tvOk, aBoolean);
+          IsCanClick=aBoolean;
         });
 
         if (mDrugUseCaseViewModel.typePag == 0) {
@@ -416,8 +416,12 @@ setProgressVisible(false);
             case R.id.scrollView:
                 break;
             case R.id.tvOk:
-                setProgressVisible(true);
-                mDrugUseCaseViewModel.getTXGP_PigeonDrug_AddData();
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    mDrugUseCaseViewModel.getTXGP_PigeonDrug_AddData();
+                }else {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),lvDiseaseName,lvDrugName,lvDrugUseTime,lvDrugAfterStatus);
+                }
                 break;
         }
     }

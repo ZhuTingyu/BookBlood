@@ -61,14 +61,7 @@ public class OffspringViewModel extends BasePigeonViewModel {
 
 
     public void isCanCommit() {
-
-        if (pigeonType == 1) {
-            //种鸽录入
             isCanCommit(foot);
-        } else {
-            //赛鸽录入
-            isCanCommit(foot);
-        }
     }
 
 }

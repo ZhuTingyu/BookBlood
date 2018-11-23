@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
 import com.base.util.picker.PickerUtil;
-import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -32,6 +30,7 @@ import com.cpigeon.book.model.entity.SelectTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminSingleViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.select.SelectFootRingFragment;
+import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -214,27 +213,7 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     setProgressVisible(true);
                     mViewModel.modifyFootNumber();
                 } else {
-                    String Msg = null;
-                    if (lvCity.getContent().equals(StringUtil.emptyString())) {
-                        Msg = "请输入" + lvCity.getTitle() + "!";
-                        DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                        return;
-                    }
-                    if (lvFoot.getContent().equals(StringUtil.emptyString())) {
-                        Msg = "请输入" + lvFoot.getTitle() + "!";
-                        DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                        return;
-                    }
-                    if (lvSource.getContent().equals(StringUtil.emptyString())) {
-                        Msg = "请输入" + lvSource.getTitle() + "!";
-                        DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                        return;
-                    }
-                    if (lvMoney.getContent().equals(StringUtil.emptyString())) {
-                        Msg = "请输入" + lvMoney.getTitle() + "!";
-                        DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                        return;
-                    }
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),lvCity,lvFoot,lvSource,lvMoney);
                 }
             });
         } else {
@@ -245,29 +224,8 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     setProgressVisible(true);
                     mViewModel.addFoot();
                 } else {
-                    String Msg = null;
-                    if (lvCity.getContent().equals(StringUtil.emptyString())) {
-                        Log.d("shuaishuai", "onViewCreated: " + lvCity.getContent());
-                        Msg = "请输入" + lvCity.getTitle() + "!";
-                        DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                        return;
-                    }
-                    if (lvFoot.getContent().equals(StringUtil.emptyString())) {
-                        Msg = "请输入" + lvFoot.getTitle() + "!";
-                        DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                        return;
-                    }
-                    if (lvSource.getContent().equals(StringUtil.emptyString())) {
-                        Msg = "请输入" + lvSource.getTitle() + "!";
-                        DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                        return;
-                    }
-                    if (StringUtil.isStringValid(lvMoney.getContent())) {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),lvCity,lvFoot,lvSource,lvMoney);
 
-                        Msg = "请输入" + lvMoney.getTitle() + "!";
-                        DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                        return;
-                    }
                 }
             });
         }

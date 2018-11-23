@@ -64,7 +64,8 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 //    LineInputView llLineage;
 //    @BindView(R.id.ll_feather_color)
 //    LineInputView llFeatherColor;
-    private boolean IsMan = true;
+    private boolean IsCanClick = false;
+
     private String CHOOSE_SEX;
     private PairingInfoAddViewModel mPairingInfoAddViewModel;
     protected SelectTypeViewModel mSelectTypeViewModel;
@@ -149,7 +150,8 @@ public class PairingInfoAddFragment extends BaseBookFragment {
     protected void initObserve() {
         super.initObserve();
         mPairingInfoAddViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(tvNextStep, aBoolean);
+            IsCanClick=aBoolean;
+
         });
 
 
@@ -330,7 +332,13 @@ public class PairingInfoAddFragment extends BaseBookFragment {
 //
 //                break;
             case R.id.tv_next_step:
-                mPairingInfoAddViewModel.getTXGP_PigeonBreed_AddData();
+                if (IsCanClick) {
+                    mPairingInfoAddViewModel.getTXGP_PigeonBreed_AddData();
+                }
+                else
+                {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),llPairingFoot,llPairingTime);
+                }
                 break;
 
 

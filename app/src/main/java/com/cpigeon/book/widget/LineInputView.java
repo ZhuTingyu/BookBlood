@@ -302,7 +302,7 @@ public class LineInputView extends RelativeLayout {
     }
 
     public String getContent() {
-        if (StringUtil.isStringValid(mEditText.getText().toString())) {
+        if (mIsCanEdit) {
             return mEditText.getText().toString();
         } else {
             return mTvRight.getText().toString();
