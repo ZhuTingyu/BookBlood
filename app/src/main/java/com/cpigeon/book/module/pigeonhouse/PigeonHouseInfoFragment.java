@@ -254,8 +254,12 @@ private boolean IsCanClick=true;
             mViewModel.getPigeonHouse();
             mTvOk.setText(Utils.getString(R.string.text_sure_commit));
             mTvOk.setOnClickListener(v -> {
-                setProgressVisible(true);
-                mViewModel.setPigeonHouse();
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    mViewModel.setPigeonHouse();
+                }else {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),mLvPhone,mLvShedId,mLvHouseLocation);
+                }
             });
 
         }

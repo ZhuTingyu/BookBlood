@@ -377,7 +377,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mSelectTypeViewModel.getSelectType_State();
             }
         });
-
+        mLvFatherFootState.setClickable(false);
         mLvMotherFootState.setOnRightClickListener(lineInputView -> {
             try {
                 PickerUtil.showItemPicker(getBaseActivity(), SelectTypeEntity.getTypeNames(mViewModel.mSelectTypes_State), 0, new OptionPicker.OnOptionPickListener() {
@@ -393,7 +393,7 @@ public class InputPigeonFragment extends BaseBookFragment {
                 mSelectTypeViewModel.getSelectType_State();
             }
         });
-
+        mLvMotherFootState.setClickable(false);
         mLvPigeonName.setOnRightClickListener(lineInputView -> {
             mBaseInputDialog = BaseInputDialog.show(getBaseActivity().getSupportFragmentManager()
                     , R.string.text_pleas_input_pigeon_name, mLvPigeonName.getContent(), InputType.TYPE_NUMBER_FLAG_DECIMAL, content -> {
@@ -745,7 +745,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mViewModel.mDataFootRingState.observe(this, footRingStateEntity -> {
-
+setProgressVisible(false);
             if (footRingStateEntity.getFootRingID() != 0 && footRingStateEntity.getPigeonID() != 0) {
                 SetPigeonDeathDialog.show(getFragmentManager(), String.valueOf(footRingStateEntity.getFootRingID())
                         , String.valueOf(footRingStateEntity.getPigeonID()), new SetPigeonDeathDialog.OnPigeonDeathClickListener() {
