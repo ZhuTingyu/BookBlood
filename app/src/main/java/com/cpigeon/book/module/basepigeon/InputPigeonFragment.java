@@ -429,8 +429,9 @@ public class InputPigeonFragment extends BaseBookFragment {
                         , SelectFootRingFragment.CODE_SELECT_FATHER_FOOT, PigeonEntity.ID_MALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 if (!foot.equals(StringUtil.emptyString())) {
+                    setProgressVisible(true);
+                    mViewModel.pigeonFatherId= StringUtil.emptyString();
                     mViewModel.footFatherId = StringUtil.emptyString();
-                    mViewModel.pigeonFatherId = StringUtil.emptyString();
                     mViewModel.footFather = foot;
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_MALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
@@ -456,9 +457,10 @@ public class InputPigeonFragment extends BaseBookFragment {
                         , SelectFootRingFragment.CODE_SELECT_MATHER_FOOT, PigeonEntity.ID_FEMALE, PigeonEntity.ID_NONE_SEX);
             }, foot -> {
                 if (!foot.equals(StringUtil.emptyString())) {
-                    mViewModel.footMotherId = StringUtil.emptyString();
-                    mViewModel.pigeonMotherId = StringUtil.emptyString();
                     mViewModel.footMother = foot;
+                    setProgressVisible(true);
+                    mViewModel.pigeonMotherId= StringUtil.emptyString();
+                    mViewModel.footMotherId = StringUtil.emptyString();
                     mSelectParentFootRingViewModel.mSexId = PigeonEntity.ID_FEMALE;
                     mSelectParentFootRingViewModel.mFootNumber = foot;
                     mSelectParentFootRingViewModel.getPgieon();
@@ -543,61 +545,62 @@ public class InputPigeonFragment extends BaseBookFragment {
                 }
             } else {
                 String Msg=null;
-                if(mLvPigeonType.getContent().equals(StringUtil.emptyString()))
+
+                if(!StringUtil.isStringValid(mLvPigeonType.getContent()))
                 {
                     Msg="请输入"+mLvPigeonType.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-                if(mLvCountries.getContent().equals(StringUtil.emptyString()))
+                if(!StringUtil.isStringValid(mLvCountries.getContent()))
                 {
                     Msg="请输入"+mLvCountries.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-                if(mLvRing.getContent().equals(StringUtil.emptyString()))
+                if(!StringUtil.isStringValid(mLvRing.getContent()))
                 {
                     Msg="请输入"+mLvRing.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-                if(mLvSex.getContent().equals(StringUtil.emptyString()))
+                if(!StringUtil.isStringValid(mLvSex.getContent()))
                 {
                     Msg="请输入"+mLvSex.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-                if(mLvBlood.getContent().equals(StringUtil.emptyString()))
+                if(!StringUtil.isStringValid(mLvBlood.getContent()))
                 {
                     Msg="请输入"+mLvBlood.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-                if(mLvEyeSand.getContent().equals(StringUtil.emptyString()))
+                if(!StringUtil.isStringValid(mLvEyeSand.getContent()))
                 {
                     Msg="请输入"+mLvEyeSand.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-              if(mLvFeatherColor.getContent().equals(StringUtil.emptyString()))
+              if(!StringUtil.isStringValid(mLvFeatherColor.getContent()))
                 {
                     Msg="请输入"+mLvFeatherColor.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-                if(mLvState.getContent().equals(StringUtil.emptyString()))
+                if(!StringUtil.isStringValid(mLvState.getContent()))
                 {
                     Msg="请输入"+mLvState.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-                    if(!mLvFatherFoot.getContent().equals(StringUtil.emptyString())&&mLvFatherFootState.getContent().equals(StringUtil.emptyString()))
+                    if(StringUtil.isStringValid(mLvFatherFoot.getContent())&&!StringUtil.isStringValid(mLvFatherFootState.getContent()))
                 {
                     Msg="请输入"+mLvFatherFootState.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
                     return;
                 }
-                if(!mLvFatherFoot.getContent().equals(StringUtil.emptyString())&&mLvMotherFootState.getContent().equals(StringUtil.emptyString()))
+                if(StringUtil.isStringValid(mLvMotherFoot.getContent())&&!StringUtil.isStringValid(mLvMotherFootState.getContent()))
                 {
                     Msg="请输入"+mLvMotherFootState.getTitle()+"!";
                     DialogUtils.createHintDialog(getBaseActivity(), Msg);
@@ -822,10 +825,14 @@ public class InputPigeonFragment extends BaseBookFragment {
                 if (PigeonEntity.ID_MALE.equals(mSelectParentFootRingViewModel.mSexId)) {
                     mLvFatherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
                     mViewModel.footFather = mSelectParentFootRingViewModel.mFootNumber;
+                    mViewModel.pigeonFatherStateId=StringUtil.emptyString();
+                    mLvFatherFootState.setRightText(StringUtil.emptyString());
                     mLvFatherFootState.setClickable(true);
                 } else {
                     mLvMotherFoot.setRightText(mSelectParentFootRingViewModel.mFootNumber);
                     mViewModel.footMother = mSelectParentFootRingViewModel.mFootNumber;
+                    mViewModel.pigeonMotherStateId=StringUtil.emptyString();
+                    mLvMotherFootState.setRightText(StringUtil.emptyString());
                     mLvMotherFootState.setClickable(true);
                 }
                 IsCanCommit();

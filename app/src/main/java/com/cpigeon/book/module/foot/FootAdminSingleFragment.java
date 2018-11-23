@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -215,22 +214,22 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     mViewModel.modifyFootNumber();
                 } else {
                     String Msg = null;
-                    if (lvCity.getContent().equals(StringUtil.emptyString())) {
+                    if (!StringUtil.isStringValid(lvCity.getContent())) {
                         Msg = "请输入" + lvCity.getTitle() + "!";
                         DialogUtils.createHintDialog(getBaseActivity(), Msg);
                         return;
                     }
-                    if (lvFoot.getContent().equals(StringUtil.emptyString())) {
+                    if (!StringUtil.isStringValid(lvFoot.getContent())) {
                         Msg = "请输入" + lvFoot.getTitle() + "!";
                         DialogUtils.createHintDialog(getBaseActivity(), Msg);
                         return;
                     }
-                    if (lvSource.getContent().equals(StringUtil.emptyString())) {
+                    if (!StringUtil.isStringValid(lvSource.getContent())) {
                         Msg = "请输入" + lvSource.getTitle() + "!";
                         DialogUtils.createHintDialog(getBaseActivity(), Msg);
                         return;
                     }
-                    if (lvMoney.getContent().equals(StringUtil.emptyString())) {
+                    if (!StringUtil.isStringValid(lvMoney.getContent())) {
                         Msg = "请输入" + lvMoney.getTitle() + "!";
                         DialogUtils.createHintDialog(getBaseActivity(), Msg);
                         return;
@@ -246,24 +245,22 @@ public class FootAdminSingleFragment extends BaseBookFragment {
                     mViewModel.addFoot();
                 } else {
                     String Msg = null;
-                    if (lvCity.getContent().equals(StringUtil.emptyString())) {
-                        Log.d("shuaishuai", "onViewCreated: " + lvCity.getContent());
+                    if (!StringUtil.isStringValid(lvCity.getContent())) {
                         Msg = "请输入" + lvCity.getTitle() + "!";
                         DialogUtils.createHintDialog(getBaseActivity(), Msg);
                         return;
                     }
-                    if (lvFoot.getContent().equals(StringUtil.emptyString())) {
+                    if (!StringUtil.isStringValid(lvFoot.getContent())) {
                         Msg = "请输入" + lvFoot.getTitle() + "!";
                         DialogUtils.createHintDialog(getBaseActivity(), Msg);
                         return;
                     }
-                    if (lvSource.getContent().equals(StringUtil.emptyString())) {
+                    if (!StringUtil.isStringValid(lvSource.getContent())) {
                         Msg = "请输入" + lvSource.getTitle() + "!";
                         DialogUtils.createHintDialog(getBaseActivity(), Msg);
                         return;
                     }
-                    if (StringUtil.isStringValid(lvMoney.getContent())) {
-
+                    if (!StringUtil.isStringValid(lvMoney.getContent())) {
                         Msg = "请输入" + lvMoney.getTitle() + "!";
                         DialogUtils.createHintDialog(getBaseActivity(), Msg);
                         return;
