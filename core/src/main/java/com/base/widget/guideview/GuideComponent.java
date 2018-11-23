@@ -12,22 +12,10 @@ import com.base.http.R;
  * Created by Zhu TingYu on 2018/6/6.
  */
 
-public class GuideComponent implements Component {
+public class GuideComponent extends BaseComponent {
 
-    private int xOffset = 0;
-    private int yOffset = 0;
-    private int guideLocation = Component.ANCHOR_BOTTOM;
-    private int viewLocation = Component.FIT_CENTER;
     private TextView textView;
-    private String guideHint;
     private TextView tvOk;
-
-    public interface OnOkClickListener{
-        void onclick();
-    }
-
-    private OnOkClickListener onOkClickListener;
-
     @Override
     public View getView(LayoutInflater inflater) {
         LinearLayout ll;
@@ -42,56 +30,12 @@ public class GuideComponent implements Component {
 
         tvOk = ll.findViewById(R.id.tvOk);
         tvOk.setOnClickListener(v -> {
-            if(onOkClickListener != null){
-                onOkClickListener.onclick();
+            if(guide != null){
+                guide.dismiss();
             }
         });
 
         return ll;
     }
 
-
-    public void setOnOkClickListener(OnOkClickListener onOkClickListener) {
-        this.onOkClickListener = onOkClickListener;
-    }
-
-    @Override
-    public int getAnchor() {
-        return guideLocation;
-    }
-
-    @Override
-    public int getFitPosition() {
-        return viewLocation;
-    }
-
-    @Override
-    public int getXOffset() {
-        return xOffset;
-    }
-
-    @Override
-    public int getYOffset() {
-        return yOffset;
-    }
-
-    public void setxOffset(int xOffset) {
-        this.xOffset = xOffset;
-    }
-
-    public void setyOffset(int yOffset) {
-        this.yOffset = yOffset;
-    }
-
-    public void setGuideLocation(int guideLocation) {
-        this.guideLocation = guideLocation;
-    }
-
-    public void setViewLocation(int viewLocation) {
-        this.viewLocation = viewLocation;
-    }
-
-    public void setGuideHint(String guideHint) {
-        this.guideHint = guideHint;
-    }
 }

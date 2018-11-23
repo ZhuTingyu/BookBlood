@@ -17,7 +17,10 @@ import android.widget.TextView;
 import com.base.util.Lists;
 import com.base.util.Utils;
 import com.base.util.system.ScreenTool;
+import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
+import com.base.widget.guideview.Component;
+import com.base.widget.guideview.GuideManager;
 import com.base.widget.recyclerview.XRecyclerView;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -30,6 +33,7 @@ import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.foot.viewmodel.FootAdminListViewModel;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.util.RecyclerViewUtils;
+import com.cpigeon.book.util.SharedPreferencesTool;
 import com.cpigeon.book.widget.filtrate.FiltrateListView;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -42,7 +46,6 @@ import java.util.List;
  */
 
 public class FootAdminListFragment extends BaseBookFragment {
-
 
     private XRecyclerView mRecyclerView;
     private DrawerLayout mDrawerLayout;

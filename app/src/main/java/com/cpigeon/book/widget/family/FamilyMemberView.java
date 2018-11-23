@@ -49,14 +49,17 @@ public class FamilyMemberView extends FamilyMember {
     int shadowColor;
     boolean isMiniModel;
     boolean isHorizontal;
+    boolean isShowInfoModel;
 
-    public FamilyMemberView(Context context, FamilyTreeView familyTreeView, int generationPoint, int generationsOrder, boolean isMiniModel, boolean isHorizontal) {
+    public FamilyMemberView(Context context, FamilyTreeView familyTreeView, int generationPoint
+            , int generationsOrder, boolean isMiniModel, boolean isHorizontal, boolean isShowInfoModel) {
         super(context);
         this.generationPoint = generationPoint;
         this.generationsOrder = generationsOrder;
         this.isMiniModel = isMiniModel;
         this.isHorizontal = isHorizontal;
         this.mFamilyTreeView = familyTreeView;
+        this.isShowInfoModel = isShowInfoModel;
         initView(context);
     }
 
@@ -190,7 +193,9 @@ public class FamilyMemberView extends FamilyMember {
     public void bindData(PigeonEntity entity) {
 
         if (!StringUtil.isStringValid(entity.getPigeonID())) {
-            imgAdd.setVisibility(VISIBLE);
+            if(!isShowInfoModel){
+                imgAdd.setVisibility(VISIBLE);
+            }
             mRlInMemberInfo.setVisibility(GONE);
             return;
         }

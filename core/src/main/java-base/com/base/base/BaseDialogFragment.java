@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.base.base.blurdialogfragment.SupportBlurDialogFragment;
 import com.base.http.R;
 import com.base.util.Lists;
 import com.base.util.Utils;
@@ -63,11 +66,15 @@ public abstract class BaseDialogFragment extends DialogFragment {
         }
         //window.setWindowAnimations(R.style.AnimBottomDialog);
         final WindowManager.LayoutParams lp = window.getAttributes();
+        lp.dimAmount = 0.55f;
+        window.setAttributes(lp);
+        window.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
         initLayout(window, lp);
 
         initView(dialog);
 
         initProgressLayout(dialog);
+
 
         return dialog;
     }

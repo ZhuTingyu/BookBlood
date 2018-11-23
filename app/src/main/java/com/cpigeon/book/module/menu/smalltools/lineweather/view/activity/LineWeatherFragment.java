@@ -63,9 +63,12 @@ import com.base.util.utility.StringUtil;
 import com.base.util.utility.ToastUtils;
 import com.base.widget.guideview.Component;
 import com.base.widget.guideview.GuideBuilder;
+import com.base.widget.guideview.GuideComponent;
 import com.base.widget.guideview.GuideManager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
+import com.cpigeon.book.model.UserModel;
+import com.cpigeon.book.model.entity.PigeonHouseEntity;
 import com.cpigeon.book.module.menu.smalltools.lineweather.model.bean.ContactModel;
 import com.cpigeon.book.module.menu.smalltools.lineweather.presenter.LineWeatherPresenter;
 import com.cpigeon.book.module.menu.smalltools.ullage.UlageToolPresenter;
@@ -218,7 +221,24 @@ public class LineWeatherFragment extends BaseBookFragment {
 
         showLocate();//查看当前位置
 
-        presentLocate(2);//定位当前位置（）归巢地
+        PigeonHouseEntity pigeonHouseEntity = UserModel.getInstance().getUserData().pigeonHouseEntity;
+        if (pigeonHouseEntity != null) {
+            if(pigeonHouseEntity.getLatitude() == 0 || pigeonHouseEntity.getLatitude() == 0){
+                initStartStop(new LatLng(pigeonHouseEntity.getLatitude(), pigeonHouseEntity.getLongitude()), 2, false, true);
+                showHintView();
+
+
+                z_et_homing_place.setText(pigeonHouseEntity.getPigeonHomeAdds());
+                String preLo = LocationFormatUtils.GPS2AjLocation(pigeonHouseEntity.getLongitude());
+                String preLa = LocationFormatUtils.GPS2AjLocation(pigeonHouseEntity.getLatitude());
+
+                presentLo.setText("经度：" + LocationFormatUtils.strToD(preLo) + "度" + LocationFormatUtils.strToM(preLo) + "分" + LocationFormatUtils.strToS(preLo) + "秒");
+                presentLa.setText("纬度：" + LocationFormatUtils.strToD(preLa) + "度" + LocationFormatUtils.strToM(preLa) + "分" + LocationFormatUtils.strToS(preLa) + "秒");
+            }
+        }else {
+            presentLocate(2);//定位当前位置（）归巢地
+        }
+
 
         manager = new WeatherManager(getBaseActivity());
 

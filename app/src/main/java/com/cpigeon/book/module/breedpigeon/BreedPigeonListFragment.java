@@ -10,7 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.base.util.Lists;
+import com.base.util.RxUtils;
 import com.base.util.Utils;
+import com.base.util.utility.StringUtil;
+import com.base.widget.guideview.Component;
+import com.base.widget.guideview.GuideManager;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.SearchFragmentParentActivity;
 import com.cpigeon.book.event.PigeonAddEvent;
@@ -21,8 +25,10 @@ import com.cpigeon.book.module.basepigeon.BaseSearchPigeonActivity;
 import com.cpigeon.book.module.basepigeon.StateListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.BreedPigeonListAdapter;
 import com.cpigeon.book.module.breedpigeon.adpter.LinearLayoutListener;
+import com.cpigeon.book.module.foot.PigeonDeleteComponent;
 import com.cpigeon.book.module.homingpigeon.MyHomingPigeonFragment;
 import com.cpigeon.book.module.homingpigeon.OnDeleteListener;
+import com.cpigeon.book.util.SharedPreferencesTool;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -100,6 +106,24 @@ public class BreedPigeonListFragment extends BaseFootListFragment {
         mBreedPigeonListModel.mLivePigeonSexCount.observe(this, pigeonSexCountEntity -> {
             if(mAdapter.getHeaderLayoutCount() == 0){
                 mAdapter.addHeaderView(initHeadView(pigeonSexCountEntity));
+            }
+
+            String isShow = SharedPreferencesTool.Get(getBaseActivity(),
+                    SharedPreferencesTool.SP_GUIDE_DELETE_PIGEON, "", SharedPreferencesTool.SP_FILE_GUIDE);
+
+
+            if (!StringUtil.isStringValid(isShow)) {
+                composite.add(RxUtils.delayed(100, aLong -> {
+                    GuideManager.get()
+                            .setGuideComponent(new PigeonDeleteComponent())
+                            .setTagView(mAdapter.getViewByPosition(mRecyclerView.getRecyclerView()
+                                    ,1, R.id.llay))
+                            .setGuideLocation(Component.ANCHOR_BOTTOM)
+                            .setViewLocation(Component.FIT_CENTER)
+                            .show(getBaseActivity());
+                    SharedPreferencesTool.Save(getBaseActivity(), SharedPreferencesTool.SP_GUIDE_DELETE_PIGEON
+                            , SharedPreferencesTool.SP_GUIDE_DELETE_PIGEON, SharedPreferencesTool.SP_FILE_GUIDE);
+                }));
             }
         });
 

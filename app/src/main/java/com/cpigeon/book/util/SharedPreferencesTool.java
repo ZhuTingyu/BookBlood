@@ -26,6 +26,7 @@ public class SharedPreferencesTool {
     // 存储的sharedpreferences文件名
     private static final String SP_FILE_DEFAULT = "data";
     private static String TAG = "SharedPreferencesTool";
+    public static final String SP_GUIDE_DELETE_PIGEON = "SP_GUIDE_DELETE_PIGEON";
 
     /**
      * 保存数据到SharedPreferences

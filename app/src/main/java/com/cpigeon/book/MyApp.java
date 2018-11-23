@@ -74,6 +74,6 @@ public class MyApp extends BaseApplication {
 
     public boolean isOutNet() {
         return SharedPreferencesUtil.getBoolean(getAppContext(), SharedPreferencesUtil.IS_OUT_NET
-                , IS_OUT_NET, false);
+                , IS_OUT_NET, true);
     }
 }

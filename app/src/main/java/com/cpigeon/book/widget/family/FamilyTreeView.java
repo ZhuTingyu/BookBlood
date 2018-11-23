@@ -215,7 +215,8 @@ public class FamilyTreeView extends LinearLayout {
             view.setLayoutParams(params);
             return view;
         } else {
-            FamilyMemberView view = new FamilyMemberView(context, this, generationsPoint, generationsOrder, isMiniModel, isHorizontal);
+            FamilyMemberView view = new FamilyMemberView(context, this, generationsPoint
+                    , generationsOrder, isMiniModel, isHorizontal, isShowInfoModel);
             view.setLayoutParams(params);
             if (mOnFamilyClickListener != null) {
                 view.setOnMemberClickListener(new FamilyMemberView.OnMemberClickListener() {

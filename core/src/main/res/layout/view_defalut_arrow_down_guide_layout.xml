@@ -14,7 +14,7 @@
         android:paddingRight="10dp"
         android:textColor="@color/white"
         android:background="@drawable/btn_base_rect_selector"
-        android:text="朕知道了"
+        android:text="朕已阅"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

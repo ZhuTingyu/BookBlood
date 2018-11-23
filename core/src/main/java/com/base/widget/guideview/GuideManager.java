@@ -11,7 +11,7 @@ import android.view.View;
 public class GuideManager {
     private static GuideManager guideManager;
     private Guide guide;
-    GuideComponent guideComponent;
+    BaseComponent guideComponent;
     private GuideBuilder builder;
 
     private GuideManager() {
@@ -22,14 +22,21 @@ public class GuideManager {
                 .setOverlayTarget(false)
                 .setOutsideTouchable(false);
         guideComponent = new GuideComponent();
-        guideComponent.setOnOkClickListener(() -> {
-            guide.dismiss();
-        });
     }
+
 
     public static GuideManager get() {
         guideManager = new GuideManager();
         return guideManager;
+    }
+
+    public BaseComponent getGuideComponent() {
+        return guideComponent;
+    }
+
+    public GuideManager setGuideComponent(BaseComponent guideComponent) {
+        this.guideComponent = guideComponent;
+        return this;
     }
 
     public GuideManager setVisibilityChangedListener(GuideBuilder.OnVisibilityChangedListener onVisibilityChangedListener) {
@@ -65,6 +72,7 @@ public class GuideManager {
     public void show(Activity activity) {
         builder.addComponent(guideComponent);
         guide = builder.createGuide();
+        guideComponent.setGuide(guide);
         guide.setShouldCheckLocInWindow(true);
         guide.show(activity);
     }

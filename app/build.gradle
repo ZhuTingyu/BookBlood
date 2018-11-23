@@ -12,6 +12,8 @@ android {
     }
     compileSdkVersion 27
     defaultConfig {
+        renderscriptTargetApi 27
+        renderscriptSupportModeEnabled true
         applicationId "com.cpigeon.book"
         minSdkVersion 16
         targetSdkVersion 27
