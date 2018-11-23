@@ -12,6 +12,7 @@ import com.base.util.http.NetworkUtils;
 import com.base.util.utility.LogUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -254,6 +255,7 @@ public class RequestUtil<T> {
         retrofit = new Retrofit.Builder()
                 .baseUrl(getRequestUrl())
                 .client(okHttpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
