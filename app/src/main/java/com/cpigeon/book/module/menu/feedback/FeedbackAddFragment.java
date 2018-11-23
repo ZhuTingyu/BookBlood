@@ -19,6 +19,7 @@ import com.base.util.PictureSelectUtil;
 import com.base.util.RxUtils;
 import com.base.util.Utils;
 import com.base.util.dialog.DialogUtils;
+import com.base.util.utility.StringUtil;
 import com.base.widget.BottomSheetAdapter;
 import com.cpigeon.book.R;
 import com.cpigeon.book.base.BaseBookFragment;
@@ -45,7 +46,7 @@ import java.util.List;
 
 public class FeedbackAddFragment extends BaseBookFragment {
 
-
+private boolean IsCanClick;
     private LineInputListLayout mLlRoot;
     private LineInputView mLvPhone;
     private InputBoxView mIbContent;
@@ -113,8 +114,17 @@ public class FeedbackAddFragment extends BaseBookFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            setProgressVisible(true);
-            mViewModel.addFadeBack();
+            if(IsCanClick) {
+                setProgressVisible(true);
+                mViewModel.addFadeBack();
+            }else{
+                TextViewUtil.DialogShowNullMsg(getBaseActivity(),mLvPhone);
+                if(!StringUtil.isStringValid(mIbContent.getText().toString()))
+                {
+                    DialogUtils.createHintDialog(getBaseActivity(),"请输入反馈内容");
+                }
+            }
+
         });
     }
 
@@ -122,7 +132,7 @@ public class FeedbackAddFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(mTvOk, aBoolean);
+           IsCanClick=aBoolean;
         });
 
         mViewModel.normalResult.observe(this, s -> {

@@ -44,7 +44,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
  */
 
 public class UseVaccineFragment extends BaseBookFragment {
-
+private boolean IsCanClick =true;
     @BindView(R.id.lvVaccine)
     LineInputView lvVaccine;
     @BindView(R.id.lvTime)
@@ -150,7 +150,7 @@ public class UseVaccineFragment extends BaseBookFragment {
         mUseVaccineViewModel.isCanCommit();
 
         mUseVaccineViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(tvOk, aBoolean);
+            IsCanClick=aBoolean;
         });
 
         if (mUseVaccineViewModel.typePag == 0) {
@@ -333,8 +333,13 @@ public class UseVaccineFragment extends BaseBookFragment {
             case R.id.scrollView:
                 break;
             case R.id.tvOk:
-                setProgressVisible(true);
-                mUseVaccineViewModel.getTXGP_PigeonVaccine_AddData();
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    mUseVaccineViewModel.getTXGP_PigeonVaccine_AddData();
+                }else {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),lvVaccine,lvTime,lvVaccineReason);
+                }
+
                 break;
         }
     }

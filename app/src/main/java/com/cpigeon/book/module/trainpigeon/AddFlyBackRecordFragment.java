@@ -44,6 +44,7 @@ public class AddFlyBackRecordFragment extends BaseBookFragment {
     private LineInputView mLvTime;
     private LineInputView mLvSpeed;
     private TextView mTvOk;
+    private  Boolean IsCanClick=true;
 
     AddFlyBackRecordViewModel mViewModel;
 
@@ -122,8 +123,13 @@ public class AddFlyBackRecordFragment extends BaseBookFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            setProgressVisible(true);
-            mViewModel.addFlyBackRecord();
+            if(IsCanClick) {
+                setProgressVisible(true);
+                mViewModel.addFlyBackRecord();
+            }else{
+
+                TextViewUtil.DialogShowNullMsg(getBaseActivity());
+            }
         });
 
     }
@@ -131,7 +137,7 @@ public class AddFlyBackRecordFragment extends BaseBookFragment {
     @Override
     protected void initObserve() {
         mViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(mTvOk, aBoolean);
+            IsCanClick=aBoolean;
         });
 
         mViewModel.normalResult.observe(this, s -> {

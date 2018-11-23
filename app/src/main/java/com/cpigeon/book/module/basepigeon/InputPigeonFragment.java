@@ -544,56 +544,8 @@ public class InputPigeonFragment extends BaseBookFragment {
                     mViewModel.modifyBreedPigeonEntry();
                 }
             } else {
-                String Msg=null;
-
-                if(!StringUtil.isStringValid(mLvPigeonType.getContent()))
-                {
-                    Msg="请输入"+mLvPigeonType.getTitle()+"!";
-                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                    return;
-                }
-                if(!StringUtil.isStringValid(mLvCountries.getContent()))
-                {
-                    Msg="请输入"+mLvCountries.getTitle()+"!";
-                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                    return;
-                }
-                if(!StringUtil.isStringValid(mLvRing.getContent()))
-                {
-                    Msg="请输入"+mLvRing.getTitle()+"!";
-                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                    return;
-                }
-                if(!StringUtil.isStringValid(mLvSex.getContent()))
-                {
-                    Msg="请输入"+mLvSex.getTitle()+"!";
-                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                    return;
-                }
-                if(!StringUtil.isStringValid(mLvBlood.getContent()))
-                {
-                    Msg="请输入"+mLvBlood.getTitle()+"!";
-                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                    return;
-                }
-                if(!StringUtil.isStringValid(mLvEyeSand.getContent()))
-                {
-                    Msg="请输入"+mLvEyeSand.getTitle()+"!";
-                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                    return;
-                }
-              if(!StringUtil.isStringValid(mLvFeatherColor.getContent()))
-                {
-                    Msg="请输入"+mLvFeatherColor.getTitle()+"!";
-                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                    return;
-                }
-                if(!StringUtil.isStringValid(mLvState.getContent()))
-                {
-                    Msg="请输入"+mLvState.getTitle()+"!";
-                    DialogUtils.createHintDialog(getBaseActivity(), Msg);
-                    return;
-                }
+                TextViewUtil.DialogShowNullMsg(getBaseActivity(),mLvPigeonType,mLvCountries,mLvRing,mLvSex,mLvBlood,mLvEyeSand,mLvFeatherColor,mLvState);
+                   String Msg;
                     if(StringUtil.isStringValid(mLvFatherFoot.getContent())&&!StringUtil.isStringValid(mLvFatherFootState.getContent()))
                 {
                     Msg="请输入"+mLvFatherFootState.getTitle()+"!";
@@ -649,9 +601,7 @@ public class InputPigeonFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
-            setProgressVisible(false);
 
-            TextViewUtil.setEnabled(mTvNextStep, true);
             IsClick = aBoolean;
         });
 
@@ -739,12 +689,13 @@ public class InputPigeonFragment extends BaseBookFragment {
         mViewModel.mDataPigeon.observe(this, data -> {
             setProgressVisible(false);
 
+
             mDataPigeonResult(data);
         });
 
         //性别
         mSelectTypeViewModel.mSelectType_Sex.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
+
             mViewModel.mSelectTypes_Sex = selectTypeEntities;
             mViewModel.mSelectTypes_Sex = selectTypeEntities;
             if (StringUtil.isStringValid(mSexType)) {
@@ -754,38 +705,38 @@ public class InputPigeonFragment extends BaseBookFragment {
 
         //雨色
         mSelectTypeViewModel.mSelectType_FeatherColor.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
+
             mViewModel.mSelectTypes_FeatherColor = selectTypeEntities;
         });
 
         //眼沙
         mSelectTypeViewModel.mSelectType_EyeSand.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
+
             mViewModel.mSelectTypes_EyeSand = selectTypeEntities;
         });
 
 
         //血统
         mSelectTypeViewModel.mSelectType_Lineage.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
+
             mViewModel.mSelectTypes_Lineage = selectTypeEntities;
         });
 
         //状态
         mSelectTypeViewModel.mSelectType_State.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
+
             mViewModel.mSelectTypes_State = selectTypeEntities;
         });
 
         //来源
         mSelectTypeViewModel.mSelectType_Pigeon_Source.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
+
             mViewModel.mSelectTypes_Source = selectTypeEntities;
         });
 
         //信鸽类型
         mSelectTypeViewModel.mSelectType_PigeonType.observe(this, selectTypeEntities -> {
-            setProgressVisible(false);
+
             mViewModel.mSelectTypes_PigeonType = selectTypeEntities;
             if (PigeonEntity.ID_BREED_PIGEON.equals(mPigeonType)) {
                 mViewModel.pigeonType = mViewModel.mSelectTypes_PigeonType.get(0).getTypeID();
@@ -794,7 +745,7 @@ public class InputPigeonFragment extends BaseBookFragment {
         });
 
         mViewModel.mDataFootRingState.observe(this, footRingStateEntity -> {
-            setProgressVisible(false);
+
             if (footRingStateEntity.getFootRingID() != 0 && footRingStateEntity.getPigeonID() != 0) {
                 SetPigeonDeathDialog.show(getFragmentManager(), String.valueOf(footRingStateEntity.getFootRingID())
                         , String.valueOf(footRingStateEntity.getPigeonID()), new SetPigeonDeathDialog.OnPigeonDeathClickListener() {
@@ -1004,4 +955,5 @@ public class InputPigeonFragment extends BaseBookFragment {
             }
         }
     }
+
 }

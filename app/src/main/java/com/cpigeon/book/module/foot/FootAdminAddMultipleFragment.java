@@ -45,6 +45,7 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
 
     FootAddMultiViewModel mViewModel;
     SelectTypeViewModel mPublicViewModel;
+    private boolean IsCanClick;
     private LineInputListLayout mLlRoot;
     private LineInputView mLvCity;
     private LineInputView mLvFoot;
@@ -149,8 +150,12 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            setProgressVisible(true);
-            mViewModel.addMultiFoot();
+            if(IsCanClick) {
+                setProgressVisible(true);
+                mViewModel.addMultiFoot();
+            }else {
+                TextViewUtil.DialogShowNullMsg(getBaseActivity(),mLvFoot,mLvCount,mLvMoney);
+            }
         });
 
         mPublicViewModel.getSelectType_Source();
@@ -161,7 +166,7 @@ public class FootAdminAddMultipleFragment extends BaseBookFragment {
     protected void initObserve() {
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(mTvOk, aBoolean);
+            IsCanClick=aBoolean;
         });
 
         mPublicViewModel.mSelectType_Foot_Ring.observe(this, selectTypeEntities -> {

@@ -31,7 +31,7 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
     private TextView mTvCancel;
     private TextView mTvOk;
     private TextView mTvDirectUse;
-
+private boolean IsCanClick;
     SetPigeonDeathViewModel mViewModel;
     SelectTypeViewModel mSelectTypeViewModel;
 
@@ -78,8 +78,14 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         });
 
         mTvOk.setOnClickListener(v -> {
-            setProgressVisible(true);
-            mViewModel.setPigeonDeath();
+            if(IsCanClick)
+            {
+                setProgressVisible(true);
+                mViewModel.setPigeonDeath();
+            }else{
+                TextViewUtil.DialogShowNullMsg(getBaseActivity(),mLvDeathReason);
+            }
+
         });
 
         mTvDirectUse.setOnClickListener(v -> {
@@ -112,7 +118,7 @@ public class SetPigeonDeathDialog extends BaseDialogFragment {
         });
 
         mViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(mTvOk, aBoolean);
+           IsCanClick=aBoolean;
         });
 
         mSelectTypeViewModel.mDeathReason.observe(this, selectTypeEntities -> {

@@ -78,7 +78,7 @@ public class CareDrugFragment extends BaseBookFragment {
     NestedScrollView scrollView;
     @BindView(R.id.tvOk)
     TextView tvOk;
-
+private boolean IsCanClick =true;
 //    private LineInputListLayout mLlRoot;
 //    private LineInputView lvCareDrugName;
 //    private LineInputView mLvCareDrugFunction;
@@ -188,7 +188,7 @@ public class CareDrugFragment extends BaseBookFragment {
         mCareDrugViewModel.isCanCommit();
 
         mCareDrugViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(tvOk, aBoolean);
+           IsCanClick=aBoolean;
         });
 
         if (mCareDrugViewModel.typePag == 0) {
@@ -430,9 +430,14 @@ public class CareDrugFragment extends BaseBookFragment {
             case R.id.llRoot:
                 break;
             case R.id.tvOk:
-                setProgressVisible(true);
-                mCareDrugViewModel.getTXGP_PigeonHealth_AddData();
+                if(IsCanClick) {
+                    setProgressVisible(true);
+                    mCareDrugViewModel.getTXGP_PigeonHealth_AddData();
+                }else {
+                    TextViewUtil.DialogShowNullMsg(getBaseActivity(),lvCareDrugName,lvCareDrugFunction,lvRecordTime,lvUserTime);
+                }
                 break;
+
         }
     }
 }

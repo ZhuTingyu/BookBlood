@@ -159,7 +159,7 @@ public class DrugUseCaseViewModel extends BaseViewModel {
             mBaseFragment.setProgressVisible(true);//加载框
             getTXGP_PigeonDrug_EditData();
         } else {
-            isCanCommit(drugName, drugUseTime, drugAfterStatus);
+            isCanCommit(illnessName,drugName, drugUseTime, drugAfterStatus);
         }
     }
 

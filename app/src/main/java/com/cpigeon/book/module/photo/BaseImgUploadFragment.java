@@ -19,7 +19,6 @@ import com.cpigeon.book.base.BaseBookFragment;
 import com.cpigeon.book.model.entity.ImgTypeEntity;
 import com.cpigeon.book.module.foot.viewmodel.SelectTypeViewModel;
 import com.cpigeon.book.module.photo.viewmodel.ImgUploadViewModel;
-import com.cpigeon.book.util.TextViewUtil;
 import com.cpigeon.book.widget.InputBoxView;
 import com.cpigeon.book.widget.LineInputListLayout;
 import com.cpigeon.book.widget.LineInputView;
@@ -32,7 +31,7 @@ import butterknife.BindView;
 
 public class BaseImgUploadFragment extends BaseBookFragment {
 
-
+private boolean IsCanClick=true;
     @BindView(R.id.imgview)
     protected ImageView imgview;
     @BindView(R.id.ll_label)
@@ -109,7 +108,7 @@ public class BaseImgUploadFragment extends BaseBookFragment {
         super.initObserve();
 
         mImgUploadViewModel.isCanCommit.observe(this, aBoolean -> {
-            TextViewUtil.setEnabled(tv_next_step, aBoolean);
+            IsCanClick=aBoolean;
         });
     }
 }
